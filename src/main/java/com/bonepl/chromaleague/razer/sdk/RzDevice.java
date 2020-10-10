@@ -1,4 +1,4 @@
-package com.bonepl.chromaleague.razersdk;
+package com.bonepl.chromaleague.razer.sdk;
 
 import com.sun.jna.platform.win32.Guid.GUID;
 

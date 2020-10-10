@@ -1,4 +1,4 @@
-package com.bonepl.chromaleague.razersdk;
+package com.bonepl.chromaleague.razer.sdk;
 
 import java.util.Arrays;
 
@@ -17,7 +17,7 @@ public enum RzDeviceType {
         this.type = type;
     }
 
-    public static RzDeviceType fromType(byte type) {
+    public static RzDeviceType fromSDKType(byte type) {
         return Arrays.stream(values()).filter(v -> v.type == type).findAny().orElse(INVALID);
     }
 }

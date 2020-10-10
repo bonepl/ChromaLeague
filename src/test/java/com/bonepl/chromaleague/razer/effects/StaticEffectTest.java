@@ -1,9 +1,10 @@
-package com.bonepl.chromaleague.razer.sdk.effects;
+package com.bonepl.chromaleague.razer.effects;
 
 import com.bonepl.chromaleague.razer.RazerSDKClient;
 import org.junit.jupiter.api.Test;
 
 class StaticEffectTest {
+
     @Test
     void testStaticEffect() throws InterruptedException {
         try (RazerSDKClient razerSDKClient = new RazerSDKClient()) {

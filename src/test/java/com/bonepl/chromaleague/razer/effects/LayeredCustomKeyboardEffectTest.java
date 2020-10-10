@@ -1,10 +1,10 @@
-package com.bonepl.chromaleague.razer.sdk.effects;
+package com.bonepl.chromaleague.razer.effects;
 
 import com.bonepl.chromaleague.razer.RazerSDKClient;
 import com.bonepl.chromaleague.razer.sdk.RzKey;
 import org.junit.jupiter.api.Test;
 
-import static com.bonepl.chromaleague.razer.sdk.effects.ProgressBarKeyboardEffectTest.BLACKWIDOW_FIRST_ROW;
+import static com.bonepl.chromaleague.razer.effects.ProgressBarKeyboardEffectTest.BLACKWIDOW_FIRST_ROW;
 
 class LayeredCustomKeyboardEffectTest {
     @Test
@@ -21,7 +21,6 @@ class LayeredCustomKeyboardEffectTest {
                 razerSDKClient.createKeyboardEffect(layeredCustomKeyboardEffect);
                 Thread.sleep(100);
             }
-            Thread.sleep(2000);
         }
     }
 }

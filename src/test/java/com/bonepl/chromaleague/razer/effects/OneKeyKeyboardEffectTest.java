@@ -1,4 +1,4 @@
-package com.bonepl.chromaleague.razer.sdk.effects;
+package com.bonepl.chromaleague.razer.effects;
 
 import com.bonepl.chromaleague.razer.RazerSDKClient;
 import com.bonepl.chromaleague.razer.sdk.RzKey;

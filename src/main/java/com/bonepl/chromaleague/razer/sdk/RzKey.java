@@ -1,6 +1,6 @@
 package com.bonepl.chromaleague.razer.sdk;
 
-import com.bonepl.chromaleague.razer.sdk.effects.OneKeyKeyboardEffect;
+import com.bonepl.chromaleague.razer.effects.OneKeyKeyboardEffect;
 
 public enum RzKey {
 

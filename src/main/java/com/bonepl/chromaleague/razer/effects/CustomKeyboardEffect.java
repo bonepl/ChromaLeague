@@ -1,4 +1,4 @@
-package com.bonepl.chromaleague.razer.sdk.effects;
+package com.bonepl.chromaleague.razer.effects;
 
 import com.bonepl.chromaleague.razer.sdk.RzKeyboardEffectType;
 import com.sun.jna.Pointer;
@@ -27,7 +27,6 @@ public abstract class CustomKeyboardEffect extends Structure implements SDKKeybo
         this.write();
         return this.getPointer();
     }
-
 
     @Override
     public List<String> getFieldOrder() {

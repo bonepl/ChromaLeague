@@ -36,7 +36,9 @@ public class RazerSDKClient implements AutoCloseable {
     }
 
     public void createKeyboardEffect(SDKKeyboardEffect effect) {
-        int result = rzChromaSDK64.CreateKeyboardEffect(effect.getSDKKeyboardEffectType(), effect.getEffect(), Pointer.NULL);
+        int result = rzChromaSDK64.CreateKeyboardEffect(
+                effect.getSDKKeyboardEffectType().getRzSDKKeyboardEffectType(),
+                effect.getEffect(), Pointer.NULL);
         if (result != 0) {
             System.out.println("Creating keyboard effect returned error " + result);
         }

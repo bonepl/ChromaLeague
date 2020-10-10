@@ -21,8 +21,8 @@ public class OneKeyKeyboardEffect extends Structure implements SDKKeyboardEffect
     }
 
     @Override
-    public int getSDKKeyboardEffectType() {
-        return RzKeyboardEffectType.CUSTOM.getRzSDKKeyboardEffectType();
+    public RzKeyboardEffectType getSDKKeyboardEffectType() {
+        return RzKeyboardEffectType.CUSTOM;
     }
 
     @Override

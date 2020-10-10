@@ -21,8 +21,8 @@ public class StaticEffectSDK extends Structure implements SDKKeyboardEffect {
     }
 
     @Override
-    public int getSDKKeyboardEffectType() {
-        return RzKeyboardEffectType.STATIC.getRzSDKKeyboardEffectType();
+    public RzKeyboardEffectType getSDKKeyboardEffectType() {
+        return RzKeyboardEffectType.STATIC;
     }
 
     @Override

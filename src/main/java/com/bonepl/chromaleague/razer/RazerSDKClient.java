@@ -3,7 +3,7 @@ package com.bonepl.chromaleague.razer;
 import com.bonepl.chromaleague.razer.sdk.RzChromaSDK64;
 import com.bonepl.chromaleague.razer.sdk.RzDevice;
 import com.bonepl.chromaleague.razer.sdk.RzDeviceInfo;
-import com.bonepl.chromaleague.razer.effects.SDKKeyboardEffect;
+import com.bonepl.chromaleague.razer.effects.keyboard.SDKKeyboardEffect;
 import com.sun.jna.Native;
 import com.sun.jna.Pointer;
 

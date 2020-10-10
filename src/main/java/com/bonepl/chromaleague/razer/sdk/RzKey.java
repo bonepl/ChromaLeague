@@ -1,6 +1,6 @@
 package com.bonepl.chromaleague.razer.sdk;
 
-import com.bonepl.chromaleague.razer.effects.OneKeyKeyboardEffect;
+import com.bonepl.chromaleague.razer.effects.keyboard.OneKeyEffect;
 
 public enum RzKey {
 
@@ -139,6 +139,6 @@ public enum RzKey {
     }
 
     public int getCustomPosition() {
-        return (getRzSDKKey() & 0xFF) + (getRzSDKKey() >> 8) * OneKeyKeyboardEffect.COLUMN_COUNT;
+        return (getRzSDKKey() & 0xFF) + (getRzSDKKey() >> 8) * OneKeyEffect.COLUMN_COUNT;
     }
 }

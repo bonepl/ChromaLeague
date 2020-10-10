@@ -1,4 +1,4 @@
-package com.bonepl.chromaleague.razer.effects;
+package com.bonepl.chromaleague.razer.effects.keyboard;
 
 import com.bonepl.chromaleague.razer.sdk.RzKeyboardEffectType;
 import com.sun.jna.Pointer;

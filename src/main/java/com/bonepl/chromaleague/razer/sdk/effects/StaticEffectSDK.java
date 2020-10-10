@@ -1,5 +1,6 @@
 package com.bonepl.chromaleague.razer.sdk.effects;
 
+import com.bonepl.chromaleague.razer.sdk.RzKeyboardEffectType;
 import com.sun.jna.Pointer;
 import com.sun.jna.Structure;
 
@@ -21,7 +22,7 @@ public class StaticEffectSDK extends Structure implements SDKKeyboardEffect {
 
     @Override
     public int getSDKKeyboardEffectType() {
-        return 4;
+        return RzKeyboardEffectType.STATIC.getRzSDKKeyboardEffectType();
     }
 
     @Override

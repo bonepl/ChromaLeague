@@ -12,6 +12,7 @@ class LayeredCustomKeyboardEffectTest {
         try (RazerSDKClient razerSDKClient = new RazerSDKClient()) {
             for (int i = 0; i <= 100; i += 5) {
                 LayeredCustomKeyboardEffect layeredCustomKeyboardEffect = new LayeredCustomKeyboardEffect()
+                        .withCustomKeyboardEffect(new StaticKeyboardEffect(new Color(30, 30, 0)))
                         .withCustomKeyboardEffect(new ProgressBarKeyboardEffect(BLACKWIDOW_FIRST_ROW.subList(0, 9), i, Color.GREEN))
                         .withCustomKeyboardEffect(new ProgressBarKeyboardEffect(BLACKWIDOW_FIRST_ROW.subList(9, 16), i, Color.BLUE));
                 if (i % 10 == 0) {

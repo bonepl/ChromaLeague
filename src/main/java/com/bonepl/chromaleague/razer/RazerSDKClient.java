@@ -1,13 +1,16 @@
 package com.bonepl.chromaleague.razer;
 
+import com.bonepl.chromaleague.razer.effects.keyboard.SDKKeyboardEffect;
 import com.bonepl.chromaleague.razer.sdk.RzChromaSDK64;
 import com.bonepl.chromaleague.razer.sdk.RzDevice;
 import com.bonepl.chromaleague.razer.sdk.RzDeviceInfo;
-import com.bonepl.chromaleague.razer.effects.keyboard.SDKKeyboardEffect;
 import com.sun.jna.Native;
 import com.sun.jna.Pointer;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class RazerSDKClient implements AutoCloseable {
+    private static final Logger logger = LogManager.getLogger();
     private final RzChromaSDK64 rzChromaSDK64;
 
     public RazerSDKClient() {
@@ -31,7 +34,7 @@ public class RazerSDKClient implements AutoCloseable {
     public RzDeviceInfo queryDevice(RzDevice rzDevice) {
         RzDeviceInfo rzDeviceInfo = new RzDeviceInfo(rzDevice);
         rzChromaSDK64.QueryDevice(rzDevice.getGuid(), rzDeviceInfo);
-        System.out.println(rzDeviceInfo);
+        logger.info("Queried device: " + rzDeviceInfo);
         return rzDeviceInfo;
     }
 
@@ -40,7 +43,7 @@ public class RazerSDKClient implements AutoCloseable {
                 effect.getSDKKeyboardEffectType().getRzSDKKeyboardEffectType(),
                 effect.getEffect(), Pointer.NULL);
         if (result != 0) {
-            System.out.println("Creating keyboard effect returned error " + result);
+            logger.error("Creating keyboard effect returned error " + result);
         }
     }
 

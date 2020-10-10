@@ -21,7 +21,7 @@ public class RzDeviceInfo extends Structure {
 
     @Override
     public String toString() {
-        return "Razer device " + rzDevice +
+        return rzDevice +
                 " { type = " + RzDeviceType.fromSDKType(type) +
                 ", isConnected = " + (isConnected == 1) + " }";
     }

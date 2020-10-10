@@ -5,24 +5,22 @@ import org.junit.jupiter.api.Test;
 
 class StaticEffectSDKTest {
     @Test
-    void testStaticEffect() {
+    void testStaticEffect() throws InterruptedException {
         try (RazerSDKClient razerSDKClient = new RazerSDKClient()) {
             razerSDKClient.createKeyboardEffect(new StaticEffectSDK(Color.WHITE));
-            Thread.sleep(1000);
+            Thread.sleep(100);
             razerSDKClient.createKeyboardEffect(new StaticEffectSDK(Color.GREEN));
-            Thread.sleep(1000);
+            Thread.sleep(100);
             razerSDKClient.createKeyboardEffect(new StaticEffectSDK(Color.RED));
-            Thread.sleep(1000);
+            Thread.sleep(100);
             razerSDKClient.createKeyboardEffect(new StaticEffectSDK(Color.BLACK));
-            Thread.sleep(1000);
+            Thread.sleep(100);
             razerSDKClient.createKeyboardEffect(new StaticEffectSDK(Color.BLUE));
-            Thread.sleep(1000);
+            Thread.sleep(100);
             razerSDKClient.createKeyboardEffect(new StaticEffectSDK(Color.YELLOW));
-            Thread.sleep(1000);
+            Thread.sleep(100);
             razerSDKClient.createKeyboardEffect(new StaticEffectSDK(Color.CYAN));
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            Thread.sleep(100);
         }
     }
 }

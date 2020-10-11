@@ -41,7 +41,9 @@ public class ActivePlayerThread extends Thread {
     public int getHpPercentage() {
         if (activePlayer != null) {
             final ChampionStats championStats = activePlayer.getChampionStats();
-            return (int) Math.floor((championStats.getCurrentHealth() / championStats.getMaxHealth()) * 100);
+            if (championStats != null) {
+                return (int) Math.floor((championStats.getCurrentHealth() / championStats.getMaxHealth()) * 100);
+            }
         }
         return 0;
     }
@@ -49,7 +51,9 @@ public class ActivePlayerThread extends Thread {
     public int getResourcePercentage() {
         if (activePlayer != null) {
             final ChampionStats championStats = activePlayer.getChampionStats();
-            return (int) Math.floor((championStats.getResourceValue() / championStats.getResourceMax()) * 100);
+            if (championStats != null) {
+                return (int) Math.floor((championStats.getResourceValue() / championStats.getResourceMax()) * 100);
+            }
         }
         return 0;
     }

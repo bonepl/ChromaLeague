@@ -1,7 +1,9 @@
 package com.bonepl.chromaleague.razer.league;
 
 import com.bonepl.chromaleague.razer.RazerSDKClient;
+import com.bonepl.chromaleague.razer.effects.Color;
 import com.bonepl.chromaleague.razer.effects.keyboard.LayeredCustomEffect;
+import com.bonepl.chromaleague.razer.effects.keyboard.StaticEffect;
 import com.bonepl.chromaleague.razer.league.hud.HpBar;
 import com.bonepl.chromaleague.razer.league.hud.ResourceBar;
 import com.bonepl.chromaleague.razer.league.json.GameDetectionThread;
@@ -24,6 +26,7 @@ public class MainHud {
                 try (RazerSDKClient razerSDKClient = new RazerSDKClient()) {
                     while (GameDetectionThread.isGameActive()) {
                         final LayeredCustomEffect layeredCustomEffect = new LayeredCustomEffect();
+                        layeredCustomEffect.addCustomKeyboardEffect(new StaticEffect(new Color(10, 10, 10 )));
                         layeredCustomEffect.addCustomKeyboardEffect(new HpBar(activePlayerThread));
                         layeredCustomEffect.addCustomKeyboardEffect(new ResourceBar(activePlayerThread));
                         razerSDKClient.createKeyboardEffect(layeredCustomEffect);

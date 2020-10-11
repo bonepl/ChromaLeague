@@ -1,5 +1,6 @@
 package com.bonepl.chromaleague.razer.league.json.activeplayer;
 
+import com.bonepl.chromaleague.razer.league.json.GameDetectionThread;
 import com.bonepl.chromaleague.razer.league.json.LeagueHttpClient;
 import com.bonepl.chromaleague.razer.league.json.activeplayer.model.ActivePlayer;
 import com.bonepl.chromaleague.razer.league.json.activeplayer.model.ChampionStats;
@@ -11,8 +12,8 @@ public class ActivePlayerThread extends Thread {
     private final static Logger logger = LogManager.getLogger();
 
     private final LeagueHttpClient leagueHttpClient;
-    private ActivePlayer activePlayer;
     boolean alive = true;
+    private ActivePlayer activePlayer;
 
     public ActivePlayerThread(LeagueHttpClient leagueHttpClient) {
         this.leagueHttpClient = leagueHttpClient;
@@ -20,11 +21,15 @@ public class ActivePlayerThread extends Thread {
 
     public void run() {
         while (alive) {
-            fetchAndUpdateData();
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            if (GameDetectionThread.isGameActive()) {
+                while (GameDetectionThread.isGameActive()) {
+                    fetchAndUpdateData();
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         }
     }

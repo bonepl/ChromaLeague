@@ -2,8 +2,6 @@ package com.bonepl.chromaleague.razer;
 
 import com.bonepl.chromaleague.razer.effects.keyboard.SDKKeyboardEffect;
 import com.bonepl.chromaleague.razer.sdk.RzChromaSDK64;
-import com.bonepl.chromaleague.razer.sdk.RzDevice;
-import com.bonepl.chromaleague.razer.sdk.RzDeviceInfo;
 import com.sun.jna.Native;
 import com.sun.jna.Pointer;
 import org.apache.logging.log4j.LogManager;
@@ -29,13 +27,6 @@ public class RazerSDKClient implements AutoCloseable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
-
-    public RzDeviceInfo queryDevice(RzDevice rzDevice) {
-        RzDeviceInfo rzDeviceInfo = new RzDeviceInfo(rzDevice);
-        rzChromaSDK64.QueryDevice(rzDevice.getGuid(), rzDeviceInfo);
-        logger.info("Queried device: " + rzDeviceInfo);
-        return rzDeviceInfo;
     }
 
     public void createKeyboardEffect(SDKKeyboardEffect effect) {

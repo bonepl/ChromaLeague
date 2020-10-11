@@ -1,0 +1,143 @@
+{
+  "abilities": {
+    "E": {
+      "abilityLevel": 0,
+      "displayName": "Hookshot",
+      "id": "CamilleE",
+      "rawDescription": "GeneratedTip_Spell_CamilleE_Description",
+      "rawDisplayName": "GeneratedTip_Spell_CamilleE_DisplayName"
+    },
+    "Passive": {
+      "displayName": "Adaptive Defenses",
+      "id": "CamillePassive",
+      "rawDescription": "GeneratedTip_Passive_CamillePassive_Description",
+      "rawDisplayName": "GeneratedTip_Passive_CamillePassive_DisplayName"
+    },
+    "Q": {
+      "abilityLevel": 0,
+      "displayName": "Precision Protocol",
+      "id": "CamilleQ",
+      "rawDescription": "GeneratedTip_Spell_CamilleQ_Description",
+      "rawDisplayName": "GeneratedTip_Spell_CamilleQ_DisplayName"
+    },
+    "R": {
+      "abilityLevel": 0,
+      "displayName": "The Hextech Ultimatum",
+      "id": "CamilleR",
+      "rawDescription": "GeneratedTip_Spell_CamilleR_Description",
+      "rawDisplayName": "GeneratedTip_Spell_CamilleR_DisplayName"
+    },
+    "W": {
+      "abilityLevel": 1,
+      "displayName": "Tactical Sweep",
+      "id": "CamilleW",
+      "rawDescription": "GeneratedTip_Spell_CamilleW_Description",
+      "rawDisplayName": "GeneratedTip_Spell_CamilleW_DisplayName"
+    }
+  },
+  "championStats": {
+    "abilityPower": 0.0,
+    "armor": 41.0,
+    "armorPenetrationFlat": 0.0,
+    "armorPenetrationPercent": 1.0,
+    "attackDamage": 86.80000305175781,
+    "attackRange": 125.0,
+    "attackSpeed": 0.6439999938011169,
+    "bonusArmorPenetrationPercent": 1.0,
+    "bonusMagicPenetrationPercent": 1.0,
+    "cooldownReduction": 0.0,
+    "critChance": 0.0,
+    "critDamage": 200.0,
+    "currentHealth": 655.5999755859375,
+    "healthRegenRate": 1.7000000476837159,
+    "lifeSteal": 0.029999999329447748,
+    "magicLethality": 0.0,
+    "magicPenetrationFlat": 0.0,
+    "magicPenetrationPercent": 1.0,
+    "magicResist": 32.099998474121097,
+    "maxHealth": 655.5999755859375,
+    "moveSpeed": 340.0,
+    "physicalLethality": 0.0,
+    "resourceMax": 222.222222222222222,
+    "resourceRegenRate": 1.6299999952316285,
+    "resourceType": "MANA",
+    "resourceValue": 111.11111111111111,
+    "spellVamp": 0.0,
+    "tenacity": 0.0
+  },
+  "currentGold": 0.0,
+  "fullRunes": {
+    "generalRunes": [
+      {
+        "displayName": "Grasp of the Undying",
+        "id": 8437,
+        "rawDescription": "perk_tooltip_GraspOfTheUndying",
+        "rawDisplayName": "perk_displayname_GraspOfTheUndying"
+      },
+      {
+        "displayName": "Shield Bash",
+        "id": 8401,
+        "rawDescription": "perk_tooltip_ShieldBash",
+        "rawDisplayName": "perk_displayname_ShieldBash"
+      },
+      {
+        "displayName": "Second Wind",
+        "id": 8444,
+        "rawDescription": "perk_tooltip_SecondWind",
+        "rawDisplayName": "perk_displayname_SecondWind"
+      },
+      {
+        "displayName": "Overgrowth",
+        "id": 8451,
+        "rawDescription": "perk_tooltip_Overgrowth",
+        "rawDisplayName": "perk_displayname_Overgrowth"
+      },
+      {
+        "displayName": "Magical Footwear",
+        "id": 8304,
+        "rawDescription": "perk_tooltip_MagicalFootwear",
+        "rawDisplayName": "perk_displayname_MagicalFootwear"
+      },
+      {
+        "displayName": "Biscuit Delivery",
+        "id": 8345,
+        "rawDescription": "perk_tooltip_BiscuitDelivery",
+        "rawDisplayName": "perk_displayname_BiscuitDelivery"
+      }
+    ],
+    "keystone": {
+      "displayName": "Grasp of the Undying",
+      "id": 8437,
+      "rawDescription": "perk_tooltip_GraspOfTheUndying",
+      "rawDisplayName": "perk_displayname_GraspOfTheUndying"
+    },
+    "primaryRuneTree": {
+      "displayName": "Resolve",
+      "id": 8400,
+      "rawDescription": "perkstyle_tooltip_7204",
+      "rawDisplayName": "perkstyle_displayname_7204"
+    },
+    "secondaryRuneTree": {
+      "displayName": "Inspiration",
+      "id": 8300,
+      "rawDescription": "perkstyle_tooltip_7203",
+      "rawDisplayName": "perkstyle_displayname_7203"
+    },
+    "statRunes": [
+      {
+        "id": 5008,
+        "rawDescription": "perk_tooltip_StatModAdaptive"
+      },
+      {
+        "id": 5008,
+        "rawDescription": "perk_tooltip_StatModAdaptive"
+      },
+      {
+        "id": 5002,
+        "rawDescription": "perk_tooltip_StatModArmor"
+      }
+    ]
+  },
+  "level": 1,
+  "summonerName": "BooonE"
+}

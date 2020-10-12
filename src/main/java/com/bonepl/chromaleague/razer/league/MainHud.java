@@ -1,9 +1,8 @@
 package com.bonepl.chromaleague.razer.league;
 
 import com.bonepl.chromaleague.razer.RazerSDKClient;
-import com.bonepl.chromaleague.razer.effects.Color;
 import com.bonepl.chromaleague.razer.effects.keyboard.LayeredCustomEffect;
-import com.bonepl.chromaleague.razer.effects.keyboard.StaticEffect;
+import com.bonepl.chromaleague.razer.league.hud.Background;
 import com.bonepl.chromaleague.razer.league.hud.GoldBar;
 import com.bonepl.chromaleague.razer.league.hud.HpBar;
 import com.bonepl.chromaleague.razer.league.hud.ResourceBar;
@@ -30,14 +29,12 @@ public class MainHud {
             if (GameDetectionThread.isGameActive()) {
                 try (RazerSDKClient razerSDKClient = new RazerSDKClient()) {
                     while (GameDetectionThread.isGameActive()) {
-                        final LayeredCustomEffect layeredCustomEffect = new LayeredCustomEffect();
-                        layeredCustomEffect.addCustomKeyboardEffect(new StaticEffect(new Color(10, 10, 10)));
-                        layeredCustomEffect.addCustomKeyboardEffect(new HpBar(activePlayerThread));
-                        layeredCustomEffect.addCustomKeyboardEffect(new ResourceBar(activePlayerThread));
-                        layeredCustomEffect.addCustomKeyboardEffect(new GoldBar(activePlayerThread));
-                        razerSDKClient.createKeyboardEffect(layeredCustomEffect);
+                        if (eventDataThread.hasUnprocessedEvents()) {
+                            EventProcessor.processEvents(eventDataThread, razerSDKClient);
+                        }
+                        drawHud(razerSDKClient);
                         try {
-                            Thread.sleep(1000);
+                            Thread.sleep(500);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
@@ -45,5 +42,14 @@ public class MainHud {
                 }
             }
         }
+    }
+
+    private void drawHud(RazerSDKClient razerSDKClient) {
+        final LayeredCustomEffect layeredCustomEffect = new LayeredCustomEffect();
+        layeredCustomEffect.addCustomKeyboardEffect(new Background());
+        layeredCustomEffect.addCustomKeyboardEffect(new HpBar(activePlayerThread));
+        layeredCustomEffect.addCustomKeyboardEffect(new ResourceBar(activePlayerThread));
+        layeredCustomEffect.addCustomKeyboardEffect(new GoldBar(activePlayerThread));
+        razerSDKClient.createKeyboardEffect(layeredCustomEffect);
     }
 }

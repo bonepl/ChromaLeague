@@ -9,8 +9,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class EventDataThread extends Thread {
     private final static Logger logger = LogManager.getLogger();
@@ -18,7 +19,7 @@ public class EventDataThread extends Thread {
     private final LeagueHttpClient leagueHttpClient;
     boolean alive = true;
     int lastProcessedEventId;
-    LinkedList<Event> unprocessedEvents;
+    Queue<Event> unprocessedEvents;
 
     public EventDataThread(LeagueHttpClient leagueHttpClient) {
         this.leagueHttpClient = leagueHttpClient;
@@ -26,7 +27,7 @@ public class EventDataThread extends Thread {
 
     private void init() {
         lastProcessedEventId = -1;
-        unprocessedEvents = new LinkedList<>();
+        unprocessedEvents = new LinkedBlockingQueue<>();
     }
 
     public void run() {
@@ -58,7 +59,7 @@ public class EventDataThread extends Thread {
     List<Event> collectUnprocessedEvents(List<Event> events) {
         if (!events.isEmpty() && (events.size() > lastProcessedEventId + 1)) {
             final List<Event> newEvents = events.subList(lastProcessedEventId + 1, events.size());
-            newEvents.forEach(ev -> logger.info("New event registered: " + ev.getEventID() + " " + ev.getEventName()));
+            newEvents.forEach(ev -> logger.info("New event registered: " + ev));
             lastProcessedEventId = events.size() - 1;
             if (detectRealTimeEventProcessing(newEvents)) {
                 return newEvents;
@@ -71,5 +72,13 @@ public class EventDataThread extends Thread {
 
     private boolean detectRealTimeEventProcessing(List<Event> newEvents) {
         return Math.abs(newEvents.get(0).getEventTime() - newEvents.get(newEvents.size() - 1).getEventTime()) < 10.0;
+    }
+
+    public boolean hasUnprocessedEvents() {
+        return !unprocessedEvents.isEmpty();
+    }
+
+    public Event pollNextUnprocessedEvent() {
+        return unprocessedEvents.poll();
     }
 }

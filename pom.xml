@@ -84,6 +84,7 @@
                 <configuration>
                     <excludes>
                         <exclude>com/bonepl/chromaleague/razer/effects/*.java</exclude>
+                        <exclude>com/bonepl/chromaleague/razer/league/EventProcessorTest</exclude>
                     </excludes>
                 </configuration>
             </plugin>
@@ -94,6 +95,7 @@
                 <configuration>
                     <includes>
                         <include>com/bonepl/chromaleague/razer/effects/*.java</include>
+                        <include>com/bonepl/chromaleague/razer/league/EventProcessorTest</include>
                     </includes>
                 </configuration>
                 <executions>

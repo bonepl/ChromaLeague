@@ -1,5 +1,6 @@
 package com.bonepl.chromaleague.razer.league.json.activeplayer;
 
+import com.bonepl.chromaleague.razer.league.hud.GoldBar;
 import com.bonepl.chromaleague.razer.league.json.GameDetectionThread;
 import com.bonepl.chromaleague.razer.league.json.LeagueHttpClient;
 import com.bonepl.chromaleague.razer.league.json.activeplayer.model.ActivePlayer;
@@ -57,8 +58,18 @@ public class ActivePlayerThread extends Thread {
         if (activePlayer != null) {
             final ChampionStats championStats = activePlayer.getChampionStats();
             if (championStats != null) {
+                if (championStats.getCurrentHealth() == 0.0) {
+                    return 0;
+                }
                 return (int) Math.floor((championStats.getResourceValue() / championStats.getResourceMax()) * 100);
             }
+        }
+        return 0;
+    }
+
+    public int getGoldPercentage() {
+        if (activePlayer != null) {
+            return (int) Math.floor((activePlayer.getCurrentGold() / GoldBar.GOLD_FULL) * 100);
         }
         return 0;
     }

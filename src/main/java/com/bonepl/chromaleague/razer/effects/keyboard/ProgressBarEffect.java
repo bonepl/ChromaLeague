@@ -8,7 +8,7 @@ import java.util.List;
 public class ProgressBarEffect extends CustomEffect {
 
     public ProgressBarEffect(final List<RzKey> progressBar, final int percent, final Color color) {
-        int filledBar = (int) (progressBar.size() * (percent * 0.01));
+        int filledBar = percent >= 100 ? progressBar.size() : (int) (progressBar.size() * (percent * 0.01));
         progressBar.subList(0, filledBar)
                 .forEach(rzKey -> colors[rzKey.getCustomPosition()] = color.getSDKColorRef());
     }

@@ -3,21 +3,33 @@ package com.bonepl.chromaleague.razer.league;
 import com.bonepl.chromaleague.razer.RazerSDKClient;
 import com.bonepl.chromaleague.razer.league.json.eventdata.EventDataThread;
 import com.bonepl.chromaleague.razer.league.json.eventdata.model.Event;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class EventProcessorTest {
+    private static RazerSDKClient razerSDKClient;
+
+    @BeforeAll
+    static void beforeAll() {
+        razerSDKClient = new RazerSDKClient();
+    }
+
+    @AfterAll
+    static void afterAll() {
+        razerSDKClient.close();
+    }
+
     @Test
     void testOceanDragonAnimation() {
         //given
         final EventDataThread edt = mockDataThread(mockDragonEvent("Water"));
 
         //then
-        try (RazerSDKClient razerSDKClient = new RazerSDKClient()) {
-            EventProcessor.processEvents(edt, razerSDKClient);
-        }
+        EventProcessor.processEvents(edt, razerSDKClient);
     }
 
     @Test
@@ -26,9 +38,7 @@ class EventProcessorTest {
         final EventDataThread edt = mockDataThread(mockDragonEvent("Fire"));
 
         //then
-        try (RazerSDKClient razerSDKClient = new RazerSDKClient()) {
-            EventProcessor.processEvents(edt, razerSDKClient);
-        }
+        EventProcessor.processEvents(edt, razerSDKClient);
     }
 
     @Test
@@ -37,9 +47,7 @@ class EventProcessorTest {
         final EventDataThread edt = mockDataThread(mockDragonEvent("Air"));
 
         //then
-        try (RazerSDKClient razerSDKClient = new RazerSDKClient()) {
-            EventProcessor.processEvents(edt, razerSDKClient);
-        }
+        EventProcessor.processEvents(edt, razerSDKClient);
     }
 
     @Test
@@ -48,9 +56,7 @@ class EventProcessorTest {
         final EventDataThread edt = mockDataThread(mockDragonEvent("Earth"));
 
         //then
-        try (RazerSDKClient razerSDKClient = new RazerSDKClient()) {
-            EventProcessor.processEvents(edt, razerSDKClient);
-        }
+        EventProcessor.processEvents(edt, razerSDKClient);
     }
 
     @Test
@@ -59,9 +65,7 @@ class EventProcessorTest {
         final EventDataThread edt = mockDataThread(mockDragonEvent("Elder"));
 
         //then
-        try (RazerSDKClient razerSDKClient = new RazerSDKClient()) {
-            EventProcessor.processEvents(edt, razerSDKClient);
-        }
+        EventProcessor.processEvents(edt, razerSDKClient);
     }
 
     @Test
@@ -70,9 +74,7 @@ class EventProcessorTest {
         final EventDataThread edt = mockDataThread(mockHeraldEvent());
 
         //then
-        try (RazerSDKClient razerSDKClient = new RazerSDKClient()) {
-            EventProcessor.processEvents(edt, razerSDKClient);
-        }
+        EventProcessor.processEvents(edt, razerSDKClient);
     }
 
     @Test
@@ -81,9 +83,7 @@ class EventProcessorTest {
         final EventDataThread edt = mockDataThread(mockBaronEvent());
 
         //then
-        try (RazerSDKClient razerSDKClient = new RazerSDKClient()) {
-            EventProcessor.processEvents(edt, razerSDKClient);
-        }
+        EventProcessor.processEvents(edt, razerSDKClient);
     }
 
     private Event mockDragonEvent(String dragonType) {

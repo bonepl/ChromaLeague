@@ -10,10 +10,12 @@ import com.bonepl.chromaleague.razer.league.json.GameDetectionThread;
 import com.bonepl.chromaleague.razer.league.json.LeagueHttpClient;
 import com.bonepl.chromaleague.razer.league.json.activeplayer.ActivePlayerThread;
 import com.bonepl.chromaleague.razer.league.json.eventdata.EventDataThread;
+import com.bonepl.chromaleague.razer.league.json.playerlist.PlayerListThread;
 
 public class MainHud {
     private final ActivePlayerThread activePlayerThread;
     private final EventDataThread eventDataThread;
+    private final PlayerListThread playerListThread;
     boolean alive = true;
 
     public MainHud() {
@@ -22,6 +24,8 @@ public class MainHud {
         activePlayerThread.start();
         eventDataThread = new EventDataThread(new LeagueHttpClient());
         eventDataThread.start();
+        playerListThread = new PlayerListThread(new LeagueHttpClient());
+        playerListThread.start();
     }
 
     public void start() {

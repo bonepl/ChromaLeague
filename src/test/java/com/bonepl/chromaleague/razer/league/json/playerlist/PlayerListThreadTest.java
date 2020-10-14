@@ -24,7 +24,7 @@ class PlayerListThreadTest {
         final String testJson = Files.readString(new File(this.getClass().getClassLoader()
                 .getResource("json/playerlist.json").toURI()).toPath());
         LeagueHttpClient mockedLeagueHttpClient = mock(LeagueHttpClient.class);
-        when(mockedLeagueHttpClient.fetchJson(any())).thenReturn(testJson);
+        when(mockedLeagueHttpClient.fetchData(any())).thenReturn(testJson);
 
         playerListThread = new PlayerListThread(mockedLeagueHttpClient);
     }
@@ -41,5 +41,6 @@ class PlayerListThreadTest {
         assertEquals(Team.CHAOS, playerList.getActivePlayer().getTeam());
         assertTrue(playerList.isAlly("Test summoner 5"));
         assertFalse(playerList.isAlly("Test summoner 9"));
+        assertTrue(playerListThread.isActivePlayerDead());
     }
 }

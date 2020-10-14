@@ -2,7 +2,7 @@
   {
     "championName": "Ryze",
     "isBot": false,
-    "isDead": false,
+    "isDead": true,
     "items": [],
     "level": 1,
     "position": "TOP",
@@ -38,7 +38,7 @@
     },
     "skinID": 10,
     "skinName": "SKT T1 Ryze",
-    "summonerName": "test summoner 1",
+    "summonerName": "Test summoner 1",
     "summonerSpells": {
       "summonerSpellOne": {
         "displayName": "Flash",
@@ -268,7 +268,7 @@
   {
     "championName": "Cho'Gath",
     "isBot": false,
-    "isDead": false,
+    "isDead": true,
     "items": [],
     "level": 1,
     "position": "TOP",

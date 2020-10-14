@@ -24,7 +24,7 @@ public class LeagueHttpClient {
                 .connectTimeout(Duration.of(100, ChronoUnit.MILLIS)).build();
     }
 
-    public String fetchJson(String url) {
+    public String fetchData(String url) {
         try {
             return httpClient.send(HttpRequest.newBuilder()
                             .uri(URI.create(url)).build(),

@@ -49,7 +49,7 @@ public class EventDataThread extends Thread {
     }
 
     List<Event> fetchData() {
-        String json = leagueHttpClient.fetchJson("https://127.0.0.1:2999/liveclientdata/eventdata");
+        String json = leagueHttpClient.fetchData("https://127.0.0.1:2999/liveclientdata/eventdata");
         if (json != null) {
             return JsonIterator.deserialize(json, Events.class).getEvents();
         }
@@ -58,20 +58,16 @@ public class EventDataThread extends Thread {
 
     List<Event> collectUnprocessedEvents(List<Event> events) {
         if (!events.isEmpty() && (events.size() > lastProcessedEventId + 1)) {
-            final List<Event> newEvents = events.subList(lastProcessedEventId + 1, events.size());
-            newEvents.forEach(ev -> logger.info("New event registered: " + ev));
-            lastProcessedEventId = events.size() - 1;
-            if (detectRealTimeEventProcessing(newEvents)) {
-                return newEvents;
-            } else {
+            if (lastProcessedEventId == -1 && events.size() > 1) {
                 logger.warn("Game reconnection detected, skipping passed events");
+                lastProcessedEventId = events.size() - 1;
+                return Collections.emptyList();
             }
+            final List<Event> newEvents = events.subList(lastProcessedEventId + 1, events.size());
+            lastProcessedEventId = events.size() - 1;
+            return newEvents;
         }
         return Collections.emptyList();
-    }
-
-    private boolean detectRealTimeEventProcessing(List<Event> newEvents) {
-        return Math.abs(newEvents.get(0).getEventTime() - newEvents.get(newEvents.size() - 1).getEventTime()) < 10.0;
     }
 
     public boolean hasUnprocessedEvents() {

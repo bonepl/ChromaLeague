@@ -26,7 +26,7 @@ public class ActivePlayerThread extends Thread {
                 while (GameDetectionThread.isGameActive()) {
                     fetchAndUpdateData();
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(300);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -36,7 +36,7 @@ public class ActivePlayerThread extends Thread {
     }
 
     public void fetchAndUpdateData() {
-        String json = leagueHttpClient.fetchJson("https://127.0.0.1:2999/liveclientdata/activeplayer");
+        String json = leagueHttpClient.fetchData("https://127.0.0.1:2999/liveclientdata/activeplayer");
         if (json != null) {
             activePlayer = JsonIterator.deserialize(json, ActivePlayer.class);
             logger.debug("New hp value: " + activePlayer.getChampionStats().getCurrentHealth());
@@ -58,9 +58,6 @@ public class ActivePlayerThread extends Thread {
         if (activePlayer != null) {
             final ChampionStats championStats = activePlayer.getChampionStats();
             if (championStats != null) {
-                if (championStats.getCurrentHealth() == 0.0) {
-                    return 0;
-                }
                 return (int) Math.floor((championStats.getResourceValue() / championStats.getResourceMax()) * 100);
             }
         }

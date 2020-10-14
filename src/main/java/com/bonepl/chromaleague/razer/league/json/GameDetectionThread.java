@@ -31,12 +31,12 @@ public class GameDetectionThread extends Thread {
     }
 
     public void fetchAndUpdateData() {
-        String json = leagueHttpClient.fetchJson("https://127.0.0.1:2999/liveclientdata/activeplayername");
+        String json = leagueHttpClient.fetchData("https://127.0.0.1:2999/liveclientdata/activeplayername");
         if (json != null && !json.contains("RESOURCE_NOT_FOUND")) {
             if (!gameActive) {
                 logger.debug(json + " has joined the game");
                 GameDetectionThread.gameActive = true;
-                GameDetectionThread.activePlayerName = json;
+                GameDetectionThread.activePlayerName = json.replaceAll("\"", "");
             }
         } else {
             if (gameActive) {

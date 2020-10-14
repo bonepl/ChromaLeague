@@ -22,11 +22,13 @@ public class PlayerListThread extends Thread {
     public void run() {
         while (alive) {
             if (GameDetectionThread.isGameActive()) {
-                if (playerList == null) {
+                while (GameDetectionThread.isGameActive()) {
                     playerList = new PlayerList(GameDetectionThread.getActivePlayerName(), fetchData());
-                    logger.info("Player data loaded, summoner's team: " + playerList.getActivePlayer().getTeam().name());
-                    logger.info("Player teammates: " + playerList.getAllies());
-                    logger.info("Player enemies: " + playerList.getEnemies());
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
             } else {
                 playerList = null;
@@ -35,7 +37,7 @@ public class PlayerListThread extends Thread {
     }
 
     Player[] fetchData() {
-        String json = leagueHttpClient.fetchJson("https://127.0.0.1:2999/liveclientdata/playerlist");
+        String json = leagueHttpClient.fetchData("https://127.0.0.1:2999/liveclientdata/playerlist");
         if (json != null) {
             final Player[] jsonPlayers = JsonIterator.deserialize(json, Player[].class);
             if (jsonPlayers != null && jsonPlayers.length != 0) {
@@ -43,5 +45,13 @@ public class PlayerListThread extends Thread {
             }
         }
         return null;
+    }
+
+    public boolean isActivePlayerDead() {
+        final Player activePlayer = playerList.getActivePlayer();
+        if (activePlayer != null) {
+            return activePlayer.isDead();
+        }
+        return false;
     }
 }

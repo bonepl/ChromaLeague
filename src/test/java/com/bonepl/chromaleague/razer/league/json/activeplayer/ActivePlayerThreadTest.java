@@ -23,7 +23,7 @@ class ActivePlayerThreadTest {
         final String testJson = Files.readString(new File(this.getClass().getClassLoader()
                 .getResource("json/activeplayer.json").toURI()).toPath());
         LeagueHttpClient mockedLeagueHttpClient = mock(LeagueHttpClient.class);
-        when(mockedLeagueHttpClient.fetchJson(any())).thenReturn(testJson);
+        when(mockedLeagueHttpClient.fetchData(any())).thenReturn(testJson);
 
         activePlayerThread = new ActivePlayerThread(mockedLeagueHttpClient);
     }

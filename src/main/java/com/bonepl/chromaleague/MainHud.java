@@ -1,10 +1,7 @@
 package com.bonepl.chromaleague;
 
 import com.bonepl.chromaleague.league.EventProcessor;
-import com.bonepl.chromaleague.league.hud.Background;
-import com.bonepl.chromaleague.league.hud.GoldBar;
-import com.bonepl.chromaleague.league.hud.HpBar;
-import com.bonepl.chromaleague.league.hud.ResourceBar;
+import com.bonepl.chromaleague.league.hud.*;
 import com.bonepl.chromaleague.league.json.GameDetectionThread;
 import com.bonepl.chromaleague.league.json.LeagueHttpClient;
 import com.bonepl.chromaleague.league.json.activeplayer.ActivePlayerThread;
@@ -55,7 +52,8 @@ public class MainHud {
         final int hpPercentage = playerListThread.isActivePlayerDead() ? 0 : activePlayerThread.getHpPercentage();
         layeredCustomEffect.addCustomKeyboardEffect(new HpBar(hpPercentage));
         final int resourcePercentage = playerListThread.isActivePlayerDead() ? 0 : activePlayerThread.getResourcePercentage();
-        layeredCustomEffect.addCustomKeyboardEffect(new ResourceBar(resourcePercentage));
+        ResourceType resourceType = activePlayerThread.getResourceType();
+        layeredCustomEffect.addCustomKeyboardEffect(new ResourceBar(resourcePercentage, resourceType));
         layeredCustomEffect.addCustomKeyboardEffect(new GoldBar(activePlayerThread));
         razerSDKClient.createKeyboardEffect(layeredCustomEffect);
     }

@@ -23,7 +23,10 @@ public class PlayerListThread extends Thread {
         while (alive) {
             if (GameDetectionThread.isGameActive()) {
                 while (GameDetectionThread.isGameActive()) {
-                    playerList = new PlayerList(GameDetectionThread.getActivePlayerName(), fetchData());
+                    final Player[] players = fetchData();
+                    if (players != null) {
+                        playerList = new PlayerList(GameDetectionThread.getActivePlayerName(), players);
+                    }
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {

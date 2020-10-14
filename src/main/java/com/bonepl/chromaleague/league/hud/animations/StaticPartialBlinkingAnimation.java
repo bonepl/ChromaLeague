@@ -3,16 +3,15 @@ package com.bonepl.chromaleague.league.hud.animations;
 import com.bonepl.chromaleague.league.hud.Background;
 import com.bonepl.chromaleague.razer.RazerSDKClient;
 import com.bonepl.chromaleague.razer.effects.Color;
-import com.bonepl.chromaleague.razer.effects.keyboard.StaticEffect;
 import com.bonepl.chromaleague.razer.effects.keyboard.StaticPartialEffect;
 import com.bonepl.chromaleague.razer.sdk.RzKey;
 
 import java.util.List;
 
 public class StaticPartialBlinkingAnimation {
-    private int times;
-    private Color color;
-    private List<RzKey> rzKeys;
+    private final int times;
+    private final Color color;
+    private final List<RzKey> rzKeys;
 
     public StaticPartialBlinkingAnimation(List<RzKey> rzKeys, int times, Color color) {
         this.rzKeys = rzKeys;

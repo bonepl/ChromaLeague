@@ -36,6 +36,7 @@ public class GameDetectionThread extends Thread {
             if (!gameActive) {
                 logger.debug(json + " has joined the game");
                 GameDetectionThread.gameActive = true;
+                //TODO activePlayerName comes with quotes like "BooonE" - any cleaner solution over this?
                 GameDetectionThread.activePlayerName = json.replaceAll("\"", "");
             }
         } else {
@@ -53,10 +54,5 @@ public class GameDetectionThread extends Thread {
 
     public static String getActivePlayerName() {
         return activePlayerName;
-    }
-
-    // TEST ONLY
-    public static void setInstance(GameDetectionThread instance) {
-        GameDetectionThread.instance = instance;
     }
 }

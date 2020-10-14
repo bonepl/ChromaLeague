@@ -6,8 +6,8 @@ import com.bonepl.chromaleague.razer.effects.Color;
 import com.bonepl.chromaleague.razer.effects.keyboard.StaticEffect;
 
 public class StaticBlinkingAnimation {
-    private int times;
-    private Color color;
+    private final int times;
+    private final Color color;
 
     public StaticBlinkingAnimation(int times, Color color) {
         this.times = times;

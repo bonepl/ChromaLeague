@@ -13,7 +13,7 @@ public class PlayerListThread extends Thread {
 
     private final LeagueHttpClient leagueHttpClient;
     boolean alive = true;
-    PlayerList playerList;
+    public static PlayerList playerList;
 
     public PlayerListThread(LeagueHttpClient leagueHttpClient) {
         this.leagueHttpClient = leagueHttpClient;
@@ -48,10 +48,21 @@ public class PlayerListThread extends Thread {
     }
 
     public boolean isActivePlayerDead() {
-        final Player activePlayer = playerList.getActivePlayer();
-        if (activePlayer != null) {
-            return activePlayer.isDead();
+        if (playerList != null) {
+            final Player activePlayer = playerList.getActivePlayer();
+            if (activePlayer != null) {
+                return activePlayer.isDead();
+            }
         }
         return false;
+    }
+
+    public static PlayerList getPlayerList() {
+        return playerList;
+    }
+
+    // TEST ONLY
+    public static void setPlayerList(PlayerList playerList) {
+        PlayerListThread.playerList = playerList;
     }
 }

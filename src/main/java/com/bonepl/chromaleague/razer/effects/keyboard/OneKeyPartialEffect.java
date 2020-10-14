@@ -5,9 +5,9 @@ import com.bonepl.chromaleague.razer.sdk.RzKey;
 
 import java.util.Collections;
 
-public class OneKeyEffect extends PartialStaticEffect {
+public class OneKeyPartialEffect extends StaticPartialEffect {
 
-    public OneKeyEffect(RzKey rzKey, Color color) {
+    public OneKeyPartialEffect(RzKey rzKey, Color color) {
         super(Collections.singletonList(rzKey), color);
     }
 }

@@ -2,11 +2,14 @@ package com.bonepl.chromaleague.league;
 
 import com.bonepl.chromaleague.league.json.eventdata.EventDataThread;
 import com.bonepl.chromaleague.league.json.eventdata.model.Event;
+import com.bonepl.chromaleague.league.json.playerlist.PlayerListThread;
+import com.bonepl.chromaleague.league.json.playerlist.model.PlayerList;
 import com.bonepl.chromaleague.razer.RazerSDKClient;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -24,63 +27,140 @@ class EventProcessorTest {
     }
 
     @Test
-    void testOceanDragonAnimation() {
+    void testAllyOceanDragonAnimation() {
         //given
         final EventDataThread edt = mockDataThread(mockDragonEvent("Water"));
+        mockPlayerList(true);
 
         //then
         EventProcessor.processEvents(edt, razerSDKClient);
     }
 
     @Test
-    void testInfernalDragonAnimation() {
+    void testAllyInfernalDragonAnimation() {
         //given
         final EventDataThread edt = mockDataThread(mockDragonEvent("Fire"));
+        mockPlayerList(true);
 
         //then
         EventProcessor.processEvents(edt, razerSDKClient);
     }
 
     @Test
-    void testCloudDragonAnimation() {
+    void testAllyCloudDragonAnimation() {
         //given
         final EventDataThread edt = mockDataThread(mockDragonEvent("Air"));
+        mockPlayerList(true);
 
         //then
         EventProcessor.processEvents(edt, razerSDKClient);
     }
 
     @Test
-    void testMountainDragonAnimation() {
+    void testAllyMountainDragonAnimation() {
         //given
         final EventDataThread edt = mockDataThread(mockDragonEvent("Earth"));
+        mockPlayerList(true);
 
         //then
         EventProcessor.processEvents(edt, razerSDKClient);
     }
 
     @Test
-    void testElderDragonAnimation() {
+    void testAllyElderDragonAnimation() {
         //given
         final EventDataThread edt = mockDataThread(mockDragonEvent("Elder"));
+        mockPlayerList(true);
 
         //then
         EventProcessor.processEvents(edt, razerSDKClient);
     }
 
     @Test
-    void testHeraldAnimation() {
+    void testAllyHeraldAnimation() {
         //given
         final EventDataThread edt = mockDataThread(mockHeraldEvent());
+        mockPlayerList(true);
 
         //then
         EventProcessor.processEvents(edt, razerSDKClient);
     }
 
     @Test
-    void testBaronAnimation() {
+    void testAllyBaronAnimation() {
         //given
         final EventDataThread edt = mockDataThread(mockBaronEvent());
+        mockPlayerList(false);
+
+        //then
+        EventProcessor.processEvents(edt, razerSDKClient);
+    }
+
+    @Test
+    void testEnemyOceanDragonAnimation() {
+        //given
+        final EventDataThread edt = mockDataThread(mockDragonEvent("Water"));
+        mockPlayerList(false);
+
+        //then
+        EventProcessor.processEvents(edt, razerSDKClient);
+    }
+
+    @Test
+    void testEnemyInfernalDragonAnimation() {
+        //given
+        final EventDataThread edt = mockDataThread(mockDragonEvent("Fire"));
+        mockPlayerList(false);
+
+        //then
+        EventProcessor.processEvents(edt, razerSDKClient);
+    }
+
+    @Test
+    void testEnemyCloudDragonAnimation() {
+        //given
+        final EventDataThread edt = mockDataThread(mockDragonEvent("Air"));
+        mockPlayerList(false);
+
+        //then
+        EventProcessor.processEvents(edt, razerSDKClient);
+    }
+
+    @Test
+    void testEnemyMountainDragonAnimation() {
+        //given
+        final EventDataThread edt = mockDataThread(mockDragonEvent("Earth"));
+        mockPlayerList(false);
+
+        //then
+        EventProcessor.processEvents(edt, razerSDKClient);
+    }
+
+    @Test
+    void testEnemyElderDragonAnimation() {
+        //given
+        final EventDataThread edt = mockDataThread(mockDragonEvent("Elder"));
+        mockPlayerList(false);
+
+        //then
+        EventProcessor.processEvents(edt, razerSDKClient);
+    }
+
+    @Test
+    void testEnemyHeraldAnimation() {
+        //given
+        final EventDataThread edt = mockDataThread(mockHeraldEvent());
+        mockPlayerList(false);
+
+        //then
+        EventProcessor.processEvents(edt, razerSDKClient);
+    }
+
+    @Test
+    void testEnemyBaronAnimation() {
+        //given
+        final EventDataThread edt = mockDataThread(mockBaronEvent());
+        mockPlayerList(true);
 
         //then
         EventProcessor.processEvents(edt, razerSDKClient);
@@ -112,4 +192,9 @@ class EventProcessorTest {
         return mock;
     }
 
+    private void mockPlayerList(boolean isAlly) {
+        final PlayerList mock = mock(PlayerList.class);
+        when(mock.isAlly(any())).thenReturn(isAlly);
+        PlayerListThread.setPlayerList(mock);
+    }
 }

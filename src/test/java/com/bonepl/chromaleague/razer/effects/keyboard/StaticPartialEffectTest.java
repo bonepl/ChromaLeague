@@ -10,7 +10,7 @@ import java.util.List;
 
 import static com.bonepl.chromaleague.razer.sdk.RzKey.*;
 
-class PartialStaticEffectTest {
+class StaticPartialEffectTest {
     List<RzKey> smiley = Arrays.asList(RZKEY_W, RZKEY_3, RZKEY_4, RZKEY_R,
             RZKEY_I, RZKEY_9, RZKEY_0, RZKEY_P,
             RZKEY_X, RZKEY_SPACE, RZKEY_OEM_9);
@@ -18,7 +18,7 @@ class PartialStaticEffectTest {
     @Test
     void testPartialStaticEffect() throws InterruptedException {
         try (RazerSDKClient razerSDKClient = new RazerSDKClient()) {
-            razerSDKClient.createKeyboardEffect(new PartialStaticEffect(smiley, Color.YELLOW));
+            razerSDKClient.createKeyboardEffect(new StaticPartialEffect(smiley, Color.YELLOW));
             Thread.sleep(100);
         }
     }

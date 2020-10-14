@@ -54,4 +54,9 @@ public class GameDetectionThread extends Thread {
     public static String getActivePlayerName() {
         return activePlayerName;
     }
+
+    // TEST ONLY
+    public static void setInstance(GameDetectionThread instance) {
+        GameDetectionThread.instance = instance;
+    }
 }

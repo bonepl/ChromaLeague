@@ -5,9 +5,9 @@ import com.bonepl.chromaleague.razer.sdk.RzKey;
 
 import java.util.List;
 
-public class PartialStaticEffect extends CustomEffect {
+public class StaticPartialEffect extends CustomEffect {
 
-    public PartialStaticEffect(List<RzKey> keys, Color color) {
+    public StaticPartialEffect(List<RzKey> keys, Color color) {
         keys.forEach(rzKey -> colors[rzKey.getCustomPosition()] = color.getSDKColorRef());
     }
 }

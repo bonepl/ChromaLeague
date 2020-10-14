@@ -18,6 +18,6 @@ public class ResourceBar extends ProgressBarEffect {
             RZKEY_6, RZKEY_7, RZKEY_8, RZKEY_9, RZKEY_0, RZKEY_OEM_2, RZKEY_OEM_3, RZKEY_BACKSPACE);
 
     public ResourceBar(int resourcePercentage, ResourceType resourceType) {
-        super(RESOURCE_BAR_KEYS, resourcePercentage, resourceType.color);
+        super(RESOURCE_BAR_KEYS, resourcePercentage, resourceType.getColor());
     }
 }

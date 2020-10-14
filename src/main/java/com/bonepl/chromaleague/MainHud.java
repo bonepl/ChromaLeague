@@ -52,8 +52,8 @@ public class MainHud {
         final int hpPercentage = playerListThread.isActivePlayerDead() ? 0 : activePlayerThread.getHpPercentage();
         layeredCustomEffect.addCustomKeyboardEffect(new HpBar(hpPercentage));
         final int resourcePercentage = playerListThread.isActivePlayerDead() ? 0 : activePlayerThread.getResourcePercentage();
-        ResourceType resource = ResourceType.parseResType(activePlayerThread.getResourceType());
-        layeredCustomEffect.addCustomKeyboardEffect(new ResourceBar(resourcePercentage, resource));
+        ResourceType resourceType = activePlayerThread.getResourceType();
+        layeredCustomEffect.addCustomKeyboardEffect(new ResourceBar(resourcePercentage, resourceType));
         layeredCustomEffect.addCustomKeyboardEffect(new GoldBar(activePlayerThread));
         razerSDKClient.createKeyboardEffect(layeredCustomEffect);
     }

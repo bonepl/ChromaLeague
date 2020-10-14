@@ -1,6 +1,7 @@
 package com.bonepl.chromaleague.league.json.activeplayer;
 
 import com.bonepl.chromaleague.league.hud.GoldBar;
+import com.bonepl.chromaleague.league.hud.ResourceType;
 import com.bonepl.chromaleague.league.json.GameDetectionThread;
 import com.bonepl.chromaleague.league.json.LeagueHttpClient;
 import com.bonepl.chromaleague.league.json.activeplayer.model.ActivePlayer;
@@ -71,10 +72,10 @@ public class ActivePlayerThread extends Thread {
         return 0;
     }
 
-    public String getResourceType() {
-        if (activePlayer!= null) {
-            return activePlayer.getChampionStats().getResourceType();
+    public ResourceType getResourceType() {
+        if (activePlayer != null) {
+            return ResourceType.from(activePlayer.getChampionStats().getResourceType());
         }
-        return null;
+        return ResourceType.MANA;
     }
 }

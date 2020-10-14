@@ -12,7 +12,11 @@ public enum ResourceType {
         this.color = color;
     }
 
-    public static ResourceType parseResType(String value) {
+    public Color getColor() {
+        return color;
+    }
+
+    public static ResourceType from(String value) {
         if ("ENERGY".equals(value)) {
             return ENERGY;
         }

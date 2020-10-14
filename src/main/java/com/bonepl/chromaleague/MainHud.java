@@ -9,9 +9,9 @@ import com.bonepl.chromaleague.league.json.GameDetectionThread;
 import com.bonepl.chromaleague.league.json.LeagueHttpClient;
 import com.bonepl.chromaleague.league.json.activeplayer.ActivePlayerThread;
 import com.bonepl.chromaleague.league.json.eventdata.EventDataThread;
+import com.bonepl.chromaleague.league.json.playerlist.PlayerListThread;
 import com.bonepl.chromaleague.razer.RazerSDKClient;
 import com.bonepl.chromaleague.razer.effects.keyboard.LayeredCustomEffect;
-import com.bonepl.chromaleague.league.json.playerlist.PlayerListThread;
 
 public class MainHud {
     private final ActivePlayerThread activePlayerThread;

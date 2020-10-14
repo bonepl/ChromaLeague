@@ -83,8 +83,8 @@
                 <version>3.0.0-M5</version>
                 <configuration>
                     <excludes>
-                        <exclude>com/bonepl/chromaleague/razer/effects/*.java</exclude>
-                        <exclude>com/bonepl/chromaleague/razer/league/EventProcessorTest</exclude>
+                        <exclude>com/bonepl/chromaleague/razer/effects/keyboard/*.java</exclude>
+                        <exclude>com/bonepl/chromaleague/league/EventProcessorTest.java</exclude>
                     </excludes>
                 </configuration>
             </plugin>
@@ -94,8 +94,8 @@
                 <version>3.0.0-M5</version>
                 <configuration>
                     <includes>
-                        <include>com/bonepl/chromaleague/razer/effects/*.java</include>
-                        <include>com/bonepl/chromaleague/razer/league/EventProcessorTest</include>
+                        <include>com/bonepl/chromaleague/razer/effects/keyboard/*.java</include>
+                        <include>com/bonepl/chromaleague/league/EventProcessorTest.java</include>
                     </includes>
                 </configuration>
                 <executions>

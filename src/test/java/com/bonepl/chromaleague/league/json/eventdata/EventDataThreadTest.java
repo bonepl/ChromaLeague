@@ -1,7 +1,7 @@
 package com.bonepl.chromaleague.league.json.eventdata;
 
-import com.bonepl.chromaleague.league.json.eventdata.model.Event;
 import com.bonepl.chromaleague.league.json.LeagueHttpClient;
+import com.bonepl.chromaleague.league.json.eventdata.model.Event;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -42,15 +42,5 @@ class EventDataThreadTest {
         assertEquals(0, event.getEventID());
         assertEquals("GameStart", event.getEventName());
         assertEquals(0.0563616007566452, event.getEventTime());
-    }
-
-    @Test
-    void testEventStackingProtection() {
-        //when
-        final List<Event> events = eventDataThread.fetchData();
-        final List<Event> unprocessedEvents = eventDataThread.collectUnprocessedEvents(events);
-
-        //then
-        assertTrue(unprocessedEvents.isEmpty());
     }
 }

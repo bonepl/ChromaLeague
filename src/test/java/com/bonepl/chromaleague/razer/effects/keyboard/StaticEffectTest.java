@@ -1,7 +1,7 @@
-package com.bonepl.chromaleague.razer.effects;
+package com.bonepl.chromaleague.razer.effects.keyboard;
 
 import com.bonepl.chromaleague.razer.RazerSDKClient;
-import com.bonepl.chromaleague.razer.effects.keyboard.StaticEffect;
+import com.bonepl.chromaleague.razer.effects.Color;
 import org.junit.jupiter.api.Test;
 
 class StaticEffectTest {

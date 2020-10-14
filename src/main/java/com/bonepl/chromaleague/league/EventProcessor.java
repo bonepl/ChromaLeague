@@ -1,10 +1,10 @@
 package com.bonepl.chromaleague.league;
 
+import com.bonepl.chromaleague.league.hud.animations.StaticBlinkingAnimation;
+import com.bonepl.chromaleague.league.json.eventdata.EventDataThread;
 import com.bonepl.chromaleague.league.json.eventdata.model.EventType;
 import com.bonepl.chromaleague.razer.RazerSDKClient;
 import com.bonepl.chromaleague.razer.effects.Color;
-import com.bonepl.chromaleague.league.hud.animations.StaticBlinkingAnimation;
-import com.bonepl.chromaleague.league.json.eventdata.EventDataThread;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

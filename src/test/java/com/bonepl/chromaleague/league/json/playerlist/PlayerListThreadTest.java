@@ -41,6 +41,5 @@ class PlayerListThreadTest {
         assertEquals(Team.CHAOS, playerList.getActivePlayer().getTeam());
         assertTrue(playerList.isAlly("Test summoner 5"));
         assertFalse(playerList.isAlly("Test summoner 9"));
-        assertTrue(playerListThread.isActivePlayerDead());
     }
 }

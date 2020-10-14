@@ -1,8 +1,8 @@
 package com.bonepl.chromaleague.league.hud;
 
+import com.bonepl.chromaleague.league.json.activeplayer.ActivePlayerThread;
 import com.bonepl.chromaleague.razer.effects.Color;
 import com.bonepl.chromaleague.razer.effects.keyboard.ProgressBarEffect;
-import com.bonepl.chromaleague.league.json.activeplayer.ActivePlayerThread;
 import com.bonepl.chromaleague.razer.sdk.RzKey;
 
 import java.util.Arrays;

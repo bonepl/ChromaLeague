@@ -1,8 +1,8 @@
 package com.bonepl.chromaleague.league;
 
-import com.bonepl.chromaleague.razer.RazerSDKClient;
 import com.bonepl.chromaleague.league.json.eventdata.EventDataThread;
 import com.bonepl.chromaleague.league.json.eventdata.model.Event;
+import com.bonepl.chromaleague.razer.RazerSDKClient;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

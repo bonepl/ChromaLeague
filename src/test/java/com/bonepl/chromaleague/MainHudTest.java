@@ -1,6 +1,5 @@
-package com.bonepl.chromaleague.league;
+package com.bonepl.chromaleague;
 
-import com.bonepl.chromaleague.MainHud;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 

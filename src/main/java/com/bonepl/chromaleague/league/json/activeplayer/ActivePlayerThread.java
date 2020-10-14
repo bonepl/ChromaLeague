@@ -70,4 +70,11 @@ public class ActivePlayerThread extends Thread {
         }
         return 0;
     }
+
+    public String getResourceType() {
+        if (activePlayer!= null) {
+            return activePlayer.getChampionStats().getResourceType();
+        }
+        return null;
+    }
 }

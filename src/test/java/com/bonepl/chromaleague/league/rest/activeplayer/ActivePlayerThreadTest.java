@@ -1,6 +1,6 @@
-package com.bonepl.chromaleague.league.json.activeplayer;
+package com.bonepl.chromaleague.league.rest.activeplayer;
 
-import com.bonepl.chromaleague.league.json.activeplayer.model.ActivePlayer;
+import com.bonepl.chromaleague.league.rest.activeplayer.model.ActivePlayer;
 import com.jsoniter.JsonIterator;
 import org.junit.jupiter.api.Test;
 

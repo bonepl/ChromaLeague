@@ -2,8 +2,7 @@ package com.bonepl.chromaleague.league;
 
 import com.bonepl.chromaleague.league.hud.animations.StaticBlinkingAnimation;
 import com.bonepl.chromaleague.league.hud.animations.StaticPartialBlinkingAnimation;
-import com.bonepl.chromaleague.league.json.eventdata.EventDataThread;
-import com.bonepl.chromaleague.league.json.eventdata.model.EventType;
+import com.bonepl.chromaleague.league.rest.eventdata.model.EventType;
 import com.bonepl.chromaleague.razer.RazerSDKClient;
 import com.bonepl.chromaleague.razer.effects.Color;
 import com.bonepl.chromaleague.razer.sdk.RzKey;
@@ -22,12 +21,14 @@ public class EventProcessor {
             RZKEY_DELETE, RZKEY_END, RZKEY_PAGEDOWN);
     private final static Logger logger = LogManager.getLogger();
 
+    private static int lastProcessedEventId = -1;
+
     private EventProcessor() {
     }
 
-    public static void processEvents(EventDataThread eventDataThread, RazerSDKClient razerSDKClient) {
-        while (eventDataThread.hasUnprocessedEvents()) {
-            final EventType eventType = EventType.fromEvent(eventDataThread.pollNextUnprocessedEvent());
+    public static void processEvents(RazerSDKClient razerSDKClient) {
+        while (GameState.hasUnprocessedEvents()) {
+            final EventType eventType = EventType.fromEvent(GameState.pollNextUnprocessedEvent());
             if (eventType != EventType.UNSUPPORTED) {
                 logger.info("Processing event: " + eventType);
                 switch (eventType) {
@@ -47,5 +48,13 @@ public class EventProcessor {
             }
         }
 
+    }
+
+    public static int getLastProcessedEventId() {
+        return lastProcessedEventId;
+    }
+
+    public static void setLastProcessedEventId(int lastProcessedEventId) {
+        EventProcessor.lastProcessedEventId = lastProcessedEventId;
     }
 }

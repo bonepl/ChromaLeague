@@ -1,8 +1,8 @@
 package com.bonepl.chromaleague.league;
 
-import com.bonepl.chromaleague.league.json.activeplayer.model.ActivePlayer;
-import com.bonepl.chromaleague.league.json.eventdata.model.Event;
-import com.bonepl.chromaleague.league.json.playerlist.model.PlayerList;
+import com.bonepl.chromaleague.league.rest.activeplayer.model.ActivePlayer;
+import com.bonepl.chromaleague.league.rest.eventdata.model.Event;
+import com.bonepl.chromaleague.league.rest.playerlist.model.PlayerList;
 
 import java.util.Collection;
 import java.util.Queue;
@@ -25,7 +25,7 @@ public class GameState {
         return activePlayerName;
     }
 
-    public static boolean isActivePlayerNameAvailable() {
+    public static boolean isGameActive() {
         return activePlayerName != null;
     }
 

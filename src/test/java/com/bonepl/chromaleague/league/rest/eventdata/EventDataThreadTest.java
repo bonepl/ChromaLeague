@@ -1,7 +1,7 @@
-package com.bonepl.chromaleague.league.json.eventdata;
+package com.bonepl.chromaleague.league.rest.eventdata;
 
-import com.bonepl.chromaleague.league.json.eventdata.model.Event;
-import com.bonepl.chromaleague.league.json.eventdata.model.Events;
+import com.bonepl.chromaleague.league.rest.eventdata.model.Event;
+import com.bonepl.chromaleague.league.rest.eventdata.model.Events;
 import com.jsoniter.JsonIterator;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +20,7 @@ class EventDataThreadTest {
         //given
         final String testJson = Files.readString(new File(this.getClass().getClassLoader()
                 .getResource("json/eventdata.json").toURI()).toPath());
-        
+
         //when
         final List<Event> events = JsonIterator.deserialize(testJson, Events.class).getEvents();
 

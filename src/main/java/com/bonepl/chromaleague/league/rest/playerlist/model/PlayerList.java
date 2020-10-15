@@ -1,4 +1,4 @@
-package com.bonepl.chromaleague.league.json.playerlist.model;
+package com.bonepl.chromaleague.league.rest.playerlist.model;
 
 import com.bonepl.chromaleague.league.GameState;
 

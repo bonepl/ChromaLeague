@@ -1,4 +1,4 @@
-package com.bonepl.chromaleague.league.json.activeplayer.model;
+package com.bonepl.chromaleague.league.rest.activeplayer.model;
 
 public class ChampionStats {
     double currentHealth;

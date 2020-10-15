@@ -1,9 +1,9 @@
-package com.bonepl.chromaleague.league.json.playerlist;
+package com.bonepl.chromaleague.league.rest.playerlist;
 
 import com.bonepl.chromaleague.league.GameState;
-import com.bonepl.chromaleague.league.json.playerlist.model.Player;
-import com.bonepl.chromaleague.league.json.playerlist.model.PlayerList;
-import com.bonepl.chromaleague.league.json.playerlist.model.Team;
+import com.bonepl.chromaleague.league.rest.playerlist.model.Player;
+import com.bonepl.chromaleague.league.rest.playerlist.model.PlayerList;
+import com.bonepl.chromaleague.league.rest.playerlist.model.Team;
 import com.jsoniter.JsonIterator;
 import org.junit.jupiter.api.Test;
 

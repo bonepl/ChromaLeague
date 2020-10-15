@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-public class GameState {
+public final class GameState {
     private volatile static String activePlayerName;
     private volatile static ActivePlayer activePlayer;
     private volatile static PlayerList playerList;
@@ -38,7 +38,7 @@ public class GameState {
     }
 
     public static boolean isActivePlayerAvailable() {
-        return activePlayer != null;
+        return activePlayer != null && activePlayer.getChampionStats() != null;
     }
 
     public static void setPlayerList(PlayerList playerList) {
@@ -50,7 +50,7 @@ public class GameState {
     }
 
     public static boolean isPlayerListAvailable() {
-        return playerList != null;
+        return playerList != null && playerList.getActivePlayer() != null;
     }
 
     public static void addUnprocessedEvents(Collection<Event> events) {

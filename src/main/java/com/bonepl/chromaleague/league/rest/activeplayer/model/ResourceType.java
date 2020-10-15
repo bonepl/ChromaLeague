@@ -1,4 +1,4 @@
-package com.bonepl.chromaleague.league.hud;
+package com.bonepl.chromaleague.league.rest.activeplayer.model;
 
 import com.bonepl.chromaleague.razer.effects.Color;
 

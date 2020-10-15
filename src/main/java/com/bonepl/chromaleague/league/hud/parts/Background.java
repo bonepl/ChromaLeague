@@ -1,4 +1,4 @@
-package com.bonepl.chromaleague.league.hud;
+package com.bonepl.chromaleague.league.hud.parts;
 
 import com.bonepl.chromaleague.razer.effects.Color;
 import com.bonepl.chromaleague.razer.effects.keyboard.StaticEffect;

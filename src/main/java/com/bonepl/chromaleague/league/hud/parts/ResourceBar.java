@@ -1,6 +1,6 @@
-package com.bonepl.chromaleague.league.hud;
+package com.bonepl.chromaleague.league.hud.parts;
 
-import com.bonepl.chromaleague.razer.effects.Color;
+import com.bonepl.chromaleague.league.rest.activeplayer.model.ResourceType;
 import com.bonepl.chromaleague.razer.effects.keyboard.ProgressBarEffect;
 import com.bonepl.chromaleague.razer.sdk.RzKey;
 

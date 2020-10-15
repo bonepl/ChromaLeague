@@ -48,7 +48,7 @@
     "cooldownReduction": 0.0,
     "critChance": 0.0,
     "critDamage": 200.0,
-    "currentHealth": 655.5999755859375,
+    "currentHealth": 255.59997,
     "healthRegenRate": 1.7000000476837159,
     "lifeSteal": 0.029999999329447748,
     "magicLethality": 0.0,
@@ -65,7 +65,7 @@
     "spellVamp": 0.0,
     "tenacity": 0.0
   },
-  "currentGold": 0.0,
+  "currentGold": 123.45,
   "fullRunes": {
     "generalRunes": [
       {

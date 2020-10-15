@@ -95,4 +95,9 @@ public class LeagueHttpClient {
             }
         }
     }
+
+    //TEST ONLY
+    static void setLeagueHttpClient(CloseableHttpClient leagueHttpClient) {
+        LeagueHttpClient.leagueHttpClient = leagueHttpClient;
+    }
 }

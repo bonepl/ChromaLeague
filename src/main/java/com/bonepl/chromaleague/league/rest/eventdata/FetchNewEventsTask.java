@@ -13,13 +13,14 @@ import java.util.Collections;
 import java.util.List;
 
 public class FetchNewEventsTask implements Runnable {
+    public static final String URL = "https://127.0.0.1:2999/liveclientdata/eventdata";
     private final static Logger logger = LogManager.getLogger();
 
     @Override
     public void run() {
         if (GameState.isGameActive()) {
-            logger.info("Fetching Events");
-            LeagueHttpClient.get("https://127.0.0.1:2999/liveclientdata/eventdata")
+            logger.trace("Fetching Events");
+            LeagueHttpClient.get(URL)
                     .map(events -> JsonIterator.deserialize(events, Events.class))
                     .map(Events::getEvents)
                     .map(this::collectUnprocessedEvents)

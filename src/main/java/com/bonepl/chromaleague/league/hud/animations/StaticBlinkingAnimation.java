@@ -1,6 +1,6 @@
 package com.bonepl.chromaleague.league.hud.animations;
 
-import com.bonepl.chromaleague.league.hud.Background;
+import com.bonepl.chromaleague.league.hud.parts.Background;
 import com.bonepl.chromaleague.razer.RazerSDKClient;
 import com.bonepl.chromaleague.razer.effects.Color;
 import com.bonepl.chromaleague.razer.effects.keyboard.StaticEffect;

@@ -1,8 +1,8 @@
 package com.bonepl.chromaleague.league.json.eventdata;
 
-import com.bonepl.chromaleague.league.json.LeagueHttpClient;
 import com.bonepl.chromaleague.league.json.eventdata.model.Event;
-import org.junit.jupiter.api.BeforeEach;
+import com.bonepl.chromaleague.league.json.eventdata.model.Events;
+import com.jsoniter.JsonIterator;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -12,28 +12,17 @@ import java.nio.file.Files;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 class EventDataThreadTest {
 
-    private EventDataThread eventDataThread;
-
-    @BeforeEach
-    void setUp() throws URISyntaxException, IOException {
+    @Test
+    void testEventParsing() throws URISyntaxException, IOException {
+        //given
         final String testJson = Files.readString(new File(this.getClass().getClassLoader()
                 .getResource("json/eventdata.json").toURI()).toPath());
-        LeagueHttpClient mockedLeagueHttpClient = mock(LeagueHttpClient.class);
-        when(mockedLeagueHttpClient.fetchData(any())).thenReturn(testJson);
-
-        eventDataThread = new EventDataThread(mockedLeagueHttpClient);
-    }
-
-    @Test
-    void testEventParsing() {
+        
         //when
-        final List<Event> events = eventDataThread.fetchData();
+        final List<Event> events = JsonIterator.deserialize(testJson, Events.class).getEvents();
 
         //then
         assertEquals(27, events.size());

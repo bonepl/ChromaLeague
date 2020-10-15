@@ -1,9 +1,10 @@
 package com.bonepl.chromaleague.league.json.playerlist;
 
-import com.bonepl.chromaleague.league.json.LeagueHttpClient;
+import com.bonepl.chromaleague.league.GameState;
+import com.bonepl.chromaleague.league.json.playerlist.model.Player;
 import com.bonepl.chromaleague.league.json.playerlist.model.PlayerList;
 import com.bonepl.chromaleague.league.json.playerlist.model.Team;
-import org.junit.jupiter.api.BeforeEach;
+import com.jsoniter.JsonIterator;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -12,27 +13,18 @@ import java.net.URISyntaxException;
 import java.nio.file.Files;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 class PlayerListThreadTest {
-    private PlayerListThread playerListThread;
-
-    @BeforeEach
-    void setUp() throws URISyntaxException, IOException {
-        final String testJson = Files.readString(new File(this.getClass().getClassLoader()
-                .getResource("json/playerlist.json").toURI()).toPath());
-        LeagueHttpClient mockedLeagueHttpClient = mock(LeagueHttpClient.class);
-        when(mockedLeagueHttpClient.fetchData(any())).thenReturn(testJson);
-
-        playerListThread = new PlayerListThread(mockedLeagueHttpClient);
-    }
 
     @Test
-    void testPlayerListParsing() {
+    void testPlayerListParsing() throws URISyntaxException, IOException {
+        //given
+        final String testJson = Files.readString(new File(this.getClass().getClassLoader()
+                .getResource("json/playerlist.json").toURI()).toPath());
+        GameState.setActivePlayerName("BooonE");
+
         //when
-        final PlayerList playerList = new PlayerList("BooonE", playerListThread.fetchData());
+        final PlayerList playerList = new PlayerList(JsonIterator.deserialize(testJson, Player[].class));
 
         //then
         assertEquals(5, playerList.getAllies().size());

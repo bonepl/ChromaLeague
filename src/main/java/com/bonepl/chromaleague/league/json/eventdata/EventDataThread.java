@@ -1,7 +1,8 @@
 package com.bonepl.chromaleague.league.json.eventdata;
 
+import com.bonepl.chromaleague.league.GameState;
+import com.bonepl.chromaleague.league.json.ApacheLeagueHttpClient;
 import com.bonepl.chromaleague.league.json.GameDetectionThread;
-import com.bonepl.chromaleague.league.json.LeagueHttpClient;
 import com.bonepl.chromaleague.league.json.eventdata.model.Event;
 import com.bonepl.chromaleague.league.json.eventdata.model.Events;
 import com.jsoniter.JsonIterator;
@@ -10,32 +11,18 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Queue;
-import java.util.concurrent.LinkedBlockingQueue;
 
 public class EventDataThread extends Thread {
     private final static Logger logger = LogManager.getLogger();
 
-    private final LeagueHttpClient leagueHttpClient;
     boolean alive = true;
     int lastProcessedEventId;
-    Queue<Event> unprocessedEvents;
-
-    public EventDataThread(LeagueHttpClient leagueHttpClient) {
-        this.leagueHttpClient = leagueHttpClient;
-    }
-
-    private void init() {
-        lastProcessedEventId = -1;
-        unprocessedEvents = new LinkedBlockingQueue<>();
-    }
 
     public void run() {
         while (alive) {
             if (GameDetectionThread.isGameActive()) {
                 while (GameDetectionThread.isGameActive()) {
-                    List<Event> events = fetchData();
-                    unprocessedEvents.addAll(collectUnprocessedEvents(events));
+                    fetchAndUpdateData();
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
@@ -43,17 +30,17 @@ public class EventDataThread extends Thread {
                     }
                 }
             } else {
-                init();
+                lastProcessedEventId = -1;
             }
         }
     }
 
-    List<Event> fetchData() {
-        String json = leagueHttpClient.fetchData("https://127.0.0.1:2999/liveclientdata/eventdata");
-        if (json != null) {
-            return JsonIterator.deserialize(json, Events.class).getEvents();
-        }
-        return Collections.emptyList();
+    void fetchAndUpdateData() {
+        ApacheLeagueHttpClient.get("https://127.0.0.1:2999/liveclientdata/eventdata")
+                .map(events -> JsonIterator.deserialize(events, Events.class))
+                .map(Events::getEvents)
+                .map(this::collectUnprocessedEvents)
+                .ifPresent(GameState::addUnprocessedEvents);
     }
 
     List<Event> collectUnprocessedEvents(List<Event> events) {
@@ -71,10 +58,10 @@ public class EventDataThread extends Thread {
     }
 
     public boolean hasUnprocessedEvents() {
-        return !unprocessedEvents.isEmpty();
+        return GameState.hasUnprocessedEvents();
     }
 
     public Event pollNextUnprocessedEvent() {
-        return unprocessedEvents.poll();
+        return GameState.pollNextUnprocessedEvent();
     }
 }

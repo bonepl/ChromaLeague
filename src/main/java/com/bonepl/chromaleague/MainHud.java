@@ -6,7 +6,6 @@ import com.bonepl.chromaleague.league.hud.GoldBar;
 import com.bonepl.chromaleague.league.hud.HpBar;
 import com.bonepl.chromaleague.league.hud.ResourceBar;
 import com.bonepl.chromaleague.league.json.GameDetectionThread;
-import com.bonepl.chromaleague.league.json.LeagueHttpClient;
 import com.bonepl.chromaleague.league.json.activeplayer.ActivePlayerThread;
 import com.bonepl.chromaleague.league.json.eventdata.EventDataThread;
 import com.bonepl.chromaleague.league.json.playerlist.PlayerListThread;
@@ -20,12 +19,12 @@ public class MainHud {
     boolean alive = true;
 
     public MainHud() {
-        GameDetectionThread.runThread(new LeagueHttpClient());
-        activePlayerThread = new ActivePlayerThread(new LeagueHttpClient());
+        GameDetectionThread.runThread();
+        activePlayerThread = new ActivePlayerThread();
         activePlayerThread.start();
-        eventDataThread = new EventDataThread(new LeagueHttpClient());
+        eventDataThread = new EventDataThread();
         eventDataThread.start();
-        playerListThread = new PlayerListThread(new LeagueHttpClient());
+        playerListThread = new PlayerListThread();
         playerListThread.start();
     }
 

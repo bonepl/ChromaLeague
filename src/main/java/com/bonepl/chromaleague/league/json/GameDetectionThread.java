@@ -1,20 +1,16 @@
 package com.bonepl.chromaleague.league.json;
 
+import com.bonepl.chromaleague.league.GameState;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class GameDetectionThread extends Thread {
     private final static Logger logger = LogManager.getLogger();
     private static GameDetectionThread instance;
-    private static LeagueHttpClient leagueHttpClient;
 
     boolean alive = true;
 
-    volatile static boolean gameActive;
-    static String activePlayerName;
-
-    public static void runThread(LeagueHttpClient leagueHttpClient) {
-        GameDetectionThread.leagueHttpClient = leagueHttpClient;
+    public static void runThread() {
         instance = new GameDetectionThread();
         instance.start();
     }
@@ -31,28 +27,18 @@ public class GameDetectionThread extends Thread {
     }
 
     public void fetchAndUpdateData() {
-        String json = leagueHttpClient.fetchData("https://127.0.0.1:2999/liveclientdata/activeplayername");
-        if (json != null && !json.contains("RESOURCE_NOT_FOUND")) {
-            if (!gameActive) {
-                logger.debug(json + " has joined the game");
-                GameDetectionThread.gameActive = true;
-                //TODO activePlayerName comes with quotes like "BooonE" - any cleaner solution over this?
-                GameDetectionThread.activePlayerName = json.replaceAll("\"", "");
-            }
-        } else {
-            if (gameActive) {
-                logger.debug("Game ended");
-                GameDetectionThread.gameActive = false;
-                GameDetectionThread.activePlayerName = null;
-            }
-        }
+        ApacheLeagueHttpClient.get("https://127.0.0.1:2999/liveclientdata/activeplayername")
+                .filter(name -> !name.contains("RESOURCE_NOT_FOUND"))
+                .map(name -> name.substring(1, name.length() - 1))
+                .ifPresentOrElse(GameState::setActivePlayerName,
+                        () -> GameState.setActivePlayerName(null));
     }
 
     public static boolean isGameActive() {
-        return gameActive;
+        return GameState.isActivePlayerNameAvailable();
     }
 
     public static String getActivePlayerName() {
-        return activePlayerName;
+        return GameState.getActivePlayerName();
     }
 }

@@ -28,7 +28,7 @@ public class RefreshMainHudTask implements Runnable {
         final int hpPercentage = isActivePlayerDead() ? 0 : getHpPercentage();
         layeredCustomEffect.addCustomKeyboardEffect(new HpBar(hpPercentage));
         final int resourcePercentage = isActivePlayerDead() ? 0 : getResourcePercentage();
-        layeredCustomEffect.addCustomKeyboardEffect(new ResourceBar(resourcePercentage));
+        layeredCustomEffect.addCustomKeyboardEffect(new ResourceBar(resourcePercentage, getResourceType()));
         layeredCustomEffect.addCustomKeyboardEffect(new GoldBar(getGoldPercentage()));
         razerSDKClient.createKeyboardEffect(layeredCustomEffect);
     }
@@ -61,6 +61,16 @@ public class RefreshMainHudTask implements Runnable {
             }
         }
         return 0;
+    }
+
+    public ResourceType getResourceType() {
+        if (GameState.isActivePlayerAvailable()) {
+            final ChampionStats championStats = GameState.getActivePlayer().getChampionStats();
+            if (championStats != null) {
+                return ResourceType.from(championStats.getResourceType());
+            }
+        }
+        return ResourceType.MANA;
     }
 
     public int getGoldPercentage() {

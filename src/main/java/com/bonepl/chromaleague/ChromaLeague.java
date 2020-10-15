@@ -2,6 +2,7 @@ package com.bonepl.chromaleague;
 
 import com.bonepl.chromaleague.league.GameState;
 import com.bonepl.chromaleague.league.hud.RefreshMainHudTask;
+import com.bonepl.chromaleague.league.rest.LeagueHttpClient;
 import com.bonepl.chromaleague.league.rest.activeplayer.FetchActivePlayerTask;
 import com.bonepl.chromaleague.league.rest.activeplayername.FetchActivePlayerNameTask;
 import com.bonepl.chromaleague.league.rest.eventdata.FetchNewEventsTask;
@@ -30,6 +31,7 @@ public class ChromaLeague {
         }
 
         gameActiveExecutor.shutdown();
+        LeagueHttpClient.shutdown();
     }
 
     private static void initializeThreads() {

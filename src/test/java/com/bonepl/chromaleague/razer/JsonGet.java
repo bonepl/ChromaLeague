@@ -1,6 +1,6 @@
 package com.bonepl.chromaleague.razer;
 
-import com.bonepl.chromaleague.league.json.activeplayer.model.ActivePlayer;
+import com.bonepl.chromaleague.league.rest.activeplayer.model.ActivePlayer;
 import com.jsoniter.JsonIterator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

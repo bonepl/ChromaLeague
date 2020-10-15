@@ -30,6 +30,11 @@
             <version>${jna.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.13</version>
+        </dependency>
+        <dependency>
             <groupId>com.jsoniter</groupId>
             <artifactId>jsoniter</artifactId>
             <version>0.9.23</version>

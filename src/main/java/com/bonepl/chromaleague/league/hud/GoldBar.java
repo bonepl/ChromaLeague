@@ -1,6 +1,5 @@
 package com.bonepl.chromaleague.league.hud;
 
-import com.bonepl.chromaleague.league.json.activeplayer.ActivePlayerThread;
 import com.bonepl.chromaleague.razer.effects.Color;
 import com.bonepl.chromaleague.razer.effects.keyboard.ProgressBarEffect;
 import com.bonepl.chromaleague.razer.sdk.RzKey;
@@ -17,7 +16,7 @@ public class GoldBar extends ProgressBarEffect {
             RZKEY_NUMPAD6, RZKEY_NUMPAD8, RZKEY_NUMPAD4, RZKEY_NUMPAD_ADD, RZKEY_NUMPAD9,
             RZKEY_NUMPAD_DIVIDE, RZKEY_NUMPAD7, RZKEY_NUMPAD_MULTIPLY, RZKEY_NUMLOCK, RZKEY_NUMPAD_SUBTRACT);
 
-    public GoldBar(ActivePlayerThread activePlayerThread) {
-        super(GOLD_BAR_KEYS, activePlayerThread.getGoldPercentage(), Color.YELLOW);
+    public GoldBar(int goldPercentage) {
+        super(GOLD_BAR_KEYS, goldPercentage, Color.YELLOW);
     }
 }

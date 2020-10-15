@@ -2,7 +2,7 @@ package com.bonepl.chromaleague.league.rest.eventdata;
 
 import com.bonepl.chromaleague.league.EventProcessor;
 import com.bonepl.chromaleague.league.GameState;
-import com.bonepl.chromaleague.league.rest.ApacheLeagueHttpClient;
+import com.bonepl.chromaleague.league.rest.LeagueHttpClient;
 import com.bonepl.chromaleague.league.rest.eventdata.model.Event;
 import com.bonepl.chromaleague.league.rest.eventdata.model.Events;
 import com.jsoniter.JsonIterator;
@@ -19,7 +19,7 @@ public class FetchNewEventsTask implements Runnable {
     public void run() {
         if (GameState.isGameActive()) {
             logger.info("Fetching Events");
-            ApacheLeagueHttpClient.get("https://127.0.0.1:2999/liveclientdata/eventdata")
+            LeagueHttpClient.get("https://127.0.0.1:2999/liveclientdata/eventdata")
                     .map(events -> JsonIterator.deserialize(events, Events.class))
                     .map(Events::getEvents)
                     .map(this::collectUnprocessedEvents)

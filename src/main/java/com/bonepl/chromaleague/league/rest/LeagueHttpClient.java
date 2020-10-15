@@ -22,7 +22,7 @@ import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
 import java.util.Optional;
 
-public class ApacheLeagueHttpClient {
+public class LeagueHttpClient {
     private final static Logger logger = LogManager.getLogger();
     private static CloseableHttpClient leagueHttpClient;
 

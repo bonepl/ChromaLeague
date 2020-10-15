@@ -4,11 +4,10 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 @Disabled
-class MainHudTest {
+class ChromaLeagueTest {
 
     @Test
     void test() {
-        final MainHud mainHUD = new MainHud();
-        mainHUD.start();
+        ChromaLeague.main();
     }
 }

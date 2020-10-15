@@ -1,7 +1,7 @@
 package com.bonepl.chromaleague.league.rest.activeplayer;
 
 import com.bonepl.chromaleague.league.GameState;
-import com.bonepl.chromaleague.league.rest.ApacheLeagueHttpClient;
+import com.bonepl.chromaleague.league.rest.LeagueHttpClient;
 import com.bonepl.chromaleague.league.rest.activeplayer.model.ActivePlayer;
 import com.jsoniter.JsonIterator;
 import org.apache.logging.log4j.LogManager;
@@ -14,7 +14,7 @@ public class FetchActivePlayerTask implements Runnable {
     public void run() {
         logger.info("Fetching Active Player");
         if (GameState.isGameActive()) {
-            ApacheLeagueHttpClient.get("https://127.0.0.1:2999/liveclientdata/activeplayer")
+            LeagueHttpClient.get("https://127.0.0.1:2999/liveclientdata/activeplayer")
                     .map(activePlayer -> JsonIterator.deserialize(activePlayer, ActivePlayer.class))
                     .ifPresentOrElse(GameState::setActivePlayer,
                             () -> GameState.setActivePlayer(null));

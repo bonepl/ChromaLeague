@@ -3,6 +3,7 @@ package com.bonepl.chromaleague.league.rest;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.config.RegistryBuilder;
+import org.apache.http.conn.ConnectTimeoutException;
 import org.apache.http.conn.socket.ConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -16,6 +17,7 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -30,8 +32,10 @@ public class LeagueHttpClient {
         try {
             return Optional.of(EntityUtils.toString(
                     getLeagueHttpClient().execute(new HttpGet(url)).getEntity()));
+        } catch (ConnectTimeoutException | SocketTimeoutException ex) {
+            logger.debug("Game service not available, game is not running");
         } catch (Exception e) {
-            logger.debug("Couldn't get data from endpoint: " + url + " - is game running?", e);
+            logger.debug("Couldn't get data from endpoint: " + url, e);
         }
         return Optional.empty();
     }
@@ -58,8 +62,8 @@ public class LeagueHttpClient {
 
     private static RequestConfig createRequestConfig() {
         return RequestConfig.custom()
-                .setConnectTimeout(100)
-                .setSocketTimeout(100).build();
+                .setConnectTimeout(150)
+                .setSocketTimeout(150).build();
     }
 
     private static SSLContext createUnsecuredSSL() {

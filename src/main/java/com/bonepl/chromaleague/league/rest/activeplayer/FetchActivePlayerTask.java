@@ -17,8 +17,7 @@ public class FetchActivePlayerTask implements Runnable {
         if (GameState.isGameActive()) {
             LeagueHttpClient.get(URL)
                     .map(activePlayer -> JsonIterator.deserialize(activePlayer, ActivePlayer.class))
-                    .ifPresentOrElse(GameState::setActivePlayer,
-                            () -> GameState.setActivePlayer(null));
+                    .ifPresent(GameState::setActivePlayer);
         }
     }
 

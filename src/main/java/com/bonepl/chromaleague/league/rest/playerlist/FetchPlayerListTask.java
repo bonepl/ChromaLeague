@@ -19,8 +19,7 @@ public class FetchPlayerListTask implements Runnable {
             LeagueHttpClient.get(URL)
                     .map(playerList -> JsonIterator.deserialize(playerList, Player[].class))
                     .map(PlayerList::new)
-                    .ifPresentOrElse(GameState::setPlayerList,
-                            () -> GameState.setPlayerList(null));
+                    .ifPresent(GameState::setPlayerList);
         }
     }
 

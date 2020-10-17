@@ -1,0 +1,606 @@
+[
+  {
+    "championName": "Ryze",
+    "isBot": false,
+    "isDead": true,
+    "items": [],
+    "level": 1,
+    "position": "TOP",
+    "rawChampionName": "game_character_displayname_Ryze",
+    "rawSkinName": "game_character_skin_displayname_Ryze_10",
+    "respawnTimer": 0.0,
+    "runes": {
+      "keystone": {
+        "displayName": "Phase Rush",
+        "id": 8230,
+        "rawDescription": "perk_tooltip_PhaseRush",
+        "rawDisplayName": "perk_displayname_PhaseRush"
+      },
+      "primaryRuneTree": {
+        "displayName": "Sorcery",
+        "id": 8200,
+        "rawDescription": "perkstyle_tooltip_7202",
+        "rawDisplayName": "perkstyle_displayname_7202"
+      },
+      "secondaryRuneTree": {
+        "displayName": "Domination",
+        "id": 8100,
+        "rawDescription": "perkstyle_tooltip_7200",
+        "rawDisplayName": "perkstyle_displayname_7200"
+      }
+    },
+    "scores": {
+      "assists": 0,
+      "creepScore": 0,
+      "deaths": 0,
+      "kills": 0,
+      "wardScore": 0.0
+    },
+    "skinID": 10,
+    "skinName": "SKT T1 Ryze",
+    "summonerName": "Test summoner 1",
+    "summonerSpells": {
+      "summonerSpellOne": {
+        "displayName": "Flash",
+        "rawDescription": "GeneratedTip_SummonerSpell_SummonerFlash_Description",
+        "rawDisplayName": "GeneratedTip_SummonerSpell_SummonerFlash_DisplayName"
+      },
+      "summonerSpellTwo": {
+        "displayName": "Teleport",
+        "rawDescription": "GeneratedTip_SummonerSpell_SummonerTeleport_Description",
+        "rawDisplayName": "GeneratedTip_SummonerSpell_SummonerTeleport_DisplayName"
+      }
+    },
+    "team": "ORDER"
+  },
+  {
+    "championName": "Hecarim",
+    "isBot": false,
+    "isDead": false,
+    "items": [],
+    "level": 1,
+    "position": "JUNGLE",
+    "rawChampionName": "game_character_displayname_Hecarim",
+    "rawSkinName": "game_character_skin_displayname_Hecarim_5",
+    "respawnTimer": 0.0,
+    "runes": {
+      "keystone": {
+        "displayName": "Conqueror",
+        "id": 8010,
+        "rawDescription": "perk_tooltip_Conqueror",
+        "rawDisplayName": "perk_displayname_Conqueror"
+      },
+      "primaryRuneTree": {
+        "displayName": "Precision",
+        "id": 8000,
+        "rawDescription": "perkstyle_tooltip_7201",
+        "rawDisplayName": "perkstyle_displayname_7201"
+      },
+      "secondaryRuneTree": {
+        "displayName": "Sorcery",
+        "id": 8200,
+        "rawDescription": "perkstyle_tooltip_7202",
+        "rawDisplayName": "perkstyle_displayname_7202"
+      }
+    },
+    "scores": {
+      "assists": 0,
+      "creepScore": 0,
+      "deaths": 0,
+      "kills": 0,
+      "wardScore": 0.0
+    },
+    "skinID": 5,
+    "skinName": "Elderwood Hecarim",
+    "summonerName": "Test summoner 2",
+    "summonerSpells": {
+      "summonerSpellOne": {
+        "displayName": "Ghost",
+        "rawDescription": "GeneratedTip_SummonerSpell_SummonerHaste_Description",
+        "rawDisplayName": "GeneratedTip_SummonerSpell_SummonerHaste_DisplayName"
+      },
+      "summonerSpellTwo": {
+        "displayName": "Smite",
+        "rawDescription": "GeneratedTip_SummonerSpell_SummonerSmite_Description",
+        "rawDisplayName": "GeneratedTip_SummonerSpell_SummonerSmite_DisplayName"
+      }
+    },
+    "team": "ORDER"
+  },
+  {
+    "championName": "Yasuo",
+    "isBot": false,
+    "isDead": false,
+    "items": [],
+    "level": 1,
+    "position": "MIDDLE",
+    "rawChampionName": "game_character_displayname_Yasuo",
+    "respawnTimer": 0.0,
+    "runes": {
+      "keystone": {
+        "displayName": "Conqueror",
+        "id": 8010,
+        "rawDescription": "perk_tooltip_Conqueror",
+        "rawDisplayName": "perk_displayname_Conqueror"
+      },
+      "primaryRuneTree": {
+        "displayName": "Precision",
+        "id": 8000,
+        "rawDescription": "perkstyle_tooltip_7201",
+        "rawDisplayName": "perkstyle_displayname_7201"
+      },
+      "secondaryRuneTree": {
+        "displayName": "Domination",
+        "id": 8100,
+        "rawDescription": "perkstyle_tooltip_7200",
+        "rawDisplayName": "perkstyle_displayname_7200"
+      }
+    },
+    "scores": {
+      "assists": 0,
+      "creepScore": 0,
+      "deaths": 0,
+      "kills": 0,
+      "wardScore": 0.0
+    },
+    "skinID": 0,
+    "summonerName": "Test summoner 7",
+    "summonerSpells": {
+      "summonerSpellOne": {
+        "displayName": "Ignite",
+        "rawDescription": "GeneratedTip_SummonerSpell_SummonerDot_Description",
+        "rawDisplayName": "GeneratedTip_SummonerSpell_SummonerDot_DisplayName"
+      },
+      "summonerSpellTwo": {
+        "displayName": "Flash",
+        "rawDescription": "GeneratedTip_SummonerSpell_SummonerFlash_Description",
+        "rawDisplayName": "GeneratedTip_SummonerSpell_SummonerFlash_DisplayName"
+      }
+    },
+    "team": "ORDER"
+  },
+  {
+    "championName": "Lucian",
+    "isBot": false,
+    "isDead": false,
+    "items": [],
+    "level": 1,
+    "position": "BOTTOM",
+    "rawChampionName": "game_character_displayname_Lucian",
+    "rawSkinName": "game_character_skin_displayname_Lucian_9",
+    "respawnTimer": 0.0,
+    "runes": {
+      "keystone": {
+        "displayName": "Press the Attack",
+        "id": 8005,
+        "rawDescription": "perk_tooltip_PressTheAttack",
+        "rawDisplayName": "perk_displayname_PressTheAttack"
+      },
+      "primaryRuneTree": {
+        "displayName": "Precision",
+        "id": 8000,
+        "rawDescription": "perkstyle_tooltip_7201",
+        "rawDisplayName": "perkstyle_displayname_7201"
+      },
+      "secondaryRuneTree": {
+        "displayName": "Inspiration",
+        "id": 8300,
+        "rawDescription": "perkstyle_tooltip_7203",
+        "rawDisplayName": "perkstyle_displayname_7203"
+      }
+    },
+    "scores": {
+      "assists": 0,
+      "creepScore": 0,
+      "deaths": 0,
+      "kills": 0,
+      "wardScore": 0.0
+    },
+    "skinID": 9,
+    "skinName": "Demacia Vice Lucian",
+    "summonerName": "Test summoner 8",
+    "summonerSpells": {
+      "summonerSpellOne": {
+        "displayName": "Flash",
+        "rawDescription": "GeneratedTip_SummonerSpell_SummonerFlash_Description",
+        "rawDisplayName": "GeneratedTip_SummonerSpell_SummonerFlash_DisplayName"
+      },
+      "summonerSpellTwo": {
+        "displayName": "Heal",
+        "rawDescription": "GeneratedTip_SummonerSpell_SummonerHeal_Description",
+        "rawDisplayName": "GeneratedTip_SummonerSpell_SummonerHeal_DisplayName"
+      }
+    },
+    "team": "ORDER"
+  },
+  {
+    "championName": "Malphite",
+    "isBot": false,
+    "isDead": false,
+    "items": [],
+    "level": 1,
+    "position": "UTILITY",
+    "rawChampionName": "game_character_displayname_Malphite",
+    "respawnTimer": 0.0,
+    "runes": {
+      "keystone": {
+        "displayName": "Arcane Comet",
+        "id": 8229,
+        "rawDescription": "perk_tooltip_ArcaneComet",
+        "rawDisplayName": "perk_displayname_ArcaneComet"
+      },
+      "primaryRuneTree": {
+        "displayName": "Sorcery",
+        "id": 8200,
+        "rawDescription": "perkstyle_tooltip_7202",
+        "rawDisplayName": "perkstyle_displayname_7202"
+      },
+      "secondaryRuneTree": {
+        "displayName": "Precision",
+        "id": 8000,
+        "rawDescription": "perkstyle_tooltip_7201",
+        "rawDisplayName": "perkstyle_displayname_7201"
+      }
+    },
+    "scores": {
+      "assists": 0,
+      "creepScore": 0,
+      "deaths": 0,
+      "kills": 0,
+      "wardScore": 0.0
+    },
+    "skinID": 0,
+    "summonerName": "Test summoner 9",
+    "summonerSpells": {
+      "summonerSpellOne": {
+        "displayName": "Ignite",
+        "rawDescription": "GeneratedTip_SummonerSpell_SummonerDot_Description",
+        "rawDisplayName": "GeneratedTip_SummonerSpell_SummonerDot_DisplayName"
+      },
+      "summonerSpellTwo": {
+        "displayName": "Flash",
+        "rawDescription": "GeneratedTip_SummonerSpell_SummonerFlash_Description",
+        "rawDisplayName": "GeneratedTip_SummonerSpell_SummonerFlash_DisplayName"
+      }
+    },
+    "team": "ORDER"
+  },
+  {
+    "championName": "Cho'Gath",
+    "isBot": false,
+    "isDead": true,
+    "items": [],
+    "level": 1,
+    "position": "TOP",
+    "rawChampionName": "game_character_displayname_Chogath",
+    "rawSkinName": "game_character_skin_displayname_Chogath_2",
+    "respawnTimer": 0.0,
+    "runes": {
+      "keystone": {
+        "displayName": "Grasp of the Undying",
+        "id": 8437,
+        "rawDescription": "perk_tooltip_GraspOfTheUndying",
+        "rawDisplayName": "perk_displayname_GraspOfTheUndying"
+      },
+      "primaryRuneTree": {
+        "displayName": "Resolve",
+        "id": 8400,
+        "rawDescription": "perkstyle_tooltip_7204",
+        "rawDisplayName": "perkstyle_displayname_7204"
+      },
+      "secondaryRuneTree": {
+        "displayName": "Inspiration",
+        "id": 8300,
+        "rawDescription": "perkstyle_tooltip_7203",
+        "rawDisplayName": "perkstyle_displayname_7203"
+      }
+    },
+    "scores": {
+      "assists": 0,
+      "creepScore": 0,
+      "deaths": 0,
+      "kills": 0,
+      "wardScore": 0.0
+    },
+    "skinID": 2,
+    "skinName": "Gentleman Cho'Gath",
+    "summonerName": "BooonE",
+    "summonerSpells": {
+      "summonerSpellOne": {
+        "displayName": "Flash",
+        "rawDescription": "GeneratedTip_SummonerSpell_SummonerFlash_Description",
+        "rawDisplayName": "GeneratedTip_SummonerSpell_SummonerFlash_DisplayName"
+      },
+      "summonerSpellTwo": {
+        "displayName": "Teleport",
+        "rawDescription": "GeneratedTip_SummonerSpell_SummonerTeleport_Description",
+        "rawDisplayName": "GeneratedTip_SummonerSpell_SummonerTeleport_DisplayName"
+      }
+    },
+    "team": "CHAOS"
+  },
+  {
+    "championName": "Amumu",
+    "isBot": false,
+    "isDead": false,
+    "items": [],
+    "level": 1,
+    "position": "JUNGLE",
+    "rawChampionName": "game_character_displayname_Amumu",
+    "rawSkinName": "game_character_skin_displayname_Amumu_23",
+    "respawnTimer": 0.0,
+    "runes": {
+      "keystone": {
+        "displayName": "Aftershock",
+        "id": 8439,
+        "rawDescription": "perk_tooltip_VeteranAftershock",
+        "rawDisplayName": "perk_displayname_VeteranAftershock"
+      },
+      "primaryRuneTree": {
+        "displayName": "Resolve",
+        "id": 8400,
+        "rawDescription": "perkstyle_tooltip_7204",
+        "rawDisplayName": "perkstyle_displayname_7204"
+      },
+      "secondaryRuneTree": {
+        "displayName": "Domination",
+        "id": 8100,
+        "rawDescription": "perkstyle_tooltip_7200",
+        "rawDisplayName": "perkstyle_displayname_7200"
+      }
+    },
+    "scores": {
+      "assists": 0,
+      "creepScore": 0,
+      "deaths": 0,
+      "kills": 0,
+      "wardScore": 0.0
+    },
+    "skinID": 23,
+    "skinName": "Hextech Amumu",
+    "summonerName": "Test summoner 3",
+    "summonerSpells": {
+      "summonerSpellOne": {
+        "displayName": "Flash",
+        "rawDescription": "GeneratedTip_SummonerSpell_SummonerFlash_Description",
+        "rawDisplayName": "GeneratedTip_SummonerSpell_SummonerFlash_DisplayName"
+      },
+      "summonerSpellTwo": {
+        "displayName": "Smite",
+        "rawDescription": "GeneratedTip_SummonerSpell_SummonerSmite_Description",
+        "rawDisplayName": "GeneratedTip_SummonerSpell_SummonerSmite_DisplayName"
+      }
+    },
+    "team": "CHAOS"
+  },
+  {
+    "championName": "Zed",
+    "isBot": false,
+    "isDead": false,
+    "items": [
+      {
+        "canUse": false,
+        "consumable": false,
+        "count": 1,
+        "displayName": "Long Sword",
+        "itemID": 1036,
+        "price": 350,
+        "rawDescription": "game_item_description_1036",
+        "rawDisplayName": "game_item_displayname_1036",
+        "slot": 0
+      },
+      {
+        "canUse": true,
+        "consumable": true,
+        "count": 3,
+        "displayName": "Health Potion",
+        "itemID": 2003,
+        "price": 50,
+        "rawDescription": "game_item_description_2003",
+        "rawDisplayName": "game_item_displayname_2003",
+        "slot": 1
+      },
+      {
+        "canUse": true,
+        "consumable": false,
+        "count": 1,
+        "displayName": "Warding Totem (Trinket)",
+        "itemID": 3340,
+        "price": 0,
+        "rawDescription": "game_item_description_3340",
+        "rawDisplayName": "game_item_displayname_3340",
+        "slot": 6
+      }
+    ],
+    "level": 1,
+    "position": "MIDDLE",
+    "rawChampionName": "game_character_displayname_Zed",
+    "rawSkinName": "game_character_skin_displayname_Zed_10",
+    "respawnTimer": 0.0,
+    "runes": {
+      "keystone": {
+        "displayName": "Electrocute",
+        "id": 8112,
+        "rawDescription": "perk_tooltip_Electrocute",
+        "rawDisplayName": "perk_displayname_Electrocute"
+      },
+      "primaryRuneTree": {
+        "displayName": "Domination",
+        "id": 8100,
+        "rawDescription": "perkstyle_tooltip_7200",
+        "rawDisplayName": "perkstyle_displayname_7200"
+      },
+      "secondaryRuneTree": {
+        "displayName": "Precision",
+        "id": 8000,
+        "rawDescription": "perkstyle_tooltip_7201",
+        "rawDisplayName": "perkstyle_displayname_7201"
+      }
+    },
+    "scores": {
+      "assists": 0,
+      "creepScore": 0,
+      "deaths": 0,
+      "kills": 0,
+      "wardScore": 0.0
+    },
+    "skinID": 10,
+    "skinName": "Championship Zed",
+    "summonerName": "Test summoner 4",
+    "summonerSpells": {
+      "summonerSpellOne": {
+        "displayName": "Flash",
+        "rawDescription": "GeneratedTip_SummonerSpell_SummonerFlash_Description",
+        "rawDisplayName": "GeneratedTip_SummonerSpell_SummonerFlash_DisplayName"
+      },
+      "summonerSpellTwo": {
+        "displayName": "Ignite",
+        "rawDescription": "GeneratedTip_SummonerSpell_SummonerDot_Description",
+        "rawDisplayName": "GeneratedTip_SummonerSpell_SummonerDot_DisplayName"
+      }
+    },
+    "team": "CHAOS"
+  },
+  {
+    "championName": "Jhin",
+    "isBot": false,
+    "isDead": false,
+    "items": [
+      {
+        "canUse": false,
+        "consumable": false,
+        "count": 1,
+        "displayName": "Doran's Blade",
+        "itemID": 1055,
+        "price": 450,
+        "rawDescription": "game_item_description_1055",
+        "rawDisplayName": "game_item_displayname_1055",
+        "slot": 0
+      },
+      {
+        "canUse": true,
+        "consumable": true,
+        "count": 1,
+        "displayName": "Health Potion",
+        "itemID": 2003,
+        "price": 50,
+        "rawDescription": "game_item_description_2003",
+        "rawDisplayName": "game_item_displayname_2003",
+        "slot": 1
+      },
+      {
+        "canUse": true,
+        "consumable": false,
+        "count": 1,
+        "displayName": "Warding Totem (Trinket)",
+        "itemID": 3340,
+        "price": 0,
+        "rawDescription": "game_item_description_3340",
+        "rawDisplayName": "game_item_displayname_3340",
+        "slot": 6
+      }
+    ],
+    "level": 1,
+    "position": "BOTTOM",
+    "rawChampionName": "game_character_displayname_Jhin",
+    "rawSkinName": "game_character_skin_displayname_Jhin_2",
+    "respawnTimer": 0.0,
+    "runes": {
+      "keystone": {
+        "displayName": "Fleet Footwork",
+        "id": 8021,
+        "rawDescription": "perk_tooltip_FleetFootwork",
+        "rawDisplayName": "perk_displayname_FleetFootwork"
+      },
+      "primaryRuneTree": {
+        "displayName": "Precision",
+        "id": 8000,
+        "rawDescription": "perkstyle_tooltip_7201",
+        "rawDisplayName": "perkstyle_displayname_7201"
+      },
+      "secondaryRuneTree": {
+        "displayName": "Sorcery",
+        "id": 8200,
+        "rawDescription": "perkstyle_tooltip_7202",
+        "rawDisplayName": "perkstyle_displayname_7202"
+      }
+    },
+    "scores": {
+      "assists": 0,
+      "creepScore": 0,
+      "deaths": 0,
+      "kills": 0,
+      "wardScore": 0.0
+    },
+    "skinID": 2,
+    "skinName": "Blood Moon Jhin",
+    "summonerName": "Test summoner 5",
+    "summonerSpells": {
+      "summonerSpellOne": {
+        "displayName": "Flash",
+        "rawDescription": "GeneratedTip_SummonerSpell_SummonerFlash_Description",
+        "rawDisplayName": "GeneratedTip_SummonerSpell_SummonerFlash_DisplayName"
+      },
+      "summonerSpellTwo": {
+        "displayName": "Heal",
+        "rawDescription": "GeneratedTip_SummonerSpell_SummonerHeal_Description",
+        "rawDisplayName": "GeneratedTip_SummonerSpell_SummonerHeal_DisplayName"
+      }
+    },
+    "team": "CHAOS"
+  },
+  {
+    "championName": "Thresh",
+    "isBot": false,
+    "isDead": false,
+    "items": [],
+    "level": 1,
+    "position": "UTILITY",
+    "rawChampionName": "game_character_displayname_Thresh",
+    "rawSkinName": "game_character_skin_displayname_Thresh_3",
+    "respawnTimer": 0.0,
+    "runes": {
+      "keystone": {
+        "displayName": "Aftershock",
+        "id": 8439,
+        "rawDescription": "perk_tooltip_VeteranAftershock",
+        "rawDisplayName": "perk_displayname_VeteranAftershock"
+      },
+      "primaryRuneTree": {
+        "displayName": "Resolve",
+        "id": 8400,
+        "rawDescription": "perkstyle_tooltip_7204",
+        "rawDisplayName": "perkstyle_displayname_7204"
+      },
+      "secondaryRuneTree": {
+        "displayName": "Inspiration",
+        "id": 8300,
+        "rawDescription": "perkstyle_tooltip_7203",
+        "rawDisplayName": "perkstyle_displayname_7203"
+      }
+    },
+    "scores": {
+      "assists": 0,
+      "creepScore": 0,
+      "deaths": 0,
+      "kills": 0,
+      "wardScore": 0.0
+    },
+    "skinID": 3,
+    "skinName": "Blood Moon Thresh",
+    "summonerName": "Test summoner 6",
+    "summonerSpells": {
+      "summonerSpellOne": {
+        "displayName": "Flash",
+        "rawDescription": "GeneratedTip_SummonerSpell_SummonerFlash_Description",
+        "rawDisplayName": "GeneratedTip_SummonerSpell_SummonerFlash_DisplayName"
+      },
+      "summonerSpellTwo": {
+        "displayName": "Ignite",
+        "rawDescription": "GeneratedTip_SummonerSpell_SummonerDot_Description",
+        "rawDisplayName": "GeneratedTip_SummonerSpell_SummonerDot_DisplayName"
+      }
+    },
+    "team": "CHAOS"
+  }
+]

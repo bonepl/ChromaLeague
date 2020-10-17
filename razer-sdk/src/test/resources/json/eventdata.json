@@ -1,0 +1,206 @@
+{
+  "Events": [
+    {
+      "EventID": 0,
+      "EventName": "GameStart",
+      "EventTime": 0.0563616007566452
+    },
+    {
+      "EventID": 1,
+      "EventName": "MinionsSpawning",
+      "EventTime": 65.06690979003906
+    },
+    {
+      "Assisters": [],
+      "EventID": 2,
+      "EventName": "ChampionKill",
+      "EventTime": 230.1595916748047,
+      "KillerName": "BooonE",
+      "VictimName": "Warwick Bot"
+    },
+    {
+      "EventID": 3,
+      "EventName": "FirstBlood",
+      "EventTime": 230.1595916748047,
+      "Recipient": "BooonE"
+    },
+    {
+      "Acer": "BooonE",
+      "AcingTeam": "ORDER",
+      "EventID": 4,
+      "EventName": "Ace",
+      "EventTime": 230.1595916748047
+    },
+    {
+      "Assisters": [],
+      "EventID": 5,
+      "EventName": "TurretKilled",
+      "EventTime": 907.0410766601563,
+      "KillerName": "Warwick Bot",
+      "TurretKilled": "Turret_T1_R_03_A"
+    },
+    {
+      "EventID": 6,
+      "EventName": "FirstBrick",
+      "EventTime": 907.0410766601563,
+      "KillerName": "Warwick Bot"
+    },
+    {
+      "Assisters": [],
+      "DragonType": "Fire",
+      "EventID": 7,
+      "EventName": "DragonKill",
+      "EventTime": 933.6826782226563,
+      "KillerName": "BooonE",
+      "Stolen": "False"
+    },
+    {
+      "Assisters": [],
+      "EventID": 8,
+      "EventName": "HeraldKill",
+      "EventTime": 982.7305908203125,
+      "KillerName": "BooonE",
+      "Stolen": "False"
+    },
+    {
+      "Assisters": [],
+      "EventID": 9,
+      "EventName": "TurretKilled",
+      "EventTime": 1027.162841796875,
+      "KillerName": "BooonE",
+      "TurretKilled": "Turret_T2_L_03_A"
+    },
+    {
+      "Assisters": [],
+      "EventID": 10,
+      "EventName": "TurretKilled",
+      "EventTime": 1048.6292724609376,
+      "KillerName": "Minion_T200L0S31N0195",
+      "TurretKilled": "Turret_T1_R_02_A"
+    },
+    {
+      "Assisters": [],
+      "EventID": 11,
+      "EventName": "TurretKilled",
+      "EventTime": 1053.9127197265626,
+      "KillerName": "BooonE",
+      "TurretKilled": "Turret_T2_L_02_A"
+    },
+    {
+      "Assisters": [],
+      "EventID": 12,
+      "EventName": "TurretKilled",
+      "EventTime": 1087.5941162109376,
+      "KillerName": "BooonE",
+      "TurretKilled": "Turret_T2_L_01_A"
+    },
+    {
+      "Assisters": [],
+      "EventID": 13,
+      "EventName": "InhibKilled",
+      "EventTime": 1105.1768798828126,
+      "InhibKilled": "Barracks_T2_L1",
+      "KillerName": "BooonE"
+    },
+    {
+      "Assisters": [],
+      "EventID": 14,
+      "EventName": "ChampionKill",
+      "EventTime": 1118.4588623046876,
+      "KillerName": "BooonE",
+      "VictimName": "Warwick Bot"
+    },
+    {
+      "Acer": "BooonE",
+      "AcingTeam": "ORDER",
+      "EventID": 15,
+      "EventName": "Ace",
+      "EventTime": 1118.4588623046876
+    },
+    {
+      "Assisters": [],
+      "EventID": 16,
+      "EventName": "TurretKilled",
+      "EventTime": 1144.8411865234376,
+      "KillerName": "BooonE",
+      "TurretKilled": "Turret_T2_C_02_A"
+    },
+    {
+      "Assisters": [],
+      "EventID": 17,
+      "EventName": "TurretKilled",
+      "EventTime": 1160.109130859375,
+      "KillerName": "BooonE",
+      "TurretKilled": "Turret_T2_C_01_A"
+    },
+    {
+      "Assisters": [],
+      "EventID": 18,
+      "EventName": "ChampionKill",
+      "EventTime": 1172.0419921875,
+      "KillerName": "Warwick Bot",
+      "VictimName": "BooonE"
+    },
+    {
+      "Acer": "Warwick Bot",
+      "AcingTeam": "CHAOS",
+      "EventID": 19,
+      "EventName": "Ace",
+      "EventTime": 1172.0419921875
+    },
+    {
+      "Assisters": [],
+      "EventID": 20,
+      "EventName": "TurretKilled",
+      "EventTime": 1244.9444580078126,
+      "KillerName": "BooonE",
+      "TurretKilled": "Turret_T2_C_05_A"
+    },
+    {
+      "Assisters": [],
+      "EventID": 21,
+      "EventName": "ChampionKill",
+      "EventTime": 1253.8250732421876,
+      "KillerName": "Turret_T2_C_04_A",
+      "VictimName": "BooonE"
+    },
+    {
+      "Assisters": [],
+      "EventID": 22,
+      "EventName": "TurretKilled",
+      "EventTime": 1259.8662109375,
+      "KillerName": "Minion_T100L1S39N0248",
+      "TurretKilled": "Turret_T2_C_04_A"
+    },
+    {
+      "Assisters": [],
+      "EventID": 23,
+      "EventName": "TurretKilled",
+      "EventTime": 1319.2762451171876,
+      "KillerName": "Minion_T100L1S41N0257",
+      "TurretKilled": "Turret_T2_C_03_A"
+    },
+    {
+      "Assisters": [],
+      "EventID": 24,
+      "EventName": "InhibKilled",
+      "EventTime": 1349.1202392578126,
+      "InhibKilled": "Barracks_T2_C1",
+      "KillerName": "BooonE"
+    },
+    {
+      "Assisters": [],
+      "EventID": 25,
+      "EventName": "BaronKill",
+      "EventTime": 1357.689453125,
+      "KillerName": "BooonE",
+      "Stolen": "False"
+    },
+    {
+      "EventID": 26,
+      "EventName": "GameEnd",
+      "EventTime": 1375.343994140625,
+      "Result": "Win"
+    }
+  ]
+}

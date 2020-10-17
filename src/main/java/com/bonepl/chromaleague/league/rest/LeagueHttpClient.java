@@ -33,9 +33,9 @@ public class LeagueHttpClient {
             return Optional.of(EntityUtils.toString(
                     getLeagueHttpClient().execute(new HttpGet(url)).getEntity()));
         } catch (ConnectTimeoutException | SocketTimeoutException ex) {
-            logger.debug("Game service not available, game is not running");
+            // it is possible to fail on json fetch from time to time
         } catch (Exception e) {
-            logger.debug("Couldn't get data from endpoint: " + url, e);
+            logger.error("Couldn't get data from endpoint: " + url, e);
         }
         return Optional.empty();
     }

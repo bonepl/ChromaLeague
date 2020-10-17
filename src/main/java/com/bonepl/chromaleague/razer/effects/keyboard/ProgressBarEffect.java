@@ -2,15 +2,15 @@ package com.bonepl.chromaleague.razer.effects.keyboard;
 
 import com.bonepl.chromaleague.razer.effects.Color;
 import com.bonepl.chromaleague.razer.effects.animation.FramePart;
-import com.bonepl.chromaleague.razer.effects.animation.StaticFrame;
+import com.bonepl.chromaleague.razer.effects.animation.AnimatedFrame;
 import com.bonepl.chromaleague.razer.sdk.RzKey;
 
 import java.util.List;
 
-public class ProgressBarEffect extends StaticFrame {
+public class ProgressBarEffect extends AnimatedFrame {
 
     public ProgressBarEffect(final List<RzKey> progressBar, final Integer percent, final Color color) {
-        super(getFrame(progressBar, percent, color));
+        withAnimationFrame(getFrame(progressBar, percent, color));
     }
 
     private static FramePart getFrame(final List<RzKey> progressBar, final Integer percent, final Color color) {

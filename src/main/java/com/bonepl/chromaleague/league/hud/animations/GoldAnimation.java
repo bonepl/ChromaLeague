@@ -3,10 +3,9 @@ package com.bonepl.chromaleague.league.hud.animations;
 import com.bonepl.chromaleague.league.GameStateHelper;
 import com.bonepl.chromaleague.league.hud.parts.GoldBar;
 import com.bonepl.chromaleague.razer.effects.Color;
+import com.bonepl.chromaleague.razer.effects.animation.AnimatedFrame;
 import com.bonepl.chromaleague.razer.effects.animation.Animation;
-import com.bonepl.chromaleague.razer.effects.animation.Frame;
 import com.bonepl.chromaleague.razer.effects.animation.FramePart;
-import com.bonepl.chromaleague.razer.effects.animation.MotionFrame;
 import com.bonepl.chromaleague.razer.effects.keyboard.LayeredCustomEffect;
 import com.bonepl.chromaleague.razer.sdk.RzKey;
 import org.apache.logging.log4j.LogManager;
@@ -38,11 +37,10 @@ public class GoldAnimation extends Animation {
     private Double lastGold;
     private LocalTime lastGoldCheck;
 
-    @Override
     public LayeredCustomEffect getNextFrame() {
         addToFront(new GoldBar());
         spawnCoinIfNeeded();
-        return super.getNextFrame();
+        return super.getNextAnimatedFrame();
     }
 
     private void spawnCoinIfNeeded() {
@@ -66,10 +64,10 @@ public class GoldAnimation extends Animation {
         }
     }
 
-    private Frame fallingCoin(List<RzKey> rzKeys) {
-        final MotionFrame motionFrames = new MotionFrame();
-        rzKeys.forEach(rzKey -> motionFrames.withAnimationFrame(new FramePart(rzKey, Color.YELLOW)));
-        return motionFrames;
+    private AnimatedFrame fallingCoin(List<RzKey> rzKeys) {
+        final AnimatedFrame animatedFrames = new AnimatedFrame();
+        rzKeys.forEach(rzKey -> animatedFrames.withAnimationFrame(new FramePart(rzKey, Color.YELLOW)));
+        return animatedFrames;
     }
 
     public LocalTime getLastGoldCheck() {

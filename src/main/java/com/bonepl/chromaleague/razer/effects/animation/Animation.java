@@ -7,29 +7,26 @@ import java.util.Iterator;
 import java.util.concurrent.LinkedBlockingDeque;
 
 public class Animation {
-    private final Deque<Frame> frames = new LinkedBlockingDeque<>();
+    private final Deque<AnimatedFrame> frames = new LinkedBlockingDeque<>();
 
-    public void addToFront(Frame frame) {
+    public void addToFront(AnimatedFrame frame) {
         this.frames.addLast(frame);
     }
 
-    public void addToBack(Frame frame) {
+    public void addToBack(AnimatedFrame frame) {
         this.frames.addFirst(frame);
     }
 
-    public LayeredCustomEffect getNextFrame() {
+    public LayeredCustomEffect getNextAnimatedFrame() {
         final LayeredCustomEffect layeredCustomEffect = new LayeredCustomEffect();
         if (!frames.isEmpty()) {
-            final Iterator<Frame> it = frames.iterator();
+            final Iterator<AnimatedFrame> it = frames.iterator();
             while (it.hasNext()) {
-                final Frame nextFrame = it.next();
+                final AnimatedFrame nextFrame = it.next();
                 if (!nextFrame.hasNextFrame()) {
                     it.remove();
                 } else {
                     layeredCustomEffect.addCustomKeyboardEffect(nextFrame.getNextFrame());
-                }
-                if (nextFrame instanceof StaticFrame) {
-                    it.remove();
                 }
             }
         }

@@ -1,16 +1,16 @@
 package com.bonepl.chromaleague.razer.effects.keyboard;
 
 import com.bonepl.chromaleague.razer.effects.Color;
+import com.bonepl.chromaleague.razer.effects.animation.AnimatedFrame;
 import com.bonepl.chromaleague.razer.effects.animation.Animation;
-import com.bonepl.chromaleague.razer.effects.animation.Frame;
 
 public class LayeredCustomEffect extends CustomEffect {
 
     public void addCustomKeyboardEffect(Animation animation) {
-        addCustomKeyboardEffect(animation.getNextFrame());
+        addCustomKeyboardEffect(animation.getNextAnimatedFrame());
     }
 
-    public void addCustomKeyboardEffect(Frame frame) {
+    public void addCustomKeyboardEffect(AnimatedFrame frame) {
         addCustomKeyboardEffect(frame.getNextFrame());
     }
 

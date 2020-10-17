@@ -20,7 +20,7 @@ public class ChromaLeague {
 
     public static void main(String... args) {
         final ScheduledExecutorService gameActiveExecutor = Executors.newSingleThreadScheduledExecutor();
-        gameActiveExecutor.scheduleAtFixedRate(new FetchActivePlayerNameTask(), 0, 1000, TimeUnit.MILLISECONDS);
+        gameActiveExecutor.scheduleAtFixedRate(new FetchActivePlayerNameTask(), 0, 5000, TimeUnit.MILLISECONDS);
 
         while (alive) {
             if (GameState.isGameActive()) {

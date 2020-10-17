@@ -4,14 +4,14 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.stream.IntStream;
 
-public class MotionFrame implements Frame {
+public class AnimatedFrame {
     private final Queue<FramePart> frameParts = new LinkedList<>();
 
-    public MotionFrame withAnimationFrame(FramePart framePart) {
+    public AnimatedFrame withAnimationFrame(FramePart framePart) {
         return withAnimationFrame(1, framePart);
     }
 
-    public MotionFrame withAnimationFrame(int frameCount, FramePart framePart) {
+    public AnimatedFrame withAnimationFrame(int frameCount, FramePart framePart) {
         if (frameCount < 1) {
             throw new IllegalArgumentException("AnimationFrame requires at least 1 frameCount, was " + frameCount);
         }
@@ -19,12 +19,10 @@ public class MotionFrame implements Frame {
         return this;
     }
 
-    @Override
     public boolean hasNextFrame() {
         return !frameParts.isEmpty();
     }
 
-    @Override
     public FramePart getNextFrame() {
         return frameParts.poll();
     }

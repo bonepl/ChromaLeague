@@ -8,7 +8,7 @@ import static com.bonepl.chromaleague.razer.effects.Color.RED;
 import static com.bonepl.chromaleague.razer.effects.Color.YELLOW;
 import static com.bonepl.chromaleague.razer.sdk.RzKey.*;
 
-class MotionFrameTest {
+class AnimatedFrameTest {
     @Test
     void testAnimation() throws InterruptedException {
         final GoldAnimation goldAnimation = new GoldAnimation();
@@ -23,8 +23,8 @@ class MotionFrameTest {
         }
     }
 
-    private MotionFrame createLevelUpAnimation() {
-        return new MotionFrame()
+    private AnimatedFrame createLevelUpAnimation() {
+        return new AnimatedFrame()
                 .withAnimationFrame(new FramePart(RZKEY_MACRO5, YELLOW))
                 .withAnimationFrame(new FramePart(RZKEY_MACRO4, YELLOW))
                 .withAnimationFrame(new FramePart(RZKEY_MACRO3, YELLOW))
@@ -32,8 +32,8 @@ class MotionFrameTest {
                 .withAnimationFrame(new FramePart(RZKEY_MACRO1, YELLOW));
     }
 
-    private MotionFrame createLevelDownAnimation() {
-        return new MotionFrame()
+    private AnimatedFrame createLevelDownAnimation() {
+        return new AnimatedFrame()
                 .withAnimationFrame(new FramePart(RZKEY_MACRO1, RED))
                 .withAnimationFrame(new FramePart(RZKEY_MACRO2, RED))
                 .withAnimationFrame(new FramePart(RZKEY_MACRO3, RED))

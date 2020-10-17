@@ -37,7 +37,8 @@ public class GoldAnimation extends Animation {
     private Double lastGold;
     private LocalTime lastGoldCheck;
 
-    public LayeredFrame getNextFrame() {
+    @Override
+    public LayeredFrame getNextAnimatedFrame() {
         addToFront(new GoldBar());
         spawnCoinIfNeeded();
         return super.getNextAnimatedFrame();

@@ -47,6 +47,13 @@ public final class GameStateHelper {
         return 0;
     }
 
+    public static int getLevel() {
+        if (isActivePlayerAvailable()) {
+            return getActivePlayer().getLevel();
+        }
+        return 0;
+    }
+
     public static int getGoldPercentage() {
         if (isActivePlayerAvailable()) {
             return getPercentage(getActivePlayer().getCurrentGold(), GoldBar.GOLD_FULL);

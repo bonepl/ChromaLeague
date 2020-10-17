@@ -38,9 +38,9 @@ public class ChromaLeague {
         if (scheduledExecutorService == null || scheduledExecutorService.isShutdown()) {
             razerSDKClient = new RazerSDKClient();
             scheduledExecutorService = Executors.newScheduledThreadPool(5);
-            scheduledExecutorService.scheduleAtFixedRate(new FetchPlayerListTask(), 0, 1000, TimeUnit.MILLISECONDS);
-            scheduledExecutorService.scheduleAtFixedRate(new FetchActivePlayerTask(), 50, 300, TimeUnit.MILLISECONDS);
-            scheduledExecutorService.scheduleAtFixedRate(new FetchNewEventsTask(), 100, 1000, TimeUnit.MILLISECONDS);
+            scheduledExecutorService.scheduleWithFixedDelay(new FetchPlayerListTask(), 0, 1000, TimeUnit.MILLISECONDS);
+            scheduledExecutorService.scheduleWithFixedDelay(new FetchActivePlayerTask(), 50, 300, TimeUnit.MILLISECONDS);
+            scheduledExecutorService.scheduleWithFixedDelay(new FetchNewEventsTask(), 100, 1000, TimeUnit.MILLISECONDS);
             scheduledExecutorService.scheduleWithFixedDelay(new RefreshMainHudTask(razerSDKClient), 150, 50, TimeUnit.MILLISECONDS);
         }
     }

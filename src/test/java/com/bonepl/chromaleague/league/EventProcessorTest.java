@@ -1,5 +1,6 @@
 package com.bonepl.chromaleague.league;
 
+import com.bonepl.chromaleague.league.hud.animations.EventAnimation;
 import com.bonepl.chromaleague.league.rest.eventdata.model.Event;
 import com.bonepl.chromaleague.league.rest.playerlist.model.PlayerList;
 import com.bonepl.chromaleague.razer.RazerSDKClient;
@@ -15,6 +16,7 @@ import static org.mockito.Mockito.when;
 
 class EventProcessorTest {
     private static RazerSDKClient razerSDKClient;
+    private static final EventAnimation eventAnimation = new EventAnimation();
 
     @BeforeAll
     static void beforeAll() {
@@ -33,7 +35,19 @@ class EventProcessorTest {
         mockPlayerList(true);
 
         //then
-        EventProcessor.processEvents(razerSDKClient);
+        EventProcessor.processEvents();
+        runEventAnimation();
+    }
+
+    private void runEventAnimation() {
+        while (eventAnimation.hasFrame()) {
+            razerSDKClient.createKeyboardEffect(eventAnimation.getFrame());
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Test
@@ -43,7 +57,8 @@ class EventProcessorTest {
         mockPlayerList(true);
 
         //then
-        EventProcessor.processEvents(razerSDKClient);
+        EventProcessor.processEvents();
+        runEventAnimation();
     }
 
     @Test
@@ -53,7 +68,8 @@ class EventProcessorTest {
         mockPlayerList(true);
 
         //then
-        EventProcessor.processEvents(razerSDKClient);
+        EventProcessor.processEvents();
+        runEventAnimation();
     }
 
     @Test
@@ -63,7 +79,8 @@ class EventProcessorTest {
         mockPlayerList(true);
 
         //then
-        EventProcessor.processEvents(razerSDKClient);
+        EventProcessor.processEvents();
+        runEventAnimation();
     }
 
     @Test
@@ -73,7 +90,7 @@ class EventProcessorTest {
         mockPlayerList(true);
 
         //then
-        EventProcessor.processEvents(razerSDKClient);
+        EventProcessor.processEvents();
     }
 
     @Test
@@ -83,7 +100,8 @@ class EventProcessorTest {
         mockPlayerList(true);
 
         //then
-        EventProcessor.processEvents(razerSDKClient);
+        EventProcessor.processEvents();
+        runEventAnimation();
     }
 
     @Test
@@ -93,7 +111,8 @@ class EventProcessorTest {
         mockPlayerList(true);
 
         //then
-        EventProcessor.processEvents(razerSDKClient);
+        EventProcessor.processEvents();
+        runEventAnimation();
     }
 
     @Test
@@ -103,7 +122,8 @@ class EventProcessorTest {
         mockPlayerList(false);
 
         //then
-        EventProcessor.processEvents(razerSDKClient);
+        EventProcessor.processEvents();
+        runEventAnimation();
     }
 
     @Test
@@ -113,7 +133,8 @@ class EventProcessorTest {
         mockPlayerList(false);
 
         //then
-        EventProcessor.processEvents(razerSDKClient);
+        EventProcessor.processEvents();
+        runEventAnimation();
     }
 
     @Test
@@ -123,7 +144,8 @@ class EventProcessorTest {
         mockPlayerList(false);
 
         //then
-        EventProcessor.processEvents(razerSDKClient);
+        EventProcessor.processEvents();
+        runEventAnimation();
     }
 
     @Test
@@ -133,7 +155,8 @@ class EventProcessorTest {
         mockPlayerList(false);
 
         //then
-        EventProcessor.processEvents(razerSDKClient);
+        EventProcessor.processEvents();
+        runEventAnimation();
     }
 
     @Test
@@ -143,7 +166,8 @@ class EventProcessorTest {
         mockPlayerList(false);
 
         //then
-        EventProcessor.processEvents(razerSDKClient);
+        EventProcessor.processEvents();
+        runEventAnimation();
     }
 
     @Test
@@ -153,7 +177,8 @@ class EventProcessorTest {
         mockPlayerList(false);
 
         //then
-        EventProcessor.processEvents(razerSDKClient);
+        EventProcessor.processEvents();
+        runEventAnimation();
     }
 
     @Test
@@ -163,7 +188,8 @@ class EventProcessorTest {
         mockPlayerList(false);
 
         //then
-        EventProcessor.processEvents(razerSDKClient);
+        EventProcessor.processEvents();
+        runEventAnimation();
     }
 
     private Event mockDragonEvent(String dragonType) {

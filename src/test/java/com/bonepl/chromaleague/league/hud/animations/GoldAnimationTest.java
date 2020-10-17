@@ -11,18 +11,18 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class GoldAnimationTest {
+
     @Test
     void testGoldAnimation() throws InterruptedException {
         final GoldAnimation goldAnimation = new GoldAnimation();
         mockActiveGold(0.0);
         try (RazerSDKClient razerSDKClient = new RazerSDKClient()) {
             for (int i = 0; i < 1000; i++) {
-                razerSDKClient.createKeyboardEffect(goldAnimation.getNextFrame());
+                razerSDKClient.createKeyboardEffect(goldAnimation.getNextAnimatedFrame());
                 Thread.sleep(1100);
                 mockActiveGold(GameStateHelper.getGold() + 100);
             }
         }
-
     }
 
     private void mockActiveGold(double gold) {

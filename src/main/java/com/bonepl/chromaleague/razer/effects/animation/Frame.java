@@ -10,6 +10,7 @@ import java.util.List;
 
 public class Frame implements IFrame {
     private final EnumMap<RzKey, Color> keysToColors = new EnumMap<>(RzKey.class);
+    private boolean hasFrame = true;
 
     public Frame() {
     }
@@ -40,11 +41,12 @@ public class Frame implements IFrame {
 
     @Override
     public boolean hasFrame() {
-        return true;
+        return hasFrame;
     }
 
     @Override
     public Frame getFrame() {
+        hasFrame = false;
         return this;
     }
 }

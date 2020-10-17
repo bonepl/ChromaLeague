@@ -2,6 +2,7 @@ package com.bonepl.chromaleague.league.rest.activeplayer.model;
 
 public class ActivePlayer {
     double currentGold;
+    int level;
     ChampionStats championStats;
 
     public ChampionStats getChampionStats() {
@@ -10,5 +11,9 @@ public class ActivePlayer {
 
     public double getCurrentGold() {
         return currentGold;
+    }
+
+    public int getLevel() {
+        return level;
     }
 }

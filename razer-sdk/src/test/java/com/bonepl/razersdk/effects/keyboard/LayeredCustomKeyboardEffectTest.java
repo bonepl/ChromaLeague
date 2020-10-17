@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import static com.bonepl.razersdk.effects.keyboard.ProgressBarTest.BLACKWIDOW_FIRST_ROW;
 
-class LayeredCustomEffectTest {
+class LayeredCustomKeyboardEffectTest {
     @Test
     void testLayeredKeyboardEffect() throws InterruptedException {
         try (RazerSDKClient razerSDKClient = new RazerSDKClient()) {

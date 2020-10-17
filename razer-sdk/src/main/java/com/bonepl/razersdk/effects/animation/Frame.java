@@ -1,7 +1,7 @@
 package com.bonepl.razersdk.effects.animation;
 
 import com.bonepl.razersdk.effects.Color;
-import com.bonepl.razersdk.effects.keyboard.CustomEffect;
+import com.bonepl.razersdk.effects.keyboard.CustomKeyboardEffect;
 import com.bonepl.razersdk.sdk.RzKey;
 
 import java.util.Arrays;
@@ -35,8 +35,8 @@ public class Frame implements IFrame {
         return keysToColors;
     }
 
-    public CustomEffect toCustomEffect() {
-        return new CustomEffect(getKeysToColors());
+    public CustomKeyboardEffect toCustomEffect() {
+        return new CustomKeyboardEffect(getKeysToColors());
     }
 
     @Override

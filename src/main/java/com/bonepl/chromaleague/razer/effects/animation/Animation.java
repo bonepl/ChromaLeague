@@ -5,7 +5,11 @@ import java.util.Iterator;
 import java.util.concurrent.LinkedBlockingDeque;
 
 public class Animation {
-    private final Deque<AnimatedFrame> frames = new LinkedBlockingDeque<>();
+    private final Deque<IFrame> frames = new LinkedBlockingDeque<>();
+
+    public void addToFront(Frame frame) {
+        this.frames.addLast(frame);
+    }
 
     public void addToFront(AnimatedFrame frame) {
         this.frames.addLast(frame);
@@ -18,13 +22,13 @@ public class Animation {
     public LayeredFrame getNextAnimatedFrame() {
         final LayeredFrame layeredFrame = new LayeredFrame();
         if (!frames.isEmpty()) {
-            final Iterator<AnimatedFrame> it = frames.iterator();
+            final Iterator<IFrame> it = frames.iterator();
             while (it.hasNext()) {
-                final AnimatedFrame nextFrame = it.next();
-                if (!nextFrame.hasNextFrame()) {
+                final IFrame frame = it.next();
+                if (!frame.hasFrame()) {
                     it.remove();
                 } else {
-                    layeredFrame.addFrame(nextFrame.getNextFrame());
+                    layeredFrame.addFrame(frame.getFrame());
                 }
             }
         }

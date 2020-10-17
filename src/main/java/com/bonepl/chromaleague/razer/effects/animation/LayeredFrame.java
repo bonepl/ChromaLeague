@@ -9,7 +9,7 @@ public class LayeredFrame extends Frame {
     }
 
     public void addFrame(final AnimatedFrame animatedFrame) {
-        addFrame(animatedFrame.getNextFrame());
+        addFrame(animatedFrame.getFrame());
     }
 
     public void addFrame(final Frame frame) {

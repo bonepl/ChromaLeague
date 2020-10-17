@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.stream.IntStream;
 
-public class AnimatedFrame {
+public class AnimatedFrame implements IFrame {
     private final Queue<Frame> frames = new LinkedList<>();
 
     public AnimatedFrame withAnimationFrame(Frame frame) {
@@ -19,11 +19,13 @@ public class AnimatedFrame {
         return this;
     }
 
-    public boolean hasNextFrame() {
+    @Override
+    public boolean hasFrame() {
         return !frames.isEmpty();
     }
 
-    public Frame getNextFrame() {
+    @Override
+    public Frame getFrame() {
         return frames.poll();
     }
 }

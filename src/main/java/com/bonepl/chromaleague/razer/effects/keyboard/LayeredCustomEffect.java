@@ -7,11 +7,11 @@ import com.bonepl.chromaleague.razer.effects.animation.Animation;
 public class LayeredCustomEffect extends CustomEffect {
 
     public void addCustomKeyboardEffect(Animation animation) {
-        addCustomKeyboardEffect(animation.getNextAnimatedFrame());
+        addCustomKeyboardEffect(animation.getNextAnimatedFrame().toCustomEffect());
     }
 
     public void addCustomKeyboardEffect(AnimatedFrame frame) {
-        addCustomKeyboardEffect(frame.getNextFrame());
+        addCustomKeyboardEffect(frame.getNextFrame().toCustomEffect());
     }
 
     public void addCustomKeyboardEffect(CustomEffect customEffect) {

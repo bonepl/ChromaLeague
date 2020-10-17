@@ -20,12 +20,12 @@ class ProgressBarEffectTest {
         try (RazerSDKClient razerSDKClient = new RazerSDKClient()) {
             for (int i = 0; i <= 100; i += 5) {
                 razerSDKClient.createKeyboardEffect(
-                        new ProgressBarEffect(BLACKWIDOW_FIRST_ROW, i, Color.GREEN).getNextFrame());
+                        new ProgressBarEffect(BLACKWIDOW_FIRST_ROW, i, Color.GREEN).getNextFrame().toCustomEffect());
                 Thread.sleep(100);
             }
             for (int i = 100; i >= 0; i -= 5) {
                 razerSDKClient.createKeyboardEffect(
-                        new ProgressBarEffect(BLACKWIDOW_FIRST_ROW, i, Color.GREEN).getNextFrame());
+                        new ProgressBarEffect(BLACKWIDOW_FIRST_ROW, i, Color.GREEN).getNextFrame().toCustomEffect());
                 Thread.sleep(100);
             }
         }

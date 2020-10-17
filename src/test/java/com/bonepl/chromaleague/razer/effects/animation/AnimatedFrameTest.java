@@ -14,7 +14,7 @@ class AnimatedFrameTest {
         final GoldAnimation goldAnimation = new GoldAnimation();
         try (RazerSDKClient razerSDKClient = new RazerSDKClient()) {
             for (int i = 0; i < 5000; i++) {
-                razerSDKClient.createKeyboardEffect(goldAnimation.getNextFrame());
+                razerSDKClient.createKeyboardEffect(goldAnimation.getNextFrame().toCustomEffect());
                 if (i % 10 == 0) {
                     goldAnimation.spawnCoin();
                 }
@@ -25,19 +25,19 @@ class AnimatedFrameTest {
 
     private AnimatedFrame createLevelUpAnimation() {
         return new AnimatedFrame()
-                .withAnimationFrame(new FramePart(RZKEY_MACRO5, YELLOW))
-                .withAnimationFrame(new FramePart(RZKEY_MACRO4, YELLOW))
-                .withAnimationFrame(new FramePart(RZKEY_MACRO3, YELLOW))
-                .withAnimationFrame(new FramePart(RZKEY_MACRO2, YELLOW))
-                .withAnimationFrame(new FramePart(RZKEY_MACRO1, YELLOW));
+                .withAnimationFrame(new Frame(RZKEY_MACRO5, YELLOW))
+                .withAnimationFrame(new Frame(RZKEY_MACRO4, YELLOW))
+                .withAnimationFrame(new Frame(RZKEY_MACRO3, YELLOW))
+                .withAnimationFrame(new Frame(RZKEY_MACRO2, YELLOW))
+                .withAnimationFrame(new Frame(RZKEY_MACRO1, YELLOW));
     }
 
     private AnimatedFrame createLevelDownAnimation() {
         return new AnimatedFrame()
-                .withAnimationFrame(new FramePart(RZKEY_MACRO1, RED))
-                .withAnimationFrame(new FramePart(RZKEY_MACRO2, RED))
-                .withAnimationFrame(new FramePart(RZKEY_MACRO3, RED))
-                .withAnimationFrame(new FramePart(RZKEY_MACRO4, RED))
-                .withAnimationFrame(new FramePart(RZKEY_MACRO5, RED));
+                .withAnimationFrame(new Frame(RZKEY_MACRO1, RED))
+                .withAnimationFrame(new Frame(RZKEY_MACRO2, RED))
+                .withAnimationFrame(new Frame(RZKEY_MACRO3, RED))
+                .withAnimationFrame(new Frame(RZKEY_MACRO4, RED))
+                .withAnimationFrame(new Frame(RZKEY_MACRO5, RED));
     }
 }

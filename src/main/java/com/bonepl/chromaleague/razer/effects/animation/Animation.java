@@ -1,7 +1,5 @@
 package com.bonepl.chromaleague.razer.effects.animation;
 
-import com.bonepl.chromaleague.razer.effects.keyboard.LayeredCustomEffect;
-
 import java.util.Deque;
 import java.util.Iterator;
 import java.util.concurrent.LinkedBlockingDeque;
@@ -17,8 +15,8 @@ public class Animation {
         this.frames.addFirst(frame);
     }
 
-    public LayeredCustomEffect getNextAnimatedFrame() {
-        final LayeredCustomEffect layeredCustomEffect = new LayeredCustomEffect();
+    public LayeredFrame getNextAnimatedFrame() {
+        final LayeredFrame layeredFrame = new LayeredFrame();
         if (!frames.isEmpty()) {
             final Iterator<AnimatedFrame> it = frames.iterator();
             while (it.hasNext()) {
@@ -26,10 +24,10 @@ public class Animation {
                 if (!nextFrame.hasNextFrame()) {
                     it.remove();
                 } else {
-                    layeredCustomEffect.addCustomKeyboardEffect(nextFrame.getNextFrame());
+                    layeredFrame.addFrame(nextFrame.getNextFrame());
                 }
             }
         }
-        return layeredCustomEffect;
+        return layeredFrame;
     }
 }

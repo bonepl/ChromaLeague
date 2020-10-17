@@ -5,25 +5,25 @@ import java.util.Queue;
 import java.util.stream.IntStream;
 
 public class AnimatedFrame {
-    private final Queue<FramePart> frameParts = new LinkedList<>();
+    private final Queue<Frame> frames = new LinkedList<>();
 
-    public AnimatedFrame withAnimationFrame(FramePart framePart) {
-        return withAnimationFrame(1, framePart);
+    public AnimatedFrame withAnimationFrame(Frame frame) {
+        return withAnimationFrame(1, frame);
     }
 
-    public AnimatedFrame withAnimationFrame(int frameCount, FramePart framePart) {
+    public AnimatedFrame withAnimationFrame(int frameCount, Frame frame) {
         if (frameCount < 1) {
             throw new IllegalArgumentException("AnimationFrame requires at least 1 frameCount, was " + frameCount);
         }
-        IntStream.range(0, frameCount).forEach(i -> frameParts.offer(framePart));
+        IntStream.range(0, frameCount).forEach(i -> frames.offer(frame));
         return this;
     }
 
     public boolean hasNextFrame() {
-        return !frameParts.isEmpty();
+        return !frames.isEmpty();
     }
 
-    public FramePart getNextFrame() {
-        return frameParts.poll();
+    public Frame getNextFrame() {
+        return frames.poll();
     }
 }

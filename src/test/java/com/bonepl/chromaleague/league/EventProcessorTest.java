@@ -90,7 +90,7 @@ class EventProcessorTest {
     void testAllyBaronAnimation() {
         //given
         GameState.addUnprocessedEvents(Collections.singletonList(mockBaronEvent()));
-        mockPlayerList(false);
+        mockPlayerList(true);
 
         //then
         EventProcessor.processEvents(razerSDKClient);

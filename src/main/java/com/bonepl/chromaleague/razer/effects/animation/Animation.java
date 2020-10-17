@@ -4,7 +4,7 @@ import java.util.Deque;
 import java.util.Iterator;
 import java.util.concurrent.LinkedBlockingDeque;
 
-public class Animation {
+public class Animation implements IFrame {
     private final Deque<IFrame> frames = new LinkedBlockingDeque<>();
 
     public void addToFront(IFrame frame) {
@@ -29,5 +29,15 @@ public class Animation {
             }
         }
         return layeredFrame;
+    }
+
+    @Override
+    public synchronized boolean hasFrame() {
+        return !frames.isEmpty();
+    }
+
+    @Override
+    public synchronized Frame getFrame() {
+        return getNextAnimatedFrame();
     }
 }

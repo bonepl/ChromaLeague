@@ -41,7 +41,7 @@ public class ChromaLeague {
             scheduledExecutorService.scheduleAtFixedRate(new FetchPlayerListTask(), 0, 1000, TimeUnit.MILLISECONDS);
             scheduledExecutorService.scheduleAtFixedRate(new FetchActivePlayerTask(), 50, 300, TimeUnit.MILLISECONDS);
             scheduledExecutorService.scheduleAtFixedRate(new FetchNewEventsTask(), 100, 1000, TimeUnit.MILLISECONDS);
-            scheduledExecutorService.scheduleWithFixedDelay(new RefreshMainHudTask(razerSDKClient), 150, 100, TimeUnit.MILLISECONDS);
+            scheduledExecutorService.scheduleWithFixedDelay(new RefreshMainHudTask(razerSDKClient), 150, 50, TimeUnit.MILLISECONDS);
         }
     }
 

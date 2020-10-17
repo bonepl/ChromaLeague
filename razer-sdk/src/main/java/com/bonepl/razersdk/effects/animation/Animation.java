@@ -15,7 +15,13 @@ public class Animation implements IFrame {
         this.frames.addFirst(frame);
     }
 
-    public LayeredFrame getNextAnimatedFrame() {
+    @Override
+    public synchronized boolean hasFrame() {
+        return !frames.isEmpty();
+    }
+
+    @Override
+    public synchronized Frame getFrame() {
         final LayeredFrame layeredFrame = new LayeredFrame();
         if (!frames.isEmpty()) {
             final Iterator<IFrame> it = frames.iterator();
@@ -29,15 +35,5 @@ public class Animation implements IFrame {
             }
         }
         return layeredFrame;
-    }
-
-    @Override
-    public synchronized boolean hasFrame() {
-        return !frames.isEmpty();
-    }
-
-    @Override
-    public synchronized Frame getFrame() {
-        return getNextAnimatedFrame();
     }
 }

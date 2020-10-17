@@ -5,7 +5,6 @@ import com.bonepl.razersdk.effects.Color;
 import com.bonepl.razersdk.effects.animation.AnimatedFrame;
 import com.bonepl.razersdk.effects.animation.Animation;
 import com.bonepl.razersdk.effects.animation.Frame;
-import com.bonepl.razersdk.effects.animation.LayeredFrame;
 
 import java.util.Arrays;
 
@@ -15,9 +14,9 @@ public class LevelUpAnimation extends Animation {
     private int previousLevel = 0;
 
     @Override
-    public LayeredFrame getNextAnimatedFrame() {
+    public Frame getFrame() {
         addLevelUpAnimationIfNeeded();
-        return super.getNextAnimatedFrame();
+        return super.getFrame();
     }
 
     private void addLevelUpAnimationIfNeeded() {

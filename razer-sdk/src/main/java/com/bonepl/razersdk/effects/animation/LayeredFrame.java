@@ -5,7 +5,7 @@ import com.bonepl.razersdk.effects.Color;
 public class LayeredFrame extends Frame {
 
     public LayeredFrame withFrame(final Animation animation) {
-        withFrame(animation.getNextAnimatedFrame());
+        withFrame(animation.getFrame());
         return this;
     }
 

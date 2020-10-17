@@ -70,8 +70,8 @@
                 <version>3.0.0-M5</version>
                 <configuration>
                     <excludes>
-                        <exclude>com/bonepl/chromaleague/league/EventProcessorTest.java</exclude>
-                        <exclude>com/bonepl/chromaleague/league/hud/animations/*.java</exclude>
+                        <exclude>com/bonepl/chromaleague/EventProcessorTest.java</exclude>
+                        <exclude>com/bonepl/chromaleague/hud/animations/*.java</exclude>
                     </excludes>
                 </configuration>
             </plugin>
@@ -81,8 +81,8 @@
                 <version>3.0.0-M5</version>
                 <configuration>
                     <includes>
-                        <include>com/bonepl/chromaleague/league/EventProcessorTest.java</include>
-                        <include>com/bonepl/chromaleague/league/hud/animations/*.java</include>
+                        <include>com/bonepl/chromaleague/EventProcessorTest.java</include>
+                        <include>com/bonepl/chromaleague/hud/animations/*.java</include>
                     </includes>
                 </configuration>
                 <executions>

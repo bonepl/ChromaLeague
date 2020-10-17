@@ -47,7 +47,7 @@
                 <version>3.0.0-M5</version>
                 <configuration>
                     <excludes>
-                        <exclude>com/bonepl/chromaleague/razer/effects/keyboard/*.java</exclude>
+                        <exclude>com/bonepl/razersdk/effects/keyboard/*.java</exclude>
                     </excludes>
                 </configuration>
             </plugin>
@@ -57,7 +57,7 @@
                 <version>3.0.0-M5</version>
                 <configuration>
                     <includes>
-                        <include>com/bonepl/chromaleague/razer/effects/keyboard/*.java</include>
+                        <include>com/bonepl/razersdk/effects/keyboard/*.java</include>
                     </includes>
                 </configuration>
                 <executions>

@@ -38,10 +38,10 @@ public class GoldAnimation extends Animation {
     private LocalTime lastGoldCheck;
 
     @Override
-    public LayeredFrame getNextAnimatedFrame() {
+    public Frame getFrame() {
         addToFront(new GoldBar());
         spawnCoinIfNeeded();
-        return super.getNextAnimatedFrame();
+        return super.getFrame();
     }
 
     private void spawnCoinIfNeeded() {

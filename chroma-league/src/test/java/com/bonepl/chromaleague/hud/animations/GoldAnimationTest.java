@@ -2,9 +2,9 @@ package com.bonepl.chromaleague.hud.animations;
 
 import com.bonepl.chromaleague.GameState;
 import com.bonepl.chromaleague.GameStateHelper;
-import com.bonepl.razersdk.RazerSDKClient;
 import com.bonepl.chromaleague.rest.activeplayer.model.ActivePlayer;
 import com.bonepl.chromaleague.rest.activeplayer.model.ChampionStats;
+import com.bonepl.razersdk.RazerSDKClient;
 import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.mock;
@@ -18,7 +18,7 @@ class GoldAnimationTest {
         mockActiveGold(0.0);
         try (RazerSDKClient razerSDKClient = new RazerSDKClient()) {
             for (int i = 0; i < 1000; i++) {
-                razerSDKClient.createKeyboardEffect(goldAnimation.getNextAnimatedFrame());
+                razerSDKClient.createKeyboardEffect(goldAnimation.getFrame());
                 Thread.sleep(1100);
                 mockActiveGold(GameStateHelper.getGold() + 100);
             }

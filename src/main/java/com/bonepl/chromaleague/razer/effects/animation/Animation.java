@@ -7,15 +7,11 @@ import java.util.concurrent.LinkedBlockingDeque;
 public class Animation {
     private final Deque<IFrame> frames = new LinkedBlockingDeque<>();
 
-    public void addToFront(Frame frame) {
+    public void addToFront(IFrame frame) {
         this.frames.addLast(frame);
     }
 
-    public void addToFront(AnimatedFrame frame) {
-        this.frames.addLast(frame);
-    }
-
-    public void addToBack(AnimatedFrame frame) {
+    public void addToBack(IFrame frame) {
         this.frames.addFirst(frame);
     }
 

@@ -18,9 +18,9 @@ public class StaticBlinkingAnimation extends Animation {
     public void runEffect(RazerSDKClient razerSDKClient) {
         for (int i = 0; i < times; i++) {
             try {
-                razerSDKClient.createKeyboardEffect(new Frame(color).toCustomEffect());
+                razerSDKClient.createKeyboardEffect(new Frame(color));
                 Thread.sleep(50);
-                razerSDKClient.createKeyboardEffect(new Background().getFrame().toCustomEffect());
+                razerSDKClient.createKeyboardEffect(new Background());
                 Thread.sleep(150);
             } catch (InterruptedException e) {
                 e.printStackTrace();

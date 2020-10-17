@@ -17,6 +17,6 @@ public class RefreshMainHudTask implements Runnable {
         if (GameState.hasUnprocessedEvents()) {
             EventProcessor.processEvents(razerSDKClient);
         }
-        razerSDKClient.createKeyboardEffect(new MainHud().toCustomEffect());
+        razerSDKClient.createKeyboardEffect(new MainHud());
     }
 }

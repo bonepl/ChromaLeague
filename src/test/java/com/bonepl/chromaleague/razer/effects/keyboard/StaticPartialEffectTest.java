@@ -19,7 +19,7 @@ class StaticPartialEffectTest {
     @Test
     void testPartialStaticEffect() throws InterruptedException {
         try (RazerSDKClient razerSDKClient = new RazerSDKClient()) {
-            razerSDKClient.createKeyboardEffect(new Frame(smiley, Color.YELLOW).toCustomEffect());
+            razerSDKClient.createKeyboardEffect(new Frame(smiley, Color.YELLOW));
             Thread.sleep(100);
         }
     }

@@ -1,8 +1,8 @@
 package com.bonepl.chromaleague.razer;
 
+import com.bonepl.chromaleague.razer.effects.animation.Frame;
 import com.bonepl.chromaleague.razer.effects.keyboard.SDKKeyboardEffect;
 import com.bonepl.chromaleague.razer.sdk.RzChromaSDK64;
-import com.bonepl.chromaleague.razer.sdk.RzCustomKeyboardEffect;
 import com.bonepl.chromaleague.razer.sdk.RzKeyboardEffectType;
 import com.sun.jna.Native;
 import com.sun.jna.Pointer;
@@ -31,7 +31,11 @@ public class RazerSDKClient implements AutoCloseable {
         }
     }
 
-    public void createKeyboardEffect(SDKKeyboardEffect effect) {
+    public void createKeyboardEffect(Frame frame) {
+        createKeyboardEffect(frame.toCustomEffect());
+    }
+
+    private void createKeyboardEffect(SDKKeyboardEffect effect) {
         int result = rzChromaSDK64.CreateKeyboardEffect(
                 RzKeyboardEffectType.CUSTOM.getRzSDKKeyboardEffectType(),
                 effect.getEffect(), Pointer.NULL);

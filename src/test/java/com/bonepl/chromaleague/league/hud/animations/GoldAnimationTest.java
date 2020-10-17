@@ -17,7 +17,7 @@ class GoldAnimationTest {
         mockActiveGold(0.0);
         try (RazerSDKClient razerSDKClient = new RazerSDKClient()) {
             for (int i = 0; i < 1000; i++) {
-                razerSDKClient.createKeyboardEffect(goldAnimation.getNextFrame().toCustomEffect());
+                razerSDKClient.createKeyboardEffect(goldAnimation.getNextFrame());
                 Thread.sleep(1100);
                 mockActiveGold(GameStateHelper.getGold() + 100);
             }

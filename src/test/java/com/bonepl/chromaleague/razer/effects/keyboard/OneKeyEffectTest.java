@@ -12,7 +12,7 @@ class OneKeyEffectTest {
     void testOneKeyEffect() throws InterruptedException {
         try (RazerSDKClient razerSDKClient = new RazerSDKClient()) {
             for (RzKey rzKey : RzKey.values()) {
-                razerSDKClient.createKeyboardEffect(new Frame(rzKey, Color.RED).toCustomEffect());
+                razerSDKClient.createKeyboardEffect(new Frame(rzKey, Color.RED));
                 Thread.sleep(50);
             }
         }

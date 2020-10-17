@@ -20,7 +20,7 @@ public class ChromaLeague {
 
     public static void main(String... args) {
         final ScheduledExecutorService gameActiveExecutor = Executors.newSingleThreadScheduledExecutor();
-        gameActiveExecutor.scheduleAtFixedRate(new FetchActivePlayerNameTask(), 0, 1000, TimeUnit.MILLISECONDS);
+        gameActiveExecutor.scheduleAtFixedRate(new FetchActivePlayerNameTask(), 0, 5000, TimeUnit.MILLISECONDS);
 
         while (alive) {
             if (GameState.isGameActive()) {
@@ -38,10 +38,10 @@ public class ChromaLeague {
         if (scheduledExecutorService == null || scheduledExecutorService.isShutdown()) {
             razerSDKClient = new RazerSDKClient();
             scheduledExecutorService = Executors.newScheduledThreadPool(5);
-            scheduledExecutorService.scheduleAtFixedRate(new FetchPlayerListTask(), 0, 1000, TimeUnit.MILLISECONDS);
-            scheduledExecutorService.scheduleAtFixedRate(new FetchActivePlayerTask(), 50, 300, TimeUnit.MILLISECONDS);
-            scheduledExecutorService.scheduleAtFixedRate(new FetchNewEventsTask(), 100, 1000, TimeUnit.MILLISECONDS);
-            scheduledExecutorService.scheduleWithFixedDelay(new RefreshMainHudTask(razerSDKClient), 150, 300, TimeUnit.MILLISECONDS);
+            scheduledExecutorService.scheduleWithFixedDelay(new FetchPlayerListTask(), 0, 1000, TimeUnit.MILLISECONDS);
+            scheduledExecutorService.scheduleWithFixedDelay(new FetchActivePlayerTask(), 50, 300, TimeUnit.MILLISECONDS);
+            scheduledExecutorService.scheduleWithFixedDelay(new FetchNewEventsTask(), 100, 1000, TimeUnit.MILLISECONDS);
+            scheduledExecutorService.scheduleWithFixedDelay(new RefreshMainHudTask(razerSDKClient), 150, 50, TimeUnit.MILLISECONDS);
         }
     }
 

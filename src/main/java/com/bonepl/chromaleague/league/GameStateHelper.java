@@ -3,7 +3,6 @@ package com.bonepl.chromaleague.league;
 import com.bonepl.chromaleague.league.hud.parts.GoldBar;
 import com.bonepl.chromaleague.league.rest.activeplayer.model.ChampionStats;
 import com.bonepl.chromaleague.league.rest.activeplayer.model.ResourceType;
-import com.bonepl.chromaleague.league.rest.playerlist.model.Player;
 
 import static com.bonepl.chromaleague.league.GameState.*;
 
@@ -39,6 +38,20 @@ public final class GameStateHelper {
             return ResourceType.from(getActivePlayer().getChampionStats().getResourceType());
         }
         return ResourceType.MANA;
+    }
+
+    public static double getGold() {
+        if (isActivePlayerAvailable()) {
+            return getActivePlayer().getCurrentGold();
+        }
+        return 0;
+    }
+
+    public static int getLevel() {
+        if (isActivePlayerAvailable()) {
+            return getActivePlayer().getLevel();
+        }
+        return 0;
     }
 
     public static int getGoldPercentage() {

@@ -13,11 +13,6 @@ public abstract class RzCustomKeyboardEffect extends Structure implements SDKKey
     public int[] colors = new int[ROW_COUNT * COLUMN_COUNT];
 
     @Override
-    public RzKeyboardEffectType getSDKKeyboardEffectType() {
-        return RzKeyboardEffectType.CUSTOM;
-    }
-
-    @Override
     public Pointer getEffect() {
         this.write();
         return this.getPointer();

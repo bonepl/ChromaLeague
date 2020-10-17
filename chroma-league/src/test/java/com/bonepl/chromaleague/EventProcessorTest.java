@@ -1,9 +1,9 @@
 package com.bonepl.chromaleague;
 
 import com.bonepl.chromaleague.hud.animations.EventAnimation;
-import com.bonepl.razersdk.RazerSDKClient;
 import com.bonepl.chromaleague.rest.eventdata.model.Event;
 import com.bonepl.chromaleague.rest.playerlist.model.PlayerList;
+import com.bonepl.razersdk.RazerSDKClient;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

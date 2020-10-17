@@ -5,11 +5,13 @@ import com.bonepl.chromaleague.GameStateHelper;
 import com.bonepl.chromaleague.rest.activeplayer.model.ActivePlayer;
 import com.bonepl.chromaleague.rest.activeplayer.model.ChampionStats;
 import com.bonepl.razersdk.RazerSDKClient;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@Disabled
 class GoldAnimationTest {
 
     @Test

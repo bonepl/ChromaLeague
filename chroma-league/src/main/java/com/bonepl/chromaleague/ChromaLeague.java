@@ -1,12 +1,12 @@
 package com.bonepl.chromaleague;
 
 import com.bonepl.chromaleague.hud.RefreshMainHudTask;
-import com.bonepl.razersdk.RazerSDKClient;
 import com.bonepl.chromaleague.rest.LeagueHttpClient;
 import com.bonepl.chromaleague.rest.activeplayer.FetchActivePlayerTask;
 import com.bonepl.chromaleague.rest.activeplayername.FetchActivePlayerNameTask;
 import com.bonepl.chromaleague.rest.eventdata.FetchNewEventsTask;
 import com.bonepl.chromaleague.rest.playerlist.FetchPlayerListTask;
+import com.bonepl.razersdk.RazerSDKClient;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;

@@ -3,10 +3,10 @@ package com.bonepl.chromaleague;
 import com.bonepl.chromaleague.hud.animations.EventAnimation;
 import com.bonepl.chromaleague.hud.animations.StaticBlinkingAnimation;
 import com.bonepl.chromaleague.hud.animations.StaticPartialBlinkingAnimation;
+import com.bonepl.chromaleague.rest.eventdata.model.EventType;
 import com.bonepl.razersdk.effects.Color;
 import com.bonepl.razersdk.effects.animation.IFrame;
 import com.bonepl.razersdk.sdk.RzKey;
-import com.bonepl.chromaleague.rest.eventdata.model.EventType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

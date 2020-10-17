@@ -13,6 +13,7 @@ public class CustomEffect extends RzCustomKeyboardEffect {
     }
 
     public CustomEffect(final EnumMap<RzKey, Color> keysToColors) {
+        this();
         keysToColors.forEach((r, c) -> colors[r.getCustomPosition()] = c.getSDKColorRef());
     }
 }

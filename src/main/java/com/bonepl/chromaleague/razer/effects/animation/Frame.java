@@ -4,6 +4,7 @@ import com.bonepl.chromaleague.razer.effects.Color;
 import com.bonepl.chromaleague.razer.effects.keyboard.CustomEffect;
 import com.bonepl.chromaleague.razer.sdk.RzKey;
 
+import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
 
@@ -11,6 +12,10 @@ public class Frame implements IFrame {
     private final EnumMap<RzKey, Color> keysToColors = new EnumMap<>(RzKey.class);
 
     public Frame() {
+    }
+
+    public Frame(Color color) {
+        Arrays.stream(RzKey.values()).forEach(rzKey -> keysToColors.put(rzKey, color));
     }
 
     public Frame(RzKey rzKey, Color color) {

@@ -28,7 +28,7 @@ public class Animation {
                 if (!frame.hasFrame()) {
                     it.remove();
                 } else {
-                    layeredFrame.addFrame(frame.getFrame());
+                    layeredFrame.withFrame(frame.getFrame());
                 }
             }
         }

@@ -6,9 +6,9 @@ import com.bonepl.chromaleague.razer.sdk.RzKey;
 
 import java.util.List;
 
-public class ProgressBarEffect extends Frame {
+public class ProgressBar extends Frame {
 
-    public ProgressBarEffect(final List<RzKey> progressBar, final Integer percent, final Color color) {
+    public ProgressBar(final List<RzKey> progressBar, final Integer percent, final Color color) {
         super(getBarPercent(progressBar, percent), color);
     }
 

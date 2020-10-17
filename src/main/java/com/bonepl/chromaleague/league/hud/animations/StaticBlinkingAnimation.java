@@ -4,7 +4,7 @@ import com.bonepl.chromaleague.league.hud.parts.Background;
 import com.bonepl.chromaleague.razer.RazerSDKClient;
 import com.bonepl.chromaleague.razer.effects.Color;
 import com.bonepl.chromaleague.razer.effects.animation.Animation;
-import com.bonepl.chromaleague.razer.effects.keyboard.StaticEffect;
+import com.bonepl.chromaleague.razer.effects.animation.Frame;
 
 public class StaticBlinkingAnimation extends Animation {
     private final int times;
@@ -18,7 +18,7 @@ public class StaticBlinkingAnimation extends Animation {
     public void runEffect(RazerSDKClient razerSDKClient) {
         for (int i = 0; i < times; i++) {
             try {
-                razerSDKClient.createKeyboardEffect(new StaticEffect(color));
+                razerSDKClient.createKeyboardEffect(new Frame(color).toCustomEffect());
                 Thread.sleep(50);
                 razerSDKClient.createKeyboardEffect(new Background().getFrame().toCustomEffect());
                 Thread.sleep(150);

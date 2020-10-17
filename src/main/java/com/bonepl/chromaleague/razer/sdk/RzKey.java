@@ -1,7 +1,5 @@
 package com.bonepl.chromaleague.razer.sdk;
 
-import com.bonepl.chromaleague.razer.effects.keyboard.OneKeyPartialEffect;
-
 public enum RzKey {
 
     RZKEY_ESC(0x0001),
@@ -139,6 +137,6 @@ public enum RzKey {
     }
 
     public int getCustomPosition() {
-        return (getRzSDKKey() & 0xFF) + (getRzSDKKey() >> 8) * OneKeyPartialEffect.COLUMN_COUNT;
+        return (getRzSDKKey() & 0xFF) + (getRzSDKKey() >> 8) * RzCustomKeyboardEffect.COLUMN_COUNT;
     }
 }

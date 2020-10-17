@@ -2,6 +2,7 @@ package com.bonepl.chromaleague.razer.effects.keyboard;
 
 import com.bonepl.chromaleague.razer.RazerSDKClient;
 import com.bonepl.chromaleague.razer.effects.Color;
+import com.bonepl.chromaleague.razer.effects.animation.Frame;
 import com.bonepl.chromaleague.razer.sdk.RzKey;
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +19,7 @@ class StaticPartialEffectTest {
     @Test
     void testPartialStaticEffect() throws InterruptedException {
         try (RazerSDKClient razerSDKClient = new RazerSDKClient()) {
-            razerSDKClient.createKeyboardEffect(new StaticPartialEffect(smiley, Color.YELLOW));
+            razerSDKClient.createKeyboardEffect(new Frame(smiley, Color.YELLOW).toCustomEffect());
             Thread.sleep(100);
         }
     }

@@ -1,11 +1,6 @@
 package com.bonepl.chromaleague.razer.effects.keyboard;
 
-import com.bonepl.chromaleague.razer.RazerSDKClient;
-import com.bonepl.chromaleague.razer.effects.Color;
-import com.bonepl.chromaleague.razer.sdk.RzKey;
 import org.junit.jupiter.api.Test;
-
-import static com.bonepl.chromaleague.razer.effects.keyboard.ProgressBarEffectTest.BLACKWIDOW_FIRST_ROW;
 
 class LayeredCustomEffectTest {
     @Test

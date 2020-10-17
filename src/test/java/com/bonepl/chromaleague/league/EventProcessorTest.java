@@ -1,20 +1,23 @@
 package com.bonepl.chromaleague.league;
 
 import com.bonepl.chromaleague.razer.RazerSDKClient;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 class EventProcessorTest {
     private static RazerSDKClient razerSDKClient;
 
-//    @BeforeAll
-//    static void beforeAll() {
-//        razerSDKClient = new RazerSDKClient();
-//    }
-//
-//    @AfterAll
-//    static void afterAll() {
-//        razerSDKClient.close();
-//    }
-//
+    @BeforeAll
+    static void beforeAll() {
+        razerSDKClient = new RazerSDKClient();
+    }
+
+    @AfterAll
+    static void afterAll() {
+        razerSDKClient.close();
+    }
+
 //    @Test
 //    void testAllyOceanDragonAnimation() {
 //        //given

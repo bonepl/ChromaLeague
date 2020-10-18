@@ -12,23 +12,13 @@ import org.apache.logging.log4j.Logger;
 
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import static com.bonepl.razersdk.sdk.RzKey.*;
+import static com.bonepl.chromaleague.hud.PredefinedKeySets.*;
 
 public class GoldAnimation extends Animation {
     private static final Logger logger = LogManager.getLogger();
-
-    private static final List<RzKey> FIRST_NUMPAD_COLUMN
-            = Arrays.asList(RZKEY_NUMLOCK, RZKEY_NUMPAD7, RZKEY_NUMPAD4, RZKEY_NUMPAD1, RZKEY_NUMPAD0);
-    private static final List<RzKey> SECOND_NUMPAD_COLUMN
-            = Arrays.asList(RZKEY_NUMPAD_DIVIDE, RZKEY_NUMPAD8, RZKEY_NUMPAD5, RZKEY_NUMPAD2, RZKEY_NUMPAD0);
-    private static final List<RzKey> THIRD_NUMPAD_COLUMN
-            = Arrays.asList(RZKEY_NUMPAD_MULTIPLY, RZKEY_NUMPAD9, RZKEY_NUMPAD6, RZKEY_NUMPAD3, RZKEY_NUMPAD_DECIMAL);
-    private static final List<RzKey> FOURTH_NUMPAD_COLUMN
-            = Arrays.asList(RZKEY_NUMPAD_SUBTRACT, RZKEY_NUMPAD_ADD, RZKEY_NUMPAD_ENTER);
 
     private static final Random random = new Random();
     private static final double goldDiffToSpawnCoin = 10;

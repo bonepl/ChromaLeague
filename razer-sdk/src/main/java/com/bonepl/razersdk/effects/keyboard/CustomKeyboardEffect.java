@@ -9,7 +9,7 @@ import java.util.EnumMap;
 
 public class CustomKeyboardEffect extends RzCustomKeyboardEffect {
     public CustomKeyboardEffect() {
-        Arrays.fill(colors, Color.BLACK.getSDKColorRef());
+        Arrays.fill(colors, Color.NONE.getSDKColorRef());
     }
 
     public CustomKeyboardEffect(final EnumMap<RzKey, Color> keysToColors) {

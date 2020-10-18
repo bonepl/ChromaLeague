@@ -14,6 +14,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLException;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 import java.io.IOException;
@@ -32,7 +33,7 @@ public class LeagueHttpClient {
         try {
             return Optional.of(EntityUtils.toString(
                     getLeagueHttpClient().execute(new HttpGet(url)).getEntity()));
-        } catch (ConnectTimeoutException | SocketTimeoutException ex) {
+        } catch (ConnectTimeoutException | SocketTimeoutException | SSLException ex) {
             // it is possible to fail on json fetch from time to time
         } catch (Exception e) {
             logger.error("Couldn't get data from endpoint: " + url, e);

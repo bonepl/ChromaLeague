@@ -41,6 +41,9 @@ public class EventProcessor {
 
             if (animation != null) {
                 logger.info("Processing event: " + eventType);
+                if (eventType == EventType.ALLY_BARON_KILL) {
+                    GameState.startBaronBuff();
+                }
                 EventAnimation.addFrames(animation);
             }
         }

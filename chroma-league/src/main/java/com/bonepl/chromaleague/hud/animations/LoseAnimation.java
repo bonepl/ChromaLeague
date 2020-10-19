@@ -42,4 +42,10 @@ public class LoseAnimation extends Animation {
         red = red + redStep;
         return red;
     }
+
+    @Override
+    public synchronized Frame getFrame() {
+        addToBack(new Frame(Color.BLACK));
+        return super.getFrame();
+    }
 }

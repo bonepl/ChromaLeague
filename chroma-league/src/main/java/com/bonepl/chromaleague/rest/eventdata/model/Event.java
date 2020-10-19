@@ -6,6 +6,7 @@ public class Event {
     double EventTime;
     String DragonType;
     String KillerName;
+    String Result;
 
     public int getEventID() {
         return EventID;
@@ -27,6 +28,10 @@ public class Event {
         return KillerName;
     }
 
+    public String getResult() {
+        return Result;
+    }
+
     @Override
     public String toString() {
         return "Event{" +
@@ -35,6 +40,7 @@ public class Event {
                 ", EventTime=" + EventTime +
                 ", DragonType='" + DragonType + '\'' +
                 ", KillerName='" + KillerName + '\'' +
+                ", Result='" + Result + '\'' +
                 '}';
     }
 }

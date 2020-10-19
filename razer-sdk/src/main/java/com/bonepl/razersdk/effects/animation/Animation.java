@@ -23,15 +23,12 @@ public class Animation implements IFrame {
     @Override
     public synchronized Frame getFrame() {
         final LayeredFrame layeredFrame = new LayeredFrame();
-        if (!frames.isEmpty()) {
-            final Iterator<IFrame> it = frames.iterator();
-            while (it.hasNext()) {
-                final IFrame frame = it.next();
-                if (!frame.hasFrame()) {
-                    it.remove();
-                } else {
-                    layeredFrame.withFrame(frame.getFrame());
-                }
+        final Iterator<IFrame> it = frames.iterator();
+        while (it.hasNext()) {
+            final IFrame frame = it.next();
+            layeredFrame.withFrame(frame.getFrame());
+            if (!frame.hasFrame()) {
+                it.remove();
             }
         }
         return layeredFrame;

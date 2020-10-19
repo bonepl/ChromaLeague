@@ -1,6 +1,6 @@
 package com.bonepl.chromaleague.rest.activeplayer.model;
 
-import com.bonepl.razersdk.effects.Color;
+import com.bonepl.razersdk.animation.Color;
 
 public enum ResourceType {
     MANA(Color.BLUE),

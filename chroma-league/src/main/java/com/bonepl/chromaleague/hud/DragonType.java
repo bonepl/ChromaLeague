@@ -1,6 +1,6 @@
 package com.bonepl.chromaleague.hud;
 
-import com.bonepl.razersdk.effects.Color;
+import com.bonepl.razersdk.animation.Color;
 
 import java.util.Objects;
 

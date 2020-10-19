@@ -1,4 +1,4 @@
-package com.bonepl.razersdk.effects.animation;
+package com.bonepl.razersdk.animation;
 
 import java.util.Deque;
 import java.util.concurrent.LinkedBlockingDeque;

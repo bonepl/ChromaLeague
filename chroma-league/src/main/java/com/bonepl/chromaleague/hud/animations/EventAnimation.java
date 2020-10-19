@@ -1,8 +1,8 @@
 package com.bonepl.chromaleague.hud.animations;
 
-import com.bonepl.razersdk.effects.animation.AnimatedFrame;
-import com.bonepl.razersdk.effects.animation.Frame;
-import com.bonepl.razersdk.effects.animation.IFrame;
+import com.bonepl.razersdk.animation.AnimatedFrame;
+import com.bonepl.razersdk.animation.Frame;
+import com.bonepl.razersdk.animation.IFrame;
 
 public class EventAnimation extends AnimatedFrame {
 

@@ -1,12 +1,12 @@
-package com.bonepl.chromaleague.hud.animations;
+package com.bonepl.chromaleague.hud.parts;
 
-import com.bonepl.razersdk.effects.Color;
-import com.bonepl.razersdk.effects.animation.Frame;
+import com.bonepl.razersdk.animation.Color;
+import com.bonepl.razersdk.animation.Frame;
 import com.bonepl.razersdk.sdk.RzKey;
 
 import java.util.List;
 
-public class ProgressBar extends Frame {
+public abstract class ProgressBar extends Frame {
 
     public ProgressBar(final List<RzKey> progressBar, final Integer percent, final Color color) {
         super(getBarPercent(progressBar, percent), color);

@@ -1,6 +1,6 @@
 package com.bonepl.razersdk;
 
-import com.bonepl.razersdk.effects.animation.Frame;
+import com.bonepl.razersdk.animation.Frame;
 import com.bonepl.razersdk.sdk.CustomKeyboardEffect;
 import com.bonepl.razersdk.sdk.RzChromaSDK64;
 import com.bonepl.razersdk.sdk.RzKeyboardEffectType;

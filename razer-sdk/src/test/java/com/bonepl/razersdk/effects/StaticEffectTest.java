@@ -1,8 +1,8 @@
-package com.bonepl.razersdk.effects.keyboard;
+package com.bonepl.razersdk.effects;
 
 import com.bonepl.razersdk.RazerSDKClient;
-import com.bonepl.razersdk.effects.Color;
-import com.bonepl.razersdk.effects.animation.Frame;
+import com.bonepl.razersdk.animation.Color;
+import com.bonepl.razersdk.animation.Frame;
 import org.junit.jupiter.api.Test;
 
 class StaticEffectTest {

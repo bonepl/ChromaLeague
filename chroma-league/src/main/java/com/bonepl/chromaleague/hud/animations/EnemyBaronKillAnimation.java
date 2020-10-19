@@ -1,6 +1,6 @@
 package com.bonepl.chromaleague.hud.animations;
 
-import com.bonepl.razersdk.effects.Color;
+import com.bonepl.razersdk.animation.Color;
 
 import static com.bonepl.chromaleague.hud.PredefinedKeySets.BLACKWIDOW_FUNCTIONAL;
 

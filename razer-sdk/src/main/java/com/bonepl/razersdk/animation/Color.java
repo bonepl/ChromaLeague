@@ -1,4 +1,4 @@
-package com.bonepl.razersdk.effects;
+package com.bonepl.razersdk.animation;
 
 public class Color {
 

@@ -1,4 +1,4 @@
-package com.bonepl.razersdk.effects.animation;
+package com.bonepl.razersdk.animation;
 
 import java.util.LinkedList;
 import java.util.Queue;

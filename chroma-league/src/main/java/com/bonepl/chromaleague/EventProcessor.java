@@ -2,7 +2,7 @@ package com.bonepl.chromaleague;
 
 import com.bonepl.chromaleague.hud.animations.*;
 import com.bonepl.chromaleague.rest.eventdata.model.EventType;
-import com.bonepl.razersdk.effects.animation.IFrame;
+import com.bonepl.razersdk.animation.IFrame;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

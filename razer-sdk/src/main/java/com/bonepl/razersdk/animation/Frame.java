@@ -1,6 +1,5 @@
-package com.bonepl.razersdk.effects.animation;
+package com.bonepl.razersdk.animation;
 
-import com.bonepl.razersdk.effects.Color;
 import com.bonepl.razersdk.sdk.CustomKeyboardEffect;
 import com.bonepl.razersdk.sdk.RzKey;
 

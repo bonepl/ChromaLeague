@@ -1,6 +1,4 @@
-package com.bonepl.razersdk.effects.animation;
-
-import com.bonepl.razersdk.effects.Color;
+package com.bonepl.razersdk.animation;
 
 public class LayeredFrame extends Frame {
 

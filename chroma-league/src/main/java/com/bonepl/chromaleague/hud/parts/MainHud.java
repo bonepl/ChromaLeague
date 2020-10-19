@@ -3,7 +3,7 @@ package com.bonepl.chromaleague.hud.parts;
 import com.bonepl.chromaleague.hud.animations.EventAnimation;
 import com.bonepl.chromaleague.hud.animations.GoldAnimation;
 import com.bonepl.chromaleague.hud.animations.LevelUpAnimation;
-import com.bonepl.razersdk.effects.animation.LayeredFrame;
+import com.bonepl.razersdk.animation.LayeredFrame;
 
 public class MainHud extends LayeredFrame {
     private static final GoldAnimation goldAnimation = new GoldAnimation();

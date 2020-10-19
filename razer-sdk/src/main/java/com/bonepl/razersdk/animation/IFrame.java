@@ -1,4 +1,4 @@
-package com.bonepl.razersdk.effects.animation;
+package com.bonepl.razersdk.animation;
 
 public interface IFrame {
     boolean hasFrame();

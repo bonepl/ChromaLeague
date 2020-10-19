@@ -1,6 +1,6 @@
 package com.bonepl.razersdk.sdk;
 
-import com.bonepl.razersdk.effects.Color;
+import com.bonepl.razersdk.animation.Color;
 import com.sun.jna.Pointer;
 import com.sun.jna.Structure;
 

@@ -17,7 +17,9 @@ public enum EventType {
     ENEMY_ELDER_DRAGON_KILL,
     ENEMY_INFERNAL_DRAGON_KILL,
     ENEMY_MOUNTAIN_DRAGON_KILL,
-    ENEMY_OCEAN_DRAGON_KILL;
+    ENEMY_OCEAN_DRAGON_KILL,
+    GAME_END_VICTORY,
+    GAME_END_DEFEAT;
 
     public static EventType fromEvent(Event event) {
         if (event != null) {
@@ -49,6 +51,10 @@ public enum EventType {
             if ("HeraldKill".equals(event.getEventName())) {
                 return GameState.getPlayerList().isAlly(event.getKillerName()) ?
                         ALLY_HERALD_KILL : ENEMY_HERALD_KILL;
+            }
+
+            if ("GameEnd".equals(event.getEventName())) {
+                return "Win".equals(event.getResult()) ? GAME_END_VICTORY : GAME_END_DEFEAT;
             }
         }
         return UNSUPPORTED;

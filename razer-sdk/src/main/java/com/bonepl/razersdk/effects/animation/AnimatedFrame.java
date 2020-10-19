@@ -12,20 +12,28 @@ public class AnimatedFrame implements IFrame {
     }
 
     public AnimatedFrame withAnimationFrame(int frameCount, Frame frame) {
+        addAnimationFrame(frameCount, frame);
+        return this;
+    }
+
+    public void addAnimationFrame(Frame frame) {
+        addAnimationFrame(1, frame);
+    }
+
+    public void addAnimationFrame(int frameCount, Frame frame) {
         if (frameCount < 1) {
             throw new IllegalArgumentException("AnimationFrame requires at least 1 frameCount, was " + frameCount);
         }
         IntStream.range(0, frameCount).forEach(i -> frames.offer(frame));
-        return this;
     }
 
     @Override
-    public synchronized boolean hasFrame() {
+    public boolean hasFrame() {
         return !frames.isEmpty();
     }
 
     @Override
-    public synchronized Frame getFrame() {
+    public Frame getFrame() {
         return frames.poll();
     }
 }

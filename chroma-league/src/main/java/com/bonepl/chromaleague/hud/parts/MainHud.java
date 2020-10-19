@@ -11,13 +11,13 @@ public class MainHud extends LayeredFrame {
     private static final EventAnimation eventAnimation = new EventAnimation();
 
     public MainHud() {
-        withFrame(new Background());
-        withFrame(new HpBar());
-        withFrame(new ResourceBar());
-        withFrame(goldAnimation);
-        withFrame(levelUpAnimation);
+        addFrame(new Background());
+        addFrame(new HpBar());
+        addFrame(new ResourceBar());
+        addFrame(goldAnimation);
+        addFrame(levelUpAnimation);
         if (eventAnimation.hasFrame()) {
-            withFrame(eventAnimation);
+            addFrame(eventAnimation);
         }
     }
 }

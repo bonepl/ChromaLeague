@@ -1,4 +1,4 @@
-package com.bonepl.razersdk.effects.keyboard;
+package com.bonepl.chromaleague.hud.animations;
 
 import com.bonepl.razersdk.effects.Color;
 import com.bonepl.razersdk.effects.animation.Frame;

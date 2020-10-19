@@ -137,6 +137,6 @@ public enum RzKey {
     }
 
     public int getCustomPosition() {
-        return (getRzSDKKey() & 0xFF) + (getRzSDKKey() >> 8) * RzCustomKeyboardEffect.COLUMN_COUNT;
+        return (getRzSDKKey() & 0xFF) + (getRzSDKKey() >> 8) * CustomKeyboardEffect.COLUMN_COUNT;
     }
 }

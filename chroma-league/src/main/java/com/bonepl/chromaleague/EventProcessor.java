@@ -2,12 +2,9 @@ package com.bonepl.chromaleague;
 
 import com.bonepl.chromaleague.hud.animations.*;
 import com.bonepl.chromaleague.rest.eventdata.model.EventType;
-import com.bonepl.razersdk.effects.Color;
 import com.bonepl.razersdk.effects.animation.IFrame;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import static com.bonepl.chromaleague.hud.PredefinedKeySets.BLACKWIDOW_FUNCTIONAL;
 
 public class EventProcessor {
 
@@ -21,33 +18,39 @@ public class EventProcessor {
     public static void processEvents() {
         while (GameState.hasUnprocessedEvents()) {
             final EventType eventType = EventType.fromEvent(GameState.pollNextUnprocessedEvent());
-            IFrame animation = switch (eventType) {
-                case ALLY_BARON_KILL, ALLY_HERALD_KILL -> new StaticBlinkingAnimation(8, Color.PURPLE);
-                case ALLY_CLOUD_DRAGON_KILL -> new StaticBlinkingAnimation(8, Color.CYAN);
-                case ALLY_INFERNAL_DRAGON_KILL -> new StaticBlinkingAnimation(8, Color.RED);
-                case ALLY_OCEAN_DRAGON_KILL -> new StaticBlinkingAnimation(8, Color.BLUE);
-                case ALLY_MOUNTAIN_DRAGON_KILL -> new StaticBlinkingAnimation(8, Color.ORANGE);
-                case ALLY_ELDER_DRAGON_KILL -> new StaticBlinkingAnimation(8, Color.WHITE);
-                case ENEMY_BARON_KILL, ENEMY_HERALD_KILL -> new StaticPartialBlinkingAnimation(BLACKWIDOW_FUNCTIONAL, 8, Color.PURPLE);
-                case ENEMY_CLOUD_DRAGON_KILL -> new StaticPartialBlinkingAnimation(BLACKWIDOW_FUNCTIONAL, 8, Color.CYAN);
-                case ENEMY_INFERNAL_DRAGON_KILL -> new StaticPartialBlinkingAnimation(BLACKWIDOW_FUNCTIONAL, 8, Color.RED);
-                case ENEMY_OCEAN_DRAGON_KILL -> new StaticPartialBlinkingAnimation(BLACKWIDOW_FUNCTIONAL, 8, Color.BLUE);
-                case ENEMY_MOUNTAIN_DRAGON_KILL -> new StaticPartialBlinkingAnimation(BLACKWIDOW_FUNCTIONAL, 8, Color.ORANGE);
-                case ENEMY_ELDER_DRAGON_KILL -> new StaticPartialBlinkingAnimation(BLACKWIDOW_FUNCTIONAL, 8, Color.WHITE);
-                case GAME_END_VICTORY -> new WinAnimation();
-                case GAME_END_DEFEAT -> new LoseAnimation();
-                case UNSUPPORTED -> null;
-            };
 
+            if (eventType == EventType.ALLY_BARON_KILL) {
+                GameState.startBaronBuff();
+            }
+
+            IFrame animation = getEventAnimation(eventType);
             if (animation != null) {
-                logger.info("Processing event: " + eventType);
-                if (eventType == EventType.ALLY_BARON_KILL) {
-                    GameState.startBaronBuff();
-                }
+                logger.info("Animating event: " + eventType);
                 EventAnimation.addFrames(animation);
             }
         }
+    }
 
+    private static IFrame getEventAnimation(EventType eventType) {
+        return switch (eventType) {
+            case ALLY_BARON_KILL -> new AllyBaronKillAnimation();
+            case ALLY_HERALD_KILL -> new AllyHeraldKillAnimation();
+            case ALLY_CLOUD_DRAGON_KILL -> new AllyCloudDragonKillAnimation();
+            case ALLY_INFERNAL_DRAGON_KILL -> new AllyInfernalDragonKillAnimation();
+            case ALLY_OCEAN_DRAGON_KILL -> new AllyOceanDragonKillAnimation();
+            case ALLY_MOUNTAIN_DRAGON_KILL -> new AllyMountainDragonKillAnimation();
+            case ALLY_ELDER_DRAGON_KILL -> new AllyElderDragonKillAnimation();
+            case ENEMY_BARON_KILL -> new EnemyBaronKillAnimation();
+            case ENEMY_HERALD_KILL -> new EnemyHeraldKillAnimation();
+            case ENEMY_CLOUD_DRAGON_KILL -> new EnemyCloudDragonKillAnimation();
+            case ENEMY_INFERNAL_DRAGON_KILL -> new EnemyInfernalDragonKillAnimation();
+            case ENEMY_OCEAN_DRAGON_KILL -> new EnemyOceanDragonKillAnimation();
+            case ENEMY_MOUNTAIN_DRAGON_KILL -> new EnemyMountainDragonKillAnimation();
+            case ENEMY_ELDER_DRAGON_KILL -> new EnemyElderDragonKillAnimation();
+            case GAME_END_VICTORY -> new WinAnimation();
+            case GAME_END_DEFEAT -> new LoseAnimation();
+            case UNSUPPORTED -> null;
+        };
     }
 
     public static int getLastProcessedEventId() {

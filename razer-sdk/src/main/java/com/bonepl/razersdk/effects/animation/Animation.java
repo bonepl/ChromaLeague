@@ -1,7 +1,6 @@
 package com.bonepl.razersdk.effects.animation;
 
 import java.util.Deque;
-import java.util.Iterator;
 import java.util.concurrent.LinkedBlockingDeque;
 
 public class Animation implements IFrame {
@@ -16,21 +15,15 @@ public class Animation implements IFrame {
     }
 
     @Override
-    public synchronized boolean hasFrame() {
+    public boolean hasFrame() {
         return !frames.isEmpty();
     }
 
     @Override
-    public synchronized Frame getFrame() {
+    public Frame getFrame() {
         final LayeredFrame layeredFrame = new LayeredFrame();
-        final Iterator<IFrame> it = frames.iterator();
-        while (it.hasNext()) {
-            final IFrame frame = it.next();
-            layeredFrame.withFrame(frame.getFrame());
-            if (!frame.hasFrame()) {
-                it.remove();
-            }
-        }
+        frames.stream().map(IFrame::getFrame).forEach(layeredFrame::addFrame);
+        frames.removeIf(iFrame -> !iFrame.hasFrame());
         return layeredFrame;
     }
 }

@@ -7,8 +7,6 @@ import com.bonepl.razersdk.effects.animation.AnimatedFrame;
 import com.bonepl.razersdk.effects.animation.Animation;
 import com.bonepl.razersdk.effects.animation.Frame;
 import com.bonepl.razersdk.sdk.RzKey;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;

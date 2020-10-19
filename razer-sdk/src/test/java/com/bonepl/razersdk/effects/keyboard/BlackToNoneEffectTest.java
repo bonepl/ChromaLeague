@@ -14,7 +14,7 @@ import java.util.List;
 import static com.bonepl.razersdk.sdk.RzKey.*;
 
 public class BlackToNoneEffectTest {
-    private List<RzKey> firstLetters = Arrays.asList(RZKEY_Q, RZKEY_W, RZKEY_E, RZKEY_R, RZKEY_T, RZKEY_Y, RZKEY_U);
+    private final List<RzKey> firstLetters = Arrays.asList(RZKEY_Q, RZKEY_W, RZKEY_E, RZKEY_R, RZKEY_T, RZKEY_Y, RZKEY_U);
 
     @Test
     void testNonTransparentBlack() throws InterruptedException {
@@ -43,8 +43,8 @@ public class BlackToNoneEffectTest {
     }
 
     AnimatedFrame createMovingBlackPixel(Color color) {
-        AnimatedFrame movingBlackpixel = new AnimatedFrame();
-        firstLetters.forEach(rzKey -> movingBlackpixel.withAnimationFrame(new Frame(rzKey, color)));
-        return movingBlackpixel;
+        AnimatedFrame movingBlackPixel = new AnimatedFrame();
+        firstLetters.forEach(rzKey -> movingBlackPixel.withAnimationFrame(2, new Frame(rzKey, color)));
+        return movingBlackPixel;
     }
 }

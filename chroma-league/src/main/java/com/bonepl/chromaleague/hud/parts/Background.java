@@ -12,9 +12,9 @@ public class Background extends LayeredFrame {
     private static final AnimatedFrame baronBuffBackground = new BaronBuffBackground();
 
     public Background() {
-        withFrame(new Frame(BACKGROUND_COLOR));
+        addFrame(new Frame(BACKGROUND_COLOR));
         if (GameState.hasBaronBuff()) {
-            withFrame(baronBuffBackground.getFrame());
+            addFrame(baronBuffBackground.getFrame());
         }
     }
 }

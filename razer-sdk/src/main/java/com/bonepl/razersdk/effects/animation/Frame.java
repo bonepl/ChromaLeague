@@ -1,7 +1,7 @@
 package com.bonepl.razersdk.effects.animation;
 
 import com.bonepl.razersdk.effects.Color;
-import com.bonepl.razersdk.effects.keyboard.CustomKeyboardEffect;
+import com.bonepl.razersdk.sdk.CustomKeyboardEffect;
 import com.bonepl.razersdk.sdk.RzKey;
 
 import java.util.Arrays;

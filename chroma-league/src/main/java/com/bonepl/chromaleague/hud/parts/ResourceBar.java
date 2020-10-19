@@ -1,7 +1,7 @@
 package com.bonepl.chromaleague.hud.parts;
 
 import com.bonepl.chromaleague.GameStateHelper;
-import com.bonepl.razersdk.effects.keyboard.ProgressBar;
+import com.bonepl.chromaleague.hud.animations.ProgressBar;
 import com.bonepl.razersdk.sdk.RzKey;
 
 import java.util.List;

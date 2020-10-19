@@ -18,13 +18,21 @@ import java.util.Random;
 import static com.bonepl.chromaleague.hud.PredefinedKeySets.*;
 
 public class GoldAnimation extends Animation {
-    private static final Logger logger = LogManager.getLogger();
-
     private static final Random random = new Random();
-    private static final double goldDiffToSpawnCoin = 10;
-    private static final int millisecondsForGoldCount = 1000;
+    private final double goldDiffToSpawnCoin;
+    private final int millisecondsForGoldCount;
     private Double lastGold;
     private LocalTime lastGoldCheck;
+
+    public GoldAnimation() {
+        this(10, 1000);
+    }
+
+    //FOR TEST ONLY
+    public GoldAnimation(double goldDiffToSpawnCoin, int millisecondsForGoldCount) {
+        this.goldDiffToSpawnCoin = goldDiffToSpawnCoin;
+        this.millisecondsForGoldCount = millisecondsForGoldCount;
+    }
 
     @Override
     public Frame getFrame() {

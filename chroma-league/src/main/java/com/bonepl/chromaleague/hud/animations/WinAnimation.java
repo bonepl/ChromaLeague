@@ -36,4 +36,10 @@ public class WinAnimation extends Animation {
         animatedFrame.withAnimationFrame(new Frame(BLACKWIDOW_FIRST_ROW, color));
         return animatedFrame;
     }
+
+    @Override
+    public synchronized Frame getFrame() {
+        addToBack(new Frame(Color.BLACK));
+        return super.getFrame();
+    }
 }

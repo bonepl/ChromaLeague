@@ -8,7 +8,7 @@ class WinAnimationTest {
     void playWinAnimation() throws InterruptedException {
         final WinAnimation winAnimation = new WinAnimation();
         try (RazerSDKClient razerSDKClient = new RazerSDKClient()) {
-            for (int i = 0; i < 1000; i++) {
+            for (int i = 0; i < 120; i++) {
                 razerSDKClient.createKeyboardEffect(winAnimation.getFrame());
                 Thread.sleep(50);
             }

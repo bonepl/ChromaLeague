@@ -8,7 +8,7 @@ class LoseAnimationTest {
     void playLoseAnimation() throws InterruptedException {
         final LoseAnimation loseAnimation = new LoseAnimation();
         try (RazerSDKClient razerSDKClient = new RazerSDKClient()) {
-            for (int i = 0; i < 1000; i++) {
+            for (int i = 0; i < 120; i++) {
                 razerSDKClient.createKeyboardEffect(loseAnimation.getFrame());
                 Thread.sleep(50);
             }

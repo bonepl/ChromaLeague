@@ -7,17 +7,21 @@ import com.bonepl.chromaleague.rest.activeplayername.FetchActivePlayerNameTask;
 import com.bonepl.chromaleague.rest.eventdata.FetchNewEventsTask;
 import com.bonepl.chromaleague.rest.playerlist.FetchPlayerListTask;
 import com.bonepl.razersdk.RazerSDKClient;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class ChromaLeague {
+    private static final Logger logger = LogManager.getLogger();
     private static ScheduledExecutorService scheduledExecutorService;
     private static RazerSDKClient razerSDKClient;
     static boolean alive = true;
 
     public static void main(String... args) {
+        logger.info("Started Chroma League");
         final ScheduledExecutorService gameActiveExecutor = Executors.newSingleThreadScheduledExecutor();
         gameActiveExecutor.scheduleAtFixedRate(new FetchActivePlayerNameTask(), 0, 5000, TimeUnit.MILLISECONDS);
 

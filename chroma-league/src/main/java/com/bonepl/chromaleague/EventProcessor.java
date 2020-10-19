@@ -1,9 +1,6 @@
 package com.bonepl.chromaleague;
 
-import com.bonepl.chromaleague.hud.animations.EventAnimation;
-import com.bonepl.chromaleague.hud.animations.StaticBlinkingAnimation;
-import com.bonepl.chromaleague.hud.animations.StaticPartialBlinkingAnimation;
-import com.bonepl.chromaleague.hud.animations.WinAnimation;
+import com.bonepl.chromaleague.hud.animations.*;
 import com.bonepl.chromaleague.rest.eventdata.model.EventType;
 import com.bonepl.razersdk.effects.Color;
 import com.bonepl.razersdk.effects.animation.IFrame;
@@ -38,7 +35,7 @@ public class EventProcessor {
                 case ENEMY_MOUNTAIN_DRAGON_KILL -> new StaticPartialBlinkingAnimation(BLACKWIDOW_FUNCTIONAL, 8, Color.ORANGE);
                 case ENEMY_ELDER_DRAGON_KILL -> new StaticPartialBlinkingAnimation(BLACKWIDOW_FUNCTIONAL, 8, Color.WHITE);
                 case GAME_END_VICTORY -> new WinAnimation();
-                case GAME_END_DEFEAT -> null;
+                case GAME_END_DEFEAT -> new LoseAnimation();
                 case UNSUPPORTED -> null;
             };
 

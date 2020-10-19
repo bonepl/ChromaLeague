@@ -14,7 +14,7 @@ import static com.bonepl.chromaleague.hud.PredefinedKeySets.BLACKWIDOW_SECOND_RO
  * shyvana uses resource type: DRAGONFURY
  */
 public class ResourceBar extends ProgressBar {
-    public static List<RzKey> RESOURCE_BAR_KEYS = BLACKWIDOW_SECOND_ROW.subList(1, 14);
+    public static List<RzKey> RESOURCE_BAR_KEYS = BLACKWIDOW_SECOND_ROW.subList(1, 15);
 
     public ResourceBar() {
         super(RESOURCE_BAR_KEYS, GameStateHelper.getResourcePercentage(), getResourceType().getColor());

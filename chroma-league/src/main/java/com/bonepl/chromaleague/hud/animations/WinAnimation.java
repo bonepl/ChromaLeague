@@ -12,17 +12,17 @@ public class WinAnimation extends Animation {
     public WinAnimation() {
         int i = 0;
         while (i < 500) {
-            this.addToFront(createMovingFrame(i++, Color.GREEN));
-            this.addToFront(createMovingFrame(i++, Color.WHITE));
-            this.addToFront(createMovingFrame(i++, Color.BLUE));
-            this.addToFront(createMovingFrame(i++, Color.YELLOW));
-            this.addToFront(createMovingFrame(i++, Color.CYAN));
-            this.addToFront(createMovingFrame(i++, Color.ORANGE));
-            this.addToFront(createMovingFrame(i++, Color.RED));
+            this.addToFront(createUpMovingFrame(i++, Color.GREEN));
+            this.addToFront(createUpMovingFrame(i++, Color.WHITE));
+            this.addToFront(createUpMovingFrame(i++, Color.BLUE));
+            this.addToFront(createUpMovingFrame(i++, Color.YELLOW));
+            this.addToFront(createUpMovingFrame(i++, Color.CYAN));
+            this.addToFront(createUpMovingFrame(i++, Color.ORANGE));
+            this.addToFront(createUpMovingFrame(i++, Color.RED));
         }
     }
 
-    private static AnimatedFrame createMovingFrame(int delay, Color color) {
+    private static AnimatedFrame createUpMovingFrame(int delay, Color color) {
         final AnimatedFrame animatedFrame = new AnimatedFrame();
         if (delay > 0) {
             animatedFrame.withAnimationFrame(delay * 4, new Frame());

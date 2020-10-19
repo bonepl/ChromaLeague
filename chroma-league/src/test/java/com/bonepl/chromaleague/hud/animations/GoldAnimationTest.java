@@ -5,24 +5,22 @@ import com.bonepl.chromaleague.GameStateHelper;
 import com.bonepl.chromaleague.rest.activeplayer.model.ActivePlayer;
 import com.bonepl.chromaleague.rest.activeplayer.model.ChampionStats;
 import com.bonepl.razersdk.RazerSDKClient;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-@Disabled
 class GoldAnimationTest {
 
     @Test
     void testGoldAnimation() throws InterruptedException {
-        final GoldAnimation goldAnimation = new GoldAnimation();
+        final GoldAnimation goldAnimation = new GoldAnimation(10, 150);
         mockActiveGold(0.0);
         try (RazerSDKClient razerSDKClient = new RazerSDKClient()) {
-            for (int i = 0; i < 1000; i++) {
+            for (int i = 0; i < 100; i++) {
                 razerSDKClient.createKeyboardEffect(goldAnimation.getFrame());
-                Thread.sleep(1100);
-                mockActiveGold(GameStateHelper.getGold() + 100);
+                Thread.sleep(50);
+                mockActiveGold(GameStateHelper.getGold() + 30);
             }
         }
     }

@@ -1,25 +1,25 @@
 package com.bonepl.chromaleague.hud.animations;
 
 import com.bonepl.chromaleague.GameStateHelper;
-import com.bonepl.chromaleague.hud.PredefinedKeySets;
-import com.bonepl.razersdk.animation.Color;
 import com.bonepl.razersdk.animation.AnimatedFrame;
 import com.bonepl.razersdk.animation.Animation;
+import com.bonepl.razersdk.animation.Color;
 import com.bonepl.razersdk.animation.Frame;
 import com.bonepl.razersdk.sdk.RzKey;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 
-public class LevelUpAnimation extends Animation {
-    private final List<RzKey> LEVEL_UP_KEYS;
-    private int previousLevel = 0;
+import static com.bonepl.razersdk.sdk.RzKey.*;
 
-    public LevelUpAnimation() {
-        LEVEL_UP_KEYS = new ArrayList<>(PredefinedKeySets.MACROS);
-        Collections.reverse(LEVEL_UP_KEYS);
-    }
+public class LevelUpAnimation extends Animation {
+    private final List<RzKey> LEVEL_UP_KEYS = Arrays.asList(
+            RZKEY_MACRO5, RZKEY_LCTRL, RZKEY_LWIN,
+            RZKEY_MACRO4, RZKEY_LSHIFT,
+            RZKEY_MACRO3, RZKEY_CAPSLOCK,
+            RZKEY_MACRO2, RZKEY_TAB,
+            RZKEY_MACRO1, RZKEY_OEM_1);
+    private int previousLevel = 0;
 
     @Override
     public Frame getFrame() {
@@ -36,14 +36,13 @@ public class LevelUpAnimation extends Animation {
 
     void levelUp() {
         final AnimatedFrame frame = new AnimatedFrame()
-                .withAnimationFrame(2, new Frame(LEVEL_UP_KEYS.get(0), Color.YELLOW))
-                .withAnimationFrame(2, new Frame(LEVEL_UP_KEYS.subList(0, 1), Color.YELLOW))
-                .withAnimationFrame(2, new Frame(LEVEL_UP_KEYS.subList(0, 2), Color.YELLOW))
                 .withAnimationFrame(2, new Frame(LEVEL_UP_KEYS.subList(0, 3), Color.YELLOW))
-                .withAnimationFrame(2, new Frame(LEVEL_UP_KEYS.subList(1, 4), Color.YELLOW))
-                .withAnimationFrame(2, new Frame(LEVEL_UP_KEYS.subList(2, 4), Color.YELLOW))
-                .withAnimationFrame(2, new Frame(LEVEL_UP_KEYS.subList(3, 4), Color.YELLOW))
-                .withAnimationFrame(2, new Frame(LEVEL_UP_KEYS.get(4), Color.YELLOW));
+                .withAnimationFrame(2, new Frame(LEVEL_UP_KEYS.subList(0, 5), Color.YELLOW))
+                .withAnimationFrame(2, new Frame(LEVEL_UP_KEYS.subList(0, 7), Color.YELLOW))
+                .withAnimationFrame(2, new Frame(LEVEL_UP_KEYS.subList(3, 9), Color.YELLOW))
+                .withAnimationFrame(2, new Frame(LEVEL_UP_KEYS.subList(5, 11), Color.YELLOW))
+                .withAnimationFrame(2, new Frame(LEVEL_UP_KEYS.subList(7, 11), Color.YELLOW))
+                .withAnimationFrame(2, new Frame(LEVEL_UP_KEYS.subList(9, 11), Color.YELLOW));
         addToFront(frame);
     }
 }

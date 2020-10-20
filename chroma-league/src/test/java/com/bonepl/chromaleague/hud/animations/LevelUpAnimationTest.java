@@ -11,7 +11,7 @@ class LevelUpAnimationTest {
         try (RazerSDKClient razerSDKClient = new RazerSDKClient()) {
             while (levelUpAnimation.hasFrame()) {
                 razerSDKClient.createKeyboardEffect(levelUpAnimation.getFrame());
-                Thread.sleep(50);
+                Thread.sleep(200);
             }
         }
     }

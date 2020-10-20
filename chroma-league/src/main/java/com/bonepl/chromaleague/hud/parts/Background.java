@@ -9,9 +9,9 @@ import com.bonepl.razersdk.animation.Frame;
 import com.bonepl.razersdk.animation.LayeredFrame;
 
 public class Background extends LayeredFrame {
-    public static final Color BACKGROUND_COLOR = new Color(10, 10, 10);
+    public static final Color BACKGROUND_COLOR = new Color(5, 5, 5);
     private static final AnimatedFrame baronBuffBackground = new BaronBuffBackground();
-    private static final BreathingColor deadBackground = new BreathingColor(new Color(100, 0, 0));
+    private static final BreathingColor deadBackground = new BreathingColor(new Color(100, 80, 80));
 
     public Background() {
         if (GameStateHelper.isActivePlayerAlive()) {

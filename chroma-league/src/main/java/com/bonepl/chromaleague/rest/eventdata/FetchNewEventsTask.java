@@ -2,6 +2,7 @@ package com.bonepl.chromaleague.rest.eventdata;
 
 import com.bonepl.chromaleague.EventProcessor;
 import com.bonepl.chromaleague.GameState;
+import com.bonepl.chromaleague.GameStateHelper;
 import com.bonepl.chromaleague.rest.LeagueHttpClient;
 import com.bonepl.chromaleague.rest.eventdata.model.Event;
 import com.bonepl.chromaleague.rest.eventdata.model.EventType;
@@ -36,6 +37,7 @@ public class FetchNewEventsTask implements Runnable {
         if (!events.isEmpty() && (events.size() > lastProcessedEventId + 1)) {
             if (lastProcessedEventId == -1 && events.size() > 1) {
                 logger.warn("Game reconnection detected, skipping passed events");
+                GameStateHelper.getKilledDragons().clear();
                 events.stream().map(EventType::fromEvent).forEach(EventProcessor::processEventForCustomData);
                 EventProcessor.setLastProcessedEventId(events.size() - 1);
                 return Collections.emptyList();

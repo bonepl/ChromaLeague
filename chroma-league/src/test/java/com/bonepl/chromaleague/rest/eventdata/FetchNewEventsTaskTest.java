@@ -4,20 +4,30 @@ import com.bonepl.chromaleague.EventProcessor;
 import com.bonepl.chromaleague.GameState;
 import com.bonepl.chromaleague.rest.LeagueHttpClientMocker;
 import com.bonepl.chromaleague.rest.eventdata.model.Event;
+import com.bonepl.chromaleague.rest.playerlist.model.PlayerList;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class FetchNewEventsTaskTest {
+
+    @BeforeEach
+    void setUp() {
+        GameState.setActivePlayerName("BooonE");
+        PlayerList playerList = mock(PlayerList.class);
+        GameState.setPlayerList(playerList);
+    }
 
     @Test
     void testEventParsing() {
         //given
         LeagueHttpClientMocker.mockReturnedResponseWithResource("json/eventdata.json");
-        GameState.setActivePlayerName("BooonE");
         EventProcessor.setLastProcessedEventId(0);
 
         //when
@@ -40,7 +50,6 @@ class FetchNewEventsTaskTest {
     void testFirstEventParsing() {
         //given
         LeagueHttpClientMocker.mockReturnedResponseWithResource("json/gamestartevent.json");
-        GameState.setActivePlayerName("BooonE");
         EventProcessor.setLastProcessedEventId(-1);
 
         //when
@@ -63,7 +72,6 @@ class FetchNewEventsTaskTest {
     void testEventsSkipAfterReconnect() {
         //given
         LeagueHttpClientMocker.mockReturnedResponseWithResource("json/eventdata.json");
-        GameState.setActivePlayerName("BooonE");
         EventProcessor.setLastProcessedEventId(-1);
 
         //when

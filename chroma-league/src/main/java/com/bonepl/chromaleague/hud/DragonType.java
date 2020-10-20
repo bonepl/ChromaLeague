@@ -5,11 +5,11 @@ import com.bonepl.razersdk.animation.Color;
 import java.util.Objects;
 
 public enum DragonType {
-    CLOUD("Air", Color.CYAN),
+    CLOUD("Air", Color.AIR),
     ELDER("Elder", Color.WHITE),
     INFERNAL("Fire", Color.RED),
     MOUNTAIN("Earth", Color.BROWN),
-    OCEAN("Water", Color.BLUE);
+    OCEAN("Water", Color.OCEAN);
 
     private String apiType;
     private Color color;

@@ -1,5 +1,6 @@
 package com.bonepl.chromaleague;
 
+import com.bonepl.chromaleague.rest.CustomData;
 import com.bonepl.chromaleague.rest.activeplayer.model.ActivePlayer;
 import com.bonepl.chromaleague.rest.eventdata.model.Event;
 import com.bonepl.chromaleague.rest.playerlist.model.PlayerList;
@@ -13,7 +14,7 @@ public final class GameState {
     private volatile static String activePlayerName;
     private volatile static ActivePlayer activePlayer;
     private volatile static PlayerList playerList;
-    private static LocalTime baronBuffEnd;
+    private static final CustomData customData = new CustomData();
     private static final Queue<Event> unprocessedEvents = new ConcurrentLinkedQueue<>();
 
     private GameState() {
@@ -67,17 +68,7 @@ public final class GameState {
         return !unprocessedEvents.isEmpty();
     }
 
-    public static void startBaronBuff() {
-        if (GameStateHelper.isActivePlayerAlive()) {
-            baronBuffEnd = LocalTime.now().plusMinutes(3);
-        }
-    }
-
-    public static boolean hasBaronBuff() {
-        if (baronBuffEnd != null && GameStateHelper.isActivePlayerAlive()) {
-            return LocalTime.now().isBefore(baronBuffEnd);
-        }
-        baronBuffEnd = null;
-        return false;
+    public static CustomData getCustomData() {
+        return customData;
     }
 }

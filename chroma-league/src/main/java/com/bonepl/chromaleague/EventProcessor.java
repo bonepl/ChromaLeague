@@ -1,5 +1,6 @@
 package com.bonepl.chromaleague;
 
+import com.bonepl.chromaleague.hud.DragonType;
 import com.bonepl.chromaleague.hud.animations.*;
 import com.bonepl.chromaleague.rest.eventdata.model.EventType;
 import com.bonepl.razersdk.animation.IFrame;
@@ -18,16 +19,30 @@ public class EventProcessor {
     public static void processEvents() {
         while (GameState.hasUnprocessedEvents()) {
             final EventType eventType = EventType.fromEvent(GameState.pollNextUnprocessedEvent());
+            processEventForCustomData(eventType);
+            processEventAnimation(eventType);
+        }
+    }
 
-            if (eventType == EventType.ALLY_BARON_KILL) {
-                GameState.startBaronBuff();
-            }
+    public static void processEventForCustomData(EventType eventType) {
+        if (eventType == EventType.ALLY_BARON_KILL) {
+            GameStateHelper.startBaronBuff();
+        } else if (eventType == EventType.ALLY_CLOUD_DRAGON_KILL) {
+            GameStateHelper.addKilledDragon(DragonType.CLOUD);
+        } else if (eventType == EventType.ALLY_INFERNAL_DRAGON_KILL) {
+            GameStateHelper.addKilledDragon(DragonType.INFERNAL);
+        } else if (eventType == EventType.ALLY_MOUNTAIN_DRAGON_KILL) {
+            GameStateHelper.addKilledDragon(DragonType.MOUNTAIN);
+        } else if (eventType == EventType.ALLY_OCEAN_DRAGON_KILL) {
+            GameStateHelper.addKilledDragon(DragonType.OCEAN);
+        }
+    }
 
-            IFrame animation = getEventAnimation(eventType);
-            if (animation != null) {
-                logger.info("Animating event: " + eventType);
-                EventAnimation.addFrames(animation);
-            }
+    private static void processEventAnimation(EventType eventType) {
+        IFrame animation = getEventAnimation(eventType);
+        if (animation != null) {
+            logger.info("Animating event: " + eventType);
+            EventAnimation.addFrames(animation);
         }
     }
 

@@ -14,6 +14,7 @@ public class MainHud extends LayeredFrame {
         addFrame(new Background());
         addFrame(new HpBar());
         addFrame(new ResourceBar());
+        addFrame(new KilledDragonBar());
         addFrame(goldAnimation);
         addFrame(levelUpAnimation);
         if (eventAnimation.hasFrame()) {

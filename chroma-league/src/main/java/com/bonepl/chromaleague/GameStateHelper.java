@@ -85,6 +85,14 @@ public final class GameStateHelper {
         return false;
     }
 
+    public static boolean hasDragonSoul() {
+        return getCustomData().getKilledDragons().size() >= 4;
+    }
+
+    public static DragonType getDragonSoulType() {
+        return getCustomData().getKilledDragons().get(3);
+    }
+
     public static void addKilledDragon(DragonType dragonType) {
         getCustomData().getKilledDragons().add(dragonType);
     }

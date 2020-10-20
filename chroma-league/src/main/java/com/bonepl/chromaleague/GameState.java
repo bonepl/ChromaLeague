@@ -5,7 +5,6 @@ import com.bonepl.chromaleague.rest.activeplayer.model.ActivePlayer;
 import com.bonepl.chromaleague.rest.eventdata.model.Event;
 import com.bonepl.chromaleague.rest.playerlist.model.PlayerList;
 
-import java.time.LocalTime;
 import java.util.Collection;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -21,6 +20,10 @@ public final class GameState {
     }
 
     public static void setActivePlayerName(String activePlayerName) {
+        if (activePlayerName == null) {
+            unprocessedEvents.clear();
+            getCustomData().getKilledDragons().clear();
+        }
         GameState.activePlayerName = activePlayerName;
     }
 

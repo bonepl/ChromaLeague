@@ -85,6 +85,26 @@ public final class GameStateHelper {
         return false;
     }
 
+    public static void startElderBuff() {
+        if (GameStateHelper.isActivePlayerAlive()) {
+            final int totalEldersKilled = GameStateHelper.getTotalEldersKilled();
+            if (totalEldersKilled == 1) {
+                GameState.getCustomData().setElderBuffEnd(LocalTime.now().plusSeconds(150));
+            } else {
+                GameState.getCustomData().setElderBuffEnd(LocalTime.now().plusSeconds(300));
+            }
+        }
+    }
+
+    public static boolean hasElderBuff() {
+        final CustomData customData = getCustomData();
+        if (customData.getElderBuffEnd() != null && GameStateHelper.isActivePlayerAlive()) {
+            return LocalTime.now().isBefore(customData.getElderBuffEnd());
+        }
+        customData.setElderBuffEnd(null);
+        return false;
+    }
+
     public static boolean hasDragonSoul() {
         return getCustomData().getKilledDragons().size() >= 4;
     }
@@ -100,4 +120,18 @@ public final class GameStateHelper {
     public static List<DragonType> getKilledDragons() {
         return getCustomData().getKilledDragons();
     }
+
+    public static int getTotalEldersKilled() {
+        return getCustomData().getTotalEldersKilled();
+    }
+
+    public static void addKilledElder() {
+        final CustomData customData = getCustomData();
+        customData.setTotalEldersKilled(customData.getTotalEldersKilled() + 1);
+    }
+
+    public static void resetCustomData(){
+        getCustomData().reset();
+    }
+
 }

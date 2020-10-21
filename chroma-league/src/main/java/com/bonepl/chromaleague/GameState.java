@@ -1,5 +1,6 @@
 package com.bonepl.chromaleague;
 
+import com.bonepl.chromaleague.hud.animations.EventAnimation;
 import com.bonepl.chromaleague.rest.CustomData;
 import com.bonepl.chromaleague.rest.activeplayer.model.ActivePlayer;
 import com.bonepl.chromaleague.rest.eventdata.model.Event;
@@ -19,10 +20,17 @@ public final class GameState {
     private GameState() {
     }
 
+    /**
+     * Sets activePlayerName, this is used as a check if game is running.
+     * Setting activePlayerName to null clears the GameState.
+     *
+     * @param activePlayerName - activePlayerName fetched from ActivePlayerName REST (can be null)                         or null
+     */
     public static void setActivePlayerName(String activePlayerName) {
         if (activePlayerName == null) {
             unprocessedEvents.clear();
-            getCustomData().getKilledDragons().clear();
+            EventAnimation.stop();
+            GameStateHelper.resetCustomData();
         }
         GameState.activePlayerName = activePlayerName;
     }

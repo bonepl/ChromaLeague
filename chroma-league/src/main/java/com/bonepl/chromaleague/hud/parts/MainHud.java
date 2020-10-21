@@ -1,9 +1,7 @@
 package com.bonepl.chromaleague.hud.parts;
 
-import com.bonepl.chromaleague.hud.animations.DragonSoulAnimation;
-import com.bonepl.chromaleague.hud.animations.EventAnimation;
-import com.bonepl.chromaleague.hud.animations.GoldAnimation;
-import com.bonepl.chromaleague.hud.animations.LevelUpAnimation;
+import com.bonepl.chromaleague.GameStateHelper;
+import com.bonepl.chromaleague.hud.animations.*;
 import com.bonepl.razersdk.animation.LayeredFrame;
 
 public class MainHud extends LayeredFrame {
@@ -11,6 +9,7 @@ public class MainHud extends LayeredFrame {
     private static final LevelUpAnimation levelUpAnimation = new LevelUpAnimation();
     private static final EventAnimation eventAnimation = new EventAnimation();
     private static final DragonSoulAnimation dragonSoulAnimation = new DragonSoulAnimation();
+    private static final ElderBuffAnimation elderBuffAnimation = new ElderBuffAnimation();
 
     public MainHud() {
         addFrame(new Background());
@@ -20,6 +19,9 @@ public class MainHud extends LayeredFrame {
         addFrame(dragonSoulAnimation);
         addFrame(goldAnimation);
         addFrame(levelUpAnimation);
+        if (GameStateHelper.hasElderBuff()) {
+            addFrame(elderBuffAnimation.getFrame());
+        }
         if (eventAnimation.hasFrame()) {
             addFrame(eventAnimation);
         }

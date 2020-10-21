@@ -14,10 +14,10 @@ import java.util.Optional;
 import static com.bonepl.razersdk.sdk.RzKey.*;
 
 public class KilledDragonBar extends Frame {
-    private static final List<RzKey> FIRST_DRAGON_ROW = Arrays.asList(RZKEY_FN, RZKEY_RMENU, RZKEY_RCTRL);
-    private static final RzKey SECOND_DRAGON_ROW = RZKEY_RSHIFT;
-    private static final RzKey THIRD_DRAGON_ROW = RZKEY_ENTER;
-    private static final RzKey FOURTH_DRAGON_ROW = RZKEY_OEM_6;
+    public static final List<RzKey> FIRST_DRAGON_ROW = Arrays.asList(RZKEY_FN, RZKEY_RMENU, RZKEY_RCTRL);
+    public static final RzKey SECOND_DRAGON_ROW = RZKEY_RSHIFT;
+    public static final RzKey THIRD_DRAGON_ROW = RZKEY_ENTER;
+    public static final RzKey FOURTH_DRAGON_ROW = RZKEY_OEM_6;
 
     public KilledDragonBar() {
         super(getKilledDragonsBar());

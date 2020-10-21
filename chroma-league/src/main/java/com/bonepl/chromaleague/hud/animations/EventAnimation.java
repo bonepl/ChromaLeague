@@ -23,4 +23,8 @@ public class EventAnimation extends AnimatedFrame {
     public synchronized Frame getFrame() {
         return animatedFrame.getFrame();
     }
+
+    public static void stop() {
+        animatedFrame.getFrames().clear();
+    }
 }

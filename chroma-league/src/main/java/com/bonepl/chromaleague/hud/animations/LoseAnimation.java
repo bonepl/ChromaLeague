@@ -15,11 +15,11 @@ public class LoseAnimation extends Animation {
     public LoseAnimation() {
         int i = 0;
         while (i < 500) {
-            this.addToFront(createUpMovingFrame(i++, new Color(getRed(), 0, 0)));
+            this.addToFront(createDownMovingFrame(i++, new Color(getRed(), 0, 0)));
         }
     }
 
-    private static AnimatedFrame createUpMovingFrame(int delay, Color color) {
+    private static AnimatedFrame createDownMovingFrame(int delay, Color color) {
         final AnimatedFrame animatedFrame = new AnimatedFrame();
         if (delay > 0) {
             animatedFrame.withAnimationFrame(delay * 13, new Frame());

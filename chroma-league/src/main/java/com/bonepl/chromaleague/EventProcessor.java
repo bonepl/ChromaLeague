@@ -35,6 +35,11 @@ public class EventProcessor {
             GameStateHelper.addKilledDragon(DragonType.MOUNTAIN);
         } else if (eventType == EventType.ALLY_OCEAN_DRAGON_KILL) {
             GameStateHelper.addKilledDragon(DragonType.OCEAN);
+        } else if (eventType == EventType.ALLY_ELDER_DRAGON_KILL) {
+            GameStateHelper.addKilledElder();
+            GameStateHelper.startElderBuff();
+        } else if (eventType == EventType.ENEMY_ELDER_DRAGON_KILL) {
+            GameStateHelper.addKilledElder();
         }
     }
 

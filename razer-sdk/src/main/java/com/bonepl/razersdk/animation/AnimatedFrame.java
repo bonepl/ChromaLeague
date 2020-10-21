@@ -36,4 +36,8 @@ public class AnimatedFrame implements IFrame {
     public Frame getFrame() {
         return frames.poll();
     }
+
+    public Queue<Frame> getFrames() {
+        return frames;
+    }
 }

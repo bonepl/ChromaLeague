@@ -10,12 +10,12 @@ import com.bonepl.razersdk.sdk.RzKey;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BaronBuffBackground extends AnimatedFrame {
+public class BaronBuffBackgroundAnimation extends AnimatedFrame {
     private final BreathingColor baronBuffColor = new BreathingColor(new Color(200, 0, 200));
     private static final List<RzKey> baronArea = buildBaronArea();
 
     @Override
-    public synchronized Frame getFrame() {
+    public Frame getFrame() {
         if (!hasFrame()) {
             extendAnimation();
         }

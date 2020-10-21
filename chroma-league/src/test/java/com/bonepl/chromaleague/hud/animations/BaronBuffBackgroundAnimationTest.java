@@ -3,13 +3,13 @@ package com.bonepl.chromaleague.hud.animations;
 import com.bonepl.razersdk.RazerSDKClient;
 import org.junit.jupiter.api.Test;
 
-class BaronBuffBackgroundTest {
+class BaronBuffBackgroundAnimationTest {
     @Test
     void playBaronBuffBackgroundAnimation() throws InterruptedException {
-        BaronBuffBackground baronBuffBackground = new BaronBuffBackground();
+        BaronBuffBackgroundAnimation baronBuffBackgroundAnimation = new BaronBuffBackgroundAnimation();
         try (RazerSDKClient razerSDKClient = new RazerSDKClient()) {
             for (int i = 0; i < 300; i++) {
-                razerSDKClient.createKeyboardEffect(baronBuffBackground.getFrame());
+                razerSDKClient.createKeyboardEffect(baronBuffBackgroundAnimation.getFrame());
                 Thread.sleep(50);
             }
         }

@@ -1,5 +1,6 @@
 package com.bonepl.chromaleague.rest.eventdata.model;
 
+import com.bonepl.chromaleague.GameState;
 import com.bonepl.chromaleague.hud.DragonType;
 
 import java.util.Objects;
@@ -23,10 +24,15 @@ public enum EventType {
     ENEMY_MOUNTAIN_DRAGON_KILL,
     ENEMY_OCEAN_DRAGON_KILL,
     GAME_END_VICTORY,
-    GAME_END_DEFEAT;
+    GAME_END_DEFEAT,
+    ACTIVE_PLAYER_DIED;
 
     public static EventType fromEvent(Event event) {
         if (event != null) {
+            if ("ChampionKill".equals(event.getEventName()) && GameState.getActivePlayerName().equals(event.getVictimName())) {
+                return ACTIVE_PLAYER_DIED;
+            }
+
             if ("DragonKill".equals(event.getEventName())) {
                 return switch (Objects.requireNonNull(DragonType.fromApiType(event.getDragonType()))) {
                     case CLOUD -> getPlayerList().isAlly(event.getKillerName()) ?

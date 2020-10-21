@@ -2,6 +2,8 @@ package com.bonepl.chromaleague;
 
 import com.bonepl.chromaleague.hud.DragonType;
 import com.bonepl.chromaleague.hud.animations.*;
+import com.bonepl.chromaleague.rest.CustomData;
+import com.bonepl.chromaleague.rest.eventdata.model.Event;
 import com.bonepl.chromaleague.rest.eventdata.model.EventType;
 import com.bonepl.razersdk.animation.IFrame;
 import org.apache.logging.log4j.LogManager;
@@ -40,6 +42,10 @@ public class EventProcessor {
             GameStateHelper.startElderBuff();
         } else if (eventType == EventType.ENEMY_ELDER_DRAGON_KILL) {
             GameStateHelper.addKilledElder();
+        } else if(eventType == EventType.ACTIVE_PLAYER_DIED){
+            final CustomData customData = GameState.getCustomData();
+            customData.setElderBuffEnd(null);
+            customData.setBaronBuffEnd(null);
         }
     }
 
@@ -69,7 +75,7 @@ public class EventProcessor {
             case ENEMY_ELDER_DRAGON_KILL -> new EnemyElderDragonKillAnimation();
             case GAME_END_VICTORY -> new WinAnimation();
             case GAME_END_DEFEAT -> new LoseAnimation();
-            case UNSUPPORTED -> null;
+            case ACTIVE_PLAYER_DIED, UNSUPPORTED -> null;
         };
     }
 

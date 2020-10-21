@@ -10,6 +10,7 @@ public class MainHud extends LayeredFrame {
     private static final EventAnimation eventAnimation = new EventAnimation();
     private static final DragonSoulAnimation dragonSoulAnimation = new DragonSoulAnimation();
     private static final ElderBuffAnimation elderBuffAnimation = new ElderBuffAnimation();
+    private static boolean playerDead;
 
     public MainHud() {
         addFrame(new Background());
@@ -22,8 +23,23 @@ public class MainHud extends LayeredFrame {
         if (GameStateHelper.hasElderBuff()) {
             addFrame(elderBuffAnimation.getFrame());
         }
+        handleRespawnEvent();
         if (eventAnimation.hasFrame()) {
             addFrame(eventAnimation);
+        }
+    }
+
+    private static void handleRespawnEvent() {
+        final boolean activePlayerAlive = GameStateHelper.isActivePlayerAlive();
+        if (playerDead) {
+            if (activePlayerAlive) {
+                playerDead = false;
+                EventAnimation.addFrames(new RespawnAnimation());
+            }
+        } else {
+            if (!activePlayerAlive) {
+                playerDead = true;
+            }
         }
     }
 }

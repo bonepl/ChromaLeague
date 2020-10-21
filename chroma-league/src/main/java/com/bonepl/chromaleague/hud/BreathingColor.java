@@ -1,5 +1,6 @@
 package com.bonepl.chromaleague.hud;
 
+import com.bonepl.chromaleague.hud.parts.Background;
 import com.bonepl.razersdk.animation.Color;
 
 public class BreathingColor {
@@ -28,8 +29,8 @@ public class BreathingColor {
         }
 
         currentStep += direction;
-        if(currentStep == 0) {
-            return new Color(2,2,2);
+        if (currentStep == 0) {
+            return Background.BACKGROUND_COLOR;
         }
 
         int red = currentStep * getRedStep();

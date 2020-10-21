@@ -7,6 +7,7 @@ public class Event {
     String DragonType;
     String KillerName;
     String Result;
+    String VictimName;
 
     public int getEventID() {
         return EventID;
@@ -32,6 +33,10 @@ public class Event {
         return Result;
     }
 
+    public String getVictimName() {
+        return VictimName;
+    }
+
     @Override
     public String toString() {
         return "Event{" +
@@ -41,6 +46,7 @@ public class Event {
                 ", DragonType='" + DragonType + '\'' +
                 ", KillerName='" + KillerName + '\'' +
                 ", Result='" + Result + '\'' +
+                ", VictimName='" + VictimName + '\'' +
                 '}';
     }
 }

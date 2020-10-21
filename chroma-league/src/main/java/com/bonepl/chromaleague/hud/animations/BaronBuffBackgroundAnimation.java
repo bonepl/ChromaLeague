@@ -28,7 +28,7 @@ public class BaronBuffBackgroundAnimation extends AnimatedFrame {
         }
     }
 
-    private static List<RzKey> buildBaronArea() {
+    public static List<RzKey> buildBaronArea() {
         List<RzKey> baronArea = new ArrayList<>(40);
         baronArea.addAll(PredefinedKeySets.BLACKWIDOW_THIRD_ROW.subList(2, 11));
         baronArea.addAll(PredefinedKeySets.BLACKWIDOW_FOURTH_ROW.subList(2, 10));

@@ -3,11 +3,13 @@ package com.bonepl.chromaleague;
 import com.bonepl.chromaleague.hud.DragonType;
 import com.bonepl.chromaleague.hud.animations.*;
 import com.bonepl.chromaleague.rest.CustomData;
-import com.bonepl.chromaleague.rest.eventdata.model.Event;
 import com.bonepl.chromaleague.rest.eventdata.model.EventType;
+import com.bonepl.razersdk.animation.Frame;
 import com.bonepl.razersdk.animation.IFrame;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import static com.bonepl.chromaleague.rest.eventdata.model.EventType.*;
 
 public class EventProcessor {
 
@@ -21,40 +23,43 @@ public class EventProcessor {
     public static void processEvents() {
         while (GameState.hasUnprocessedEvents()) {
             final EventType eventType = EventType.fromEvent(GameState.pollNextUnprocessedEvent());
+            if (eventType != UNSUPPORTED) {
+                logger.info("Processing event: " + eventType.name());
+            }
             processEventForCustomData(eventType);
             processEventAnimation(eventType);
         }
     }
 
     public static void processEventForCustomData(EventType eventType) {
-        if (eventType == EventType.ALLY_BARON_KILL) {
+        if (eventType == ALLY_BARON_KILL) {
             GameStateHelper.startBaronBuff();
-        } else if (eventType == EventType.ALLY_CLOUD_DRAGON_KILL) {
+        } else if (eventType == ALLY_CLOUD_DRAGON_KILL) {
             GameStateHelper.addKilledDragon(DragonType.CLOUD);
-        } else if (eventType == EventType.ALLY_INFERNAL_DRAGON_KILL) {
+        } else if (eventType == ALLY_INFERNAL_DRAGON_KILL) {
             GameStateHelper.addKilledDragon(DragonType.INFERNAL);
-        } else if (eventType == EventType.ALLY_MOUNTAIN_DRAGON_KILL) {
+        } else if (eventType == ALLY_MOUNTAIN_DRAGON_KILL) {
             GameStateHelper.addKilledDragon(DragonType.MOUNTAIN);
-        } else if (eventType == EventType.ALLY_OCEAN_DRAGON_KILL) {
+        } else if (eventType == ALLY_OCEAN_DRAGON_KILL) {
             GameStateHelper.addKilledDragon(DragonType.OCEAN);
-        } else if (eventType == EventType.ALLY_ELDER_DRAGON_KILL) {
+        } else if (eventType == ALLY_ELDER_DRAGON_KILL) {
             GameStateHelper.addKilledElder();
             GameStateHelper.startElderBuff();
-        } else if (eventType == EventType.ENEMY_ELDER_DRAGON_KILL) {
+        } else if (eventType == ENEMY_ELDER_DRAGON_KILL) {
             GameStateHelper.addKilledElder();
-        } else if(eventType == EventType.ACTIVE_PLAYER_DIED){
+        } else if (eventType == ACTIVE_PLAYER_DIED) {
             final CustomData customData = GameState.getCustomData();
             customData.setElderBuffEnd(null);
             customData.setBaronBuffEnd(null);
+            customData.setActivePlayerKillingSpree(0);
+        } else if (eventType == ACTIVE_PLAYER_KILLED) {
+            GameStateHelper.addPlayerKill();
         }
     }
 
     private static void processEventAnimation(EventType eventType) {
         IFrame animation = getEventAnimation(eventType);
-        if (animation != null) {
-            logger.info("Animating event: " + eventType);
-            EventAnimation.addFrames(animation);
-        }
+        EventAnimation.addFrames(animation);
     }
 
     private static IFrame getEventAnimation(EventType eventType) {
@@ -75,7 +80,7 @@ public class EventProcessor {
             case ENEMY_ELDER_DRAGON_KILL -> new EnemyElderDragonKillAnimation();
             case GAME_END_VICTORY -> new WinAnimation();
             case GAME_END_DEFEAT -> new LoseAnimation();
-            case ACTIVE_PLAYER_DIED, UNSUPPORTED -> null;
+            case ACTIVE_PLAYER_DIED, ACTIVE_PLAYER_KILLED, UNSUPPORTED -> new Frame();
         };
     }
 

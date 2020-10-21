@@ -130,7 +130,12 @@ public final class GameStateHelper {
         customData.setTotalEldersKilled(customData.getTotalEldersKilled() + 1);
     }
 
-    public static void resetCustomData(){
+    public static void addPlayerKill() {
+        final CustomData customData = getCustomData();
+        customData.setActivePlayerKillingSpree(customData.getActivePlayerKillingSpree() + 1);
+    }
+
+    public static void resetCustomData() {
         getCustomData().reset();
     }
 

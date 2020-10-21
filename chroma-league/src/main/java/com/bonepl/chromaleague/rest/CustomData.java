@@ -7,13 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomData {
-    private int baronKillGameTime;
     private LocalTime baronBuffEnd;
-    private int elderKillGameTime;
     private LocalTime elderBuffEnd;
-    private int lastPlayerDeathTime;
     private final List<DragonType> killedDragons = new ArrayList<>();
     private int totalEldersKilled = 0;
+    private int activePlayerKillingSpree = 0;
 
     public void setBaronBuffEnd(LocalTime baronBuffEnd) {
         this.baronBuffEnd = baronBuffEnd;
@@ -43,32 +41,17 @@ public class CustomData {
         this.totalEldersKilled = totalEldersKilled;
     }
 
+    public int getActivePlayerKillingSpree() {
+        return activePlayerKillingSpree;
+    }
+
+    public void setActivePlayerKillingSpree(int activePlayerKillingSpree) {
+        this.activePlayerKillingSpree = activePlayerKillingSpree;
+    }
+
     public void reset() {
-        getKilledDragons().clear();
+        killedDragons.clear();
         totalEldersKilled = 0;
-    }
-
-    public int getBaronKillGameTime() {
-        return baronKillGameTime;
-    }
-
-    public void setBaronKillGameTime(int baronKillGameTime) {
-        this.baronKillGameTime = baronKillGameTime;
-    }
-
-    public int getElderKillGameTime() {
-        return elderKillGameTime;
-    }
-
-    public void setElderKillGameTime(int elderKillGameTime) {
-        this.elderKillGameTime = elderKillGameTime;
-    }
-
-    public int getLastPlayerDeathTime() {
-        return lastPlayerDeathTime;
-    }
-
-    public void setLastPlayerDeathTime(int lastPlayerDeathTime) {
-        this.lastPlayerDeathTime = lastPlayerDeathTime;
+        activePlayerKillingSpree = 0;
     }
 }

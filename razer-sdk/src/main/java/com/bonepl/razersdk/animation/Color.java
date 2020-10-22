@@ -44,4 +44,13 @@ public class Color {
     public int getBlue() {
         return blue;
     }
+
+    @Override
+    public String toString() {
+        return "Color{" +
+                "red=" + red +
+                ", green=" + green +
+                ", blue=" + blue +
+                '}';
+    }
 }

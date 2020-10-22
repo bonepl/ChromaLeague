@@ -1,53 +1,35 @@
 package com.bonepl.chromaleague.hud;
 
-import com.bonepl.chromaleague.hud.parts.Background;
 import com.bonepl.razersdk.animation.Color;
 
 public class BreathingColor {
-    private final int maxRed;
-    private final int maxGreen;
-    private final int maxBlue;
-    private final int steps;
-
-    private int direction = 1;
-    private int currentStep = 0;
+    private final TransitionColor upColor;
+    private final TransitionColor downColor;
+    private boolean upDirection = true;
 
     public BreathingColor(Color color) {
         this(color, 20);
     }
 
     public BreathingColor(Color color, int steps) {
-        this.maxRed = color.getRed();
-        this.maxGreen = color.getGreen();
-        this.maxBlue = color.getBlue();
-        this.steps = steps;
+        this.upColor = new TransitionColor(Color.BLACK, color, steps / 2);
+        this.downColor = new TransitionColor(color, Color.BLACK, steps / 2);
     }
 
     public Color getNextColor() {
-        if (currentStep + direction > steps || currentStep + direction < 0) {
-            direction = Math.negateExact(direction);
+        if (upDirection) {
+            Color color = upColor.getNextColor();
+            if (upColor.transitionFinished()) {
+                upDirection = false;
+                upColor.resetTransition();
+            }
+            return color;
         }
-
-        currentStep += direction;
-        if (currentStep == 0) {
-            return Background.BACKGROUND_COLOR;
+        Color color = downColor.getNextColor();
+        if (downColor.transitionFinished()) {
+            upDirection = true;
+            downColor.resetTransition();
         }
-
-        int red = currentStep * getRedStep();
-        int green = currentStep * getGreenStep();
-        int blue = currentStep * getBlueStep();
-        return new Color(red, green, blue);
-    }
-
-    private int getRedStep() {
-        return maxRed / steps;
-    }
-
-    private int getGreenStep() {
-        return maxGreen / steps;
-    }
-
-    private int getBlueStep() {
-        return maxBlue / steps;
+        return color;
     }
 }

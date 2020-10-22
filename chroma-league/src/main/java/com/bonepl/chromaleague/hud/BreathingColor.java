@@ -12,8 +12,8 @@ public class BreathingColor {
     }
 
     public BreathingColor(Color color, int steps) {
-        this.upColor = new TransitionColor(Color.BLACK, color, steps / 2);
-        this.downColor = new TransitionColor(color, Color.BLACK, steps / 2);
+        this.upColor = new TransitionColor(Color.BLACK, color, steps);
+        this.downColor = new TransitionColor(color, Color.BLACK, steps);
     }
 
     public Color getNextColor() {

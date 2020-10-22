@@ -130,6 +130,11 @@ public final class GameStateHelper {
         customData.setTotalEldersKilled(customData.getTotalEldersKilled() + 1);
     }
 
+    public static int getActivePlayerKillingSpree() {
+        final CustomData customData = getCustomData();
+        return customData.getActivePlayerKillingSpree();
+    }
+
     public static void addPlayerKill() {
         final CustomData customData = getCustomData();
         customData.setActivePlayerKillingSpree(customData.getActivePlayerKillingSpree() + 1);

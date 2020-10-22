@@ -24,7 +24,7 @@ public final class GameState {
      * Sets activePlayerName, this is used as a check if game is running.
      * Setting activePlayerName to null clears the GameState.
      *
-     * @param activePlayerName - activePlayerName fetched from ActivePlayerName REST (can be null)                         or null
+     * @param activePlayerName - activePlayerName fetched from ActivePlayerName REST (can be null) or null
      */
     public static void setActivePlayerName(String activePlayerName) {
         if (activePlayerName == null) {

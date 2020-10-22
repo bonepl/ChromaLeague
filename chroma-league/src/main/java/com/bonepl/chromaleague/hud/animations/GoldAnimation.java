@@ -2,10 +2,7 @@ package com.bonepl.chromaleague.hud.animations;
 
 import com.bonepl.chromaleague.GameStateHelper;
 import com.bonepl.chromaleague.hud.parts.GoldBar;
-import com.bonepl.razersdk.animation.Color;
-import com.bonepl.razersdk.animation.AnimatedFrame;
-import com.bonepl.razersdk.animation.Animation;
-import com.bonepl.razersdk.animation.Frame;
+import com.bonepl.razersdk.animation.*;
 import com.bonepl.razersdk.sdk.RzKey;
 
 import java.time.LocalTime;
@@ -62,7 +59,7 @@ public class GoldAnimation extends Animation {
 
     private AnimatedFrame fallingCoin(List<RzKey> rzKeys) {
         final AnimatedFrame animatedFrames = new AnimatedFrame();
-        rzKeys.forEach(rzKey -> animatedFrames.withAnimationFrame(new Frame(rzKey, Color.YELLOW)));
+        rzKeys.forEach(rzKey -> animatedFrames.withAnimationFrame(new SimpleFrame(rzKey, Color.YELLOW)));
         return animatedFrames;
     }
 

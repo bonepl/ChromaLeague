@@ -5,15 +5,16 @@ import com.bonepl.chromaleague.hud.BreathingColor;
 import com.bonepl.chromaleague.hud.PredefinedKeySets;
 import com.bonepl.razersdk.animation.AnimatedFrame;
 import com.bonepl.razersdk.animation.Frame;
+import com.bonepl.razersdk.animation.SimpleFrame;
 
 public class DragonSoulAnimation extends AnimatedFrame {
 
     private BreathingColor dragonColor;
 
     @Override
-    public synchronized Frame getFrame() {
+    public Frame getFrame() {
         if (!shouldAnimateDragonSoul()) {
-            return new Frame();
+            return new SimpleFrame().getFrame();
         }
         if (!hasFrame()) {
             extendAnimation();
@@ -36,7 +37,7 @@ public class DragonSoulAnimation extends AnimatedFrame {
 
     private void extendAnimation() {
         for (int i = 0; i < 20; i++) {
-            withAnimationFrame(2, new Frame(PredefinedKeySets.ARROWS, dragonColor.getNextColor()));
+            withAnimationFrame(2, new SimpleFrame(PredefinedKeySets.ARROWS, dragonColor.getNextColor()));
         }
     }
 }

@@ -8,8 +8,8 @@ class BaronBuffBackgroundAnimationTest {
     void playBaronBuffBackgroundAnimation() throws InterruptedException {
         BaronBuffBackgroundAnimation baronBuffBackgroundAnimation = new BaronBuffBackgroundAnimation();
         try (RazerSDKClient razerSDKClient = new RazerSDKClient()) {
-            for (int i = 0; i < 300; i++) {
-                razerSDKClient.createKeyboardEffect(baronBuffBackgroundAnimation.getFrame());
+            for (int i = 0; i < 100; i++) {
+                razerSDKClient.createKeyboardEffect(baronBuffBackgroundAnimation);
                 Thread.sleep(50);
             }
         }

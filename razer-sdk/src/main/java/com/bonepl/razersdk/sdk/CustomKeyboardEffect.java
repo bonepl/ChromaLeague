@@ -4,10 +4,7 @@ import com.bonepl.razersdk.animation.Color;
 import com.sun.jna.Pointer;
 import com.sun.jna.Structure;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.EnumMap;
-import java.util.List;
+import java.util.*;
 
 public class CustomKeyboardEffect extends Structure {
     public static final int ROW_COUNT = 6;
@@ -18,14 +15,14 @@ public class CustomKeyboardEffect extends Structure {
         Arrays.fill(colors, Color.NONE.getSDKColorRef());
     }
 
-    public CustomKeyboardEffect(final EnumMap<RzKey, Color> keysToColors) {
+    public CustomKeyboardEffect(final Map<RzKey, Color> keysToColors) {
         this();
         keysToColors.forEach((r, c) -> colors[r.getCustomPosition()] = c.getSDKColorRef());
     }
 
     public Pointer getEffect() {
-        this.write();
-        return this.getPointer();
+        write();
+        return getPointer();
     }
 
     @Override

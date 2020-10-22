@@ -4,6 +4,7 @@ import com.bonepl.chromaleague.hud.parts.KilledDragonBar;
 import com.bonepl.razersdk.animation.AnimatedFrame;
 import com.bonepl.razersdk.animation.Color;
 import com.bonepl.razersdk.animation.Frame;
+import com.bonepl.razersdk.animation.SimpleFrame;
 import com.bonepl.razersdk.sdk.RzKey;
 import org.apache.commons.collections4.ListUtils;
 
@@ -21,13 +22,13 @@ public class ElderBuffAnimation extends AnimatedFrame {
 
     private void extendAnimation() {
         for (int i = 0; i < 10; i++) {
-            withAnimationFrame(2, new Frame(ListUtils.sum(KilledDragonBar.FIRST_DRAGON_ROW,
+            withAnimationFrame(2, new SimpleFrame(ListUtils.sum(KilledDragonBar.FIRST_DRAGON_ROW,
                     Arrays.asList(RzKey.RZKEY_UP, RzKey.RZKEY_DOWN, RzKey.RZKEY_RIGHT)), Color.WHITE));
-            withAnimationFrame(2, new Frame(Arrays.asList(RzKey.RZKEY_RSHIFT,
+            withAnimationFrame(2, new SimpleFrame(Arrays.asList(RzKey.RZKEY_RSHIFT,
                     RzKey.RZKEY_UP), Color.WHITE));
-            withAnimationFrame(2, new Frame(RzKey.RZKEY_ENTER, Color.WHITE));
-            withAnimationFrame(2, new Frame(RzKey.RZKEY_OEM_6, Color.WHITE));
-            withAnimationFrame(20, new Frame());
+            withAnimationFrame(2, new SimpleFrame(RzKey.RZKEY_ENTER, Color.WHITE));
+            withAnimationFrame(2, new SimpleFrame(RzKey.RZKEY_OEM_6, Color.WHITE));
+            withAnimationFrame(20, new SimpleFrame());
         }
     }
 }

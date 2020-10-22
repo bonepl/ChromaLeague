@@ -41,7 +41,7 @@ class EventProcessorTest {
 
     private void runEventAnimation() {
         while (eventAnimation.hasFrame()) {
-            razerSDKClient.createKeyboardEffect(eventAnimation.getFrame());
+            razerSDKClient.createKeyboardEffect(eventAnimation);
             try {
                 Thread.sleep(50);
             } catch (InterruptedException e) {

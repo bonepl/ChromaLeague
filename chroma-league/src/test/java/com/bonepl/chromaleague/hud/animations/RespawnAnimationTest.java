@@ -9,7 +9,7 @@ class RespawnAnimationTest {
         RespawnAnimation respawnAnimation = new RespawnAnimation();
         try (RazerSDKClient razerSDKClient = new RazerSDKClient()) {
             while (respawnAnimation.hasFrame()) {
-                razerSDKClient.createKeyboardEffect(respawnAnimation.getFrame());
+                razerSDKClient.createKeyboardEffect(respawnAnimation);
                 Thread.sleep(50);
             }
         }

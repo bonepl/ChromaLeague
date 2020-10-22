@@ -4,7 +4,7 @@ import com.bonepl.chromaleague.hud.DragonType;
 import com.bonepl.chromaleague.hud.animations.*;
 import com.bonepl.chromaleague.rest.CustomData;
 import com.bonepl.chromaleague.rest.eventdata.model.EventType;
-import com.bonepl.razersdk.animation.Frame;
+import com.bonepl.razersdk.animation.SimpleFrame;
 import com.bonepl.razersdk.animation.IFrame;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -80,7 +80,7 @@ public class EventProcessor {
             case ENEMY_ELDER_DRAGON_KILL -> new EnemyElderDragonKillAnimation();
             case GAME_END_VICTORY -> new WinAnimation();
             case GAME_END_DEFEAT -> new LoseAnimation();
-            case ACTIVE_PLAYER_DIED, ACTIVE_PLAYER_KILLED, UNSUPPORTED -> new Frame();
+            case ACTIVE_PLAYER_DIED, ACTIVE_PLAYER_KILLED, UNSUPPORTED -> new SimpleFrame();
         };
     }
 

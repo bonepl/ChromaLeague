@@ -16,12 +16,12 @@
     <name>Chroma League</name>
 
     <dependencies>
+        <!-- core -->
         <dependency>
             <groupId>com.bonepl</groupId>
             <artifactId>razer-sdk</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-collections4</artifactId>

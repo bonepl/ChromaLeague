@@ -46,7 +46,7 @@ class DragonSoulAnimationTest {
         DragonSoulAnimation dragonSoulAnimation = new DragonSoulAnimation();
         switchToDragon(dragonType);
         for (int i = 0; i < 80; i++) {
-            razerSDKClient.createKeyboardEffect(dragonSoulAnimation.getFrame());
+            razerSDKClient.createKeyboardEffect(dragonSoulAnimation);
             Thread.sleep(50);
         }
     }

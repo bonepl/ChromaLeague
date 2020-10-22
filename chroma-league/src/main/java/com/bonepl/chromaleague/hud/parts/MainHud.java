@@ -21,7 +21,7 @@ public class MainHud extends LayeredFrame {
         addFrame(goldAnimation);
         addFrame(levelUpAnimation);
         if (GameStateHelper.hasElderBuff()) {
-            addFrame(elderBuffAnimation.getFrame());
+            addFrame(elderBuffAnimation);
         }
         handleRespawnEvent();
         if (eventAnimation.hasFrame()) {

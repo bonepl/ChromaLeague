@@ -9,7 +9,7 @@ class WinAnimationTest {
         final WinAnimation winAnimation = new WinAnimation();
         try (RazerSDKClient razerSDKClient = new RazerSDKClient()) {
             for (int i = 0; i < 120; i++) {
-                razerSDKClient.createKeyboardEffect(winAnimation.getFrame());
+                razerSDKClient.createKeyboardEffect(winAnimation);
                 Thread.sleep(50);
             }
         }

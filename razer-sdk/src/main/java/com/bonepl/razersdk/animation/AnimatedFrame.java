@@ -7,24 +7,24 @@ import java.util.stream.IntStream;
 public class AnimatedFrame implements IFrame {
     private final Queue<Frame> frames = new LinkedList<>();
 
-    public AnimatedFrame withAnimationFrame(Frame frame) {
+    public AnimatedFrame withAnimationFrame(IFrame frame) {
         return withAnimationFrame(1, frame);
     }
 
-    public AnimatedFrame withAnimationFrame(int frameCount, Frame frame) {
+    public AnimatedFrame withAnimationFrame(int frameCount, IFrame frame) {
         addAnimationFrame(frameCount, frame);
         return this;
     }
 
-    public void addAnimationFrame(Frame frame) {
+    public void addAnimationFrame(IFrame frame) {
         addAnimationFrame(1, frame);
     }
 
-    public void addAnimationFrame(int frameCount, Frame frame) {
+    public void addAnimationFrame(int frameCount, IFrame frame) {
         if (frameCount < 1) {
             throw new IllegalArgumentException("AnimationFrame requires at least 1 frameCount, was " + frameCount);
         }
-        IntStream.range(0, frameCount).forEach(i -> frames.offer(frame));
+        IntStream.range(0, frameCount).forEach(i -> frames.offer(frame.getFrame()));
     }
 
     @Override
@@ -34,10 +34,10 @@ public class AnimatedFrame implements IFrame {
 
     @Override
     public Frame getFrame() {
-        return frames.poll();
+        return frames.remove();
     }
 
-    public Queue<Frame> getFrames() {
-        return frames;
+    public void clearFrames(){
+        frames.clear();
     }
 }

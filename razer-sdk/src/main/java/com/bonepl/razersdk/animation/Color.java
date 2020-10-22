@@ -1,7 +1,6 @@
 package com.bonepl.razersdk.animation;
 
 public class Color {
-
     public static final Color NONE = new Color(0, 0, 0);
 
     public static final Color WHITE = new Color(255, 255, 255);
@@ -17,6 +16,9 @@ public class Color {
     public static final Color PURPLE = new Color(238, 130, 238);
     public static final Color ORANGE = new Color(255, 165, 0);
 
+    private static final int BLUE_BIT_POS = 16;
+    private static final int GREEN_BIT_POS = 8;
+
     private final int red;
     private final int green;
     private final int blue;
@@ -28,7 +30,7 @@ public class Color {
     }
 
     public int getSDKColorRef() {
-        return getBlue() << 16 | getGreen() << 8 | getRed();
+        return blue << BLUE_BIT_POS | green << GREEN_BIT_POS | red;
     }
 
     public int getRed() {

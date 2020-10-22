@@ -126,6 +126,7 @@ public enum RzKey {
     RZKEY_KOR_6(0x0509),
     RZKEY_KOR_7(0x050A);
 
+    private static final int BIT_MASK = 0xFF;
     private final int rzSDKKey;
 
     RzKey(int rzSDKKey) {
@@ -137,6 +138,6 @@ public enum RzKey {
     }
 
     public int getCustomPosition() {
-        return (getRzSDKKey() & 0xFF) + (getRzSDKKey() >> 8) * CustomKeyboardEffect.COLUMN_COUNT;
+        return (rzSDKKey & BIT_MASK) + (rzSDKKey >> 8) * CustomKeyboardEffect.COLUMN_COUNT;
     }
 }

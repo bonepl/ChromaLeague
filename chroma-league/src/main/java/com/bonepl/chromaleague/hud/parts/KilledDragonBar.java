@@ -3,7 +3,7 @@ package com.bonepl.chromaleague.hud.parts;
 import com.bonepl.chromaleague.GameStateHelper;
 import com.bonepl.chromaleague.hud.DragonType;
 import com.bonepl.razersdk.animation.Color;
-import com.bonepl.razersdk.animation.Frame;
+import com.bonepl.razersdk.animation.SimpleFrame;
 import com.bonepl.razersdk.sdk.RzKey;
 
 import java.util.Arrays;
@@ -13,7 +13,7 @@ import java.util.Optional;
 
 import static com.bonepl.razersdk.sdk.RzKey.*;
 
-public class KilledDragonBar extends Frame {
+public class KilledDragonBar extends SimpleFrame {
     public static final List<RzKey> FIRST_DRAGON_ROW = Arrays.asList(RZKEY_FN, RZKEY_RMENU, RZKEY_RCTRL);
     public static final RzKey SECOND_DRAGON_ROW = RZKEY_RSHIFT;
     public static final RzKey THIRD_DRAGON_ROW = RZKEY_ENTER;

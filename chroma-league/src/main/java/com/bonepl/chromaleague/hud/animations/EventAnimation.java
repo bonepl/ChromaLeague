@@ -5,26 +5,25 @@ import com.bonepl.razersdk.animation.Frame;
 import com.bonepl.razersdk.animation.IFrame;
 
 public class EventAnimation extends AnimatedFrame {
+    private static final AnimatedFrame ANIMATED_FRAME = new AnimatedFrame();
 
-    private static final AnimatedFrame animatedFrame = new AnimatedFrame();
-
-    public synchronized static void addFrames(IFrame frame) {
+    public static void addFrames(IFrame frame) {
         while (frame.hasFrame()) {
-            animatedFrame.withAnimationFrame(frame.getFrame());
+            ANIMATED_FRAME.withAnimationFrame(frame);
         }
     }
 
     @Override
-    public synchronized boolean hasFrame() {
-        return animatedFrame.hasFrame();
+    public boolean hasFrame() {
+        return ANIMATED_FRAME.hasFrame();
     }
 
     @Override
-    public synchronized Frame getFrame() {
-        return animatedFrame.getFrame();
+    public Frame getFrame() {
+        return ANIMATED_FRAME.getFrame();
     }
 
     public static void stop() {
-        animatedFrame.getFrames().clear();
+        ANIMATED_FRAME.clearFrames();
     }
 }

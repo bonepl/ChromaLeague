@@ -5,6 +5,7 @@ import com.bonepl.chromaleague.hud.PredefinedKeySets;
 import com.bonepl.razersdk.animation.AnimatedFrame;
 import com.bonepl.razersdk.animation.Color;
 import com.bonepl.razersdk.animation.Frame;
+import com.bonepl.razersdk.animation.SimpleFrame;
 import com.bonepl.razersdk.sdk.RzKey;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class BaronBuffBackgroundAnimation extends AnimatedFrame {
 
     private void extendAnimation() {
         for (int i = 0; i < 20; i++) {
-            withAnimationFrame(2, new Frame(baronArea, baronBuffColor.getNextColor()));
+            withAnimationFrame(2, new SimpleFrame(baronArea, baronBuffColor.getNextColor()));
         }
     }
 

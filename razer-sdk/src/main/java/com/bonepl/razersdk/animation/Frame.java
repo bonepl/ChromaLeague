@@ -3,49 +3,22 @@ package com.bonepl.razersdk.animation;
 import com.bonepl.razersdk.sdk.CustomKeyboardEffect;
 import com.bonepl.razersdk.sdk.RzKey;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.EnumMap;
-import java.util.List;
+import java.util.Map;
 
-public class Frame implements IFrame {
-    private final EnumMap<RzKey, Color> keysToColors = new EnumMap<>(RzKey.class);
-    private boolean hasFrame = true;
+public class Frame {
+    private final Map<RzKey, Color> keysToColors = new EnumMap<>(RzKey.class);
 
-    public Frame() {
-    }
-
-    public Frame(Color color) {
-        Arrays.stream(RzKey.values()).forEach(rzKey -> keysToColors.put(rzKey, color));
-    }
-
-    public Frame(RzKey rzKey, Color color) {
-        keysToColors.put(rzKey, color);
-    }
-
-    public Frame(List<RzKey> rzKeys, Color color) {
-        rzKeys.forEach(rzKey -> keysToColors.put(rzKey, color));
-    }
-
-    public Frame(EnumMap<RzKey, Color> keysToColors) {
+    public Frame(Map<RzKey, Color> keysToColors) {
         this.keysToColors.putAll(keysToColors);
     }
 
-    public EnumMap<RzKey, Color> getKeysToColors() {
-        return keysToColors;
+    public Map<RzKey, Color> getKeysToColors() {
+        return Collections.unmodifiableMap(keysToColors);
     }
 
     public CustomKeyboardEffect toCustomEffect() {
         return new CustomKeyboardEffect(getKeysToColors());
-    }
-
-    @Override
-    public boolean hasFrame() {
-        return hasFrame;
-    }
-
-    @Override
-    public Frame getFrame() {
-        hasFrame = false;
-        return this;
     }
 }

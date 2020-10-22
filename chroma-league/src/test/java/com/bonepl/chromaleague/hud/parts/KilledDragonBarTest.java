@@ -23,7 +23,6 @@ class KilledDragonBarTest {
                 EventProcessor.processEventForCustomData(testDrakesOrder.poll());
                 Thread.sleep(500);
             }
-            Thread.sleep(5000);
         }
     }
 }

@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
+import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
@@ -26,6 +27,21 @@ class EventProcessorTest {
     @AfterAll
     static void afterAll() {
         razerSDKClient.close();
+    }
+
+    @Test
+    void testActivePLayerKill() {
+        //given
+        final String player = "BooonE";
+        GameState.setActivePlayerName(player);
+        final Event mock = mock(Event.class);
+        when(mock.getEventName()).thenReturn("ChampionKill");
+        when(mock.getKillerName()).thenReturn(player);
+        GameState.addUnprocessedEvents(List.of(mock));
+
+        //then
+        EventProcessor.processEvents();
+        runEventAnimation();
     }
 
     @Test

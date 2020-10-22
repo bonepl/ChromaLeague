@@ -52,7 +52,7 @@ public class EventProcessor {
             customData.setElderBuffEnd(null);
             customData.setBaronBuffEnd(null);
             customData.setActivePlayerKillingSpree(0);
-        } else if (eventType == ACTIVE_PLAYER_KILLED) {
+        } else if (eventType == ACTIVE_PLAYER_KILL) {
             GameStateHelper.addPlayerKill();
         }
     }
@@ -80,7 +80,7 @@ public class EventProcessor {
             case ENEMY_ELDER_DRAGON_KILL -> new EnemyElderDragonKillAnimation();
             case GAME_END_VICTORY -> new WinAnimation();
             case GAME_END_DEFEAT -> new LoseAnimation();
-            case ACTIVE_PLAYER_KILLED -> new ActivePlayerKillAnimation();
+            case ACTIVE_PLAYER_KILL -> new ActivePlayerKillAnimation();
             case ACTIVE_PLAYER_DIED, UNSUPPORTED -> new SimpleFrame();
         };
     }

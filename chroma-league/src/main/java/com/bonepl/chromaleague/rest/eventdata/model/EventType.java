@@ -26,7 +26,7 @@ public enum EventType {
     GAME_END_VICTORY,
     GAME_END_DEFEAT,
     ACTIVE_PLAYER_DIED,
-    ACTIVE_PLAYER_KILLED;
+    ACTIVE_PLAYER_KILL;
 
     public static EventType fromEvent(Event event) {
         if (event != null) {
@@ -35,7 +35,7 @@ public enum EventType {
                 if (activePlayerName.equals(event.getVictimName())) {
                     return ACTIVE_PLAYER_DIED;
                 } else if (activePlayerName.equals(event.getKillerName())) {
-                    return ACTIVE_PLAYER_KILLED;
+                    return ACTIVE_PLAYER_KILL;
                 }
             }
 

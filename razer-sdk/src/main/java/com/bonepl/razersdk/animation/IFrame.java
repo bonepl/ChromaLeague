@@ -5,6 +5,8 @@ package com.bonepl.razersdk.animation;
  */
 public interface IFrame {
     /**
+     * Check if frame is available
+     *
      * @return true if object has an animation frame to draw
      */
     boolean hasFrame();

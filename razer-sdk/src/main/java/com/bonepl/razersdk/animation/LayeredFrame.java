@@ -10,6 +10,8 @@ import java.util.NoSuchElementException;
  * Class used to simulate layering of multiple {@link Frame} classes to create one {@link SimpleFrame} to return.
  * Newest frame always overwrites previous ones. Keys with color {@link Color#NONE}
  * are treated as transparent.
+ * <br><br>
+ * New object without any added frames is similar to {@link SimpleFrame} - there is an empty frame by default.
  */
 public class LayeredFrame implements IFrame {
     private final Map<RzKey, Color> keysToColors = new EnumMap<>(RzKey.class);
@@ -28,6 +30,8 @@ public class LayeredFrame implements IFrame {
     }
 
     /**
+     * Check if frame is available
+     *
      * @return true if {@link #getFrame} hasn't been called yet,
      * false otherwise
      */
@@ -37,6 +41,8 @@ public class LayeredFrame implements IFrame {
     }
 
     /**
+     * Return the frame
+     *
      * @return the single {@link Frame}
      */
     @Override

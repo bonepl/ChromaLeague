@@ -52,6 +52,8 @@ public class Animation implements IFrame {
     }
 
     /**
+     * Check if frame is available
+     *
      * @return true if there is at least one {@link Frame} in the animation sequence,
      * false otherwise
      */

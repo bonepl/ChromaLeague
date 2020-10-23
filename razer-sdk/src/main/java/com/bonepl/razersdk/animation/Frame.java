@@ -13,15 +13,27 @@ import java.util.Map;
 public class Frame {
     private final Map<RzKey, Color> keysToColors = new EnumMap<>(RzKey.class);
 
+    /**
+     * Create a frame from provided keys to colors map
+     *
+     * @param keysToColors map of keys to colors
+     */
     public Frame(Map<RzKey, Color> keysToColors) {
         this.keysToColors.putAll(keysToColors);
     }
 
+    /**
+     * Return the underlying map of keys to colors
+     *
+     * @return map of keys to colors
+     */
     public Map<RzKey, Color> getKeysToColors() {
         return Collections.unmodifiableMap(keysToColors);
     }
 
     /**
+     * Transform this class to {@link CustomKeyboardEffect} C++ object required for creating animation effect
+     *
      * @return Razer Chroma SDK C++ {@link CustomKeyboardEffect} class
      */
     public CustomKeyboardEffect toCustomEffect() {

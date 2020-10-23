@@ -34,6 +34,9 @@ public class RazerSDKClient implements AutoCloseable {
     private static final Logger LOGGER = LogManager.getLogger();
     private final RzChromaSDK64 rzChromaSDK64;
 
+    /**
+     * Create and initialize connection to Chroma-enabled Razer device
+     */
     public RazerSDKClient() {
         rzChromaSDK64 = Native.load("RzChromaSDK64", RzChromaSDK64.class);
         init();
@@ -73,7 +76,7 @@ public class RazerSDKClient implements AutoCloseable {
     }
 
     /**
-     * Close and disconnect Razer device
+     * Close and disconnect Chroma-enabled Razer device
      */
     @Override
     public void close() {

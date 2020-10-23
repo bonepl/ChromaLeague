@@ -39,6 +39,8 @@ public class AnimatedFrame implements IFrame {
     }
 
     /**
+     * Check if frame is available
+     *
      * @return true if there are still frames in the animation sequence,
      * false otherwise
      */
@@ -48,6 +50,8 @@ public class AnimatedFrame implements IFrame {
     }
 
     /**
+     * Return the frame
+     *
      * @return next {@link Frame} of the animation
      * @throws NoSuchElementException when there is no frames available
      */

@@ -56,6 +56,8 @@ public class SimpleFrame implements IFrame {
     }
 
     /**
+     * Check if frame is available
+     *
      * @return true if {@link #getFrame} hasn't been called yet,
      * false otherwise
      */
@@ -65,6 +67,8 @@ public class SimpleFrame implements IFrame {
     }
 
     /**
+     * Return the frame
+     *
      * @return the single {@link Frame}
      * @throws NoSuchElementException when there is no frames available
      */

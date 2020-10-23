@@ -1,7 +1,7 @@
 package com.bonepl.chromaleague.hud.parts;
 
 import com.bonepl.chromaleague.GameStateHelper;
-import com.bonepl.chromaleague.hud.BreathingColor;
+import com.bonepl.chromaleague.hud.colors.BreathingColor;
 import com.bonepl.chromaleague.hud.animations.BaronBuffBackgroundAnimation;
 import com.bonepl.razersdk.animation.AnimatedFrame;
 import com.bonepl.razersdk.animation.Color;

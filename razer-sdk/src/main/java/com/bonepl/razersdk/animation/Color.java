@@ -6,14 +6,12 @@ public class Color {
     public static final Color WHITE = new Color(255, 255, 255);
     public static final Color RED = new Color(255, 0, 0);
     public static final Color GREEN = new Color(0, 255, 0);
-    public static final Color AIR = new Color(120, 150, 150);
     public static final Color BLUE = new Color(0, 0, 255);
     public static final Color BLACK = new Color(0, 0, 0);
     public static final Color YELLOW = new Color(255, 255, 0);
     public static final Color CYAN = new Color(0, 255, 255);
-    public static final Color OCEAN = new Color(0, 210, 70);
     public static final Color BROWN = new Color(130, 50, 0);
-    public static final Color PURPLE = new Color(238, 130, 238);
+    public static final Color PURPLE = new Color(200, 0, 200);
     public static final Color ORANGE = new Color(255, 165, 0);
 
     private static final int BLUE_BIT_POS = 16;

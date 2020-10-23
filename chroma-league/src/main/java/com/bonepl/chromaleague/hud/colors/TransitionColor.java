@@ -1,4 +1,4 @@
-package com.bonepl.chromaleague.hud;
+package com.bonepl.chromaleague.hud.colors;
 
 import com.bonepl.razersdk.animation.Color;
 

@@ -1,7 +1,7 @@
 package com.bonepl.chromaleague.hud.animations;
 
 import com.bonepl.chromaleague.GameStateHelper;
-import com.bonepl.chromaleague.hud.DragonType;
+import com.bonepl.chromaleague.rest.eventdata.model.DragonType;
 import com.bonepl.razersdk.RazerSDKClient;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;

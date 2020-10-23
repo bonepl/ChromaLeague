@@ -1,7 +1,7 @@
 package com.bonepl.chromaleague.hud.parts;
 
 import com.bonepl.chromaleague.GameStateHelper;
-import com.bonepl.chromaleague.hud.DragonType;
+import com.bonepl.chromaleague.rest.eventdata.model.DragonType;
 import com.bonepl.razersdk.animation.Color;
 import com.bonepl.razersdk.animation.SimpleFrame;
 import com.bonepl.razersdk.sdk.RzKey;

@@ -1,7 +1,6 @@
 package com.bonepl.chromaleague.rest.eventdata.model;
 
 import com.bonepl.chromaleague.GameState;
-import com.bonepl.chromaleague.hud.DragonType;
 
 import java.util.Objects;
 

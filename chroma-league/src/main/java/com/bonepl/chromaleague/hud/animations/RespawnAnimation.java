@@ -1,8 +1,8 @@
 package com.bonepl.chromaleague.hud.animations;
 
 import com.bonepl.chromaleague.GameStateHelper;
-import com.bonepl.chromaleague.hud.BreathingColor;
-import com.bonepl.chromaleague.hud.TransitionColor;
+import com.bonepl.chromaleague.hud.colors.BreathingColor;
+import com.bonepl.chromaleague.hud.colors.TransitionColor;
 import com.bonepl.chromaleague.hud.parts.Background;
 import com.bonepl.chromaleague.hud.parts.HpBar;
 import com.bonepl.chromaleague.hud.parts.ResourceBar;

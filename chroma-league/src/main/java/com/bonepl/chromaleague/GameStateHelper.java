@@ -1,6 +1,6 @@
 package com.bonepl.chromaleague;
 
-import com.bonepl.chromaleague.hud.DragonType;
+import com.bonepl.chromaleague.rest.eventdata.model.DragonType;
 import com.bonepl.chromaleague.hud.parts.GoldBar;
 import com.bonepl.chromaleague.rest.CustomData;
 import com.bonepl.chromaleague.rest.activeplayer.model.ChampionStats;

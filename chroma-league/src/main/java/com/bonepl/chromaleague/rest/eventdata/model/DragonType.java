@@ -1,18 +1,19 @@
-package com.bonepl.chromaleague.hud;
+package com.bonepl.chromaleague.rest.eventdata.model;
 
+import com.bonepl.chromaleague.hud.colors.CLColor;
 import com.bonepl.razersdk.animation.Color;
 
 import java.util.Objects;
 
 public enum DragonType {
-    CLOUD("Air", Color.AIR),
+    CLOUD("Air", CLColor.AIR),
     ELDER("Elder", Color.WHITE),
     INFERNAL("Fire", Color.RED),
     MOUNTAIN("Earth", Color.BROWN),
-    OCEAN("Water", Color.OCEAN);
+    OCEAN("Water", CLColor.OCEAN);
 
-    private String apiType;
-    private Color color;
+    private final String apiType;
+    private final Color color;
 
     DragonType(String apiType, Color color) {
         this.apiType = apiType;

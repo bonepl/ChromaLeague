@@ -12,6 +12,7 @@ import java.util.*;
 public class CustomKeyboardEffect extends Structure {
     public static final int ROW_COUNT = 6;
     public static final int COLUMN_COUNT = 22;
+    @SuppressWarnings("PublicField")
     public int[] colors = new int[ROW_COUNT * COLUMN_COUNT];
 
     public CustomKeyboardEffect() {
@@ -20,7 +21,7 @@ public class CustomKeyboardEffect extends Structure {
 
     public CustomKeyboardEffect(final Map<RzKey, Color> keysToColors) {
         this();
-        keysToColors.forEach((r, c) -> colors[r.getCustomPosition()] = c.getSDKColorRef());
+        keysToColors.forEach((rzKey, color) -> colors[rzKey.getCustomPosition()] = color.getSDKColorRef());
     }
 
     public Pointer getEffect() {

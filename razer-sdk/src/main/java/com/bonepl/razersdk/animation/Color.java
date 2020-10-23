@@ -18,8 +18,11 @@ public class Color {
     public static final Color PURPLE = new Color(200, 0, 200);
     public static final Color ORANGE = new Color(255, 165, 0);
 
-    private static final int BLUE_BIT_POS = 16;
+    public static final int MIN_COLOR_VALUE = 0;
+    public static final int MAX_COLOR_VALUE = 255;
+
     private static final int GREEN_BIT_POS = 8;
+    private static final int BLUE_BIT_POS = 16;
 
     private final int red;
     private final int green;
@@ -39,8 +42,8 @@ public class Color {
         this.blue = validatedColorRange("blue", blue);
     }
 
-    private int validatedColorRange(String colorName, int value) {
-        if (value < 0 || value > 255) {
+    private static int validatedColorRange(String colorName, int value) {
+        if (value < MIN_COLOR_VALUE || value > MAX_COLOR_VALUE) {
             throw new IllegalArgumentException(
                     String.format("%s value of provided color is out of range (expected: 0-255, actual: %d)",
                             colorName, value));

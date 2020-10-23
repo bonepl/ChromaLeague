@@ -101,7 +101,7 @@ class AnimatedFrameTest {
         assertThrows(NoSuchElementException.class, animatedFrame::getFrame);
     }
 
-    private void assertHasFrameAndMatches(AnimatedFrame animatedFrame, Color expectedColor) {
+    private static void assertHasFrameAndMatches(AnimatedFrame animatedFrame, Color expectedColor) {
         assertTrue(animatedFrame.hasFrame());
         assertTrue(animatedFrame.getFrame().getKeysToColors().values()
                 .stream().allMatch(color -> color == expectedColor));

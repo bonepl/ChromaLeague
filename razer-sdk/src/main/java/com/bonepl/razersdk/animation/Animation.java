@@ -61,8 +61,8 @@ public class Animation implements IFrame {
     }
 
     /**
-     * Create and return {@link LayeredFrame} by calling {@link IFrame#getFrame()}
-     * on all objects in animation sequence.
+     * Create and return {@link LayeredFrame} by getting frames
+     * from all objects available in animation sequence.
      *
      * @return {@link LayeredFrame} built from animation sequence
      * @throws NoSuchElementException when there is no frames available

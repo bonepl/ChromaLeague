@@ -31,6 +31,7 @@ public class Color {
      * @param red   red color (0-255)
      * @param green green color (0-255)
      * @param blue  blue color (0-255)
+     * @throws IllegalArgumentException if color value is out of accepted range
      */
     public Color(int red, int green, int blue) {
         this.red = validatedColorRange("red", red);

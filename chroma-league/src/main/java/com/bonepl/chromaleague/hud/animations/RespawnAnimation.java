@@ -15,7 +15,7 @@ import com.bonepl.razersdk.sdk.RzKey;
 import java.util.List;
 
 public class RespawnAnimation extends AnimatedFrame {
-    private final List<RzKey> glowArea = BaronBuffBackgroundAnimation.buildBaronArea();
+    private static final List<RzKey> GLOW_AREA = BaronBuffBackgroundAnimation.buildBaronArea();
 
     public RespawnAnimation() {
         BreathingColor glowAreaColor = new BreathingColor(Color.YELLOW);
@@ -23,7 +23,7 @@ public class RespawnAnimation extends AnimatedFrame {
 
         for (int i = 0; i < 20; i++) {
             final LayeredFrame layeredFrame = new LayeredFrame();
-            layeredFrame.addFrame(new SimpleFrame(glowArea, glowAreaColor.getNextColor()));
+            layeredFrame.addFrame(new SimpleFrame(GLOW_AREA, glowAreaColor.getNextColor()));
             layeredFrame.addFrame(new SimpleFrame(HpBar.HP_BAR_KEYS, Background.BACKGROUND_COLOR));
             layeredFrame.addFrame(new SimpleFrame(ResourceBar.RESOURCE_BAR_KEYS, Background.BACKGROUND_COLOR));
             addAnimationFrame(layeredFrame);
@@ -31,7 +31,7 @@ public class RespawnAnimation extends AnimatedFrame {
 
         for (int i = 0; i < 20; i++) {
             final LayeredFrame layeredFrame = new LayeredFrame();
-            layeredFrame.addFrame(new SimpleFrame(glowArea, glowAreaColor.getNextColor()));
+            layeredFrame.addFrame(new SimpleFrame(GLOW_AREA, glowAreaColor.getNextColor()));
             final Color buttonsNextColor = buttonsColor.getNextColor();
             layeredFrame.addFrame(new SimpleFrame(HpBar.HP_BAR_KEYS, buttonsNextColor));
             layeredFrame.addFrame(new SimpleFrame(ResourceBar.RESOURCE_BAR_KEYS, buttonsNextColor));

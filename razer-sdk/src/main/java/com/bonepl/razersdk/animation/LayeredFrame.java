@@ -4,6 +4,7 @@ import com.bonepl.razersdk.sdk.RzKey;
 
 import java.util.EnumMap;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 /**
  * Class used to simulate layering of multiple {@link Frame} classes to create one {@link SimpleFrame} to return.
@@ -40,7 +41,11 @@ public class LayeredFrame implements IFrame {
      */
     @Override
     public Frame getFrame() {
-        hasFrame = false;
-        return new Frame(keysToColors);
+        if (hasFrame) {
+            hasFrame = false;
+            return new Frame(keysToColors);
+        } else {
+            throw new NoSuchElementException("LayeredFrame does not have any frames to return");
+        }
     }
 }

@@ -1,6 +1,7 @@
 package com.bonepl.razersdk.animation;
 
 import java.util.LinkedList;
+import java.util.NoSuchElementException;
 import java.util.Queue;
 import java.util.stream.IntStream;
 
@@ -31,10 +32,10 @@ public class AnimatedFrame implements IFrame {
      * @param frame      frame to be added to animation sequence
      */
     public void addAnimationFrame(int frameCount, IFrame frame) {
-        if (frameCount < 1) {
-            throw new IllegalArgumentException("AnimationFrame requires at least 1 frameCount, was " + frameCount);
+        if (frameCount > 0) {
+            final Frame animationFrame = frame.getFrame();
+            IntStream.range(0, frameCount).forEach(i -> frames.offer(animationFrame));
         }
-        IntStream.range(0, frameCount).forEach(i -> frames.offer(frame.getFrame()));
     }
 
     /**
@@ -48,10 +49,15 @@ public class AnimatedFrame implements IFrame {
 
     /**
      * @return next {@link Frame} of the animation
+     * @throws NoSuchElementException when there is no frames available
      */
     @Override
     public Frame getFrame() {
-        return frames.remove();
+        if (hasFrame()) {
+            return frames.remove();
+        } else {
+            throw new NoSuchElementException("AnimatedFrame does not have any frames to return");
+        }
     }
 
     /**

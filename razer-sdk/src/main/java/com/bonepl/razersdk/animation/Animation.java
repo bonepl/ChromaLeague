@@ -2,6 +2,7 @@ package com.bonepl.razersdk.animation;
 
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.NoSuchElementException;
 import java.util.Queue;
 
 /**
@@ -64,13 +65,18 @@ public class Animation implements IFrame {
      * on all objects in animation sequence.
      *
      * @return {@link LayeredFrame} built from animation sequence
+     * @throws NoSuchElementException when there is no frames available
      */
     @Override
     public Frame getFrame() {
-        final LayeredFrame layeredFrame = new LayeredFrame();
-        frames.stream().map(Queue::remove).forEach(layeredFrame::addFrame);
-        frames.removeIf(Queue::isEmpty);
-        return layeredFrame.getFrame();
+        if (hasFrame()) {
+            final LayeredFrame layeredFrame = new LayeredFrame();
+            frames.stream().map(Queue::remove).forEach(layeredFrame::addFrame);
+            frames.removeIf(Queue::isEmpty);
+            return layeredFrame.getFrame();
+        } else {
+            throw new NoSuchElementException("Animation does not have any frames to return");
+        }
     }
 
     private static Queue<SimpleFrame> convertToSimpleFrames(IFrame frame) {

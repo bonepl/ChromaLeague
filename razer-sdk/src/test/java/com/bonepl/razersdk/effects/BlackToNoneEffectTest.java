@@ -47,7 +47,7 @@ public class BlackToNoneEffectTest {
 
     private static AnimatedFrame createMovingBlackPixel(Color color) {
         AnimatedFrame movingBlackPixel = new AnimatedFrame();
-        FIRST_LETTERS.forEach(rzKey -> movingBlackPixel.withAnimationFrame(2, new SimpleFrame(rzKey, color)));
+        FIRST_LETTERS.forEach(rzKey -> movingBlackPixel.addAnimationFrame(2, new SimpleFrame(rzKey, color)));
         return movingBlackPixel;
     }
 }

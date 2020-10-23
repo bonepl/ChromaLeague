@@ -25,7 +25,7 @@ public class BaronBuffBackgroundAnimation extends AnimatedFrame {
 
     private void extendAnimation() {
         for (int i = 0; i < 20; i++) {
-            withAnimationFrame(2, new SimpleFrame(baronArea, baronBuffColor.getNextColor()));
+            addAnimationFrame(2, new SimpleFrame(baronArea, baronBuffColor.getNextColor()));
         }
     }
 

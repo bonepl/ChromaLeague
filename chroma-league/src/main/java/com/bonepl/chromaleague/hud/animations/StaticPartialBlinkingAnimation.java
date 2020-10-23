@@ -11,8 +11,8 @@ public class StaticPartialBlinkingAnimation extends AnimatedFrame {
 
     public StaticPartialBlinkingAnimation(List<RzKey> rzKeys, int times, Color color) {
         for (int i = 0; i < times; i++) {
-            withAnimationFrame(new SimpleFrame(rzKeys, color));
-            withAnimationFrame(3, new SimpleFrame(rzKeys, Color.BLACK));
+            addAnimationFrame(new SimpleFrame(rzKeys, color));
+            addAnimationFrame(3, new SimpleFrame(rzKeys, Color.BLACK));
         }
     }
 }

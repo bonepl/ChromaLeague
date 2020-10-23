@@ -1,5 +1,8 @@
 package com.bonepl.razersdk.sdk;
 
+/**
+ * Razer Chroma SDK C++ keys mapping
+ */
 public enum RzKey {
 
     RZKEY_ESC(0x0001),

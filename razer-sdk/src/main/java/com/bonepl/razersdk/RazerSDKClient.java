@@ -1,9 +1,7 @@
 package com.bonepl.razersdk;
 
 import com.bonepl.razersdk.animation.IFrame;
-import com.bonepl.razersdk.sdk.CustomKeyboardEffect;
 import com.bonepl.razersdk.sdk.RzChromaSDK64;
-import com.bonepl.razersdk.sdk.RzKeyboardEffectType;
 import com.sun.jna.Native;
 import com.sun.jna.Pointer;
 import org.apache.logging.log4j.LogManager;
@@ -20,7 +18,7 @@ public class RazerSDKClient implements AutoCloseable {
 
     /**
      * Initialization requires about 1s before accepting effect
-     * or it drops frames (?)
+     * or it drops first frames of animation
      */
     private void init() {
         final int initReturnCode = rzChromaSDK64.Init();
@@ -33,13 +31,7 @@ public class RazerSDKClient implements AutoCloseable {
     }
 
     public void createKeyboardEffect(IFrame frame) {
-        createKeyboardEffect(frame.getFrame().toCustomEffect());
-    }
-
-    private void createKeyboardEffect(CustomKeyboardEffect effect) {
-        int result = rzChromaSDK64.CreateKeyboardEffect(
-                RzKeyboardEffectType.CUSTOM.getRzSDKKeyboardEffectType(),
-                effect.getEffect(), Pointer.NULL);
+        int result = rzChromaSDK64.CreateKeyboardEffect(2, frame.getFrame().toCustomEffect().getEffect(), Pointer.NULL);
         if (result != 0) {
             LOGGER.error("Creating keyboard effect returned error {}", result);
         }
@@ -49,8 +41,7 @@ public class RazerSDKClient implements AutoCloseable {
     public void close() {
         final int unInitReturnCode = rzChromaSDK64.UnInit();
         if (unInitReturnCode != 0) {
-            LOGGER.error("Error during uninitialization of RazerSDKClient, returned code {}",
-                    unInitReturnCode);
+            LOGGER.error("Error during un-initialization of RazerSDKClient, returned code {}", unInitReturnCode);
         }
     }
 }

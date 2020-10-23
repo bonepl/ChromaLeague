@@ -8,8 +8,8 @@ public class StaticBlinkingAnimation extends AnimatedFrame {
 
     public StaticBlinkingAnimation(int times, Color color) {
         for (int i = 0; i < times; i++) {
-            withAnimationFrame(new SimpleFrame(color));
-            withAnimationFrame(3, new SimpleFrame(Color.BLACK));
+            addAnimationFrame(new SimpleFrame(color));
+            addAnimationFrame(3, new SimpleFrame(Color.BLACK));
         }
     }
 }

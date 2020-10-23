@@ -59,7 +59,7 @@ public class GoldAnimation extends Animation {
 
     private AnimatedFrame fallingCoin(List<RzKey> rzKeys) {
         final AnimatedFrame animatedFrames = new AnimatedFrame();
-        rzKeys.forEach(rzKey -> animatedFrames.withAnimationFrame(new SimpleFrame(rzKey, Color.YELLOW)));
+        rzKeys.forEach(rzKey -> animatedFrames.addAnimationFrame(new SimpleFrame(rzKey, Color.YELLOW)));
         return animatedFrames;
     }
 

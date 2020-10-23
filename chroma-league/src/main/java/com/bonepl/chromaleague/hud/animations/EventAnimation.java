@@ -9,7 +9,7 @@ public class EventAnimation extends AnimatedFrame {
 
     public static void addFrames(IFrame frame) {
         while (frame.hasFrame()) {
-            ANIMATED_FRAME.withAnimationFrame(frame);
+            ANIMATED_FRAME.addAnimationFrame(frame);
         }
     }
 

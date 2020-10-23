@@ -19,16 +19,16 @@ public class LoseAnimation extends Animation {
     private static AnimatedFrame createDownMovingFrame(int delay, Color color) {
         final AnimatedFrame animatedFrame = new AnimatedFrame();
         if (delay > 0) {
-            animatedFrame.withAnimationFrame(delay * 13, new SimpleFrame());
+            animatedFrame.addAnimationFrame(delay * 13, new SimpleFrame());
         }
-        animatedFrame.withAnimationFrame(3, new SimpleFrame(BLACKWIDOW_FIRST_ROW, color));
-        animatedFrame.withAnimationFrame(3, new SimpleFrame(sum(BLACKWIDOW_SECOND_ROW, BLACKWIDOW_FIRST_ROW), color));
-        animatedFrame.withAnimationFrame(3, new SimpleFrame(sum(sum(BLACKWIDOW_THIRD_ROW, BLACKWIDOW_SECOND_ROW), BLACKWIDOW_FIRST_ROW), color));
-        animatedFrame.withAnimationFrame(3, new SimpleFrame(sum(sum(BLACKWIDOW_FOURTH_ROW, BLACKWIDOW_THIRD_ROW), BLACKWIDOW_SECOND_ROW), color));
-        animatedFrame.withAnimationFrame(3, new SimpleFrame(sum(sum(BLACKWIDOW_FIFTH_ROW, BLACKWIDOW_FOURTH_ROW), BLACKWIDOW_THIRD_ROW), color));
-        animatedFrame.withAnimationFrame(3, new SimpleFrame(sum(sum(BLACKWIDOW_SIXTH_ROW, BLACKWIDOW_FIFTH_ROW), BLACKWIDOW_FOURTH_ROW), color));
-        animatedFrame.withAnimationFrame(3, new SimpleFrame(sum(BLACKWIDOW_SIXTH_ROW, BLACKWIDOW_FIFTH_ROW), color));
-        animatedFrame.withAnimationFrame(3, new SimpleFrame(BLACKWIDOW_SIXTH_ROW, color));
+        animatedFrame.addAnimationFrame(3, new SimpleFrame(BLACKWIDOW_FIRST_ROW, color));
+        animatedFrame.addAnimationFrame(3, new SimpleFrame(sum(BLACKWIDOW_SECOND_ROW, BLACKWIDOW_FIRST_ROW), color));
+        animatedFrame.addAnimationFrame(3, new SimpleFrame(sum(sum(BLACKWIDOW_THIRD_ROW, BLACKWIDOW_SECOND_ROW), BLACKWIDOW_FIRST_ROW), color));
+        animatedFrame.addAnimationFrame(3, new SimpleFrame(sum(sum(BLACKWIDOW_FOURTH_ROW, BLACKWIDOW_THIRD_ROW), BLACKWIDOW_SECOND_ROW), color));
+        animatedFrame.addAnimationFrame(3, new SimpleFrame(sum(sum(BLACKWIDOW_FIFTH_ROW, BLACKWIDOW_FOURTH_ROW), BLACKWIDOW_THIRD_ROW), color));
+        animatedFrame.addAnimationFrame(3, new SimpleFrame(sum(sum(BLACKWIDOW_SIXTH_ROW, BLACKWIDOW_FIFTH_ROW), BLACKWIDOW_FOURTH_ROW), color));
+        animatedFrame.addAnimationFrame(3, new SimpleFrame(sum(BLACKWIDOW_SIXTH_ROW, BLACKWIDOW_FIFTH_ROW), color));
+        animatedFrame.addAnimationFrame(3, new SimpleFrame(BLACKWIDOW_SIXTH_ROW, color));
         return animatedFrame;
     }
 

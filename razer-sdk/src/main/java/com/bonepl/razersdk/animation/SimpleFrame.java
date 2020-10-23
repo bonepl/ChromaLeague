@@ -2,39 +2,67 @@ package com.bonepl.razersdk.animation;
 
 import com.bonepl.razersdk.sdk.RzKey;
 
-import java.util.Arrays;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
+/**
+ * Single animation frame with one {@link Frame}
+ */
 public class SimpleFrame implements IFrame {
     private final Map<RzKey, Color> keysToColors = new EnumMap<>(RzKey.class);
     private boolean hasFrame = true;
 
+    /**
+     * Create an empty frame
+     */
     public SimpleFrame() {
     }
 
+    /**
+     * Create a frame with all keys in the same color
+     * @param color {@link Color} of the fill
+     */
     public SimpleFrame(Color color) {
         Arrays.stream(RzKey.values()).forEach(rzKey -> keysToColors.put(rzKey, color));
     }
 
+    /**
+     * Create a frame with one key in provided color
+     * @param rzKey {@link RzKey} to color
+     * @param color {@link Color} of the fill
+     */
     public SimpleFrame(RzKey rzKey, Color color) {
         keysToColors.put(rzKey, color);
     }
 
-    public SimpleFrame(List<RzKey> rzKeys, Color color) {
+    /**
+     * Create a frame with all provided keys in the same color
+     * @param rzKeys collection of {@link RzKey} to color
+     * @param color {@link Color} of the fill
+     */
+    public SimpleFrame(Collection<RzKey> rzKeys, Color color) {
         rzKeys.forEach(rzKey -> keysToColors.put(rzKey, color));
     }
 
+    /**
+     * Create a frame from {@link RzKey} to {@link Color} map
+     * @param keysToColors {@link Map} of keys and corresponding fill color
+     */
     public SimpleFrame(Map<RzKey, Color> keysToColors) {
         this.keysToColors.putAll(keysToColors);
     }
 
+    /**
+     * @return true if {@link #getFrame} hasn't been called yet,
+     * false otherwise
+     */
     @Override
     public boolean hasFrame() {
         return hasFrame;
     }
 
+    /**
+     * @return the single {@link Frame}
+     */
     @Override
     public Frame getFrame() {
         hasFrame = false;

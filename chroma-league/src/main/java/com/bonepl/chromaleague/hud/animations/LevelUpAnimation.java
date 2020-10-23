@@ -32,14 +32,14 @@ public class LevelUpAnimation extends Animation {
     }
 
     void levelUp() {
-        final AnimatedFrame frame = new AnimatedFrame()
-                .withAnimationFrame(2, new SimpleFrame(LEVEL_UP_KEYS.subList(0, 3), Color.YELLOW))
-                .withAnimationFrame(2, new SimpleFrame(LEVEL_UP_KEYS.subList(0, 5), Color.YELLOW))
-                .withAnimationFrame(2, new SimpleFrame(LEVEL_UP_KEYS.subList(0, 7), Color.YELLOW))
-                .withAnimationFrame(2, new SimpleFrame(LEVEL_UP_KEYS.subList(3, 9), Color.YELLOW))
-                .withAnimationFrame(2, new SimpleFrame(LEVEL_UP_KEYS.subList(5, 11), Color.YELLOW))
-                .withAnimationFrame(2, new SimpleFrame(LEVEL_UP_KEYS.subList(7, 11), Color.YELLOW))
-                .withAnimationFrame(2, new SimpleFrame(LEVEL_UP_KEYS.subList(9, 11), Color.YELLOW));
+        final AnimatedFrame frame = new AnimatedFrame();
+        frame.addAnimationFrame(2, new SimpleFrame(LEVEL_UP_KEYS.subList(0, 3), Color.YELLOW));
+        frame.addAnimationFrame(2, new SimpleFrame(LEVEL_UP_KEYS.subList(0, 5), Color.YELLOW));
+        frame.addAnimationFrame(2, new SimpleFrame(LEVEL_UP_KEYS.subList(0, 7), Color.YELLOW));
+        frame.addAnimationFrame(2, new SimpleFrame(LEVEL_UP_KEYS.subList(3, 9), Color.YELLOW));
+        frame.addAnimationFrame(2, new SimpleFrame(LEVEL_UP_KEYS.subList(5, 11), Color.YELLOW));
+        frame.addAnimationFrame(2, new SimpleFrame(LEVEL_UP_KEYS.subList(7, 11), Color.YELLOW));
+        frame.addAnimationFrame(2, new SimpleFrame(LEVEL_UP_KEYS.subList(9, 11), Color.YELLOW));
         addToFront(frame);
     }
 }

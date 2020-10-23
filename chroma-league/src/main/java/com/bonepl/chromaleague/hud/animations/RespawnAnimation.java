@@ -26,7 +26,7 @@ public class RespawnAnimation extends AnimatedFrame {
             layeredFrame.addFrame(new SimpleFrame(glowArea, glowAreaColor.getNextColor()));
             layeredFrame.addFrame(new SimpleFrame(HpBar.HP_BAR_KEYS, Background.BACKGROUND_COLOR));
             layeredFrame.addFrame(new SimpleFrame(ResourceBar.RESOURCE_BAR_KEYS, Background.BACKGROUND_COLOR));
-            withAnimationFrame(layeredFrame);
+            addAnimationFrame(layeredFrame);
         }
 
         for (int i = 0; i < 20; i++) {
@@ -35,7 +35,7 @@ public class RespawnAnimation extends AnimatedFrame {
             final Color buttonsNextColor = buttonsColor.getNextColor();
             layeredFrame.addFrame(new SimpleFrame(HpBar.HP_BAR_KEYS, buttonsNextColor));
             layeredFrame.addFrame(new SimpleFrame(ResourceBar.RESOURCE_BAR_KEYS, buttonsNextColor));
-            withAnimationFrame(layeredFrame);
+            addAnimationFrame(layeredFrame);
         }
 
         final TransitionColor toHpColor = new TransitionColor(Color.YELLOW, Color.GREEN, 10);
@@ -51,7 +51,7 @@ public class RespawnAnimation extends AnimatedFrame {
             final LayeredFrame layeredFrame = new LayeredFrame();
             layeredFrame.addFrame(new SimpleFrame(HpBar.HP_BAR_KEYS, toHpColor.getNextColor()));
             layeredFrame.addFrame(new SimpleFrame(ResourceBar.RESOURCE_BAR_KEYS, toManaColor.getNextColor()));
-            withAnimationFrame(layeredFrame);
+            addAnimationFrame(layeredFrame);
         }
     }
 }

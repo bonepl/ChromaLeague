@@ -7,6 +7,9 @@ import java.util.Collections;
 import java.util.EnumMap;
 import java.util.Map;
 
+/**
+ * Frame object containing map of keys to corresponding colors
+ */
 public class Frame {
     private final Map<RzKey, Color> keysToColors = new EnumMap<>(RzKey.class);
 
@@ -18,6 +21,9 @@ public class Frame {
         return Collections.unmodifiableMap(keysToColors);
     }
 
+    /**
+     * @return Razer Chroma SDK C++ {@link CustomKeyboardEffect} class
+     */
     public CustomKeyboardEffect toCustomEffect() {
         return new CustomKeyboardEffect(getKeysToColors());
     }

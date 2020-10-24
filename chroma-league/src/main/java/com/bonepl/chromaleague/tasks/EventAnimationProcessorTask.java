@@ -54,7 +54,6 @@ public class EventAnimationProcessorTask implements Runnable {
     }
 
     public static void addEvents(List<Event> events) {
-        logger.info("Added events for animation: " + Arrays.toString(events.toArray()));
         unprocessedEvents.addAll(events);
     }
 

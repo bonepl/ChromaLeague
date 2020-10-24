@@ -1,4 +1,4 @@
-package com.bonepl.chromaleague.rest;
+package com.bonepl.chromaleague.state;
 
 import com.bonepl.chromaleague.rest.eventdata.DragonType;
 

@@ -1,11 +1,10 @@
 package com.bonepl.chromaleague.tasks;
 
-import com.bonepl.chromaleague.GameState;
+import com.bonepl.chromaleague.state.GameState;
 import com.bonepl.chromaleague.hud.animations.EventAnimation;
 import com.bonepl.chromaleague.rest.activeplayer.ActivePlayer;
 import com.bonepl.chromaleague.rest.eventdata.Event;
 import com.bonepl.chromaleague.rest.playerlist.PlayerList;
-import com.bonepl.chromaleague.tasks.EventAnimationProcessorTask;
 import com.bonepl.razersdk.RazerSDKClient;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;

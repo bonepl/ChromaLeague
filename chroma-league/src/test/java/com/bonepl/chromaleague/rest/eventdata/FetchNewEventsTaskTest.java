@@ -2,7 +2,7 @@ package com.bonepl.chromaleague.rest.eventdata;
 
 import com.bonepl.chromaleague.tasks.EventAnimationProcessorTask;
 import com.bonepl.chromaleague.tasks.EventDataProcessorTask;
-import com.bonepl.chromaleague.GameState;
+import com.bonepl.chromaleague.state.GameState;
 import com.bonepl.chromaleague.rest.LeagueHttpClientMocker;
 import com.bonepl.chromaleague.rest.activeplayer.ActivePlayer;
 import com.bonepl.chromaleague.rest.playerlist.PlayerList;

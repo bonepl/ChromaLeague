@@ -1,10 +1,10 @@
 package com.bonepl.chromaleague.rest.eventdata;
 
-import com.bonepl.chromaleague.GameState;
+import com.bonepl.chromaleague.state.GameState;
 
 import java.util.Objects;
 
-import static com.bonepl.chromaleague.GameState.getPlayerList;
+import static com.bonepl.chromaleague.state.GameState.getPlayerList;
 
 public enum EventType {
     UNSUPPORTED,

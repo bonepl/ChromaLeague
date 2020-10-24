@@ -1,6 +1,6 @@
 package com.bonepl.chromaleague.tasks;
 
-import com.bonepl.chromaleague.GameState;
+import com.bonepl.chromaleague.state.GameState;
 
 import java.net.InetSocketAddress;
 import java.net.Socket;

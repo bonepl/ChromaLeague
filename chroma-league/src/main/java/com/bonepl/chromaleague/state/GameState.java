@@ -1,7 +1,6 @@
-package com.bonepl.chromaleague;
+package com.bonepl.chromaleague.state;
 
 import com.bonepl.chromaleague.hud.animations.EventAnimation;
-import com.bonepl.chromaleague.rest.CustomData;
 import com.bonepl.chromaleague.rest.activeplayer.ActivePlayer;
 import com.bonepl.chromaleague.tasks.FetchNewEventsTask;
 import com.bonepl.chromaleague.rest.playerlist.PlayerList;

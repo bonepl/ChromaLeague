@@ -1,6 +1,6 @@
 package com.bonepl.chromaleague.tasks;
 
-import com.bonepl.chromaleague.GameStateHelper;
+import com.bonepl.chromaleague.state.GameStateHelper;
 import com.bonepl.chromaleague.rest.LeagueHttpClient;
 import com.bonepl.chromaleague.rest.eventdata.Event;
 import com.bonepl.chromaleague.rest.eventdata.Events;

@@ -1,6 +1,6 @@
 package com.bonepl.chromaleague.tasks;
 
-import com.bonepl.chromaleague.GameState;
+import com.bonepl.chromaleague.state.GameState;
 import com.bonepl.chromaleague.rest.LeagueHttpClient;
 import com.bonepl.chromaleague.rest.activeplayer.ActivePlayer;
 import com.jsoniter.JsonIterator;

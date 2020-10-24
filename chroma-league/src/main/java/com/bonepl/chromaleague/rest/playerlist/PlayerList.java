@@ -1,6 +1,6 @@
 package com.bonepl.chromaleague.rest.playerlist;
 
-import com.bonepl.chromaleague.GameState;
+import com.bonepl.chromaleague.state.GameState;
 
 import java.util.Arrays;
 import java.util.List;

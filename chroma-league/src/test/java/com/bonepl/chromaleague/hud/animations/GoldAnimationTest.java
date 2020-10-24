@@ -1,7 +1,7 @@
 package com.bonepl.chromaleague.hud.animations;
 
-import com.bonepl.chromaleague.GameState;
-import com.bonepl.chromaleague.GameStateHelper;
+import com.bonepl.chromaleague.state.GameState;
+import com.bonepl.chromaleague.state.GameStateHelper;
 import com.bonepl.chromaleague.rest.activeplayer.ActivePlayer;
 import com.bonepl.chromaleague.rest.activeplayer.ChampionStats;
 import com.bonepl.razersdk.RazerSDKClient;

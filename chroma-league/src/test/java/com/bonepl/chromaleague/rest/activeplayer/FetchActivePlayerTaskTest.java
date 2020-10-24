@@ -1,6 +1,6 @@
 package com.bonepl.chromaleague.rest.activeplayer;
 
-import com.bonepl.chromaleague.GameState;
+import com.bonepl.chromaleague.state.GameState;
 import com.bonepl.chromaleague.rest.LeagueHttpClientMocker;
 import com.bonepl.chromaleague.tasks.FetchActivePlayerTask;
 import org.junit.jupiter.api.Test;

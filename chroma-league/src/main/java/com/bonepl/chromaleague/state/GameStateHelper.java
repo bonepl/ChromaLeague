@@ -1,15 +1,14 @@
-package com.bonepl.chromaleague;
+package com.bonepl.chromaleague.state;
 
 import com.bonepl.chromaleague.rest.eventdata.DragonType;
 import com.bonepl.chromaleague.hud.parts.GoldBar;
-import com.bonepl.chromaleague.rest.CustomData;
 import com.bonepl.chromaleague.rest.activeplayer.ChampionStats;
 import com.bonepl.chromaleague.rest.activeplayer.ResourceType;
 
 import java.time.LocalTime;
 import java.util.List;
 
-import static com.bonepl.chromaleague.GameState.*;
+import static com.bonepl.chromaleague.state.GameState.*;
 
 public final class GameStateHelper {
     private GameStateHelper() {

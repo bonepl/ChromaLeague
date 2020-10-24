@@ -1,11 +1,11 @@
 package com.bonepl.chromaleague.hud.parts;
 
-import com.bonepl.chromaleague.GameStateHelper;
+import com.bonepl.chromaleague.state.GameStateHelper;
 import com.bonepl.razersdk.sdk.RzKey;
 
 import java.util.List;
 
-import static com.bonepl.chromaleague.GameStateHelper.getResourceType;
+import static com.bonepl.chromaleague.state.GameStateHelper.getResourceType;
 import static com.bonepl.chromaleague.hud.PredefinedKeySets.BLACKWIDOW_SECOND_ROW;
 
 /**

@@ -1,9 +1,11 @@
-package com.bonepl.chromaleague;
+package com.bonepl.chromaleague.tasks;
 
+import com.bonepl.chromaleague.GameState;
+import com.bonepl.chromaleague.GameStateHelper;
 import com.bonepl.chromaleague.rest.CustomData;
-import com.bonepl.chromaleague.rest.eventdata.model.DragonType;
-import com.bonepl.chromaleague.rest.eventdata.model.Event;
-import com.bonepl.chromaleague.rest.eventdata.model.EventType;
+import com.bonepl.chromaleague.rest.eventdata.DragonType;
+import com.bonepl.chromaleague.rest.eventdata.Event;
+import com.bonepl.chromaleague.rest.eventdata.EventType;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

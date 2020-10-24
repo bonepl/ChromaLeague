@@ -1,4 +1,4 @@
-package com.bonepl.chromaleague.rest.eventdata.model;
+package com.bonepl.chromaleague.rest.eventdata;
 
 public class Event {
     int EventID;

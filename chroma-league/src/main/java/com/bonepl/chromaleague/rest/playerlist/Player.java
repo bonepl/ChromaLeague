@@ -1,4 +1,4 @@
-package com.bonepl.chromaleague.rest.playerlist.model;
+package com.bonepl.chromaleague.rest.playerlist;
 
 public class Player {
     String summonerName;

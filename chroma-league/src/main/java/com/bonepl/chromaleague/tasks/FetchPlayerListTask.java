@@ -1,9 +1,9 @@
-package com.bonepl.chromaleague.rest.playerlist;
+package com.bonepl.chromaleague.tasks;
 
 import com.bonepl.chromaleague.GameState;
 import com.bonepl.chromaleague.rest.LeagueHttpClient;
-import com.bonepl.chromaleague.rest.playerlist.model.Player;
-import com.bonepl.chromaleague.rest.playerlist.model.PlayerList;
+import com.bonepl.chromaleague.rest.playerlist.Player;
+import com.bonepl.chromaleague.rest.playerlist.PlayerList;
 import com.jsoniter.JsonIterator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

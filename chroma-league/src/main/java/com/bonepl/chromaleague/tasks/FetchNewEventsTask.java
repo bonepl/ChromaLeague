@@ -1,11 +1,9 @@
-package com.bonepl.chromaleague.rest.eventdata;
+package com.bonepl.chromaleague.tasks;
 
-import com.bonepl.chromaleague.EventAnimationProcessorTask;
-import com.bonepl.chromaleague.EventDataProcessorTask;
 import com.bonepl.chromaleague.GameStateHelper;
 import com.bonepl.chromaleague.rest.LeagueHttpClient;
-import com.bonepl.chromaleague.rest.eventdata.model.Event;
-import com.bonepl.chromaleague.rest.eventdata.model.Events;
+import com.bonepl.chromaleague.rest.eventdata.Event;
+import com.bonepl.chromaleague.rest.eventdata.Events;
 import com.jsoniter.JsonIterator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

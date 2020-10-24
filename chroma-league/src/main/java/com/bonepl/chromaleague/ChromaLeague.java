@@ -1,11 +1,13 @@
 package com.bonepl.chromaleague;
 
 import com.bonepl.chromaleague.hud.RefreshMainHudTask;
-import com.bonepl.chromaleague.rest.CheckRiotApiTask;
+import com.bonepl.chromaleague.tasks.CheckRiotApiTask;
 import com.bonepl.chromaleague.rest.LeagueHttpClient;
-import com.bonepl.chromaleague.rest.activeplayer.FetchActivePlayerTask;
-import com.bonepl.chromaleague.rest.eventdata.FetchNewEventsTask;
-import com.bonepl.chromaleague.rest.playerlist.FetchPlayerListTask;
+import com.bonepl.chromaleague.tasks.FetchActivePlayerTask;
+import com.bonepl.chromaleague.tasks.FetchNewEventsTask;
+import com.bonepl.chromaleague.tasks.FetchPlayerListTask;
+import com.bonepl.chromaleague.tasks.EventAnimationProcessorTask;
+import com.bonepl.chromaleague.tasks.EventDataProcessorTask;
 import com.bonepl.razersdk.RazerSDKClient;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

@@ -1,6 +1,6 @@
 package com.bonepl.chromaleague.rest;
 
-import com.bonepl.chromaleague.rest.eventdata.model.DragonType;
+import com.bonepl.chromaleague.rest.eventdata.DragonType;
 
 import java.time.LocalTime;
 import java.util.ArrayList;

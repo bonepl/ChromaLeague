@@ -1,4 +1,4 @@
-package com.bonepl.chromaleague.rest.eventdata.model;
+package com.bonepl.chromaleague.rest.eventdata;
 
 import java.util.List;
 

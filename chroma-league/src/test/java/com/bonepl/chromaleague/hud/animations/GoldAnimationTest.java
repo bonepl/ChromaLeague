@@ -2,8 +2,8 @@ package com.bonepl.chromaleague.hud.animations;
 
 import com.bonepl.chromaleague.GameState;
 import com.bonepl.chromaleague.GameStateHelper;
-import com.bonepl.chromaleague.rest.activeplayer.model.ActivePlayer;
-import com.bonepl.chromaleague.rest.activeplayer.model.ChampionStats;
+import com.bonepl.chromaleague.rest.activeplayer.ActivePlayer;
+import com.bonepl.chromaleague.rest.activeplayer.ChampionStats;
 import com.bonepl.razersdk.RazerSDKClient;
 import org.junit.jupiter.api.Test;
 

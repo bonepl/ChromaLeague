@@ -2,8 +2,7 @@ package com.bonepl.chromaleague.rest.activeplayer;
 
 import com.bonepl.chromaleague.GameState;
 import com.bonepl.chromaleague.rest.LeagueHttpClientMocker;
-import com.bonepl.chromaleague.rest.activeplayer.model.ActivePlayer;
-import com.bonepl.chromaleague.rest.activeplayer.model.ChampionStats;
+import com.bonepl.chromaleague.tasks.FetchActivePlayerTask;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

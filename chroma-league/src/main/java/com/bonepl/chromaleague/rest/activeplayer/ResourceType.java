@@ -1,4 +1,4 @@
-package com.bonepl.chromaleague.rest.activeplayer.model;
+package com.bonepl.chromaleague.rest.activeplayer;
 
 import com.bonepl.razersdk.animation.Color;
 

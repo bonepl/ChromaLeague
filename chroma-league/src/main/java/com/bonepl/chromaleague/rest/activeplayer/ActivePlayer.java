@@ -1,4 +1,4 @@
-package com.bonepl.chromaleague.rest.activeplayer.model;
+package com.bonepl.chromaleague.rest.activeplayer;
 
 public class ActivePlayer {
     double currentGold;

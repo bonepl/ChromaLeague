@@ -1,7 +1,7 @@
 package com.bonepl.chromaleague.hud.parts;
 
-import com.bonepl.chromaleague.EventDataProcessorTask;
-import com.bonepl.chromaleague.rest.eventdata.model.EventType;
+import com.bonepl.chromaleague.tasks.EventDataProcessorTask;
+import com.bonepl.chromaleague.rest.eventdata.EventType;
 import com.bonepl.razersdk.RazerSDKClient;
 import org.junit.jupiter.api.Test;
 
@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import static com.bonepl.chromaleague.rest.eventdata.model.EventType.*;
+import static com.bonepl.chromaleague.rest.eventdata.EventType.*;
 
 class KilledDragonBarTest {
     private final Queue<EventType> testDrakesOrder = new LinkedList<>(Arrays.asList(ALLY_INFERNAL_DRAGON_KILL,

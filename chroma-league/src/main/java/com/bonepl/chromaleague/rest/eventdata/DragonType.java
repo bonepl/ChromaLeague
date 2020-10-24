@@ -1,4 +1,4 @@
-package com.bonepl.chromaleague.rest.eventdata.model;
+package com.bonepl.chromaleague.rest.eventdata;
 
 import com.bonepl.chromaleague.hud.colors.CLColor;
 import com.bonepl.razersdk.animation.Color;

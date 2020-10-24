@@ -1,7 +1,7 @@
 package com.bonepl.chromaleague.hud.parts;
 
-import com.bonepl.chromaleague.EventDataProcessorTask;
-import com.bonepl.chromaleague.rest.eventdata.model.EventType;
+import com.bonepl.chromaleague.tasks.EventDataProcessorTask;
+import com.bonepl.chromaleague.rest.eventdata.EventType;
 import com.bonepl.razersdk.RazerSDKClient;
 import org.junit.jupiter.api.Test;
 

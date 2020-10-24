@@ -1,4 +1,4 @@
-package com.bonepl.chromaleague.rest;
+package com.bonepl.chromaleague.tasks;
 
 import com.bonepl.chromaleague.GameState;
 

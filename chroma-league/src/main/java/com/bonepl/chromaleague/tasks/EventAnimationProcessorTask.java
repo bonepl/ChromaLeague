@@ -1,8 +1,8 @@
-package com.bonepl.chromaleague;
+package com.bonepl.chromaleague.tasks;
 
 import com.bonepl.chromaleague.hud.animations.*;
-import com.bonepl.chromaleague.rest.eventdata.model.Event;
-import com.bonepl.chromaleague.rest.eventdata.model.EventType;
+import com.bonepl.chromaleague.rest.eventdata.Event;
+import com.bonepl.chromaleague.rest.eventdata.EventType;
 import com.bonepl.razersdk.animation.IFrame;
 import com.bonepl.razersdk.animation.SimpleFrame;
 import org.apache.logging.log4j.LogManager;

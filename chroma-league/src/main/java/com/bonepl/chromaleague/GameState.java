@@ -2,16 +2,11 @@ package com.bonepl.chromaleague;
 
 import com.bonepl.chromaleague.hud.animations.EventAnimation;
 import com.bonepl.chromaleague.rest.CustomData;
-import com.bonepl.chromaleague.rest.activeplayer.model.ActivePlayer;
-import com.bonepl.chromaleague.rest.eventdata.FetchNewEventsTask;
-import com.bonepl.chromaleague.rest.eventdata.model.Event;
-import com.bonepl.chromaleague.rest.playerlist.model.PlayerList;
+import com.bonepl.chromaleague.rest.activeplayer.ActivePlayer;
+import com.bonepl.chromaleague.tasks.FetchNewEventsTask;
+import com.bonepl.chromaleague.rest.playerlist.PlayerList;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.Collection;
-import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 public final class GameState {
     private static final Logger logger = LogManager.getLogger();

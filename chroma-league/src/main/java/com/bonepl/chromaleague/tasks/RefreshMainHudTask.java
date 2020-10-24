@@ -1,4 +1,4 @@
-package com.bonepl.chromaleague.hud;
+package com.bonepl.chromaleague.tasks;
 
 import com.bonepl.chromaleague.hud.parts.MainHud;
 import com.bonepl.razersdk.RazerSDKClient;

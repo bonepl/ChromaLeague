@@ -2,11 +2,14 @@ package com.bonepl.chromaleague.rest.playerlist;
 
 import com.bonepl.chromaleague.GameState;
 import com.bonepl.chromaleague.rest.LeagueHttpClientMocker;
+import com.bonepl.chromaleague.rest.activeplayer.model.ActivePlayer;
 import com.bonepl.chromaleague.rest.playerlist.model.PlayerList;
 import com.bonepl.chromaleague.rest.playerlist.model.Team;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class FetchPlayerListTaskTest {
 
@@ -14,7 +17,10 @@ class FetchPlayerListTaskTest {
     void testPlayerListParsing() {
         //given
         LeagueHttpClientMocker.mockReturnedResponseWithResource("json/playerlist.json");
-        GameState.setActivePlayerName("BooonE");
+        final String player = "BooonE";
+        ActivePlayer activePlayer = mock(ActivePlayer.class);
+        when(activePlayer.getSummonerName()).thenReturn(player);
+        GameState.setActivePlayer(activePlayer);
 
         //when
         new FetchPlayerListTask().run();

@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class FetchActivePlayerTaskTest {
 
@@ -15,7 +17,10 @@ class FetchActivePlayerTaskTest {
     void testActivePlayerParsing() {
         //given
         LeagueHttpClientMocker.mockReturnedResponseWithResource("json/activeplayer.json");
-        GameState.setActivePlayerName("BooonE");
+        final String player = "BooonE";
+        ActivePlayer mockedActivePlayer = mock(ActivePlayer.class);
+        when(mockedActivePlayer.getSummonerName()).thenReturn(player);
+        GameState.setActivePlayer(mockedActivePlayer);
 
         //when
         new FetchActivePlayerTask().run();

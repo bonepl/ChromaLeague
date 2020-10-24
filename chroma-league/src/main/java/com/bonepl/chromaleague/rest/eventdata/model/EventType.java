@@ -22,6 +22,7 @@ public enum EventType {
     ENEMY_INFERNAL_DRAGON_KILL,
     ENEMY_MOUNTAIN_DRAGON_KILL,
     ENEMY_OCEAN_DRAGON_KILL,
+    GAME_START,
     GAME_END_VICTORY,
     GAME_END_DEFEAT,
     ACTIVE_PLAYER_DIED,
@@ -29,6 +30,9 @@ public enum EventType {
 
     public static EventType fromEvent(Event event) {
         if (event != null) {
+            if ("GameStart".equals(event.getEventName())) {
+                return GAME_START;
+            }
             if ("ChampionKill".equals(event.getEventName())) {
                 final String activePlayerName = GameState.getActivePlayerName();
                 if (activePlayerName.equals(event.getVictimName())) {

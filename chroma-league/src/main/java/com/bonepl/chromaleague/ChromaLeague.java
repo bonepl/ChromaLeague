@@ -1,9 +1,9 @@
 package com.bonepl.chromaleague;
 
 import com.bonepl.chromaleague.hud.RefreshMainHudTask;
+import com.bonepl.chromaleague.rest.CheckRiotApiTask;
 import com.bonepl.chromaleague.rest.LeagueHttpClient;
 import com.bonepl.chromaleague.rest.activeplayer.FetchActivePlayerTask;
-import com.bonepl.chromaleague.rest.activeplayername.FetchActivePlayerNameTask;
 import com.bonepl.chromaleague.rest.eventdata.FetchNewEventsTask;
 import com.bonepl.chromaleague.rest.playerlist.FetchPlayerListTask;
 import com.bonepl.razersdk.RazerSDKClient;
@@ -22,38 +22,53 @@ public class ChromaLeague {
 
     public static void main(String... args) {
         logger.info("Started Chroma League");
-        final ScheduledExecutorService gameActiveExecutor = Executors.newSingleThreadScheduledExecutor();
-        gameActiveExecutor.scheduleAtFixedRate(new FetchActivePlayerNameTask(), 0, 5000, TimeUnit.MILLISECONDS);
+        final ScheduledExecutorService riotApiCheckExecutor = Executors.newSingleThreadScheduledExecutor();
+        riotApiCheckExecutor.scheduleAtFixedRate(new CheckRiotApiTask(), 0, 1000, TimeUnit.MILLISECONDS);
 
         while (alive) {
-            if (GameState.isGameActive()) {
-                initializeThreads();
-            } else {
+            if (GameState.isRiotApiUp()) {
+                initializePreGameThreads();
+                while (GameState.isRiotApiUp()) {
+                    if (GameState.isRunningGame()) {
+                        initializeGameThreads();
+                    }
+                }
                 shutdownThreads();
             }
         }
 
-        gameActiveExecutor.shutdown();
+        riotApiCheckExecutor.shutdown();
         LeagueHttpClient.shutdown();
     }
 
-    private static void initializeThreads() {
-        if (scheduledExecutorService == null || scheduledExecutorService.isShutdown()) {
-            razerSDKClient = new RazerSDKClient();
-            scheduledExecutorService = Executors.newScheduledThreadPool(5);
-            scheduledExecutorService.scheduleWithFixedDelay(new FetchPlayerListTask(), 0, 1000, TimeUnit.MILLISECONDS);
-            scheduledExecutorService.scheduleWithFixedDelay(new FetchActivePlayerTask(), 50, 300, TimeUnit.MILLISECONDS);
-            scheduledExecutorService.scheduleWithFixedDelay(new FetchNewEventsTask(), 100, 1000, TimeUnit.MILLISECONDS);
-            scheduledExecutorService.scheduleWithFixedDelay(new RefreshMainHudTask(razerSDKClient), 150, 50, TimeUnit.MILLISECONDS);
-        }
-    }
-
     private static void shutdownThreads() {
-        if (scheduledExecutorService != null && !scheduledExecutorService.isShutdown()) {
+        if (razerSDKClient != null) {
             razerSDKClient.close();
+            razerSDKClient = null;
+        }
+
+        if (scheduledExecutorService != null && !scheduledExecutorService.isShutdown()) {
+            logger.info("RIOT api shut downed, cleaning up");
             scheduledExecutorService.shutdown();
         }
     }
 
+    private static void initializeGameThreads() {
+        if (razerSDKClient == null) {
+            razerSDKClient = new RazerSDKClient();
+            scheduledExecutorService.scheduleWithFixedDelay(new FetchPlayerListTask(), 0, 1000, TimeUnit.MILLISECONDS);
+            scheduledExecutorService.scheduleWithFixedDelay(new FetchActivePlayerTask(), 50, 300, TimeUnit.MILLISECONDS);
+            scheduledExecutorService.scheduleWithFixedDelay(new EventAnimationProcessorTask(), 100, 500, TimeUnit.MILLISECONDS);
+            scheduledExecutorService.scheduleWithFixedDelay(new RefreshMainHudTask(razerSDKClient), 150, 50, TimeUnit.MILLISECONDS);
 
+        }
+    }
+
+    private static void initializePreGameThreads() {
+        if (scheduledExecutorService == null || scheduledExecutorService.isShutdown()) {
+            scheduledExecutorService = Executors.newScheduledThreadPool(20);
+            scheduledExecutorService.scheduleWithFixedDelay(new FetchNewEventsTask(), 0, 1000, TimeUnit.MILLISECONDS);
+            scheduledExecutorService.scheduleWithFixedDelay(new EventDataProcessorTask(), 500, 500, TimeUnit.MILLISECONDS);
+        }
+    }
 }

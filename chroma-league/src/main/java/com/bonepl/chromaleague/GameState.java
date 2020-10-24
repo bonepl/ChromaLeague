@@ -3,44 +3,29 @@ package com.bonepl.chromaleague;
 import com.bonepl.chromaleague.hud.animations.EventAnimation;
 import com.bonepl.chromaleague.rest.CustomData;
 import com.bonepl.chromaleague.rest.activeplayer.model.ActivePlayer;
+import com.bonepl.chromaleague.rest.eventdata.FetchNewEventsTask;
 import com.bonepl.chromaleague.rest.eventdata.model.Event;
 import com.bonepl.chromaleague.rest.playerlist.model.PlayerList;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Collection;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public final class GameState {
-    private volatile static String activePlayerName;
+    private static final Logger logger = LogManager.getLogger();
     private volatile static ActivePlayer activePlayer;
     private volatile static PlayerList playerList;
+    private volatile static boolean riotApiUp = false;
+    private volatile static boolean runningGame = false;
     private static final CustomData customData = new CustomData();
-    private static final Queue<Event> unprocessedEvents = new ConcurrentLinkedQueue<>();
 
     private GameState() {
     }
 
-    /**
-     * Sets activePlayerName, this is used as a check if game is running.
-     * Setting activePlayerName to null clears the GameState.
-     *
-     * @param activePlayerName - activePlayerName fetched from ActivePlayerName REST (can be null) or null
-     */
-    public static void setActivePlayerName(String activePlayerName) {
-        if (activePlayerName == null) {
-            unprocessedEvents.clear();
-            EventAnimation.stop();
-            GameStateHelper.resetCustomData();
-        }
-        GameState.activePlayerName = activePlayerName;
-    }
-
     public static String getActivePlayerName() {
-        return activePlayerName;
-    }
-
-    public static boolean isGameActive() {
-        return activePlayerName != null;
+        return getActivePlayer().getSummonerName();
     }
 
     public static void setActivePlayer(ActivePlayer activePlayer) {
@@ -67,19 +52,35 @@ public final class GameState {
         return playerList != null && playerList.getActivePlayer() != null;
     }
 
-    public static void addUnprocessedEvents(Collection<Event> events) {
-        unprocessedEvents.addAll(events);
-    }
-
-    public static Event pollNextUnprocessedEvent() {
-        return unprocessedEvents.poll();
-    }
-
-    public static boolean hasUnprocessedEvents() {
-        return !unprocessedEvents.isEmpty();
-    }
-
     public static CustomData getCustomData() {
         return customData;
+    }
+
+    public static boolean isRunningGame() {
+        return runningGame;
+    }
+
+    public static void setRunningGame(boolean runningGame) {
+        if(runningGame != GameState.runningGame) {
+            logger.info("Change running game to " + runningGame);
+        }
+        GameState.runningGame = runningGame;
+    }
+
+    public static boolean isRiotApiUp() {
+        return riotApiUp;
+    }
+
+    public static void setRiotApiUp(boolean riotApiUp) {
+        if (riotApiUp != GameState.riotApiUp) {
+            logger.info("Change riot api up to " + riotApiUp);
+        }
+        GameState.riotApiUp = riotApiUp;
+        if (!riotApiUp) {
+            EventAnimation.stop();
+            GameStateHelper.resetCustomData();
+            runningGame = false;
+            FetchNewEventsTask.resetProcessedEventCounter();
+        }
     }
 }

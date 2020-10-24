@@ -1,6 +1,6 @@
 package com.bonepl.chromaleague.hud.parts;
 
-import com.bonepl.chromaleague.EventProcessor;
+import com.bonepl.chromaleague.EventDataProcessorTask;
 import com.bonepl.chromaleague.rest.eventdata.model.EventType;
 import com.bonepl.razersdk.RazerSDKClient;
 import org.junit.jupiter.api.Test;
@@ -18,9 +18,9 @@ class KilledDragonBarTest {
     @Test
     void testKilledDragonBar() throws InterruptedException {
         try (RazerSDKClient razerSDKClient = new RazerSDKClient()) {
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 4; i++) {
                 razerSDKClient.createKeyboardEffect(new KilledDragonBar());
-                EventProcessor.processEventForCustomData(testDrakesOrder.poll());
+                new EventDataProcessorTask().processEventForCustomData(testDrakesOrder.remove());
                 Thread.sleep(500);
             }
         }

@@ -28,6 +28,7 @@ public class MainHud extends LayeredFrame {
         if (eventAnimation.hasFrame()) {
             addFrame(eventAnimation);
         }
+        System.out.println();
     }
 
     private static void handleRespawnEvent() {

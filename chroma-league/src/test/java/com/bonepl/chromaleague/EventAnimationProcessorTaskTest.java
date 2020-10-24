@@ -1,6 +1,7 @@
 package com.bonepl.chromaleague;
 
 import com.bonepl.chromaleague.hud.animations.EventAnimation;
+import com.bonepl.chromaleague.rest.activeplayer.model.ActivePlayer;
 import com.bonepl.chromaleague.rest.eventdata.model.Event;
 import com.bonepl.chromaleague.rest.playerlist.model.PlayerList;
 import com.bonepl.razersdk.RazerSDKClient;
@@ -15,7 +16,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-class EventProcessorTest {
+class EventAnimationProcessorTaskTest {
     private static RazerSDKClient razerSDKClient;
     private static final EventAnimation eventAnimation = new EventAnimation();
 
@@ -33,25 +34,196 @@ class EventProcessorTest {
     void testActivePLayerKill() {
         //given
         final String player = "BooonE";
-        GameState.setActivePlayerName(player);
+        ActivePlayer activePlayer = mock(ActivePlayer.class);
+        when(activePlayer.getSummonerName()).thenReturn(player);
+        GameState.setActivePlayer(activePlayer);
         final Event mock = mock(Event.class);
         when(mock.getEventName()).thenReturn("ChampionKill");
         when(mock.getKillerName()).thenReturn(player);
-        GameState.addUnprocessedEvents(List.of(mock));
 
         //then
-        EventProcessor.processEvents();
+        EventAnimationProcessorTask.addEvents(List.of(mock));
         runEventAnimation();
     }
 
     @Test
     void testAllyOceanDragonAnimation() {
         //given
-        GameState.addUnprocessedEvents(Collections.singletonList(mockDragonEvent("Water")));
+        EventAnimationProcessorTask.addEvents(Collections.singletonList(mockDragonEvent("Water")));
         mockPlayerList(true);
 
+        //when
+        new EventAnimationProcessorTask().run();
+
         //then
-        EventProcessor.processEvents();
+        runEventAnimation();
+    }
+
+    @Test
+    void testAllyInfernalDragonAnimation() {
+        //given
+        EventAnimationProcessorTask.addEvents(Collections.singletonList(mockDragonEvent("Fire")));
+        mockPlayerList(true);
+
+        //when
+        new EventAnimationProcessorTask().run();
+
+        //then
+        runEventAnimation();
+    }
+
+    @Test
+    void testAllyCloudDragonAnimation() {
+        //given
+        EventAnimationProcessorTask.addEvents(Collections.singletonList(mockDragonEvent("Air")));
+        mockPlayerList(true);
+
+        //when
+        new EventAnimationProcessorTask().run();
+
+        //then
+        runEventAnimation();
+    }
+
+    @Test
+    void testAllyMountainDragonAnimation() {
+        //given
+        EventAnimationProcessorTask.addEvents(Collections.singletonList(mockDragonEvent("Earth")));
+        mockPlayerList(true);
+
+        //when
+        new EventAnimationProcessorTask().run();
+
+        //then
+        runEventAnimation();
+    }
+
+    @Test
+    void testAllyElderDragonAnimation() {
+        //given
+        EventAnimationProcessorTask.addEvents(Collections.singletonList(mockDragonEvent("Elder")));
+        mockPlayerList(true);
+
+        //when
+        new EventAnimationProcessorTask().run();
+
+        //then
+    }
+
+    @Test
+    void testAllyHeraldAnimation() {
+        //given
+        EventAnimationProcessorTask.addEvents(Collections.singletonList(mockHeraldEvent()));
+        mockPlayerList(true);
+
+        //when
+        new EventAnimationProcessorTask().run();
+
+        //then
+        runEventAnimation();
+    }
+
+    @Test
+    void testAllyBaronAnimation() {
+        //given
+        EventAnimationProcessorTask.addEvents(Collections.singletonList(mockBaronEvent()));
+        mockPlayerList(true);
+
+        //when
+        new EventAnimationProcessorTask().run();
+
+        //then
+        runEventAnimation();
+    }
+
+    @Test
+    void testEnemyOceanDragonAnimation() {
+        //given
+        EventAnimationProcessorTask.addEvents(Collections.singletonList(mockDragonEvent("Water")));
+        mockPlayerList(false);
+
+        //when
+        new EventAnimationProcessorTask().run();
+
+        //then
+        runEventAnimation();
+    }
+
+    @Test
+    void testEnemyInfernalDragonAnimation() {
+        //given
+        EventAnimationProcessorTask.addEvents(Collections.singletonList(mockDragonEvent("Fire")));
+        mockPlayerList(false);
+
+        //when
+        new EventAnimationProcessorTask().run();
+
+        //then
+        runEventAnimation();
+    }
+
+    @Test
+    void testEnemyCloudDragonAnimation() {
+        //given
+        EventAnimationProcessorTask.addEvents(Collections.singletonList(mockDragonEvent("Air")));
+        mockPlayerList(false);
+
+        //when
+        new EventAnimationProcessorTask().run();
+
+        //then
+        runEventAnimation();
+    }
+
+    @Test
+    void testEnemyMountainDragonAnimation() {
+        //given
+        EventAnimationProcessorTask.addEvents(Collections.singletonList(mockDragonEvent("Earth")));
+        mockPlayerList(false);
+
+        //when
+        new EventAnimationProcessorTask().run();
+
+        //then
+        runEventAnimation();
+    }
+
+    @Test
+    void testEnemyElderDragonAnimation() {
+        //given
+        EventAnimationProcessorTask.addEvents(Collections.singletonList(mockDragonEvent("Elder")));
+        mockPlayerList(false);
+
+        //when
+        new EventAnimationProcessorTask().run();
+
+        //then
+        runEventAnimation();
+    }
+
+    @Test
+    void testEnemyHeraldAnimation() {
+        //given
+        EventAnimationProcessorTask.addEvents(Collections.singletonList(mockHeraldEvent()));
+        mockPlayerList(false);
+
+        //when
+        new EventAnimationProcessorTask().run();
+
+        //then
+        runEventAnimation();
+    }
+
+    @Test
+    void testEnemyBaronAnimation() {
+        //given
+        EventAnimationProcessorTask.addEvents(Collections.singletonList(mockBaronEvent()));
+        mockPlayerList(false);
+
+        //when
+        new EventAnimationProcessorTask().run();
+
+        //then
         runEventAnimation();
     }
 
@@ -64,148 +236,6 @@ class EventProcessorTest {
                 e.printStackTrace();
             }
         }
-    }
-
-    @Test
-    void testAllyInfernalDragonAnimation() {
-        //given
-        GameState.addUnprocessedEvents(Collections.singletonList(mockDragonEvent("Fire")));
-        mockPlayerList(true);
-
-        //then
-        EventProcessor.processEvents();
-        runEventAnimation();
-    }
-
-    @Test
-    void testAllyCloudDragonAnimation() {
-        //given
-        GameState.addUnprocessedEvents(Collections.singletonList(mockDragonEvent("Air")));
-        mockPlayerList(true);
-
-        //then
-        EventProcessor.processEvents();
-        runEventAnimation();
-    }
-
-    @Test
-    void testAllyMountainDragonAnimation() {
-        //given
-        GameState.addUnprocessedEvents(Collections.singletonList(mockDragonEvent("Earth")));
-        mockPlayerList(true);
-
-        //then
-        EventProcessor.processEvents();
-        runEventAnimation();
-    }
-
-    @Test
-    void testAllyElderDragonAnimation() {
-        //given
-        GameState.addUnprocessedEvents(Collections.singletonList(mockDragonEvent("Elder")));
-        mockPlayerList(true);
-
-        //then
-        EventProcessor.processEvents();
-    }
-
-    @Test
-    void testAllyHeraldAnimation() {
-        //given
-        GameState.addUnprocessedEvents(Collections.singletonList(mockHeraldEvent()));
-        mockPlayerList(true);
-
-        //then
-        EventProcessor.processEvents();
-        runEventAnimation();
-    }
-
-    @Test
-    void testAllyBaronAnimation() {
-        //given
-        GameState.addUnprocessedEvents(Collections.singletonList(mockBaronEvent()));
-        mockPlayerList(true);
-
-        //then
-        EventProcessor.processEvents();
-        runEventAnimation();
-    }
-
-    @Test
-    void testEnemyOceanDragonAnimation() {
-        //given
-        GameState.addUnprocessedEvents(Collections.singletonList(mockDragonEvent("Water")));
-        mockPlayerList(false);
-
-        //then
-        EventProcessor.processEvents();
-        runEventAnimation();
-    }
-
-    @Test
-    void testEnemyInfernalDragonAnimation() {
-        //given
-        GameState.addUnprocessedEvents(Collections.singletonList(mockDragonEvent("Fire")));
-        mockPlayerList(false);
-
-        //then
-        EventProcessor.processEvents();
-        runEventAnimation();
-    }
-
-    @Test
-    void testEnemyCloudDragonAnimation() {
-        //given
-        GameState.addUnprocessedEvents(Collections.singletonList(mockDragonEvent("Air")));
-        mockPlayerList(false);
-
-        //then
-        EventProcessor.processEvents();
-        runEventAnimation();
-    }
-
-    @Test
-    void testEnemyMountainDragonAnimation() {
-        //given
-        GameState.addUnprocessedEvents(Collections.singletonList(mockDragonEvent("Earth")));
-        mockPlayerList(false);
-
-        //then
-        EventProcessor.processEvents();
-        runEventAnimation();
-    }
-
-    @Test
-    void testEnemyElderDragonAnimation() {
-        //given
-        GameState.addUnprocessedEvents(Collections.singletonList(mockDragonEvent("Elder")));
-        mockPlayerList(false);
-
-        //then
-        EventProcessor.processEvents();
-        runEventAnimation();
-    }
-
-    @Test
-    void testEnemyHeraldAnimation() {
-        //given
-        GameState.addUnprocessedEvents(Collections.singletonList(mockHeraldEvent()));
-        mockPlayerList(false);
-
-        //then
-        EventProcessor.processEvents();
-        runEventAnimation();
-    }
-
-    @Test
-    void testEnemyBaronAnimation() {
-        //given
-        GameState.addUnprocessedEvents(Collections.singletonList(mockBaronEvent()));
-        mockPlayerList(false);
-
-        //then
-        EventProcessor.processEvents();
-        runEventAnimation();
     }
 
     private Event mockDragonEvent(String dragonType) {

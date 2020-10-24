@@ -21,7 +21,10 @@ public class LevelUpAnimation extends Animation {
     @Override
     public Frame getFrame() {
         addLevelUpAnimationIfNeeded();
-        return super.getFrame();
+        if (hasFrame()) {
+            return super.getFrame();
+        }
+        return new SimpleFrame().getFrame();
     }
 
     private void addLevelUpAnimationIfNeeded() {

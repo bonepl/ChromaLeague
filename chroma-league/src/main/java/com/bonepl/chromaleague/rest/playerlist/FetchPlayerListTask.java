@@ -14,13 +14,10 @@ public class FetchPlayerListTask implements Runnable {
 
     @Override
     public void run() {
-        if (GameState.isGameActive()) {
-            logger.trace("Fetching PlayerList");
-            LeagueHttpClient.get(URL)
-                    .map(playerList -> JsonIterator.deserialize(playerList, Player[].class))
-                    .map(PlayerList::new)
-                    .ifPresent(GameState::setPlayerList);
-        }
+        LeagueHttpClient.get(URL)
+                .map(playerList -> JsonIterator.deserialize(playerList, Player[].class))
+                .map(PlayerList::new)
+                .ifPresent(GameState::setPlayerList);
     }
 
 }

@@ -1,18 +1,14 @@
 package com.bonepl.chromaleague.hud.parts;
 
-import com.bonepl.razersdk.RazerSDKClient;
+import com.bonepl.chromaleague.hud.animations.AnimationTester;
 import org.junit.jupiter.api.Test;
 
 class LevelUpBarTest {
     @Test
-    void playLevelUpAnimation() throws InterruptedException {
+    void playLevelUpAnimation() {
         final LevelUpBar levelUpBar = new LevelUpBar();
         levelUpBar.levelUp();
-        try (RazerSDKClient razerSDKClient = new RazerSDKClient()) {
-            while (levelUpBar.hasFrame()) {
-                razerSDKClient.createKeyboardEffect(levelUpBar);
-                Thread.sleep(200);
-            }
-        }
+
+        new AnimationTester().testAnimation(levelUpBar);
     }
 }

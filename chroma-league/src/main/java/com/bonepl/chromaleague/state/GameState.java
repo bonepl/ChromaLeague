@@ -2,13 +2,10 @@ package com.bonepl.chromaleague.state;
 
 import com.bonepl.chromaleague.hud.parts.EventAnimator;
 import com.bonepl.chromaleague.rest.activeplayer.ActivePlayer;
-import com.bonepl.chromaleague.tasks.FetchNewEventsTask;
 import com.bonepl.chromaleague.rest.playerlist.PlayerList;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import com.bonepl.chromaleague.tasks.FetchNewEventsTask;
 
 public final class GameState {
-    private static final Logger logger = LogManager.getLogger();
     private volatile static ActivePlayer activePlayer;
     private volatile static PlayerList playerList;
     private volatile static boolean riotApiUp = false;
@@ -31,7 +28,7 @@ public final class GameState {
     }
 
     public static boolean isActivePlayerAvailable() {
-        return activePlayer != null && activePlayer.getChampionStats() != null;
+        return activePlayer != null;
     }
 
     public static void setPlayerList(PlayerList playerList) {
@@ -43,7 +40,7 @@ public final class GameState {
     }
 
     public static boolean isPlayerListAvailable() {
-        return playerList != null && playerList.getActivePlayer() != null;
+        return playerList != null;
     }
 
     public static EventData getCustomData() {
@@ -55,9 +52,6 @@ public final class GameState {
     }
 
     public static void setRunningGame(boolean runningGame) {
-        if(runningGame != GameState.runningGame) {
-            logger.info("Change running game to " + runningGame);
-        }
         GameState.runningGame = runningGame;
     }
 
@@ -66,15 +60,16 @@ public final class GameState {
     }
 
     public static void setRiotApiUp(boolean riotApiUp) {
-        if (riotApiUp != GameState.riotApiUp) {
-            logger.info("Change riot api up to " + riotApiUp);
-        }
         GameState.riotApiUp = riotApiUp;
         if (!riotApiUp) {
-            EventAnimator.stop();
             GameStateHelper.resetCustomData();
-            runningGame = false;
+            EventAnimator.stop();
             FetchNewEventsTask.resetProcessedEventCounter();
+            runningGame = false;
         }
+    }
+
+    private static boolean changedRiotApiUP(boolean newValue) {
+        return newValue != riotApiUp;
     }
 }

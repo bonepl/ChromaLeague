@@ -1,12 +1,9 @@
-package com.bonepl.chromaleague.rest.eventdata;
+package com.bonepl.chromaleague.tasks;
 
-import com.bonepl.chromaleague.tasks.EventAnimationProcessorTask;
-import com.bonepl.chromaleague.tasks.EventDataProcessorTask;
-import com.bonepl.chromaleague.state.GameState;
-import com.bonepl.chromaleague.rest.LeagueHttpClientMocker;
-import com.bonepl.chromaleague.rest.activeplayer.ActivePlayer;
-import com.bonepl.chromaleague.rest.playerlist.PlayerList;
-import com.bonepl.chromaleague.tasks.FetchNewEventsTask;
+import com.bonepl.chromaleague.GameStateMocks;
+import com.bonepl.chromaleague.rest.LeagueHttpClientMock;
+import com.bonepl.chromaleague.rest.eventdata.Event;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,20 +12,22 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 class FetchNewEventsTaskTest {
 
     @BeforeEach
     void setUp() {
-        final String player = "BooonE";
-        ActivePlayer activePlayer = mock(ActivePlayer.class);
-        when(activePlayer.getSummonerName()).thenReturn(player);
-        GameState.setActivePlayer(activePlayer);
-        PlayerList playerList = mock(PlayerList.class);
-        GameState.setPlayerList(playerList);
+        GameStateMocks.setActivePlayerName("BooonE");
+        GameStateMocks.makePlayerListAvailable();
 
+        EventAnimationProcessorTask.getUnprocessedEvents().clear();
+        EventDataProcessorTask.getUnprocessedEvents().clear();
+    }
+
+    @AfterEach
+    void tearDown() {
+        GameStateMocks.clearActivePlayer();
+        GameStateMocks.clearPlayerList();
         EventAnimationProcessorTask.getUnprocessedEvents().clear();
         EventDataProcessorTask.getUnprocessedEvents().clear();
     }
@@ -36,7 +35,7 @@ class FetchNewEventsTaskTest {
     @Test
     void testEventParsing() {
         //given
-        LeagueHttpClientMocker.mockReturnedResponseWithResource("json/eventdata.json");
+        LeagueHttpClientMock.mockReturnedResponseWithResource("json/eventdata.json");
         FetchNewEventsTask.resetProcessedEventCounter();
 
         //when
@@ -55,7 +54,7 @@ class FetchNewEventsTaskTest {
     @Test
     void testFirstEventParsing() {
         //given
-        LeagueHttpClientMocker.mockReturnedResponseWithResource("json/gamestartevent.json");
+        LeagueHttpClientMock.mockReturnedResponseWithResource("json/gamestartevent.json");
 
         //when
         new FetchNewEventsTask().run();
@@ -73,7 +72,7 @@ class FetchNewEventsTaskTest {
     @Test
     void testEventsSkipAfterReconnect() {
         //given
-        LeagueHttpClientMocker.mockReturnedResponseWithResource("json/eventdata.json");
+        LeagueHttpClientMock.mockReturnedResponseWithResource("json/eventdata.json");
         FetchNewEventsTask.resetProcessedEventCounter();
 
         //when

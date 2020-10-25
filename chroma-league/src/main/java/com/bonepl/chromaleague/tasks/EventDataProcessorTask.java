@@ -1,15 +1,17 @@
 package com.bonepl.chromaleague.tasks;
 
-import com.bonepl.chromaleague.state.GameState;
-import com.bonepl.chromaleague.state.GameStateHelper;
-import com.bonepl.chromaleague.state.EventData;
 import com.bonepl.chromaleague.rest.eventdata.DragonType;
 import com.bonepl.chromaleague.rest.eventdata.Event;
 import com.bonepl.chromaleague.rest.eventdata.EventType;
+import com.bonepl.chromaleague.state.EventData;
+import com.bonepl.chromaleague.state.GameState;
+import com.bonepl.chromaleague.state.GameStateHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class EventDataProcessorTask implements Runnable {
@@ -55,7 +57,6 @@ public class EventDataProcessorTask implements Runnable {
     }
 
     public static void addEvents(List<Event> events) {
-        logger.info("Added events for animation: " + Arrays.toString(events.toArray()));
         unprocessedEvents.addAll(events);
     }
 

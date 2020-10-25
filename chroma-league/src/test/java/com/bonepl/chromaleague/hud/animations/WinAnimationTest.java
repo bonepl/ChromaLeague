@@ -1,17 +1,11 @@
 package com.bonepl.chromaleague.hud.animations;
 
-import com.bonepl.razersdk.RazerSDKClient;
 import org.junit.jupiter.api.Test;
 
 class WinAnimationTest {
+
     @Test
-    void playWinAnimation() throws InterruptedException {
-        final WinAnimation winAnimation = new WinAnimation();
-        try (RazerSDKClient razerSDKClient = new RazerSDKClient()) {
-            for (int i = 0; i < 120; i++) {
-                razerSDKClient.createKeyboardEffect(winAnimation);
-                Thread.sleep(50);
-            }
-        }
+    void playWinAnimation() {
+        new AnimationTester().testAnimation(new WinAnimation(), 100);
     }
 }

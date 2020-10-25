@@ -3,7 +3,6 @@ package com.bonepl.chromaleague.tasks;
 import com.bonepl.chromaleague.rest.LeagueHttpClient;
 import com.bonepl.chromaleague.rest.eventdata.Event;
 import com.bonepl.chromaleague.rest.eventdata.Events;
-import com.bonepl.chromaleague.state.GameState;
 import com.bonepl.chromaleague.state.GameStateHelper;
 import com.jsoniter.JsonIterator;
 import org.apache.logging.log4j.LogManager;
@@ -18,12 +17,10 @@ public class FetchNewEventsTask implements Runnable {
 
     @Override
     public void run() {
-        if (GameState.isActivePlayerAvailable() && GameState.isPlayerListAvailable()) {
-            LeagueHttpClient.get(URL)
-                    .map(events -> JsonIterator.deserialize(events, Events.class))
-                    .map(Events::getEvents)
-                    .ifPresent(this::collectUnprocessedEvents);
-        }
+        LeagueHttpClient.get(URL)
+                .map(events -> JsonIterator.deserialize(events, Events.class))
+                .map(Events::getEvents)
+                .ifPresent(this::collectUnprocessedEvents);
     }
 
     void collectUnprocessedEvents(List<Event> events) {

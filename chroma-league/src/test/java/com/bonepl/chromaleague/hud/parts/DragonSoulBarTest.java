@@ -1,55 +1,37 @@
 package com.bonepl.chromaleague.hud.parts;
 
-import com.bonepl.chromaleague.hud.parts.DragonSoulBar;
-import com.bonepl.chromaleague.state.GameStateHelper;
+import com.bonepl.chromaleague.hud.animations.AnimationTester;
 import com.bonepl.chromaleague.rest.eventdata.DragonType;
-import com.bonepl.razersdk.RazerSDKClient;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
+import com.bonepl.chromaleague.state.GameStateHelper;
 import org.junit.jupiter.api.Test;
 
 import java.util.stream.IntStream;
 
 class DragonSoulBarTest {
-    private static RazerSDKClient razerSDKClient;
-
-    @BeforeAll
-    static void beforeAll() {
-        razerSDKClient = new RazerSDKClient();
-    }
-
-    @AfterAll
-    static void afterAll() {
-        razerSDKClient.close();
-    }
 
     @Test
-    void playCloudDragonSoulAnimation() throws InterruptedException {
+    void playCloudDragonSoulAnimation() {
         testDragonSoulAnimation(DragonType.CLOUD);
     }
 
     @Test
-    void playInfernalDragonSoulAnimation() throws InterruptedException {
+    void playInfernalDragonSoulAnimation() {
         testDragonSoulAnimation(DragonType.INFERNAL);
     }
 
     @Test
-    void playMountainDragonSoulAnimation() throws InterruptedException {
+    void playMountainDragonSoulAnimation() {
         testDragonSoulAnimation(DragonType.MOUNTAIN);
     }
 
     @Test
-    void playOceanDragonSoulAnimation() throws InterruptedException {
+    void playOceanDragonSoulAnimation() {
         testDragonSoulAnimation(DragonType.OCEAN);
     }
 
-    private void testDragonSoulAnimation(DragonType dragonType) throws InterruptedException {
-        DragonSoulBar dragonSoulBar = new DragonSoulBar();
+    private void testDragonSoulAnimation(DragonType dragonType) {
         switchToDragon(dragonType);
-        for (int i = 0; i < 80; i++) {
-            razerSDKClient.createKeyboardEffect(dragonSoulBar);
-            Thread.sleep(50);
-        }
+        new AnimationTester().testAnimation(new DragonSoulBar(), 80);
     }
 
     private void switchToDragon(DragonType dragonType) {

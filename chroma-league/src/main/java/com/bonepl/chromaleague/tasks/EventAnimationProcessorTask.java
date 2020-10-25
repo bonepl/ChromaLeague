@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Queue;
 
 public class EventAnimationProcessorTask implements Runnable {
-    private static final Logger logger = LogManager.getLogger();
     private static final Queue<Event> unprocessedEvents = new LinkedList<>();
 
     @Override

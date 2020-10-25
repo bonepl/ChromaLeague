@@ -1,7 +1,8 @@
 package com.bonepl.chromaleague.hud.parts;
 
+import com.bonepl.chromaleague.hud.animations.ElderBuffAnimation;
+import com.bonepl.chromaleague.hud.animations.RespawnAnimation;
 import com.bonepl.chromaleague.state.GameStateHelper;
-import com.bonepl.chromaleague.hud.animations.*;
 import com.bonepl.razersdk.animation.LayeredFrame;
 
 public class MainHud extends LayeredFrame {
@@ -28,7 +29,6 @@ public class MainHud extends LayeredFrame {
         if (EVENT_ANIMATOR.hasFrame()) {
             addFrame(EVENT_ANIMATOR);
         }
-        System.out.println();
     }
 
     private static void handleRespawnEvent() {

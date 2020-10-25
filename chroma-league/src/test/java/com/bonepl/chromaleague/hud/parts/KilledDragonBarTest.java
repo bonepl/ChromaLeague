@@ -1,8 +1,8 @@
 package com.bonepl.chromaleague.hud.parts;
 
-import com.bonepl.chromaleague.tasks.EventDataProcessorTask;
+import com.bonepl.chromaleague.hud.animations.AnimationTester;
 import com.bonepl.chromaleague.rest.eventdata.EventType;
-import com.bonepl.razersdk.RazerSDKClient;
+import com.bonepl.chromaleague.tasks.EventDataProcessorTask;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -16,13 +16,14 @@ class KilledDragonBarTest {
             ALLY_CLOUD_DRAGON_KILL, ALLY_MOUNTAIN_DRAGON_KILL, ALLY_OCEAN_DRAGON_KILL));
 
     @Test
-    void testKilledDragonBar() throws InterruptedException {
-        try (RazerSDKClient razerSDKClient = new RazerSDKClient()) {
-            for (int i = 0; i < 4; i++) {
-                razerSDKClient.createKeyboardEffect(new KilledDragonBar());
-                new EventDataProcessorTask().processEventForEventData(testDrakesOrder.remove());
-                Thread.sleep(500);
-            }
-        }
+    void testKilledDragonBar() {
+        new AnimationTester()
+                .withAfterIterationAction(i -> {
+                    if (!testDrakesOrder.isEmpty()) {
+                        new EventDataProcessorTask().processEventForEventData(testDrakesOrder.remove());
+                    }
+                })
+                .withSleepTime(500)
+                .testAnimation(KilledDragonBar::new, 5);
     }
 }

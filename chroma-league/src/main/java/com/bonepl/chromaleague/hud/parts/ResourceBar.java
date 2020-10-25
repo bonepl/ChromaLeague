@@ -5,8 +5,8 @@ import com.bonepl.razersdk.sdk.RzKey;
 
 import java.util.List;
 
-import static com.bonepl.chromaleague.state.GameStateHelper.getResourceType;
 import static com.bonepl.chromaleague.hud.PredefinedKeySets.BLACKWIDOW_SECOND_ROW;
+import static com.bonepl.chromaleague.state.GameStateHelper.getResourceType;
 
 /**
  * vladimir uses resource type: GNARFURY

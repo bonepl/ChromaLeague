@@ -1,8 +1,8 @@
 package com.bonepl.chromaleague.hud.parts;
 
-import com.bonepl.chromaleague.state.GameStateHelper;
-import com.bonepl.chromaleague.hud.colors.BreathingColor;
 import com.bonepl.chromaleague.hud.PredefinedKeySets;
+import com.bonepl.chromaleague.hud.colors.BreathingColor;
+import com.bonepl.chromaleague.state.GameStateHelper;
 import com.bonepl.razersdk.animation.AnimatedFrame;
 import com.bonepl.razersdk.animation.Frame;
 import com.bonepl.razersdk.animation.SimpleFrame;

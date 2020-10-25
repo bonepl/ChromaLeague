@@ -15,14 +15,14 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public final class LeagueHttpClientMocker {
-    private LeagueHttpClientMocker() {
+public final class LeagueHttpClientMock {
+    private LeagueHttpClientMock() {
     }
 
     public static void mockReturnedResponseWithResource(String jsonResourcePath) {
         try {
             mockReturnedResponse(Files.readString(
-                    new File(Objects.requireNonNull(LeagueHttpClientMocker.class.getClassLoader()
+                    new File(Objects.requireNonNull(LeagueHttpClientMock.class.getClassLoader()
                             .getResource(jsonResourcePath)).toURI()).toPath()));
         } catch (IOException | URISyntaxException e) {
             fail(e);

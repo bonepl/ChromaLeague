@@ -33,10 +33,9 @@ public class LeagueHttpClient {
         try {
             return Optional.of(EntityUtils.toString(
                     getLeagueHttpClient().execute(new HttpGet(url)).getEntity()));
-        } catch (ConnectTimeoutException | SocketTimeoutException | SSLException ex) {
-            // it is possible to fail on json fetch from time to time
-        } catch (Exception e) {
-            logger.error("Couldn't get data from endpoint: " + url, e);
+        } catch (IOException ex) {
+            // it is possible to fail on HTTP connection during API shutdown
+            logger.debug(ex);
         }
         return Optional.empty();
     }
@@ -51,7 +50,9 @@ public class LeagueHttpClient {
     private static CloseableHttpClient createLeagueHttpClient() {
         return HttpClients.custom()
                 .setConnectionManager(createUnsecureConnManager())
-                .setDefaultRequestConfig(createRequestConfig()).build();
+                .setDefaultRequestConfig(createRequestConfig())
+                .disableAutomaticRetries()
+                .build();
     }
 
     private static PoolingHttpClientConnectionManager createUnsecureConnManager() {

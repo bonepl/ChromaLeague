@@ -1,14 +1,9 @@
 package com.bonepl.chromaleague;
 
-import com.bonepl.chromaleague.tasks.RefreshMainHudTask;
-import com.bonepl.chromaleague.state.GameState;
-import com.bonepl.chromaleague.tasks.CheckRiotApiTask;
+import com.bonepl.chromaleague.hud.parts.MainHud;
 import com.bonepl.chromaleague.rest.LeagueHttpClient;
-import com.bonepl.chromaleague.tasks.FetchActivePlayerTask;
-import com.bonepl.chromaleague.tasks.FetchNewEventsTask;
-import com.bonepl.chromaleague.tasks.FetchPlayerListTask;
-import com.bonepl.chromaleague.tasks.EventAnimationProcessorTask;
-import com.bonepl.chromaleague.tasks.EventDataProcessorTask;
+import com.bonepl.chromaleague.state.GameState;
+import com.bonepl.chromaleague.tasks.*;
 import com.bonepl.razersdk.RazerSDKClient;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,55 +14,59 @@ import java.util.concurrent.TimeUnit;
 
 public class ChromaLeague {
     private static final Logger logger = LogManager.getLogger();
+    private static ScheduledExecutorService gameDetectionExecutorService;
     private static ScheduledExecutorService scheduledExecutorService;
     private static RazerSDKClient razerSDKClient;
     static boolean alive = true;
 
     public static void main(String... args) {
-        logger.info("Started Chroma League");
-        final ScheduledExecutorService riotApiCheckExecutor = Executors.newSingleThreadScheduledExecutor();
-        riotApiCheckExecutor.scheduleAtFixedRate(new CheckRiotApiTask(), 0, 1000, TimeUnit.MILLISECONDS);
-
+        initializeGameDetection();
         while (alive) {
             if (GameState.isRiotApiUp()) {
-                initializePreGameThreads();
+                initializePreGame();
                 while (GameState.isRiotApiUp()) {
                     if (GameState.isRunningGame()) {
                         initializeGameThreads();
                     }
                 }
-                shutdownThreads();
+                shutdown();
             }
         }
-
-        riotApiCheckExecutor.shutdown();
-        LeagueHttpClient.shutdown();
+        shutdownGameDetection();
     }
 
-    private static void shutdownThreads() {
-        if (razerSDKClient != null) {
-            razerSDKClient.close();
-            razerSDKClient = null;
-        }
+    private static void shutdownGameDetection() {
+        gameDetectionExecutorService.shutdown();
+    }
 
-        if (scheduledExecutorService != null && !scheduledExecutorService.isShutdown()) {
-            logger.info("RIOT api shut downed, cleaning up");
-            scheduledExecutorService.shutdown();
-        }
+    private static void initializeGameDetection() {
+        logger.info("Started Chroma League");
+        gameDetectionExecutorService = Executors.newSingleThreadScheduledExecutor();
+        gameDetectionExecutorService.scheduleAtFixedRate(new CheckRiotApiTask(), 0, 500, TimeUnit.MILLISECONDS);
+    }
+
+    private static void shutdown() {
+        logger.info("Player left the game");
+        razerSDKClient.close();
+        razerSDKClient = null;
+        scheduledExecutorService.shutdown();
+        LeagueHttpClient.shutdown();
     }
 
     private static void initializeGameThreads() {
         if (razerSDKClient == null) {
+            logger.info("Player joined the game");
             razerSDKClient = new RazerSDKClient();
             scheduledExecutorService.scheduleWithFixedDelay(new FetchPlayerListTask(), 0, 1000, TimeUnit.MILLISECONDS);
             scheduledExecutorService.scheduleWithFixedDelay(new FetchActivePlayerTask(), 50, 300, TimeUnit.MILLISECONDS);
             scheduledExecutorService.scheduleWithFixedDelay(new EventAnimationProcessorTask(), 100, 500, TimeUnit.MILLISECONDS);
-            scheduledExecutorService.scheduleWithFixedDelay(new RefreshMainHudTask(razerSDKClient), 150, 50, TimeUnit.MILLISECONDS);
+            scheduledExecutorService.scheduleWithFixedDelay(() -> razerSDKClient.createKeyboardEffect(new MainHud()), 150, 50, TimeUnit.MILLISECONDS);
         }
     }
 
-    private static void initializePreGameThreads() {
+    private static void initializePreGame() {
         if (scheduledExecutorService == null || scheduledExecutorService.isShutdown()) {
+            logger.info("Game is loading");
             scheduledExecutorService = Executors.newScheduledThreadPool(20);
             scheduledExecutorService.scheduleWithFixedDelay(new FetchNewEventsTask(), 0, 1000, TimeUnit.MILLISECONDS);
             scheduledExecutorService.scheduleWithFixedDelay(new EventDataProcessorTask(), 500, 500, TimeUnit.MILLISECONDS);

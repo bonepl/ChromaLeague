@@ -1,11 +1,11 @@
 package com.bonepl.chromaleague.hud.animations;
 
-import com.bonepl.chromaleague.state.GameStateHelper;
 import com.bonepl.chromaleague.hud.colors.BreathingColor;
 import com.bonepl.chromaleague.hud.colors.TransitionColor;
 import com.bonepl.chromaleague.hud.parts.Background;
 import com.bonepl.chromaleague.hud.parts.HpBar;
 import com.bonepl.chromaleague.hud.parts.ResourceBar;
+import com.bonepl.chromaleague.state.GameStateHelper;
 import com.bonepl.razersdk.animation.AnimatedFrame;
 import com.bonepl.razersdk.animation.Color;
 import com.bonepl.razersdk.animation.LayeredFrame;

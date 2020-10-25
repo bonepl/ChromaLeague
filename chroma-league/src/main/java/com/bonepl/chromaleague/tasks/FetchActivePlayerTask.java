@@ -1,8 +1,8 @@
 package com.bonepl.chromaleague.tasks;
 
-import com.bonepl.chromaleague.state.GameState;
 import com.bonepl.chromaleague.rest.LeagueHttpClient;
 import com.bonepl.chromaleague.rest.activeplayer.ActivePlayer;
+import com.bonepl.chromaleague.state.GameState;
 import com.jsoniter.JsonIterator;
 
 public class FetchActivePlayerTask implements Runnable {

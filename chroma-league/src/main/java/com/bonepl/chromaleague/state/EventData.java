@@ -4,15 +4,16 @@ import com.bonepl.chromaleague.rest.eventdata.DragonType;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class EventData {
     private volatile LocalTime baronBuffEnd;
     private volatile LocalTime elderBuffEnd;
     private final List<DragonType> killedDragons = new ArrayList<>();
-    private volatile int totalEldersKilled = 0;
-    private volatile int activePlayerKillingSpree = 0;
-    private volatile int activePlayerAssistSpree = 0;
+    private volatile int totalEldersKilled;
+    private volatile int activePlayerKillingSpree;
+    private volatile int activePlayerAssistSpree;
 
     public void setBaronBuffEnd(LocalTime baronBuffEnd) {
         this.baronBuffEnd = baronBuffEnd;
@@ -23,7 +24,11 @@ public class EventData {
     }
 
     public List<DragonType> getKilledDragons() {
-        return killedDragons;
+        return Collections.unmodifiableList(killedDragons);
+    }
+
+    public void addKilledDragon(DragonType dragonType) {
+        killedDragons.add(dragonType);
     }
 
     public void setElderBuffEnd(LocalTime elderBuffEnd) {

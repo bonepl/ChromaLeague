@@ -12,7 +12,7 @@ import java.util.List;
 
 public class FetchNewEventsTask implements Runnable {
     public static final String URL = "https://127.0.0.1:2999/liveclientdata/eventdata";
-    private final static Logger logger = LogManager.getLogger();
+    private static final Logger LOGGER = LogManager.getLogger();
     private static int lastProcessedEventId = -1;
 
     @Override
@@ -20,16 +20,16 @@ public class FetchNewEventsTask implements Runnable {
         LeagueHttpClient.get(URL)
                 .map(events -> JsonIterator.deserialize(events, Events.class))
                 .map(Events::getEvents)
-                .ifPresent(this::collectUnprocessedEvents);
+                .ifPresent(FetchNewEventsTask::collectUnprocessedEvents);
     }
 
-    void collectUnprocessedEvents(List<Event> events) {
+    static void collectUnprocessedEvents(List<Event> events) {
         if (lastProcessedEventId == -1 && events.size() > 1) {
-            logger.warn("Game reconnection detected, fast-forwarding past events");
+            LOGGER.warn("Game reconnection detected, fast-forwarding past events");
             GameStateHelper.resetCustomData();
             EventDataProcessorTask.addEvents(events);
         } else {
-            if (!events.isEmpty() && (events.size() > lastProcessedEventId + 1)) {
+            if (!events.isEmpty() && events.size() > lastProcessedEventId + 1) {
                 final List<Event> newEvents = events.subList(lastProcessedEventId + 1, events.size());
                 EventAnimationProcessorTask.addEvents(newEvents);
                 EventDataProcessorTask.addEvents(newEvents);

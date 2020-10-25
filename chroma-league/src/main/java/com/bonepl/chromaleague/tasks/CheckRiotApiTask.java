@@ -6,9 +6,7 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 
 public class CheckRiotApiTask implements Runnable {
-
-    private static final int faultTolerance = 3;
-    private static int currentFault = faultTolerance;
+    private static final int RIOT_API_PORT = 2999;
 
     @Override
     public void run() {
@@ -16,14 +14,11 @@ public class CheckRiotApiTask implements Runnable {
     }
 
     public static boolean checkRiotApiUp() {
-        try (Socket s = new Socket()) {
-            s.connect(new InetSocketAddress("localhost", 2999), 100);
-//            currentFault = 0;
+        try (Socket socket = new Socket()) {
+            socket.connect(new InetSocketAddress("localhost", RIOT_API_PORT), 100);
             return true;
         } catch (Exception e) {
             return false;
-//            currentFault++;
-//            return currentFault >= faultTolerance;
         }
     }
 }

@@ -6,17 +6,17 @@ import com.bonepl.chromaleague.rest.playerlist.PlayerList;
 import com.bonepl.chromaleague.tasks.FetchNewEventsTask;
 
 public final class GameState {
-    private volatile static ActivePlayer activePlayer;
-    private volatile static PlayerList playerList;
-    private volatile static boolean riotApiUp = false;
-    private volatile static boolean runningGame = false;
+    private static volatile ActivePlayer activePlayer;
+    private static volatile PlayerList playerList;
+    private static volatile boolean riotApiUp;
+    private static volatile boolean runningGame;
     private static final EventData EVENT_DATA = new EventData();
 
     private GameState() {
     }
 
     public static String getActivePlayerName() {
-        return getActivePlayer().getSummonerName();
+        return activePlayer.getSummonerName();
     }
 
     public static void setActivePlayer(ActivePlayer activePlayer) {

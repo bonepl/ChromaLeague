@@ -20,16 +20,16 @@ class FetchNewEventsTaskTest {
         GameStateMocks.setActivePlayerName("BooonE");
         GameStateMocks.makePlayerListAvailable();
 
-        EventAnimationProcessorTask.getUnprocessedEvents().clear();
-        EventDataProcessorTask.getUnprocessedEvents().clear();
+        EventAnimationProcessorTask.clearUnprocessedEvents();
+        EventDataProcessorTask.clearUnprocessedEvents();
     }
 
     @AfterEach
     void tearDown() {
         GameStateMocks.clearActivePlayer();
         GameStateMocks.clearPlayerList();
-        EventAnimationProcessorTask.getUnprocessedEvents().clear();
-        EventDataProcessorTask.getUnprocessedEvents().clear();
+        EventAnimationProcessorTask.clearUnprocessedEvents();
+        EventDataProcessorTask.clearUnprocessedEvents();
     }
 
     @Test

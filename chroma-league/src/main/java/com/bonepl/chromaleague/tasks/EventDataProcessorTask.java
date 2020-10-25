@@ -9,23 +9,25 @@ import com.bonepl.chromaleague.state.GameStateHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class EventDataProcessorTask implements Runnable {
-    private static final Logger logger = LogManager.getLogger();
-    private static final Queue<Event> unprocessedEvents = new ConcurrentLinkedQueue<>();
+    private static final Logger LOGGER = LogManager.getLogger();
+    private static final Queue<Event> UNPROCESSED_EVENTS = new ConcurrentLinkedQueue<>();
 
     @Override
     public void run() {
-        while (!unprocessedEvents.isEmpty()) {
-            final Event nextEvent = unprocessedEvents.remove();
+        while (!UNPROCESSED_EVENTS.isEmpty()) {
+            final Event nextEvent = UNPROCESSED_EVENTS.remove();
             processEventForEventData(EventType.fromEvent(nextEvent));
         }
     }
 
-    public void processEventForEventData(EventType eventType) {
+    public static void processEventForEventData(EventType eventType) {
         switch (eventType) {
             case GAME_START -> GameState.setRunningGame(true);
             case ALLY_BARON_KILL -> GameStateHelper.startBaronBuff();
@@ -37,17 +39,21 @@ public class EventDataProcessorTask implements Runnable {
             case ACTIVE_PLAYER_DIED -> resetAlivePlayerCounters();
             case ACTIVE_PLAYER_KILL -> GameStateHelper.addPlayerKill();
             case ACTIVE_PLAYER_ASSIST -> GameStateHelper.addPlayerAssist();
+            case GAME_END_DEFEAT, GAME_END_VICTORY, ENEMY_OCEAN_DRAGON_KILL, ENEMY_MOUNTAIN_DRAGON_KILL,
+                    ENEMY_INFERNAL_DRAGON_KILL, ENEMY_CLOUD_DRAGON_KILL, ENEMY_HERALD_KILL,
+                    ENEMY_BARON_KILL, ALLY_HERALD_KILL, UNSUPPORTED -> {
+            }
         }
     }
 
-    private void processElderKill(EventType eventType) {
+    private static void processElderKill(EventType eventType) {
         if (eventType == EventType.ALLY_ELDER_DRAGON_KILL) {
             GameStateHelper.startElderBuff();
         }
         GameStateHelper.addKilledElder();
     }
 
-    private void resetAlivePlayerCounters() {
+    private static void resetAlivePlayerCounters() {
         final EventData eventData = GameState.getEventData();
         eventData.setElderBuffEnd(null);
         eventData.setBaronBuffEnd(null);
@@ -56,11 +62,16 @@ public class EventDataProcessorTask implements Runnable {
     }
 
     public static void addEvents(List<Event> events) {
-        unprocessedEvents.addAll(events);
+        UNPROCESSED_EVENTS.addAll(events);
     }
 
     //TEST ONLY
-    public static Queue<Event> getUnprocessedEvents() {
-        return unprocessedEvents;
+    public static Collection<Event> getUnprocessedEvents() {
+        return Collections.unmodifiableCollection(UNPROCESSED_EVENTS);
+    }
+
+    //TEST ONLY
+    public static void clearUnprocessedEvents() {
+        UNPROCESSED_EVENTS.clear();
     }
 }

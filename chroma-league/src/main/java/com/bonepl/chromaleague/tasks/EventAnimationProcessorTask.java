@@ -6,30 +6,26 @@ import com.bonepl.chromaleague.rest.eventdata.Event;
 import com.bonepl.chromaleague.rest.eventdata.EventType;
 import com.bonepl.razersdk.animation.IFrame;
 import com.bonepl.razersdk.animation.SimpleFrame;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class EventAnimationProcessorTask implements Runnable {
-    private static final Queue<Event> unprocessedEvents = new LinkedList<>();
+    private static final Queue<Event> UNPROCESSED_EVENTS = new LinkedList<>();
 
     @Override
     public void run() {
-        while (!unprocessedEvents.isEmpty()) {
-            final Event nextEvent = unprocessedEvents.remove();
+        while (!UNPROCESSED_EVENTS.isEmpty()) {
+            final Event nextEvent = UNPROCESSED_EVENTS.remove();
             processEventAnimation(EventType.fromEvent(nextEvent));
         }
     }
 
-    private void processEventAnimation(EventType eventType) {
+    private static void processEventAnimation(EventType eventType) {
         IFrame animation = getEventAnimation(eventType);
         EventAnimator.addAnimation(animation);
     }
 
-    private IFrame getEventAnimation(EventType eventType) {
+    private static IFrame getEventAnimation(EventType eventType) {
         return switch (eventType) {
             case ALLY_BARON_KILL -> new AllyBaronKillAnimation();
             case ALLY_HERALD_KILL -> new AllyHeraldKillAnimation();
@@ -54,11 +50,16 @@ public class EventAnimationProcessorTask implements Runnable {
     }
 
     public static void addEvents(List<Event> events) {
-        unprocessedEvents.addAll(events);
+        UNPROCESSED_EVENTS.addAll(events);
     }
 
     //TEST ONLY
-    public static Queue<Event> getUnprocessedEvents() {
-        return unprocessedEvents;
+    public static Collection<Event> getUnprocessedEvents() {
+        return Collections.unmodifiableCollection(UNPROCESSED_EVENTS);
+    }
+
+    //TEST ONLY
+    public static void clearUnprocessedEvents() {
+        UNPROCESSED_EVENTS.clear();
     }
 }

@@ -10,7 +10,7 @@ import org.apache.logging.log4j.Logger;
 
 public class FetchPlayerListTask implements Runnable {
     public static final String URL = "https://127.0.0.1:2999/liveclientdata/playerlist";
-    private final static Logger logger = LogManager.getLogger();
+    private static final Logger LOGGER = LogManager.getLogger();
 
     @Override
     public void run() {

@@ -1,9 +1,9 @@
 package com.bonepl.chromaleague.tasks;
 
-import com.bonepl.chromaleague.state.GameState;
 import com.bonepl.chromaleague.rest.LeagueHttpClient;
 import com.bonepl.chromaleague.rest.playerlist.Player;
 import com.bonepl.chromaleague.rest.playerlist.PlayerList;
+import com.bonepl.chromaleague.state.GameState;
 import com.jsoniter.JsonIterator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,10 +14,12 @@ public class FetchPlayerListTask implements Runnable {
 
     @Override
     public void run() {
-        LeagueHttpClient.get(URL)
-                .map(playerList -> JsonIterator.deserialize(playerList, Player[].class))
-                .map(PlayerList::new)
-                .ifPresent(GameState::setPlayerList);
+        if (GameState.isActivePlayerAvailable()) {
+            LeagueHttpClient.get(URL)
+                    .map(playerList -> JsonIterator.deserialize(playerList, Player[].class))
+                    .map(PlayerList::new)
+                    .ifPresent(GameState::setPlayerList);
+        }
     }
 
 }

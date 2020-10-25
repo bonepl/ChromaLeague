@@ -1,4 +1,4 @@
-package com.bonepl.chromaleague.hud.animations;
+package com.bonepl.chromaleague.hud.parts;
 
 import com.bonepl.chromaleague.state.GameStateHelper;
 import com.bonepl.chromaleague.hud.colors.BreathingColor;
@@ -7,7 +7,7 @@ import com.bonepl.razersdk.animation.AnimatedFrame;
 import com.bonepl.razersdk.animation.Frame;
 import com.bonepl.razersdk.animation.SimpleFrame;
 
-public class DragonSoulAnimation extends AnimatedFrame {
+public class DragonSoulBar extends AnimatedFrame {
 
     private BreathingColor dragonColor;
 

@@ -1,6 +1,7 @@
 package com.bonepl.chromaleague.tasks;
 
 import com.bonepl.chromaleague.hud.animations.*;
+import com.bonepl.chromaleague.hud.parts.EventAnimator;
 import com.bonepl.chromaleague.rest.eventdata.Event;
 import com.bonepl.chromaleague.rest.eventdata.EventType;
 import com.bonepl.razersdk.animation.IFrame;
@@ -26,7 +27,7 @@ public class EventAnimationProcessorTask implements Runnable {
 
     private void processEventAnimation(EventType eventType) {
         IFrame animation = getEventAnimation(eventType);
-        EventAnimation.addFrames(animation);
+        EventAnimator.addAnimation(animation);
     }
 
     private IFrame getEventAnimation(EventType eventType) {

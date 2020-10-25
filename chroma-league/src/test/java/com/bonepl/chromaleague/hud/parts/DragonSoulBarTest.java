@@ -1,5 +1,6 @@
-package com.bonepl.chromaleague.hud.animations;
+package com.bonepl.chromaleague.hud.parts;
 
+import com.bonepl.chromaleague.hud.parts.DragonSoulBar;
 import com.bonepl.chromaleague.state.GameStateHelper;
 import com.bonepl.chromaleague.rest.eventdata.DragonType;
 import com.bonepl.razersdk.RazerSDKClient;
@@ -9,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.stream.IntStream;
 
-class DragonSoulAnimationTest {
+class DragonSoulBarTest {
     private static RazerSDKClient razerSDKClient;
 
     @BeforeAll
@@ -43,10 +44,10 @@ class DragonSoulAnimationTest {
     }
 
     private void testDragonSoulAnimation(DragonType dragonType) throws InterruptedException {
-        DragonSoulAnimation dragonSoulAnimation = new DragonSoulAnimation();
+        DragonSoulBar dragonSoulBar = new DragonSoulBar();
         switchToDragon(dragonType);
         for (int i = 0; i < 80; i++) {
-            razerSDKClient.createKeyboardEffect(dragonSoulAnimation);
+            razerSDKClient.createKeyboardEffect(dragonSoulBar);
             Thread.sleep(50);
         }
     }

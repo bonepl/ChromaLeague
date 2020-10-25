@@ -5,10 +5,10 @@ import com.bonepl.chromaleague.hud.animations.*;
 import com.bonepl.razersdk.animation.LayeredFrame;
 
 public class MainHud extends LayeredFrame {
-    private static final GoldAnimation goldAnimation = new GoldAnimation();
-    private static final LevelUpAnimation levelUpAnimation = new LevelUpAnimation();
-    private static final EventAnimation eventAnimation = new EventAnimation();
-    private static final DragonSoulAnimation dragonSoulAnimation = new DragonSoulAnimation();
+    private static final GoldBar GOLD_BAR = new GoldBar();
+    private static final LevelUpBar LEVEL_UP_BAR = new LevelUpBar();
+    private static final EventAnimator EVENT_ANIMATOR = new EventAnimator();
+    private static final DragonSoulBar DRAGON_SOUL_BAR = new DragonSoulBar();
     private static final ElderBuffAnimation elderBuffAnimation = new ElderBuffAnimation();
     private static boolean playerDead;
 
@@ -18,15 +18,15 @@ public class MainHud extends LayeredFrame {
         addFrame(new ResourceBar());
         addFrame(new KilledDragonBar());
         addFrame(new AssistKillingSpreeBar());
-        addFrame(dragonSoulAnimation);
-        addFrame(goldAnimation);
-        addFrame(levelUpAnimation);
+        addFrame(DRAGON_SOUL_BAR);
+        addFrame(GOLD_BAR);
+        addFrame(LEVEL_UP_BAR);
         if (GameStateHelper.hasElderBuff()) {
             addFrame(elderBuffAnimation);
         }
         handleRespawnEvent();
-        if (eventAnimation.hasFrame()) {
-            addFrame(eventAnimation);
+        if (EVENT_ANIMATOR.hasFrame()) {
+            addFrame(EVENT_ANIMATOR);
         }
         System.out.println();
     }
@@ -36,7 +36,7 @@ public class MainHud extends LayeredFrame {
         if (playerDead) {
             if (activePlayerAlive) {
                 playerDead = false;
-                EventAnimation.addFrames(new RespawnAnimation());
+                EventAnimator.addAnimation(new RespawnAnimation());
             }
         } else {
             if (!activePlayerAlive) {

@@ -1,4 +1,4 @@
-package com.bonepl.chromaleague.hud.animations;
+package com.bonepl.chromaleague.hud.parts;
 
 import com.bonepl.chromaleague.state.GameStateHelper;
 import com.bonepl.razersdk.animation.*;
@@ -9,7 +9,7 @@ import java.util.List;
 
 import static com.bonepl.razersdk.sdk.RzKey.*;
 
-public class LevelUpAnimation extends Animation {
+public class LevelUpBar extends Animation {
     private final List<RzKey> LEVEL_UP_KEYS = Arrays.asList(
             RZKEY_MACRO5, RZKEY_LCTRL, RZKEY_LWIN,
             RZKEY_MACRO4, RZKEY_LSHIFT,

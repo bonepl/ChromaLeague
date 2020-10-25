@@ -7,7 +7,7 @@ import org.apache.logging.log4j.Logger;
 
 public class RefreshMainHudTask implements Runnable {
     private static final Logger logger = LogManager.getLogger();
-    private RazerSDKClient razerSDKClient;
+    private final RazerSDKClient razerSDKClient;
 
     public RefreshMainHudTask(RazerSDKClient razerSDKClient) {
         this.razerSDKClient = razerSDKClient;

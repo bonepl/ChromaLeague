@@ -1,7 +1,7 @@
 package com.bonepl.chromaleague.tasks;
 
 import com.bonepl.chromaleague.state.GameState;
-import com.bonepl.chromaleague.hud.animations.EventAnimation;
+import com.bonepl.chromaleague.hud.parts.EventAnimator;
 import com.bonepl.chromaleague.rest.activeplayer.ActivePlayer;
 import com.bonepl.chromaleague.rest.eventdata.Event;
 import com.bonepl.chromaleague.rest.playerlist.PlayerList;
@@ -17,9 +17,9 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-class EventAnimationProcessorTaskTest {
+class EventAnimatorProcessorTaskTest {
     private static RazerSDKClient razerSDKClient;
-    private static final EventAnimation eventAnimation = new EventAnimation();
+    private static final EventAnimator EVENT_ANIMATOR = new EventAnimator();
 
     @BeforeAll
     static void beforeAll() {
@@ -253,8 +253,8 @@ class EventAnimationProcessorTaskTest {
     }
 
     private void runEventAnimation() {
-        while (eventAnimation.hasFrame()) {
-            razerSDKClient.createKeyboardEffect(eventAnimation);
+        while (EVENT_ANIMATOR.hasFrame()) {
+            razerSDKClient.createKeyboardEffect(EVENT_ANIMATOR);
             try {
                 Thread.sleep(50);
             } catch (InterruptedException e) {

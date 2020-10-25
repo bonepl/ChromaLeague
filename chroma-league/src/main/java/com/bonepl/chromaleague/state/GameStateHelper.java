@@ -1,9 +1,9 @@
 package com.bonepl.chromaleague.state;
 
-import com.bonepl.chromaleague.rest.eventdata.DragonType;
 import com.bonepl.chromaleague.hud.parts.GoldBar;
 import com.bonepl.chromaleague.rest.activeplayer.ChampionStats;
 import com.bonepl.chromaleague.rest.activeplayer.ResourceType;
+import com.bonepl.chromaleague.rest.eventdata.DragonType;
 
 import java.time.LocalTime;
 import java.util.List;

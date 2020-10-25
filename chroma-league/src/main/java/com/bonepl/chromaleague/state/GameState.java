@@ -1,6 +1,6 @@
 package com.bonepl.chromaleague.state;
 
-import com.bonepl.chromaleague.hud.animations.EventAnimation;
+import com.bonepl.chromaleague.hud.parts.EventAnimator;
 import com.bonepl.chromaleague.rest.activeplayer.ActivePlayer;
 import com.bonepl.chromaleague.tasks.FetchNewEventsTask;
 import com.bonepl.chromaleague.rest.playerlist.PlayerList;
@@ -71,7 +71,7 @@ public final class GameState {
         }
         GameState.riotApiUp = riotApiUp;
         if (!riotApiUp) {
-            EventAnimation.stop();
+            EventAnimator.stop();
             GameStateHelper.resetCustomData();
             runningGame = false;
             FetchNewEventsTask.resetProcessedEventCounter();

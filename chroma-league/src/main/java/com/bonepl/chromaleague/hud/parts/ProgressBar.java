@@ -6,7 +6,7 @@ import com.bonepl.razersdk.sdk.RzKey;
 
 import java.util.List;
 
-public abstract class ProgressBar extends SimpleFrame {
+public class ProgressBar extends SimpleFrame {
 
     public ProgressBar(final List<RzKey> progressBar, final Integer percent, final Color color) {
         super(getBarPercent(progressBar, percent), color);

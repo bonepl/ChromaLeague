@@ -10,7 +10,7 @@ public class FetchActivePlayerTask implements Runnable {
 
     @Override
     public void run() {
-        LeagueHttpClient.get(URL)
+        LeagueHttpClient.getResponse(URL)
                 .map(activePlayer -> JsonIterator.deserialize(activePlayer, ActivePlayer.class))
                 .ifPresent(GameState::setActivePlayer);
     }

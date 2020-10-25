@@ -16,14 +16,12 @@ import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class EventDataProcessorTask implements Runnable {
-    private static final Logger LOGGER = LogManager.getLogger();
     private static final Queue<Event> UNPROCESSED_EVENTS = new ConcurrentLinkedQueue<>();
 
     @Override
     public void run() {
         while (!UNPROCESSED_EVENTS.isEmpty()) {
-            final Event nextEvent = UNPROCESSED_EVENTS.remove();
-            processEventForEventData(EventType.fromEvent(nextEvent));
+            processEventForEventData(EventType.fromEvent(UNPROCESSED_EVENTS.remove()));
         }
     }
 

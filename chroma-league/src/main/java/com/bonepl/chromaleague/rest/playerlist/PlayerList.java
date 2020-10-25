@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class PlayerList {
     private final Map<String, Player> players;
 
-    public PlayerList(Player[] players) {
+    public PlayerList(Player... players) {
         this.players = Arrays.stream(players)
                 .collect(Collectors.toMap(Player::getSummonerName, Function.identity()));
     }
@@ -23,14 +23,14 @@ public class PlayerList {
 
     public List<String> getAllies() {
         return players.values().stream()
-                .filter(p -> Objects.equals(getActivePlayer().getTeam(), p.getTeam()))
+                .filter(p -> getActivePlayer().getTeam() == p.getTeam())
                 .map(Player::getSummonerName)
                 .collect(Collectors.toList());
     }
 
     public List<String> getEnemies() {
         return players.values().stream()
-                .filter(p -> !Objects.equals(getActivePlayer().getTeam(), p.getTeam()))
+                .filter(p -> getActivePlayer().getTeam() != p.getTeam())
                 .map(Player::getSummonerName)
                 .collect(Collectors.toList());
     }

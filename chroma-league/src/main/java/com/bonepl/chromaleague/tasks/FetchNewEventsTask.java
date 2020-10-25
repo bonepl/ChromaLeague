@@ -17,20 +17,22 @@ public class FetchNewEventsTask implements Runnable {
 
     @Override
     public void run() {
-        LeagueHttpClient.get(URL)
+        LeagueHttpClient.getResponse(URL)
                 .map(events -> JsonIterator.deserialize(events, Events.class))
                 .map(Events::getEvents)
+                .filter(events -> !events.isEmpty())
                 .ifPresent(FetchNewEventsTask::collectUnprocessedEvents);
     }
 
     static void collectUnprocessedEvents(List<Event> events) {
         if (lastProcessedEventId == -1 && events.size() > 1) {
-            LOGGER.warn("Game reconnection detected, fast-forwarding past events");
+            LOGGER.warn("Game reconnection detected, fast-forwarding past {} events", events.size());
             GameStateHelper.resetCustomData();
             EventDataProcessorTask.addEvents(events);
         } else {
-            if (!events.isEmpty() && events.size() > lastProcessedEventId + 1) {
+            if (events.size() > lastProcessedEventId + 1) {
                 final List<Event> newEvents = events.subList(lastProcessedEventId + 1, events.size());
+                newEvents.forEach(event -> LOGGER.debug("Adding new event: " + event));
                 EventAnimationProcessorTask.addEvents(newEvents);
                 EventDataProcessorTask.addEvents(newEvents);
             }

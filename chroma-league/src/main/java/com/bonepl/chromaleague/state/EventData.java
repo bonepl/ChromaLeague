@@ -7,12 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EventData {
-    private LocalTime baronBuffEnd;
-    private LocalTime elderBuffEnd;
+    private volatile LocalTime baronBuffEnd;
+    private volatile LocalTime elderBuffEnd;
     private final List<DragonType> killedDragons = new ArrayList<>();
-    private int totalEldersKilled = 0;
-    private int activePlayerKillingSpree = 0;
-    private int activePlayerAssistSpree = 0;
+    private volatile int totalEldersKilled = 0;
+    private volatile int activePlayerKillingSpree = 0;
+    private volatile int activePlayerAssistSpree = 0;
 
     public void setBaronBuffEnd(LocalTime baronBuffEnd) {
         this.baronBuffEnd = baronBuffEnd;

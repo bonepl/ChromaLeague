@@ -9,7 +9,6 @@ import com.bonepl.chromaleague.state.GameStateHelper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -49,7 +48,7 @@ public class EventDataProcessorTask implements Runnable {
     }
 
     private void resetAlivePlayerCounters() {
-        final EventData eventData = GameState.getCustomData();
+        final EventData eventData = GameState.getEventData();
         eventData.setElderBuffEnd(null);
         eventData.setBaronBuffEnd(null);
         eventData.setActivePlayerKillingSpree(0);

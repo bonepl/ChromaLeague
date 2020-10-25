@@ -71,12 +71,12 @@ public final class GameStateHelper {
 
     public static void startBaronBuff() {
         if (GameStateHelper.isActivePlayerAlive()) {
-            GameState.getCustomData().setBaronBuffEnd(LocalTime.now().plusMinutes(3));
+            GameState.getEventData().setBaronBuffEnd(LocalTime.now().plusMinutes(3));
         }
     }
 
     public static boolean hasBaronBuff() {
-        final EventData eventData = getCustomData();
+        final EventData eventData = getEventData();
         if (eventData.getBaronBuffEnd() != null && GameStateHelper.isActivePlayerAlive()) {
             return LocalTime.now().isBefore(eventData.getBaronBuffEnd());
         }
@@ -88,15 +88,15 @@ public final class GameStateHelper {
         if (GameStateHelper.isActivePlayerAlive()) {
             final int totalEldersKilled = GameStateHelper.getTotalEldersKilled();
             if (totalEldersKilled == 1) {
-                GameState.getCustomData().setElderBuffEnd(LocalTime.now().plusSeconds(150));
+                GameState.getEventData().setElderBuffEnd(LocalTime.now().plusSeconds(150));
             } else {
-                GameState.getCustomData().setElderBuffEnd(LocalTime.now().plusSeconds(300));
+                GameState.getEventData().setElderBuffEnd(LocalTime.now().plusSeconds(300));
             }
         }
     }
 
     public static boolean hasElderBuff() {
-        final EventData eventData = getCustomData();
+        final EventData eventData = getEventData();
         if (eventData.getElderBuffEnd() != null && GameStateHelper.isActivePlayerAlive()) {
             return LocalTime.now().isBefore(eventData.getElderBuffEnd());
         }
@@ -105,52 +105,52 @@ public final class GameStateHelper {
     }
 
     public static boolean hasDragonSoul() {
-        return getCustomData().getKilledDragons().size() >= 4;
+        return getEventData().getKilledDragons().size() >= 4;
     }
 
     public static DragonType getDragonSoulType() {
-        return getCustomData().getKilledDragons().get(3);
+        return getEventData().getKilledDragons().get(3);
     }
 
     public static void addKilledDragon(DragonType dragonType) {
-        getCustomData().getKilledDragons().add(dragonType);
+        getEventData().getKilledDragons().add(dragonType);
     }
 
     public static List<DragonType> getKilledDragons() {
-        return getCustomData().getKilledDragons();
+        return getEventData().getKilledDragons();
     }
 
     public static int getTotalEldersKilled() {
-        return getCustomData().getTotalEldersKilled();
+        return getEventData().getTotalEldersKilled();
     }
 
     public static void addKilledElder() {
-        final EventData eventData = getCustomData();
+        final EventData eventData = getEventData();
         eventData.setTotalEldersKilled(eventData.getTotalEldersKilled() + 1);
     }
 
     public static int getActivePlayerKillingSpree() {
-        final EventData eventData = getCustomData();
+        final EventData eventData = getEventData();
         return eventData.getActivePlayerKillingSpree();
     }
 
     public static void addPlayerKill() {
-        final EventData eventData = getCustomData();
+        final EventData eventData = getEventData();
         eventData.setActivePlayerKillingSpree(eventData.getActivePlayerKillingSpree() + 1);
     }
 
     public static int getActivePlayerAssistSpree() {
-        final EventData eventData = getCustomData();
+        final EventData eventData = getEventData();
         return eventData.getActivePlayerAssistSpree();
     }
 
     public static void addPlayerAssist() {
-        final EventData eventData = getCustomData();
+        final EventData eventData = getEventData();
         eventData.setActivePlayerAssistSpree(eventData.getActivePlayerAssistSpree() + 1);
     }
 
     public static void resetCustomData() {
-        getCustomData().resetCounters();
+        getEventData().resetCounters();
     }
 
 }

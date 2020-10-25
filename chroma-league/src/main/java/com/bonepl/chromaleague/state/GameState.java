@@ -43,7 +43,7 @@ public final class GameState {
         return playerList != null;
     }
 
-    public static EventData getCustomData() {
+    public static EventData getEventData() {
         return EVENT_DATA;
     }
 

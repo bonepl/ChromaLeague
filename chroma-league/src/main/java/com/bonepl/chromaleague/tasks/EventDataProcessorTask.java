@@ -6,8 +6,6 @@ import com.bonepl.chromaleague.rest.eventdata.EventType;
 import com.bonepl.chromaleague.state.EventData;
 import com.bonepl.chromaleague.state.GameState;
 import com.bonepl.chromaleague.state.GameStateHelper;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.util.Collection;
 import java.util.Collections;

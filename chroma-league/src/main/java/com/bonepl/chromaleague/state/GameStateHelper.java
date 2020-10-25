@@ -112,7 +112,7 @@ public final class GameStateHelper {
     }
 
     public static void addKilledDragon(DragonType dragonType) {
-        GameState.getEventData().getKilledDragons().add(dragonType);
+        GameState.getEventData().addKilledDragon(dragonType);
     }
 
     public static List<DragonType> getKilledDragons() {
@@ -129,23 +129,21 @@ public final class GameStateHelper {
     }
 
     public static int getActivePlayerKillingSpree() {
-        final EventData eventData = GameState.getEventData();
-        return eventData.getActivePlayerKillingSpree();
+        return GameState.getEventData().getActivePlayerKillingSpree();
     }
 
     public static void addPlayerKill() {
-        final EventData eventData = GameState.getEventData();
-        eventData.setActivePlayerKillingSpree(eventData.getActivePlayerKillingSpree() + 1);
+        GameState.getEventData().setActivePlayerKillingSpree(
+                GameState.getEventData().getActivePlayerKillingSpree() + 1);
     }
 
     public static int getActivePlayerAssistSpree() {
-        final EventData eventData = GameState.getEventData();
-        return eventData.getActivePlayerAssistSpree();
+        return GameState.getEventData().getActivePlayerAssistSpree();
     }
 
     public static void addPlayerAssist() {
-        final EventData eventData = GameState.getEventData();
-        eventData.setActivePlayerAssistSpree(eventData.getActivePlayerAssistSpree() + 1);
+        GameState.getEventData().setActivePlayerAssistSpree(
+                GameState.getEventData().getActivePlayerAssistSpree() + 1);
     }
 
     public static void resetCustomData() {

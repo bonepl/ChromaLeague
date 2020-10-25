@@ -1,11 +1,7 @@
 package com.bonepl.chromaleague.state;
 
-import com.bonepl.chromaleague.hud.parts.EventAnimator;
 import com.bonepl.chromaleague.rest.activeplayer.ActivePlayer;
 import com.bonepl.chromaleague.rest.playerlist.PlayerList;
-import com.bonepl.chromaleague.tasks.FetchNewEventsTask;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public final class GameState {
     private static volatile ActivePlayer activePlayer;
@@ -73,14 +69,6 @@ public final class GameState {
     public static void setRiotApiUp(boolean riotApiUp) {
         if (GameState.riotApiUp != riotApiUp) {
             GameState.riotApiUp = riotApiUp;
-            if (!riotApiUp) {
-                GameStateHelper.resetCustomData();
-                EventAnimator.stop();
-                FetchNewEventsTask.resetProcessedEventCounter();
-                runningGame = false;
-            }
         }
     }
-
-
 }

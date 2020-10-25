@@ -7,7 +7,7 @@ import com.bonepl.razersdk.sdk.RzKey;
 
 import java.util.List;
 
-public class StaticPartialBlinkingAnimation extends AnimatedFrame {
+public abstract class StaticPartialBlinkingAnimation extends AnimatedFrame {
 
     public StaticPartialBlinkingAnimation(List<RzKey> rzKeys, int times, Color color) {
         for (int i = 0; i < times; i++) {

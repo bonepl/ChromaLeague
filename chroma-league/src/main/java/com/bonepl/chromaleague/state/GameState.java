@@ -13,7 +13,7 @@ public final class GameState {
     private volatile static PlayerList playerList;
     private volatile static boolean riotApiUp = false;
     private volatile static boolean runningGame = false;
-    private static final CustomData customData = new CustomData();
+    private static final EventData EVENT_DATA = new EventData();
 
     private GameState() {
     }
@@ -46,8 +46,8 @@ public final class GameState {
         return playerList != null && playerList.getActivePlayer() != null;
     }
 
-    public static CustomData getCustomData() {
-        return customData;
+    public static EventData getCustomData() {
+        return EVENT_DATA;
     }
 
     public static boolean isRunningGame() {

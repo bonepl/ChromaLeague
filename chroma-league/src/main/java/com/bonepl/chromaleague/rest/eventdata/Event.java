@@ -1,5 +1,7 @@
 package com.bonepl.chromaleague.rest.eventdata;
 
+import java.util.List;
+
 public class Event {
     int EventID;
     String EventName;
@@ -8,6 +10,7 @@ public class Event {
     String KillerName;
     String Result;
     String VictimName;
+    List<String> Assisters;
 
     public int getEventID() {
         return EventID;
@@ -35,6 +38,10 @@ public class Event {
 
     public String getVictimName() {
         return VictimName;
+    }
+
+    public List<String> getAssisters() {
+        return Assisters;
     }
 
     @Override

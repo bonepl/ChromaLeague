@@ -41,9 +41,33 @@ class EventAnimationProcessorTaskTest {
         final Event mock = mock(Event.class);
         when(mock.getEventName()).thenReturn("ChampionKill");
         when(mock.getKillerName()).thenReturn(player);
+        EventAnimationProcessorTask.addEvents(List.of(mock));
+
+        //when
+        new EventAnimationProcessorTask().run();
 
         //then
+        runEventAnimation();
+    }
+
+    @Test
+    void testActivePLayerAssist() {
+        //given
+        final String player = "BooonE";
+        ActivePlayer activePlayer = mock(ActivePlayer.class);
+        when(activePlayer.getSummonerName()).thenReturn(player);
+        GameState.setActivePlayer(activePlayer);
+
+        final Event mock = mock(Event.class);
+        when(mock.getEventName()).thenReturn("ChampionKill");
+        when(mock.getKillerName()).thenReturn("My Teammate");
+        when(mock.getAssisters()).thenReturn(List.of(player));
         EventAnimationProcessorTask.addEvents(List.of(mock));
+
+        //when
+        new EventAnimationProcessorTask().run();
+
+        //then
         runEventAnimation();
     }
 

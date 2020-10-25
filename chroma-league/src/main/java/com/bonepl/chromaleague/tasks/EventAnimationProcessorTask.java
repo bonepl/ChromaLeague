@@ -8,7 +8,6 @@ import com.bonepl.razersdk.animation.SimpleFrame;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -49,6 +48,7 @@ public class EventAnimationProcessorTask implements Runnable {
             case GAME_END_VICTORY -> new WinAnimation();
             case GAME_END_DEFEAT -> new LoseAnimation();
             case ACTIVE_PLAYER_KILL -> new ActivePlayerKillAnimation();
+            case ACTIVE_PLAYER_ASSIST -> new ActivePlayerAssistAnimation();
             case ACTIVE_PLAYER_DIED, GAME_START, UNSUPPORTED -> new SimpleFrame();
         };
     }

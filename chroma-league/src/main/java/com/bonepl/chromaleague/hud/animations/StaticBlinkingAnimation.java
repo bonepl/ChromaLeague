@@ -4,7 +4,7 @@ import com.bonepl.razersdk.animation.Color;
 import com.bonepl.razersdk.animation.AnimatedFrame;
 import com.bonepl.razersdk.animation.SimpleFrame;
 
-public class StaticBlinkingAnimation extends AnimatedFrame {
+public abstract class StaticBlinkingAnimation extends AnimatedFrame {
 
     public StaticBlinkingAnimation(int times, Color color) {
         for (int i = 0; i < times; i++) {

@@ -20,7 +20,7 @@ class KilledDragonBarTest {
         try (RazerSDKClient razerSDKClient = new RazerSDKClient()) {
             for (int i = 0; i < 4; i++) {
                 razerSDKClient.createKeyboardEffect(new KilledDragonBar());
-                new EventDataProcessorTask().processEventForCustomData(testDrakesOrder.remove());
+                new EventDataProcessorTask().processEventForEventData(testDrakesOrder.remove());
                 Thread.sleep(500);
             }
         }

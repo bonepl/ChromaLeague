@@ -17,7 +17,7 @@ public class MainHud extends LayeredFrame {
         addFrame(new HpBar());
         addFrame(new ResourceBar());
         addFrame(new KilledDragonBar());
-        addFrame(new KillingSpreeBar());
+        addFrame(new AssistKillingSpreeBar());
         addFrame(dragonSoulAnimation);
         addFrame(goldAnimation);
         addFrame(levelUpAnimation);

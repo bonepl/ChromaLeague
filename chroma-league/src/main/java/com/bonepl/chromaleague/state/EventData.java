@@ -6,12 +6,13 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomData {
+public class EventData {
     private LocalTime baronBuffEnd;
     private LocalTime elderBuffEnd;
     private final List<DragonType> killedDragons = new ArrayList<>();
     private int totalEldersKilled = 0;
     private int activePlayerKillingSpree = 0;
+    private int activePlayerAssistSpree = 0;
 
     public void setBaronBuffEnd(LocalTime baronBuffEnd) {
         this.baronBuffEnd = baronBuffEnd;
@@ -49,9 +50,18 @@ public class CustomData {
         this.activePlayerKillingSpree = activePlayerKillingSpree;
     }
 
-    public void reset() {
+    public int getActivePlayerAssistSpree() {
+        return activePlayerAssistSpree;
+    }
+
+    public void setActivePlayerAssistSpree(int activePlayerAssistSpree) {
+        this.activePlayerAssistSpree = activePlayerAssistSpree;
+    }
+
+    public void resetCounters() {
         killedDragons.clear();
         totalEldersKilled = 0;
         activePlayerKillingSpree = 0;
+        activePlayerAssistSpree = 0;
     }
 }

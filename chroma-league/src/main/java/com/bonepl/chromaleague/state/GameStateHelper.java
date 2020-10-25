@@ -76,11 +76,11 @@ public final class GameStateHelper {
     }
 
     public static boolean hasBaronBuff() {
-        final CustomData customData = getCustomData();
-        if (customData.getBaronBuffEnd() != null && GameStateHelper.isActivePlayerAlive()) {
-            return LocalTime.now().isBefore(customData.getBaronBuffEnd());
+        final EventData eventData = getCustomData();
+        if (eventData.getBaronBuffEnd() != null && GameStateHelper.isActivePlayerAlive()) {
+            return LocalTime.now().isBefore(eventData.getBaronBuffEnd());
         }
-        customData.setBaronBuffEnd(null);
+        eventData.setBaronBuffEnd(null);
         return false;
     }
 
@@ -96,11 +96,11 @@ public final class GameStateHelper {
     }
 
     public static boolean hasElderBuff() {
-        final CustomData customData = getCustomData();
-        if (customData.getElderBuffEnd() != null && GameStateHelper.isActivePlayerAlive()) {
-            return LocalTime.now().isBefore(customData.getElderBuffEnd());
+        final EventData eventData = getCustomData();
+        if (eventData.getElderBuffEnd() != null && GameStateHelper.isActivePlayerAlive()) {
+            return LocalTime.now().isBefore(eventData.getElderBuffEnd());
         }
-        customData.setElderBuffEnd(null);
+        eventData.setElderBuffEnd(null);
         return false;
     }
 
@@ -125,22 +125,32 @@ public final class GameStateHelper {
     }
 
     public static void addKilledElder() {
-        final CustomData customData = getCustomData();
-        customData.setTotalEldersKilled(customData.getTotalEldersKilled() + 1);
+        final EventData eventData = getCustomData();
+        eventData.setTotalEldersKilled(eventData.getTotalEldersKilled() + 1);
     }
 
     public static int getActivePlayerKillingSpree() {
-        final CustomData customData = getCustomData();
-        return customData.getActivePlayerKillingSpree();
+        final EventData eventData = getCustomData();
+        return eventData.getActivePlayerKillingSpree();
     }
 
     public static void addPlayerKill() {
-        final CustomData customData = getCustomData();
-        customData.setActivePlayerKillingSpree(customData.getActivePlayerKillingSpree() + 1);
+        final EventData eventData = getCustomData();
+        eventData.setActivePlayerKillingSpree(eventData.getActivePlayerKillingSpree() + 1);
+    }
+
+    public static int getActivePlayerAssistSpree() {
+        final EventData eventData = getCustomData();
+        return eventData.getActivePlayerAssistSpree();
+    }
+
+    public static void addPlayerAssist() {
+        final EventData eventData = getCustomData();
+        eventData.setActivePlayerAssistSpree(eventData.getActivePlayerAssistSpree() + 1);
     }
 
     public static void resetCustomData() {
-        getCustomData().reset();
+        getCustomData().resetCounters();
     }
 
 }

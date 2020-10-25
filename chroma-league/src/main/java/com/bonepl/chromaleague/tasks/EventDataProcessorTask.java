@@ -2,7 +2,7 @@ package com.bonepl.chromaleague.tasks;
 
 import com.bonepl.chromaleague.state.GameState;
 import com.bonepl.chromaleague.state.GameStateHelper;
-import com.bonepl.chromaleague.state.CustomData;
+import com.bonepl.chromaleague.state.EventData;
 import com.bonepl.chromaleague.rest.eventdata.DragonType;
 import com.bonepl.chromaleague.rest.eventdata.Event;
 import com.bonepl.chromaleague.rest.eventdata.EventType;
@@ -20,11 +20,11 @@ public class EventDataProcessorTask implements Runnable {
     public void run() {
         while (!unprocessedEvents.isEmpty()) {
             final Event nextEvent = unprocessedEvents.remove();
-            processEventForCustomData(EventType.fromEvent(nextEvent));
+            processEventForEventData(EventType.fromEvent(nextEvent));
         }
     }
 
-    public void processEventForCustomData(EventType eventType) {
+    public void processEventForEventData(EventType eventType) {
         switch (eventType) {
             case GAME_START -> GameState.setRunningGame(true);
             case ALLY_BARON_KILL -> GameStateHelper.startBaronBuff();
@@ -35,6 +35,7 @@ public class EventDataProcessorTask implements Runnable {
             case ALLY_ELDER_DRAGON_KILL, ENEMY_ELDER_DRAGON_KILL -> processElderKill(eventType);
             case ACTIVE_PLAYER_DIED -> resetAlivePlayerCounters();
             case ACTIVE_PLAYER_KILL -> GameStateHelper.addPlayerKill();
+            case ACTIVE_PLAYER_ASSIST -> GameStateHelper.addPlayerAssist();
         }
     }
 
@@ -46,10 +47,11 @@ public class EventDataProcessorTask implements Runnable {
     }
 
     private void resetAlivePlayerCounters() {
-        final CustomData customData = GameState.getCustomData();
-        customData.setElderBuffEnd(null);
-        customData.setBaronBuffEnd(null);
-        customData.setActivePlayerKillingSpree(0);
+        final EventData eventData = GameState.getCustomData();
+        eventData.setElderBuffEnd(null);
+        eventData.setBaronBuffEnd(null);
+        eventData.setActivePlayerKillingSpree(0);
+        eventData.setActivePlayerAssistSpree(0);
     }
 
     public static void addEvents(List<Event> events) {

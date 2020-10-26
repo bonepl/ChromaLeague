@@ -1,10 +1,13 @@
-package com.bonepl.razersdk.sdk;
+package com.bonepl.razersdk;
 
+import com.bonepl.razersdk.animation.Frame;
 import com.bonepl.razersdk.animation.IFrame;
+import com.bonepl.razersdk.sdk.HeartbeatTask;
+import com.bonepl.razersdk.sdk.json.ChromaSDKHttpClient;
 import com.bonepl.razersdk.sdk.json.request.Init;
 import com.bonepl.razersdk.sdk.json.request.KeyboardEffect;
-import com.bonepl.razersdk.sdk.json.response.SessionInfo;
 import com.bonepl.razersdk.sdk.json.response.Result;
+import com.bonepl.razersdk.sdk.json.response.SessionInfo;
 import com.bonepl.razersdk.sdk.json.response.Version;
 import com.jsoniter.JsonIterator;
 import com.jsoniter.output.JsonStream;
@@ -21,13 +24,35 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Main class for communication with Razer Chroma SDK C++ libraries.
+ * Note that it is heavy to initialize this class, so try to initialize it once
+ * and close only when you want to disconnect from your Razer device.
+ * <br><br>
+ * This class implements {@link AutoCloseable} interface so it is recommended
+ * to use with try-with-resources.
+ * <br><br>
+ * Recommended usage:
+ * <pre>
+ * try (ChromaRestSDK chromaRestSDK = new ChromaRestSDK()) {
+ *     # animation start
+ *     chromaRestSDK.createKeyboardEffect(new SimpleFrame(Color.RED));
+ *     chromaRestSDK.createKeyboardEffect(new SimpleFrame(Color.BLUE));
+ *     chromaRestSDK.createKeyboardEffect(new SimpleFrame(Color.GREEN));
+ *     # animation end
+ * }
+ * # automatic disconnection
+ * </pre>
+ */
 public class ChromaRestSDK implements AutoCloseable {
     private final static Logger LOGGER = LogManager.getLogger();
     private final CloseableHttpClient httpClient;
     private final SessionInfo sessionInfo;
     private final ScheduledExecutorService heartbeatExecutor;
 
-
+    /**
+     * Create and initialize connection to Chroma-enabled Razer device
+     */
     public ChromaRestSDK() {
         this.httpClient = ChromaSDKHttpClient.getInstance();
         printVersionInfo();
@@ -36,6 +61,19 @@ public class ChromaRestSDK implements AutoCloseable {
         heartbeatExecutor.scheduleAtFixedRate(new HeartbeatTask(httpClient, sessionInfo), 0, 5, TimeUnit.SECONDS);
     }
 
+    /**
+     * Create effect from {@link Frame} obtained
+     * from {@link IFrame} object.
+     * <br><br>
+     * Note that animations passed to this method will be applied
+     * immediately to your Razer device and will last until next
+     * method invocation or device disconnection.
+     * <br><br>
+     * It is recommended to use scheduler like {@link ScheduledExecutorService}
+     * to invoke this method in fixed rates.
+     *
+     * @param frame {@link IFrame} with available {@link Frame}
+     */
     public void createKeyboardEffect(IFrame frame) {
         final HttpPut keyboardEffectRequest = new HttpPut(sessionInfo.getUri() + "/keyboard");
         keyboardEffectRequest.setEntity(createKeyboardEffectParameter(frame));
@@ -89,6 +127,9 @@ public class ChromaRestSDK implements AutoCloseable {
         LOGGER.info("Detected Razer Chroma REST Api " + version);
     }
 
+    /**
+     * Close and disconnect Chroma-enabled Razer device
+     */
     @Override
     public void close() {
         heartbeatExecutor.shutdown();

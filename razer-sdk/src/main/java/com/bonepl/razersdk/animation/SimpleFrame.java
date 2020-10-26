@@ -1,6 +1,6 @@
 package com.bonepl.razersdk.animation;
 
-import com.bonepl.razersdk.sdk.RzKey2;
+import com.bonepl.razersdk.sdk.RzKey;
 
 import java.util.*;
 
@@ -8,7 +8,7 @@ import java.util.*;
  * Single animation frame with one {@link Frame}
  */
 public class SimpleFrame implements IFrame {
-    private final Map<RzKey2, Color> keysToColors = new EnumMap<>(RzKey2.class);
+    private final Map<RzKey, Color> keysToColors = new EnumMap<>(RzKey.class);
     private boolean hasFrame = true;
 
     /**
@@ -23,35 +23,35 @@ public class SimpleFrame implements IFrame {
      * @param color {@link Color} of the fill
      */
     public SimpleFrame(Color color) {
-        Arrays.stream(RzKey2.values()).forEach(rzKey -> keysToColors.put(rzKey, color));
+        Arrays.stream(RzKey.values()).forEach(rzKey -> keysToColors.put(rzKey, color));
     }
 
     /**
      * Create a frame with one key in provided color
      *
-     * @param rzKey {@link RzKey2} to color
+     * @param rzKey {@link RzKey} to color
      * @param color {@link Color} of the fill
      */
-    public SimpleFrame(RzKey2 rzKey, Color color) {
+    public SimpleFrame(RzKey rzKey, Color color) {
         keysToColors.put(rzKey, color);
     }
 
     /**
      * Create a frame with all provided keys in the same color
      *
-     * @param rzKeys collection of {@link RzKey2} to color
+     * @param rzKeys collection of {@link RzKey} to color
      * @param color  {@link Color} of the fill
      */
-    public SimpleFrame(Collection<RzKey2> rzKeys, Color color) {
+    public SimpleFrame(Collection<RzKey> rzKeys, Color color) {
         rzKeys.forEach(rzKey -> keysToColors.put(rzKey, color));
     }
 
     /**
-     * Create a frame from {@link RzKey2} to {@link Color} map
+     * Create a frame from {@link RzKey} to {@link Color} map
      *
      * @param keysToColors {@link Map} of keys and corresponding fill color
      */
-    public SimpleFrame(Map<RzKey2, Color> keysToColors) {
+    public SimpleFrame(Map<RzKey, Color> keysToColors) {
         this.keysToColors.putAll(keysToColors);
     }
 

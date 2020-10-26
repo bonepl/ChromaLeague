@@ -1,4 +1,4 @@
-package com.bonepl.razersdk.sdk;
+package com.bonepl.razersdk.sdk.json;
 
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.config.RegistryBuilder;

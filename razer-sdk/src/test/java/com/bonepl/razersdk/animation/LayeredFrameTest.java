@@ -1,6 +1,6 @@
 package com.bonepl.razersdk.animation;
 
-import com.bonepl.razersdk.sdk.RzKey2;
+import com.bonepl.razersdk.sdk.RzKey;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -37,21 +37,21 @@ class LayeredFrameTest {
     @Test
     void testLayerCreation() {
         //given
-        final SimpleFrame layerOne = new SimpleFrame(Arrays.asList(RzKey2.RZKEY_1, RzKey2.RZKEY_2, RzKey2.RZKEY_3), Color.BLUE);
-        final SimpleFrame layerTwo = new SimpleFrame(RzKey2.RZKEY_2, Color.RED);
-        final SimpleFrame transparentLayer = new SimpleFrame(Arrays.asList(RzKey2.RZKEY_1, RzKey2.RZKEY_2, RzKey2.RZKEY_3, RzKey2.RZKEY_4), Color.NONE);
+        final SimpleFrame layerOne = new SimpleFrame(Arrays.asList(RzKey.RZKEY_1, RzKey.RZKEY_2, RzKey.RZKEY_3), Color.BLUE);
+        final SimpleFrame layerTwo = new SimpleFrame(RzKey.RZKEY_2, Color.RED);
+        final SimpleFrame transparentLayer = new SimpleFrame(Arrays.asList(RzKey.RZKEY_1, RzKey.RZKEY_2, RzKey.RZKEY_3, RzKey.RZKEY_4), Color.NONE);
 
         //when
         final LayeredFrame layeredFrame = new LayeredFrame();
         layeredFrame.addFrame(layerOne);
         layeredFrame.addFrame(layerTwo);
         layeredFrame.addFrame(transparentLayer);
-        final Map<RzKey2, Color> actualColorMap = layeredFrame.getFrame().getKeysToColors();
+        final Map<RzKey, Color> actualColorMap = layeredFrame.getFrame().getKeysToColors();
 
         //then
-        assertEquals(actualColorMap.get(RzKey2.RZKEY_1), Color.BLUE);
-        assertEquals(actualColorMap.get(RzKey2.RZKEY_3), Color.BLUE);
-        assertEquals(actualColorMap.get(RzKey2.RZKEY_2), Color.RED);
+        assertEquals(actualColorMap.get(RzKey.RZKEY_1), Color.BLUE);
+        assertEquals(actualColorMap.get(RzKey.RZKEY_3), Color.BLUE);
+        assertEquals(actualColorMap.get(RzKey.RZKEY_2), Color.RED);
         assertEquals(3, actualColorMap.size());
         assertFalse(layeredFrame.hasFrame());
         assertThrows(NoSuchElementException.class, layeredFrame::getFrame);

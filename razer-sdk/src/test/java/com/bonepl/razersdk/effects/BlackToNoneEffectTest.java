@@ -1,26 +1,26 @@
 package com.bonepl.razersdk.effects;
 
-import com.bonepl.razersdk.RazerSDKClient;
+import com.bonepl.razersdk.ChromaRestSDK;
 import com.bonepl.razersdk.animation.AnimatedFrame;
 import com.bonepl.razersdk.animation.Animation;
 import com.bonepl.razersdk.animation.Color;
 import com.bonepl.razersdk.animation.SimpleFrame;
-import com.bonepl.razersdk.sdk.RzKey2;
+import com.bonepl.razersdk.sdk.RzKey;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static com.bonepl.razersdk.sdk.RzKey2.*;
+import static com.bonepl.razersdk.sdk.RzKey.*;
 
 public class BlackToNoneEffectTest {
-    private static final List<RzKey2> FIRST_LETTERS =
+    private static final List<RzKey> FIRST_LETTERS =
             Arrays.asList(RZKEY_Q, RZKEY_W, RZKEY_E, RZKEY_R, RZKEY_T, RZKEY_Y, RZKEY_U);
 
     @Test
     @SuppressWarnings("JUnitTestMethodWithNoAssertions")
     void testNonTransparentBlack() throws InterruptedException {
-        try (RazerSDKClient razerSDKClient = new RazerSDKClient()) {
+        try (ChromaRestSDK razerSDKClient = new ChromaRestSDK()) {
             Animation animation = new Animation();
             animation.addToFront(createMovingBlackPixel(Color.BLACK));
             while (animation.hasFrame()) {
@@ -34,7 +34,7 @@ public class BlackToNoneEffectTest {
     @Test
     @SuppressWarnings("JUnitTestMethodWithNoAssertions")
     void testTransparentBlack() throws InterruptedException {
-        try (RazerSDKClient razerSDKClient = new RazerSDKClient()) {
+        try (ChromaRestSDK razerSDKClient = new ChromaRestSDK()) {
             Animation animation = new Animation();
             animation.addToFront(createMovingBlackPixel(Color.NONE));
             while (animation.hasFrame()) {

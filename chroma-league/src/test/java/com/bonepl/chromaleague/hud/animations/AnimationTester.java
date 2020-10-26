@@ -1,6 +1,7 @@
 package com.bonepl.chromaleague.hud.animations;
 
-import com.bonepl.razersdk.RazerSDKClient;
+
+import com.bonepl.razersdk.ChromaRestSDK;
 import com.bonepl.razersdk.animation.IFrame;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -24,10 +25,10 @@ public final class AnimationTester {
     }
 
     public void testAnimation(Supplier<? extends IFrame> supplier, int iterations) {
-        try (RazerSDKClient razerSDKClient = new RazerSDKClient()) {
+        try (ChromaRestSDK chromaRestSDK = new ChromaRestSDK()) {
             for (int i = 0; i < iterations; i++) {
                 final IFrame frame = supplier.get();
-                razerSDKClient.createKeyboardEffect(frame);
+                chromaRestSDK.createKeyboardEffect(frame);
                 executeAfterIteration(i);
                 sleepThread();
             }
@@ -35,9 +36,9 @@ public final class AnimationTester {
     }
 
     public void testAnimation(IFrame frame) {
-        try (RazerSDKClient razerSDKClient = new RazerSDKClient()) {
+        try (ChromaRestSDK chromaRestSDK = new ChromaRestSDK()) {
             for (int i = 0; frame.hasFrame(); i++) {
-                razerSDKClient.createKeyboardEffect(frame);
+                chromaRestSDK.createKeyboardEffect(frame);
                 executeAfterIteration(i);
                 sleepThread();
             }
@@ -45,9 +46,9 @@ public final class AnimationTester {
     }
 
     public void testAnimation(IFrame frame, int iterations) {
-        try (RazerSDKClient razerSDKClient = new RazerSDKClient()) {
+        try (ChromaRestSDK chromaRestSDK = new ChromaRestSDK()) {
             for (int i = 0; i < iterations; i++) {
-                razerSDKClient.createKeyboardEffect(frame);
+                chromaRestSDK.createKeyboardEffect(frame);
                 executeAfterIteration(i);
                 sleepThread();
             }

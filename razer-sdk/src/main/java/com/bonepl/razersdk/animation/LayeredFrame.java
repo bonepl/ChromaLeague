@@ -1,6 +1,6 @@
 package com.bonepl.razersdk.animation;
 
-import com.bonepl.razersdk.sdk.RzKey2;
+import com.bonepl.razersdk.sdk.RzKey;
 
 import java.util.EnumMap;
 import java.util.Map;
@@ -14,7 +14,7 @@ import java.util.NoSuchElementException;
  * New object without any added frames is similar to {@link SimpleFrame} - there is an empty frame by default.
  */
 public class LayeredFrame implements IFrame {
-    private final Map<RzKey2, Color> keysToColors = new EnumMap<>(RzKey2.class);
+    private final Map<RzKey, Color> keysToColors = new EnumMap<>(RzKey.class);
     private boolean hasFrame = true;
 
     /**

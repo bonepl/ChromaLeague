@@ -4,7 +4,7 @@ import com.bonepl.chromaleague.hud.parts.EventAnimator;
 import com.bonepl.chromaleague.hud.parts.MainHud;
 import com.bonepl.chromaleague.state.GameState;
 import com.bonepl.chromaleague.state.GameStateHelper;
-import com.bonepl.razersdk.RazerSDKClient;
+import com.bonepl.razersdk.ChromaRestSDK;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,7 +16,7 @@ public class MainTask implements Runnable {
     private static final Logger LOGGER = LogManager.getLogger();
 
     private static ScheduledExecutorService scheduledExecutorService;
-    private static RazerSDKClient razerSDKClient;
+    private static ChromaRestSDK chromaRestSDK;
 
     @Override
     public void run() {
@@ -31,10 +31,10 @@ public class MainTask implements Runnable {
     }
 
     private static void shutdown() {
-        if (razerSDKClient != null) {
+        if (chromaRestSDK != null) {
             LOGGER.info("Player left the game");
-            razerSDKClient.close();
-            razerSDKClient = null;
+            chromaRestSDK.close();
+            chromaRestSDK = null;
             scheduledExecutorService.shutdown();
             try {
                 scheduledExecutorService.awaitTermination(5000, TimeUnit.MILLISECONDS);
@@ -50,11 +50,11 @@ public class MainTask implements Runnable {
 
     private static void initializeGameThreads() {
         LOGGER.info("Player joined the game");
-        razerSDKClient = new RazerSDKClient();
+        chromaRestSDK = new ChromaRestSDK();
         scheduledExecutorService.scheduleWithFixedDelay(new FetchPlayerListTask(), 0, 1000, TimeUnit.MILLISECONDS);
         scheduledExecutorService.scheduleWithFixedDelay(new FetchActivePlayerTask(), 50, 300, TimeUnit.MILLISECONDS);
         scheduledExecutorService.scheduleWithFixedDelay(new EventAnimationProcessorTask(), 100, 500, TimeUnit.MILLISECONDS);
-        scheduledExecutorService.scheduleWithFixedDelay(() -> razerSDKClient.createKeyboardEffect(new MainHud()), 150, 50, TimeUnit.MILLISECONDS);
+        scheduledExecutorService.scheduleWithFixedDelay(() -> chromaRestSDK.createKeyboardEffect(new MainHud()), 150, 50, TimeUnit.MILLISECONDS);
     }
 
     private static void initializePreGame() {

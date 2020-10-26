@@ -1,7 +1,7 @@
 package com.bonepl.razersdk.sdk.json.request;
 
 import com.bonepl.razersdk.animation.Color;
-import com.bonepl.razersdk.sdk.RzKey2;
+import com.bonepl.razersdk.sdk.RzKey;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -16,7 +16,7 @@ public class KeyboardEffect {
         }
     }
 
-    public KeyboardEffect(Map<RzKey2, Color> keysToColors) {
+    public KeyboardEffect(Map<RzKey, Color> keysToColors) {
         keysToColors.forEach((key, value) -> param[key.getRow()][key.getColumn()] = value.getSDKColorRef());
     }
 }

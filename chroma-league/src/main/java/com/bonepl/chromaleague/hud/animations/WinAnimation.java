@@ -1,7 +1,7 @@
 package com.bonepl.chromaleague.hud.animations;
 
+import com.bonepl.chromaleague.hud.KeysJoiner;
 import com.bonepl.razersdk.animation.*;
-import org.apache.commons.collections4.ListUtils;
 
 import static com.bonepl.chromaleague.hud.PredefinedKeySets.*;
 
@@ -25,11 +25,11 @@ public class WinAnimation extends Animation {
             animatedFrame.addAnimationFrame(delay * 4, new SimpleFrame());
         }
         animatedFrame.addAnimationFrame(new SimpleFrame(BLACKWIDOW_SIXTH_ROW, color));
-        animatedFrame.addAnimationFrame(new SimpleFrame(ListUtils.sum(BLACKWIDOW_SIXTH_ROW, BLACKWIDOW_FIFTH_ROW), color));
-        animatedFrame.addAnimationFrame(new SimpleFrame(ListUtils.sum(BLACKWIDOW_FIFTH_ROW, BLACKWIDOW_FOURTH_ROW), color));
-        animatedFrame.addAnimationFrame(new SimpleFrame(ListUtils.sum(BLACKWIDOW_FOURTH_ROW, BLACKWIDOW_THIRD_ROW), color));
-        animatedFrame.addAnimationFrame(new SimpleFrame(ListUtils.sum(BLACKWIDOW_THIRD_ROW, BLACKWIDOW_SECOND_ROW), color));
-        animatedFrame.addAnimationFrame(new SimpleFrame(ListUtils.sum(BLACKWIDOW_SECOND_ROW, BLACKWIDOW_FIRST_ROW), color));
+        animatedFrame.addAnimationFrame(new SimpleFrame(new KeysJoiner().with(BLACKWIDOW_SIXTH_ROW).with(BLACKWIDOW_FIFTH_ROW).join(), color));
+        animatedFrame.addAnimationFrame(new SimpleFrame(new KeysJoiner().with(BLACKWIDOW_FIFTH_ROW).with(BLACKWIDOW_FOURTH_ROW).join(), color));
+        animatedFrame.addAnimationFrame(new SimpleFrame(new KeysJoiner().with(BLACKWIDOW_FOURTH_ROW).with(BLACKWIDOW_THIRD_ROW).join(), color));
+        animatedFrame.addAnimationFrame(new SimpleFrame(new KeysJoiner().with(BLACKWIDOW_THIRD_ROW).with(BLACKWIDOW_SECOND_ROW).join(), color));
+        animatedFrame.addAnimationFrame(new SimpleFrame(new KeysJoiner().with(BLACKWIDOW_SECOND_ROW).with(BLACKWIDOW_FIRST_ROW).join(), color));
         animatedFrame.addAnimationFrame(new SimpleFrame(BLACKWIDOW_FIRST_ROW, color));
         return animatedFrame;
     }

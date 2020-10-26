@@ -5,7 +5,6 @@ import com.bonepl.chromaleague.rest.activeplayer.ActivePlayer;
 import com.bonepl.chromaleague.rest.playerlist.PlayerList;
 import com.bonepl.chromaleague.rest.playerlist.Team;
 import com.bonepl.chromaleague.state.GameState;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -39,7 +38,7 @@ class FetchPlayerListTaskTest {
         assertEquals(5, playerList.getAllies().size());
         assertEquals(5, playerList.getEnemies().size());
         assertEquals(PLAYER_NAME, playerList.getActivePlayer().getSummonerName());
-        Assertions.assertEquals(Team.CHAOS, playerList.getActivePlayer().getTeam());
+        assertEquals(Team.CHAOS, playerList.getActivePlayer().getTeam());
         assertTrue(playerList.isAlly("Test summoner 5"));
         assertFalse(playerList.isAlly("Test summoner 9"));
     }
@@ -53,7 +52,7 @@ class FetchPlayerListTaskTest {
         assertFalse(GameState.isPlayerListAvailable());
     }
 
-    private ActivePlayer createActivePlayerMock() {
+    private static ActivePlayer createActivePlayerMock() {
         ActivePlayer activePlayer = mock(ActivePlayer.class);
         when(activePlayer.getSummonerName()).thenReturn(PLAYER_NAME);
         return activePlayer;

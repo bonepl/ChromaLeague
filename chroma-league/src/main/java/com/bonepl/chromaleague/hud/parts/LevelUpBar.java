@@ -16,7 +16,7 @@ public class LevelUpBar extends Animation {
             RZKEY_MACRO3, RZKEY_CAPSLOCK,
             RZKEY_MACRO2, RZKEY_TAB,
             RZKEY_MACRO1, RZKEY_TILDE);
-    private int previousLevel = 0;
+    private int previousLevel;
 
     @Override
     public Frame getFrame() {

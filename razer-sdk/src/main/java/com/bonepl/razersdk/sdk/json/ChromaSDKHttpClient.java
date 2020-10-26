@@ -19,9 +19,12 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.X509Certificate;
 
-public class ChromaSDKHttpClient {
+public final class ChromaSDKHttpClient {
     private static final Logger LOGGER = LogManager.getLogger();
-    public static final int DEFAULT_TIMEOUT = 150;
+    public static final int DEFAULT_TIMEOUT = 5000;
+
+    private ChromaSDKHttpClient() {
+    }
 
     public static CloseableHttpClient getInstance() {
         return HttpClients.custom()

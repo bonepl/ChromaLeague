@@ -29,12 +29,12 @@ class DragonSoulBarTest {
         testDragonSoulAnimation(DragonType.OCEAN);
     }
 
-    private void testDragonSoulAnimation(DragonType dragonType) {
+    private static void testDragonSoulAnimation(DragonType dragonType) {
         switchToDragon(dragonType);
         new AnimationTester().testAnimation(new DragonSoulBar(), 80);
     }
 
-    private void switchToDragon(DragonType dragonType) {
+    private static void switchToDragon(DragonType dragonType) {
         GameStateHelper.getKilledDragons().clear();
         IntStream.range(0, 4).forEach(i -> GameStateHelper.addKilledDragon(dragonType));
     }

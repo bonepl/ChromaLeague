@@ -6,7 +6,7 @@ public class TransitionColor {
     private final Color from;
     private final Color to;
     private final int steps;
-    private int currentStep = 0;
+    private int currentStep;
 
     public TransitionColor(Color from, Color to, int steps) {
         this.from = from;
@@ -20,9 +20,8 @@ public class TransitionColor {
                 from.getBlue() - getBlueStep() * currentStep);
         if (transitionFinished()) {
             return to;
-        } else {
-            currentStep = currentStep + 1;
         }
+        currentStep += 1;
         return color;
     }
 

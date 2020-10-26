@@ -38,7 +38,7 @@ public class Animation implements IFrame {
      *
      * @param frame animation class to be added
      */
-    public void addToFront(IFrame frame) {
+    public final void addToFront(IFrame frame) {
         frames.addLast(convertToSimpleFrames(frame));
     }
 
@@ -47,7 +47,7 @@ public class Animation implements IFrame {
      *
      * @param frame animation class to be added
      */
-    public void addToBack(IFrame frame) {
+    public final void addToBack(IFrame frame) {
         frames.addFirst(convertToSimpleFrames(frame));
     }
 

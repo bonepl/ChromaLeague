@@ -26,14 +26,18 @@ public class HeartbeatTask implements Runnable {
     public void run() {
         try {
             final HttpPut heartbeatRequest = new HttpPut(sessionInfo.getUri() + "/heartbeat");
-            try (final CloseableHttpResponse execute = httpClient.execute(heartbeatRequest)) {
-                final String heartbeatJson = EntityUtils.toString(execute.getEntity());
-                final Heartbeat heartbeat = JsonIterator.deserialize(heartbeatJson, Heartbeat.class);
-                LOGGER.debug(heartbeat);
-            }
+            executeHttpRequest(heartbeatRequest);
         } catch (IOException e) {
             LOGGER.error("Error while executing heartbeat", e);
             throw new IllegalStateException(e);
+        }
+    }
+
+    private void executeHttpRequest(HttpPut heartbeatRequest) throws IOException {
+        try (final CloseableHttpResponse execute = httpClient.execute(heartbeatRequest)) {
+            final String heartbeatJson = EntityUtils.toString(execute.getEntity());
+            final Heartbeat heartbeat = JsonIterator.deserialize(heartbeatJson, Heartbeat.class);
+            LOGGER.debug(heartbeat);
         }
     }
 }

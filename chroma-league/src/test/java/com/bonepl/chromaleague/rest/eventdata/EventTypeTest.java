@@ -37,7 +37,7 @@ class EventTypeTest {
         assertEquals(EventType.ACTIVE_PLAYER_KILL, eventType);
     }
 
-    private Event mockActivePlayerKillEvent() {
+    private static Event mockActivePlayerKillEvent() {
         final Event mock = mock(Event.class);
         when(mock.getEventName()).thenReturn("ChampionKill");
         when(mock.getKillerName()).thenReturn(ACTIVE_PLAYER_NAME);
@@ -56,7 +56,7 @@ class EventTypeTest {
         assertEquals(EventType.ACTIVE_PLAYER_ASSIST, eventType);
     }
 
-    private Event mockActivePlayerAssistEvent() {
+    private static Event mockActivePlayerAssistEvent() {
         final Event mock = mock(Event.class);
         when(mock.getEventName()).thenReturn("ChampionKill");
         when(mock.getKillerName()).thenReturn("My Teammate");
@@ -189,7 +189,7 @@ class EventTypeTest {
         assertEquals(EventType.ENEMY_ELDER_DRAGON_KILL, eventType);
     }
 
-    private Event mockDragonEvent(DragonType dragonType) {
+    private static Event mockDragonEvent(DragonType dragonType) {
         final Event mock = mock(Event.class);
         when(mock.getEventName()).thenReturn("DragonKill");
         when(mock.getDragonType()).thenReturn(dragonType.getApiType());
@@ -246,19 +246,19 @@ class EventTypeTest {
         assertEquals(EventType.ENEMY_BARON_KILL, eventType);
     }
 
-    private Event mockHeraldEvent() {
+    private static Event mockHeraldEvent() {
         final Event mock = mock(Event.class);
         when(mock.getEventName()).thenReturn("HeraldKill");
         return mock;
     }
 
-    private Event mockBaronEvent() {
+    private static Event mockBaronEvent() {
         final Event mock = mock(Event.class);
         when(mock.getEventName()).thenReturn("BaronKill");
         return mock;
     }
 
-    private void mockIsAllyResponse(boolean isAlly) {
+    private static void mockIsAllyResponse(boolean isAlly) {
         final PlayerList mock = mock(PlayerList.class);
         when(mock.isAlly(any())).thenReturn(isAlly);
         GameState.setPlayerList(mock);

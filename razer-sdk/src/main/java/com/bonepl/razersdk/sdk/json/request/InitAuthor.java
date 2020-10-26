@@ -1,8 +1,8 @@
 package com.bonepl.razersdk.sdk.json.request;
 
 public class InitAuthor {
-    String name;
-    String contact;
+    private final String name;
+    private final String contact;
 
     public InitAuthor(String name, String contact) {
         this.name = name;

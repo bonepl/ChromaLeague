@@ -6,7 +6,7 @@ public enum ResourceType {
     MANA(Color.BLUE),
     ENERGY(Color.YELLOW);
 
-    Color color;
+    final Color color;
 
     ResourceType(Color color) {
         this.color = color;

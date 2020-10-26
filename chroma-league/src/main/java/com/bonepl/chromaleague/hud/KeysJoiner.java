@@ -8,7 +8,7 @@ import java.util.EnumSet;
 import java.util.List;
 
 public class KeysJoiner {
-    final EnumSet<RzKey> rzKeys = EnumSet.noneOf(RzKey.class);
+    private final EnumSet<RzKey> rzKeys = EnumSet.noneOf(RzKey.class);
 
     public KeysJoiner with(Collection<RzKey> collection) {
         rzKeys.addAll(collection);

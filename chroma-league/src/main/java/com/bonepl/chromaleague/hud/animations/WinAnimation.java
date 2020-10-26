@@ -1,21 +1,22 @@
 package com.bonepl.chromaleague.hud.animations;
 
 import com.bonepl.chromaleague.hud.KeysJoiner;
+import com.bonepl.chromaleague.hud.PredefinedKeySets;
 import com.bonepl.razersdk.animation.*;
 
-import static com.bonepl.chromaleague.hud.PredefinedKeySets.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class WinAnimation extends Animation {
     public WinAnimation() {
-        int i = 0;
-        while (i < 500) {
-            this.addToFront(createUpMovingFrame(i++, Color.GREEN));
-            this.addToFront(createUpMovingFrame(i++, Color.WHITE));
-            this.addToFront(createUpMovingFrame(i++, Color.BLUE));
-            this.addToFront(createUpMovingFrame(i++, Color.YELLOW));
-            this.addToFront(createUpMovingFrame(i++, Color.CYAN));
-            this.addToFront(createUpMovingFrame(i++, Color.ORANGE));
-            this.addToFront(createUpMovingFrame(i++, Color.RED));
+        AtomicInteger integer = new AtomicInteger(0);
+        while (integer.get() < 500) {
+            addToFront(createUpMovingFrame(integer.getAndIncrement(), Color.GREEN));
+            addToFront(createUpMovingFrame(integer.getAndIncrement(), Color.WHITE));
+            addToFront(createUpMovingFrame(integer.getAndIncrement(), Color.BLUE));
+            addToFront(createUpMovingFrame(integer.getAndIncrement(), Color.YELLOW));
+            addToFront(createUpMovingFrame(integer.getAndIncrement(), Color.CYAN));
+            addToFront(createUpMovingFrame(integer.getAndIncrement(), Color.ORANGE));
+            addToFront(createUpMovingFrame(integer.getAndIncrement(), Color.RED));
         }
     }
 
@@ -24,18 +25,18 @@ public class WinAnimation extends Animation {
         if (delay > 0) {
             animatedFrame.addAnimationFrame(delay * 4, new SimpleFrame());
         }
-        animatedFrame.addAnimationFrame(new SimpleFrame(BLACKWIDOW_SIXTH_ROW, color));
-        animatedFrame.addAnimationFrame(new SimpleFrame(new KeysJoiner().with(BLACKWIDOW_SIXTH_ROW).with(BLACKWIDOW_FIFTH_ROW).join(), color));
-        animatedFrame.addAnimationFrame(new SimpleFrame(new KeysJoiner().with(BLACKWIDOW_FIFTH_ROW).with(BLACKWIDOW_FOURTH_ROW).join(), color));
-        animatedFrame.addAnimationFrame(new SimpleFrame(new KeysJoiner().with(BLACKWIDOW_FOURTH_ROW).with(BLACKWIDOW_THIRD_ROW).join(), color));
-        animatedFrame.addAnimationFrame(new SimpleFrame(new KeysJoiner().with(BLACKWIDOW_THIRD_ROW).with(BLACKWIDOW_SECOND_ROW).join(), color));
-        animatedFrame.addAnimationFrame(new SimpleFrame(new KeysJoiner().with(BLACKWIDOW_SECOND_ROW).with(BLACKWIDOW_FIRST_ROW).join(), color));
-        animatedFrame.addAnimationFrame(new SimpleFrame(BLACKWIDOW_FIRST_ROW, color));
+        animatedFrame.addAnimationFrame(new SimpleFrame(PredefinedKeySets.BLACKWIDOW_SIXTH_ROW, color));
+        animatedFrame.addAnimationFrame(new SimpleFrame(new KeysJoiner().with(PredefinedKeySets.BLACKWIDOW_SIXTH_ROW).with(PredefinedKeySets.BLACKWIDOW_FIFTH_ROW).join(), color));
+        animatedFrame.addAnimationFrame(new SimpleFrame(new KeysJoiner().with(PredefinedKeySets.BLACKWIDOW_FIFTH_ROW).with(PredefinedKeySets.BLACKWIDOW_FOURTH_ROW).join(), color));
+        animatedFrame.addAnimationFrame(new SimpleFrame(new KeysJoiner().with(PredefinedKeySets.BLACKWIDOW_FOURTH_ROW).with(PredefinedKeySets.BLACKWIDOW_THIRD_ROW).join(), color));
+        animatedFrame.addAnimationFrame(new SimpleFrame(new KeysJoiner().with(PredefinedKeySets.BLACKWIDOW_THIRD_ROW).with(PredefinedKeySets.BLACKWIDOW_SECOND_ROW).join(), color));
+        animatedFrame.addAnimationFrame(new SimpleFrame(new KeysJoiner().with(PredefinedKeySets.BLACKWIDOW_SECOND_ROW).with(PredefinedKeySets.BLACKWIDOW_FIRST_ROW).join(), color));
+        animatedFrame.addAnimationFrame(new SimpleFrame(PredefinedKeySets.BLACKWIDOW_FIRST_ROW, color));
         return animatedFrame;
     }
 
     @Override
-    public synchronized Frame getFrame() {
+    public Frame getFrame() {
         addToBack(new SimpleFrame(Color.BLACK));
         return super.getFrame();
     }

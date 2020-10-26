@@ -8,7 +8,7 @@ import static com.bonepl.chromaleague.hud.PredefinedKeySets.BLACKWIDOW_FIRST_ROW
 
 class ProgressBarTest {
     private static final int STEP = 5;
-    private static int PERCENT = 0;
+    private static int PERCENT;
     private static int UP = 1;
 
     @Test

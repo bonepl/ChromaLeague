@@ -20,7 +20,7 @@ public final class AnimationTester {
     }
 
     public AnimationTester withSleepTime(int milliseconds) {
-        this.sleepTime = milliseconds;
+        sleepTime = milliseconds;
         return this;
     }
 
@@ -63,7 +63,7 @@ public final class AnimationTester {
 
     private void sleepThread() {
         try {
-            Thread.sleep(this.sleepTime);
+            Thread.sleep(sleepTime);
         } catch (InterruptedException e) {
             logger.error(e);
         }

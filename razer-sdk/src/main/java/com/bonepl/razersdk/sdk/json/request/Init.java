@@ -3,12 +3,13 @@ package com.bonepl.razersdk.sdk.json.request;
 import com.jsoniter.annotation.JsonProperty;
 
 public class Init {
-    String title;
-    String description;
-    InitAuthor author;
+    private final String title;
+    private final String description;
+    private final InitAuthor author;
+
     @JsonProperty("device_supported")
-    String[] deviceSupported;
-    String category;
+    private final String[] deviceSupported;
+    private final String category;
 
     public Init() {
         title = "Chroma League";
@@ -16,5 +17,25 @@ public class Init {
         author = new InitAuthor("Jakub \"BonE\" Andrzejewski", "bone.pl@gmail.com");
         deviceSupported = new String[]{"keyboard"};
         category = "game";
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public InitAuthor getAuthor() {
+        return author;
+    }
+
+    public String[] getDeviceSupported() {
+        return deviceSupported.clone();
+    }
+
+    public String getCategory() {
+        return category;
     }
 }

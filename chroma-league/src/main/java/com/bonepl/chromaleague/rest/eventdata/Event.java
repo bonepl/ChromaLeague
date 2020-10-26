@@ -54,6 +54,7 @@ public class Event {
                 ", KillerName='" + KillerName + '\'' +
                 ", Result='" + Result + '\'' +
                 ", VictimName='" + VictimName + '\'' +
+                ", Assisters=" + Assisters +
                 '}';
     }
 }

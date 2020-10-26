@@ -4,9 +4,9 @@ import com.bonepl.chromaleague.state.GameStateHelper;
 import com.bonepl.razersdk.animation.*;
 import com.bonepl.razersdk.sdk.RzKey;
 
+import java.security.SecureRandom;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -15,11 +15,11 @@ import static com.bonepl.razersdk.sdk.RzKey.*;
 
 public class GoldBar extends Animation {
     public static final int GOLD_FULL = 3000;
-    public static final List<RzKey> GOLD_BAR_KEYS = Arrays.asList(RZKEY_NUMPAD_DECIMAL, RZKEY_NUMPAD0,
+    public static final List<RzKey> GOLD_BAR_KEYS = List.of(RZKEY_NUMPAD_DECIMAL, RZKEY_NUMPAD0,
             RZKEY_NUMPAD2, RZKEY_NUMPAD_ENTER, RZKEY_NUMPAD3, RZKEY_NUMPAD5, RZKEY_NUMPAD1,
             RZKEY_NUMPAD6, RZKEY_NUMPAD8, RZKEY_NUMPAD4, RZKEY_NUMPAD_ADD, RZKEY_NUMPAD9,
             RZKEY_NUMPAD_DIVIDE, RZKEY_NUMPAD7, RZKEY_NUMPAD_MULTIPLY, RZKEY_NUMLOCK, RZKEY_NUMPAD_SUBTRACT);
-    private static final Random random = new Random();
+    private static final Random RANDOM = new SecureRandom();
 
     private final double goldDiffToSpawnCoin;
     private final int millisecondsForGoldCount;
@@ -60,16 +60,16 @@ public class GoldBar extends Animation {
     }
 
     public void spawnCoin() {
-        final int i = random.nextInt(4);
+        final int i = RANDOM.nextInt(4);
         switch (i) {
             case 0 -> addToBack(fallingCoin(FIRST_NUMPAD_COLUMN));
             case 1 -> addToBack(fallingCoin(SECOND_NUMPAD_COLUMN));
             case 2 -> addToBack(fallingCoin(THIRD_NUMPAD_COLUMN));
-            case 3 -> addToBack(fallingCoin(FOURTH_NUMPAD_COLUMN));
+            default -> addToBack(fallingCoin(FOURTH_NUMPAD_COLUMN));
         }
     }
 
-    private AnimatedFrame fallingCoin(List<RzKey> rzKeys) {
+    private static AnimatedFrame fallingCoin(List<RzKey> rzKeys) {
         final AnimatedFrame animatedFrames = new AnimatedFrame();
         rzKeys.forEach(rzKey -> animatedFrames.addAnimationFrame(new SimpleFrame(rzKey, Color.YELLOW)));
         return animatedFrames;

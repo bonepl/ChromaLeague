@@ -5,7 +5,7 @@ import com.bonepl.razersdk.animation.AnimatedFrame;
 import com.bonepl.razersdk.animation.Color;
 import com.bonepl.razersdk.animation.LayeredFrame;
 import com.bonepl.razersdk.animation.SimpleFrame;
-import com.bonepl.razersdk.sdk.RzKey;
+import com.bonepl.razersdk.sdk.RzKey2;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -26,7 +26,7 @@ class LayeredCustomKeyboardEffectTest {
                 layeredFrame.addFrame(firstAnimatedFrame);
                 layeredFrame.addFrame(secondAnimatedFrame);
                 if (i % 10 == 0) {
-                    layeredFrame.addFrame(new SimpleFrame(RzKey.RZKEY_SPACE, Color.RED));
+                    layeredFrame.addFrame(new SimpleFrame(RzKey2.RZKEY_SPACE, Color.RED));
                 }
                 razerSDKClient.createKeyboardEffect(layeredFrame);
                 Thread.sleep(100);
@@ -35,7 +35,7 @@ class LayeredCustomKeyboardEffectTest {
     }
 
     private static AnimatedFrame createFramesFromEnum(int from, int to, Color color) {
-        final List<RzKey> keys = Arrays.stream(RzKey.values())
+        final List<RzKey2> keys = Arrays.stream(RzKey2.values())
                 .skip(from).limit(to)
                 .collect(Collectors.toList());
         final AnimatedFrame animatedFrame = new AnimatedFrame();

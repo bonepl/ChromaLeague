@@ -27,7 +27,7 @@ public class ElderBuffAnimation extends AnimatedFrame {
             addAnimationFrame(2, new SimpleFrame(Arrays.asList(RzKey.RZKEY_RSHIFT,
                     RzKey.RZKEY_UP), Color.WHITE));
             addAnimationFrame(2, new SimpleFrame(RzKey.RZKEY_ENTER, Color.WHITE));
-            addAnimationFrame(2, new SimpleFrame(RzKey.RZKEY_OEM_6, Color.WHITE));
+            addAnimationFrame(2, new SimpleFrame(RzKey.RZKEY_BACKSLASH, Color.WHITE));
             addAnimationFrame(20, new SimpleFrame());
         }
     }

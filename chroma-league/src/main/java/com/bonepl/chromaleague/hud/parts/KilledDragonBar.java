@@ -17,7 +17,7 @@ public class KilledDragonBar extends SimpleFrame {
     public static final List<RzKey> FIRST_DRAGON_ROW = Arrays.asList(RZKEY_FN, RZKEY_RMENU, RZKEY_RCTRL);
     public static final RzKey SECOND_DRAGON_ROW = RZKEY_RSHIFT;
     public static final RzKey THIRD_DRAGON_ROW = RZKEY_ENTER;
-    public static final RzKey FOURTH_DRAGON_ROW = RZKEY_OEM_6;
+    public static final RzKey FOURTH_DRAGON_ROW = RZKEY_BACKSLASH;
 
     public KilledDragonBar() {
         super(getKilledDragonsBar());

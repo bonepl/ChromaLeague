@@ -3,16 +3,16 @@ package com.bonepl.razersdk.effects;
 import com.bonepl.razersdk.RazerSDKClient;
 import com.bonepl.razersdk.animation.Color;
 import com.bonepl.razersdk.animation.SimpleFrame;
-import com.bonepl.razersdk.sdk.RzKey;
+import com.bonepl.razersdk.sdk.RzKey2;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
 class StaticPartialEffectTest {
-    private final List<RzKey> smiley = Arrays.asList(RzKey.RZKEY_W, RzKey.RZKEY_3, RzKey.RZKEY_4, RzKey.RZKEY_R,
-            RzKey.RZKEY_I, RzKey.RZKEY_9, RzKey.RZKEY_0, RzKey.RZKEY_P,
-            RzKey.RZKEY_X, RzKey.RZKEY_SPACE, RzKey.RZKEY_OEM_9);
+    private final List<RzKey2> smiley = Arrays.asList(RzKey2.RZKEY_W, RzKey2.RZKEY_3, RzKey2.RZKEY_4, RzKey2.RZKEY_R,
+            RzKey2.RZKEY_I, RzKey2.RZKEY_9, RzKey2.RZKEY_0, RzKey2.RZKEY_P,
+            RzKey2.RZKEY_X, RzKey2.RZKEY_SPACE, RzKey2.RZKEY_COMA);
 
     @Test
     @SuppressWarnings("JUnitTestMethodWithNoAssertions")

@@ -11,9 +11,9 @@ import java.util.List;
 
 public class AssistKillingSpreeBar extends LayeredFrame {
     private static final List<RzKey> KILLING_SPREE_BAR =
-            Arrays.asList(RzKey.RZKEY_OEM_9, RzKey.RZKEY_OEM_10, RzKey.RZKEY_OEM_11,
-                    RzKey.RZKEY_L, RzKey.RZKEY_OEM_7, RzKey.RZKEY_OEM_8,
-                    RzKey.RZKEY_P, RzKey.RZKEY_OEM_4, RzKey.RZKEY_OEM_5);
+            Arrays.asList(RzKey.RZKEY_M, RzKey.RZKEY_COMA, RzKey.RZKEY_DOT,
+                    RzKey.RZKEY_K, RzKey.RZKEY_L, RzKey.RZKEY_SEMICOLON,
+                    RzKey.RZKEY_O, RzKey.RZKEY_P, RzKey.RZKEY_SQUARE_BRACKET_LEFT);
 
     public AssistKillingSpreeBar() {
         addFrame(new SimpleFrame(KILLING_SPREE_BAR.subList(0, computeAssistsIndex()), Color.YELLOW));

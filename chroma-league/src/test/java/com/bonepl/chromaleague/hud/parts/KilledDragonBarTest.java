@@ -20,7 +20,7 @@ class KilledDragonBarTest {
         new AnimationTester()
                 .withAfterIterationAction(i -> {
                     if (!testDrakesOrder.isEmpty()) {
-                        new EventDataProcessorTask().processEventForEventData(testDrakesOrder.remove());
+                        EventDataProcessorTask.processEventForEventData(testDrakesOrder.remove());
                     }
                 })
                 .withSleepTime(500)

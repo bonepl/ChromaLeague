@@ -11,9 +11,9 @@ class AssistKillingSpreeBarTest {
     void testKillingSpreeBar() {
         final AnimationTester animationTester = new AnimationTester()
                 .withAfterIterationAction(i -> {
-                    new EventDataProcessorTask().processEventForEventData(EventType.ACTIVE_PLAYER_ASSIST);
+                    EventDataProcessorTask.processEventForEventData(EventType.ACTIVE_PLAYER_ASSIST);
                     if (i > 4) {
-                        new EventDataProcessorTask().processEventForEventData(EventType.ACTIVE_PLAYER_KILL);
+                        EventDataProcessorTask.processEventForEventData(EventType.ACTIVE_PLAYER_KILL);
                     }
                 });
 

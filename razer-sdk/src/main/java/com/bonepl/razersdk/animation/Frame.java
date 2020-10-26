@@ -1,7 +1,7 @@
 package com.bonepl.razersdk.animation;
 
 import com.bonepl.razersdk.sdk.CustomKeyboardEffect;
-import com.bonepl.razersdk.sdk.RzKey;
+import com.bonepl.razersdk.sdk.RzKey2;
 
 import java.util.Collections;
 import java.util.EnumMap;
@@ -11,14 +11,14 @@ import java.util.Map;
  * Frame object containing map of keys to corresponding colors
  */
 public class Frame {
-    private final Map<RzKey, Color> keysToColors = new EnumMap<>(RzKey.class);
+    private final Map<RzKey2, Color> keysToColors = new EnumMap<>(RzKey2.class);
 
     /**
      * Create a frame from provided keys to colors map
      *
      * @param keysToColors map of keys to colors
      */
-    public Frame(Map<RzKey, Color> keysToColors) {
+    public Frame(Map<RzKey2, Color> keysToColors) {
         this.keysToColors.putAll(keysToColors);
     }
 
@@ -27,7 +27,7 @@ public class Frame {
      *
      * @return map of keys to colors
      */
-    public Map<RzKey, Color> getKeysToColors() {
+    public Map<RzKey2, Color> getKeysToColors() {
         return Collections.unmodifiableMap(keysToColors);
     }
 

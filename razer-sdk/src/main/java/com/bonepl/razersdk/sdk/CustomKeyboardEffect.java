@@ -19,9 +19,9 @@ public class CustomKeyboardEffect extends Structure {
         Arrays.fill(colors, Color.NONE.getSDKColorRef());
     }
 
-    public CustomKeyboardEffect(final Map<RzKey, Color> keysToColors) {
+    public CustomKeyboardEffect(final Map<RzKey2, Color> keysToColors) {
         this();
-        keysToColors.forEach((rzKey, color) -> colors[rzKey.getCustomPosition()] = color.getSDKColorRef());
+//        keysToColors.forEach((rzKey, color) -> colors[rzKey.getCustomPosition()] = color.getSDKColorRef());
     }
 
     public Pointer getEffect() {

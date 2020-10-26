@@ -103,17 +103,17 @@ public enum RzKey {
     RZKEY_MACRO3(0x0300),
     RZKEY_MACRO4(0x0400),
     RZKEY_MACRO5(0x0500),
-    RZKEY_OEM_1(0x0101), // ~ `
-    RZKEY_OEM_2(0x010C), // - _
-    RZKEY_OEM_3(0x010D), // = +
-    RZKEY_OEM_4(0x020C), // [ {
-    RZKEY_OEM_5(0x020D), // ] }
-    RZKEY_OEM_6(0x020E), // \ |
-    RZKEY_OEM_7(0x030B), // ; :
-    RZKEY_OEM_8(0x030C), // ' "
-    RZKEY_OEM_9(0x040A), // , <
-    RZKEY_OEM_10(0x040B), // . >
-    RZKEY_OEM_11(0x040C), // / ?
+    RZKEY_TILDE(0x0101), // ~ `
+    RZKEY_HYPHEN(0x010C), // - _
+    RZKEY_EQUALS(0x010D), // = +
+    RZKEY_SQUARE_BRACKET_LEFT(0x020C), // [ {
+    RZKEY_SQUARE_BRACKET_RIGHT(0x020D), // ] }
+    RZKEY_BACKSLASH(0x020E), // \ |
+    RZKEY_SEMICOLON(0x030B), // ; :
+    RZKEY_APOSTROPHE(0x030C), // ' "
+    RZKEY_COMA(0x040A), // , <
+    RZKEY_DOT(0x040B), // . >
+    RZKEY_SLASH(0x040C), // / ?
     RZKEY_EUR_1(0x030D),
     RZKEY_EUR_2(0x0402),
     RZKEY_JPN_1(0x0015),

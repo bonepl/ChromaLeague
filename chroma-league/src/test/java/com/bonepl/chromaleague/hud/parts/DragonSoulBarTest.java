@@ -2,6 +2,7 @@ package com.bonepl.chromaleague.hud.parts;
 
 import com.bonepl.chromaleague.hud.animations.AnimationTester;
 import com.bonepl.chromaleague.rest.eventdata.DragonType;
+import com.bonepl.chromaleague.state.GameState;
 import com.bonepl.chromaleague.state.GameStateHelper;
 import org.junit.jupiter.api.Test;
 
@@ -35,7 +36,7 @@ class DragonSoulBarTest {
     }
 
     private static void switchToDragon(DragonType dragonType) {
-        GameStateHelper.getKilledDragons().clear();
+        GameState.getEventData().resetCounters();
         IntStream.range(0, 4).forEach(i -> GameStateHelper.addKilledDragon(dragonType));
     }
 }

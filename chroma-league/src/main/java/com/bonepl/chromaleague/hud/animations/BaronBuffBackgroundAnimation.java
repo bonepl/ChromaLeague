@@ -1,14 +1,14 @@
 package com.bonepl.chromaleague.hud.animations;
 
-import com.bonepl.chromaleague.hud.PredefinedKeySets;
 import com.bonepl.chromaleague.hud.colors.BreathingColor;
 import com.bonepl.razersdk.animation.AnimatedFrame;
 import com.bonepl.razersdk.animation.Color;
 import com.bonepl.razersdk.animation.Frame;
 import com.bonepl.razersdk.animation.SimpleFrame;
 import com.bonepl.razersdk.sdk.RzKey;
+import com.bonepl.razersdk.sdk.RzKeyJoiner;
+import com.bonepl.razersdk.sdk.RzKeySelector;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class BaronBuffBackgroundAnimation extends AnimatedFrame {
@@ -30,11 +30,11 @@ public class BaronBuffBackgroundAnimation extends AnimatedFrame {
     }
 
     public static List<RzKey> buildBaronArea() {
-        List<RzKey> area = new ArrayList<>(40);
-        area.addAll(PredefinedKeySets.BLACKWIDOW_THIRD_ROW.subList(2, 11));
-        area.addAll(PredefinedKeySets.BLACKWIDOW_FOURTH_ROW.subList(2, 10));
-        area.addAll(PredefinedKeySets.BLACKWIDOW_FIFTH_ROW.subList(2, 9));
-        area.addAll(PredefinedKeySets.BLACKWIDOW_SIXTH_ROW.subList(3, 5));
-        return area;
+        return new RzKeyJoiner()
+                .with(new RzKeySelector().withRowOf(RzKey.RZKEY_Q).withColumnBetween(RzKey.RZKEY_Q, RzKey.RZKEY_I))
+                .with(new RzKeySelector().withRowOf(RzKey.RZKEY_A).withColumnBetween(RzKey.RZKEY_A, RzKey.RZKEY_J))
+                .with(new RzKeySelector().withRowOf(RzKey.RZKEY_Z).withColumnBetween(RzKey.RZKEY_Z, RzKey.RZKEY_N))
+                .with(new RzKeySelector().withRowOf(RzKey.RZKEY_LALT).withColumnBetween(RzKey.RZKEY_LALT, RzKey.RZKEY_SPACE))
+                .join();
     }
 }

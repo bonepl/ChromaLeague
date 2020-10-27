@@ -4,8 +4,6 @@ import com.bonepl.chromaleague.state.GameState;
 
 import java.util.Objects;
 
-import static com.bonepl.chromaleague.state.GameState.getPlayerList;
-
 public enum EventType {
     UNSUPPORTED,
     ALLY_BARON_KILL,
@@ -47,31 +45,58 @@ public enum EventType {
 
             if ("DragonKill".equals(event.getEventName())) {
                 return switch (Objects.requireNonNull(DragonType.fromApiType(event.getDragonType()))) {
-                    case CLOUD -> getPlayerList().isAlly(event.getKillerName()) ?
-                            ALLY_CLOUD_DRAGON_KILL : ENEMY_CLOUD_DRAGON_KILL;
-                    case INFERNAL -> getPlayerList().isAlly(event.getKillerName()) ?
-                            ALLY_INFERNAL_DRAGON_KILL : ENEMY_INFERNAL_DRAGON_KILL;
-                    case OCEAN -> getPlayerList().isAlly(event.getKillerName()) ?
-                            ALLY_OCEAN_DRAGON_KILL : ENEMY_OCEAN_DRAGON_KILL;
-                    case MOUNTAIN -> getPlayerList().isAlly(event.getKillerName()) ?
-                            ALLY_MOUNTAIN_DRAGON_KILL : ENEMY_MOUNTAIN_DRAGON_KILL;
-                    case ELDER -> getPlayerList().isAlly(event.getKillerName()) ?
-                            ALLY_ELDER_DRAGON_KILL : ENEMY_ELDER_DRAGON_KILL;
+                    case CLOUD -> {
+                        if (GameState.getPlayerList().isAlly(event.getKillerName())) {
+                            yield ALLY_CLOUD_DRAGON_KILL;
+                        }
+                        yield ENEMY_CLOUD_DRAGON_KILL;
+                    }
+                    case INFERNAL -> {
+                        if (GameState.getPlayerList().isAlly(event.getKillerName())) {
+                            yield ALLY_INFERNAL_DRAGON_KILL;
+                        }
+                        yield ENEMY_INFERNAL_DRAGON_KILL;
+                    }
+                    case OCEAN -> {
+                        if (GameState.getPlayerList().isAlly(event.getKillerName())) {
+                            yield ALLY_OCEAN_DRAGON_KILL;
+                        }
+                        yield ENEMY_OCEAN_DRAGON_KILL;
+                    }
+                    case MOUNTAIN -> {
+                        if (GameState.getPlayerList().isAlly(event.getKillerName())) {
+                            yield ALLY_MOUNTAIN_DRAGON_KILL;
+                        }
+                        yield ENEMY_MOUNTAIN_DRAGON_KILL;
+                    }
+                    case ELDER -> {
+                        if (GameState.getPlayerList().isAlly(event.getKillerName())) {
+                            yield ALLY_ELDER_DRAGON_KILL;
+                        }
+                        yield ENEMY_ELDER_DRAGON_KILL;
+                    }
                 };
             }
 
             if ("BaronKill".equals(event.getEventName())) {
-                return getPlayerList().isAlly(event.getKillerName()) ?
-                        ALLY_BARON_KILL : ENEMY_BARON_KILL;
+                if (GameState.getPlayerList().isAlly(event.getKillerName())) {
+                    return ALLY_BARON_KILL;
+                }
+                return ENEMY_BARON_KILL;
             }
 
             if ("HeraldKill".equals(event.getEventName())) {
-                return getPlayerList().isAlly(event.getKillerName()) ?
-                        ALLY_HERALD_KILL : ENEMY_HERALD_KILL;
+                if (GameState.getPlayerList().isAlly(event.getKillerName())) {
+                    return ALLY_HERALD_KILL;
+                }
+                return ENEMY_HERALD_KILL;
             }
 
             if ("GameEnd".equals(event.getEventName())) {
-                return "Win".equals(event.getResult()) ? GAME_END_VICTORY : GAME_END_DEFEAT;
+                if ("Win".equals(event.getResult())) {
+                    return GAME_END_VICTORY;
+                }
+                return GAME_END_DEFEAT;
             }
         }
         return UNSUPPORTED;

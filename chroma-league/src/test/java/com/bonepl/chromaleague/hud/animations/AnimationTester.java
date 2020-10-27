@@ -10,12 +10,12 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public final class AnimationTester {
-    private static final Logger logger = LogManager.getLogger();
-    Consumer<Integer> afterIterationAction;
-    int sleepTime = 50;
+    private static final Logger LOGGER = LogManager.getLogger();
+    private Consumer<Integer> afterIterationAction;
+    private int sleepTime = 50;
 
-    public AnimationTester withAfterIterationAction(Consumer<Integer> afterIterationAction) {
-        this.afterIterationAction = afterIterationAction;
+    public AnimationTester withAfterIterationAction(Consumer<Integer> action) {
+        afterIterationAction = action;
         return this;
     }
 
@@ -65,7 +65,7 @@ public final class AnimationTester {
         try {
             Thread.sleep(sleepTime);
         } catch (InterruptedException e) {
-            logger.error(e);
+            LOGGER.error(e);
         }
     }
 }

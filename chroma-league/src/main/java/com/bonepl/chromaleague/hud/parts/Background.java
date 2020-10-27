@@ -10,17 +10,17 @@ import com.bonepl.razersdk.animation.SimpleFrame;
 
 public class Background extends LayeredFrame {
     public static final Color BACKGROUND_COLOR = new Color(5, 5, 5);
-    private static final AnimatedFrame baronBuffBackground = new BaronBuffBackgroundAnimation();
-    private static final BreathingColor deadBackground = new BreathingColor(new Color(60, 40, 40));
+    private static final AnimatedFrame BARON_BUFF_BACKGROUND_ANIMATION = new BaronBuffBackgroundAnimation();
+    private static final BreathingColor DEAD_BACKGROUND = new BreathingColor(new Color(60, 40, 40));
 
     public Background() {
         if (GameStateHelper.isActivePlayerAlive()) {
             addFrame(new SimpleFrame(BACKGROUND_COLOR));
         } else {
-            addFrame(new SimpleFrame(deadBackground.getNextColor()));
+            addFrame(new SimpleFrame(DEAD_BACKGROUND.getNextColor()));
         }
         if (GameStateHelper.hasBaronBuff()) {
-            addFrame(baronBuffBackground);
+            addFrame(BARON_BUFF_BACKGROUND_ANIMATION);
         }
     }
 }

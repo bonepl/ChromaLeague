@@ -1,6 +1,6 @@
 package com.bonepl.chromaleague.hud.animations;
 
-import com.bonepl.chromaleague.hud.KeysJoiner;
+import com.bonepl.razersdk.sdk.RzKeyJoiner;
 import com.bonepl.chromaleague.hud.parts.KilledDragonBar;
 import com.bonepl.razersdk.animation.AnimatedFrame;
 import com.bonepl.razersdk.animation.Color;
@@ -22,7 +22,7 @@ public class ElderBuffAnimation extends AnimatedFrame {
 
     private void extendAnimation() {
         for (int i = 0; i < 10; i++) {
-            addAnimationFrame(2, new SimpleFrame(new KeysJoiner().with(KilledDragonBar.FIRST_DRAGON_ROW)
+            addAnimationFrame(2, new SimpleFrame(new RzKeyJoiner().with(KilledDragonBar.FIRST_DRAGON_ROW)
                     .with(Arrays.asList(RzKey.RZKEY_UP, RzKey.RZKEY_DOWN, RzKey.RZKEY_RIGHT)).join(), Color.WHITE));
             addAnimationFrame(2, new SimpleFrame(Arrays.asList(RzKey.RZKEY_RSHIFT,
                     RzKey.RZKEY_UP), Color.WHITE));

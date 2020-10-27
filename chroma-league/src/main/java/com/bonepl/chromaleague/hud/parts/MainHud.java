@@ -10,7 +10,7 @@ public class MainHud extends LayeredFrame {
     private static final LevelUpBar LEVEL_UP_BAR = new LevelUpBar();
     private static final EventAnimator EVENT_ANIMATOR = new EventAnimator();
     private static final DragonSoulBar DRAGON_SOUL_BAR = new DragonSoulBar();
-    private static final ElderBuffAnimation elderBuffAnimation = new ElderBuffAnimation();
+    private static final ElderBuffAnimation ELDER_BUFF_ANIMATION = new ElderBuffAnimation();
     private static boolean playerDead;
 
     public MainHud() {
@@ -23,7 +23,7 @@ public class MainHud extends LayeredFrame {
         addFrame(GOLD_BAR);
         addFrame(LEVEL_UP_BAR);
         if (GameStateHelper.hasElderBuff()) {
-            addFrame(elderBuffAnimation);
+            addFrame(ELDER_BUFF_ANIMATION);
         }
         handleRespawnEvent();
         if (EVENT_ANIMATOR.hasFrame()) {

@@ -9,7 +9,7 @@ import java.util.List;
 
 public abstract class StaticPartialBlinkingAnimation extends AnimatedFrame {
 
-    public StaticPartialBlinkingAnimation(List<RzKey> rzKeys, int times, Color color) {
+    protected StaticPartialBlinkingAnimation(List<RzKey> rzKeys, int times, Color color) {
         for (int i = 0; i < times; i++) {
             addAnimationFrame(new SimpleFrame(rzKeys, color));
             addAnimationFrame(3, new SimpleFrame(rzKeys, Color.BLACK));

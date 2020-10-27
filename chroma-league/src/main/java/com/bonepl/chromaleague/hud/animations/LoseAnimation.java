@@ -1,6 +1,6 @@
 package com.bonepl.chromaleague.hud.animations;
 
-import com.bonepl.chromaleague.hud.KeysJoiner;
+import com.bonepl.razersdk.sdk.RzKeyJoiner;
 import com.bonepl.chromaleague.hud.PredefinedKeySets;
 import com.bonepl.razersdk.animation.*;
 
@@ -23,17 +23,17 @@ public class LoseAnimation extends Animation {
             animatedFrame.addAnimationFrame(delay * 13, new SimpleFrame());
         }
         animatedFrame.addAnimationFrame(3, new SimpleFrame(PredefinedKeySets.BLACKWIDOW_FIRST_ROW, color));
-        animatedFrame.addAnimationFrame(3, new SimpleFrame(new KeysJoiner().with(PredefinedKeySets.BLACKWIDOW_SECOND_ROW)
+        animatedFrame.addAnimationFrame(3, new SimpleFrame(new RzKeyJoiner().with(PredefinedKeySets.BLACKWIDOW_SECOND_ROW)
                 .with(PredefinedKeySets.BLACKWIDOW_FIRST_ROW).join(), color));
-        animatedFrame.addAnimationFrame(3, new SimpleFrame(new KeysJoiner().with(PredefinedKeySets.BLACKWIDOW_THIRD_ROW)
+        animatedFrame.addAnimationFrame(3, new SimpleFrame(new RzKeyJoiner().with(PredefinedKeySets.BLACKWIDOW_THIRD_ROW)
                 .with(PredefinedKeySets.BLACKWIDOW_SECOND_ROW).with(PredefinedKeySets.BLACKWIDOW_FIRST_ROW).join(), color));
-        animatedFrame.addAnimationFrame(3, new SimpleFrame(new KeysJoiner().with(PredefinedKeySets.BLACKWIDOW_FOURTH_ROW)
+        animatedFrame.addAnimationFrame(3, new SimpleFrame(new RzKeyJoiner().with(PredefinedKeySets.BLACKWIDOW_FOURTH_ROW)
                 .with(PredefinedKeySets.BLACKWIDOW_THIRD_ROW).with(PredefinedKeySets.BLACKWIDOW_SECOND_ROW).join(), color));
-        animatedFrame.addAnimationFrame(3, new SimpleFrame(new KeysJoiner().with(PredefinedKeySets.BLACKWIDOW_FIFTH_ROW)
+        animatedFrame.addAnimationFrame(3, new SimpleFrame(new RzKeyJoiner().with(PredefinedKeySets.BLACKWIDOW_FIFTH_ROW)
                 .with(PredefinedKeySets.BLACKWIDOW_FOURTH_ROW).with(PredefinedKeySets.BLACKWIDOW_THIRD_ROW).join(), color));
-        animatedFrame.addAnimationFrame(3, new SimpleFrame(new KeysJoiner().with(PredefinedKeySets.BLACKWIDOW_SIXTH_ROW)
+        animatedFrame.addAnimationFrame(3, new SimpleFrame(new RzKeyJoiner().with(PredefinedKeySets.BLACKWIDOW_SIXTH_ROW)
                 .with(PredefinedKeySets.BLACKWIDOW_FIFTH_ROW).with(PredefinedKeySets.BLACKWIDOW_FOURTH_ROW).join(), color));
-        animatedFrame.addAnimationFrame(3, new SimpleFrame(new KeysJoiner().with(PredefinedKeySets.BLACKWIDOW_SIXTH_ROW)
+        animatedFrame.addAnimationFrame(3, new SimpleFrame(new RzKeyJoiner().with(PredefinedKeySets.BLACKWIDOW_SIXTH_ROW)
                 .with(PredefinedKeySets.BLACKWIDOW_FIFTH_ROW).join(), color));
         animatedFrame.addAnimationFrame(3, new SimpleFrame(PredefinedKeySets.BLACKWIDOW_SIXTH_ROW, color));
         return animatedFrame;

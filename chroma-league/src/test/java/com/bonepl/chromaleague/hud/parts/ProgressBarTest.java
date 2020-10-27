@@ -8,8 +8,8 @@ import static com.bonepl.chromaleague.hud.PredefinedKeySets.BLACKWIDOW_FIRST_ROW
 
 class ProgressBarTest {
     private static final int STEP = 5;
-    private static int PERCENT;
-    private static int UP = 1;
+    private static int percent;
+    private static int direction = 1;
 
     @Test
     void testProgressBarEffect() {
@@ -18,10 +18,10 @@ class ProgressBarTest {
     }
 
     private static int nextPercent() {
-        if (PERCENT + STEP > 100 || PERCENT + STEP < 0) {
-            UP = Math.negateExact(UP);
+        if (percent + STEP > 100 || percent + STEP < 0) {
+            direction = Math.negateExact(direction);
         }
-        PERCENT += STEP * UP;
-        return PERCENT;
+        percent += STEP * direction;
+        return percent;
     }
 }

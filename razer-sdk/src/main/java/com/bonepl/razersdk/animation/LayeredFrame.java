@@ -23,7 +23,7 @@ public class LayeredFrame implements IFrame {
      *
      * @param frame object containing {@link Frame}
      */
-    public void addFrame(final IFrame frame) {
+    public final void addFrame(final IFrame frame) {
         frame.getFrame().getKeysToColors().entrySet().stream()
                 .filter(ktc -> ktc.getValue() != Color.NONE)
                 .forEach(ktc -> keysToColors.put(ktc.getKey(), ktc.getValue()));

@@ -21,7 +21,7 @@ public class Event {
     @JsonProperty("VictimName")
     private String victimName;
     @JsonProperty("Assisters")
-    private List<String> Assisters;
+    private List<String> assisters;
 
     public int getEventID() {
         return eventID;
@@ -52,7 +52,7 @@ public class Event {
     }
 
     public List<String> getAssisters() {
-        return Collections.unmodifiableList(Assisters);
+        return Collections.unmodifiableList(assisters);
     }
 
     @Override
@@ -65,7 +65,7 @@ public class Event {
                 ", KillerName='" + killerName + '\'' +
                 ", Result='" + result + '\'' +
                 ", VictimName='" + victimName + '\'' +
-                ", Assisters=" + Assisters +
+                ", Assisters=" + assisters +
                 '}';
     }
 }

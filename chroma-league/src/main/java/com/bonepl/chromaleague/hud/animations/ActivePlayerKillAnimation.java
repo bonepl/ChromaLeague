@@ -7,21 +7,22 @@ import com.bonepl.razersdk.animation.LayeredFrame;
 import com.bonepl.razersdk.animation.SimpleFrame;
 import com.bonepl.razersdk.sdk.RzKey;
 
-import java.util.Arrays;
 import java.util.List;
 
+import static com.bonepl.razersdk.sdk.RzKey.*;
+
 public class ActivePlayerKillAnimation extends AnimatedFrame {
-    private static final List<RzKey> BACKGROUND_KEYS = Arrays.asList(
-            RzKey.RZKEY_P, RzKey.RZKEY_SQUARE_BRACKET_LEFT, RzKey.RZKEY_SQUARE_BRACKET_RIGHT,
-            RzKey.RZKEY_L, RzKey.RZKEY_SEMICOLON, RzKey.RZKEY_APOSTROPHE,
-            RzKey.RZKEY_COMA, RzKey.RZKEY_DOT, RzKey.RZKEY_SLASH);
+    private static final List<RzKey> BACKGROUND_KEYS = List.of(
+            RZKEY_P, RZKEY_SQUARE_BRACKET_LEFT, RZKEY_SQUARE_BRACKET_RIGHT,
+            RZKEY_L, RZKEY_SEMICOLON, RZKEY_APOSTROPHE,
+            RZKEY_COMA, RZKEY_DOT, RZKEY_SLASH);
 
     public ActivePlayerKillAnimation() {
         for (int i = 0; i < 4; i++) {
-            addAnimationFrame(2, withBackground(Arrays.asList(RzKey.RZKEY_O, RzKey.RZKEY_L, RzKey.RZKEY_DOT)));
-            addAnimationFrame(2, withBackground(Arrays.asList(RzKey.RZKEY_K, RzKey.RZKEY_L, RzKey.RZKEY_SEMICOLON)));
-            addAnimationFrame(2, withBackground(Arrays.asList(RzKey.RZKEY_M, RzKey.RZKEY_L, RzKey.RZKEY_SQUARE_BRACKET_LEFT)));
-            addAnimationFrame(2, withBackground(Arrays.asList(RzKey.RZKEY_COMA, RzKey.RZKEY_L, RzKey.RZKEY_P)));
+            addAnimationFrame(2, withBackground(List.of(RZKEY_O, RZKEY_L, RZKEY_DOT)));
+            addAnimationFrame(2, withBackground(List.of(RZKEY_K, RZKEY_L, RZKEY_SEMICOLON)));
+            addAnimationFrame(2, withBackground(List.of(RZKEY_M, RZKEY_L, RZKEY_SQUARE_BRACKET_LEFT)));
+            addAnimationFrame(2, withBackground(List.of(RZKEY_COMA, RZKEY_L, RZKEY_P)));
         }
     }
 

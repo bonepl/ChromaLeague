@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+import static com.bonepl.razersdk.sdk.RzKey.RZKEY_ENTER;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AnimationTest {
@@ -61,8 +62,8 @@ class AnimationTest {
         animation.addToBack(layeredFrame);
 
         final AnimatedFrame animatedFrame = new AnimatedFrame();
-        animatedFrame.addAnimationFrame(new SimpleFrame(RzKey.RZKEY_ENTER, Color.RED));
-        animatedFrame.addAnimationFrame(new SimpleFrame(RzKey.RZKEY_ENTER, Color.BLUE));
+        animatedFrame.addAnimationFrame(new SimpleFrame(RZKEY_ENTER, Color.RED));
+        animatedFrame.addAnimationFrame(new SimpleFrame(RZKEY_ENTER, Color.BLUE));
         animation.addToFront(animatedFrame);
 
         //when 1st frame
@@ -70,9 +71,9 @@ class AnimationTest {
 
         //then
         assertTrue(animation.hasFrame());
-        assertEquals(actualKeysToColors.get(RzKey.RZKEY_ENTER), Color.RED);
+        assertEquals(actualKeysToColors.get(RZKEY_ENTER), Color.RED);
         assertTrue(actualKeysToColors.entrySet().stream()
-                .filter(entry -> entry.getKey() != RzKey.RZKEY_ENTER)
+                .filter(entry -> entry.getKey() != RZKEY_ENTER)
                 .map(Map.Entry::getValue).allMatch(color -> color == Color.GREEN));
         assertEquals(RzKey.values().length, actualKeysToColors.size());
 
@@ -81,7 +82,7 @@ class AnimationTest {
 
         //then
         assertFalse(animation.hasFrame());
-        assertEquals(actualKeysToColors2.get(RzKey.RZKEY_ENTER), Color.BLUE);
+        assertEquals(actualKeysToColors2.get(RZKEY_ENTER), Color.BLUE);
         assertEquals(1, actualKeysToColors2.size());
         assertThrows(NoSuchElementException.class, animation::getFrame);
     }

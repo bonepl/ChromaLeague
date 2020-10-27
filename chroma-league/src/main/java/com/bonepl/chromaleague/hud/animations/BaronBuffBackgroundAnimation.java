@@ -11,6 +11,8 @@ import com.bonepl.razersdk.sdk.RzKeySelector;
 
 import java.util.List;
 
+import static com.bonepl.razersdk.sdk.RzKey.*;
+
 public class BaronBuffBackgroundAnimation extends AnimatedFrame {
     private final BreathingColor baronBuffColor = new BreathingColor(new Color(200, 0, 200));
     private static final List<RzKey> BARON_AREA = buildBaronArea();
@@ -31,10 +33,10 @@ public class BaronBuffBackgroundAnimation extends AnimatedFrame {
 
     public static List<RzKey> buildBaronArea() {
         return new RzKeyJoiner()
-                .with(new RzKeySelector().withRowOf(RzKey.RZKEY_Q).withColumnBetween(RzKey.RZKEY_Q, RzKey.RZKEY_I))
-                .with(new RzKeySelector().withRowOf(RzKey.RZKEY_A).withColumnBetween(RzKey.RZKEY_A, RzKey.RZKEY_J))
-                .with(new RzKeySelector().withRowOf(RzKey.RZKEY_Z).withColumnBetween(RzKey.RZKEY_Z, RzKey.RZKEY_N))
-                .with(new RzKeySelector().withRowOf(RzKey.RZKEY_LALT).withColumnBetween(RzKey.RZKEY_LALT, RzKey.RZKEY_SPACE))
+                .with(new RzKeySelector().withRowOf(RZKEY_Q).withColumnBetween(RZKEY_Q, RZKEY_I))
+                .with(new RzKeySelector().withRowOf(RZKEY_A).withColumnBetween(RZKEY_A, RZKEY_J))
+                .with(new RzKeySelector().withRowOf(RZKEY_Z).withColumnBetween(RZKEY_Z, RZKEY_N))
+                .with(new RzKeySelector().withRowOf(RZKEY_LALT).withColumnBetween(RZKEY_LALT, RZKEY_SPACE))
                 .join();
     }
 }

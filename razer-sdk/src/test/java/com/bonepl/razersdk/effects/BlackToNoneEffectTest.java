@@ -8,14 +8,13 @@ import com.bonepl.razersdk.animation.SimpleFrame;
 import com.bonepl.razersdk.sdk.RzKey;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static com.bonepl.razersdk.sdk.RzKey.*;
 
 public class BlackToNoneEffectTest {
     private static final List<RzKey> FIRST_LETTERS =
-            Arrays.asList(RZKEY_Q, RZKEY_W, RZKEY_E, RZKEY_R, RZKEY_T, RZKEY_Y, RZKEY_U);
+            List.of(RZKEY_Q, RZKEY_W, RZKEY_E, RZKEY_R, RZKEY_T, RZKEY_Y, RZKEY_U);
 
     @Test
     @SuppressWarnings("JUnitTestMethodWithNoAssertions")

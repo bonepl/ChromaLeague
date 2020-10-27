@@ -42,12 +42,12 @@ public final class RzKeySelector {
         return this;
     }
 
-    public RzKeySelector sortedByColumn(){
+    public RzKeySelector sortedByColumn() {
         comparator = Comparator.comparingInt(RzKey::getColumn);
         return this;
     }
 
-    public RzKeySelector sortedByRow(){
+    public RzKeySelector sortedByRow() {
         comparator = Comparator.comparingInt(RzKey::getRow);
         return this;
     }

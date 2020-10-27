@@ -6,13 +6,14 @@ import com.bonepl.razersdk.animation.SimpleFrame;
 import com.bonepl.razersdk.sdk.RzKey;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.List;
 
+import static com.bonepl.razersdk.sdk.RzKey.*;
+
 class StaticPartialEffectTest {
-    private final List<RzKey> smiley = Arrays.asList(RzKey.RZKEY_W, RzKey.RZKEY_3, RzKey.RZKEY_4, RzKey.RZKEY_R,
-            RzKey.RZKEY_I, RzKey.RZKEY_9, RzKey.RZKEY_0, RzKey.RZKEY_P,
-            RzKey.RZKEY_X, RzKey.RZKEY_SPACE, RzKey.RZKEY_COMA);
+    private final List<RzKey> smiley = List.of(RZKEY_W, RZKEY_3, RZKEY_4, RZKEY_R,
+            RZKEY_I, RZKEY_9, RZKEY_0, RZKEY_P,
+            RZKEY_X, RZKEY_SPACE, RZKEY_COMA);
 
     @Test
     @SuppressWarnings("JUnitTestMethodWithNoAssertions")

@@ -6,14 +6,13 @@ import com.bonepl.chromaleague.state.GameState;
 import com.bonepl.chromaleague.tasks.EventDataProcessorTask;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
 import static com.bonepl.chromaleague.rest.eventdata.EventType.*;
 
 class KilledDragonBarTest {
-    private final Queue<EventType> testDrakesOrder = new LinkedList<>(Arrays.asList(ALLY_INFERNAL_DRAGON_KILL,
+    private final Queue<EventType> testDrakesOrder = new LinkedList<>(List.of(ALLY_INFERNAL_DRAGON_KILL,
             ALLY_CLOUD_DRAGON_KILL, ALLY_MOUNTAIN_DRAGON_KILL, ALLY_OCEAN_DRAGON_KILL));
 
     @Test

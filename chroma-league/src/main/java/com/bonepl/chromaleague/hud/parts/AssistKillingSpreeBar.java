@@ -8,11 +8,13 @@ import com.bonepl.razersdk.sdk.RzKey;
 
 import java.util.List;
 
+import static com.bonepl.razersdk.sdk.RzKey.*;
+
 public class AssistKillingSpreeBar extends LayeredFrame {
     private static final List<RzKey> KILLING_SPREE_BAR =
-            List.of(RzKey.RZKEY_M, RzKey.RZKEY_COMA, RzKey.RZKEY_DOT,
-                    RzKey.RZKEY_K, RzKey.RZKEY_L, RzKey.RZKEY_SEMICOLON,
-                    RzKey.RZKEY_O, RzKey.RZKEY_P, RzKey.RZKEY_SQUARE_BRACKET_LEFT);
+            List.of(RZKEY_M, RZKEY_COMA, RZKEY_DOT,
+                    RZKEY_K, RZKEY_L, RZKEY_SEMICOLON,
+                    RZKEY_O, RZKEY_P, RZKEY_SQUARE_BRACKET_LEFT);
 
     public AssistKillingSpreeBar() {
         addFrame(new SimpleFrame(KILLING_SPREE_BAR.subList(0, computeAssistsIndex()), Color.YELLOW));

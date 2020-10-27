@@ -65,7 +65,7 @@ class SimpleFrameTest {
     @Test
     void testMultipleKeys() {
         //given
-        final Collection<RzKey> rzKeys = Arrays.asList(RzKey.RZKEY_2, RzKey.RZKEY_3);
+        final Collection<RzKey> rzKeys = List.of(RzKey.RZKEY_2, RzKey.RZKEY_3);
         final SimpleFrame simpleFrame = new SimpleFrame(rzKeys, Color.YELLOW);
 
         //when

@@ -33,7 +33,10 @@ public final class LeagueHttpClient {
 
     public static Optional<String> getResponse(String url) {
         try (CloseableHttpResponse response = leagueHttpClient.execute(new HttpGet(url))) {
-            return Optional.of(EntityUtils.toString(response.getEntity()));
+            final String json = EntityUtils.toString(response.getEntity());
+            if (!json.contains("RESOURCE_NOT_FOUND")) {
+                return Optional.of(json);
+            }
         } catch (IOException ex) {
             // it is possible to fail on HTTP connection during API shutdown
             LOGGER.debug(ex);

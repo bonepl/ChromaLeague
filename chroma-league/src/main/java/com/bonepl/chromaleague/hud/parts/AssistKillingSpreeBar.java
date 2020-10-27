@@ -26,4 +26,8 @@ public class AssistKillingSpreeBar extends LayeredFrame {
     private static int computeKillsIndex() {
         return Math.min(GameStateHelper.getActivePlayerKillingSpree(), KILLING_SPREE_BAR.size());
     }
+
+    public static List<RzKey> getKillingSpreeBar() {
+        return KILLING_SPREE_BAR;
+    }
 }

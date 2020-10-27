@@ -2,34 +2,26 @@ package com.bonepl.chromaleague.rest.eventdata;
 
 import com.jsoniter.annotation.JsonProperty;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class Event {
-
-    private final int eventID;
-    private final String eventName;
-    private final double eventTime;
-    private final String dragonType;
-    private final String killerName;
-    private final String result;
-    private final String victimName;
-    private final List<String> assisters;
-
-    @SuppressWarnings("ConstructorWithTooManyParameters")
-    public Event(@JsonProperty("EventID") int eventID, @JsonProperty("EventName") String eventName, @JsonProperty("EventTime") double eventTime,
-                 @JsonProperty("DragonType") String dragonType, @JsonProperty("KillerName") String killerName,
-                 @JsonProperty("Result") String result, @JsonProperty("VictimName") String victimName, @JsonProperty("Assisters") List<String> assisters) {
-        this.eventID = eventID;
-        this.eventName = eventName;
-        this.eventTime = eventTime;
-        this.dragonType = dragonType;
-        this.killerName = killerName;
-        this.result = result;
-        this.victimName = victimName;
-        this.assisters = new ArrayList<>(assisters);
-    }
+    @JsonProperty("EventID")
+    private int eventID;
+    @JsonProperty("EventName")
+    private String eventName;
+    @JsonProperty("EventTime")
+    private double eventTime;
+    @JsonProperty("DragonType")
+    private String dragonType;
+    @JsonProperty("KillerName")
+    private String killerName;
+    @JsonProperty("Result")
+    private String result;
+    @JsonProperty("VictimName")
+    private String victimName;
+    @JsonProperty("Assisters")
+    private List<String> Assisters;
 
     public int getEventID() {
         return eventID;
@@ -60,7 +52,7 @@ public class Event {
     }
 
     public List<String> getAssisters() {
-        return Collections.unmodifiableList(assisters);
+        return Collections.unmodifiableList(Assisters);
     }
 
     @Override
@@ -73,7 +65,7 @@ public class Event {
                 ", KillerName='" + killerName + '\'' +
                 ", Result='" + result + '\'' +
                 ", VictimName='" + victimName + '\'' +
-                ", Assisters=" + assisters +
+                ", Assisters=" + Assisters +
                 '}';
     }
 }

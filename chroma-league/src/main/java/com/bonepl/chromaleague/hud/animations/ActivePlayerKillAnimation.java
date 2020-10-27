@@ -18,10 +18,10 @@ public class ActivePlayerKillAnimation extends AnimatedFrame {
 
     public ActivePlayerKillAnimation() {
         for (int i = 0; i < 4; i++) {
-            addAnimationFrame(2, withBackground(Arrays.asList(RzKey.RZKEY_P, RzKey.RZKEY_SEMICOLON, RzKey.RZKEY_SLASH)));
-            addAnimationFrame(2, withBackground(Arrays.asList(RzKey.RZKEY_L, RzKey.RZKEY_SEMICOLON, RzKey.RZKEY_APOSTROPHE)));
-            addAnimationFrame(2, withBackground(Arrays.asList(RzKey.RZKEY_COMA, RzKey.RZKEY_SEMICOLON, RzKey.RZKEY_SQUARE_BRACKET_RIGHT)));
-            addAnimationFrame(2, withBackground(Arrays.asList(RzKey.RZKEY_DOT, RzKey.RZKEY_SEMICOLON, RzKey.RZKEY_SQUARE_BRACKET_LEFT)));
+            addAnimationFrame(2, withBackground(Arrays.asList(RzKey.RZKEY_O, RzKey.RZKEY_L, RzKey.RZKEY_DOT)));
+            addAnimationFrame(2, withBackground(Arrays.asList(RzKey.RZKEY_K, RzKey.RZKEY_L, RzKey.RZKEY_SEMICOLON)));
+            addAnimationFrame(2, withBackground(Arrays.asList(RzKey.RZKEY_M, RzKey.RZKEY_L, RzKey.RZKEY_SQUARE_BRACKET_LEFT)));
+            addAnimationFrame(2, withBackground(Arrays.asList(RzKey.RZKEY_COMA, RzKey.RZKEY_L, RzKey.RZKEY_P)));
         }
     }
 

@@ -2,6 +2,7 @@ package com.bonepl.chromaleague.tasks;
 
 import com.bonepl.chromaleague.rest.LeagueHttpClientMock;
 import com.bonepl.chromaleague.rest.activeplayer.ActivePlayer;
+import com.bonepl.chromaleague.rest.playerlist.Player;
 import com.bonepl.chromaleague.rest.playerlist.PlayerList;
 import com.bonepl.chromaleague.rest.playerlist.Team;
 import com.bonepl.chromaleague.state.GameState;
@@ -41,6 +42,11 @@ class FetchPlayerListTaskTest {
         assertEquals(Team.CHAOS, playerList.getActivePlayer().getTeam());
         assertTrue(playerList.isAlly("Test summoner 5"));
         assertFalse(playerList.isAlly("Test summoner 9"));
+
+        final Player activePlayer = GameState.getPlayerList().getActivePlayer();
+        assertEquals("Cho'Gath", activePlayer.getChampionName());
+        assertEquals("BooonE", activePlayer.getSummonerName());
+        assertEquals(Team.CHAOS, activePlayer.getTeam());
     }
 
     @Test

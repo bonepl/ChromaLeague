@@ -54,18 +54,4 @@ public class Event {
     public List<String> getAssisters() {
         return Collections.unmodifiableList(assisters);
     }
-
-    @Override
-    public String toString() {
-        return "Event{" +
-                "EventID=" + eventID +
-                ", EventName='" + eventName + '\'' +
-                ", EventTime=" + eventTime +
-                ", DragonType='" + dragonType + '\'' +
-                ", KillerName='" + killerName + '\'' +
-                ", Result='" + result + '\'' +
-                ", VictimName='" + victimName + '\'' +
-                ", Assisters=" + assisters +
-                '}';
-    }
 }

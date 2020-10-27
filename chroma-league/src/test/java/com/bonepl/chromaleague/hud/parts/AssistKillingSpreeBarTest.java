@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 class AssistKillingSpreeBarTest {
 
+    @SuppressWarnings("JUnitTestMethodWithNoAssertions")
     @Test
     void testKillingSpreeBar() {
         final AnimationTester animationTester = new AnimationTester()

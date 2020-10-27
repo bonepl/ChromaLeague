@@ -16,6 +16,7 @@ class KilledDragonBarTest {
     private final Queue<EventType> testDrakesOrder = new LinkedList<>(List.of(ALLY_INFERNAL_DRAGON_KILL,
             ALLY_CLOUD_DRAGON_KILL, ALLY_MOUNTAIN_DRAGON_KILL, ALLY_OCEAN_DRAGON_KILL));
 
+    @SuppressWarnings("JUnitTestMethodWithNoAssertions")
     @Test
     void testKilledDragonBar() {
         GameState.getEventData().resetCounters();

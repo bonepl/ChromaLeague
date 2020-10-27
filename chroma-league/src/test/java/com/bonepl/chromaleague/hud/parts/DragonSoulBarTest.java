@@ -10,21 +10,25 @@ import java.util.stream.IntStream;
 
 class DragonSoulBarTest {
 
+    @SuppressWarnings("JUnitTestMethodWithNoAssertions")
     @Test
     void playCloudDragonSoulAnimation() {
         testDragonSoulAnimation(DragonType.CLOUD);
     }
 
+    @SuppressWarnings("JUnitTestMethodWithNoAssertions")
     @Test
     void playInfernalDragonSoulAnimation() {
         testDragonSoulAnimation(DragonType.INFERNAL);
     }
 
+    @SuppressWarnings("JUnitTestMethodWithNoAssertions")
     @Test
     void playMountainDragonSoulAnimation() {
         testDragonSoulAnimation(DragonType.MOUNTAIN);
     }
 
+    @SuppressWarnings("JUnitTestMethodWithNoAssertions")
     @Test
     void playOceanDragonSoulAnimation() {
         testDragonSoulAnimation(DragonType.OCEAN);

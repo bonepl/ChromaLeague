@@ -4,6 +4,7 @@ import com.bonepl.chromaleague.hud.animations.AnimationTester;
 import org.junit.jupiter.api.Test;
 
 class LevelUpBarTest {
+    @SuppressWarnings("JUnitTestMethodWithNoAssertions")
     @Test
     void playLevelUpAnimation() {
         final LevelUpBar levelUpBar = new LevelUpBar();

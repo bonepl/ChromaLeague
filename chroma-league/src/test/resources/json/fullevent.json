@@ -1,0 +1,13 @@
+{
+  "Assisters": [
+    "Teammate 1",
+    "Teammate 2"
+  ],
+  "DragonType": "Fire",
+  "EventID": 7,
+  "EventName": "DragonKill",
+  "EventTime": 933.6826782226563,
+  "KillerName": "BooonE",
+  "VictimName": "Noob",
+  "Result": "Win"
+}

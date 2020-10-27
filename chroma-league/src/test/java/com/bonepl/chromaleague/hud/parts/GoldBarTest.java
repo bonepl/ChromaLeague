@@ -14,6 +14,7 @@ class GoldBarTest {
         GameStateMocks.clearActivePlayer();
     }
 
+    @SuppressWarnings("JUnitTestMethodWithNoAssertions")
     @Test
     void testGoldAnimation() {
         //given

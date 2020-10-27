@@ -11,6 +11,7 @@ class ProgressBarTest {
     private static int percent;
     private static int direction = 1;
 
+    @SuppressWarnings("JUnitTestMethodWithNoAssertions")
     @Test
     void testProgressBarEffect() {
         new AnimationTester()

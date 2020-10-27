@@ -1,15 +1,14 @@
 package com.bonepl.razersdk.sdk;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.EnumSet;
-import java.util.List;
+import java.util.*;
 
-public class RzKeyJoiner {
+public final class RzKeyJoiner {
     private final EnumSet<RzKey> rzKeys = EnumSet.noneOf(RzKey.class);
 
-    public RzKeyJoiner with(RzKey rzKey) {
-        rzKeys.add(rzKey);
+    public RzKeyJoiner with(RzKey... rzKey) {
+        if (rzKey.length != 0) {
+            rzKeys.addAll(List.of(rzKey));
+        }
         return this;
     }
 

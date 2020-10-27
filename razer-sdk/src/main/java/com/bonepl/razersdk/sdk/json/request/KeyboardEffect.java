@@ -13,13 +13,8 @@ public class KeyboardEffect {
     public static final int KEYBOARD_COLUMNS = 22;
     public static final int KEYBOARD_ROWS = 6;
     private static final String EFFECT = "CHROMA_CUSTOM";
+    @SuppressWarnings("MismatchedReadAndWriteOfArray")
     private final int[][] param = new int[KEYBOARD_ROWS][KEYBOARD_COLUMNS];
-
-    public KeyboardEffect() {
-        for (int[] rows : param) {
-            Arrays.fill(rows, Color.NONE.getSDKColorRef());
-        }
-    }
 
     public KeyboardEffect(Map<RzKey, Color> keysToColors) {
         keysToColors.forEach((key, value) -> param[key.getRow()][key.getColumn()] = value.getSDKColorRef());

@@ -6,8 +6,6 @@ public class Init {
     private final String title;
     private final String description;
     private final InitAuthor author;
-
-    @JsonProperty("device_supported")
     private final String[] deviceSupported;
     private final String category;
 
@@ -31,6 +29,7 @@ public class Init {
         return author;
     }
 
+    @JsonProperty("device_supported")
     public String[] getDeviceSupported() {
         return deviceSupported.clone();
     }

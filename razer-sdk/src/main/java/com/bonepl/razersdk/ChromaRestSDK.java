@@ -44,7 +44,7 @@ import java.util.concurrent.TimeUnit;
  * # automatic disconnection
  * </pre>
  */
-public class ChromaRestSDK implements AutoCloseable {
+public final class ChromaRestSDK implements AutoCloseable {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final int INIT_SLEEP_TIME = 2000;
     private final CloseableHttpClient httpClient;

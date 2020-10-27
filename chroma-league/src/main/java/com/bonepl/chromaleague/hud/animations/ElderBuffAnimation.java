@@ -23,8 +23,9 @@ public class ElderBuffAnimation extends AnimatedFrame {
 
     private void extendAnimation() {
         for (int i = 0; i < 10; i++) {
-            addAnimationFrame(2, new SimpleFrame(new RzKeyJoiner().with(KilledDragonBar.FIRST_DRAGON_ROW)
-                    .with(List.of(RZKEY_UP, RZKEY_DOWN, RZKEY_RIGHT)).with(RZKEY_RALT).join(), Color.WHITE));
+            addAnimationFrame(2, new SimpleFrame(new RzKeyJoiner()
+                    .with(KilledDragonBar.FIRST_DRAGON_ROW).with(RZKEY_RALT)
+                    .with(RZKEY_UP, RZKEY_DOWN, RZKEY_RIGHT).join(), Color.WHITE));
             addAnimationFrame(2, new SimpleFrame(List.of(RZKEY_RSHIFT,
                     RZKEY_UP, RZKEY_SLASH), Color.WHITE));
             addAnimationFrame(2, new SimpleFrame(List.of(RZKEY_ENTER, RZKEY_APOSTROPHE), Color.WHITE));

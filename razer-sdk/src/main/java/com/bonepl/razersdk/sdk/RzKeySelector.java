@@ -8,48 +8,51 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public final class RzKeySelector {
-    private Predicate<Integer> columnPredicate = column -> true;
-    private Predicate<Integer> rowPredicate = row -> true;
-    private Comparator<RzKey> comparator = Comparator.naturalOrder();
+    private Predicate<Integer> columnPredicate = column -> false;
+    private Predicate<Integer> rowPredicate = row -> false;
+    private Comparator<RzKey> sort = Comparator.naturalOrder();
 
-    public RzKeySelector withColumn(Predicate<Integer> predicate) {
+    private RzKeySelector withColumn(Predicate<Integer> predicate) {
         columnPredicate = predicate;
         return this;
     }
 
-    public RzKeySelector withRow(Predicate<Integer> predicate) {
+    private RzKeySelector withRow(Predicate<Integer> predicate) {
         rowPredicate = predicate;
         return this;
     }
 
-    public RzKeySelector withColumnOf(RzKey rzKey) {
-        columnPredicate = column -> column == rzKey.getColumn();
+    private RzKeySelector withSort(Comparator<RzKey> comparator) {
+        sort = comparator;
         return this;
+    }
+
+    public RzKeySelector withColumnOf(RzKey rzKey) {
+        return withColumn(column -> column == rzKey.getColumn());
     }
 
     public RzKeySelector withRowOf(RzKey rzKey) {
-        rowPredicate = row -> row == rzKey.getRow();
-        return this;
+        return withRow(row -> row == rzKey.getRow());
     }
 
     public RzKeySelector withColumnBetween(RzKey from, RzKey to) {
-        columnPredicate = column -> column >= from.getColumn() && column <= to.getColumn();
-        return this;
+        return withColumn(column -> column >= from.getColumn() && column <= to.getColumn());
     }
 
     public RzKeySelector withRowBetween(RzKey from, RzKey to) {
-        rowPredicate = row -> row >= from.getRow() && row <= to.getRow();
-        return this;
+        return withRow(row -> row >= from.getRow() && row <= to.getRow());
+    }
+
+    public RzKeySelector withRectangleBetween(RzKey topLeft, RzKey bottomRight) {
+        return withRowBetween(topLeft, bottomRight).withColumnBetween(topLeft, bottomRight);
     }
 
     public RzKeySelector sortedByColumn() {
-        comparator = Comparator.comparingInt(RzKey::getColumn);
-        return this;
+        return withSort(Comparator.comparingInt(RzKey::getColumn));
     }
 
     public RzKeySelector sortedByRow() {
-        comparator = Comparator.comparingInt(RzKey::getRow);
-        return this;
+        return withSort(Comparator.comparingInt(RzKey::getRow));
     }
 
     public List<RzKey> asList() {
@@ -60,6 +63,6 @@ public final class RzKeySelector {
         return Arrays.stream(RzKey.values())
                 .filter(rzKey -> columnPredicate.test(rzKey.getColumn()))
                 .filter(rzKey -> rowPredicate.test(rzKey.getRow()))
-                .sorted(comparator);
+                .sorted(sort);
     }
 }

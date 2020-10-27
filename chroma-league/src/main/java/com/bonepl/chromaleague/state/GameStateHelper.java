@@ -65,7 +65,7 @@ public final class GameStateHelper {
     }
 
     private static int getPercentage(double firstDouble, double secondDouble) {
-        return (int) Math.floor(firstDouble * 100 / secondDouble);
+        return Double.valueOf(firstDouble * 100 / secondDouble).intValue();
     }
 
     public static void startBaronBuff() {

@@ -20,6 +20,6 @@ public class ProgressBar extends SimpleFrame {
         if (percent >= 100) {
             return progressBar.size();
         }
-        return (int) (progressBar.size() * (percent * 0.01));
+        return Double.valueOf(progressBar.size() * (percent * 0.01)).intValue();
     }
 }

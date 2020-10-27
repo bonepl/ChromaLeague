@@ -2,6 +2,7 @@ package com.bonepl.chromaleague.hud.parts;
 
 import com.bonepl.chromaleague.hud.animations.AnimationTester;
 import com.bonepl.chromaleague.rest.eventdata.EventType;
+import com.bonepl.chromaleague.state.GameState;
 import com.bonepl.chromaleague.tasks.EventDataProcessorTask;
 import org.junit.jupiter.api.Test;
 
@@ -17,10 +18,11 @@ class KilledDragonBarTest {
 
     @Test
     void testKilledDragonBar() {
+        GameState.getEventData().resetCounters();
         new AnimationTester()
                 .withAfterIterationAction(i -> {
                     if (!testDrakesOrder.isEmpty()) {
-                        new EventDataProcessorTask().processEventForEventData(testDrakesOrder.remove());
+                        EventDataProcessorTask.processEventForEventData(testDrakesOrder.remove());
                     }
                 })
                 .withSleepTime(500)

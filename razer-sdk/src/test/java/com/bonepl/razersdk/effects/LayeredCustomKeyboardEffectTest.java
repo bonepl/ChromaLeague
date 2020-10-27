@@ -1,6 +1,6 @@
 package com.bonepl.razersdk.effects;
 
-import com.bonepl.razersdk.RazerSDKClient;
+import com.bonepl.razersdk.ChromaRestSDK;
 import com.bonepl.razersdk.animation.AnimatedFrame;
 import com.bonepl.razersdk.animation.Color;
 import com.bonepl.razersdk.animation.LayeredFrame;
@@ -17,7 +17,7 @@ class LayeredCustomKeyboardEffectTest {
     @Test
     @SuppressWarnings("JUnitTestMethodWithNoAssertions")
     void testLayeredKeyboardEffect() throws InterruptedException {
-        try (RazerSDKClient razerSDKClient = new RazerSDKClient()) {
+        try (ChromaRestSDK razerSDKClient = new ChromaRestSDK()) {
             final AnimatedFrame firstAnimatedFrame = createFramesFromEnum(7, 18, Color.GREEN);
             final AnimatedFrame secondAnimatedFrame = createFramesFromEnum(0, 11, Color.BLUE);
             for (int i = 0; i <= 100; i += 5) {

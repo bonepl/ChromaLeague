@@ -1,6 +1,6 @@
 package com.bonepl.razersdk.effects;
 
-import com.bonepl.razersdk.RazerSDKClient;
+import com.bonepl.razersdk.ChromaRestSDK;
 import com.bonepl.razersdk.animation.AnimatedFrame;
 import com.bonepl.razersdk.animation.Animation;
 import com.bonepl.razersdk.animation.Color;
@@ -20,7 +20,7 @@ public class BlackToNoneEffectTest {
     @Test
     @SuppressWarnings("JUnitTestMethodWithNoAssertions")
     void testNonTransparentBlack() throws InterruptedException {
-        try (RazerSDKClient razerSDKClient = new RazerSDKClient()) {
+        try (ChromaRestSDK razerSDKClient = new ChromaRestSDK()) {
             Animation animation = new Animation();
             animation.addToFront(createMovingBlackPixel(Color.BLACK));
             while (animation.hasFrame()) {
@@ -34,7 +34,7 @@ public class BlackToNoneEffectTest {
     @Test
     @SuppressWarnings("JUnitTestMethodWithNoAssertions")
     void testTransparentBlack() throws InterruptedException {
-        try (RazerSDKClient razerSDKClient = new RazerSDKClient()) {
+        try (ChromaRestSDK razerSDKClient = new ChromaRestSDK()) {
             Animation animation = new Animation();
             animation.addToFront(createMovingBlackPixel(Color.NONE));
             while (animation.hasFrame()) {

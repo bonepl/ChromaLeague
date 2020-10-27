@@ -6,7 +6,8 @@ public enum ResourceType {
     MANA(Color.BLUE),
     ENERGY(Color.YELLOW);
 
-    Color color;
+    @SuppressWarnings("NonSerializableFieldInSerializableClass")
+    private final Color color;
 
     ResourceType(Color color) {
         this.color = color;

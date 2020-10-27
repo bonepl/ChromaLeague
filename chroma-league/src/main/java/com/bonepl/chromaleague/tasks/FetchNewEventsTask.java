@@ -32,7 +32,7 @@ public class FetchNewEventsTask implements Runnable {
         } else {
             if (events.size() > lastProcessedEventId + 1) {
                 final List<Event> newEvents = events.subList(lastProcessedEventId + 1, events.size());
-                newEvents.forEach(event -> LOGGER.debug("Adding new event: " + event));
+                newEvents.forEach(event -> LOGGER.debug("Adding new event: {}", event));
                 EventAnimationProcessorTask.addEvents(newEvents);
                 EventDataProcessorTask.addEvents(newEvents);
             }

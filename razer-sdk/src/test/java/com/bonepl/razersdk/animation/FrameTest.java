@@ -18,12 +18,9 @@ class FrameTest {
 
         //when
         final Frame frame = new Frame(inputMap);
-        final int[] actualColors = frame.toCustomEffect().colors;
         final Map<RzKey, Color> actualMap = frame.getKeysToColors();
 
         //then
-        assertEquals(actualColors[RzKey.RZKEY_ESC.getCustomPosition()], Color.BLUE.getSDKColorRef());
-        assertEquals(actualColors[RzKey.RZKEY_ENTER.getCustomPosition()], Color.WHITE.getSDKColorRef());
         assertEquals(inputMap, actualMap);
     }
 }

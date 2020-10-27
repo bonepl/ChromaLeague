@@ -1,18 +1,19 @@
 package com.bonepl.chromaleague.hud.animations;
 
+import com.bonepl.razersdk.sdk.RzKeyJoiner;
+import com.bonepl.chromaleague.hud.PredefinedKeySets;
 import com.bonepl.razersdk.animation.*;
 
-import static com.bonepl.chromaleague.hud.PredefinedKeySets.*;
-import static org.apache.commons.collections4.ListUtils.sum;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class LoseAnimation extends Animation {
-    private int red = 0;
+    private int red;
     private int redStep = 50;
 
     public LoseAnimation() {
-        int i = 0;
-        while (i < 500) {
-            this.addToFront(createDownMovingFrame(i++, new Color(getRed(), 0, 0)));
+        AtomicInteger integer = new AtomicInteger(0);
+        while (integer.get() < 500) {
+            addToFront(createDownMovingFrame(integer.getAndIncrement(), new Color(getNewRedValue(), 0, 0)));
         }
     }
 
@@ -21,27 +22,33 @@ public class LoseAnimation extends Animation {
         if (delay > 0) {
             animatedFrame.addAnimationFrame(delay * 13, new SimpleFrame());
         }
-        animatedFrame.addAnimationFrame(3, new SimpleFrame(BLACKWIDOW_FIRST_ROW, color));
-        animatedFrame.addAnimationFrame(3, new SimpleFrame(sum(BLACKWIDOW_SECOND_ROW, BLACKWIDOW_FIRST_ROW), color));
-        animatedFrame.addAnimationFrame(3, new SimpleFrame(sum(sum(BLACKWIDOW_THIRD_ROW, BLACKWIDOW_SECOND_ROW), BLACKWIDOW_FIRST_ROW), color));
-        animatedFrame.addAnimationFrame(3, new SimpleFrame(sum(sum(BLACKWIDOW_FOURTH_ROW, BLACKWIDOW_THIRD_ROW), BLACKWIDOW_SECOND_ROW), color));
-        animatedFrame.addAnimationFrame(3, new SimpleFrame(sum(sum(BLACKWIDOW_FIFTH_ROW, BLACKWIDOW_FOURTH_ROW), BLACKWIDOW_THIRD_ROW), color));
-        animatedFrame.addAnimationFrame(3, new SimpleFrame(sum(sum(BLACKWIDOW_SIXTH_ROW, BLACKWIDOW_FIFTH_ROW), BLACKWIDOW_FOURTH_ROW), color));
-        animatedFrame.addAnimationFrame(3, new SimpleFrame(sum(BLACKWIDOW_SIXTH_ROW, BLACKWIDOW_FIFTH_ROW), color));
-        animatedFrame.addAnimationFrame(3, new SimpleFrame(BLACKWIDOW_SIXTH_ROW, color));
+        animatedFrame.addAnimationFrame(3, new SimpleFrame(PredefinedKeySets.BLACKWIDOW_FIRST_ROW, color));
+        animatedFrame.addAnimationFrame(3, new SimpleFrame(new RzKeyJoiner().with(PredefinedKeySets.BLACKWIDOW_SECOND_ROW)
+                .with(PredefinedKeySets.BLACKWIDOW_FIRST_ROW).join(), color));
+        animatedFrame.addAnimationFrame(3, new SimpleFrame(new RzKeyJoiner().with(PredefinedKeySets.BLACKWIDOW_THIRD_ROW)
+                .with(PredefinedKeySets.BLACKWIDOW_SECOND_ROW).with(PredefinedKeySets.BLACKWIDOW_FIRST_ROW).join(), color));
+        animatedFrame.addAnimationFrame(3, new SimpleFrame(new RzKeyJoiner().with(PredefinedKeySets.BLACKWIDOW_FOURTH_ROW)
+                .with(PredefinedKeySets.BLACKWIDOW_THIRD_ROW).with(PredefinedKeySets.BLACKWIDOW_SECOND_ROW).join(), color));
+        animatedFrame.addAnimationFrame(3, new SimpleFrame(new RzKeyJoiner().with(PredefinedKeySets.BLACKWIDOW_FIFTH_ROW)
+                .with(PredefinedKeySets.BLACKWIDOW_FOURTH_ROW).with(PredefinedKeySets.BLACKWIDOW_THIRD_ROW).join(), color));
+        animatedFrame.addAnimationFrame(3, new SimpleFrame(new RzKeyJoiner().with(PredefinedKeySets.BLACKWIDOW_SIXTH_ROW)
+                .with(PredefinedKeySets.BLACKWIDOW_FIFTH_ROW).with(PredefinedKeySets.BLACKWIDOW_FOURTH_ROW).join(), color));
+        animatedFrame.addAnimationFrame(3, new SimpleFrame(new RzKeyJoiner().with(PredefinedKeySets.BLACKWIDOW_SIXTH_ROW)
+                .with(PredefinedKeySets.BLACKWIDOW_FIFTH_ROW).join(), color));
+        animatedFrame.addAnimationFrame(3, new SimpleFrame(PredefinedKeySets.BLACKWIDOW_SIXTH_ROW, color));
         return animatedFrame;
     }
 
-    public int getRed() {
-        if ((red + redStep) >= 200 || (red + redStep) < 0) {
+    public final int getNewRedValue() {
+        if (red + redStep >= 200 || red + redStep < 0) {
             redStep = Math.negateExact(redStep);
         }
-        red = red + redStep;
+        red += redStep;
         return red;
     }
 
     @Override
-    public synchronized Frame getFrame() {
+    public Frame getFrame() {
         addToBack(new SimpleFrame(Color.BLACK));
         return super.getFrame();
     }

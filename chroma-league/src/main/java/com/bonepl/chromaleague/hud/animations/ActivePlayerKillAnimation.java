@@ -12,16 +12,16 @@ import java.util.List;
 
 public class ActivePlayerKillAnimation extends AnimatedFrame {
     private static final List<RzKey> BACKGROUND_KEYS = Arrays.asList(
-            RzKey.RZKEY_P, RzKey.RZKEY_OEM_4, RzKey.RZKEY_OEM_5,
-            RzKey.RZKEY_L, RzKey.RZKEY_OEM_7, RzKey.RZKEY_OEM_8,
-            RzKey.RZKEY_OEM_9, RzKey.RZKEY_OEM_10, RzKey.RZKEY_OEM_11);
+            RzKey.RZKEY_P, RzKey.RZKEY_SQUARE_BRACKET_LEFT, RzKey.RZKEY_SQUARE_BRACKET_RIGHT,
+            RzKey.RZKEY_L, RzKey.RZKEY_SEMICOLON, RzKey.RZKEY_APOSTROPHE,
+            RzKey.RZKEY_COMA, RzKey.RZKEY_DOT, RzKey.RZKEY_SLASH);
 
     public ActivePlayerKillAnimation() {
         for (int i = 0; i < 4; i++) {
-            addAnimationFrame(2, withBackground(Arrays.asList(RzKey.RZKEY_P, RzKey.RZKEY_OEM_7, RzKey.RZKEY_OEM_11)));
-            addAnimationFrame(2, withBackground(Arrays.asList(RzKey.RZKEY_L, RzKey.RZKEY_OEM_7, RzKey.RZKEY_OEM_8)));
-            addAnimationFrame(2, withBackground(Arrays.asList(RzKey.RZKEY_OEM_9, RzKey.RZKEY_OEM_7, RzKey.RZKEY_OEM_5)));
-            addAnimationFrame(2, withBackground(Arrays.asList(RzKey.RZKEY_OEM_10, RzKey.RZKEY_OEM_7, RzKey.RZKEY_OEM_4)));
+            addAnimationFrame(2, withBackground(Arrays.asList(RzKey.RZKEY_O, RzKey.RZKEY_L, RzKey.RZKEY_DOT)));
+            addAnimationFrame(2, withBackground(Arrays.asList(RzKey.RZKEY_K, RzKey.RZKEY_L, RzKey.RZKEY_SEMICOLON)));
+            addAnimationFrame(2, withBackground(Arrays.asList(RzKey.RZKEY_M, RzKey.RZKEY_L, RzKey.RZKEY_SQUARE_BRACKET_LEFT)));
+            addAnimationFrame(2, withBackground(Arrays.asList(RzKey.RZKEY_COMA, RzKey.RZKEY_L, RzKey.RZKEY_P)));
         }
     }
 

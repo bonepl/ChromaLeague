@@ -1,11 +1,22 @@
 package com.bonepl.chromaleague.rest.activeplayer;
 
+import com.jsoniter.annotation.JsonCreator;
+
 public class ChampionStats {
-    double currentHealth;
-    double maxHealth;
-    double resourceMax;
-    double resourceValue;
-    String resourceType;
+    private final double currentHealth;
+    private final double maxHealth;
+    private final double resourceMax;
+    private final double resourceValue;
+    private final String resourceType;
+
+    @JsonCreator
+    public ChampionStats(double currentHealth, double maxHealth, double resourceMax, double resourceValue, String resourceType) {
+        this.currentHealth = currentHealth;
+        this.maxHealth = maxHealth;
+        this.resourceMax = resourceMax;
+        this.resourceValue = resourceValue;
+        this.resourceType = resourceType;
+    }
 
     public double getCurrentHealth() {
         return currentHealth;

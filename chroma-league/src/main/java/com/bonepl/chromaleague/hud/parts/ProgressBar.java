@@ -17,6 +17,9 @@ public class ProgressBar extends SimpleFrame {
     }
 
     private static int indexToFill(List<RzKey> progressBar, Integer percent) {
-        return percent >= 100 ? progressBar.size() : (int) (progressBar.size() * (percent * 0.01));
+        if (percent >= 100) {
+            return progressBar.size();
+        }
+        return (int) (progressBar.size() * (percent * 0.01));
     }
 }

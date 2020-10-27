@@ -9,6 +9,9 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public final class GameStateMocks {
+    private GameStateMocks() {
+    }
+
     public static void setActivePlayerName(String name) {
         ActivePlayer mockedActivePlayer = mock(ActivePlayer.class);
         when(mockedActivePlayer.getSummonerName()).thenReturn(name);

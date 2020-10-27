@@ -6,6 +6,6 @@ class ElderBuffAnimationTest {
 
     @Test
     void playElderBuffAnimation() {
-        new AnimationTester().testAnimation(new ElderBuffAnimation());
+        new AnimationTester().testAnimation(new ElderBuffAnimation(), 60);
     }
 }

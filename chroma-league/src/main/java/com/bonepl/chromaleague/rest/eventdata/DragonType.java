@@ -13,6 +13,7 @@ public enum DragonType {
     OCEAN("Water", CLColor.OCEAN);
 
     private final String apiType;
+    @SuppressWarnings("NonSerializableFieldInSerializableClass")
     private final Color color;
 
     DragonType(String apiType, Color color) {
@@ -30,7 +31,7 @@ public enum DragonType {
 
     public static DragonType fromApiType(String apiType) {
         for (DragonType value : values()) {
-            if (Objects.equals(value.getApiType(), apiType)) {
+            if (Objects.equals(value.apiType, apiType)) {
                 return value;
             }
         }

@@ -18,7 +18,7 @@ public class AnimatedFrame implements IFrame {
      *
      * @param frame frame added to animation sequence
      */
-    public void addAnimationFrame(IFrame frame) {
+    public final void addAnimationFrame(IFrame frame) {
         addAnimationFrame(1, frame);
     }
 
@@ -31,7 +31,7 @@ public class AnimatedFrame implements IFrame {
      * @param frameCount how long should provided frame last (be returned by {@link #getFrame()}
      * @param frame      frame to be added to animation sequence
      */
-    public void addAnimationFrame(int frameCount, IFrame frame) {
+    public final void addAnimationFrame(int frameCount, IFrame frame) {
         if (frameCount > 0) {
             final Frame animationFrame = frame.getFrame();
             IntStream.range(0, frameCount).forEach(i -> frames.offer(animationFrame));
@@ -67,7 +67,7 @@ public class AnimatedFrame implements IFrame {
     /**
      * Clear the frame sequence, and stop the animation
      */
-    public void clearFrames() {
+    public final void clearFrames() {
         frames.clear();
     }
 }

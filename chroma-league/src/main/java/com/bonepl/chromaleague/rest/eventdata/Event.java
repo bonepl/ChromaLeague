@@ -1,59 +1,71 @@
 package com.bonepl.chromaleague.rest.eventdata;
 
+import com.jsoniter.annotation.JsonProperty;
+
+import java.util.Collections;
 import java.util.List;
 
 public class Event {
-    int EventID;
-    String EventName;
-    double EventTime;
-    String DragonType;
-    String KillerName;
-    String Result;
-    String VictimName;
-    List<String> Assisters;
+    @JsonProperty("EventID")
+    private int eventID;
+    @JsonProperty("EventName")
+    private String eventName;
+    @JsonProperty("EventTime")
+    private double eventTime;
+    @JsonProperty("DragonType")
+    private String dragonType;
+    @JsonProperty("KillerName")
+    private String killerName;
+    @JsonProperty("Result")
+    private String result;
+    @JsonProperty("VictimName")
+    private String victimName;
+    @JsonProperty("Assisters")
+    private List<String> Assisters;
 
     public int getEventID() {
-        return EventID;
+        return eventID;
     }
 
     public String getEventName() {
-        return EventName;
+        return eventName;
     }
 
     public double getEventTime() {
-        return EventTime;
+        return eventTime;
     }
 
     public String getDragonType() {
-        return DragonType;
+        return dragonType;
     }
 
     public String getKillerName() {
-        return KillerName;
+        return killerName;
     }
 
     public String getResult() {
-        return Result;
+        return result;
     }
 
     public String getVictimName() {
-        return VictimName;
+        return victimName;
     }
 
     public List<String> getAssisters() {
-        return Assisters;
+        return Collections.unmodifiableList(Assisters);
     }
 
     @Override
     public String toString() {
         return "Event{" +
-                "EventID=" + EventID +
-                ", EventName='" + EventName + '\'' +
-                ", EventTime=" + EventTime +
-                ", DragonType='" + DragonType + '\'' +
-                ", KillerName='" + KillerName + '\'' +
-                ", Result='" + Result + '\'' +
-                ", VictimName='" + VictimName + '\'' +
+                "EventID=" + eventID +
+                ", EventName='" + eventName + '\'' +
+                ", EventTime=" + eventTime +
+                ", DragonType='" + dragonType + '\'' +
+                ", KillerName='" + killerName + '\'' +
+                ", Result='" + result + '\'' +
+                ", VictimName='" + victimName + '\'' +
+                ", Assisters=" + Assisters +
                 '}';
     }
 }

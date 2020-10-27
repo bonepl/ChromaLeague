@@ -24,8 +24,8 @@ public class RespawnAnimation extends AnimatedFrame {
         for (int i = 0; i < 20; i++) {
             final LayeredFrame layeredFrame = new LayeredFrame();
             layeredFrame.addFrame(new SimpleFrame(GLOW_AREA, glowAreaColor.getNextColor()));
-            layeredFrame.addFrame(new SimpleFrame(HpBar.HP_BAR_KEYS, Background.BACKGROUND_COLOR));
-            layeredFrame.addFrame(new SimpleFrame(ResourceBar.RESOURCE_BAR_KEYS, Background.BACKGROUND_COLOR));
+            layeredFrame.addFrame(new SimpleFrame(HpBar.getHpBarKeys(), Background.BACKGROUND_COLOR));
+            layeredFrame.addFrame(new SimpleFrame(ResourceBar.getResourceBarKeys(), Background.BACKGROUND_COLOR));
             addAnimationFrame(layeredFrame);
         }
 
@@ -33,8 +33,8 @@ public class RespawnAnimation extends AnimatedFrame {
             final LayeredFrame layeredFrame = new LayeredFrame();
             layeredFrame.addFrame(new SimpleFrame(GLOW_AREA, glowAreaColor.getNextColor()));
             final Color buttonsNextColor = buttonsColor.getNextColor();
-            layeredFrame.addFrame(new SimpleFrame(HpBar.HP_BAR_KEYS, buttonsNextColor));
-            layeredFrame.addFrame(new SimpleFrame(ResourceBar.RESOURCE_BAR_KEYS, buttonsNextColor));
+            layeredFrame.addFrame(new SimpleFrame(HpBar.getHpBarKeys(), buttonsNextColor));
+            layeredFrame.addFrame(new SimpleFrame(ResourceBar.getResourceBarKeys(), buttonsNextColor));
             addAnimationFrame(layeredFrame);
         }
 
@@ -49,8 +49,8 @@ public class RespawnAnimation extends AnimatedFrame {
 
         for (int i = 0; i < 10; i++) {
             final LayeredFrame layeredFrame = new LayeredFrame();
-            layeredFrame.addFrame(new SimpleFrame(HpBar.HP_BAR_KEYS, toHpColor.getNextColor()));
-            layeredFrame.addFrame(new SimpleFrame(ResourceBar.RESOURCE_BAR_KEYS, toManaColor.getNextColor()));
+            layeredFrame.addFrame(new SimpleFrame(HpBar.getHpBarKeys(), toHpColor.getNextColor()));
+            layeredFrame.addFrame(new SimpleFrame(ResourceBar.getResourceBarKeys(), toManaColor.getNextColor()));
             addAnimationFrame(layeredFrame);
         }
     }

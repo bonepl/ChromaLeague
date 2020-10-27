@@ -6,9 +6,9 @@ import com.bonepl.chromaleague.rest.playerlist.PlayerList;
 public final class GameState {
     private static volatile ActivePlayer activePlayer;
     private static volatile PlayerList playerList;
-    private static boolean runningGameChanged = false;
-    private static volatile boolean riotApiUp = false;
-    private static volatile boolean runningGame = false;
+    private static boolean runningGameChanged;
+    private static volatile boolean riotApiUp;
+    private static volatile boolean runningGame;
     private static final EventData EVENT_DATA = new EventData();
 
     private GameState() {
@@ -51,13 +51,13 @@ public final class GameState {
     }
 
     public static boolean isRunningGame() {
-        GameState.runningGameChanged = false;
+        runningGameChanged = false;
         return runningGame;
     }
 
     public static void setRunningGame(boolean runningGame) {
         if (GameState.runningGame != runningGame) {
-            GameState.runningGameChanged = true;
+            runningGameChanged = true;
             GameState.runningGame = runningGame;
         }
     }

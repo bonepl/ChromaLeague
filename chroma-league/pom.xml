@@ -70,8 +70,7 @@
                 <version>3.0.0-M5</version>
                 <configuration>
                     <excludes>
-                        <exclude>com/bonepl/chromaleague/hud/animations/*.java</exclude>
-                        <exclude>com/bonepl/chromaleague/hud/parts/*.java</exclude>
+                        <exclude>com/bonepl/chromaleague/hud/**/*.java</exclude>
                     </excludes>
                 </configuration>
             </plugin>
@@ -82,8 +81,7 @@
                 <version>3.0.0-M5</version>
                 <configuration>
                     <includes>
-                        <include>com/bonepl/chromaleague/hud/animations/*.java</include>
-                        <include>com/bonepl/chromaleague/hud/parts/*.java</include>
+                        <include>com/bonepl/chromaleague/hud/**/*.java</include>
                     </includes>
                 </configuration>
                 <executions>

@@ -1,14 +1,14 @@
-package com.bonepl.chromaleague.hud.parts;
+package com.bonepl.chromaleague.hud.parts.health;
 
 import com.bonepl.chromaleague.GameStateMocks;
 import com.bonepl.chromaleague.hud.animations.AnimationTester;
 import org.junit.jupiter.api.Test;
 
-class HpBarAnimationTest {
+class HpBarTest {
 
     @Test
     void testHpBarLostAnimation() {
-        final HpBarAnimation hpBarAnimation = new HpBarAnimation();
+        final HpBar hpBar = new HpBar();
         GameStateMocks.mockActivePlayerHealth(1000, 1000);
 
         new AnimationTester()
@@ -21,12 +21,12 @@ class HpBarAnimationTest {
                     }
                 })
                 .withSleepTime(100)
-                .testAnimation(hpBarAnimation, 60);
+                .testAnimation(hpBar, 60);
     }
 
     @Test
     void testHpBarGainedAnimation() {
-        final HpBarAnimation hpBarAnimation = new HpBarAnimation();
+        final HpBar hpBar = new HpBar();
         GameStateMocks.mockActivePlayerHealth(0, 1000);
 
         new AnimationTester()
@@ -39,6 +39,6 @@ class HpBarAnimationTest {
                     }
                 })
                 .withSleepTime(100)
-                .testAnimation(hpBarAnimation, 60);
+                .testAnimation(hpBar, 60);
     }
 }

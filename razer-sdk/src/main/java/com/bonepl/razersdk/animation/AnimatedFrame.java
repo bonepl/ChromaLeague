@@ -11,7 +11,7 @@ import java.util.stream.IntStream;
  * Speed of the animation will depend on the external scheduler calling {@link #getFrame()}.
  */
 public class AnimatedFrame implements IFrame {
-    private final Queue<Frame> frames = new LinkedList<>();
+    public final Queue<Frame> frames = new LinkedList<>();
 
     /**
      * Add single animation frame delivered by calling {@link IFrame#getFrame()}

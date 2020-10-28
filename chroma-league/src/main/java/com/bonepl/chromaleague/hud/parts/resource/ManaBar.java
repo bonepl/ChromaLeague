@@ -1,5 +1,6 @@
-package com.bonepl.chromaleague.hud.parts;
+package com.bonepl.chromaleague.hud.parts.resource;
 
+import com.bonepl.chromaleague.hud.parts.ProgressBar;
 import com.bonepl.chromaleague.state.GameStateHelper;
 import com.bonepl.razersdk.sdk.RzKey;
 import com.bonepl.razersdk.sdk.RzKeySelector;
@@ -15,14 +16,14 @@ import static com.bonepl.razersdk.sdk.RzKey.RZKEY_TILDE;
  * vladimir uses resource type: GNARFURY
  * shyvana uses resource type: DRAGONFURY
  */
-public class ResourceBar extends ProgressBar {
+public class ManaBar extends ProgressBar {
     private static final List<RzKey> RESOURCE_BAR_KEYS = new RzKeySelector()
             .withRowOf(RZKEY_TILDE)
             .withColumnBetween(RZKEY_TILDE, RZKEY_BACKSPACE)
             .sortedByColumn()
             .asList();
 
-    public ResourceBar() {
+    public ManaBar() {
         super(RESOURCE_BAR_KEYS, GameStateHelper.getResourcePercentage(), getResourceType().getColor());
     }
 

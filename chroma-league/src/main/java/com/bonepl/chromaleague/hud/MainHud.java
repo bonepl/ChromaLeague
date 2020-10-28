@@ -1,32 +1,32 @@
 package com.bonepl.chromaleague.hud;
 
-import com.bonepl.chromaleague.hud.animations.ElderBuffAnimation;
 import com.bonepl.chromaleague.hud.animations.RespawnAnimation;
 import com.bonepl.chromaleague.hud.parts.*;
+import com.bonepl.chromaleague.hud.parts.dragons.DragonBar;
+import com.bonepl.chromaleague.hud.parts.health.HpBar;
+import com.bonepl.chromaleague.hud.parts.resource.ManaBar;
 import com.bonepl.chromaleague.state.GameStateHelper;
 import com.bonepl.razersdk.animation.LayeredFrame;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class MainHud extends LayeredFrame {
+    private static final Logger logger = LogManager.getLogger();
     private static final GoldBar GOLD_BAR = new GoldBar();
     private static final LevelUpBar LEVEL_UP_BAR = new LevelUpBar();
     private static final EventAnimator EVENT_ANIMATOR = new EventAnimator();
-    private static final DragonSoulBar DRAGON_SOUL_BAR = new DragonSoulBar();
-    private static final ElderBuffAnimation ELDER_BUFF_ANIMATION = new ElderBuffAnimation();
-    private static final HpBarAnimation HP_BAR = new HpBarAnimation();
+    private static final DragonBar DRAGON_BAR = new DragonBar();
+    private static final HpBar HP_BAR = new HpBar();
     private static boolean playerDead;
 
     public MainHud() {
         addFrame(new Background());
         addFrame(HP_BAR);
-        addFrame(new ResourceBar());
-        addFrame(new KilledDragonBar());
+        addFrame(new ManaBar());
         addFrame(new AssistKillingSpreeBar());
-        addFrame(DRAGON_SOUL_BAR);
+        addFrame(DRAGON_BAR);
         addFrame(GOLD_BAR);
         addFrame(LEVEL_UP_BAR);
-        if (GameStateHelper.hasElderBuff()) {
-            addFrame(ELDER_BUFF_ANIMATION);
-        }
         handleRespawnEvent();
         if (EVENT_ANIMATOR.hasFrame()) {
             addFrame(EVENT_ANIMATOR);

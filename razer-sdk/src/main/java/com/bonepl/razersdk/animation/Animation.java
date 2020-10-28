@@ -3,7 +3,6 @@ package com.bonepl.razersdk.animation;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
-import java.util.Queue;
 
 /**
  * Top level class for advanced animations.
@@ -31,7 +30,7 @@ import java.util.Queue;
  * to modify the animation on-the-fly (for example reacting to some event)
  */
 public class Animation implements IFrame {
-    private final Deque<Queue<SimpleFrame>> frames = new LinkedList<>();
+    private final Deque<IFrame> frames = new LinkedList<>();
 
     /**
      * Add {@link IFrame} implementing class to the front of the animation
@@ -39,7 +38,7 @@ public class Animation implements IFrame {
      * @param frame animation class to be added
      */
     public final void addToFront(IFrame frame) {
-        frames.addLast(convertToSimpleFrames(frame));
+        frames.addLast(frame);
     }
 
     /**
@@ -48,7 +47,7 @@ public class Animation implements IFrame {
      * @param frame animation class to be added
      */
     public final void addToBack(IFrame frame) {
-        frames.addFirst(convertToSimpleFrames(frame));
+        frames.addFirst(frame);
     }
 
     /**
@@ -73,19 +72,14 @@ public class Animation implements IFrame {
     public Frame getFrame() {
         if (hasFrame()) {
             final LayeredFrame layeredFrame = new LayeredFrame();
-            frames.stream().map(Queue::remove).forEach(layeredFrame::addFrame);
-            frames.removeIf(Queue::isEmpty);
+            frames.stream().map(IFrame::getFrame)
+                    .map(Frame::getKeysToColors)
+                    .map(SimpleFrame::new)
+                    .forEach(layeredFrame::addFrame);
+            frames.removeIf(iFrame -> !iFrame.hasFrame());
             return layeredFrame.getFrame();
         } else {
             throw new NoSuchElementException("Animation does not have any frames to return");
         }
-    }
-
-    private static Queue<SimpleFrame> convertToSimpleFrames(IFrame frame) {
-        final Queue<SimpleFrame> simpleFrames = new LinkedList<>();
-        while (frame.hasFrame()) {
-            simpleFrames.add(new SimpleFrame(frame.getFrame().getKeysToColors()));
-        }
-        return simpleFrames;
     }
 }

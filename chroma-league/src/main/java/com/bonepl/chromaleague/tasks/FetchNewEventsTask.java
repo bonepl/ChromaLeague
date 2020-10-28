@@ -58,7 +58,6 @@ public class FetchNewEventsTask implements Runnable {
         if (!events.isEmpty()) {
             final Event gameStart = events.get(0);
             EventDataProcessorTask.addEvents(Collections.singletonList(gameStart));
-            lastProcessedEventId = gameStart.getEventID();
         }
     }
 

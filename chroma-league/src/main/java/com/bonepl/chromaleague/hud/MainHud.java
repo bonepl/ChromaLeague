@@ -1,7 +1,8 @@
-package com.bonepl.chromaleague.hud.parts;
+package com.bonepl.chromaleague.hud;
 
 import com.bonepl.chromaleague.hud.animations.ElderBuffAnimation;
 import com.bonepl.chromaleague.hud.animations.RespawnAnimation;
+import com.bonepl.chromaleague.hud.parts.*;
 import com.bonepl.chromaleague.state.GameStateHelper;
 import com.bonepl.razersdk.animation.LayeredFrame;
 
@@ -11,11 +12,12 @@ public class MainHud extends LayeredFrame {
     private static final EventAnimator EVENT_ANIMATOR = new EventAnimator();
     private static final DragonSoulBar DRAGON_SOUL_BAR = new DragonSoulBar();
     private static final ElderBuffAnimation ELDER_BUFF_ANIMATION = new ElderBuffAnimation();
+    private static final HpBarAnimation HP_BAR = new HpBarAnimation();
     private static boolean playerDead;
 
     public MainHud() {
         addFrame(new Background());
-        addFrame(new HpBar());
+        addFrame(HP_BAR);
         addFrame(new ResourceBar());
         addFrame(new KilledDragonBar());
         addFrame(new AssistKillingSpreeBar());

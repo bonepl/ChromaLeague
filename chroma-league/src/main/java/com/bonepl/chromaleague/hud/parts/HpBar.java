@@ -12,6 +12,7 @@ import static com.bonepl.razersdk.sdk.RzKey.RZKEY_ESC;
 import static com.bonepl.razersdk.sdk.RzKey.RZKEY_F12;
 
 public class HpBar extends ProgressBar {
+    public static final Color HP_BAR_COLOR = Color.GREEN;
     private static final List<RzKey> HP_BAR_KEYS = new RzKeySelector()
             .withRowOf(RZKEY_ESC)
             .withColumnBetween(RZKEY_ESC, RZKEY_F12)
@@ -19,7 +20,7 @@ public class HpBar extends ProgressBar {
             .asList();
 
     public HpBar() {
-        super(HP_BAR_KEYS, GameStateHelper.getHpPercentage(), Color.GREEN);
+        super(HP_BAR_KEYS, GameStateHelper.getHpPercentage(), HP_BAR_COLOR);
     }
 
     public static List<RzKey> getHpBarKeys() {

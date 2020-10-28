@@ -13,6 +13,7 @@ public final class AnimationTester {
     private static final Logger LOGGER = LogManager.getLogger();
     private Consumer<Integer> afterIterationAction;
     private int sleepTime = 50;
+    private int sleepAfter;
 
     public AnimationTester withAfterIterationAction(Consumer<Integer> action) {
         afterIterationAction = action;
@@ -24,14 +25,20 @@ public final class AnimationTester {
         return this;
     }
 
+    public AnimationTester withSleepAfter(int milliseconds) {
+        sleepAfter = milliseconds;
+        return this;
+    }
+
     public void testAnimation(Supplier<? extends IFrame> supplier, int iterations) {
         try (ChromaRestSDK chromaRestSDK = new ChromaRestSDK()) {
             for (int i = 0; i < iterations; i++) {
                 final IFrame frame = supplier.get();
                 chromaRestSDK.createKeyboardEffect(frame);
                 executeAfterIteration(i);
-                sleepThread();
+                sleepThread(sleepTime);
             }
+            sleepThread(sleepAfter);
         }
     }
 
@@ -40,8 +47,9 @@ public final class AnimationTester {
             for (int i = 0; frame.hasFrame(); i++) {
                 chromaRestSDK.createKeyboardEffect(frame);
                 executeAfterIteration(i);
-                sleepThread();
+                sleepThread(sleepTime);
             }
+            sleepThread(sleepAfter);
         }
     }
 
@@ -50,8 +58,9 @@ public final class AnimationTester {
             for (int i = 0; i < iterations; i++) {
                 chromaRestSDK.createKeyboardEffect(frame);
                 executeAfterIteration(i);
-                sleepThread();
+                sleepThread(sleepTime);
             }
+            sleepThread(sleepAfter);
         }
     }
 
@@ -61,9 +70,9 @@ public final class AnimationTester {
         }
     }
 
-    private void sleepThread() {
+    private static void sleepThread(int milliseconds) {
         try {
-            Thread.sleep(sleepTime);
+            Thread.sleep(milliseconds);
         } catch (InterruptedException e) {
             LOGGER.error(e);
         }

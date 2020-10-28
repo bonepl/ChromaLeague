@@ -39,4 +39,12 @@ public final class GameStateMocks {
         GameState.setPlayerList(null);
     }
 
+    public static void mockActivePlayerHealth(double currentHealth, double maxHealth) {
+        final ChampionStats championStatsMock = mock(ChampionStats.class);
+        when(championStatsMock.getCurrentHealth()).thenReturn(currentHealth);
+        when(championStatsMock.getMaxHealth()).thenReturn(maxHealth);
+        final ActivePlayer apMock = mock(ActivePlayer.class);
+        when(apMock.getChampionStats()).thenReturn(championStatsMock);
+        GameState.setActivePlayer(apMock);
+    }
 }

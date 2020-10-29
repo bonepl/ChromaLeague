@@ -1,7 +1,7 @@
 package com.bonepl.chromaleague.tasks;
 
-import com.bonepl.chromaleague.hud.parts.EventAnimator;
 import com.bonepl.chromaleague.hud.MainHud;
+import com.bonepl.chromaleague.hud.parts.EventAnimator;
 import com.bonepl.chromaleague.state.GameState;
 import com.bonepl.chromaleague.state.GameStateHelper;
 import com.bonepl.razersdk.ChromaRestSDK;
@@ -45,6 +45,7 @@ public class MainTask implements Runnable {
             GameStateHelper.resetCustomData();
             EventAnimator.stop();
             FetchNewEventsTask.resetProcessedEventCounter();
+            MainHud.clearResourceBar();
         }
     }
 

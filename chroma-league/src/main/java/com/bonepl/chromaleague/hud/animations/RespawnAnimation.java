@@ -5,6 +5,7 @@ import com.bonepl.chromaleague.hud.colors.TransitionColor;
 import com.bonepl.chromaleague.hud.parts.Background;
 import com.bonepl.chromaleague.hud.parts.health.HpBar;
 import com.bonepl.chromaleague.hud.parts.resource.ManaBar;
+import com.bonepl.chromaleague.hud.parts.resource.ResourceBars;
 import com.bonepl.chromaleague.state.GameStateHelper;
 import com.bonepl.razersdk.animation.AnimatedFrame;
 import com.bonepl.razersdk.animation.Color;
@@ -25,7 +26,7 @@ public class RespawnAnimation extends AnimatedFrame {
             final LayeredFrame layeredFrame = new LayeredFrame();
             layeredFrame.addFrame(new SimpleFrame(GLOW_AREA, glowAreaColor.getNextColor()));
             layeredFrame.addFrame(new SimpleFrame(HpBar.getHpBarKeys(), Background.BACKGROUND_COLOR));
-            layeredFrame.addFrame(new SimpleFrame(ManaBar.getResourceBarKeys(), Background.BACKGROUND_COLOR));
+            layeredFrame.addFrame(new SimpleFrame(ResourceBars.getResourceBarKeys(), Background.BACKGROUND_COLOR));
             addAnimationFrame(layeredFrame);
         }
 
@@ -34,7 +35,7 @@ public class RespawnAnimation extends AnimatedFrame {
             layeredFrame.addFrame(new SimpleFrame(GLOW_AREA, glowAreaColor.getNextColor()));
             final Color buttonsNextColor = buttonsColor.getNextColor();
             layeredFrame.addFrame(new SimpleFrame(HpBar.getHpBarKeys(), buttonsNextColor));
-            layeredFrame.addFrame(new SimpleFrame(ManaBar.getResourceBarKeys(), buttonsNextColor));
+            layeredFrame.addFrame(new SimpleFrame(ResourceBars.getResourceBarKeys(), buttonsNextColor));
             addAnimationFrame(layeredFrame);
         }
 
@@ -50,7 +51,7 @@ public class RespawnAnimation extends AnimatedFrame {
         for (int i = 0; i < 10; i++) {
             final LayeredFrame layeredFrame = new LayeredFrame();
             layeredFrame.addFrame(new SimpleFrame(HpBar.getHpBarKeys(), toHpColor.getNextColor()));
-            layeredFrame.addFrame(new SimpleFrame(ManaBar.getResourceBarKeys(), toManaColor.getNextColor()));
+            layeredFrame.addFrame(new SimpleFrame(ResourceBars.getResourceBarKeys(), toManaColor.getNextColor()));
             addAnimationFrame(layeredFrame);
         }
     }

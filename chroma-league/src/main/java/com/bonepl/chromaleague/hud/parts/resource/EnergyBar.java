@@ -10,12 +10,12 @@ import com.bonepl.razersdk.animation.Frame;
  * vladimir uses resource type: GNARFURY
  * shyvana uses resource type: DRAGONFURY
  */
-public class ManaBar extends AnimatedFrame {
+public class EnergyBar extends AnimatedFrame {
 
     @Override
     public Frame getFrame() {
         addAnimationFrame(new ProgressBar(ResourceBars.getResourceBarKeys(),
-                GameStateHelper.getResourcePercentage(), Color.BLUE));
+                GameStateHelper.getResourcePercentage(), Color.YELLOW));
         return super.getFrame();
     }
 }

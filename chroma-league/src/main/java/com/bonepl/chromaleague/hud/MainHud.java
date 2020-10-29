@@ -5,7 +5,9 @@ import com.bonepl.chromaleague.hud.parts.*;
 import com.bonepl.chromaleague.hud.parts.dragons.DragonBar;
 import com.bonepl.chromaleague.hud.parts.health.HpBar;
 import com.bonepl.chromaleague.hud.parts.resource.ManaBar;
+import com.bonepl.chromaleague.hud.parts.resource.ResourceBars;
 import com.bonepl.chromaleague.state.GameStateHelper;
+import com.bonepl.razersdk.animation.IFrame;
 import com.bonepl.razersdk.animation.LayeredFrame;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -17,6 +19,7 @@ public class MainHud extends LayeredFrame {
     private static final EventAnimator EVENT_ANIMATOR = new EventAnimator();
     private static final DragonBar DRAGON_BAR = new DragonBar();
     private static final HpBar HP_BAR = new HpBar();
+    private static IFrame resourceBar;
     private static boolean playerDead;
 
     public MainHud() {
@@ -45,5 +48,16 @@ public class MainHud extends LayeredFrame {
                 playerDead = true;
             }
         }
+    }
+
+    private static IFrame getResourceBar() {
+        if (resourceBar == null) {
+            resourceBar = ResourceBars.getResourceBarForActivePlayerChampion();
+        }
+        return resourceBar;
+    }
+
+    public static void clearResourceBar() {
+        MainHud.resourceBar = null;
     }
 }

@@ -2,7 +2,6 @@ package com.bonepl.chromaleague.state;
 
 import com.bonepl.chromaleague.hud.parts.GoldBar;
 import com.bonepl.chromaleague.rest.activeplayer.ChampionStats;
-import com.bonepl.chromaleague.rest.activeplayer.ResourceType;
 import com.bonepl.chromaleague.rest.eventdata.DragonType;
 
 import java.time.LocalTime;
@@ -34,13 +33,6 @@ public final class GameStateHelper {
             return getPercentage(championStats.getResourceValue(), championStats.getResourceMax());
         }
         return 0;
-    }
-
-    public static ResourceType getResourceType() {
-        if (GameState.isActivePlayerAvailable()) {
-            return ResourceType.from(GameState.getActivePlayer().getChampionStats().getResourceType());
-        }
-        return ResourceType.MANA;
     }
 
     public static double getGold() {

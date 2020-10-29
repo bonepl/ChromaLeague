@@ -58,6 +58,6 @@ public class MainHud extends LayeredFrame {
     }
 
     public static void clearResourceBar() {
-        MainHud.resourceBar = null;
+        resourceBar = null;
     }
 }

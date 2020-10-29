@@ -31,8 +31,17 @@ public final class ResourceBars {
         if (NO_MANA_BAR_CHAMPIONS.contains(activePlayerChampionName)) {
             return new NoResourceBar();
         }
+
         if (ENERGY_BAR_CHAMPIONS.contains(activePlayerChampionName)) {
             return new EnergyBar();
+        }
+
+        if ("Renekton".equals(activePlayerChampionName)) {
+            return new RenektonResourceBar();
+        }
+
+        if ("Vladimir".equals(activePlayerChampionName)) {
+            return new VladimirResourceBar();
         }
         return new ManaBar();
     }

@@ -7,7 +7,7 @@ import com.bonepl.razersdk.animation.Color;
 import com.bonepl.razersdk.animation.Frame;
 
 public class VladimirResourceBar extends AnimatedFrame {
-    private int previousResourcePercentage = 0;
+    private int previousResourcePercentage;
 
     @Override
     public Frame getFrame() {

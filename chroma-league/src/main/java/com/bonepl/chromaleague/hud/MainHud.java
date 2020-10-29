@@ -23,16 +23,20 @@ public class MainHud extends LayeredFrame {
     private static boolean playerDead;
 
     public MainHud() {
-        addFrame(new Background());
-        addFrame(HP_BAR);
-        addFrame(new ManaBar());
-        addFrame(new AssistKillingSpreeBar());
-        addFrame(DRAGON_BAR);
-        addFrame(GOLD_BAR);
-        addFrame(LEVEL_UP_BAR);
-        handleRespawnEvent();
-        if (EVENT_ANIMATOR.hasFrame()) {
-            addFrame(EVENT_ANIMATOR);
+        try {
+            addFrame(new Background());
+            addFrame(HP_BAR);
+            addFrame(new ManaBar());
+            addFrame(new AssistKillingSpreeBar());
+            addFrame(DRAGON_BAR);
+            addFrame(GOLD_BAR);
+            addFrame(LEVEL_UP_BAR);
+            handleRespawnEvent();
+            if (EVENT_ANIMATOR.hasFrame()) {
+                addFrame(EVENT_ANIMATOR);
+            }
+        } catch (Exception ex) {
+            logger.error("Error while drawing main HUD ", ex);
         }
     }
 

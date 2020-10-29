@@ -72,7 +72,9 @@ public class Animation implements IFrame {
     public Frame getFrame() {
         if (hasFrame()) {
             final LayeredFrame layeredFrame = new LayeredFrame();
-            frames.stream().map(IFrame::getFrame)
+            frames.stream()
+                    .filter(IFrame::hasFrame)
+                    .map(IFrame::getFrame)
                     .map(Frame::getKeysToColors)
                     .map(SimpleFrame::new)
                     .forEach(layeredFrame::addFrame);

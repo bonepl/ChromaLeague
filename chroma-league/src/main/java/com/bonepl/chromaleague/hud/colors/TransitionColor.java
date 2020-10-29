@@ -4,9 +4,9 @@ import com.bonepl.razersdk.animation.Color;
 
 public class TransitionColor {
     private static final int DEFAULT_STEPS = 20;
-    private final Color from;
-    private final Color to;
-    private final int steps;
+    private Color from;
+    private Color to;
+    private int steps;
     private int currentStep;
 
     public TransitionColor(Color from, Color to) {
@@ -54,5 +54,27 @@ public class TransitionColor {
 
     public void resetTransition() {
         currentStep = 0;
+    }
+
+    public void setFrom(Color from) {
+        this.from = from;
+    }
+
+    public void setTo(Color to) {
+        this.to = to;
+    }
+
+    public void setSteps(int newSteps) {
+        final double stepsRatio = (double) currentStep / steps;
+        currentStep = (int) (stepsRatio * newSteps);
+        steps = newSteps;
+    }
+
+    public Color getFrom() {
+        return from;
+    }
+
+    public Color getTo() {
+        return to;
     }
 }

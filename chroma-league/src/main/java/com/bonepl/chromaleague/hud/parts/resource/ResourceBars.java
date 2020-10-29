@@ -43,6 +43,10 @@ public final class ResourceBars {
         if ("Vladimir".equals(activePlayerChampionName)) {
             return new VladimirResourceBar();
         }
+
+        if ("Gnar".equals(activePlayerChampionName)) {
+            return new GnarFuryBar();
+        }
         return new ManaBar();
     }
 

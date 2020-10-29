@@ -56,6 +56,13 @@ public final class GameStateHelper {
         return 0;
     }
 
+    public static double getActivePlayerRange() {
+        if (GameState.isActivePlayerAvailable()) {
+            return GameState.getActivePlayer().getChampionStats().getAttackRange();
+        }
+        return 0;
+    }
+
     private static int getPercentage(double firstDouble, double secondDouble) {
         return Double.valueOf(firstDouble * 100 / secondDouble).intValue();
     }

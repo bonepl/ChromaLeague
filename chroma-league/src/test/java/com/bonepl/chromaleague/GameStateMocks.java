@@ -47,4 +47,12 @@ public final class GameStateMocks {
         when(apMock.getChampionStats()).thenReturn(championStatsMock);
         GameState.setActivePlayer(apMock);
     }
+
+    public static ChampionStats getMockedChampionStats() {
+        final ChampionStats championStatsMock = mock(ChampionStats.class);
+        final ActivePlayer apMock = mock(ActivePlayer.class);
+        when(apMock.getChampionStats()).thenReturn(championStatsMock);
+        GameState.setActivePlayer(apMock);
+        return championStatsMock;
+    }
 }

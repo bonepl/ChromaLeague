@@ -1,5 +1,6 @@
 package com.bonepl.chromaleague.hud.colors;
 
+import com.bonepl.chromaleague.hud.parts.Background;
 import com.bonepl.razersdk.animation.Color;
 
 public class BreathingColor {
@@ -16,14 +17,13 @@ public class BreathingColor {
     }
 
     public BreathingColor(Color color, int steps, boolean startUpDirection) {
+        this(color, Background.BACKGROUND_COLOR, steps, startUpDirection);
+    }
+
+    public BreathingColor(Color upColor, Color downColor, int steps, boolean startUpDirection) {
         upDirection = startUpDirection;
-        if (startUpDirection) {
-            upColor = new TransitionColor(Color.BLACK, color, steps);
-            downColor = new TransitionColor(color, Color.BLACK, steps);
-        } else {
-            downColor = new TransitionColor(color, Color.BLACK, steps);
-            upColor = new TransitionColor(Color.BLACK, color, steps);
-        }
+        this.upColor = new TransitionColor(downColor, upColor, steps);
+        this.downColor = new TransitionColor(upColor, downColor, steps);
     }
 
     public Color getNextColor() {
@@ -41,5 +41,20 @@ public class BreathingColor {
             downColor.resetTransition();
         }
         return color;
+    }
+
+    public void setSteps(int steps) {
+        upColor.setSteps(steps);
+        downColor.setSteps(steps);
+    }
+
+    public void setUpColor(Color color) {
+        upColor.setTo(color);
+        downColor.setFrom(color);
+    }
+
+    public void setDownColor(Color color) {
+        upColor.setFrom(color);
+        downColor.setTo(color);
     }
 }

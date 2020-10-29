@@ -12,6 +12,8 @@ import com.bonepl.razersdk.sdk.RzKey;
 import java.util.List;
 import java.util.stream.IntStream;
 
+import static com.bonepl.chromaleague.hud.parts.health.HpBar.getHpBarPart;
+
 public class LostHpAnimation extends AnimatedFrame {
     private static final int LOST_HEALTH_CHANGE_STEPS = 5;
 
@@ -28,9 +30,6 @@ public class LostHpAnimation extends AnimatedFrame {
     }
 
     private static List<RzKey> computeLostHealth(double previousHp, double currentHp) {
-        final double maxHealth = GameState.getActivePlayer().getChampionStats().getMaxHealth();
-        final int from = ProgressBar.indexToFill(HpBar.getHpBarKeys(), Double.valueOf(currentHp * 100 / maxHealth).intValue());
-        final int to = ProgressBar.indexToFill(HpBar.getHpBarKeys(), Double.valueOf(previousHp * 100 / maxHealth).intValue());
-        return HpBar.getHpBarKeys().subList(from, to);
+        return getHpBarPart(currentHp, previousHp);
     }
 }

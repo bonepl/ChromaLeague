@@ -46,4 +46,11 @@ public class HpBar extends Animation {
     public static List<RzKey> getHpBarKeys() {
         return Collections.unmodifiableList(HP_BAR_KEYS);
     }
+
+    public static List<RzKey> getHpBarPart(double previousHp, double currentHp) {
+        final double maxHealth = GameState.getActivePlayer().getChampionStats().getMaxHealth();
+        final int from = ProgressBar.indexToFill(HpBar.getHpBarKeys(), Double.valueOf(previousHp * 100 / maxHealth).intValue());
+        final int to = ProgressBar.indexToFill(HpBar.getHpBarKeys(), Double.valueOf(currentHp * 100 / maxHealth).intValue());
+        return HpBar.getHpBarKeys().subList(from, to);
+    }
 }

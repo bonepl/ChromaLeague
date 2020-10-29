@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 import static com.bonepl.chromaleague.hud.parts.health.HpBar.HP_BAR_COLOR;
+import static com.bonepl.chromaleague.hud.parts.health.HpBar.getHpBarPart;
 
 public class GainHpAnimation extends AnimatedFrame {
     private static final int GAINED_HEALTH_CHANGE_STEPS = 5;
@@ -30,9 +31,6 @@ public class GainHpAnimation extends AnimatedFrame {
     }
 
     private static List<RzKey> computeGainedHealth(double previousHp, double currentHp) {
-        final double maxHealth = GameState.getActivePlayer().getChampionStats().getMaxHealth();
-        final int from = ProgressBar.indexToFill(HpBar.getHpBarKeys(), Double.valueOf(previousHp * 100 / maxHealth).intValue());
-        final int to = ProgressBar.indexToFill(HpBar.getHpBarKeys(), Double.valueOf(currentHp * 100 / maxHealth).intValue());
-        return HpBar.getHpBarKeys().subList(from, to);
+        return getHpBarPart(previousHp, currentHp);
     }
 }

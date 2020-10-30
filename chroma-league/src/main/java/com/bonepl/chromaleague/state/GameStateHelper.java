@@ -37,8 +37,12 @@ public final class GameStateHelper {
         return RunningState.getGameState().getActivePlayer().getLevel();
     }
 
+    /**
+     * Future's market rune can make percentage negative
+     */
     public static int getGoldPercentage() {
-        return getPercentage(RunningState.getGameState().getActivePlayer().getCurrentGold(), GoldBar.GOLD_FULL);
+        final int percentage = getPercentage(RunningState.getGameState().getActivePlayer().getCurrentGold(), GoldBar.GOLD_FULL);
+        return Math.max(percentage, 0);
     }
 
     public static double getActivePlayerRange() {
@@ -82,18 +86,6 @@ public final class GameStateHelper {
         }
         eventData.setElderBuffEnd(null);
         return false;
-    }
-
-    public static boolean hasDragonSoul() {
-        return RunningState.getGameState().getEventData().getKilledDragons().size() >= 4;
-    }
-
-    public static DragonType getDragonSoulType() {
-        return RunningState.getGameState().getEventData().getKilledDragons().get(3);
-    }
-
-    public static void addKilledDragon(DragonType dragonType) {
-        RunningState.getGameState().getEventData().addKilledDragon(dragonType);
     }
 
     public static List<DragonType> getKilledDragons() {

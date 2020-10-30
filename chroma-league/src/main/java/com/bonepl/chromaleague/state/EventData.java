@@ -1,19 +1,23 @@
 package com.bonepl.chromaleague.state;
 
 import com.bonepl.chromaleague.rest.eventdata.DragonType;
+import com.bonepl.chromaleague.rest.eventdata.Event;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class EventData {
-    private volatile LocalTime baronBuffEnd;
-    private volatile LocalTime elderBuffEnd;
     private final List<DragonType> killedDragons = new ArrayList<>();
-    private volatile int totalEldersKilled;
-    private volatile int activePlayerKillingSpree;
-    private volatile int activePlayerAssistSpree;
+    private final List<Event> processedEvents = new LinkedList<>();
+    private LocalTime baronBuffEnd;
+    private LocalTime elderBuffEnd;
+    private int totalEldersKilled;
+    private int activePlayerKillingSpree;
+    private int activePlayerAssistSpree;
 
     public void setBaronBuffEnd(LocalTime baronBuffEnd) {
         this.baronBuffEnd = baronBuffEnd;
@@ -63,10 +67,18 @@ public class EventData {
         this.activePlayerAssistSpree = activePlayerAssistSpree;
     }
 
-    public void resetCounters() {
-        killedDragons.clear();
-        totalEldersKilled = 0;
-        activePlayerKillingSpree = 0;
-        activePlayerAssistSpree = 0;
+    public void addProcessedEvents(List<Event> events){
+        processedEvents.addAll(events);
+    }
+
+    public List<Event> getUnprocessedEvents(List<Event> fetchedEvents){
+        return fetchedEvents.stream()
+                .filter(fetchedEvent -> !processedEvents.contains(fetchedEvent))
+                .collect(Collectors.toUnmodifiableList());
+    }
+
+    //TEST ONLY
+    public List<Event> getProcessedEvents() {
+        return Collections.unmodifiableList(processedEvents);
     }
 }

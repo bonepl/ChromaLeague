@@ -65,7 +65,6 @@ public class MainTask implements Runnable {
             LOGGER.info("Game is loading");
             mainExecutor = Executors.newScheduledThreadPool(10);
             mainExecutor.scheduleWithFixedDelay(new FetchNewEventsTask(), 0, 1000, TimeUnit.MILLISECONDS);
-            mainExecutor.scheduleWithFixedDelay(new EventDataProcessorTask(), 500, 500, TimeUnit.MILLISECONDS);
         }
     }
 }

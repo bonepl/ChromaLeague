@@ -9,35 +9,23 @@ import com.bonepl.chromaleague.state.RunningState;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
-import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
-public class EventDataProcessorTask implements Runnable {
-    private static final Queue<Event> UNPROCESSED_EVENTS = new ConcurrentLinkedQueue<>();
+public class EventDataProcessor {
     private static final Logger LOGGER = LogManager.getLogger();
 
-    @Override
-    public void run() {
-        try {
-            while (!UNPROCESSED_EVENTS.isEmpty()) {
-                processEventForEventData(EventType.fromEvent(UNPROCESSED_EVENTS.remove()));
-            }
-        } catch (Exception ex) {
-            LOGGER.error("Error while processing event data", ex);
-        }
+    public void processNewEvents(List<Event> events) {
+        events.stream().map(EventType::fromEvent).forEach(this::processEventForEventData);
     }
 
-    public static void processEventForEventData(EventType eventType) {
+    public void processEventForEventData(EventType eventType) {
         switch (eventType) {
             case GAME_START -> RunningState.setRunningGame(true);
             case ALLY_BARON_KILL -> GameStateHelper.startBaronBuff();
-            case ALLY_CLOUD_DRAGON_KILL -> GameStateHelper.addKilledDragon(DragonType.CLOUD);
-            case ALLY_INFERNAL_DRAGON_KILL -> GameStateHelper.addKilledDragon(DragonType.INFERNAL);
-            case ALLY_MOUNTAIN_DRAGON_KILL -> GameStateHelper.addKilledDragon(DragonType.MOUNTAIN);
-            case ALLY_OCEAN_DRAGON_KILL -> GameStateHelper.addKilledDragon(DragonType.OCEAN);
+            case ALLY_CLOUD_DRAGON_KILL -> addKilledDragon(DragonType.CLOUD);
+            case ALLY_INFERNAL_DRAGON_KILL -> addKilledDragon(DragonType.INFERNAL);
+            case ALLY_MOUNTAIN_DRAGON_KILL -> addKilledDragon(DragonType.MOUNTAIN);
+            case ALLY_OCEAN_DRAGON_KILL -> addKilledDragon(DragonType.OCEAN);
             case ALLY_ELDER_DRAGON_KILL, ENEMY_ELDER_DRAGON_KILL -> processElderKill(eventType);
             case ACTIVE_PLAYER_DIED -> resetAlivePlayerCounters();
             case ACTIVE_PLAYER_KILL -> GameStateHelper.addPlayerKill();
@@ -47,6 +35,10 @@ public class EventDataProcessorTask implements Runnable {
                     ENEMY_BARON_KILL, ALLY_HERALD_KILL, UNSUPPORTED -> {
             }
         }
+    }
+
+    private static void addKilledDragon(DragonType dragonType) {
+        RunningState.getGameState().getEventData().addKilledDragon(dragonType);
     }
 
     private static void processElderKill(EventType eventType) {
@@ -62,19 +54,5 @@ public class EventDataProcessorTask implements Runnable {
         eventData.setBaronBuffEnd(null);
         eventData.setActivePlayerKillingSpree(0);
         eventData.setActivePlayerAssistSpree(0);
-    }
-
-    public static void addEvents(List<Event> events) {
-        UNPROCESSED_EVENTS.addAll(events);
-    }
-
-    //TEST ONLY
-    public static Collection<Event> getUnprocessedEvents() {
-        return Collections.unmodifiableCollection(UNPROCESSED_EVENTS);
-    }
-
-    //TEST ONLY
-    public static void clearUnprocessedEvents() {
-        UNPROCESSED_EVENTS.clear();
     }
 }

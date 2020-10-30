@@ -6,6 +6,7 @@ import com.bonepl.chromaleague.rest.playerlist.Player;
 import com.bonepl.chromaleague.rest.playerlist.PlayerList;
 import com.bonepl.chromaleague.rest.playerlist.Team;
 import com.bonepl.chromaleague.state.RunningState;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,8 +21,12 @@ class FetchPlayerListTaskTest {
     @BeforeEach
     void setUp() {
         LeagueHttpClientMock.mockReturnedResponseWithResource("json/playerlist.json");
-        RunningState.getGameState().setActivePlayer(null);
-        RunningState.getGameState().setPlayerList(null);
+        RunningState.setRunningGame(true);
+    }
+
+    @AfterEach
+    void tearDown() {
+        RunningState.setRunningGame(false);
     }
 
     @Test

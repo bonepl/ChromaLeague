@@ -1,8 +1,9 @@
 package com.bonepl.chromaleague.rest.eventdata;
 
-import com.bonepl.chromaleague.rest.activeplayer.ActivePlayer;
+import com.bonepl.chromaleague.GameStateMocks;
 import com.bonepl.chromaleague.rest.playerlist.PlayerList;
 import com.bonepl.chromaleague.state.RunningState;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,15 +15,16 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class EventTypeTest {
-
-    public static final String ACTIVE_PLAYER_NAME = "BooonE";
+    private static final String ACTIVE_PLAYER_NAME = "BooonE";
 
     @BeforeEach
     void setUp() {
-        ActivePlayer activePlayer = mock(ActivePlayer.class);
-        when(activePlayer.getSummonerName()).thenReturn(ACTIVE_PLAYER_NAME);
-        RunningState.getGameState().setActivePlayer(activePlayer);
-        mockIsAllyResponse(true);
+        GameStateMocks.mockPlayerNameAndIsAllyResponse(ACTIVE_PLAYER_NAME, true);
+    }
+
+    @AfterEach
+    void tearDown() {
+        RunningState.setRunningGame(false);
     }
 
     @Test
@@ -127,7 +129,7 @@ class EventTypeTest {
     @Test
     void testEnemyOceanDragonAnimation() {
         //given
-        mockIsAllyResponse(false);
+        GameStateMocks.mockPlayerNameAndIsAllyResponse(ACTIVE_PLAYER_NAME, false);
         final Event event = mockDragonEvent(DragonType.OCEAN);
 
         //when
@@ -140,7 +142,7 @@ class EventTypeTest {
     @Test
     void testEnemyInfernalDragonAnimation() {
         //given
-        mockIsAllyResponse(false);
+        GameStateMocks.mockPlayerNameAndIsAllyResponse(ACTIVE_PLAYER_NAME, false);
         final Event event = mockDragonEvent(DragonType.INFERNAL);
 
         //when
@@ -153,7 +155,7 @@ class EventTypeTest {
     @Test
     void testEnemyCloudDragonAnimation() {
         //given
-        mockIsAllyResponse(false);
+        GameStateMocks.mockPlayerNameAndIsAllyResponse(ACTIVE_PLAYER_NAME, false);
         final Event event = mockDragonEvent(DragonType.CLOUD);
 
         //when
@@ -166,7 +168,7 @@ class EventTypeTest {
     @Test
     void testEnemyMountainDragonAnimation() {
         //given
-        mockIsAllyResponse(false);
+        GameStateMocks.mockPlayerNameAndIsAllyResponse(ACTIVE_PLAYER_NAME, false);
         final Event event = mockDragonEvent(DragonType.MOUNTAIN);
 
         //when
@@ -179,7 +181,7 @@ class EventTypeTest {
     @Test
     void testEnemyElderDragonAnimation() {
         //given
-        mockIsAllyResponse(false);
+        GameStateMocks.mockPlayerNameAndIsAllyResponse(ACTIVE_PLAYER_NAME, false);
         final Event event = mockDragonEvent(DragonType.ELDER);
 
         //when
@@ -211,7 +213,7 @@ class EventTypeTest {
     @Test
     void testEnemyHeraldAnimation() {
         //given
-        mockIsAllyResponse(false);
+        GameStateMocks.mockPlayerNameAndIsAllyResponse(ACTIVE_PLAYER_NAME, false);
         final Event event = mockHeraldEvent();
 
         //when
@@ -236,7 +238,7 @@ class EventTypeTest {
     @Test
     void testEnemyBaronAnimation() {
         //given
-        mockIsAllyResponse(false);
+        GameStateMocks.mockPlayerNameAndIsAllyResponse(ACTIVE_PLAYER_NAME, false);
         final Event event = mockBaronEvent();
 
         //when

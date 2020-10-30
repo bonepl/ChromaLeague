@@ -15,6 +15,7 @@ public class FetchNewEventsTask implements Runnable {
     private static final Logger LOGGER = LogManager.getLogger();
     private static int lastProcessedEventId = -1;
     private final EventDataProcessor eventDataProcessor = new EventDataProcessor();
+    private final EventAnimationProcessor eventAnimationProcessor = new EventAnimationProcessor();
 
     @Override
     public void run() {
@@ -40,7 +41,7 @@ public class FetchNewEventsTask implements Runnable {
                     eventDataProcessor.processNewEvents(events);
                 } else {
                     unprocessedEvents.forEach(event -> LOGGER.debug("Adding new event: {}", event));
-                    EventAnimationProcessorTask.addEvents(unprocessedEvents);
+                    eventAnimationProcessor.processNewEvents(unprocessedEvents);
                     eventDataProcessor.processNewEvents(unprocessedEvents);
                 }
             }

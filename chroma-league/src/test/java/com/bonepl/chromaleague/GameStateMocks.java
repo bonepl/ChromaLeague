@@ -6,6 +6,7 @@ import com.bonepl.chromaleague.rest.playerlist.Player;
 import com.bonepl.chromaleague.rest.playerlist.PlayerList;
 import com.bonepl.chromaleague.state.RunningState;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -52,6 +53,16 @@ public final class GameStateMocks {
     public static void clearPlayerList() {
         RunningState.setRunningGame(true);
         RunningState.getGameState().setPlayerList(null);
+    }
+
+    public static void mockPlayerNameAndIsAllyResponse(String playerName, boolean isAlly) {
+        RunningState.setRunningGame(true);
+        ActivePlayer activePlayer = mock(ActivePlayer.class);
+        when(activePlayer.getSummonerName()).thenReturn(playerName);
+        RunningState.getGameState().setActivePlayer(activePlayer);
+        final PlayerList mock = mock(PlayerList.class);
+        when(mock.isAlly(any())).thenReturn(isAlly);
+        RunningState.getGameState().setPlayerList(mock);
     }
 
     public static void mockActivePlayerHealth(double currentHealth, double maxHealth) {

@@ -20,13 +20,11 @@ class FetchNewEventsTaskTest {
         RunningState.setRunningGame(true);
         GameStateMocks.setActivePlayerName("BooonE");
         GameStateMocks.makePlayerListAvailable();
-        EventAnimationProcessorTask.clearUnprocessedEvents();
     }
 
     @AfterEach
     void tearDown() {
         RunningState.setRunningGame(false);
-        EventAnimationProcessorTask.clearUnprocessedEvents();
     }
 
     @Test

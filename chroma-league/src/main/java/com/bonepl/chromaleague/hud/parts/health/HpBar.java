@@ -3,6 +3,7 @@ package com.bonepl.chromaleague.hud.parts.health;
 import com.bonepl.chromaleague.hud.parts.ProgressBar;
 import com.bonepl.chromaleague.state.GameState;
 import com.bonepl.chromaleague.state.GameStateHelper;
+import com.bonepl.chromaleague.state.RunningState;
 import com.bonepl.razersdk.animation.Animation;
 import com.bonepl.razersdk.animation.Color;
 import com.bonepl.razersdk.animation.Frame;
@@ -27,7 +28,7 @@ public class HpBar extends Animation {
 
     @Override
     public Frame getFrame() {
-        final double currentHp = GameState.getActivePlayer().getChampionStats().getCurrentHealth();
+        final double currentHp = RunningState.getGameState().getActivePlayer().getChampionStats().getCurrentHealth();
         addToBack(getHpBar());
         if (currentHp < previousHp) {
             addToFront(new LostHpAnimation(previousHp, currentHp));
@@ -48,7 +49,7 @@ public class HpBar extends Animation {
     }
 
     public static List<RzKey> getHpBarPart(double previousHp, double currentHp) {
-        final double maxHealth = GameState.getActivePlayer().getChampionStats().getMaxHealth();
+        final double maxHealth = RunningState.getGameState().getActivePlayer().getChampionStats().getMaxHealth();
         final int from = ProgressBar.indexToFill(HpBar.getHpBarKeys(), Double.valueOf(previousHp * 100 / maxHealth).intValue());
         final int to = ProgressBar.indexToFill(HpBar.getHpBarKeys(), Double.valueOf(currentHp * 100 / maxHealth).intValue());
         return getHpBarKeys().subList(from, to);

@@ -21,7 +21,7 @@ public final class GameStateHelper {
 
     public static int getHpPercentage() {
         if (isActivePlayerAlive() && GameState.isActivePlayerAvailable()) {
-            final ChampionStats championStats = GameState.getActivePlayer().getChampionStats();
+            final ChampionStats championStats = RunningState.getGameState().getActivePlayer().getChampionStats();
             return getPercentage(championStats.getCurrentHealth(), championStats.getMaxHealth());
         }
         return 0;
@@ -29,7 +29,7 @@ public final class GameStateHelper {
 
     public static int getResourcePercentage() {
         if (isActivePlayerAlive() && GameState.isActivePlayerAvailable()) {
-            final ChampionStats championStats = GameState.getActivePlayer().getChampionStats();
+            final ChampionStats championStats = RunningState.getGameState().getActivePlayer().getChampionStats();
             return getPercentage(championStats.getResourceValue(), championStats.getResourceMax());
         }
         return 0;
@@ -37,28 +37,28 @@ public final class GameStateHelper {
 
     public static double getGold() {
         if (GameState.isActivePlayerAvailable()) {
-            return GameState.getActivePlayer().getCurrentGold();
+            return RunningState.getGameState().getActivePlayer().getCurrentGold();
         }
         return 0;
     }
 
     public static int getLevel() {
         if (GameState.isActivePlayerAvailable()) {
-            return GameState.getActivePlayer().getLevel();
+            return RunningState.getGameState().getActivePlayer().getLevel();
         }
         return 0;
     }
 
     public static int getGoldPercentage() {
         if (GameState.isActivePlayerAvailable()) {
-            return getPercentage(GameState.getActivePlayer().getCurrentGold(), GoldBar.GOLD_FULL);
+            return getPercentage(RunningState.getGameState().getActivePlayer().getCurrentGold(), GoldBar.GOLD_FULL);
         }
         return 0;
     }
 
     public static double getActivePlayerRange() {
         if (GameState.isActivePlayerAvailable()) {
-            return GameState.getActivePlayer().getChampionStats().getAttackRange();
+            return RunningState.getGameState().getActivePlayer().getChampionStats().getAttackRange();
         }
         return 0;
     }
@@ -144,9 +144,4 @@ public final class GameStateHelper {
         GameState.getEventData().setActivePlayerAssistSpree(
                 GameState.getEventData().getActivePlayerAssistSpree() + 1);
     }
-
-    public static void resetCustomData() {
-        GameState.getEventData().resetCounters();
-    }
-
 }

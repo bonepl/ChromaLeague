@@ -32,7 +32,6 @@ public class FetchNewEventsTask implements Runnable {
         } else {
             if (hasPlayerReconnected(events)) {
                 LOGGER.warn("Game reconnection detected, fast-forwarding past {} events", events.size());
-                GameStateHelper.resetCustomData();
                 EventDataProcessorTask.addEvents(events);
             } else {
                 if (containsNewEventsToProcess(events)) {

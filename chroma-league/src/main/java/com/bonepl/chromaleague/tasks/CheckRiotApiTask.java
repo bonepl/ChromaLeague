@@ -1,6 +1,6 @@
 package com.bonepl.chromaleague.tasks;
 
-import com.bonepl.chromaleague.state.GameState;
+import com.bonepl.chromaleague.state.RunningState;
 
 import java.net.InetSocketAddress;
 import java.net.Socket;
@@ -10,7 +10,7 @@ public class CheckRiotApiTask implements Runnable {
 
     @Override
     public void run() {
-        GameState.setRiotApiUp(checkRiotApiUp());
+        RunningState.setRiotApiUp(checkRiotApiUp());
     }
 
     public static boolean checkRiotApiUp() {

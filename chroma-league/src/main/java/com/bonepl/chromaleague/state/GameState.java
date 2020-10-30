@@ -4,71 +4,39 @@ import com.bonepl.chromaleague.rest.activeplayer.ActivePlayer;
 import com.bonepl.chromaleague.rest.playerlist.PlayerList;
 
 public final class GameState {
-    private static volatile ActivePlayer activePlayer;
-    private static volatile PlayerList playerList;
-    private static boolean runningGameChanged;
-    private static volatile boolean riotApiUp;
-    private static volatile boolean runningGame;
-    private static final EventData EVENT_DATA = new EventData();
-
-    private GameState() {
-    }
+    private ActivePlayer activePlayer;
+    private PlayerList playerList;
+    private final EventData eventData = new EventData();
 
     public static String getActivePlayerName() {
-        return activePlayer.getSummonerName();
+        return RunningState.getGameState().activePlayer.getSummonerName();
     }
 
     public static void setActivePlayer(ActivePlayer activePlayer) {
-        GameState.activePlayer = activePlayer;
+        RunningState.getGameState().activePlayer = activePlayer;
     }
 
-    public static ActivePlayer getActivePlayer() {
+    public ActivePlayer getActivePlayer(){
         return activePlayer;
     }
 
     public static boolean isActivePlayerAvailable() {
-        return activePlayer != null;
+        return RunningState.getGameState() != null && RunningState.getGameState().activePlayer != null;
     }
 
     public static void setPlayerList(PlayerList playerList) {
-        GameState.playerList = playerList;
+        RunningState.getGameState().playerList = playerList;
     }
 
     public static PlayerList getPlayerList() {
-        return playerList;
+        return RunningState.getGameState().playerList;
     }
 
     public static boolean isPlayerListAvailable() {
-        return playerList != null;
+        return RunningState.getGameState() != null && RunningState.getGameState().playerList != null;
     }
 
     public static EventData getEventData() {
-        return EVENT_DATA;
-    }
-
-    public static boolean isRunningGameChanged() {
-        return runningGameChanged;
-    }
-
-    public static boolean isRunningGame() {
-        runningGameChanged = false;
-        return runningGame;
-    }
-
-    public static void setRunningGame(boolean runningGame) {
-        if (GameState.runningGame != runningGame) {
-            runningGameChanged = true;
-            GameState.runningGame = runningGame;
-        }
-    }
-
-    public static boolean isRiotApiUp() {
-        return riotApiUp;
-    }
-
-    public static void setRiotApiUp(boolean riotApiUp) {
-        if (GameState.riotApiUp != riotApiUp) {
-            GameState.riotApiUp = riotApiUp;
-        }
+        return RunningState.getGameState().eventData;
     }
 }

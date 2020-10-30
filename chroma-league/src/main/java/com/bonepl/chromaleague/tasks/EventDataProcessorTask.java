@@ -6,6 +6,7 @@ import com.bonepl.chromaleague.rest.eventdata.EventType;
 import com.bonepl.chromaleague.state.EventData;
 import com.bonepl.chromaleague.state.GameState;
 import com.bonepl.chromaleague.state.GameStateHelper;
+import com.bonepl.chromaleague.state.RunningState;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -25,7 +26,7 @@ public class EventDataProcessorTask implements Runnable {
 
     public static void processEventForEventData(EventType eventType) {
         switch (eventType) {
-            case GAME_START -> GameState.setRunningGame(true);
+            case GAME_START -> RunningState.setRunningGame(true);
             case ALLY_BARON_KILL -> GameStateHelper.startBaronBuff();
             case ALLY_CLOUD_DRAGON_KILL -> GameStateHelper.addKilledDragon(DragonType.CLOUD);
             case ALLY_INFERNAL_DRAGON_KILL -> GameStateHelper.addKilledDragon(DragonType.INFERNAL);

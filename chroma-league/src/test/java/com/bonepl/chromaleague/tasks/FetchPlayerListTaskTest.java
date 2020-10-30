@@ -5,7 +5,8 @@ import com.bonepl.chromaleague.rest.activeplayer.ActivePlayer;
 import com.bonepl.chromaleague.rest.playerlist.Player;
 import com.bonepl.chromaleague.rest.playerlist.PlayerList;
 import com.bonepl.chromaleague.rest.playerlist.Team;
-import com.bonepl.chromaleague.state.GameState;
+import com.bonepl.chromaleague.state.RunningState;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,21 +21,25 @@ class FetchPlayerListTaskTest {
     @BeforeEach
     void setUp() {
         LeagueHttpClientMock.mockReturnedResponseWithResource("json/playerlist.json");
-        GameState.setActivePlayer(null);
-        GameState.setPlayerList(null);
+        RunningState.setRunningGame(true);
+    }
+
+    @AfterEach
+    void tearDown() {
+        RunningState.setRunningGame(false);
     }
 
     @Test
     void testPlayerListParsing() {
         //given
-        GameState.setActivePlayer(createActivePlayerMock());
+        RunningState.getGameState().setActivePlayer(createActivePlayerMock());
 
         //when
         new FetchPlayerListTask().run();
 
         //then
-        assertTrue(GameState.isPlayerListAvailable());
-        final PlayerList playerList = GameState.getPlayerList();
+        assertTrue(RunningState.getGameState().isPlayerListAvailable());
+        final PlayerList playerList = RunningState.getGameState().getPlayerList();
         assertNotNull(playerList);
         assertEquals(5, playerList.getAllies().size());
         assertEquals(5, playerList.getEnemies().size());
@@ -43,7 +48,7 @@ class FetchPlayerListTaskTest {
         assertTrue(playerList.isAlly("Test summoner 5"));
         assertFalse(playerList.isAlly("Test summoner 9"));
 
-        final Player activePlayer = GameState.getPlayerList().getActivePlayer();
+        final Player activePlayer = RunningState.getGameState().getPlayerList().getActivePlayer();
         assertEquals("Cho'Gath", activePlayer.getChampionName());
         assertEquals("BooonE", activePlayer.getSummonerName());
         assertEquals(Team.CHAOS, activePlayer.getTeam());
@@ -55,7 +60,7 @@ class FetchPlayerListTaskTest {
         new FetchPlayerListTask().run();
 
         //then
-        assertFalse(GameState.isPlayerListAvailable());
+        assertFalse(RunningState.getGameState().isPlayerListAvailable());
     }
 
     private static ActivePlayer createActivePlayerMock() {

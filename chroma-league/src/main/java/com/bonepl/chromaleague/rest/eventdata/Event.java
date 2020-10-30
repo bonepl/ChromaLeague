@@ -4,6 +4,7 @@ import com.jsoniter.annotation.JsonProperty;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class Event {
     @JsonProperty("EventID")
@@ -53,5 +54,22 @@ public class Event {
 
     public List<String> getAssisters() {
         return Collections.unmodifiableList(assisters);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Event event = (Event) o;
+        return eventID == event.eventID;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(eventID);
     }
 }

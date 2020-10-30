@@ -2,8 +2,7 @@ package com.bonepl.chromaleague.tasks;
 
 import com.bonepl.chromaleague.hud.MainHud;
 import com.bonepl.chromaleague.hud.parts.EventAnimator;
-import com.bonepl.chromaleague.state.GameState;
-import com.bonepl.chromaleague.state.GameStateHelper;
+import com.bonepl.chromaleague.state.RunningState;
 import com.bonepl.razersdk.ChromaRestSDK;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,13 +19,17 @@ public class MainTask implements Runnable {
 
     @Override
     public void run() {
-        if (GameState.isRiotApiUp()) {
-            initializePreGame();
-            if (GameState.isRunningGameChanged() && GameState.isRunningGame()) {
-                initializeGameThreads();
+        try {
+            if (RunningState.isRiotApiUp()) {
+                initializePreGame();
+                if (RunningState.isRunningGameChanged() && RunningState.isRunningGame()) {
+                    initializeGameThreads();
+                }
+            } else {
+                shutdown();
             }
-        } else {
-            shutdown();
+        } catch (Exception ex) {
+            LOGGER.error("Exception in MainTask", ex);
         }
     }
 
@@ -41,8 +44,7 @@ public class MainTask implements Runnable {
             } catch (InterruptedException e) {
                 LOGGER.error(e);
             }
-            GameState.setRunningGame(false);
-            GameStateHelper.resetCustomData();
+            RunningState.setRunningGame(false);
             EventAnimator.stop();
             FetchNewEventsTask.resetProcessedEventCounter();
             MainHud.clearResourceBar();
@@ -54,8 +56,7 @@ public class MainTask implements Runnable {
         chromaRestSDK = new ChromaRestSDK();
         mainExecutor.scheduleWithFixedDelay(new FetchPlayerListTask(), 0, 1000, TimeUnit.MILLISECONDS);
         mainExecutor.scheduleWithFixedDelay(new FetchActivePlayerTask(), 50, 300, TimeUnit.MILLISECONDS);
-        mainExecutor.scheduleWithFixedDelay(new EventAnimationProcessorTask(), 100, 500, TimeUnit.MILLISECONDS);
-        mainExecutor.scheduleWithFixedDelay(() -> chromaRestSDK.createKeyboardEffect(new MainHud()), 150, 50, TimeUnit.MILLISECONDS);
+        mainExecutor.scheduleWithFixedDelay(new RefreshMainHudTask(chromaRestSDK), 150, 50, TimeUnit.MILLISECONDS);
     }
 
     private static void initializePreGame() {
@@ -63,7 +64,6 @@ public class MainTask implements Runnable {
             LOGGER.info("Game is loading");
             mainExecutor = Executors.newScheduledThreadPool(10);
             mainExecutor.scheduleWithFixedDelay(new FetchNewEventsTask(), 0, 1000, TimeUnit.MILLISECONDS);
-            mainExecutor.scheduleWithFixedDelay(new EventDataProcessorTask(), 500, 500, TimeUnit.MILLISECONDS);
         }
     }
 }

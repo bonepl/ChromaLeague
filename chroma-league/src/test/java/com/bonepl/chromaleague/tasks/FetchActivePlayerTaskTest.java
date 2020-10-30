@@ -5,6 +5,7 @@ import com.bonepl.chromaleague.rest.LeagueHttpClientMock;
 import com.bonepl.chromaleague.rest.activeplayer.ActivePlayer;
 import com.bonepl.chromaleague.rest.activeplayer.ChampionStats;
 import com.bonepl.chromaleague.state.GameState;
+import com.bonepl.chromaleague.state.RunningState;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -35,9 +36,9 @@ class FetchActivePlayerTaskTest {
         new FetchActivePlayerTask().run();
 
         //then
-        assertTrue(GameState.isActivePlayerAvailable());
+        assertTrue(RunningState.getGameState().isActivePlayerAvailable());
 
-        final ActivePlayer activePlayer = GameState.getActivePlayer();
+        final ActivePlayer activePlayer = RunningState.getGameState().getActivePlayer();
         assertEquals(123.45, activePlayer.getCurrentGold());
         assertEquals(1, activePlayer.getLevel());
         assertEquals(ACTIVE_PLAYER_NAME, activePlayer.getSummonerName());

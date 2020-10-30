@@ -6,18 +6,17 @@ import com.bonepl.chromaleague.rest.eventdata.Event;
 import com.bonepl.chromaleague.rest.eventdata.EventType;
 import com.bonepl.razersdk.animation.IFrame;
 import com.bonepl.razersdk.animation.SimpleFrame;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import java.util.*;
+import java.util.List;
 
-public class EventAnimationProcessorTask implements Runnable {
-    private static final Queue<Event> UNPROCESSED_EVENTS = new LinkedList<>();
+public class EventAnimationProcessor {
+    private static final Logger LOGGER = LogManager.getLogger();
 
-    @Override
-    public void run() {
-        while (!UNPROCESSED_EVENTS.isEmpty()) {
-            final Event nextEvent = UNPROCESSED_EVENTS.remove();
-            processEventAnimation(EventType.fromEvent(nextEvent));
-        }
+    public void processNewEvents(List<Event> events) {
+        events.stream().map(EventType::fromEvent)
+                .forEach(EventAnimationProcessor::processEventAnimation);
     }
 
     private static void processEventAnimation(EventType eventType) {
@@ -47,19 +46,5 @@ public class EventAnimationProcessorTask implements Runnable {
             case ACTIVE_PLAYER_ASSIST -> new ActivePlayerAssistAnimation();
             case ACTIVE_PLAYER_DIED, GAME_START, UNSUPPORTED -> new SimpleFrame();
         };
-    }
-
-    public static void addEvents(List<Event> events) {
-        UNPROCESSED_EVENTS.addAll(events);
-    }
-
-    //TEST ONLY
-    public static Collection<Event> getUnprocessedEvents() {
-        return Collections.unmodifiableCollection(UNPROCESSED_EVENTS);
-    }
-
-    //TEST ONLY
-    public static void clearUnprocessedEvents() {
-        UNPROCESSED_EVENTS.clear();
     }
 }

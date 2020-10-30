@@ -10,26 +10,31 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-public final class ChromaLeague {
-    private static final Logger LOGGER = LogManager.getLogger();
-    private static final ScheduledExecutorService MAIN_EXECUTOR_SERVICE = Executors.newScheduledThreadPool(5);
+public class ChromaLeague implements AutoCloseable {
     public static final int MAIN_EXECUTOR_DELAY = 500;
+    private static final Logger LOGGER = LogManager.getLogger();
+    private final ScheduledExecutorService mainExecutorService = Executors.newScheduledThreadPool(5);
 
-    private ChromaLeague() {
-    }
-
-    @SuppressWarnings("BusyWait")
-    public static void main(String... args) {
+    public void runChromaLeague() {
         LOGGER.info("Started Chroma League");
-        MAIN_EXECUTOR_SERVICE.scheduleWithFixedDelay(new CheckRiotApiTask(), 0, MAIN_EXECUTOR_DELAY, TimeUnit.MILLISECONDS);
-        MAIN_EXECUTOR_SERVICE.scheduleWithFixedDelay(new MainTask(), 100, MAIN_EXECUTOR_DELAY, TimeUnit.MILLISECONDS);
-        while (!MAIN_EXECUTOR_SERVICE.isShutdown()) {
+        mainExecutorService.scheduleWithFixedDelay(new CheckRiotApiTask(), 0, MAIN_EXECUTOR_DELAY, TimeUnit.MILLISECONDS);
+        mainExecutorService.scheduleWithFixedDelay(new MainTask(), 100, MAIN_EXECUTOR_DELAY, TimeUnit.MILLISECONDS);
+        while (isAlive()) {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 LOGGER.error(e);
             }
         }
+    }
+
+    private static boolean isAlive(){
+        return true;
+    }
+
+    @Override
+    public void close() {
+        mainExecutorService.shutdown();
         LeagueHttpClient.shutdown();
     }
 }

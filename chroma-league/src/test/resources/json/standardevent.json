@@ -1,0 +1,22 @@
+{
+  "Events": [
+    {
+      "EventID": 0,
+      "EventName": "GameStart",
+      "EventTime": 0.0563616007566452
+    },
+    {
+      "EventID": 1,
+      "EventName": "MinionsSpawning",
+      "EventTime": 5.06690979003906
+    },
+    {
+      "Assisters": [],
+      "EventID": 2,
+      "EventName": "ChampionKill",
+      "EventTime": 7.1595916748047,
+      "KillerName": "BooonE",
+      "VictimName": "Warwick Bot"
+    }
+  ]
+}

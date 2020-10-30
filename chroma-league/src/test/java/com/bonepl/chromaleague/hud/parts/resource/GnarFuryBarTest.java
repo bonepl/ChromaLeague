@@ -3,6 +3,7 @@ package com.bonepl.chromaleague.hud.parts.resource;
 import com.bonepl.chromaleague.GameStateMocks;
 import com.bonepl.chromaleague.hud.animations.AnimationTester;
 import com.bonepl.chromaleague.rest.activeplayer.ChampionStats;
+import com.bonepl.chromaleague.state.RunningState;
 import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.when;
@@ -13,6 +14,7 @@ class GnarFuryBarTest {
 
     @Test
     void testGnarFuryBar() {
+        RunningState.setRunningGame(true);
         currentResource = 0;
         final GnarFuryBar gnarFuryBar = new GnarFuryBar();
 

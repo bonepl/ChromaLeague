@@ -1,6 +1,6 @@
 package com.bonepl.chromaleague.rest.eventdata;
 
-import com.bonepl.chromaleague.state.GameState;
+import com.bonepl.chromaleague.state.RunningState;
 
 import java.util.Objects;
 
@@ -33,7 +33,7 @@ public enum EventType {
                 return GAME_START;
             }
             if ("ChampionKill".equals(event.getEventName())) {
-                final String activePlayerName = GameState.getActivePlayerName();
+                final String activePlayerName = RunningState.getGameState().getActivePlayer().getSummonerName();
                 if (activePlayerName.equals(event.getVictimName())) {
                     return ACTIVE_PLAYER_DIED;
                 } else if (activePlayerName.equals(event.getKillerName())) {
@@ -46,31 +46,31 @@ public enum EventType {
             if ("DragonKill".equals(event.getEventName())) {
                 return switch (Objects.requireNonNull(DragonType.fromApiType(event.getDragonType()))) {
                     case CLOUD -> {
-                        if (GameState.getPlayerList().isAlly(event.getKillerName())) {
+                        if (RunningState.getGameState().getPlayerList().isAlly(event.getKillerName())) {
                             yield ALLY_CLOUD_DRAGON_KILL;
                         }
                         yield ENEMY_CLOUD_DRAGON_KILL;
                     }
                     case INFERNAL -> {
-                        if (GameState.getPlayerList().isAlly(event.getKillerName())) {
+                        if (RunningState.getGameState().getPlayerList().isAlly(event.getKillerName())) {
                             yield ALLY_INFERNAL_DRAGON_KILL;
                         }
                         yield ENEMY_INFERNAL_DRAGON_KILL;
                     }
                     case OCEAN -> {
-                        if (GameState.getPlayerList().isAlly(event.getKillerName())) {
+                        if (RunningState.getGameState().getPlayerList().isAlly(event.getKillerName())) {
                             yield ALLY_OCEAN_DRAGON_KILL;
                         }
                         yield ENEMY_OCEAN_DRAGON_KILL;
                     }
                     case MOUNTAIN -> {
-                        if (GameState.getPlayerList().isAlly(event.getKillerName())) {
+                        if (RunningState.getGameState().getPlayerList().isAlly(event.getKillerName())) {
                             yield ALLY_MOUNTAIN_DRAGON_KILL;
                         }
                         yield ENEMY_MOUNTAIN_DRAGON_KILL;
                     }
                     case ELDER -> {
-                        if (GameState.getPlayerList().isAlly(event.getKillerName())) {
+                        if (RunningState.getGameState().getPlayerList().isAlly(event.getKillerName())) {
                             yield ALLY_ELDER_DRAGON_KILL;
                         }
                         yield ENEMY_ELDER_DRAGON_KILL;
@@ -79,14 +79,14 @@ public enum EventType {
             }
 
             if ("BaronKill".equals(event.getEventName())) {
-                if (GameState.getPlayerList().isAlly(event.getKillerName())) {
+                if (RunningState.getGameState().getPlayerList().isAlly(event.getKillerName())) {
                     return ALLY_BARON_KILL;
                 }
                 return ENEMY_BARON_KILL;
             }
 
             if ("HeraldKill".equals(event.getEventName())) {
-                if (GameState.getPlayerList().isAlly(event.getKillerName())) {
+                if (RunningState.getGameState().getPlayerList().isAlly(event.getKillerName())) {
                     return ALLY_HERALD_KILL;
                 }
                 return ENEMY_HERALD_KILL;

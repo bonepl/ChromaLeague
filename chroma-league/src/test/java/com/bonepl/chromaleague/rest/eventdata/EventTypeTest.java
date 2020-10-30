@@ -259,6 +259,7 @@ class EventTypeTest {
     }
 
     private static void mockIsAllyResponse(boolean isAlly) {
+        RunningState.setRunningGame(true);
         final PlayerList mock = mock(PlayerList.class);
         when(mock.isAlly(any())).thenReturn(isAlly);
         RunningState.getGameState().setPlayerList(mock);

@@ -57,7 +57,7 @@ public class MainTask implements Runnable {
         mainExecutor.scheduleWithFixedDelay(new FetchPlayerListTask(), 0, 1000, TimeUnit.MILLISECONDS);
         mainExecutor.scheduleWithFixedDelay(new FetchActivePlayerTask(), 50, 300, TimeUnit.MILLISECONDS);
         mainExecutor.scheduleWithFixedDelay(new EventAnimationProcessorTask(), 100, 500, TimeUnit.MILLISECONDS);
-        mainExecutor.scheduleWithFixedDelay(() -> chromaRestSDK.createKeyboardEffect(new MainHud()), 150, 50, TimeUnit.MILLISECONDS);
+        mainExecutor.scheduleWithFixedDelay(new RefreshMainHudTask(chromaRestSDK), 150, 50, TimeUnit.MILLISECONDS);
     }
 
     private static void initializePreGame() {

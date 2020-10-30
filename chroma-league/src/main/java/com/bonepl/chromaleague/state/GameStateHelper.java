@@ -16,51 +16,33 @@ public final class GameStateHelper {
     }
 
     public static boolean isActivePlayerAlive() {
-        return !RunningState.getGameState().isPlayerListAvailable() || !RunningState.getGameState().getPlayerList().getActivePlayer().isDead();
+        return !RunningState.getGameState().getPlayerList().getActivePlayer().isDead();
     }
 
     public static int getHpPercentage() {
-        if (isActivePlayerAlive() && RunningState.getGameState().isActivePlayerAvailable()) {
-            final ChampionStats championStats = RunningState.getGameState().getActivePlayer().getChampionStats();
-            return getPercentage(championStats.getCurrentHealth(), championStats.getMaxHealth());
-        }
-        return 0;
+        final ChampionStats championStats = RunningState.getGameState().getActivePlayer().getChampionStats();
+        return getPercentage(championStats.getCurrentHealth(), championStats.getMaxHealth());
     }
 
     public static int getResourcePercentage() {
-        if (isActivePlayerAlive() && RunningState.getGameState().isActivePlayerAvailable()) {
-            final ChampionStats championStats = RunningState.getGameState().getActivePlayer().getChampionStats();
-            return getPercentage(championStats.getResourceValue(), championStats.getResourceMax());
-        }
-        return 0;
+        final ChampionStats championStats = RunningState.getGameState().getActivePlayer().getChampionStats();
+        return getPercentage(championStats.getResourceValue(), championStats.getResourceMax());
     }
 
     public static double getGold() {
-        if (RunningState.getGameState().isActivePlayerAvailable()) {
-            return RunningState.getGameState().getActivePlayer().getCurrentGold();
-        }
-        return 0;
+        return RunningState.getGameState().getActivePlayer().getCurrentGold();
     }
 
     public static int getLevel() {
-        if (RunningState.getGameState().isActivePlayerAvailable()) {
-            return RunningState.getGameState().getActivePlayer().getLevel();
-        }
-        return 0;
+        return RunningState.getGameState().getActivePlayer().getLevel();
     }
 
     public static int getGoldPercentage() {
-        if (RunningState.getGameState().isActivePlayerAvailable()) {
-            return getPercentage(RunningState.getGameState().getActivePlayer().getCurrentGold(), GoldBar.GOLD_FULL);
-        }
-        return 0;
+        return getPercentage(RunningState.getGameState().getActivePlayer().getCurrentGold(), GoldBar.GOLD_FULL);
     }
 
     public static double getActivePlayerRange() {
-        if (RunningState.getGameState().isActivePlayerAvailable()) {
-            return RunningState.getGameState().getActivePlayer().getChampionStats().getAttackRange();
-        }
-        return 0;
+        return RunningState.getGameState().getActivePlayer().getChampionStats().getAttackRange();
     }
 
     private static int getPercentage(double firstDouble, double secondDouble) {

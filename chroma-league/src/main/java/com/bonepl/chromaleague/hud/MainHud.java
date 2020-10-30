@@ -25,8 +25,10 @@ public class MainHud extends LayeredFrame {
     public MainHud() {
         try {
             addFrame(new Background());
-            addFrame(HP_BAR);
-            addFrame(new ManaBar());
+            if (GameStateHelper.isActivePlayerAlive()) {
+                addFrame(HP_BAR);
+                addFrame(new ManaBar());
+            }
             addFrame(new AssistKillingSpreeBar());
             addFrame(DRAGON_BAR);
             addFrame(GOLD_BAR);

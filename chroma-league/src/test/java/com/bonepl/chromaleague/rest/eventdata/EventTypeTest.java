@@ -2,7 +2,7 @@ package com.bonepl.chromaleague.rest.eventdata;
 
 import com.bonepl.chromaleague.rest.activeplayer.ActivePlayer;
 import com.bonepl.chromaleague.rest.playerlist.PlayerList;
-import com.bonepl.chromaleague.state.GameState;
+import com.bonepl.chromaleague.state.RunningState;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +21,7 @@ class EventTypeTest {
     void setUp() {
         ActivePlayer activePlayer = mock(ActivePlayer.class);
         when(activePlayer.getSummonerName()).thenReturn(ACTIVE_PLAYER_NAME);
-        GameState.setActivePlayer(activePlayer);
+        RunningState.getGameState().setActivePlayer(activePlayer);
         mockIsAllyResponse(true);
     }
 
@@ -261,6 +261,6 @@ class EventTypeTest {
     private static void mockIsAllyResponse(boolean isAlly) {
         final PlayerList mock = mock(PlayerList.class);
         when(mock.isAlly(any())).thenReturn(isAlly);
-        GameState.setPlayerList(mock);
+        RunningState.getGameState().setPlayerList(mock);
     }
 }

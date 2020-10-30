@@ -16,11 +16,11 @@ public final class GameStateHelper {
     }
 
     public static boolean isActivePlayerAlive() {
-        return !GameState.isPlayerListAvailable() || !GameState.getPlayerList().getActivePlayer().isDead();
+        return !RunningState.getGameState().isPlayerListAvailable() || !RunningState.getGameState().getPlayerList().getActivePlayer().isDead();
     }
 
     public static int getHpPercentage() {
-        if (isActivePlayerAlive() && GameState.isActivePlayerAvailable()) {
+        if (isActivePlayerAlive() && RunningState.getGameState().isActivePlayerAvailable()) {
             final ChampionStats championStats = RunningState.getGameState().getActivePlayer().getChampionStats();
             return getPercentage(championStats.getCurrentHealth(), championStats.getMaxHealth());
         }
@@ -28,7 +28,7 @@ public final class GameStateHelper {
     }
 
     public static int getResourcePercentage() {
-        if (isActivePlayerAlive() && GameState.isActivePlayerAvailable()) {
+        if (isActivePlayerAlive() && RunningState.getGameState().isActivePlayerAvailable()) {
             final ChampionStats championStats = RunningState.getGameState().getActivePlayer().getChampionStats();
             return getPercentage(championStats.getResourceValue(), championStats.getResourceMax());
         }
@@ -36,28 +36,28 @@ public final class GameStateHelper {
     }
 
     public static double getGold() {
-        if (GameState.isActivePlayerAvailable()) {
+        if (RunningState.getGameState().isActivePlayerAvailable()) {
             return RunningState.getGameState().getActivePlayer().getCurrentGold();
         }
         return 0;
     }
 
     public static int getLevel() {
-        if (GameState.isActivePlayerAvailable()) {
+        if (RunningState.getGameState().isActivePlayerAvailable()) {
             return RunningState.getGameState().getActivePlayer().getLevel();
         }
         return 0;
     }
 
     public static int getGoldPercentage() {
-        if (GameState.isActivePlayerAvailable()) {
+        if (RunningState.getGameState().isActivePlayerAvailable()) {
             return getPercentage(RunningState.getGameState().getActivePlayer().getCurrentGold(), GoldBar.GOLD_FULL);
         }
         return 0;
     }
 
     public static double getActivePlayerRange() {
-        if (GameState.isActivePlayerAvailable()) {
+        if (RunningState.getGameState().isActivePlayerAvailable()) {
             return RunningState.getGameState().getActivePlayer().getChampionStats().getAttackRange();
         }
         return 0;
@@ -69,12 +69,12 @@ public final class GameStateHelper {
 
     public static void startBaronBuff() {
         if (isActivePlayerAlive()) {
-            GameState.getEventData().setBaronBuffEnd(LocalTime.now().plusMinutes(3));
+            RunningState.getGameState().getEventData().setBaronBuffEnd(LocalTime.now().plusMinutes(3));
         }
     }
 
     public static boolean hasBaronBuff() {
-        final EventData eventData = GameState.getEventData();
+        final EventData eventData = RunningState.getGameState().getEventData();
         if (eventData.getBaronBuffEnd() != null && isActivePlayerAlive()) {
             return LocalTime.now().isBefore(eventData.getBaronBuffEnd());
         }
@@ -86,15 +86,15 @@ public final class GameStateHelper {
         if (isActivePlayerAlive()) {
             final int totalEldersKilled = getTotalEldersKilled();
             if (totalEldersKilled == 1) {
-                GameState.getEventData().setElderBuffEnd(LocalTime.now().plusSeconds(FIRST_ELDER_TIME));
+                RunningState.getGameState().getEventData().setElderBuffEnd(LocalTime.now().plusSeconds(FIRST_ELDER_TIME));
             } else {
-                GameState.getEventData().setElderBuffEnd(LocalTime.now().plusSeconds(NEXT_ELDER_TIME));
+                RunningState.getGameState().getEventData().setElderBuffEnd(LocalTime.now().plusSeconds(NEXT_ELDER_TIME));
             }
         }
     }
 
     public static boolean hasElderBuff() {
-        final EventData eventData = GameState.getEventData();
+        final EventData eventData = RunningState.getGameState().getEventData();
         if (eventData.getElderBuffEnd() != null && isActivePlayerAlive()) {
             return LocalTime.now().isBefore(eventData.getElderBuffEnd());
         }
@@ -103,45 +103,45 @@ public final class GameStateHelper {
     }
 
     public static boolean hasDragonSoul() {
-        return GameState.getEventData().getKilledDragons().size() >= 4;
+        return RunningState.getGameState().getEventData().getKilledDragons().size() >= 4;
     }
 
     public static DragonType getDragonSoulType() {
-        return GameState.getEventData().getKilledDragons().get(3);
+        return RunningState.getGameState().getEventData().getKilledDragons().get(3);
     }
 
     public static void addKilledDragon(DragonType dragonType) {
-        GameState.getEventData().addKilledDragon(dragonType);
+        RunningState.getGameState().getEventData().addKilledDragon(dragonType);
     }
 
     public static List<DragonType> getKilledDragons() {
-        return GameState.getEventData().getKilledDragons();
+        return RunningState.getGameState().getEventData().getKilledDragons();
     }
 
     public static int getTotalEldersKilled() {
-        return GameState.getEventData().getTotalEldersKilled();
+        return RunningState.getGameState().getEventData().getTotalEldersKilled();
     }
 
     public static void addKilledElder() {
-        final EventData eventData = GameState.getEventData();
+        final EventData eventData = RunningState.getGameState().getEventData();
         eventData.setTotalEldersKilled(eventData.getTotalEldersKilled() + 1);
     }
 
     public static int getActivePlayerKillingSpree() {
-        return GameState.getEventData().getActivePlayerKillingSpree();
+        return RunningState.getGameState().getEventData().getActivePlayerKillingSpree();
     }
 
     public static void addPlayerKill() {
-        GameState.getEventData().setActivePlayerKillingSpree(
-                GameState.getEventData().getActivePlayerKillingSpree() + 1);
+        RunningState.getGameState().getEventData().setActivePlayerKillingSpree(
+                RunningState.getGameState().getEventData().getActivePlayerKillingSpree() + 1);
     }
 
     public static int getActivePlayerAssistSpree() {
-        return GameState.getEventData().getActivePlayerAssistSpree();
+        return RunningState.getGameState().getEventData().getActivePlayerAssistSpree();
     }
 
     public static void addPlayerAssist() {
-        GameState.getEventData().setActivePlayerAssistSpree(
-                GameState.getEventData().getActivePlayerAssistSpree() + 1);
+        RunningState.getGameState().getEventData().setActivePlayerAssistSpree(
+                RunningState.getGameState().getEventData().getActivePlayerAssistSpree() + 1);
     }
 }

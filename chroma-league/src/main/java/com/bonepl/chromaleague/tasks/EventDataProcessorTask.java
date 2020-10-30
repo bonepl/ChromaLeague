@@ -4,9 +4,10 @@ import com.bonepl.chromaleague.rest.eventdata.DragonType;
 import com.bonepl.chromaleague.rest.eventdata.Event;
 import com.bonepl.chromaleague.rest.eventdata.EventType;
 import com.bonepl.chromaleague.state.EventData;
-import com.bonepl.chromaleague.state.GameState;
 import com.bonepl.chromaleague.state.GameStateHelper;
 import com.bonepl.chromaleague.state.RunningState;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -16,11 +17,16 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class EventDataProcessorTask implements Runnable {
     private static final Queue<Event> UNPROCESSED_EVENTS = new ConcurrentLinkedQueue<>();
+    private static final Logger LOGGER = LogManager.getLogger();
 
     @Override
     public void run() {
-        while (!UNPROCESSED_EVENTS.isEmpty()) {
-            processEventForEventData(EventType.fromEvent(UNPROCESSED_EVENTS.remove()));
+        try {
+            while (!UNPROCESSED_EVENTS.isEmpty()) {
+                processEventForEventData(EventType.fromEvent(UNPROCESSED_EVENTS.remove()));
+            }
+        } catch (Exception ex) {
+            LOGGER.error("Error while processing event data", ex);
         }
     }
 
@@ -51,7 +57,7 @@ public class EventDataProcessorTask implements Runnable {
     }
 
     private static void resetAlivePlayerCounters() {
-        final EventData eventData = GameState.getEventData();
+        final EventData eventData = RunningState.getGameState().getEventData();
         eventData.setElderBuffEnd(null);
         eventData.setBaronBuffEnd(null);
         eventData.setActivePlayerKillingSpree(0);

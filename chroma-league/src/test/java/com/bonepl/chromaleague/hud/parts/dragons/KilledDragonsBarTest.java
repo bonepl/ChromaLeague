@@ -2,7 +2,7 @@ package com.bonepl.chromaleague.hud.parts.dragons;
 
 import com.bonepl.chromaleague.hud.animations.AnimationTester;
 import com.bonepl.chromaleague.rest.eventdata.EventType;
-import com.bonepl.chromaleague.state.GameState;
+import com.bonepl.chromaleague.state.RunningState;
 import com.bonepl.chromaleague.tasks.EventDataProcessorTask;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +16,7 @@ class KilledDragonsBarTest {
 
     @Test
     void testOceanDragons() {
-        GameState.getEventData().resetCounters();
+        RunningState.getGameState().getEventData().resetCounters();
         Queue<EventType> testDrakesOrder = new LinkedList<>(List.of(ALLY_INFERNAL_DRAGON_KILL,
                 ALLY_CLOUD_DRAGON_KILL, ALLY_OCEAN_DRAGON_KILL, ALLY_OCEAN_DRAGON_KILL));
 
@@ -25,7 +25,7 @@ class KilledDragonsBarTest {
 
     @Test
     void testInfernalDragons() {
-        GameState.getEventData().resetCounters();
+        RunningState.getGameState().getEventData().resetCounters();
         Queue<EventType> testDrakesOrder = new LinkedList<>(List.of(ALLY_OCEAN_DRAGON_KILL,
                 ALLY_MOUNTAIN_DRAGON_KILL, ALLY_INFERNAL_DRAGON_KILL, ALLY_INFERNAL_DRAGON_KILL));
 
@@ -34,7 +34,7 @@ class KilledDragonsBarTest {
 
     @Test
     void testCloudDragons() {
-        GameState.getEventData().resetCounters();
+        RunningState.getGameState().getEventData().resetCounters();
         Queue<EventType> testDrakesOrder = new LinkedList<>(List.of(ALLY_MOUNTAIN_DRAGON_KILL,
                 ALLY_OCEAN_DRAGON_KILL, ALLY_CLOUD_DRAGON_KILL, ALLY_CLOUD_DRAGON_KILL));
 
@@ -43,7 +43,7 @@ class KilledDragonsBarTest {
 
     @Test
     void testMountainDragons() {
-        GameState.getEventData().resetCounters();
+        RunningState.getGameState().getEventData().resetCounters();
         Queue<EventType> testDrakesOrder = new LinkedList<>(List.of(ALLY_CLOUD_DRAGON_KILL,
                 ALLY_INFERNAL_DRAGON_KILL, ALLY_MOUNTAIN_DRAGON_KILL, ALLY_MOUNTAIN_DRAGON_KILL));
 

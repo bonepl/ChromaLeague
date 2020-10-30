@@ -20,13 +20,13 @@ public final class RunningState {
 
     public static void setRunningGame(boolean runningGame) {
         if (RunningState.runningGame != runningGame) {
-            runningGameChanged = true;
-            RunningState.runningGame = runningGame;
             if (runningGame) {
                 gameState = new GameState();
             } else {
                 gameState = null;
             }
+            runningGameChanged = true;
+            RunningState.runningGame = runningGame;
         }
     }
 

@@ -6,17 +6,24 @@ import com.bonepl.chromaleague.rest.eventdata.Event;
 import com.bonepl.chromaleague.rest.eventdata.EventType;
 import com.bonepl.razersdk.animation.IFrame;
 import com.bonepl.razersdk.animation.SimpleFrame;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.*;
 
 public class EventAnimationProcessorTask implements Runnable {
     private static final Queue<Event> UNPROCESSED_EVENTS = new LinkedList<>();
+    private static final Logger LOGGER = LogManager.getLogger();
 
     @Override
     public void run() {
-        while (!UNPROCESSED_EVENTS.isEmpty()) {
-            final Event nextEvent = UNPROCESSED_EVENTS.remove();
-            processEventAnimation(EventType.fromEvent(nextEvent));
+        try {
+            while (!UNPROCESSED_EVENTS.isEmpty()) {
+                final Event nextEvent = UNPROCESSED_EVENTS.remove();
+                processEventAnimation(EventType.fromEvent(nextEvent));
+            }
+        } catch (Exception ex) {
+            LOGGER.error("Error while processing animations", ex);
         }
     }
 

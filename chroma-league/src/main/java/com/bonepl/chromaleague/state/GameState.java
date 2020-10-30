@@ -8,35 +8,31 @@ public final class GameState {
     private PlayerList playerList;
     private final EventData eventData = new EventData();
 
-    public static String getActivePlayerName() {
-        return RunningState.getGameState().activePlayer.getSummonerName();
+    public void setActivePlayer(ActivePlayer activePlayer) {
+        this.activePlayer = activePlayer;
     }
 
-    public static void setActivePlayer(ActivePlayer activePlayer) {
-        RunningState.getGameState().activePlayer = activePlayer;
-    }
-
-    public ActivePlayer getActivePlayer(){
+    public ActivePlayer getActivePlayer() {
         return activePlayer;
     }
 
-    public static boolean isActivePlayerAvailable() {
-        return RunningState.getGameState() != null && RunningState.getGameState().activePlayer != null;
+    public boolean isActivePlayerAvailable() {
+        return activePlayer != null;
     }
 
-    public static void setPlayerList(PlayerList playerList) {
-        RunningState.getGameState().playerList = playerList;
+    public void setPlayerList(PlayerList playerList) {
+        this.playerList = playerList;
     }
 
-    public static PlayerList getPlayerList() {
-        return RunningState.getGameState().playerList;
+    public PlayerList getPlayerList() {
+        return playerList;
     }
 
-    public static boolean isPlayerListAvailable() {
-        return RunningState.getGameState() != null && RunningState.getGameState().playerList != null;
+    public boolean isPlayerListAvailable() {
+        return playerList != null;
     }
 
-    public static EventData getEventData() {
-        return RunningState.getGameState().eventData;
+    public EventData getEventData() {
+        return eventData;
     }
 }

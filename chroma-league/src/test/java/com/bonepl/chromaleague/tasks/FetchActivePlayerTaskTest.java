@@ -36,7 +36,7 @@ class FetchActivePlayerTaskTest {
         new FetchActivePlayerTask().run();
 
         //then
-        assertTrue(GameState.isActivePlayerAvailable());
+        assertTrue(RunningState.getGameState().isActivePlayerAvailable());
 
         final ActivePlayer activePlayer = RunningState.getGameState().getActivePlayer();
         assertEquals(123.45, activePlayer.getCurrentGold());

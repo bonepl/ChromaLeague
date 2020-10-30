@@ -3,7 +3,7 @@ package com.bonepl.chromaleague;
 import com.bonepl.chromaleague.rest.activeplayer.ActivePlayer;
 import com.bonepl.chromaleague.rest.activeplayer.ChampionStats;
 import com.bonepl.chromaleague.rest.playerlist.PlayerList;
-import com.bonepl.chromaleague.state.GameState;
+import com.bonepl.chromaleague.state.RunningState;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -15,12 +15,12 @@ public final class GameStateMocks {
     public static void setActivePlayerName(String name) {
         ActivePlayer mockedActivePlayer = mock(ActivePlayer.class);
         when(mockedActivePlayer.getSummonerName()).thenReturn(name);
-        GameState.setActivePlayer(mockedActivePlayer);
+        RunningState.getGameState().setActivePlayer(mockedActivePlayer);
     }
 
     public static void makePlayerListAvailable() {
         PlayerList playerList = mock(PlayerList.class);
-        GameState.setPlayerList(playerList);
+        RunningState.getGameState().setPlayerList(playerList);
     }
 
     public static void mockActivePlayerGold(double gold) {
@@ -28,15 +28,15 @@ public final class GameStateMocks {
         final ActivePlayer apMock = mock(ActivePlayer.class);
         when(apMock.getChampionStats()).thenReturn(championStatsMock);
         when(apMock.getCurrentGold()).thenReturn(gold);
-        GameState.setActivePlayer(apMock);
+        RunningState.getGameState().setActivePlayer(apMock);
     }
 
     public static void clearActivePlayer() {
-        GameState.setActivePlayer(null);
+        RunningState.getGameState().setActivePlayer(null);
     }
 
     public static void clearPlayerList() {
-        GameState.setPlayerList(null);
+        RunningState.getGameState().setPlayerList(null);
     }
 
     public static void mockActivePlayerHealth(double currentHealth, double maxHealth) {
@@ -45,14 +45,14 @@ public final class GameStateMocks {
         when(championStatsMock.getMaxHealth()).thenReturn(maxHealth);
         final ActivePlayer apMock = mock(ActivePlayer.class);
         when(apMock.getChampionStats()).thenReturn(championStatsMock);
-        GameState.setActivePlayer(apMock);
+        RunningState.getGameState().setActivePlayer(apMock);
     }
 
     public static ChampionStats getMockedChampionStats() {
         final ChampionStats championStatsMock = mock(ChampionStats.class);
         final ActivePlayer apMock = mock(ActivePlayer.class);
         when(apMock.getChampionStats()).thenReturn(championStatsMock);
-        GameState.setActivePlayer(apMock);
+        RunningState.getGameState().setActivePlayer(apMock);
         return championStatsMock;
     }
 }

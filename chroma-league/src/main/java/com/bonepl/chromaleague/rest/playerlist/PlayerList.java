@@ -1,6 +1,6 @@
 package com.bonepl.chromaleague.rest.playerlist;
 
-import com.bonepl.chromaleague.state.GameState;
+import com.bonepl.chromaleague.state.RunningState;
 
 import java.util.Arrays;
 import java.util.List;
@@ -17,7 +17,7 @@ public class PlayerList {
     }
 
     public Player getActivePlayer() {
-        return players.get(GameState.getActivePlayerName());
+        return players.get(RunningState.getGameState().getActivePlayer().getSummonerName());
     }
 
     public List<String> getAllies() {

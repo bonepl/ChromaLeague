@@ -1,6 +1,6 @@
 package com.bonepl.chromaleague.hud.parts.resource;
 
-import com.bonepl.chromaleague.state.GameState;
+import com.bonepl.chromaleague.state.RunningState;
 import com.bonepl.razersdk.animation.IFrame;
 import com.bonepl.razersdk.sdk.RzKey;
 import com.bonepl.razersdk.sdk.RzKeySelector;
@@ -27,7 +27,7 @@ public final class ResourceBars {
     }
 
     public static IFrame getResourceBarForActivePlayerChampion() {
-        String activePlayerChampionName = GameState.getPlayerList().getActivePlayer().getChampionName();
+        String activePlayerChampionName = RunningState.getGameState().getPlayerList().getActivePlayer().getChampionName();
         if (NO_MANA_BAR_CHAMPIONS.contains(activePlayerChampionName)) {
             return new NoResourceBar();
         }

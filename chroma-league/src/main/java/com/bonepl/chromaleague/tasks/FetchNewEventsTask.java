@@ -3,8 +3,7 @@ package com.bonepl.chromaleague.tasks;
 import com.bonepl.chromaleague.rest.LeagueHttpClient;
 import com.bonepl.chromaleague.rest.eventdata.Event;
 import com.bonepl.chromaleague.rest.eventdata.Events;
-import com.bonepl.chromaleague.state.GameState;
-import com.bonepl.chromaleague.state.GameStateHelper;
+import com.bonepl.chromaleague.state.RunningState;
 import com.jsoniter.JsonIterator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,17 +18,21 @@ public class FetchNewEventsTask implements Runnable {
 
     @Override
     public void run() {
-        LeagueHttpClient.getResponse(URL)
-                .map(events -> JsonIterator.deserialize(events, Events.class))
-                .map(Events::getEvents)
-                .filter(events -> !events.isEmpty())
-                .ifPresent(FetchNewEventsTask::collectUnprocessedEvents);
+        try {
+            LeagueHttpClient.getResponse(URL)
+                    .map(events -> JsonIterator.deserialize(events, Events.class))
+                    .map(Events::getEvents)
+                    .filter(events -> !events.isEmpty())
+                    .ifPresent(FetchNewEventsTask::collectUnprocessedEvents);
+        } catch (Exception ex) {
+            LOGGER.error("Error while fetching new events", ex);
+        }
     }
 
     static void collectUnprocessedEvents(List<Event> events) {
-        if (!GameState.isActivePlayerAvailable() || !GameState.isPlayerListAvailable()) {
+        if (RunningState.getGameState() == null) {
             waitForGameStart(events);
-        } else {
+        } else if (RunningState.getGameState().isActivePlayerAvailable() && RunningState.getGameState().isPlayerListAvailable()) {
             if (hasPlayerReconnected(events)) {
                 LOGGER.warn("Game reconnection detected, fast-forwarding past {} events", events.size());
                 EventDataProcessorTask.addEvents(events);

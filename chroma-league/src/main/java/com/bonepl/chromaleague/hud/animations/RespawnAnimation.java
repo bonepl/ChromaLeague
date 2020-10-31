@@ -7,6 +7,7 @@ import com.bonepl.chromaleague.hud.parts.health.HpBar;
 import com.bonepl.chromaleague.hud.parts.resource.ManaBar;
 import com.bonepl.chromaleague.hud.parts.resource.ResourceBars;
 import com.bonepl.chromaleague.state.GameStateHelper;
+import com.bonepl.chromaleague.state.RunningState;
 import com.bonepl.razersdk.animation.AnimatedFrame;
 import com.bonepl.razersdk.animation.Color;
 import com.bonepl.razersdk.animation.LayeredFrame;
@@ -54,5 +55,13 @@ public class RespawnAnimation extends AnimatedFrame {
             layeredFrame.addFrame(new SimpleFrame(ResourceBars.getResourceBarKeys(), toManaColor.getNextColor()));
             addAnimationFrame(layeredFrame);
         }
+    }
+
+    private Color getPlayerResourceToTransitionColor() {
+        String activePlayerChampionName = RunningState.getGameState().getPlayerList().getActivePlayer().getChampionName();
+        if (ResourceBars.getEnergyBarChampions().contains(activePlayerChampionName)) {
+            return Color.YELLOW;
+        }
+        return ManaBar.MANA_COLOR;
     }
 }

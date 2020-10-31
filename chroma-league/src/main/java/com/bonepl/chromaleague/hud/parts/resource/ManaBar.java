@@ -11,6 +11,7 @@ import com.bonepl.razersdk.animation.Frame;
  * shyvana uses resource type: DRAGONFURY
  */
 public class ManaBar extends AnimatedFrame {
+    public static final Color MANA_COLOR = Color.BLUE;
 
     @Override
     public Frame getFrame() {

@@ -4,7 +4,6 @@ import com.bonepl.chromaleague.hud.animations.RespawnAnimation;
 import com.bonepl.chromaleague.hud.parts.*;
 import com.bonepl.chromaleague.hud.parts.dragons.DragonBar;
 import com.bonepl.chromaleague.hud.parts.health.HpBar;
-import com.bonepl.chromaleague.hud.parts.resource.ManaBar;
 import com.bonepl.chromaleague.hud.parts.resource.ResourceBars;
 import com.bonepl.chromaleague.state.GameStateHelper;
 import com.bonepl.razersdk.animation.IFrame;
@@ -27,7 +26,7 @@ public class MainHud extends LayeredFrame {
             addFrame(new Background());
             if (GameStateHelper.isActivePlayerAlive()) {
                 addFrame(HP_BAR);
-                addFrame(new ManaBar());
+                addFrame(getResourceBar());
             }
             addFrame(new AssistKillingSpreeBar());
             addFrame(DRAGON_BAR);

@@ -4,8 +4,6 @@ import com.bonepl.chromaleague.state.RunningState;
 import com.bonepl.razersdk.animation.IFrame;
 import com.bonepl.razersdk.sdk.RzKey;
 import com.bonepl.razersdk.sdk.RzKeySelector;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.util.Collections;
 import java.util.List;
@@ -44,7 +42,9 @@ public final class ResourceBars {
             case "Renekton" -> new RenektonFuryBar();
             case "Rengar" -> new RengarFerocityBar();
             case "Rek'Sai", "Tryndamere" -> new RedFuryBar();
+            case "Shyvana" -> new ShyvanaDragonFuryBar();
             case "Vladimir" -> new VladimirBloodPoolBar();
+            case "Yone" -> new YoneCloneBar();
             default -> new ManaBar();
         };
     }

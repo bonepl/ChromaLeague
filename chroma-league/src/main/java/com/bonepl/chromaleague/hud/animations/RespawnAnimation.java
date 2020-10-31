@@ -3,9 +3,11 @@ package com.bonepl.chromaleague.hud.animations;
 import com.bonepl.chromaleague.hud.colors.BreathingColor;
 import com.bonepl.chromaleague.hud.colors.TransitionColor;
 import com.bonepl.chromaleague.hud.parts.Background;
+import com.bonepl.chromaleague.hud.parts.ProgressBar;
 import com.bonepl.chromaleague.hud.parts.health.HpBar;
 import com.bonepl.chromaleague.hud.parts.resource.ManaBar;
 import com.bonepl.chromaleague.hud.parts.resource.ResourceBars;
+import com.bonepl.chromaleague.hud.parts.resource.ShyvanaDragonFuryBar;
 import com.bonepl.chromaleague.state.GameStateHelper;
 import com.bonepl.chromaleague.state.RunningState;
 import com.bonepl.razersdk.animation.AnimatedFrame;
@@ -42,25 +44,28 @@ public class RespawnAnimation extends AnimatedFrame {
 
         final TransitionColor toHpColor = new TransitionColor(Color.YELLOW, Color.GREEN, 10);
 
-        TransitionColor toManaColor;
+        TransitionColor toResourceColor;
         if (GameStateHelper.getResourcePercentage() == 0) {
-            toManaColor = new TransitionColor(Color.YELLOW, Background.BACKGROUND_COLOR, 10);
+            toResourceColor = new TransitionColor(Color.YELLOW, Background.BACKGROUND_COLOR, 10);
         } else {
-            toManaColor = new TransitionColor(Color.YELLOW, Color.BLUE, 10);
+            toResourceColor = new TransitionColor(Color.YELLOW, getPlayerResourceToTransitionColor(), 10);
         }
 
         for (int i = 0; i < 10; i++) {
             final LayeredFrame layeredFrame = new LayeredFrame();
             layeredFrame.addFrame(new SimpleFrame(HpBar.getHpBarKeys(), toHpColor.getNextColor()));
-            layeredFrame.addFrame(new SimpleFrame(ResourceBars.getResourceBarKeys(), toManaColor.getNextColor()));
+            layeredFrame.addFrame(new ProgressBar(ResourceBars.getResourceBarKeys(), GameStateHelper.getResourcePercentage(), toResourceColor.getNextColor()));
             addAnimationFrame(layeredFrame);
         }
     }
 
-    private Color getPlayerResourceToTransitionColor() {
+    private static Color getPlayerResourceToTransitionColor() {
         String activePlayerChampionName = RunningState.getGameState().getPlayerList().getActivePlayer().getChampionName();
         if (ResourceBars.getEnergyBarChampions().contains(activePlayerChampionName)) {
             return Color.YELLOW;
+        }
+        if ("Shyvana".equals(activePlayerChampionName)) {
+            return ShyvanaDragonFuryBar.DRAGON_FURY_COLOR;
         }
         return ManaBar.MANA_COLOR;
     }

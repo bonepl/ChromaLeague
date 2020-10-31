@@ -13,7 +13,7 @@ public class BreathingColor {
     }
 
     public BreathingColor(Color color, int steps) {
-        this(color, steps, true);
+        this(color, steps, false);
     }
 
     public BreathingColor(Color color, int steps, boolean startUpDirection) {

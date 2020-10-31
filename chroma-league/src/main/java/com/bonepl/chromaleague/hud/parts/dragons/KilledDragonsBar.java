@@ -34,7 +34,7 @@ public class KilledDragonsBar extends SimpleFrame {
         if (dragonSoul.isPresent()) {
             final DragonType soulType = dragonSoul.get();
             if (dragonSoulColor == null) {
-                dragonSoulColor = new BreathingColor(soulType.getColor(), 20, false);
+                dragonSoulColor = new BreathingColor(soulType.getColor());
             }
             final Color nextSoulColor = dragonSoulColor.getNextColor();
             getDragonType(0).map(dragonType -> swapColorIfSoul(dragonType, soulType, nextSoulColor))

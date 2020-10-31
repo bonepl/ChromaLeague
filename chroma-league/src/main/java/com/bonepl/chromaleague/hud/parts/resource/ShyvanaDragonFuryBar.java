@@ -7,17 +7,18 @@ import com.bonepl.razersdk.animation.AnimatedFrame;
 import com.bonepl.razersdk.animation.Color;
 import com.bonepl.razersdk.animation.Frame;
 
-public class RengarFerocityBar extends AnimatedFrame {
-    private static final BreathingColor FEROCITY_FULL_COLOR = new BreathingColor(Color.YELLOW, 5);
+public class ShyvanaDragonFuryBar extends AnimatedFrame {
+    public static final Color DRAGON_FURY_COLOR = Color.RED;
+    private static final BreathingColor ULTI_READY_COLOR = new BreathingColor(Color.RED);
 
     @Override
     public Frame getFrame() {
         final int resourcePercentage = GameStateHelper.getResourcePercentage();
         Color color;
         if (resourcePercentage == 100) {
-            color = FEROCITY_FULL_COLOR.getNextColor();
+            color = ULTI_READY_COLOR.getNextColor();
         } else {
-            color = Color.WHITE;
+            color = DRAGON_FURY_COLOR;
         }
         addAnimationFrame(new ProgressBar(ResourceBars.getResourceBarKeys(), resourcePercentage, color));
         return super.getFrame();

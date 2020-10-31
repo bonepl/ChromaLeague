@@ -56,6 +56,10 @@ public class Event {
         return Collections.unmodifiableList(assisters);
     }
 
+    public void setEventID(int eventID) {
+        this.eventID = eventID;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

@@ -36,16 +36,13 @@ public class FetchNewEventsTask implements Runnable {
         } else if (RunningState.getGameState().isActivePlayerAvailable() && RunningState.getGameState().isPlayerListAvailable()) {
             final List<Event> unprocessedEvents = RunningState.getGameState().getEventData().getUnprocessedEvents(events);
             if (!unprocessedEvents.isEmpty()) {
-                if (hasPlayerReconnected(events)) {
-                    LOGGER.warn("Game reconnection detected, fast-forwarding past {} events", events.size());
-                    eventDataProcessor.processNewEvents(events);
-                } else {
+                if (!hasPlayerReconnected(unprocessedEvents)) {
                     unprocessedEvents.forEach(event -> LOGGER.debug("Adding new event: {}", event));
                     eventAnimationProcessor.processNewEvents(unprocessedEvents);
-                    eventDataProcessor.processNewEvents(unprocessedEvents);
                 }
+                eventDataProcessor.processNewEvents(unprocessedEvents);
+                RunningState.getGameState().getEventData().addProcessedEvents(unprocessedEvents);
             }
-            RunningState.getGameState().getEventData().addProcessedEvents(unprocessedEvents);
         }
     }
 

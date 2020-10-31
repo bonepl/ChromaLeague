@@ -6,7 +6,7 @@ import com.bonepl.razersdk.animation.AnimatedFrame;
 import com.bonepl.razersdk.animation.Color;
 import com.bonepl.razersdk.animation.Frame;
 
-public class VladimirResourceBar extends AnimatedFrame {
+public class VladimirBloodPoolBar extends AnimatedFrame {
     private int previousResourcePercentage;
 
     @Override

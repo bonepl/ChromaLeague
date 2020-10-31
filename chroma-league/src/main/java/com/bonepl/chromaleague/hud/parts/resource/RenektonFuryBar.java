@@ -6,7 +6,7 @@ import com.bonepl.razersdk.animation.AnimatedFrame;
 import com.bonepl.razersdk.animation.Color;
 import com.bonepl.razersdk.animation.Frame;
 
-public class RenektonResourceBar extends AnimatedFrame {
+public class RenektonFuryBar extends AnimatedFrame {
     @Override
     public Frame getFrame() {
         final int resourcePercentage = GameStateHelper.getResourcePercentage();

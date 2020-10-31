@@ -54,6 +54,7 @@ class FetchNewEventsTaskTest {
 
         //when
         new FetchNewEventsTask().run();
+        new FetchNewEventsTask().run();
 
         //then
         List<Event> events = new ArrayList<>(30);

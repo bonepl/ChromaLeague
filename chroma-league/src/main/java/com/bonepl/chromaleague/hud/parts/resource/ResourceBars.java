@@ -36,18 +36,14 @@ public final class ResourceBars {
             return new EnergyBar();
         }
 
-        if ("Renekton".equals(activePlayerChampionName)) {
-            return new RenektonResourceBar();
-        }
-
-        if ("Vladimir".equals(activePlayerChampionName)) {
-            return new VladimirResourceBar();
-        }
-
-        if ("Gnar".equals(activePlayerChampionName)) {
-            return new GnarFuryBar();
-        }
-        return new ManaBar();
+        return switch (activePlayerChampionName) {
+            case "Gnar" -> new GnarFuryBar();
+            case "Mordekaiser" -> new MordekaiserShieldBar();
+            case "Renekton" -> new RenektonFuryBar();
+            case "Rek'Sai", "Tryndamere" -> new RedFuryBar();
+            case "Vladimir" -> new VladimirBloodPoolBar();
+            default -> new ManaBar();
+        };
     }
 
     public static List<RzKey> getResourceBarKeys() {

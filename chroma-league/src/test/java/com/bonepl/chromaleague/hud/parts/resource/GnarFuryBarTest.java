@@ -14,12 +14,11 @@ class GnarFuryBarTest {
 
     @Test
     void testGnarFuryBar() {
-        RunningState.setRunningGame(true);
         currentResource = 0;
         final GnarFuryBar gnarFuryBar = new GnarFuryBar();
 
         new AnimationTester()
-                .withAfterIterationAction(integer -> {
+                .withBeforeIterationAction(integer -> {
                     if (integer < 120) {
                         if (currentResource < 100) {
                             currentResource++;

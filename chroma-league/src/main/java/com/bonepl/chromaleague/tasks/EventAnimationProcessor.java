@@ -1,9 +1,9 @@
 package com.bonepl.chromaleague.tasks;
 
 import com.bonepl.chromaleague.hud.animations.*;
-import com.bonepl.chromaleague.hud.parts.EventAnimator;
 import com.bonepl.chromaleague.rest.eventdata.Event;
 import com.bonepl.chromaleague.rest.eventdata.EventType;
+import com.bonepl.chromaleague.state.RunningState;
 import com.bonepl.razersdk.animation.IFrame;
 import com.bonepl.razersdk.animation.SimpleFrame;
 import org.apache.logging.log4j.LogManager;
@@ -21,7 +21,7 @@ public class EventAnimationProcessor {
 
     private static void processEventAnimation(EventType eventType) {
         IFrame animation = getEventAnimation(eventType);
-        EventAnimator.addAnimation(animation);
+        RunningState.getGameState().getMainHud().getEventAnimation().addAnimation(animation);
     }
 
     private static IFrame getEventAnimation(EventType eventType) {

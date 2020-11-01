@@ -18,7 +18,7 @@ public class RefreshMainHudTask implements Runnable {
     public void run() {
         try {
             if (RunningState.getGameState().isActivePlayerAvailable() && RunningState.getGameState().isPlayerListAvailable()) {
-                chromaRestSDK.createKeyboardEffect(new MainHud());
+                chromaRestSDK.createKeyboardEffect(RunningState.getGameState().getMainHud());
             }
         } catch (Exception ex) {
             LOGGER.error("Error while refreshing main HUD", ex);

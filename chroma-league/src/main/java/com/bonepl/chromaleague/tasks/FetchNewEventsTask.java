@@ -59,8 +59,4 @@ public class FetchNewEventsTask implements Runnable {
             new EventDataProcessor().processNewEvents(events.subList(0, 1));
         }
     }
-
-    public static void resetProcessedEventCounter() {
-        lastProcessedEventId = -1;
-    }
 }

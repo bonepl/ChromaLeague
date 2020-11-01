@@ -1,7 +1,6 @@
 package com.bonepl.chromaleague.tasks;
 
-import com.bonepl.chromaleague.hud.MainHud;
-import com.bonepl.chromaleague.hud.parts.EventAnimator;
+import com.bonepl.chromaleague.hud.parts.EventAnimation;
 import com.bonepl.chromaleague.state.RunningState;
 import com.bonepl.razersdk.ChromaRestSDK;
 import org.apache.logging.log4j.LogManager;
@@ -12,8 +11,11 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class MainTask implements Runnable {
-    private static final Logger LOGGER = LogManager.getLogger();
+    public static final int PLAYER_LIST_FETCH_DELAY = 1000;
+    public static final int ACTIVE_PLAYER_FETCH_DELATY = 300;
+    public static final int MAIN_HUD_REFRESH_DELAY = 50;
 
+    private static final Logger LOGGER = LogManager.getLogger();
     private static ScheduledExecutorService mainExecutor;
     private static ChromaRestSDK chromaRestSDK;
 
@@ -45,18 +47,15 @@ public class MainTask implements Runnable {
                 LOGGER.error(e);
             }
             RunningState.setRunningGame(false);
-            EventAnimator.stop();
-            FetchNewEventsTask.resetProcessedEventCounter();
-            MainHud.clearResourceBar();
         }
     }
 
     private static void initializeGameThreads() {
         LOGGER.info("Player joined the game");
         chromaRestSDK = new ChromaRestSDK();
-        mainExecutor.scheduleWithFixedDelay(new FetchPlayerListTask(), 0, 1000, TimeUnit.MILLISECONDS);
-        mainExecutor.scheduleWithFixedDelay(new FetchActivePlayerTask(), 50, 300, TimeUnit.MILLISECONDS);
-        mainExecutor.scheduleWithFixedDelay(new RefreshMainHudTask(chromaRestSDK), 150, 50, TimeUnit.MILLISECONDS);
+        mainExecutor.scheduleWithFixedDelay(new FetchPlayerListTask(), 0, PLAYER_LIST_FETCH_DELAY, TimeUnit.MILLISECONDS);
+        mainExecutor.scheduleWithFixedDelay(new FetchActivePlayerTask(), 50, ACTIVE_PLAYER_FETCH_DELATY, TimeUnit.MILLISECONDS);
+        mainExecutor.scheduleWithFixedDelay(new RefreshMainHudTask(chromaRestSDK), 150, MAIN_HUD_REFRESH_DELAY, TimeUnit.MILLISECONDS);
     }
 
     private static void initializePreGame() {

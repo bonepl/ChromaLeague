@@ -47,6 +47,13 @@ public class SimpleFrame implements IFrame {
     }
 
     /**
+     * Create a frame from {@link Frame}
+     */
+    public SimpleFrame(Frame frame) {
+        this(frame.getKeysToColors());
+    }
+
+    /**
      * Create a frame from {@link RzKey} to {@link Color} map
      *
      * @param keysToColors {@link Map} of keys and corresponding fill color

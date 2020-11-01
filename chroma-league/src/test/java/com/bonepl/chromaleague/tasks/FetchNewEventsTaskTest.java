@@ -31,7 +31,6 @@ class FetchNewEventsTaskTest {
     void testEventParsing() {
         //given
         LeagueHttpClientMock.mockReturnedResponseWithResource("json/standardevent.json");
-        FetchNewEventsTask.resetProcessedEventCounter();
 
         //when
         new FetchNewEventsTask().run();
@@ -50,7 +49,6 @@ class FetchNewEventsTaskTest {
     void testEventParsingAfterReconnect() {
         //given
         LeagueHttpClientMock.mockReturnedResponseWithResource("json/eventdata.json");
-        FetchNewEventsTask.resetProcessedEventCounter();
 
         //when
         new FetchNewEventsTask().run();

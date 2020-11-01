@@ -12,8 +12,14 @@ import java.util.function.Supplier;
 public final class AnimationTester {
     private static final Logger LOGGER = LogManager.getLogger();
     private Consumer<Integer> afterIterationAction;
+    private Consumer<Integer> beforeIterationAction;
     private int sleepTime = 50;
     private int sleepAfter;
+
+    public AnimationTester withBeforeIterationAction(Consumer<Integer> action) {
+        beforeIterationAction = action;
+        return this;
+    }
 
     public AnimationTester withAfterIterationAction(Consumer<Integer> action) {
         afterIterationAction = action;
@@ -33,6 +39,7 @@ public final class AnimationTester {
     public void testAnimation(Supplier<? extends IFrame> supplier, int iterations) {
         try (ChromaRestSDK chromaRestSDK = new ChromaRestSDK()) {
             for (int i = 0; i < iterations; i++) {
+                executeBeforeIteration(i);
                 final IFrame frame = supplier.get();
                 chromaRestSDK.createKeyboardEffect(frame);
                 executeAfterIteration(i);
@@ -45,6 +52,7 @@ public final class AnimationTester {
     public void testAnimation(IFrame frame) {
         try (ChromaRestSDK chromaRestSDK = new ChromaRestSDK()) {
             for (int i = 0; frame.hasFrame(); i++) {
+                executeBeforeIteration(i);
                 chromaRestSDK.createKeyboardEffect(frame);
                 executeAfterIteration(i);
                 sleepThread(sleepTime);
@@ -56,6 +64,7 @@ public final class AnimationTester {
     public void testAnimation(IFrame frame, int iterations) {
         try (ChromaRestSDK chromaRestSDK = new ChromaRestSDK()) {
             for (int i = 0; i < iterations; i++) {
+                executeBeforeIteration(i);
                 chromaRestSDK.createKeyboardEffect(frame);
                 executeAfterIteration(i);
                 sleepThread(sleepTime);
@@ -67,6 +76,12 @@ public final class AnimationTester {
     private void executeAfterIteration(int i) {
         if (afterIterationAction != null) {
             afterIterationAction.accept(i);
+        }
+    }
+
+    private void executeBeforeIteration(int i) {
+        if (beforeIterationAction != null) {
+            beforeIterationAction.accept(i);
         }
     }
 

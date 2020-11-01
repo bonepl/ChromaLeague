@@ -15,10 +15,18 @@ public class IntSteps {
     }
 
     public int nextInt() {
-        if (current + step > to || current + step < from) {
-            direction = Math.negateExact(direction);
+        int toReturn = current;
+        final int nextIncrement = step * direction;
+        if (from < to) {
+            if (current + nextIncrement > to || current + nextIncrement < from) {
+                direction = Math.negateExact(direction);
+            }
+        } else {
+            if (current + nextIncrement < to || current + nextIncrement > from) {
+                direction = Math.negateExact(direction);
+            }
         }
         current += step * direction;
-        return current;
+        return toReturn;
     }
 }

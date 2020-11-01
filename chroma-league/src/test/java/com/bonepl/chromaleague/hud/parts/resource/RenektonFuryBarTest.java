@@ -6,12 +6,12 @@ import org.junit.jupiter.api.Test;
 
 import static com.bonepl.chromaleague.GameStateMocks.mockResource;
 
-class VladimirBloodPoolBarTest {
+class RenektonFuryBarTest {
 
     @Test
-    void testVladimirPoolBar() {
+    void testRenektonFuryBar() {
         final IntSteps intSteps = new IntSteps(0, 100, 5);
-        final VladimirBloodPoolBar vladimirBloodPoolBar = new VladimirBloodPoolBar();
+        final RenektonFuryBar vladimirBloodPoolBar = new RenektonFuryBar();
 
         new AnimationTester()
                 .withBeforeIterationAction(i -> {

@@ -93,4 +93,10 @@ public final class GameStateMocks {
         RunningState.getGameState().setActivePlayer(apMock);
         return championStatsMock;
     }
+
+    public static void mockResource(double resource, double maxResource) {
+        final ChampionStats mockedChampionStats = getMockedChampionStats();
+        when(mockedChampionStats.getResourceValue()).thenReturn(resource);
+        when(mockedChampionStats.getResourceMax()).thenReturn(maxResource);
+    }
 }

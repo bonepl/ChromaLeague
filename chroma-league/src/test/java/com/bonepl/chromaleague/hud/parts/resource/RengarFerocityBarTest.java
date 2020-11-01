@@ -6,22 +6,21 @@ import org.junit.jupiter.api.Test;
 
 import static com.bonepl.chromaleague.GameStateMocks.mockResource;
 
-class VladimirBloodPoolBarTest {
-
+class RengarFerocityBarTest {
     @Test
-    void testVladimirPoolBar() {
-        final IntSteps intSteps = new IntSteps(0, 100, 5);
-        final VladimirBloodPoolBar vladimirBloodPoolBar = new VladimirBloodPoolBar();
+    void testRengarFerocityBar() {
+        final IntSteps intSteps = new IntSteps(0, 100, 25);
+        final RengarFerocityBar rengarFerocityBar = new RengarFerocityBar();
 
         new AnimationTester()
                 .withBeforeIterationAction(i -> {
-                    if (i >= 20 && i <= 30) {
+                    if (i > 20) {
                         mockResource(100, 100);
-                    } else {
+                    } else if (i % 5 == 0) {
                         mockResource(intSteps.nextInt(), 100);
                     }
                 })
-                .testAnimation(vladimirBloodPoolBar, 50);
+                .testAnimation(rengarFerocityBar, 40);
 
     }
 }

@@ -22,8 +22,8 @@ public class RespawnAnimation extends AnimatedFrame {
     private static final List<RzKey> GLOW_AREA = BaronBuffBackgroundAnimation.buildBaronArea();
 
     public RespawnAnimation() {
-        BreathingColor glowAreaColor = new BreathingColor(Color.YELLOW);
-        BreathingColor buttonsColor = new BreathingColor(Color.YELLOW);
+        BreathingColor glowAreaColor = new BreathingColor(Color.YELLOW, 20, true);
+        BreathingColor buttonsColor = new BreathingColor(Color.YELLOW, 20, true);
 
         for (int i = 0; i < 20; i++) {
             final LayeredFrame layeredFrame = new LayeredFrame();

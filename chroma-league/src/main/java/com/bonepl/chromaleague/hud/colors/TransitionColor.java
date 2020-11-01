@@ -65,9 +65,11 @@ public class TransitionColor {
     }
 
     public void setSteps(int newSteps) {
-        final double stepsRatio = (double) currentStep / steps;
-        currentStep = (int) (stepsRatio * newSteps);
-        steps = newSteps;
+        if (newSteps != steps) {
+            final double stepsRatio = (double) currentStep / steps;
+            currentStep = (int) (stepsRatio * newSteps);
+            steps = newSteps;
+        }
     }
 
     public Color getFrom() {

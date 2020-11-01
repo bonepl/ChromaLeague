@@ -17,6 +17,7 @@ public class Color {
     public static final Color BROWN = new Color(130, 50, 0);
     public static final Color PURPLE = new Color(200, 0, 200);
     public static final Color ORANGE = new Color(255, 165, 0);
+    public static final Color GRAY = new Color(100, 100, 100);
 
     public static final int MIN_COLOR_VALUE = 0;
     public static final int MAX_COLOR_VALUE = 255;

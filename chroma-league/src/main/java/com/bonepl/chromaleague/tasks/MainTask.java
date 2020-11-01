@@ -1,6 +1,5 @@
 package com.bonepl.chromaleague.tasks;
 
-import com.bonepl.chromaleague.hud.parts.EventAnimation;
 import com.bonepl.chromaleague.state.RunningState;
 import com.bonepl.razersdk.ChromaRestSDK;
 import org.apache.logging.log4j.LogManager;
@@ -12,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 public class MainTask implements Runnable {
     public static final int PLAYER_LIST_FETCH_DELAY = 1000;
-    public static final int ACTIVE_PLAYER_FETCH_DELATY = 300;
+    public static final int ACTIVE_PLAYER_FETCH_DELAY = 300;
     public static final int MAIN_HUD_REFRESH_DELAY = 50;
 
     private static final Logger LOGGER = LogManager.getLogger();
@@ -40,12 +39,14 @@ public class MainTask implements Runnable {
             LOGGER.info("Player left the game");
             chromaRestSDK.close();
             chromaRestSDK = null;
+
             mainExecutor.shutdown();
             try {
                 mainExecutor.awaitTermination(5000, TimeUnit.MILLISECONDS);
             } catch (InterruptedException e) {
                 LOGGER.error(e);
             }
+
             RunningState.setRunningGame(false);
         }
     }
@@ -54,7 +55,7 @@ public class MainTask implements Runnable {
         LOGGER.info("Player joined the game");
         chromaRestSDK = new ChromaRestSDK();
         mainExecutor.scheduleWithFixedDelay(new FetchPlayerListTask(), 0, PLAYER_LIST_FETCH_DELAY, TimeUnit.MILLISECONDS);
-        mainExecutor.scheduleWithFixedDelay(new FetchActivePlayerTask(), 50, ACTIVE_PLAYER_FETCH_DELATY, TimeUnit.MILLISECONDS);
+        mainExecutor.scheduleWithFixedDelay(new FetchActivePlayerTask(), 50, ACTIVE_PLAYER_FETCH_DELAY, TimeUnit.MILLISECONDS);
         mainExecutor.scheduleWithFixedDelay(new RefreshMainHudTask(chromaRestSDK), 150, MAIN_HUD_REFRESH_DELAY, TimeUnit.MILLISECONDS);
     }
 

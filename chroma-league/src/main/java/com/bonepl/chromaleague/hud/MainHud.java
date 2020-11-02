@@ -3,7 +3,7 @@ package com.bonepl.chromaleague.hud;
 import com.bonepl.chromaleague.hud.animations.RespawnAnimation;
 import com.bonepl.chromaleague.hud.parts.*;
 import com.bonepl.chromaleague.hud.parts.dragons.DragonBar;
-import com.bonepl.chromaleague.hud.parts.health.HpBar;
+import com.bonepl.chromaleague.hud.parts.health.HealthBar;
 import com.bonepl.chromaleague.hud.parts.resource.ResourceBars;
 import com.bonepl.chromaleague.state.GameStateHelper;
 import com.bonepl.razersdk.animation.AnimatedFrame;
@@ -19,7 +19,7 @@ public class MainHud extends AnimatedFrame {
     private final LevelUpBar levelUpBar = new LevelUpBar();
     private final EventAnimation eventAnimation = new EventAnimation();
     private final DragonBar dragonBar = new DragonBar();
-    private final HpBar hpBar = new HpBar();
+    private final HealthBar healthBar = new HealthBar();
     private IFrame resourceBar;
     private boolean playerDead;
 
@@ -29,7 +29,7 @@ public class MainHud extends AnimatedFrame {
         try {
             mainHudFrame.addFrame(new Background());
             if (GameStateHelper.isActivePlayerAlive()) {
-                mainHudFrame.addFrame(hpBar);
+                mainHudFrame.addFrame(healthBar);
                 mainHudFrame.addFrame(getResourceBar());
             }
             mainHudFrame.addFrame(new AssistKillingSpreeBar());

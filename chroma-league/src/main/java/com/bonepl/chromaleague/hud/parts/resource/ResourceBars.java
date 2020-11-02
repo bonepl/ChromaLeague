@@ -42,6 +42,7 @@ public final class ResourceBars {
             case "Renekton" -> new RenektonFuryBar();
             case "Rengar" -> new RengarFerocityBar();
             case "Rek'Sai", "Tryndamere" -> new RedFuryBar();
+            case "Rumble" -> new RumbleHeatBar();
             case "Shyvana" -> new ShyvanaDragonFuryBar();
             case "Vladimir" -> new VladimirBloodPoolBar();
             case "Yone" -> new YoneCloneBar();

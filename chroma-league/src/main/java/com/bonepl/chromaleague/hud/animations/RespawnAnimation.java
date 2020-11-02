@@ -1,11 +1,11 @@
 package com.bonepl.chromaleague.hud.animations;
 
 import com.bonepl.chromaleague.hud.colors.BreathingColor;
+import com.bonepl.chromaleague.hud.colors.CLColor;
 import com.bonepl.chromaleague.hud.colors.TransitionColor;
 import com.bonepl.chromaleague.hud.parts.Background;
 import com.bonepl.chromaleague.hud.parts.ProgressBar;
-import com.bonepl.chromaleague.hud.parts.health.HpBar;
-import com.bonepl.chromaleague.hud.parts.resource.ManaBar;
+import com.bonepl.chromaleague.hud.parts.health.HealthBar;
 import com.bonepl.chromaleague.hud.parts.resource.ResourceBars;
 import com.bonepl.chromaleague.hud.parts.resource.ShyvanaDragonFuryBar;
 import com.bonepl.chromaleague.state.GameStateHelper;
@@ -28,7 +28,7 @@ public class RespawnAnimation extends AnimatedFrame {
         for (int i = 0; i < 20; i++) {
             final LayeredFrame layeredFrame = new LayeredFrame();
             layeredFrame.addFrame(new SimpleFrame(GLOW_AREA, glowAreaColor.getNextColor()));
-            layeredFrame.addFrame(new SimpleFrame(HpBar.getHpBarKeys(), Background.BACKGROUND_COLOR));
+            layeredFrame.addFrame(new SimpleFrame(HealthBar.getHpBarKeys(), Background.BACKGROUND_COLOR));
             layeredFrame.addFrame(new SimpleFrame(ResourceBars.getResourceBarKeys(), Background.BACKGROUND_COLOR));
             addAnimationFrame(layeredFrame);
         }
@@ -37,7 +37,7 @@ public class RespawnAnimation extends AnimatedFrame {
             final LayeredFrame layeredFrame = new LayeredFrame();
             layeredFrame.addFrame(new SimpleFrame(GLOW_AREA, glowAreaColor.getNextColor()));
             final Color buttonsNextColor = buttonsColor.getNextColor();
-            layeredFrame.addFrame(new SimpleFrame(HpBar.getHpBarKeys(), buttonsNextColor));
+            layeredFrame.addFrame(new SimpleFrame(HealthBar.getHpBarKeys(), buttonsNextColor));
             layeredFrame.addFrame(new SimpleFrame(ResourceBars.getResourceBarKeys(), buttonsNextColor));
             addAnimationFrame(layeredFrame);
         }
@@ -53,7 +53,7 @@ public class RespawnAnimation extends AnimatedFrame {
 
         for (int i = 0; i < 10; i++) {
             final LayeredFrame layeredFrame = new LayeredFrame();
-            layeredFrame.addFrame(new SimpleFrame(HpBar.getHpBarKeys(), toHpColor.getNextColor()));
+            layeredFrame.addFrame(new SimpleFrame(HealthBar.getHpBarKeys(), toHpColor.getNextColor()));
             layeredFrame.addFrame(new ProgressBar(ResourceBars.getResourceBarKeys(), GameStateHelper.getResourcePercentage(), toResourceColor.getNextColor()));
             addAnimationFrame(layeredFrame);
         }
@@ -67,6 +67,6 @@ public class RespawnAnimation extends AnimatedFrame {
         if ("Shyvana".equals(activePlayerChampionName)) {
             return ShyvanaDragonFuryBar.DRAGON_FURY_COLOR;
         }
-        return ManaBar.MANA_COLOR;
+        return CLColor.MANA;
     }
 }

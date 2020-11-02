@@ -1,5 +1,6 @@
 package com.bonepl.chromaleague.hud.parts.resource;
 
+import com.bonepl.chromaleague.hud.colors.CLColor;
 import com.bonepl.chromaleague.hud.parts.ProgressBar;
 import com.bonepl.chromaleague.state.GameStateHelper;
 import com.bonepl.razersdk.animation.AnimatedFrame;
@@ -11,12 +12,10 @@ import com.bonepl.razersdk.animation.Frame;
  * shyvana uses resource type: DRAGONFURY
  */
 public class ManaBar extends AnimatedFrame {
-    public static final Color MANA_COLOR = Color.BLUE;
-
     @Override
     public Frame getFrame() {
         addAnimationFrame(new ProgressBar(ResourceBars.getResourceBarKeys(),
-                GameStateHelper.getResourcePercentage(), Color.BLUE));
+                GameStateHelper.getResourcePercentage(), CLColor.MANA));
         return super.getFrame();
     }
 }

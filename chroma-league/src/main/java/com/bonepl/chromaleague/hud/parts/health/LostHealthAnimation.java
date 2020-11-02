@@ -2,8 +2,6 @@ package com.bonepl.chromaleague.hud.parts.health;
 
 import com.bonepl.chromaleague.hud.colors.TransitionColor;
 import com.bonepl.chromaleague.hud.parts.Background;
-import com.bonepl.chromaleague.hud.parts.ProgressBar;
-import com.bonepl.chromaleague.state.GameState;
 import com.bonepl.razersdk.animation.AnimatedFrame;
 import com.bonepl.razersdk.animation.Color;
 import com.bonepl.razersdk.animation.SimpleFrame;
@@ -12,12 +10,12 @@ import com.bonepl.razersdk.sdk.RzKey;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import static com.bonepl.chromaleague.hud.parts.health.HpBar.getHpBarPart;
+import static com.bonepl.chromaleague.hud.parts.health.HealthBar.getHpBarPart;
 
-public class LostHpAnimation extends AnimatedFrame {
+public class LostHealthAnimation extends AnimatedFrame {
     private static final int LOST_HEALTH_CHANGE_STEPS = 5;
 
-    public LostHpAnimation(double previousHp, double currentHp) {
+    public LostHealthAnimation(double previousHp, double currentHp) {
         createLostHealthAnimation(previousHp, currentHp);
     }
 

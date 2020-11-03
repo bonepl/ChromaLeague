@@ -15,55 +15,43 @@ import java.time.LocalTime;
 
 public class RumbleHeatBar extends AnimatedFrame {
     private static final Logger LOGGER = LogManager.getLogger();
-    private static final double HEAT_THRESHOLD = 13.0 * MainTask.ACTIVE_PLAYER_FETCH_DELAY / 1000;
+    private static final double HEAT_THRESHOLD = 8.0;
     private static final TransitionColor HEAT_COLOR = new TransitionColor(Color.YELLOW, Color.RED);
 
-    // previous values, to determine if a change occured
+    private LocalTime lastHeatingTime = LocalTime.now();
     private int previousResourcePercentage;
+    private int highestResourceValue;
     private boolean overheating;
-    private LocalTime lastTimeSeeingRise = LocalTime.now();
-    private int highestValue;
-    private boolean falling;
+    private boolean coolingDown;
 
     @Override
     public Frame getFrame() {
         final int resourcePercentage = GameStateHelper.getResourcePercentage();
-        final LocalTime now = LocalTime.now();
         if (resourcePercentage != previousResourcePercentage) {
+            final LocalTime now = LocalTime.now();
             if (resourcePercentage < previousResourcePercentage) {
-                // we're falling
-                if (!falling) {
-                    // note the last time we saw an increase;
-                    highestValue = previousResourcePercentage;
+                if (!coolingDown) {
+                    highestResourceValue = previousResourcePercentage;
                 }
-                falling = true;
-            }
-            if (resourcePercentage > previousResourcePercentage) {
-                // we're rising
-                falling = false;
-                overheating = false;
-                lastTimeSeeingRise = now;
-                highestValue = resourcePercentage;
-            }
-            if (falling) {
-                final long durationOfChange = Duration.between(lastTimeSeeingRise, now).toMillis();
-
-                final int delta = highestValue - resourcePercentage;
+                coolingDown = true;
+                final long durationOfChange = Duration.between(lastHeatingTime, now).toMillis();
+                final int delta = highestResourceValue - resourcePercentage;
                 double decayRate = delta * 1000.0 / durationOfChange;
                 LOGGER.debug("Calculated Rumble decay rate: {}", decayRate);
-                // in game - 14 is the lowest I got for overheating, but I got one false positive so it must've reached <13 once.
-                // while passively cooling down the rate is insanely low (2-7)
-                if (decayRate > 8.0) {
+                if (decayRate > HEAT_THRESHOLD) {
                     LOGGER.debug("Rumble overheats");
                     overheating = true;
                 } else {
-                    // rumble is cooling down normally - ~10 heat per sec, 9.6 according to math in this program :D
                     LOGGER.debug("Rumble cools down normally");
                     overheating = false;
                 }
-            } else {
+            }
+            if (resourcePercentage > previousResourcePercentage) {
                 LOGGER.debug("Rumble is neither overheating nor cooling");
+                coolingDown = false;
                 overheating = false;
+                lastHeatingTime = now;
+                highestResourceValue = resourcePercentage;
             }
             previousResourcePercentage = resourcePercentage;
         }

@@ -15,10 +15,11 @@ public class EventDataProcessor {
     private static final Logger LOGGER = LogManager.getLogger();
 
     public void processNewEvents(List<Event> events) {
-        events.stream().map(EventType::fromEvent).forEach(this::processEventForEventData);
+        events.forEach(this::processEventForEventData);
     }
 
-    public void processEventForEventData(EventType eventType) {
+    public void processEventForEventData(Event event) {
+        final EventType eventType = EventType.fromEvent(event);
         switch (eventType) {
             case GAME_START -> RunningState.setRunningGame(true);
             case ALLY_BARON_KILL -> GameStateHelper.startBaronBuff();
@@ -26,7 +27,8 @@ public class EventDataProcessor {
             case ALLY_INFERNAL_DRAGON_KILL -> addKilledDragon(DragonType.INFERNAL);
             case ALLY_MOUNTAIN_DRAGON_KILL -> addKilledDragon(DragonType.MOUNTAIN);
             case ALLY_OCEAN_DRAGON_KILL -> addKilledDragon(DragonType.OCEAN);
-            case ALLY_ELDER_DRAGON_KILL, ENEMY_ELDER_DRAGON_KILL -> processElderKill(eventType);
+            case ALLY_ELDER_DRAGON_KILL -> processAllyElderKill(event);
+            case ENEMY_ELDER_DRAGON_KILL -> GameStateHelper.addKilledElder();
             case ACTIVE_PLAYER_DIED -> resetAlivePlayerCounters();
             case ACTIVE_PLAYER_KILL -> GameStateHelper.addPlayerKill();
             case ACTIVE_PLAYER_ASSIST -> GameStateHelper.addPlayerAssist();
@@ -41,10 +43,8 @@ public class EventDataProcessor {
         RunningState.getGameState().getEventData().addKilledDragon(dragonType);
     }
 
-    private static void processElderKill(EventType eventType) {
-        if (eventType == EventType.ALLY_ELDER_DRAGON_KILL) {
-            GameStateHelper.startElderBuff();
-        }
+    private static void processAllyElderKill(Event event) {
+        GameStateHelper.startElderBuff(event.getEventTime());
         GameStateHelper.addKilledElder();
     }
 

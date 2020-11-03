@@ -3,6 +3,8 @@ package com.bonepl.chromaleague.state;
 import com.bonepl.chromaleague.hud.parts.GoldBar;
 import com.bonepl.chromaleague.rest.activeplayer.ChampionStats;
 import com.bonepl.chromaleague.rest.eventdata.DragonType;
+import com.bonepl.chromaleague.rest.gamestats.GameStats;
+import com.bonepl.chromaleague.tasks.FetchGameStats;
 
 import java.time.LocalTime;
 import java.util.List;
@@ -68,7 +70,9 @@ public final class GameStateHelper {
         return false;
     }
 
-    public static void startElderBuff() {
+    public static void startElderBuff(double eventTime) {
+        final GameStats gameStats = new FetchGameStats().fetchGameStats();
+
         if (isActivePlayerAlive()) {
             final int totalEldersKilled = getTotalEldersKilled();
             if (totalEldersKilled == 1) {

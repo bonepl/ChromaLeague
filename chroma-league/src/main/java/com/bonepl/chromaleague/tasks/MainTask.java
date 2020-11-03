@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 public class MainTask implements Runnable {
     public static final int PLAYER_LIST_FETCH_DELAY = 1000;
-    public static final int ACTIVE_PLAYER_FETCH_DELAY = 300;
+    public static final int ACTIVE_PLAYER_FETCH_DELAY = 200;
     public static final int MAIN_HUD_REFRESH_DELAY = 50;
 
     private static final Logger LOGGER = LogManager.getLogger();

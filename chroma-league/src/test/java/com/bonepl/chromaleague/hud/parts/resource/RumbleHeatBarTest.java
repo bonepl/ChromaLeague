@@ -10,12 +10,17 @@ class RumbleHeatBarTest {
 
     @Test
     void testRumbleStandardHeat() {
-        final IntSteps intSteps = new IntSteps(0, 100, 3);
-        final RumbleHeatBar rumbleHeatBar = new RumbleHeatBar();
+        final IntSteps heatSteps = new IntSteps(0, 100, 5);
+        final IntSteps cooldownSteps = new IntSteps(100, 0, 2);
 
+        final RumbleHeatBar rumbleHeatBar = new RumbleHeatBar();
         new AnimationTester()
                 .withBeforeIterationAction(i -> {
-                    mockResource(intSteps.nextInt(), 100);
+                    if (i < 20) {
+                        mockResource(heatSteps.nextInt(), 100);
+                    } else {
+                        mockResource(cooldownSteps.nextInt(), 100);
+                    }
                 })
                 .withSleepTime(300)
                 .testAnimation(rumbleHeatBar, 67);
@@ -23,12 +28,12 @@ class RumbleHeatBarTest {
 
     @Test
     void testRumbleOverheatHeat() {
-        final IntSteps intSteps = new IntSteps(0, 100, 5);
-        final RumbleHeatBar rumbleHeatBar = new RumbleHeatBar();
+        final IntSteps heatSteps = new IntSteps(0, 100, 5);
 
+        final RumbleHeatBar rumbleHeatBar = new RumbleHeatBar();
         new AnimationTester()
                 .withBeforeIterationAction(i -> {
-                    mockResource(intSteps.nextInt(), 100);
+                    mockResource(heatSteps.nextInt(), 100);
                 })
                 .withSleepTime(300)
                 .testAnimation(rumbleHeatBar, 40);

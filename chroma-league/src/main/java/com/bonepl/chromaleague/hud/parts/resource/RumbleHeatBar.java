@@ -51,8 +51,9 @@ public class RumbleHeatBar extends AnimatedFrame {
                 final int delta = highestValue - resourcePercentage;
                 double decayRate = delta * 1000.0 / durationOfChange;
                 LOGGER.debug("Calculated Rumble decay rate: {}", decayRate);
-                // rumble cooldown when overheat is 16, but let's have some margin
-                if (decayRate > 13.0) {
+                // in game - 14 is the lowest I got for overheating, but I got one false positive so it must've reached <13 once.
+                // while passively cooling down the rate is insanely low (2-7)
+                if (decayRate > 10.0) {
                     LOGGER.debug("Rumble overheats");
                     overheating = true;
                 } else {

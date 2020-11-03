@@ -1,5 +1,6 @@
 package com.bonepl.chromaleague.hud.parts.resource;
 
+import com.bonepl.chromaleague.hud.colors.TransitionColor;
 import com.bonepl.chromaleague.hud.parts.ProgressBar;
 import com.bonepl.chromaleague.state.GameStateHelper;
 import com.bonepl.chromaleague.tasks.MainTask;
@@ -15,15 +16,14 @@ import java.time.LocalTime;
 public class RumbleHeatBar extends AnimatedFrame {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final double HEAT_THRESHOLD = 13.0 * MainTask.ACTIVE_PLAYER_FETCH_DELAY / 1000;
+    private static final TransitionColor HEAT_COLOR = new TransitionColor(Color.YELLOW, Color.RED);
 
     // previous values, to determine if a change occured
-    private static int previousResourcePercentage = 0;
-
-    private static boolean overheating = false;
-
-    private static LocalTime lastTimeSeeingRise = LocalTime.now();
-    private static int highestValue = 0;
-    private boolean falling = false;
+    private int previousResourcePercentage;
+    private boolean overheating;
+    private LocalTime lastTimeSeeingRise = LocalTime.now();
+    private int highestValue;
+    private boolean falling;
 
     @Override
     public Frame getFrame() {
@@ -73,7 +73,7 @@ public class RumbleHeatBar extends AnimatedFrame {
             color = Color.RED;
         } else {
             if (resourcePercentage >= 50) {
-                color = Color.YELLOW;
+                color = HEAT_COLOR.getColorAtPercent(resourcePercentage - 50 << 1);
             } else {
                 color = Color.WHITE;
             }

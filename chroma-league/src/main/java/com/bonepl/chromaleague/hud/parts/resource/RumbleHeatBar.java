@@ -53,7 +53,7 @@ public class RumbleHeatBar extends AnimatedFrame {
                 LOGGER.debug("Calculated Rumble decay rate: {}", decayRate);
                 // in game - 14 is the lowest I got for overheating, but I got one false positive so it must've reached <13 once.
                 // while passively cooling down the rate is insanely low (2-7)
-                if (decayRate > 10.0) {
+                if (decayRate > 8.0) {
                     LOGGER.debug("Rumble overheats");
                     overheating = true;
                 } else {

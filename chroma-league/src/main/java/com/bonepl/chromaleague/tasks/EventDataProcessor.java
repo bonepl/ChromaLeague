@@ -29,7 +29,7 @@ public class EventDataProcessor {
             case ALLY_OCEAN_DRAGON_KILL -> addKilledDragon(DragonType.OCEAN);
             case ALLY_ELDER_DRAGON_KILL -> processAllyElderKill(event);
             case ENEMY_ELDER_DRAGON_KILL -> GameStateHelper.addKilledElder();
-            case ACTIVE_PLAYER_DIED -> resetAlivePlayerCounters();
+            case ACTIVE_PLAYER_DIED -> resetAlivePlayerCounters(event);
             case ACTIVE_PLAYER_KILL -> GameStateHelper.addPlayerKill();
             case ACTIVE_PLAYER_ASSIST -> GameStateHelper.addPlayerAssist();
             case GAME_END_DEFEAT, GAME_END_VICTORY, ENEMY_OCEAN_DRAGON_KILL, ENEMY_MOUNTAIN_DRAGON_KILL,
@@ -48,8 +48,10 @@ public class EventDataProcessor {
         GameStateHelper.addKilledElder();
     }
 
-    private static void resetAlivePlayerCounters() {
+    private static void resetAlivePlayerCounters(Event event) {
         final EventData eventData = RunningState.getGameState().getEventData();
+        eventData.setActivePlayerLastDeath(event.getEventTime());
+
         eventData.setElderBuffEnd(null);
         eventData.setBaronBuffEnd(null);
         eventData.setActivePlayerKillingSpree(0);

@@ -21,6 +21,12 @@ public class EventData {
     private int activePlayerKillingSpree;
     private int activePlayerAssistSpree;
 
+    public double getLastDeathTime() {
+        return lastDeathTime;
+    }
+
+    private double lastDeathTime;
+
     public void setBaronBuffEnd(LocalTime baronBuffEnd) {
         this.baronBuffEnd = baronBuffEnd;
     }
@@ -98,5 +104,9 @@ public class EventData {
     //TEST ONLY
     public List<Event> getProcessedEvents() {
         return Collections.unmodifiableList(processedEvents);
+    }
+
+    public void setActivePlayerLastDeath(double eventTime) {
+        this.lastDeathTime = eventTime;
     }
 }

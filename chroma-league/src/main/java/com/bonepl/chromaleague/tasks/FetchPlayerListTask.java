@@ -5,12 +5,13 @@ import com.bonepl.chromaleague.rest.playerlist.Player;
 import com.bonepl.chromaleague.rest.playerlist.PlayerList;
 import com.bonepl.chromaleague.state.RunningState;
 import com.jsoniter.JsonIterator;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class FetchPlayerListTask implements Runnable {
     public static final String URL = "https://127.0.0.1:2999/liveclientdata/playerlist";
-    private static final Logger LOGGER = LogManager.getLogger();
+    private static final Logger LOGGER = Logger.getLogger(FetchPlayerListTask.class.getName());
 
     @Override
     public void run() {
@@ -22,7 +23,7 @@ public class FetchPlayerListTask implements Runnable {
                         .ifPresent(playerList1 -> RunningState.getGameState().setPlayerList(playerList1));
             }
         } catch (Exception ex) {
-            LOGGER.error("Error while fetching PlayerList", ex);
+            LOGGER.log(Level.SEVERE, ex, () -> "Error while fetching PlayerList");
         }
     }
 

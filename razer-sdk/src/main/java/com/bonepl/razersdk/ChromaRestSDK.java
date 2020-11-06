@@ -15,14 +15,14 @@ import org.apache.http.client.methods.*;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.util.EntityUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Main class for communication with Razer Chroma SDK C++ libraries.
@@ -45,7 +45,7 @@ import java.util.concurrent.TimeUnit;
  * </pre>
  */
 public final class ChromaRestSDK implements AutoCloseable {
-    private static final Logger LOGGER = LogManager.getLogger();
+    private static final Logger LOGGER = Logger.getLogger(ChromaRestSDK.class.getName());
     private static final int INIT_SLEEP_TIME = 2000;
     private final CloseableHttpClient httpClient;
     private final SessionInfo currentSession;
@@ -81,7 +81,7 @@ public final class ChromaRestSDK implements AutoCloseable {
         final String result = executeRequest(keyboardEffectRequest);
         final Result effectResponse = JsonIterator.deserialize(result, Result.class);
         if (effectResponse.getResult() != 0) {
-            LOGGER.error("Error: {}", result);
+            LOGGER.severe(() -> "Error from Razer SDK Effect response: " + result);
         }
     }
 
@@ -91,7 +91,7 @@ public final class ChromaRestSDK implements AutoCloseable {
         try {
             return new StringEntity(keyboardEffectJson);
         } catch (UnsupportedEncodingException e) {
-            LOGGER.error(e);
+            LOGGER.log(Level.SEVERE, e, () -> "Error while creating Keyboard Effect");
             throw new IllegalStateException(e);
         }
     }
@@ -102,11 +102,12 @@ public final class ChromaRestSDK implements AutoCloseable {
         initRequest.setHeader("Content-type", "application/json");
         final String sessionInfoJson = executeRequest(initRequest);
         final SessionInfo sessionInfo = JsonIterator.deserialize(sessionInfoJson, SessionInfo.class);
-        LOGGER.info("Initialized Razer Chroma SDK connection {}", sessionInfo);
+        LOGGER.info(() -> "Initialized ChromaRestSDK connection " + sessionInfo);
         try {
             Thread.sleep(INIT_SLEEP_TIME);
         } catch (InterruptedException e) {
-            LOGGER.error(e);
+            LOGGER.log(Level.WARNING, e, () -> "ChromaRestSDK initialization interrupted");
+            Thread.currentThread().interrupt();
         }
         return sessionInfo;
     }
@@ -116,7 +117,7 @@ public final class ChromaRestSDK implements AutoCloseable {
             final String serialize = JsonStream.serialize(new Init());
             return new StringEntity(serialize);
         } catch (UnsupportedEncodingException e) {
-            LOGGER.error(e);
+            LOGGER.log(Level.SEVERE, e, () -> "Error while creating Json Init parameter");
             throw new IllegalStateException(e);
         }
     }
@@ -125,7 +126,7 @@ public final class ChromaRestSDK implements AutoCloseable {
         final HttpGet versionInfoRequest = new HttpGet("https://chromasdk.io:54236/razer/chromasdk");
         final String versionInfoJson = executeRequest(versionInfoRequest);
         final Version version = JsonIterator.deserialize(versionInfoJson, Version.class);
-        LOGGER.info("Detected Razer Chroma REST Api {}", version);
+        LOGGER.info(() -> "Detected Razer Chroma REST Api {}" + version);
     }
 
     /**
@@ -142,7 +143,7 @@ public final class ChromaRestSDK implements AutoCloseable {
         try {
             httpClient.close();
         } catch (IOException e) {
-            LOGGER.error("Exception while closing ChromaSDKHttpClient", e);
+            LOGGER.log(Level.SEVERE, e, () -> "Exception while closing ChromaSDKHttpClient");
             throw new IllegalStateException(e);
         }
     }
@@ -151,7 +152,7 @@ public final class ChromaRestSDK implements AutoCloseable {
         try {
             return execute(request);
         } catch (IOException e) {
-            LOGGER.error("Error while executing SDK Http request", e);
+            LOGGER.log(Level.SEVERE, e, () -> "Error while executing SDK Http request");
             throw new IllegalStateException(e);
         }
     }

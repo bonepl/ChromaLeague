@@ -3,7 +3,6 @@ package com.bonepl.chromaleague.state;
 import com.bonepl.chromaleague.hud.MainHud;
 import com.bonepl.chromaleague.rest.activeplayer.ActivePlayer;
 import com.bonepl.chromaleague.rest.playerlist.PlayerList;
-import com.sun.tools.javac.Main;
 
 public final class GameState {
     private ActivePlayer activePlayer;

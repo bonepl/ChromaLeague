@@ -6,13 +6,10 @@ import com.bonepl.chromaleague.rest.eventdata.EventType;
 import com.bonepl.chromaleague.state.RunningState;
 import com.bonepl.razersdk.animation.IFrame;
 import com.bonepl.razersdk.animation.SimpleFrame;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
 public class EventAnimationProcessor {
-    private static final Logger LOGGER = LogManager.getLogger();
 
     public void processNewEvents(List<Event> events) {
         events.stream().map(EventType::fromEvent)

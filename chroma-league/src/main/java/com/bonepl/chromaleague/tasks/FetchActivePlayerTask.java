@@ -4,12 +4,13 @@ import com.bonepl.chromaleague.rest.LeagueHttpClient;
 import com.bonepl.chromaleague.rest.activeplayer.ActivePlayer;
 import com.bonepl.chromaleague.state.RunningState;
 import com.jsoniter.JsonIterator;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class FetchActivePlayerTask implements Runnable {
     public static final String URL = "https://127.0.0.1:2999/liveclientdata/activeplayer";
-    private static final Logger LOGGER = LogManager.getLogger();
+    private static final Logger LOGGER = Logger.getLogger(FetchActivePlayerTask.class.getName());
 
     @Override
     public void run() {
@@ -18,7 +19,7 @@ public class FetchActivePlayerTask implements Runnable {
                     .map(activePlayer -> JsonIterator.deserialize(activePlayer, ActivePlayer.class))
                     .ifPresent(activePlayer -> RunningState.getGameState().setActivePlayer(activePlayer));
         } catch (Exception ex) {
-            LOGGER.error("Error while fetching ActivePlayer", ex);
+            LOGGER.log(Level.SEVERE, ex, () -> "Error while fetching ActivePlayer");
         }
     }
 }

@@ -10,17 +10,17 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.ssl.SSLContextBuilder;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import javax.net.ssl.SSLContext;
 import java.security.KeyManagementException;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.X509Certificate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public final class ChromaSDKHttpClient {
-    private static final Logger LOGGER = LogManager.getLogger();
+    private static final Logger LOGGER = Logger.getLogger(ChromaSDKHttpClient.class.getName());
     public static final int DEFAULT_TIMEOUT = 5000;
 
     private ChromaSDKHttpClient() {
@@ -57,7 +57,7 @@ public final class ChromaSDKHttpClient {
                 }
             }).build();
         } catch (NoSuchAlgorithmException | KeyManagementException | KeyStoreException e) {
-            LOGGER.error(e);
+            LOGGER.log(Level.SEVERE, e, () -> "Error while creating SSL context");
             throw new IllegalStateException(e);
         }
     }

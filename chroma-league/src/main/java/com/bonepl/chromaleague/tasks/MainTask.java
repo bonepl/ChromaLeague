@@ -2,19 +2,20 @@ package com.bonepl.chromaleague.tasks;
 
 import com.bonepl.chromaleague.state.RunningState;
 import com.bonepl.razersdk.ChromaRestSDK;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class MainTask implements Runnable {
     public static final int PLAYER_LIST_FETCH_DELAY = 1000;
     public static final int ACTIVE_PLAYER_FETCH_DELAY = 200;
     public static final int MAIN_HUD_REFRESH_DELAY = 50;
 
-    private static final Logger LOGGER = LogManager.getLogger();
+    private static final Logger LOGGER = Logger.getLogger(MainTask.class.getName());
+
     private static ScheduledExecutorService mainExecutor;
     private static ChromaRestSDK chromaRestSDK;
 
@@ -30,7 +31,7 @@ public class MainTask implements Runnable {
                 shutdown();
             }
         } catch (Exception ex) {
-            LOGGER.error("Exception in MainTask", ex);
+            LOGGER.log(Level.SEVERE, ex, () -> "Exception in MainTask");
         }
     }
 
@@ -44,7 +45,8 @@ public class MainTask implements Runnable {
             try {
                 mainExecutor.awaitTermination(5000, TimeUnit.MILLISECONDS);
             } catch (InterruptedException e) {
-                LOGGER.error(e);
+                LOGGER.log(Level.WARNING, e, () -> "MainTask thread interrupted while shutting down scheduler");
+                Thread.currentThread().interrupt();
             }
 
             RunningState.setRunningGame(false);

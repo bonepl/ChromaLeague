@@ -3,14 +3,14 @@ package com.bonepl.chromaleague.hud.animations;
 
 import com.bonepl.razersdk.ChromaRestSDK;
 import com.bonepl.razersdk.animation.IFrame;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.util.function.Consumer;
 import java.util.function.Supplier;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public final class AnimationTester {
-    private static final Logger LOGGER = LogManager.getLogger();
+    private static final Logger LOGGER = Logger.getLogger(AnimationTester.class.getName());
     private Consumer<Integer> afterIterationAction;
     private Consumer<Integer> beforeIterationAction;
     private int sleepTime = 50;
@@ -89,7 +89,8 @@ public final class AnimationTester {
         try {
             Thread.sleep(milliseconds);
         } catch (InterruptedException e) {
-            LOGGER.error(e);
+            LOGGER.log(Level.WARNING, e, () -> "AnimationTester thread interrupted");
+            Thread.currentThread().interrupt();
         }
     }
 }

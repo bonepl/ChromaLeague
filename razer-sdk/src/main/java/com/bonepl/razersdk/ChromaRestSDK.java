@@ -126,7 +126,7 @@ public final class ChromaRestSDK implements AutoCloseable {
         final HttpGet versionInfoRequest = new HttpGet("https://chromasdk.io:54236/razer/chromasdk");
         final String versionInfoJson = executeRequest(versionInfoRequest);
         final Version version = JsonIterator.deserialize(versionInfoJson, Version.class);
-        LOGGER.info(() -> "Detected Razer Chroma REST Api {}" + version);
+        LOGGER.info(() -> "Detected Razer Chroma REST Api " + version);
     }
 
     /**

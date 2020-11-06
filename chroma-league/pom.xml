@@ -69,15 +69,10 @@
                                 <manifest>
                                     <mainClass>com.bonepl.chromaleague.ChromaLeagueApp</mainClass>
                                 </manifest>
-                                <manifestEntries>
-                                    <Multi-Release>true</Multi-Release>
-                                </manifestEntries>
                             </archive>
                             <descriptorRefs>
                                 <descriptorRef>jar-with-dependencies</descriptorRef>
                             </descriptorRefs>
-                            <finalName>ChromaLeague-${project.version}</finalName>
-                            <appendAssemblyId>false</appendAssemblyId>
                         </configuration>
                     </execution>
                 </executions>

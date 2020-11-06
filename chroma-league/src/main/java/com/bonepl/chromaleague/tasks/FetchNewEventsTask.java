@@ -19,7 +19,6 @@ public class FetchNewEventsTask implements Runnable {
 
     @Override
     public void run() {
-        LOGGER.info("Fetching new events");
         try {
             LeagueHttpClient.getResponse(URL)
                     .map(events -> JsonIterator.deserialize(events, Events.class))

@@ -40,7 +40,7 @@ public final class LeagueHttpClient {
             }
         } catch (Exception ex) {
             // it is possible to fail on HTTP connection during API shutdown
-            LOGGER.log(Level.SEVERE, ex, () -> "Error while fetching HTTP response");
+            LOGGER.log(Level.FINER, ex, () -> "Error while fetching HTTP response");
         }
         return Optional.empty();
     }

@@ -66,6 +66,10 @@ Few times I experienced a bug where it was stuck in Paused state and not respond
 You can use [this PowerShell script](https://github.com/bonepl/ChromaLeague/blob/master/chroma-league-launcher/src/scripts/restartRazerSdk.ps1)
 to restart the service.
 
+## Plans
+Next plans include crafting better, advanced animations for events (like dragon kills)
+and then maybe extending support to other peripherals like mice or headphones.
+
 ## Disclaimer
 **League of Legends** and all related logic used in this project 
 are owned and copyrighted by [Riot Games](https://www.riotgames.com)

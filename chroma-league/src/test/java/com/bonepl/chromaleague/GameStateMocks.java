@@ -85,6 +85,15 @@ public final class GameStateMocks {
         RunningState.getGameState().setActivePlayer(apMock);
     }
 
+    public static void mockActivePlayerChampionName(String championName){
+        RunningState.setRunningGame(true);
+        Player activePlayer = mock(Player.class);
+        when(activePlayer.getChampionName()).thenReturn(championName);
+        PlayerList playerList = mock(PlayerList.class);
+        when(playerList.getActivePlayer()).thenReturn(activePlayer);
+        RunningState.getGameState().setPlayerList(playerList);
+    }
+
     public static ChampionStats getMockedChampionStats() {
         RunningState.setRunningGame(true);
         final ChampionStats championStatsMock = mock(ChampionStats.class);

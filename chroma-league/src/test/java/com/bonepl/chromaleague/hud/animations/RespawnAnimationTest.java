@@ -8,7 +8,8 @@ class RespawnAnimationTest {
     @SuppressWarnings("JUnitTestMethodWithNoAssertions")
     @Test
     void playRespawnAnimation() {
-        GameStateMocks.mockActivePlayerResource(0, 100);
+        GameStateMocks.mockActivePlayerResource(100, 100);
+        GameStateMocks.mockActivePlayerChampionName("Morgana");
         new AnimationTester().testAnimation(new RespawnAnimation());
     }
 }

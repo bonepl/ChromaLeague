@@ -42,14 +42,14 @@ public class HealthBar extends Animation {
         return new ProgressBar(HP_BAR_KEYS, GameStateHelper.getHpPercentage(), CLColor.HEALTH);
     }
 
-    public static List<RzKey> getHpBarKeys() {
+    public static List<RzKey> getHealthBarKeys() {
         return Collections.unmodifiableList(HP_BAR_KEYS);
     }
 
     public static List<RzKey> getHpBarPart(double previousHp, double currentHp) {
         final double maxHealth = RunningState.getGameState().getActivePlayer().getChampionStats().getMaxHealth();
-        final int from = ProgressBar.indexToFill(getHpBarKeys(), Double.valueOf(previousHp * 100 / maxHealth).intValue());
-        final int to = ProgressBar.indexToFill(getHpBarKeys(), Double.valueOf(currentHp * 100 / maxHealth).intValue());
-        return getHpBarKeys().subList(from, to);
+        final int from = ProgressBar.indexToFill(getHealthBarKeys(), Double.valueOf(previousHp * 100 / maxHealth).intValue());
+        final int to = ProgressBar.indexToFill(getHealthBarKeys(), Double.valueOf(currentHp * 100 / maxHealth).intValue());
+        return getHealthBarKeys().subList(from, to);
     }
 }

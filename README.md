@@ -22,6 +22,9 @@ the integrations
 **Chroma League** is using League's [Live Client Data Api](https://developer.riotgames.com/docs/lol#game-client-api_live-client-data-api)
 exposed during game to fetch current game's state and react to the in-game events.
 
+## Overview
+![Chroma League HUD](https://github.com/bonepl/ChromaLeague/blob/master/doc/images/ChromaLeague.png "Chroma League HUD")
+
 ## Requirements
 * Windows
 * League of Legends

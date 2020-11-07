@@ -17,11 +17,13 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
+import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 /**
@@ -50,6 +52,15 @@ public final class ChromaRestSDK implements AutoCloseable {
     private final CloseableHttpClient httpClient;
     private final SessionInfo currentSession;
     private final ScheduledExecutorService heartbeatExecutor;
+
+    static {
+        final InputStream inputStream = ChromaRestSDK.class.getClassLoader().getResourceAsStream("logging.properties");
+        try {
+            LogManager.getLogManager().readConfiguration(inputStream);
+        } catch (final IOException e) {
+            Logger.getAnonymousLogger().log(Level.SEVERE, e, () -> "Could not load default logging.properties file for ChromaRestSDK");
+        }
+    }
 
     /**
      * Create and initialize connection to Chroma-enabled Razer device

@@ -1,6 +1,10 @@
 # ChromaLeague
 Java open-source Razer Chroma keyboard integration for League of Legends.
 
+If you like this project, consider giving me a tip for all the hard work :)
+
+[![paypal](https://www.paypalobjects.com/en_US/PL/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=5JFBXY66RT8Z6&item_name=Chroma+League&currency_code=PLN)
+
 ## Introduction
 Razer Chroma is a wonderful framework provided by [Razer](https://www.razer.com/)
 for implementing custom led animations for their pheripherals.
@@ -59,7 +63,7 @@ by executing `chroma-league.bat`.
 Double check if Razer Chroma SDK Server service in Windows (`services.msc`) is up and running.
 Few times I experienced a bug where it was stuck in Paused state and not responding.
 
-You can use [this PowerShell script](https://github.com/bonepl/ChromaLeague/blob/v1.0.0/chroma-league-launcher/src/scripts/restartRazerSdk.ps1)
+You can use [this PowerShell script](https://github.com/bonepl/ChromaLeague/blob/master/chroma-league-launcher/src/scripts/restartRazerSdk.ps1)
 to restart the service.
 
 ## Disclaimer

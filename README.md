@@ -25,6 +25,9 @@ exposed during game to fetch current game's state and react to the in-game event
 ## Overview
 ![Chroma League HUD](https://github.com/bonepl/ChromaLeague/blob/master/doc/images/ChromaLeague.png "Chroma League HUD")
 
+This is what basic in game HUD looks like on Chroma Keyboard.
+Certain in-game events will spawn additional animations.
+
 ## Requirements
 * Windows
 * League of Legends

@@ -1,4 +1,4 @@
-# ChromaLeague
+# Chroma League
 Java open-source Razer Chroma keyboard integration for League of Legends.
 
 If you like this project, consider giving me a tip for all the hard work :)
@@ -72,8 +72,14 @@ Few times I experienced a bug where it was stuck in Paused state and not respond
 You can use [this PowerShell script](https://github.com/bonepl/ChromaLeague/blob/master/chroma-league-launcher/src/scripts/restartRazerSdk.ps1)
 to restart the service.
 
+If you encounter a bug, please attach logs (`cl.log`) with the exceptions
+to help me track the error.
+
+Before reporting a bug, please check Chroma League's issues page if
+it isn't already worked on.
+
 ## Plans
-Next plans include crafting better, advanced animations for events (like dragon kills)
+Next plans include resolving any bugs/issues, crafting better, advanced animations for events (like dragon kills)
 and then maybe extending support to other peripherals like mice or headphones.
 
 ## Disclaimer

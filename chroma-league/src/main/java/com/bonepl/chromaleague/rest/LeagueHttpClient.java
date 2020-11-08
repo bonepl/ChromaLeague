@@ -38,7 +38,7 @@ public final class LeagueHttpClient {
         request.addHeader("Content-type", "application/json; charset=UTF-8");
         try (CloseableHttpResponse response = leagueHttpClient.execute(request)) {
             byte[] responseBytes = EntityUtils.toByteArray(response.getEntity());
-            if (!new String(responseBytes, StandardCharsets.UTF_8).contains("RESOURCE_NOT_FOUND")) {
+            if (isResponseValid(responseBytes)) {
                 return Optional.of(responseBytes);
             }
         } catch (Exception ex) {
@@ -46,6 +46,10 @@ public final class LeagueHttpClient {
             LOGGER.log(Level.FINER, ex, () -> "Error while fetching HTTP response");
         }
         return Optional.empty();
+    }
+
+    private static boolean isResponseValid(byte... responseBytes) {
+        return !new String(responseBytes, StandardCharsets.UTF_8).contains("RESOURCE_NOT_FOUND");
     }
 
     private static CloseableHttpClient createLeagueHttpClient() {

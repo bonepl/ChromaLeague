@@ -6,7 +6,6 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.config.RegistryBuilder;
 import org.apache.http.conn.socket.ConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.entity.ContentType;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
@@ -34,13 +33,13 @@ public final class LeagueHttpClient {
     private LeagueHttpClient() {
     }
 
-    public static Optional<String> getResponse(String url) {
+    public static Optional<byte[]> getResponse(String url) {
         final HttpGet request = new HttpGet(url);
         request.addHeader("Content-type", "application/json; charset=UTF-8");
         try (CloseableHttpResponse response = leagueHttpClient.execute(request)) {
-            final String json = EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8);
-            if (!json.contains("RESOURCE_NOT_FOUND")) {
-                return Optional.of(json);
+            byte[] responseBytes = EntityUtils.toByteArray(response.getEntity());
+            if (!new String(responseBytes, StandardCharsets.UTF_8).contains("RESOURCE_NOT_FOUND")) {
+                return Optional.of(responseBytes);
             }
         } catch (Exception ex) {
             // it is possible to fail on HTTP connection during API shutdown

@@ -6,6 +6,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.config.RegistryBuilder;
 import org.apache.http.conn.socket.ConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.entity.ContentType;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
@@ -15,6 +16,7 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
@@ -36,7 +38,7 @@ public final class LeagueHttpClient {
         final HttpGet request = new HttpGet(url);
         request.addHeader("Content-type", "application/json; charset=UTF-8");
         try (CloseableHttpResponse response = leagueHttpClient.execute(request)) {
-            final String json = EntityUtils.toString(response.getEntity(), "UTF-8");
+            final String json = EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8);
             if (!json.contains("RESOURCE_NOT_FOUND")) {
                 return Optional.of(json);
             }

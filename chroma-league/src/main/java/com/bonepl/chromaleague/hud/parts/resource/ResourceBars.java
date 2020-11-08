@@ -38,6 +38,7 @@ public final class ResourceBars {
 
         return switch (activePlayerChampionName) {
             case "Gnar" -> new GnarFuryBar();
+            case "Karthus" -> new KarthusDeathBar();
             case "Mordekaiser" -> new MordekaiserShieldBar();
             case "Renekton" -> new RenektonFuryBar();
             case "Rengar" -> new RengarFerocityBar();

@@ -3,15 +3,15 @@ package com.bonepl.chromaleague;
 import com.bonepl.chromaleague.rest.LeagueHttpClient;
 import com.bonepl.chromaleague.tasks.CheckRiotApiTask;
 import com.bonepl.chromaleague.tasks.MainTask;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ChromaLeague implements AutoCloseable {
-    private static final Logger LOGGER = LogManager.getLogger();
+    private static final Logger LOGGER = Logger.getLogger(ChromaLeague.class.getName());
     private final ScheduledExecutorService mainExecutorService = Executors.newScheduledThreadPool(5);
 
     public void runChromaLeague() {
@@ -22,7 +22,8 @@ public class ChromaLeague implements AutoCloseable {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
-                LOGGER.error(e);
+                LOGGER.log(Level.WARNING, e, () -> "Main ChromaLeague thread interrupted");
+                Thread.currentThread().interrupt();
             }
         }
     }

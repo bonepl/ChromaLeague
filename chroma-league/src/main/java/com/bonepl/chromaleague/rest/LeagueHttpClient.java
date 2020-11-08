@@ -10,46 +10,59 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.util.EntityUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
 import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public final class LeagueHttpClient {
-    private static final Logger LOGGER = LogManager.getLogger();
+    private static final Logger LOGGER = Logger.getLogger(LeagueHttpClient.class.getName());
+
     public static final int DEFAULT_TIMEOUT = 150;
     private static CloseableHttpClient leagueHttpClient = createLeagueHttpClient();
 
     private LeagueHttpClient() {
     }
 
-    public static Optional<String> getResponse(String url) {
-        try (CloseableHttpResponse response = leagueHttpClient.execute(new HttpGet(url))) {
-            final String json = EntityUtils.toString(response.getEntity());
-            if (!json.contains("RESOURCE_NOT_FOUND")) {
-                return Optional.of(json);
+    public static Optional<byte[]> getResponse(String url) {
+        final HttpGet request = new HttpGet(url);
+        request.addHeader("Content-type", "application/json; charset=UTF-8");
+        try (CloseableHttpResponse response = leagueHttpClient.execute(request)) {
+            byte[] responseBytes = EntityUtils.toByteArray(response.getEntity());
+            if (isResponseValid(responseBytes)) {
+                return Optional.of(responseBytes);
             }
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             // it is possible to fail on HTTP connection during API shutdown
-            LOGGER.debug(ex);
+            LOGGER.log(Level.FINER, ex, () -> "Error while fetching HTTP response");
         }
         return Optional.empty();
     }
 
+    private static boolean isResponseValid(byte... responseBytes) {
+        return !new String(responseBytes, StandardCharsets.UTF_8).contains("RESOURCE_NOT_FOUND");
+    }
+
     private static CloseableHttpClient createLeagueHttpClient() {
-        return HttpClients.custom()
-                .setConnectionManager(createUnsecureConnManager())
-                .setDefaultRequestConfig(createRequestConfig())
-                .disableAutomaticRetries()
-                .build();
+        try {
+            return HttpClients.custom()
+                    .setConnectionManager(createUnsecureConnManager())
+                    .setDefaultRequestConfig(createRequestConfig())
+                    .disableAutomaticRetries()
+                    .build();
+        } catch (Exception ex) {
+            LOGGER.log(Level.SEVERE, ex, () -> "Error while fetching HTTP response");
+            return null;
+        }
     }
 
     private static PoolingHttpClientConnectionManager createUnsecureConnManager() {
@@ -95,7 +108,7 @@ public final class LeagueHttpClient {
             try {
                 leagueHttpClient.close();
             } catch (IOException e) {
-                LOGGER.warn("Couldn't close League HTTP Client, this can lead to memory leak", e);
+                LOGGER.log(Level.WARNING, e, () -> "Couldn't close League HTTP Client, this can lead to memory leak");
             } finally {
                 leagueHttpClient = null;
             }

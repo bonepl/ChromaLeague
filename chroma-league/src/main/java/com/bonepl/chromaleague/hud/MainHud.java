@@ -10,11 +10,13 @@ import com.bonepl.razersdk.animation.AnimatedFrame;
 import com.bonepl.razersdk.animation.Frame;
 import com.bonepl.razersdk.animation.IFrame;
 import com.bonepl.razersdk.animation.LayeredFrame;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class MainHud extends AnimatedFrame {
-    private final Logger logger = LogManager.getLogger();
+    private static final Logger LOGGER = Logger.getLogger(MainHud.class.getName());
+
     private final GoldBar goldBar = new GoldBar();
     private final LevelUpBar levelUpBar = new LevelUpBar();
     private final EventAnimation eventAnimation = new EventAnimation();
@@ -41,7 +43,7 @@ public class MainHud extends AnimatedFrame {
                 mainHudFrame.addFrame(eventAnimation);
             }
         } catch (Exception ex) {
-            logger.error("Error while drawing main HUD ", ex);
+            LOGGER.log(Level.SEVERE, ex, () -> "Error while drawing main HUD ");
         }
         addAnimationFrame(mainHudFrame);
         return super.getFrame();
@@ -60,6 +62,7 @@ public class MainHud extends AnimatedFrame {
             }
         }
     }
+
     private IFrame getResourceBar() {
         if (resourceBar == null) {
             resourceBar = ResourceBars.getResourceBarForActivePlayerChampion();

@@ -1,7 +1,7 @@
 package com.bonepl.chromaleague.rest;
 
 import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.entity.StringEntity;
+import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 
 import java.io.File;
@@ -21,7 +21,7 @@ public final class LeagueHttpClientMock {
 
     public static void mockReturnedResponseWithResource(String jsonResourcePath) {
         try {
-            mockReturnedResponse(Files.readString(
+            mockReturnedResponse(Files.readAllBytes(
                     new File(Objects.requireNonNull(LeagueHttpClientMock.class.getClassLoader()
                             .getResource(jsonResourcePath)).toURI()).toPath()));
         } catch (IOException | URISyntaxException e) {
@@ -29,10 +29,10 @@ public final class LeagueHttpClientMock {
         }
     }
 
-    public static void mockReturnedResponse(String toReturn) {
+    public static void mockReturnedResponse(byte... toReturn) {
         try {
             final CloseableHttpResponse mockedResponse = mock(CloseableHttpResponse.class);
-            when(mockedResponse.getEntity()).thenReturn(new StringEntity(toReturn));
+            when(mockedResponse.getEntity()).thenReturn(new ByteArrayEntity(toReturn));
             final CloseableHttpClient mock = mock(CloseableHttpClient.class);
             when(mock.execute(any())).thenReturn(mockedResponse);
             LeagueHttpClient.setLeagueHttpClient(mock);

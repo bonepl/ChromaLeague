@@ -7,13 +7,14 @@ import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.util.EntityUtils;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class HeartbeatTask implements Runnable {
-    private static final Logger LOGGER = LogManager.getLogger();
+    private static final Logger LOGGER = Logger.getLogger(HeartbeatTask.class.getName());
+
     private final CloseableHttpClient httpClient;
     private final SessionInfo sessionInfo;
 
@@ -28,7 +29,7 @@ public class HeartbeatTask implements Runnable {
             final HttpPut heartbeatRequest = new HttpPut(sessionInfo.getUri() + "/heartbeat");
             executeHttpRequest(heartbeatRequest);
         } catch (IOException e) {
-            LOGGER.error("Error while executing heartbeat", e);
+            LOGGER.log(Level.SEVERE, e, () -> "Error while executing heartbeat");
             throw new IllegalStateException(e);
         }
     }
@@ -37,7 +38,7 @@ public class HeartbeatTask implements Runnable {
         try (final CloseableHttpResponse execute = httpClient.execute(heartbeatRequest)) {
             final String heartbeatJson = EntityUtils.toString(execute.getEntity());
             final Heartbeat heartbeat = JsonIterator.deserialize(heartbeatJson, Heartbeat.class);
-            LOGGER.debug(heartbeat);
+            LOGGER.finer(heartbeat::toString);
         }
     }
 }

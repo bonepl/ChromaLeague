@@ -6,13 +6,10 @@ import com.bonepl.chromaleague.rest.eventdata.EventType;
 import com.bonepl.chromaleague.state.EventData;
 import com.bonepl.chromaleague.state.GameStateHelper;
 import com.bonepl.chromaleague.state.RunningState;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
 public class EventDataProcessor {
-    private static final Logger LOGGER = LogManager.getLogger();
 
     public void processNewEvents(List<Event> events) {
         events.forEach(this::processEventForEventData);

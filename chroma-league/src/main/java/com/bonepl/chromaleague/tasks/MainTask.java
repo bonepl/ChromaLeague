@@ -2,19 +2,20 @@ package com.bonepl.chromaleague.tasks;
 
 import com.bonepl.chromaleague.state.RunningState;
 import com.bonepl.razersdk.ChromaRestSDK;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class MainTask implements Runnable {
     public static final int PLAYER_LIST_FETCH_DELAY = 1000;
-    public static final int ACTIVE_PLAYER_FETCH_DELAY = 300;
+    public static final int ACTIVE_PLAYER_FETCH_DELAY = 200;
     public static final int MAIN_HUD_REFRESH_DELAY = 50;
 
-    private static final Logger LOGGER = LogManager.getLogger();
+    private static final Logger LOGGER = Logger.getLogger(MainTask.class.getName());
+
     private static ScheduledExecutorService mainExecutor;
     private static ChromaRestSDK chromaRestSDK;
 
@@ -30,25 +31,43 @@ public class MainTask implements Runnable {
                 shutdown();
             }
         } catch (Exception ex) {
-            LOGGER.error("Exception in MainTask", ex);
+            LOGGER.log(Level.SEVERE, ex, () -> "Exception in MainTask");
         }
     }
 
     private static void shutdown() {
-        if (chromaRestSDK != null) {
+        if (chromaRestSDK != null || mainExecutor != null) {
             LOGGER.info("Player left the game");
-            chromaRestSDK.close();
-            chromaRestSDK = null;
-
-            mainExecutor.shutdown();
-            try {
-                mainExecutor.awaitTermination(5000, TimeUnit.MILLISECONDS);
-            } catch (InterruptedException e) {
-                LOGGER.error(e);
-            }
-
+            shutdownChromaSDK();
+            shutdownMainExecutor();
             RunningState.setRunningGame(false);
         }
+    }
+
+    private static void shutdownMainExecutor() {
+        if (mainExecutor != null) {
+            try {
+                mainExecutor.shutdown();
+                mainExecutor.awaitTermination(5000, TimeUnit.MILLISECONDS);
+            } catch (InterruptedException e) {
+                LOGGER.log(Level.WARNING, e, () -> "MainTask thread interrupted while shutting down scheduler");
+                Thread.currentThread().interrupt();
+            } catch (Exception ex) {
+                LOGGER.log(Level.WARNING, ex, () -> "Exception while shutting down main executor");
+            }
+        }
+        mainExecutor = null;
+    }
+
+    private static void shutdownChromaSDK() {
+        if (chromaRestSDK != null) {
+            try {
+                chromaRestSDK.close();
+            } catch (Exception ex) {
+                LOGGER.log(Level.WARNING, ex, () -> "Exception while shutting down Chroma SDK");
+            }
+        }
+        chromaRestSDK = null;
     }
 
     private static void initializeGameThreads() {
@@ -60,7 +79,7 @@ public class MainTask implements Runnable {
     }
 
     private static void initializePreGame() {
-        if (mainExecutor == null || mainExecutor.isShutdown()) {
+        if (mainExecutor == null) {
             LOGGER.info("Game is loading");
             mainExecutor = Executors.newScheduledThreadPool(10);
             mainExecutor.scheduleWithFixedDelay(new FetchNewEventsTask(), 0, 1000, TimeUnit.MILLISECONDS);

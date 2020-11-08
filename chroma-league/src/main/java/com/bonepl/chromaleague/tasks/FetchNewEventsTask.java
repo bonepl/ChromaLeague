@@ -6,14 +6,14 @@ import com.bonepl.chromaleague.rest.eventdata.Events;
 import com.bonepl.chromaleague.rest.gamestats.GameStats;
 import com.bonepl.chromaleague.state.RunningState;
 import com.jsoniter.JsonIterator;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class FetchNewEventsTask implements Runnable {
     public static final String URL = "https://127.0.0.1:2999/liveclientdata/eventdata";
-    private static final Logger LOGGER = LogManager.getLogger();
+    private static final Logger LOGGER = Logger.getLogger(FetchNewEventsTask.class.getName());
     private static int lastProcessedEventId = -1;
     private final EventDataProcessor eventDataProcessor = new EventDataProcessor();
     private final EventAnimationProcessor eventAnimationProcessor = new EventAnimationProcessor();
@@ -27,7 +27,7 @@ public class FetchNewEventsTask implements Runnable {
                     .filter(events -> !events.isEmpty())
                     .ifPresent(this::collectUnprocessedEvents);
         } catch (Exception ex) {
-            LOGGER.error("Error while fetching new events", ex);
+            LOGGER.log(Level.SEVERE, ex, () -> "Error while fetching Events");
         }
     }
 
@@ -38,7 +38,6 @@ public class FetchNewEventsTask implements Runnable {
             final List<Event> unprocessedEvents = RunningState.getGameState().getEventData().getUnprocessedEvents(events);
             if (!unprocessedEvents.isEmpty()) {
                 if (!hasPlayerReconnected(unprocessedEvents)) {
-                    unprocessedEvents.forEach(event -> LOGGER.debug("Adding new event: {}", event));
                     eventAnimationProcessor.processNewEvents(unprocessedEvents);
                 }
                 eventDataProcessor.processNewEvents(unprocessedEvents);

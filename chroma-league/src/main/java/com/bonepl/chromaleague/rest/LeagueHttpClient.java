@@ -33,8 +33,10 @@ public final class LeagueHttpClient {
     }
 
     public static Optional<String> getResponse(String url) {
-        try (CloseableHttpResponse response = leagueHttpClient.execute(new HttpGet(url))) {
-            final String json = EntityUtils.toString(response.getEntity());
+        final HttpGet request = new HttpGet(url);
+        request.addHeader("Content-type", "application/json; charset=UTF-8");
+        try (CloseableHttpResponse response = leagueHttpClient.execute(request)) {
+            final String json = EntityUtils.toString(response.getEntity(), "UTF-8");
             if (!json.contains("RESOURCE_NOT_FOUND")) {
                 return Optional.of(json);
             }

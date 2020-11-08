@@ -44,7 +44,7 @@ public class RespawnAnimation extends AnimatedFrame {
                 createButtonsTransitionAnimatedFrame(delayBetweenRows * 7, ResourceBars.getResourceBarKeys(), getResourceColor()),
                 createButtonsTransitionAnimatedFrame(delayBetweenRows * 7, HealthBar.getHealthBarKeys(), Color.GREEN)
         );
-        for (int i = 0; i < delayBetweenRows * 7 + STEPS*2; i++) {
+        for (int i = 0; i < delayBetweenRows * 7 + STEPS * 2; i++) {
             final LayeredFrame layeredFrame = new LayeredFrame();
             animatedFrames.stream().filter(AnimatedFrame::hasFrame).forEach(layeredFrame::addFrame);
             addAnimationFrame(layeredFrame);
@@ -68,12 +68,11 @@ public class RespawnAnimation extends AnimatedFrame {
         for (int i = 0; i < STEPS * 2; i++) {
             final LayeredFrame layeredFrame = new LayeredFrame();
             layeredFrame.addFrame(new SimpleFrame(keys, yellowBreathingColor.getNextColor()));
-            layeredFrame.addFrame(new SimpleFrame(HealthBar.getHealthBarKeys(), Background.BACKGROUND_COLOR));
-            layeredFrame.addFrame(new SimpleFrame(ResourceBars.getResourceBarKeys(), Background.BACKGROUND_COLOR));
+            if (i < STEPS) {
+                layeredFrame.addFrame(new SimpleFrame(HealthBar.getHealthBarKeys(), Background.BACKGROUND_COLOR));
+                layeredFrame.addFrame(new SimpleFrame(ResourceBars.getResourceBarKeys(), Background.BACKGROUND_COLOR));
+            }
             animatedFrame.addAnimationFrame(layeredFrame);
-        }
-        for (int i = 0; i < delay; i++) {
-            animatedFrame.addAnimationFrame(new SimpleFrame(keys, Background.BACKGROUND_COLOR));
         }
         return animatedFrame;
     }
@@ -82,10 +81,10 @@ public class RespawnAnimation extends AnimatedFrame {
         final AnimatedFrame animatedFrame = new AnimatedFrame();
         animatedFrame.addAnimationFrame(delay, new SimpleFrame());
         BreathingColor yellowBreathingColor = new BreathingColor(Color.YELLOW, STEPS, true);
-        for (int i = 0; i < STEPS * 2; i++) {
+        for (int i = 0; i < STEPS; i++) {
             animatedFrame.addAnimationFrame(new SimpleFrame(keys, yellowBreathingColor.getNextColor()));
         }
-        for (int i = delay + STEPS * 2; i < waitTill; i++) {
+        for (int i = delay + STEPS * 2; i < waitTill - delay; i++) {
             animatedFrame.addAnimationFrame(new SimpleFrame(keys, Color.YELLOW));
         }
         return animatedFrame;

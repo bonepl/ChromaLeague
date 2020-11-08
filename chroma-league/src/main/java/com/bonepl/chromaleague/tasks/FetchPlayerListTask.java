@@ -6,6 +6,7 @@ import com.bonepl.chromaleague.rest.playerlist.PlayerList;
 import com.bonepl.chromaleague.state.RunningState;
 import com.jsoniter.JsonIterator;
 
+import java.util.function.Function;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,6 +19,7 @@ public class FetchPlayerListTask implements Runnable {
         try {
             if (RunningState.getGameState().isActivePlayerAvailable()) {
                 LeagueHttpClient.getResponse(URL)
+                        .map(cleanUpFromTrailingGarbage())
                         .map(playerList -> JsonIterator.deserialize(playerList, Player[].class))
                         .map(PlayerList::new)
                         .ifPresent(playerList1 -> RunningState.getGameState().setPlayerList(playerList1));
@@ -27,4 +29,8 @@ public class FetchPlayerListTask implements Runnable {
         }
     }
 
+    //RIOT API sends malformed JSON
+    private static Function<String, String> cleanUpFromTrailingGarbage() {
+        return input -> input.substring(input.indexOf('['));
+    }
 }

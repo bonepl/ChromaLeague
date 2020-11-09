@@ -1,7 +1,7 @@
 package com.bonepl.chromaleague.hud.parts;
 
 import com.bonepl.chromaleague.GameStateMocks;
-import com.bonepl.chromaleague.hud.animations.AnimationTester;
+import com.bonepl.chromaleague.hud.AnimationTester;
 import com.bonepl.chromaleague.rest.activeplayer.ActivePlayer;
 import com.bonepl.chromaleague.state.GameStateHelper;
 import org.junit.jupiter.api.Test;

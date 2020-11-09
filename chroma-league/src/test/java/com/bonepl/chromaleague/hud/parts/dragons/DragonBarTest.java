@@ -1,7 +1,7 @@
 package com.bonepl.chromaleague.hud.parts.dragons;
 
 import com.bonepl.chromaleague.GameStateMocks;
-import com.bonepl.chromaleague.hud.animations.AnimationTester;
+import com.bonepl.chromaleague.hud.AnimationTester;
 import com.bonepl.chromaleague.rest.LeagueHttpClientMock;
 import com.bonepl.chromaleague.rest.eventdata.DragonType;
 import com.bonepl.chromaleague.rest.playerlist.Player;

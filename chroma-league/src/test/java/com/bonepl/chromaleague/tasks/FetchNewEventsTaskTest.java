@@ -30,7 +30,7 @@ class FetchNewEventsTaskTest {
     @Test
     void testEventParsing() {
         //given
-        LeagueHttpClientMock.mockReturnedResponseWithResource("json/standardevent.json");
+        new LeagueHttpClientMock().mockEventsResponse("json/standardevent.json");
 
         //when
         new FetchNewEventsTask().run();
@@ -48,7 +48,7 @@ class FetchNewEventsTaskTest {
     @Test
     void testEventParsingAfterReconnect() {
         //given
-        LeagueHttpClientMock.mockReturnedResponseWithResource("json/eventdata.json");
+        new LeagueHttpClientMock().mockEventsResponse("json/eventdata.json");
 
         //when
         new FetchNewEventsTask().run();
@@ -67,7 +67,7 @@ class FetchNewEventsTaskTest {
     @Test
     void testFirstEventParsing() {
         //given
-        LeagueHttpClientMock.mockReturnedResponseWithResource("json/gamestartevent.json");
+        new LeagueHttpClientMock().mockEventsResponse("json/gamestartevent.json");
 
         //when
         new FetchNewEventsTask().run();

@@ -85,7 +85,7 @@ public final class GameStateMocks {
         RunningState.getGameState().setActivePlayer(apMock);
     }
 
-    public static void mockActivePlayerChampionName(String championName){
+    public static void mockActivePlayerChampionName(String championName) {
         RunningState.setRunningGame(true);
         Player activePlayer = mock(Player.class);
         when(activePlayer.getChampionName()).thenReturn(championName);
@@ -94,7 +94,7 @@ public final class GameStateMocks {
         RunningState.getGameState().setPlayerList(playerList);
     }
 
-    public static ChampionStats getMockedChampionStats() {
+    public static ChampionStats mockChampionStats() {
         RunningState.setRunningGame(true);
         final ChampionStats championStatsMock = mock(ChampionStats.class);
         final ActivePlayer apMock = mock(ActivePlayer.class);
@@ -103,8 +103,25 @@ public final class GameStateMocks {
         return championStatsMock;
     }
 
+    public static ActivePlayer mockActivePlayer(String playerName) {
+        RunningState.setRunningGame(true);
+        final ChampionStats championStatsMock = mock(ChampionStats.class);
+        final ActivePlayer apMock = mock(ActivePlayer.class);
+        when(apMock.getSummonerName()).thenReturn(playerName);
+        when(apMock.getChampionStats()).thenReturn(championStatsMock);
+        RunningState.getGameState().setActivePlayer(apMock);
+        return apMock;
+    }
+
+    public static PlayerList mockPlayerList() {
+        RunningState.setRunningGame(true);
+        final PlayerList playerListMock = mock(PlayerList.class);
+        RunningState.getGameState().setPlayerList(playerListMock);
+        return playerListMock;
+    }
+
     public static void mockResource(double resource, double maxResource) {
-        final ChampionStats mockedChampionStats = getMockedChampionStats();
+        final ChampionStats mockedChampionStats = mockChampionStats();
         when(mockedChampionStats.getResourceValue()).thenReturn(resource);
         when(mockedChampionStats.getResourceMax()).thenReturn(maxResource);
     }

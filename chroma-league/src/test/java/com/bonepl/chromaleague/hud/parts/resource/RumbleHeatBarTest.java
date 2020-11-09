@@ -17,9 +17,9 @@ class RumbleHeatBarTest {
         new AnimationTester()
                 .withBeforeIterationAction(i -> {
                     if (i < 20) {
-                        mockResource(heatSteps.nextInt(), 100);
+                        ManaBarTest.mockResource(heatSteps.nextInt(), 100);
                     } else {
-                        mockResource(cooldownSteps.nextInt(), 100);
+                        ManaBarTest.mockResource(cooldownSteps.nextInt(), 100);
                     }
                 })
                 .withSleepTime(300)

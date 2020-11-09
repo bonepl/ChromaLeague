@@ -1,7 +1,7 @@
 package com.bonepl.chromaleague.tasks;
 
+import com.bonepl.chromaleague.GameStateMocks;
 import com.bonepl.chromaleague.rest.LeagueHttpClientMock;
-import com.bonepl.chromaleague.rest.activeplayer.ActivePlayer;
 import com.bonepl.chromaleague.rest.playerlist.Player;
 import com.bonepl.chromaleague.rest.playerlist.PlayerList;
 import com.bonepl.chromaleague.rest.playerlist.Team;
@@ -11,8 +11,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 class FetchPlayerListTaskTest {
 
@@ -20,8 +18,7 @@ class FetchPlayerListTaskTest {
 
     @BeforeEach
     void setUp() {
-        LeagueHttpClientMock.mockReturnedResponseWithResource("json/playerlist.json");
-        RunningState.setRunningGame(true);
+        new LeagueHttpClientMock().mockPlayerListResponse("json/playerlist.json");
     }
 
     @AfterEach
@@ -31,8 +28,8 @@ class FetchPlayerListTaskTest {
 
     @Test
     void testPlayerListParsing() {
+        GameStateMocks.mockActivePlayer("BooonE");
         //given
-        RunningState.getGameState().setActivePlayer(createActivePlayerMock());
 
         //when
         new FetchPlayerListTask().run();
@@ -58,16 +55,10 @@ class FetchPlayerListTaskTest {
     @Test
     void testDependencyOnActivePlayer() {
         //when
+        RunningState.setRunningGame(true);
         new FetchPlayerListTask().run();
 
         //then
         assertFalse(RunningState.getGameState().isPlayerListAvailable());
     }
-
-    private static ActivePlayer createActivePlayerMock() {
-        ActivePlayer activePlayer = mock(ActivePlayer.class);
-        when(activePlayer.getSummonerName()).thenReturn(PLAYER_NAME);
-        return activePlayer;
-    }
-
 }

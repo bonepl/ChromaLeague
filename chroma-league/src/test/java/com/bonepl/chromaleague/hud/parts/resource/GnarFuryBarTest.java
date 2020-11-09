@@ -3,14 +3,13 @@ package com.bonepl.chromaleague.hud.parts.resource;
 import com.bonepl.chromaleague.GameStateMocks;
 import com.bonepl.chromaleague.hud.animations.AnimationTester;
 import com.bonepl.chromaleague.rest.activeplayer.ChampionStats;
-import com.bonepl.chromaleague.state.RunningState;
 import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.when;
 
 class GnarFuryBarTest {
-    public static int currentResource;
-    public static double currentRange = 400;
+    private static int currentResource;
+    private static double currentRange = 400;
 
     @Test
     void testGnarFuryBar() {
@@ -36,7 +35,7 @@ class GnarFuryBarTest {
     }
 
     private static void mockResourceAndRange(double resource, double maxResource, double range) {
-        final ChampionStats mockedChampionStats = GameStateMocks.getMockedChampionStats();
+        final ChampionStats mockedChampionStats = GameStateMocks.mockChampionStats();
         when(mockedChampionStats.getResourceValue()).thenReturn(resource);
         when(mockedChampionStats.getResourceMax()).thenReturn(maxResource);
         when(mockedChampionStats.getAttackRange()).thenReturn(range);

@@ -1,0 +1,10 @@
+{
+  "Assisters": [
+    "BooonE"
+  ],
+  "EventID": 14,
+  "EventName": "ChampionKill",
+  "EventTime": 1118.4588623046876,
+  "KillerName": "Some Champ",
+  "VictimName": "Warwick Bot"
+}

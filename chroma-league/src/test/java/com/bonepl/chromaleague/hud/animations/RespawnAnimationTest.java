@@ -11,7 +11,7 @@ class RespawnAnimationTest {
     @SuppressWarnings("JUnitTestMethodWithNoAssertions")
     @Test
     void playRespawnAnimation() {
-        final ChampionStats mockedChampionStats = GameStateMocks.getMockedChampionStats();
+        final ChampionStats mockedChampionStats = GameStateMocks.mockChampionStats();
         when(mockedChampionStats.getResourceMax()).thenReturn(100.0);
         when(mockedChampionStats.getResourceValue()).thenReturn(100.0);
         when(mockedChampionStats.getCurrentHealth()).thenReturn(100.0);

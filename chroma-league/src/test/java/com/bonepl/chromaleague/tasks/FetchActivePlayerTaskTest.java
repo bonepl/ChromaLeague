@@ -4,7 +4,6 @@ import com.bonepl.chromaleague.GameStateMocks;
 import com.bonepl.chromaleague.rest.LeagueHttpClientMock;
 import com.bonepl.chromaleague.rest.activeplayer.ActivePlayer;
 import com.bonepl.chromaleague.rest.activeplayer.ChampionStats;
-import com.bonepl.chromaleague.state.GameState;
 import com.bonepl.chromaleague.state.RunningState;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -30,7 +29,7 @@ class FetchActivePlayerTaskTest {
     @Test
     void testActivePlayerParsing() {
         //given
-        LeagueHttpClientMock.mockReturnedResponseWithResource("json/activeplayer.json");
+        new LeagueHttpClientMock().mockActivePlayerResponse("json/activeplayer.json");
 
         //when
         new FetchActivePlayerTask().run();

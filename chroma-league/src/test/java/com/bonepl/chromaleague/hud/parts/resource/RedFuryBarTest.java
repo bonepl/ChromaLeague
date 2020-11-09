@@ -4,8 +4,6 @@ import com.bonepl.chromaleague.IntSteps;
 import com.bonepl.chromaleague.hud.animations.AnimationTester;
 import org.junit.jupiter.api.Test;
 
-import static com.bonepl.chromaleague.GameStateMocks.mockResource;
-
 class RedFuryBarTest {
     @Test
     void testRedFuryBar() {
@@ -13,7 +11,7 @@ class RedFuryBarTest {
         final RedFuryBar yoneCloneBar = new RedFuryBar();
 
         new AnimationTester()
-                .withBeforeIterationAction(i -> mockResource(intSteps.nextInt(), 100))
+                .withBeforeIterationAction(i -> ManaBarTest.mockResource(intSteps.nextInt(), 100))
                 .testAnimation(yoneCloneBar, 40);
     }
 }

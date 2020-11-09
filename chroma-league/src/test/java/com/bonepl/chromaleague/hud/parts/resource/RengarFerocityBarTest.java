@@ -4,8 +4,6 @@ import com.bonepl.chromaleague.IntSteps;
 import com.bonepl.chromaleague.hud.animations.AnimationTester;
 import org.junit.jupiter.api.Test;
 
-import static com.bonepl.chromaleague.GameStateMocks.mockResource;
-
 class RengarFerocityBarTest {
     @Test
     void testRengarFerocityBar() {
@@ -15,9 +13,9 @@ class RengarFerocityBarTest {
         new AnimationTester()
                 .withBeforeIterationAction(i -> {
                     if (i > 20) {
-                        mockResource(100, 100);
+                        ManaBarTest.mockResource(100, 100);
                     } else if (i % 5 == 0) {
-                        mockResource(intSteps.nextInt(), 100);
+                        ManaBarTest.mockResource(intSteps.nextInt(), 100);
                     }
                 })
                 .testAnimation(rengarFerocityBar, 40);

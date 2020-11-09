@@ -4,8 +4,6 @@ import com.bonepl.chromaleague.IntSteps;
 import com.bonepl.chromaleague.hud.animations.AnimationTester;
 import org.junit.jupiter.api.Test;
 
-import static com.bonepl.chromaleague.GameStateMocks.mockResource;
-
 class YasuoWindBarTest {
     @Test
     void testYasuoWindBar() {
@@ -15,9 +13,9 @@ class YasuoWindBarTest {
         new AnimationTester()
                 .withBeforeIterationAction(i -> {
                     if (i >= 20 && i <= 50) {
-                        mockResource(100, 100);
+                        ManaBarTest.mockResource(100, 100);
                     } else {
-                        mockResource(intSteps.nextInt(), 100);
+                        ManaBarTest.mockResource(intSteps.nextInt(), 100);
                     }
                 })
                 .testAnimation(yasuoWindBar, 70);

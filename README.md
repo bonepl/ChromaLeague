@@ -31,7 +31,7 @@ Certain in-game events will spawn additional animations.
 ## Requirements
 * Windows
 * League of Legends
-* Synapse 3 with running Razer Chroma SDK Server service
+* Razer Synapse 3
 * Chroma enabled keyboard
 
 ## Running

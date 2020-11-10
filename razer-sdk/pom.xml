@@ -7,12 +7,12 @@
     <parent>
         <groupId>com.bonepl</groupId>
         <artifactId>chroma-league-parent</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.2-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>razer-sdk</artifactId>
-    <version>1.0.1</version>
+    <version>1.0.2-SNAPSHOT</version>
     <name>Java Razer Chroma SDK</name>
 
     <dependencies>

@@ -19,7 +19,7 @@ public class EventDataProcessor {
         final EventType eventType = EventType.fromEvent(event);
         switch (eventType) {
             case GAME_START -> RunningState.setRunningGame(true);
-            case ALLY_BARON_KILL -> GameStateHelper.startBaronBuff();
+            case ALLY_BARON_KILL -> GameStateHelper.startBaronBuff(event);
             case ALLY_CLOUD_DRAGON_KILL -> addKilledDragon(DragonType.CLOUD);
             case ALLY_INFERNAL_DRAGON_KILL -> addKilledDragon(DragonType.INFERNAL);
             case ALLY_MOUNTAIN_DRAGON_KILL -> addKilledDragon(DragonType.MOUNTAIN);

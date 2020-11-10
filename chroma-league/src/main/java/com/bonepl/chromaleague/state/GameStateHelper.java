@@ -3,6 +3,7 @@ package com.bonepl.chromaleague.state;
 import com.bonepl.chromaleague.hud.parts.GoldBar;
 import com.bonepl.chromaleague.rest.activeplayer.ChampionStats;
 import com.bonepl.chromaleague.rest.eventdata.DragonType;
+import com.bonepl.chromaleague.rest.eventdata.Event;
 import com.bonepl.chromaleague.rest.gamestats.GameStats;
 import com.bonepl.chromaleague.tasks.FetchGameStats;
 
@@ -55,9 +56,13 @@ public final class GameStateHelper {
         return Double.valueOf(firstDouble * 100 / secondDouble).intValue();
     }
 
-    public static void startBaronBuff() {
-        if (isActivePlayerAlive()) {
-            RunningState.getGameState().getEventData().setBaronBuffEnd(LocalTime.now().plusMinutes(3));
+    public static void startBaronBuff(Event event) {
+        final GameStats gameStats = new FetchGameStats().fetchGameStats();
+        double eventTime = event.getEventTime();
+        if (isActivePlayerAlive() || didPlayerDieAfterKill(RunningState.getGameState().getEventData().getLastDeathTime(), eventTime)) {
+            double buffDiffToCover = gameStats.gameTime - eventTime;
+            long secondsToRemoveFromTimer = Math.round(buffDiffToCover);
+            RunningState.getGameState().getEventData().setBaronBuffEnd(LocalTime.now().minusSeconds(secondsToRemoveFromTimer).plusMinutes(3));
         }
     }
 
@@ -74,8 +79,8 @@ public final class GameStateHelper {
         final GameStats gameStats = new FetchGameStats().fetchGameStats();
         if (isActivePlayerAlive() || didPlayerDieAfterKill(RunningState.getGameState().getEventData().getLastDeathTime(), eventTime)) {
             final int totalEldersKilled = getTotalEldersKilled();
-            double baronDiffToCover = gameStats.gameTime - eventTime;
-            long secondsToRemoveFromTimer = Math.round(baronDiffToCover);
+            double buffDiffToCover = gameStats.gameTime - eventTime;
+            long secondsToRemoveFromTimer = Math.round(buffDiffToCover);
             if (totalEldersKilled == 1) {
                 RunningState.getGameState().getEventData().setElderBuffEnd(LocalTime.now().minusSeconds(secondsToRemoveFromTimer).plusSeconds(FIRST_ELDER_TIME));
             } else {
@@ -84,8 +89,8 @@ public final class GameStateHelper {
         }
     }
 
-    private static boolean didPlayerDieAfterKill(double lastDeathTime, double buffKillTime) {
-        return lastDeathTime > buffKillTime;
+    private static boolean didPlayerDieAfterKill(double lastDeathTime, double eventTime) {
+        return lastDeathTime > eventTime;
     }
 
     public static boolean hasElderBuff() {

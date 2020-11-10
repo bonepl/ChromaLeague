@@ -3,6 +3,7 @@ package com.bonepl.chromaleague.hud.animations;
 import com.bonepl.chromaleague.GameStateMocks;
 import com.bonepl.chromaleague.hud.AnimationTester;
 import com.bonepl.chromaleague.rest.activeplayer.ChampionStats;
+import com.bonepl.chromaleague.rest.playerlist.PlayerList;
 import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.when;
@@ -12,13 +13,15 @@ class RespawnAnimationTest {
     @SuppressWarnings("JUnitTestMethodWithNoAssertions")
     @Test
     void playRespawnAnimation() {
-        final ChampionStats mockedChampionStats = GameStateMocks.mockChampionStats();
-        when(mockedChampionStats.getResourceMax()).thenReturn(100.0);
-        when(mockedChampionStats.getResourceValue()).thenReturn(100.0);
-        when(mockedChampionStats.getCurrentHealth()).thenReturn(100.0);
-        when(mockedChampionStats.getMaxHealth()).thenReturn(100.0);
+        final ChampionStats mockChampionStats = GameStateMocks.mockChampionStats();
+        when(mockChampionStats.getResourceMax()).thenReturn(100.0);
+        when(mockChampionStats.getResourceValue()).thenReturn(100.0);
+        when(mockChampionStats.getCurrentHealth()).thenReturn(100.0);
+        when(mockChampionStats.getMaxHealth()).thenReturn(100.0);
 
-        GameStateMocks.mockActivePlayerChampionName("Morgana");
+        PlayerList mockPlayerList = GameStateMocks.mockPlayerList();
+        when(mockPlayerList.getActivePlayer().getChampionName()).thenReturn("Morgana");
+
         new AnimationTester().testAnimation(new RespawnAnimation());
     }
 }

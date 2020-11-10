@@ -14,11 +14,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class FetchActivePlayerTaskTest {
 
-    public static final String ACTIVE_PLAYER_NAME = "BooonE";
-
     @BeforeAll
     static void beforeAll() {
-        GameStateMocks.setActivePlayerName(ACTIVE_PLAYER_NAME);
+        GameStateMocks.mockActivePlayer("BooonE");
     }
 
     @AfterAll
@@ -40,7 +38,7 @@ class FetchActivePlayerTaskTest {
         final ActivePlayer activePlayer = RunningState.getGameState().getActivePlayer();
         assertEquals(123.45, activePlayer.getCurrentGold());
         assertEquals(1, activePlayer.getLevel());
-        assertEquals(ACTIVE_PLAYER_NAME, activePlayer.getSummonerName());
+        assertEquals("BooonE", activePlayer.getSummonerName());
 
         final ChampionStats championStats = activePlayer.getChampionStats();
         assertEquals(255.59997, championStats.getCurrentHealth());

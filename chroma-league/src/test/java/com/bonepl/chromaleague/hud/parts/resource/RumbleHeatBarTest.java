@@ -4,8 +4,6 @@ import com.bonepl.chromaleague.IntSteps;
 import com.bonepl.chromaleague.hud.AnimationTester;
 import org.junit.jupiter.api.Test;
 
-import static com.bonepl.chromaleague.GameStateMocks.mockResource;
-
 class RumbleHeatBarTest {
 
     @Test
@@ -33,7 +31,7 @@ class RumbleHeatBarTest {
         final RumbleHeatBar rumbleHeatBar = new RumbleHeatBar();
         new AnimationTester()
                 .withBeforeIterationAction(i -> {
-                    mockResource(heatSteps.nextInt(), 100);
+                    ManaBarTest.mockResource(heatSteps.nextInt(), 100);
                 })
                 .withSleepTime(300)
                 .testAnimation(rumbleHeatBar, 40);

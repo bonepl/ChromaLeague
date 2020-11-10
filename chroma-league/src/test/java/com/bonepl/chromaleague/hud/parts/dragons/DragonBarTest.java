@@ -22,11 +22,9 @@ class DragonBarTest {
     @BeforeAll
     static void beforeAll() {
         GameStateMocks.mockActivePlayer("BooonE");
-        final Player player = mock(Player.class);
-        when(player.isDead()).thenReturn(false);
         final PlayerList mockedPlayerList = GameStateMocks.mockPlayerList();
         when(mockedPlayerList.isAlly(any())).thenReturn(true);
-        when(mockedPlayerList.getActivePlayer()).thenReturn(player);
+        when(mockedPlayerList.getActivePlayer().isDead()).thenReturn(false);
         new LeagueHttpClientMock().mockGameStatsResponse("json/gamestats.json");
     }
 

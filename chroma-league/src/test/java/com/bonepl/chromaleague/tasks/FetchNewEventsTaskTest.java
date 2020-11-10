@@ -17,9 +17,8 @@ class FetchNewEventsTaskTest {
 
     @BeforeEach
     void setUp() {
-        RunningState.setRunningGame(true);
-        GameStateMocks.setActivePlayerName("BooonE");
-        GameStateMocks.makePlayerListAvailable();
+        GameStateMocks.mockActivePlayer("BooonE");
+        GameStateMocks.mockPlayerList();
     }
 
     @AfterEach

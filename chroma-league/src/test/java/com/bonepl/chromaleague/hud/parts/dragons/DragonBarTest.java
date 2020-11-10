@@ -4,7 +4,6 @@ import com.bonepl.chromaleague.GameStateMocks;
 import com.bonepl.chromaleague.hud.AnimationTester;
 import com.bonepl.chromaleague.rest.LeagueHttpClientMock;
 import com.bonepl.chromaleague.rest.eventdata.DragonType;
-import com.bonepl.chromaleague.rest.playerlist.PlayerList;
 import com.bonepl.chromaleague.tasks.EventDataProcessor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,9 +19,9 @@ class DragonBarTest {
 
     @BeforeEach
     void setUp() {
-        final PlayerList mockedPlayerList = new GameStateMocks("BooonE").playerList();
-        when(mockedPlayerList.isAlly(any())).thenReturn(true);
-        when(mockedPlayerList.getActivePlayer().isDead()).thenReturn(false);
+        GameStateMocks gameStateMocks = new GameStateMocks("BooonE");
+        when(gameStateMocks.playerList().isAlly(any())).thenReturn(true);
+        when(gameStateMocks.player().isDead()).thenReturn(false);
         new LeagueHttpClientMock().mockGameStatsResponse("json/gamestats.json");
     }
 

@@ -2,19 +2,18 @@ package com.bonepl.chromaleague.hud.parts;
 
 import com.bonepl.chromaleague.GameStateMocks;
 import com.bonepl.chromaleague.hud.AnimationTester;
-import com.bonepl.chromaleague.rest.activeplayer.ActivePlayer;
 import com.bonepl.chromaleague.state.GameStateHelper;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.when;
 
 class GoldBarTest {
 
-    private static GameStateMocks gameStateMocks;
+    private GameStateMocks gameStateMocks;
 
-    @BeforeAll
-    static void beforeAll() {
+    @BeforeEach
+    void setUp() {
         gameStateMocks = new GameStateMocks("BooonE");
     }
 
@@ -29,8 +28,7 @@ class GoldBarTest {
                 .testAnimation(goldBar, 100);
     }
 
-    private static void mockActivePlayerGold(double gold) {
-        final ActivePlayer activePlayer = gameStateMocks.activePlayer();
-        when(activePlayer.getCurrentGold()).thenReturn(gold);
+    private void mockActivePlayerGold(double gold) {
+        when(gameStateMocks.activePlayer().getCurrentGold()).thenReturn(gold);
     }
 }

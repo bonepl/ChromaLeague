@@ -5,7 +5,6 @@ import com.bonepl.chromaleague.ResourceLoader;
 import com.bonepl.chromaleague.hud.AnimationTester;
 import com.bonepl.chromaleague.rest.eventdata.DragonType;
 import com.bonepl.chromaleague.rest.eventdata.Event;
-import com.bonepl.chromaleague.rest.playerlist.PlayerList;
 import com.bonepl.chromaleague.tasks.EventDataProcessor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,12 +16,11 @@ import java.util.Queue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
-class KilledDragonsBarTest {
+public class KilledDragonsBarTest {
 
     @BeforeEach
     void setUp() {
-        final PlayerList mockedPlayerList = new GameStateMocks("BooonE").playerList();
-        when(mockedPlayerList.isAlly(any())).thenReturn(true);
+        when(new GameStateMocks("BooonE").playerList().isAlly(any())).thenReturn(true);
     }
 
     @Test

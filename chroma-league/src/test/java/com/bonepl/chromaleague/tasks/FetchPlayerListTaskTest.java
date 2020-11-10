@@ -14,8 +14,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class FetchPlayerListTaskTest {
 
-    public static final String PLAYER_NAME = "BooonE";
-
     @BeforeEach
     void setUp() {
         new LeagueHttpClientMock().mockPlayerListResponse("json/playerlist.json");
@@ -29,7 +27,7 @@ class FetchPlayerListTaskTest {
     @Test
     void testPlayerListParsing() {
         //given
-        new GameStateMocks("BooonE");
+        new GameStateMocks();
 
         //when
         new FetchPlayerListTask().run();
@@ -40,7 +38,7 @@ class FetchPlayerListTaskTest {
         assertNotNull(playerList);
         assertEquals(5, playerList.getAllies().size());
         assertEquals(5, playerList.getEnemies().size());
-        assertEquals(PLAYER_NAME, playerList.getActivePlayer().getSummonerName());
+        assertEquals("BooonE", playerList.getActivePlayer().getSummonerName());
         assertEquals(Team.CHAOS, playerList.getActivePlayer().getTeam());
         assertTrue(playerList.isAlly("Test summoner 5"));
         assertFalse(playerList.isAlly("Test summoner 9"));

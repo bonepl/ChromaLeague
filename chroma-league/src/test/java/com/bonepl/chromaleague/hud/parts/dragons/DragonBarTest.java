@@ -19,7 +19,7 @@ class DragonBarTest {
 
     @BeforeEach
     void setUp() {
-        GameStateMocks gameStateMocks = new GameStateMocks("BooonE");
+        GameStateMocks gameStateMocks = new GameStateMocks();
         when(gameStateMocks.playerList().isAlly(any())).thenReturn(true);
         when(gameStateMocks.player().isDead()).thenReturn(false);
         new LeagueHttpClientMock().mockGameStatsResponse("json/gamestats.json");

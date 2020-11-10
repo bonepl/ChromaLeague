@@ -15,7 +15,7 @@ class FetchActivePlayerTaskTest {
 
     @BeforeAll
     static void beforeAll() {
-        new GameStateMocks("BooonE");
+        new GameStateMocks();
     }
 
     @Test

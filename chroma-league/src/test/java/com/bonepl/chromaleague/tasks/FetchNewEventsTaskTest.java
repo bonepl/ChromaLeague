@@ -17,7 +17,7 @@ class FetchNewEventsTaskTest {
 
     @BeforeEach
     void setUp() {
-        new GameStateMocks("BooonE");
+        new GameStateMocks();
     }
 
     @AfterEach

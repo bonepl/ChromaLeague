@@ -10,6 +10,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public final class GameStateMocks {
+    public static final String PLAYER_NAME = "BooonE";
+
     private final ActivePlayer mockActivePlayer;
     private final PlayerList mockPlayerList;
 
@@ -18,11 +20,7 @@ public final class GameStateMocks {
         RunningState.setRunningGame(true);
         mockActivePlayer = prepareActivePlayerMock();
         mockPlayerList = preparePlayerListMock();
-    }
-
-    public GameStateMocks(String playerName) {
-        this();
-        when(mockPlayerList.getActivePlayer().getSummonerName()).thenReturn(playerName);
+        when(mockPlayerList.getActivePlayer().getSummonerName()).thenReturn(PLAYER_NAME);
     }
 
     private PlayerList preparePlayerListMock() {

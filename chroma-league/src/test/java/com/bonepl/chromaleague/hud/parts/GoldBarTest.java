@@ -14,7 +14,7 @@ class GoldBarTest {
 
     @BeforeEach
     void setUp() {
-        gameStateMocks = new GameStateMocks("BooonE");
+        gameStateMocks = new GameStateMocks();
     }
 
     @SuppressWarnings("JUnitTestMethodWithNoAssertions")

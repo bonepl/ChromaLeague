@@ -11,7 +11,7 @@ class AssistKillingSpreeBarTest {
     @SuppressWarnings("JUnitTestMethodWithNoAssertions")
     @Test
     void testKillingSpreeBar() {
-        new GameStateMocks("BooonE");
+        new GameStateMocks();
         final EventDataProcessor eventDataProcessor = new EventDataProcessor();
 
         new AnimationTester()

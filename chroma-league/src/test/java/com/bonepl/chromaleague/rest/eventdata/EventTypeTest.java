@@ -15,7 +15,7 @@ class EventTypeTest {
 
     @BeforeEach
     void setUp() {
-        gameStateMocks = new GameStateMocks("BooonE");
+        gameStateMocks = new GameStateMocks();
     }
 
     @Test

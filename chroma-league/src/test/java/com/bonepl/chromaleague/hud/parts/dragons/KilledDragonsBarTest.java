@@ -20,7 +20,7 @@ public class KilledDragonsBarTest {
 
     @BeforeEach
     void setUp() {
-        when(new GameStateMocks("BooonE").playerList().isAlly(any())).thenReturn(true);
+        when(new GameStateMocks().playerList().isAlly(any())).thenReturn(true);
     }
 
     @Test

@@ -51,9 +51,7 @@ public final class LeagueHttpClientMock {
         try {
             final CloseableHttpResponse mockedResponse = mock(CloseableHttpResponse.class);
             when(mockedResponse.getEntity()).thenReturn(new ByteArrayEntity(toReturn));
-            when(mock.execute(argThat(uriRequest -> {
-                return uriRequest.getURI().toString().equals(uri);
-            }))).thenReturn(mockedResponse);
+            when(mock.execute(argThat(uriRequest -> uriRequest.getURI().toString().equals(uri)))).thenReturn(mockedResponse);
             LeagueHttpClient.setLeagueHttpClient(mock);
         } catch (IOException e) {
             fail(e);

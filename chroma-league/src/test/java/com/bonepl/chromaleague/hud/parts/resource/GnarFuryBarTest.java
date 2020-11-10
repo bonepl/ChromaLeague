@@ -1,13 +1,9 @@
 package com.bonepl.chromaleague.hud.parts.resource;
 
-import com.bonepl.chromaleague.GameStateMocks;
 import com.bonepl.chromaleague.hud.AnimationTester;
-import com.bonepl.chromaleague.rest.activeplayer.ChampionStats;
 import org.junit.jupiter.api.Test;
 
-import static org.mockito.Mockito.when;
-
-class GnarFuryBarTest {
+class GnarFuryBarTest extends AbstractResourceTest {
     private static int currentResource;
     private static double currentRange = 400;
 
@@ -29,15 +25,11 @@ class GnarFuryBarTest {
                         }
                         currentRange = 170;
                     }
-                    mockResourceAndRange(currentResource, 100, currentRange);
+                    mockResource(currentResource, 100);
+                    mockRange(currentRange);
                 })
                 .testAnimation(gnarFuryBar, 220);
     }
 
-    private static void mockResourceAndRange(double resource, double maxResource, double range) {
-        final ChampionStats mockedChampionStats = GameStateMocks.mockChampionStats();
-        when(mockedChampionStats.getResourceValue()).thenReturn(resource);
-        when(mockedChampionStats.getResourceMax()).thenReturn(maxResource);
-        when(mockedChampionStats.getAttackRange()).thenReturn(range);
-    }
+
 }

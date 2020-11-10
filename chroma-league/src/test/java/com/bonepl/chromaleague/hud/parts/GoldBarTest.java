@@ -4,11 +4,19 @@ import com.bonepl.chromaleague.GameStateMocks;
 import com.bonepl.chromaleague.hud.AnimationTester;
 import com.bonepl.chromaleague.rest.activeplayer.ActivePlayer;
 import com.bonepl.chromaleague.state.GameStateHelper;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.when;
 
 class GoldBarTest {
+
+    private static GameStateMocks gameStateMocks;
+
+    @BeforeAll
+    static void beforeAll() {
+        gameStateMocks = new GameStateMocks("BooonE");
+    }
 
     @SuppressWarnings("JUnitTestMethodWithNoAssertions")
     @Test
@@ -22,7 +30,7 @@ class GoldBarTest {
     }
 
     private static void mockActivePlayerGold(double gold) {
-        final ActivePlayer activePlayer = GameStateMocks.mockActivePlayer("BooonE");
+        final ActivePlayer activePlayer = gameStateMocks.activePlayer();
         when(activePlayer.getCurrentGold()).thenReturn(gold);
     }
 }

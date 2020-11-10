@@ -7,7 +7,7 @@ class AllyHeraldKillAnimationTest {
 
     @SuppressWarnings("JUnitTestMethodWithNoAssertions")
     @Test
-    void testAllyHeraldKillAnimation() {
+    void playAllyHeraldKillAnimation() {
         new AnimationTester().testAnimation(new AllyHeraldKillAnimation());
     }
 }

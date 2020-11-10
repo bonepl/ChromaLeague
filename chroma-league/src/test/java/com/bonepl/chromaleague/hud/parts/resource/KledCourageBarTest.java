@@ -4,7 +4,7 @@ import com.bonepl.chromaleague.IntSteps;
 import com.bonepl.chromaleague.hud.AnimationTester;
 import org.junit.jupiter.api.Test;
 
-class KledCourageBarTest {
+class KledCourageBarTest extends AbstractResourceTest {
 
     @Test
     void testKledCourageBar() {
@@ -13,9 +13,9 @@ class KledCourageBarTest {
         new AnimationTester()
                 .withBeforeIterationAction(i -> {
                     if (i >= 20 && i <= 50) {
-                        ManaBarTest.mockResource(100, 100);
+                        mockResource(100, 100);
                     } else {
-                        ManaBarTest.mockResource(intSteps.nextInt(), 100);
+                        mockResource(intSteps.nextInt(), 100);
                     }
                 })
                 .testAnimation(kledCourageBar, 70);

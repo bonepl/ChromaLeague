@@ -4,7 +4,7 @@ import com.bonepl.chromaleague.IntSteps;
 import com.bonepl.chromaleague.hud.AnimationTester;
 import org.junit.jupiter.api.Test;
 
-class ShyvanaDragonFuryBarTest {
+class ShyvanaDragonFuryBarTest extends AbstractResourceTest {
     @Test
     void testShyvanaDragonPoolBar() {
         final IntSteps intSteps = new IntSteps(0, 100, 5);
@@ -12,9 +12,9 @@ class ShyvanaDragonFuryBarTest {
         new AnimationTester()
                 .withBeforeIterationAction(i -> {
                     if (i >= 20 && i <= 50) {
-                        ManaBarTest.mockResource(100, 100);
+                        mockResource(100, 100);
                     } else {
-                        ManaBarTest.mockResource(intSteps.nextInt(), 100);
+                        mockResource(intSteps.nextInt(), 100);
                     }
                 })
                 .testAnimation(shyvanaDragonFuryBar, 70);

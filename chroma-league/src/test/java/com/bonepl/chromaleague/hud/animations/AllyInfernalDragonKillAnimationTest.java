@@ -7,7 +7,7 @@ class AllyInfernalDragonKillAnimationTest {
 
     @SuppressWarnings("JUnitTestMethodWithNoAssertions")
     @Test
-    void testAllyInfernalDragonKillAnimation() {
+    void playAllyInfernalDragonKillAnimation() {
         new AnimationTester().testAnimation(new AllyInfernalDragonKillAnimation());
     }
 }

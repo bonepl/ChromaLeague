@@ -11,12 +11,15 @@ class LevelUpBarTest {
 
     @Test
     void playLevelUpAnimation() {
-        final ActivePlayer activePlayer = GameStateMocks.mockActivePlayer("BooonE");
+        // given
+        final ActivePlayer activePlayer = new GameStateMocks("BooonE").activePlayer();
         when(activePlayer.getLevel()).thenReturn(1);
 
+        // when
         final LevelUpBar levelUpBar = new LevelUpBar();
         levelUpBar.levelUp();
 
+        // then
         new AnimationTester().testAnimation(levelUpBar);
     }
 }

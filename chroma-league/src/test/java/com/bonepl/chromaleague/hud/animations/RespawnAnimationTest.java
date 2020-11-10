@@ -13,15 +13,19 @@ class RespawnAnimationTest {
     @SuppressWarnings("JUnitTestMethodWithNoAssertions")
     @Test
     void playRespawnAnimation() {
-        final ChampionStats mockChampionStats = GameStateMocks.mockChampionStats();
+        // given
+        GameStateMocks gameStateMocks = new GameStateMocks();
+
+        final ChampionStats mockChampionStats = gameStateMocks.championStats();
         when(mockChampionStats.getResourceMax()).thenReturn(100.0);
         when(mockChampionStats.getResourceValue()).thenReturn(100.0);
         when(mockChampionStats.getCurrentHealth()).thenReturn(100.0);
         when(mockChampionStats.getMaxHealth()).thenReturn(100.0);
 
-        PlayerList mockPlayerList = GameStateMocks.mockPlayerList();
+        final PlayerList mockPlayerList = gameStateMocks.playerList();
         when(mockPlayerList.getActivePlayer().getChampionName()).thenReturn("Morgana");
 
+        // then
         new AnimationTester().testAnimation(new RespawnAnimation());
     }
 }

@@ -4,7 +4,7 @@ import com.bonepl.chromaleague.IntSteps;
 import com.bonepl.chromaleague.hud.AnimationTester;
 import org.junit.jupiter.api.Test;
 
-class RumbleHeatBarTest {
+class RumbleHeatBarTest extends AbstractResourceTest {
 
     @Test
     void testRumbleStandardHeat() {
@@ -15,9 +15,9 @@ class RumbleHeatBarTest {
         new AnimationTester()
                 .withBeforeIterationAction(i -> {
                     if (i < 20) {
-                        ManaBarTest.mockResource(heatSteps.nextInt(), 100);
+                        mockResource(heatSteps.nextInt(), 100);
                     } else {
-                        ManaBarTest.mockResource(cooldownSteps.nextInt(), 100);
+                        mockResource(cooldownSteps.nextInt(), 100);
                     }
                 })
                 .withSleepTime(300)
@@ -31,7 +31,7 @@ class RumbleHeatBarTest {
         final RumbleHeatBar rumbleHeatBar = new RumbleHeatBar();
         new AnimationTester()
                 .withBeforeIterationAction(i -> {
-                    ManaBarTest.mockResource(heatSteps.nextInt(), 100);
+                    mockResource(heatSteps.nextInt(), 100);
                 })
                 .withSleepTime(300)
                 .testAnimation(rumbleHeatBar, 40);

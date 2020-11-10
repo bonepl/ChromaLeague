@@ -7,7 +7,7 @@ class EnemyMountainDragonKillAnimationTest {
 
     @SuppressWarnings("JUnitTestMethodWithNoAssertions")
     @Test
-    void testEnemyMountainDragonKillAnimation() {
+    void playEnemyMountainDragonKillAnimation() {
         new AnimationTester().testAnimation(new EnemyMountainDragonKillAnimation());
     }
 }

@@ -4,10 +4,9 @@ import com.bonepl.chromaleague.GameStateMocks;
 import com.bonepl.chromaleague.hud.AnimationTester;
 import com.bonepl.chromaleague.rest.LeagueHttpClientMock;
 import com.bonepl.chromaleague.rest.eventdata.DragonType;
-import com.bonepl.chromaleague.rest.playerlist.Player;
 import com.bonepl.chromaleague.rest.playerlist.PlayerList;
 import com.bonepl.chromaleague.tasks.EventDataProcessor;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.LinkedList;
@@ -15,14 +14,13 @@ import java.util.List;
 import java.util.Queue;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class DragonBarTest {
-    @BeforeAll
-    static void beforeAll() {
-        GameStateMocks.mockActivePlayer("BooonE");
-        final PlayerList mockedPlayerList = GameStateMocks.mockPlayerList();
+
+    @BeforeEach
+    void setUp() {
+        final PlayerList mockedPlayerList = new GameStateMocks("BooonE").playerList();
         when(mockedPlayerList.isAlly(any())).thenReturn(true);
         when(mockedPlayerList.getActivePlayer().isDead()).thenReturn(false);
         new LeagueHttpClientMock().mockGameStatsResponse("json/gamestats.json");

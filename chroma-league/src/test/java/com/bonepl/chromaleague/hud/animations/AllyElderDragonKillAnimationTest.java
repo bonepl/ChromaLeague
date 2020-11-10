@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 class AllyElderDragonKillAnimationTest {
     @SuppressWarnings("JUnitTestMethodWithNoAssertions")
     @Test
-    void testAllyElderDragonKillAnimation() {
+    void playAllyElderDragonKillAnimation() {
         new AnimationTester().testAnimation(new AllyElderDragonKillAnimation());
     }
 }

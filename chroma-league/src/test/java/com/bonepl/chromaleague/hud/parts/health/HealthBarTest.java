@@ -3,11 +3,20 @@ package com.bonepl.chromaleague.hud.parts.health;
 import com.bonepl.chromaleague.GameStateMocks;
 import com.bonepl.chromaleague.hud.AnimationTester;
 import com.bonepl.chromaleague.rest.activeplayer.ChampionStats;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.when;
 
 class HealthBarTest {
+
+    private GameStateMocks gameStateMocks;
+
+    @BeforeEach
+    void setUp() {
+        gameStateMocks = new GameStateMocks();
+    }
 
     @Test
     void testHpBarLostAnimation() {
@@ -45,8 +54,8 @@ class HealthBarTest {
                 .testAnimation(healthBar, 60);
     }
 
-    private static void mockActivePlayerHealth(double currentHealth, double maxHealth) {
-        final ChampionStats mockedChampionStats = GameStateMocks.mockChampionStats();
+    private void mockActivePlayerHealth(double currentHealth, double maxHealth) {
+        final ChampionStats mockedChampionStats = gameStateMocks.championStats();
         when(mockedChampionStats.getCurrentHealth()).thenReturn(currentHealth);
         when(mockedChampionStats.getMaxHealth()).thenReturn(maxHealth);
     }

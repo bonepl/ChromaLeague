@@ -7,7 +7,7 @@ class ActivePlayerAssistAnimationTest {
 
     @SuppressWarnings("JUnitTestMethodWithNoAssertions")
     @Test
-    void testActivePLayerAssistAnimation() {
+    void playActivePLayerAssistAnimation() {
         new AnimationTester().testAnimation(new ActivePlayerAssistAnimation());
     }
 }

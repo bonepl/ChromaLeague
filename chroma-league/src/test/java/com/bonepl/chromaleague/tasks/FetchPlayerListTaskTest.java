@@ -28,8 +28,8 @@ class FetchPlayerListTaskTest {
 
     @Test
     void testPlayerListParsing() {
-        GameStateMocks.mockActivePlayer("BooonE");
         //given
+        new GameStateMocks("BooonE");
 
         //when
         new FetchPlayerListTask().run();

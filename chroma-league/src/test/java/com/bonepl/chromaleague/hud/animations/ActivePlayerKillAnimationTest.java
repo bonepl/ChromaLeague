@@ -7,7 +7,7 @@ class ActivePlayerKillAnimationTest {
 
     @SuppressWarnings("JUnitTestMethodWithNoAssertions")
     @Test
-    void testActivePlayerKillAnimation() {
+    void playActivePlayerKillAnimation() {
         new AnimationTester().testAnimation(new ActivePlayerKillAnimation());
     }
 }

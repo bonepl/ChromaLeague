@@ -4,7 +4,7 @@ import com.bonepl.chromaleague.IntSteps;
 import com.bonepl.chromaleague.hud.AnimationTester;
 import org.junit.jupiter.api.Test;
 
-class RenektonFuryBarTest {
+class RenektonFuryBarTest extends AbstractResourceTest {
 
     @Test
     void testRenektonFuryBar() {
@@ -14,9 +14,9 @@ class RenektonFuryBarTest {
         new AnimationTester()
                 .withBeforeIterationAction(i -> {
                     if (i >= 20 && i <= 30) {
-                        ManaBarTest.mockResource(100, 100);
+                        mockResource(100, 100);
                     } else {
-                        ManaBarTest.mockResource(intSteps.nextInt(), 100);
+                        mockResource(intSteps.nextInt(), 100);
                     }
                 })
                 .testAnimation(vladimirBloodPoolBar, 50);

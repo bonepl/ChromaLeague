@@ -16,12 +16,7 @@ class FetchActivePlayerTaskTest {
 
     @BeforeAll
     static void beforeAll() {
-        GameStateMocks.mockActivePlayer("BooonE");
-    }
-
-    @AfterAll
-    static void afterAll() {
-        GameStateMocks.clearActivePlayer();
+        new GameStateMocks("BooonE");
     }
 
     @Test

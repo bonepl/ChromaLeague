@@ -4,7 +4,7 @@ import com.bonepl.chromaleague.IntSteps;
 import com.bonepl.chromaleague.hud.AnimationTester;
 import org.junit.jupiter.api.Test;
 
-class YoneCloneBarTest {
+class YoneCloneBarTest extends AbstractResourceTest {
 
     @Test
     void testYoneCloneBar() {
@@ -12,7 +12,7 @@ class YoneCloneBarTest {
         final YoneCloneBar yoneCloneBar = new YoneCloneBar();
 
         new AnimationTester()
-                .withBeforeIterationAction(i -> ManaBarTest.mockResource(intSteps.nextInt(), 100))
+                .withBeforeIterationAction(i -> mockResource(intSteps.nextInt(), 100))
                 .testAnimation(yoneCloneBar, 20);
     }
 }

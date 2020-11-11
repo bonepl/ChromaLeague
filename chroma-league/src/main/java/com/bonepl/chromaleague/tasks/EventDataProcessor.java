@@ -41,8 +41,8 @@ public class EventDataProcessor {
     }
 
     private static void processAllyElderKill(Event event) {
-        GameStateHelper.startElderBuff(event.getEventTime());
         GameStateHelper.addKilledElder();
+        GameStateHelper.startElderBuff(event.getEventTime());
     }
 
     private static void resetAlivePlayerCounters(Event event) {

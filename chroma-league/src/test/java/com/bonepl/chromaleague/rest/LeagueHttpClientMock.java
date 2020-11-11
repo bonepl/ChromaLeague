@@ -1,40 +1,68 @@
 package com.bonepl.chromaleague.rest;
 
+import com.bonepl.chromaleague.tasks.FetchActivePlayerTask;
+import com.bonepl.chromaleague.tasks.FetchGameStats;
+import com.bonepl.chromaleague.tasks.FetchNewEventsTask;
+import com.bonepl.chromaleague.tasks.FetchPlayerListTask;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.util.Objects;
+import java.nio.file.Paths;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.util.Locale;
 
 import static org.junit.jupiter.api.Assertions.fail;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.Mockito.*;
 
 public final class LeagueHttpClientMock {
-    private LeagueHttpClientMock() {
+    private final CloseableHttpClient mock = mock(CloseableHttpClient.class);
+
+    public void mockActivePlayerResponse(String jsonResourcePath) {
+        mockReturnedResponseWithResource(FetchActivePlayerTask.URL, jsonResourcePath);
     }
 
-    public static void mockReturnedResponseWithResource(String jsonResourcePath) {
+    public void mockPlayerListResponse(String jsonResourcePath) {
+        mockReturnedResponseWithResource(FetchPlayerListTask.URL, jsonResourcePath);
+    }
+
+    public void mockEventsResponse(String jsonResourcePath) {
+        mockReturnedResponseWithResource(FetchNewEventsTask.URL, jsonResourcePath);
+    }
+
+    public void mockGameStatsResponse(String jsonResourcePath) {
+        mockReturnedResponseWithResource(FetchGameStats.URL, jsonResourcePath);
+    }
+
+    private final DecimalFormat gameTimeFormat =
+            new DecimalFormat("0.0###############", DecimalFormatSymbols.getInstance(Locale.US));
+
+    public void mockGameStatsGameTime(double gameTime) {
+        mockReturnedResponse(FetchGameStats.URL, String.format("{\"gameMode\": \"CLASSIC\", \"gameTime\": %s}", gameTimeFormat.format(gameTime))
+                .getBytes(StandardCharsets.UTF_8));
+    }
+
+    public void mockReturnedResponseWithResource(String uri, String jsonResourcePath) {
         try {
-            mockReturnedResponse(Files.readAllBytes(
-                    new File(Objects.requireNonNull(LeagueHttpClientMock.class.getClassLoader()
-                            .getResource(jsonResourcePath)).toURI()).toPath()));
+            mockReturnedResponse(uri, Files.readAllBytes(
+                    Paths.get(LeagueHttpClientMock.class.getClassLoader()
+                            .getResource(jsonResourcePath).toURI())));
         } catch (IOException | URISyntaxException e) {
             fail(e);
         }
     }
 
-    public static void mockReturnedResponse(byte... toReturn) {
+    private void mockReturnedResponse(String uri, byte... toReturn) {
         try {
             final CloseableHttpResponse mockedResponse = mock(CloseableHttpResponse.class);
             when(mockedResponse.getEntity()).thenReturn(new ByteArrayEntity(toReturn));
-            final CloseableHttpClient mock = mock(CloseableHttpClient.class);
-            when(mock.execute(any())).thenReturn(mockedResponse);
+            doReturn(mockedResponse).when(mock).execute(argThat(uriRequest -> uriRequest.getURI().toString().equals(uri)));
             LeagueHttpClient.setLeagueHttpClient(mock);
         } catch (IOException e) {
             fail(e);

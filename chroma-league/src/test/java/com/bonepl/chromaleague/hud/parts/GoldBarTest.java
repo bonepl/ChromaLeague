@@ -1,17 +1,20 @@
 package com.bonepl.chromaleague.hud.parts;
 
 import com.bonepl.chromaleague.GameStateMocks;
-import com.bonepl.chromaleague.hud.animations.AnimationTester;
+import com.bonepl.chromaleague.hud.AnimationTester;
 import com.bonepl.chromaleague.state.GameStateHelper;
-import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static com.bonepl.chromaleague.GameStateMocks.mockActivePlayerGold;
+import static org.mockito.Mockito.when;
 
 class GoldBarTest {
-    @AfterAll
-    static void afterAll() {
-        GameStateMocks.clearActivePlayer();
+
+    private GameStateMocks gameStateMocks;
+
+    @BeforeEach
+    void setUp() {
+        gameStateMocks = new GameStateMocks();
     }
 
     @SuppressWarnings("JUnitTestMethodWithNoAssertions")
@@ -23,5 +26,9 @@ class GoldBarTest {
         new AnimationTester()
                 .withAfterIterationAction(i -> mockActivePlayerGold(GameStateHelper.getGold() + 30))
                 .testAnimation(goldBar, 100);
+    }
+
+    private void mockActivePlayerGold(double gold) {
+        when(gameStateMocks.activePlayer().getCurrentGold()).thenReturn(gold);
     }
 }

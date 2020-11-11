@@ -1,4 +1,4 @@
-package com.bonepl.chromaleague.hud.animations;
+package com.bonepl.chromaleague.hud;
 
 
 import com.bonepl.razersdk.ChromaRestSDK;

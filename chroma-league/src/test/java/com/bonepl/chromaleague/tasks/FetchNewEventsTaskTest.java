@@ -12,14 +12,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
 class FetchNewEventsTaskTest {
+    private LeagueHttpClientMock leagueHttpClientMock;
 
     @BeforeEach
     void setUp() {
-        RunningState.setRunningGame(true);
-        GameStateMocks.setActivePlayerName("BooonE");
-        GameStateMocks.makePlayerListAvailable();
+        final GameStateMocks gameStateMocks = new GameStateMocks();
+        gameStateMocks.activePlayer();
+        gameStateMocks.playerList();
+        when(gameStateMocks.activePlayer().getLevel()).thenReturn(6);
+        leagueHttpClientMock = new LeagueHttpClientMock();
+        leagueHttpClientMock.mockGameStatsGameTime(1400);
     }
 
     @AfterEach
@@ -30,7 +35,7 @@ class FetchNewEventsTaskTest {
     @Test
     void testEventParsing() {
         //given
-        LeagueHttpClientMock.mockReturnedResponseWithResource("json/standardevent.json");
+        leagueHttpClientMock.mockEventsResponse("json/standardevent.json");
 
         //when
         new FetchNewEventsTask().run();
@@ -48,7 +53,7 @@ class FetchNewEventsTaskTest {
     @Test
     void testEventParsingAfterReconnect() {
         //given
-        LeagueHttpClientMock.mockReturnedResponseWithResource("json/eventdata.json");
+        leagueHttpClientMock.mockEventsResponse("json/eventdata.json");
 
         //when
         new FetchNewEventsTask().run();
@@ -67,7 +72,7 @@ class FetchNewEventsTaskTest {
     @Test
     void testFirstEventParsing() {
         //given
-        LeagueHttpClientMock.mockReturnedResponseWithResource("json/gamestartevent.json");
+        leagueHttpClientMock.mockEventsResponse("json/gamestartevent.json");
 
         //when
         new FetchNewEventsTask().run();

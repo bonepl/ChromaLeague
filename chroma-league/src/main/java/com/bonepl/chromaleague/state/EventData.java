@@ -18,6 +18,24 @@ public class EventData {
     private int totalEldersKilled;
     private int activePlayerKillingSpree;
     private int activePlayerAssistSpree;
+    private double lastDeathTime;
+    private double approxLastDeathTimer;
+
+    public void setLastDeathTime(double lastDeathTime) {
+        this.lastDeathTime = lastDeathTime;
+    }
+
+    public double getLastDeathTime() {
+        return lastDeathTime;
+    }
+
+    public double getApproxLastDeathTimer() {
+        return approxLastDeathTimer;
+    }
+
+    public void setApproxLastDeathTimer(double approxLastDeathTimer) {
+        this.approxLastDeathTimer = approxLastDeathTimer;
+    }
 
     public void setBaronBuffEnd(LocalTime baronBuffEnd) {
         this.baronBuffEnd = baronBuffEnd;

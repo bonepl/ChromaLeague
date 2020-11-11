@@ -1,35 +1,24 @@
 package com.bonepl.chromaleague.hud.parts;
 
-import com.bonepl.chromaleague.hud.animations.AnimationTester;
-import com.bonepl.chromaleague.rest.eventdata.EventType;
-import com.bonepl.chromaleague.state.RunningState;
+import com.bonepl.chromaleague.GameStateMocks;
+import com.bonepl.chromaleague.ResourceLoader;
+import com.bonepl.chromaleague.hud.AnimationTester;
 import com.bonepl.chromaleague.tasks.EventDataProcessor;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class AssistKillingSpreeBarTest {
 
-    @BeforeEach
-    void setUp() {
-        RunningState.setRunningGame(true);
-    }
-
-    @AfterEach
-    void tearDown() {
-        RunningState.setRunningGame(false);
-    }
-
     @SuppressWarnings("JUnitTestMethodWithNoAssertions")
     @Test
     void testKillingSpreeBar() {
+        new GameStateMocks();
         final EventDataProcessor eventDataProcessor = new EventDataProcessor();
 
         new AnimationTester()
                 .withAfterIterationAction(i -> {
-                    eventDataProcessor.processEventForEventData(EventType.ACTIVE_PLAYER_ASSIST);
+                    eventDataProcessor.processEventForEventData(ResourceLoader.eventFromJson("activePlayerAssist.json"));
                     if (i > 4) {
-                        eventDataProcessor.processEventForEventData(EventType.ACTIVE_PLAYER_KILL);
+                        eventDataProcessor.processEventForEventData(ResourceLoader.eventFromJson("activePlayerKill.json"));
                     }
                 }).testAnimation(AssistKillingSpreeBar::new, 15);
     }

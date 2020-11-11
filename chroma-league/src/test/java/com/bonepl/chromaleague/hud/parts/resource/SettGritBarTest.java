@@ -1,13 +1,10 @@
 package com.bonepl.chromaleague.hud.parts.resource;
 
 import com.bonepl.chromaleague.IntSteps;
-import com.bonepl.chromaleague.hud.animations.AnimationTester;
+import com.bonepl.chromaleague.hud.AnimationTester;
 import org.junit.jupiter.api.Test;
 
-import static com.bonepl.chromaleague.GameStateMocks.mockResource;
-import static org.junit.jupiter.api.Assertions.*;
-
-class SettGritBarTest {
+class SettGritBarTest extends AbstractResourceTest {
     @Test
     void testSettGritBar() {
         final IntSteps intSteps = new IntSteps(0, 100, 5);

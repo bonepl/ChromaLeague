@@ -13,9 +13,6 @@ import java.util.logging.Logger;
 public class FetchNewEventsTask implements Runnable {
     public static final String URL = "https://127.0.0.1:2999/liveclientdata/eventdata";
     private static final Logger LOGGER = Logger.getLogger(FetchNewEventsTask.class.getName());
-    private static int lastProcessedEventId = -1;
-    private final EventDataProcessor eventDataProcessor = new EventDataProcessor();
-    private final EventAnimationProcessor eventAnimationProcessor = new EventAnimationProcessor();
 
     @Override
     public void run() {
@@ -36,17 +33,16 @@ public class FetchNewEventsTask implements Runnable {
         } else if (RunningState.getGameState().isActivePlayerAvailable() && RunningState.getGameState().isPlayerListAvailable()) {
             final List<Event> unprocessedEvents = RunningState.getGameState().getEventData().getUnprocessedEvents(events);
             if (!unprocessedEvents.isEmpty()) {
-                if (!hasPlayerReconnected(unprocessedEvents)) {
-                    eventAnimationProcessor.processNewEvents(unprocessedEvents);
+                if (hasPlayerReconnected(unprocessedEvents)) {
+                    final double gameTimeForReconnection = new FetchGameStats().fetchGameStats().getGameTime();
+                    new EventDataProcessor(gameTimeForReconnection).processNewEvents(unprocessedEvents);
+                } else {
+                    new EventDataProcessor().processNewEvents(unprocessedEvents);
+                    new EventAnimationProcessor().processNewEvents(unprocessedEvents);
                 }
-                eventDataProcessor.processNewEvents(unprocessedEvents);
                 RunningState.getGameState().getEventData().addProcessedEvents(unprocessedEvents);
             }
         }
-    }
-
-    private static boolean containsNewEventsToProcess(List<Event> events) {
-        return events.size() > lastProcessedEventId + 1;
     }
 
     private static boolean hasPlayerReconnected(List<Event> events) {

@@ -4,9 +4,7 @@ import com.bonepl.chromaleague.GameStateMocks;
 import com.bonepl.chromaleague.rest.LeagueHttpClientMock;
 import com.bonepl.chromaleague.rest.activeplayer.ActivePlayer;
 import com.bonepl.chromaleague.rest.activeplayer.ChampionStats;
-import com.bonepl.chromaleague.state.GameState;
 import com.bonepl.chromaleague.state.RunningState;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -15,22 +13,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class FetchActivePlayerTaskTest {
 
-    public static final String ACTIVE_PLAYER_NAME = "BooonE";
-
     @BeforeAll
     static void beforeAll() {
-        GameStateMocks.setActivePlayerName(ACTIVE_PLAYER_NAME);
-    }
-
-    @AfterAll
-    static void afterAll() {
-        GameStateMocks.clearActivePlayer();
+        new GameStateMocks();
     }
 
     @Test
     void testActivePlayerParsing() {
         //given
-        LeagueHttpClientMock.mockReturnedResponseWithResource("json/activeplayer.json");
+        new LeagueHttpClientMock().mockActivePlayerResponse("json/activeplayer.json");
 
         //when
         new FetchActivePlayerTask().run();
@@ -41,7 +32,7 @@ class FetchActivePlayerTaskTest {
         final ActivePlayer activePlayer = RunningState.getGameState().getActivePlayer();
         assertEquals(123.45, activePlayer.getCurrentGold());
         assertEquals(1, activePlayer.getLevel());
-        assertEquals(ACTIVE_PLAYER_NAME, activePlayer.getSummonerName());
+        assertEquals("BooonE", activePlayer.getSummonerName());
 
         final ChampionStats championStats = activePlayer.getChampionStats();
         assertEquals(255.59997, championStats.getCurrentHealth());

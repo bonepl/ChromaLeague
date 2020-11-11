@@ -1,0 +1,30 @@
+{
+  "Events": [
+    {
+      "EventID": 0,
+      "EventName": "GameStart",
+      "EventTime": 0.0563616007566452
+    },
+    {
+      "EventID": 1,
+      "EventName": "MinionsSpawning",
+      "EventTime": 65.06690979003906
+    },
+    {
+      "Assisters": [],
+      "EventID": 2,
+      "EventName": "BaronKill",
+      "EventTime": 200.689453125,
+      "KillerName": "BooonE",
+      "Stolen": "False"
+    },
+    {
+      "Assisters": [],
+      "EventID": 3,
+      "EventName": "ChampionKill",
+      "EventTime": 250.1595916748047,
+      "KillerName": "Enemy Player",
+      "VictimName": "BooonE"
+    }
+  ]
+}

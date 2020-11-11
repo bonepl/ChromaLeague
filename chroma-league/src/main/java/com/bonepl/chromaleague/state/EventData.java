@@ -14,9 +14,7 @@ public class EventData {
     private final List<DragonType> killedDragons = new ArrayList<>();
     private final List<Event> processedEvents = new LinkedList<>();
     private LocalTime baronBuffEnd;
-    private double baronBuffStart;
     private LocalTime elderBuffEnd;
-    private double elderBuffStart;
     private int totalEldersKilled;
     private int activePlayerKillingSpree;
     private int activePlayerAssistSpree;
@@ -35,14 +33,6 @@ public class EventData {
         return baronBuffEnd;
     }
 
-    public double getBaronBuffStart() {
-        return baronBuffStart;
-    }
-
-    public void setBaronBuffStart(double baronBuffStart) {
-        this.baronBuffStart = baronBuffStart;
-    }
-
     public List<DragonType> getKilledDragons() {
         return Collections.unmodifiableList(killedDragons);
     }
@@ -57,14 +47,6 @@ public class EventData {
 
     public LocalTime getElderBuffEnd() {
         return elderBuffEnd;
-    }
-
-    public double getElderBuffStart() {
-        return elderBuffStart;
-    }
-
-    public void setElderBuffStart(double elderBuffStart) {
-        this.elderBuffStart = elderBuffStart;
     }
 
     public int getTotalEldersKilled() {

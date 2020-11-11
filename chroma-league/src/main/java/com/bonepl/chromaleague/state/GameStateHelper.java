@@ -14,6 +14,7 @@ public final class GameStateHelper {
 
     public static final int FIRST_ELDER_TIME = 150;
     public static final int NEXT_ELDER_TIME = 300;
+    public static final int BARON_TIME = 180;
 
     private GameStateHelper() {
     }
@@ -62,7 +63,9 @@ public final class GameStateHelper {
         if (isActivePlayerAlive() || didPlayerDieAfterKill(RunningState.getGameState().getEventData().getLastDeathTime(), eventTime)) {
             double buffDiffToCover = gameStats.gameTime - eventTime;
             long secondsToRemoveFromTimer = Math.round(buffDiffToCover);
-            RunningState.getGameState().getEventData().setBaronBuffEnd(LocalTime.now().minusSeconds(secondsToRemoveFromTimer).plusMinutes(3));
+            if (secondsToRemoveFromTimer < BARON_TIME) {
+                RunningState.getGameState().getEventData().setBaronBuffEnd(LocalTime.now().minusSeconds(secondsToRemoveFromTimer).plusSeconds(BARON_TIME));
+            }
         }
     }
 

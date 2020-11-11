@@ -3,8 +3,6 @@ package com.bonepl.chromaleague.state;
 import com.bonepl.chromaleague.hud.parts.GoldBar;
 import com.bonepl.chromaleague.rest.activeplayer.ChampionStats;
 import com.bonepl.chromaleague.rest.eventdata.DragonType;
-import com.bonepl.chromaleague.rest.eventdata.Event;
-import com.bonepl.chromaleague.rest.gamestats.GameStats;
 import com.bonepl.chromaleague.tasks.FetchGameStats;
 
 import java.time.LocalTime;
@@ -57,16 +55,21 @@ public final class GameStateHelper {
         return Double.valueOf(firstDouble * 100 / secondDouble).intValue();
     }
 
-    public static void startBaronBuff(Event event) {
-        final GameStats gameStats = new FetchGameStats().fetchGameStats();
-        double eventTime = event.getEventTime();
-        if (isActivePlayerAlive() || didPlayerDieAfterKill(RunningState.getGameState().getEventData().getLastDeathTime(), eventTime)) {
-            double buffDiffToCover = gameStats.gameTime - eventTime;
+    public static void startBaronBuff(double eventTime, double currentTimeForReconnection) {
+        if (wasPlayerAlive(eventTime) && isActivePlayerAlive()) {
+            double buffDiffToCover = getCurrentTimeOrReconnectionTime(currentTimeForReconnection) - eventTime;
             long secondsToRemoveFromTimer = Math.round(buffDiffToCover);
             if (secondsToRemoveFromTimer < BARON_TIME) {
                 RunningState.getGameState().getEventData().setBaronBuffEnd(LocalTime.now().minusSeconds(secondsToRemoveFromTimer).plusSeconds(BARON_TIME));
             }
         }
+    }
+
+    private static double getCurrentTimeOrReconnectionTime(double currentTimeForReconnection) {
+        if (currentTimeForReconnection == 0.0) {
+            return new FetchGameStats().fetchGameStats().getGameTime();
+        }
+        return currentTimeForReconnection;
     }
 
     public static boolean hasBaronBuff() {
@@ -78,11 +81,11 @@ public final class GameStateHelper {
         return false;
     }
 
-    public static void startElderBuff(double eventTime) {
-        final GameStats gameStats = new FetchGameStats().fetchGameStats();
-        if (didPlayerDieAfterKill(RunningState.getGameState().getEventData().getLastDeathTime(), eventTime) || isActivePlayerAlive()) {
+    public static void startElderBuff(double eventTime, double currentTimeForReconnection) {
+        addKilledElder();
+        if (wasPlayerAlive(eventTime) && isActivePlayerAlive()) {
             final int totalEldersKilled = getTotalEldersKilled();
-            double buffDiffToCover = gameStats.gameTime - eventTime;
+            double buffDiffToCover = getCurrentTimeOrReconnectionTime(currentTimeForReconnection) - eventTime;
             long secondsToRemoveFromTimer = Math.round(buffDiffToCover);
             if (totalEldersKilled == 1 && secondsToRemoveFromTimer < FIRST_ELDER_TIME) {
                 RunningState.getGameState().getEventData()
@@ -94,8 +97,9 @@ public final class GameStateHelper {
         }
     }
 
-    private static boolean didPlayerDieAfterKill(double lastDeathTime, double eventTime) {
-        return lastDeathTime > eventTime;
+    private static boolean wasPlayerAlive(double eventTime) {
+        final EventData eventData = RunningState.getGameState().getEventData();
+        return eventTime > eventData.getLastDeathTime() + eventData.getApproxLastDeathTimer();
     }
 
     public static boolean hasElderBuff() {

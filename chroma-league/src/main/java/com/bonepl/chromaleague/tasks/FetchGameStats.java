@@ -12,6 +12,6 @@ public class FetchGameStats {
 
     public GameStats fetchGameStats() {
         return LeagueHttpClient.getResponse(URL)
-                .map(activePlayer -> JsonIterator.deserialize(activePlayer, GameStats.class)).orElseThrow();
+                .map(gameStats -> JsonIterator.deserialize(gameStats, GameStats.class)).orElseThrow();
     }
 }

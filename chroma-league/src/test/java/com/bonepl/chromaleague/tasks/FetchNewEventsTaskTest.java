@@ -8,19 +8,21 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class FetchNewEventsTaskTest {
+    private LeagueHttpClientMock leagueHttpClientMock;
 
     @BeforeEach
     void setUp() {
-        new GameStateMocks();
+        final GameStateMocks gameStateMocks = new GameStateMocks();
+        gameStateMocks.activePlayer();
+        gameStateMocks.playerList();
+        leagueHttpClientMock = new LeagueHttpClientMock();
+        leagueHttpClientMock.mockGameStatsGameTime(1400);
     }
 
     @AfterEach
@@ -31,7 +33,7 @@ class FetchNewEventsTaskTest {
     @Test
     void testEventParsing() {
         //given
-        new LeagueHttpClientMock().mockEventsResponse("json/standardevent.json");
+        leagueHttpClientMock.mockEventsResponse("json/standardevent.json");
 
         //when
         new FetchNewEventsTask().run();
@@ -49,7 +51,7 @@ class FetchNewEventsTaskTest {
     @Test
     void testEventParsingAfterReconnect() {
         //given
-        new LeagueHttpClientMock().mockEventsResponse("json/eventdata.json");
+        leagueHttpClientMock.mockEventsResponse("json/eventdata.json");
 
         //when
         new FetchNewEventsTask().run();
@@ -68,7 +70,7 @@ class FetchNewEventsTaskTest {
     @Test
     void testFirstEventParsing() {
         //given
-        new LeagueHttpClientMock().mockEventsResponse("json/gamestartevent.json");
+        leagueHttpClientMock.mockEventsResponse("json/gamestartevent.json");
 
         //when
         new FetchNewEventsTask().run();

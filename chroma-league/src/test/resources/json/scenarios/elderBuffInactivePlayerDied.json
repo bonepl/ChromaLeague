@@ -1,0 +1,67 @@
+{
+  "Events": [
+    {
+      "EventID": 0,
+      "EventName": "GameStart",
+      "EventTime": 0.0563616007566452
+    },
+    {
+      "EventID": 1,
+      "EventName": "MinionsSpawning",
+      "EventTime": 65.06690979003906
+    },
+    {
+      "Assisters": [],
+      "DragonType": "Fire",
+      "EventID": 2,
+      "EventName": "DragonKill",
+      "EventTime": 100.6826782226563,
+      "KillerName": "BooonE",
+      "Stolen": "False"
+    },
+    {
+      "Assisters": [],
+      "DragonType": "Water",
+      "EventID": 3,
+      "EventName": "DragonKill",
+      "EventTime": 200.6826782226563,
+      "KillerName": "BooonE",
+      "Stolen": "False"
+    },
+    {
+      "Assisters": [],
+      "DragonType": "Air",
+      "EventID": 4,
+      "EventName": "DragonKill",
+      "EventTime": 250.6826782226563,
+      "KillerName": "BooonE",
+      "Stolen": "False"
+    },
+    {
+      "Assisters": [],
+      "DragonType": "Air",
+      "EventID": 5,
+      "EventName": "DragonKill",
+      "EventTime": 300.6826782226563,
+      "KillerName": "BooonE",
+      "Stolen": "False"
+    },
+    {
+      "Assisters": [],
+      "DragonType": "Elder",
+      "EventID": 6,
+      "EventName": "DragonKill",
+      "EventTime": 350.6826782226563,
+      "KillerName": "BooonE",
+      "Stolen": "False"
+    },
+    {
+      "Assisters": [],
+      "EventID": 7,
+      "EventName": "ChampionKill",
+      "EventTime": 400.1595916748047,
+      "KillerName": "Enemy Player",
+      "VictimName": "BooonE"
+    }
+  ]
+}

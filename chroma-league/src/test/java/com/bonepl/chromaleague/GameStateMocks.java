@@ -20,17 +20,17 @@ public final class GameStateMocks {
         RunningState.setRunningGame(true);
         mockActivePlayer = prepareActivePlayerMock();
         mockPlayerList = preparePlayerListMock();
-        when(mockPlayerList.getActivePlayer().getSummonerName()).thenReturn(PLAYER_NAME);
+        when(activePlayer().getSummonerName()).thenReturn(PLAYER_NAME);
     }
 
-    private PlayerList preparePlayerListMock() {
+    private static PlayerList preparePlayerListMock() {
         PlayerList playerList = mock(PlayerList.class);
         Player activePlayer = mock(Player.class);
         when(playerList.getActivePlayer()).thenReturn(activePlayer);
         return playerList;
     }
 
-    private ActivePlayer prepareActivePlayerMock() {
+    private static ActivePlayer prepareActivePlayerMock() {
         ChampionStats championStats = mock(ChampionStats.class);
         ActivePlayer activePlayer = mock(ActivePlayer.class);
         when(activePlayer.getChampionStats()).thenReturn(championStats);

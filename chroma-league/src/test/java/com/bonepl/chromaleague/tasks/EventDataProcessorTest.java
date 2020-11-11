@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalTime;
 
 import static java.time.temporal.ChronoUnit.SECONDS;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
@@ -42,6 +42,8 @@ class EventDataProcessorTest {
         final EventData eventData = RunningState.getGameState().getEventData();
         assertSecondsEqualsWithMargin(GameStateHelper.FIRST_ELDER_TIME,
                 50 + SECONDS.between(LocalTime.now(), eventData.getElderBuffEnd()));
+        assertEquals(1, eventData.getTotalEldersKilled());
+        assertTrue(GameStateHelper.hasElderBuff());
     }
 
     @Test
@@ -59,6 +61,62 @@ class EventDataProcessorTest {
         final EventData eventData = RunningState.getGameState().getEventData();
         assertSecondsEqualsWithMargin(GameStateHelper.NEXT_ELDER_TIME,
                 50 + SECONDS.between(LocalTime.now(), eventData.getElderBuffEnd()));
+        assertEquals(2, eventData.getTotalEldersKilled());
+        assertTrue(GameStateHelper.hasElderBuff());
+    }
+
+    @Test
+    void testElderBuffInactiveCauseExpired() {
+        // given
+        leagueHttpClientMock.mockEventsResponse("json/scenarios/elderBuffActive.json");
+        leagueHttpClientMock.mockGameStatsGameTime(600);
+        when(gameStateMocks.player().isDead()).thenReturn(false);
+        when(gameStateMocks.playerList().isAlly(any())).thenReturn(true);
+
+        // when
+        new FetchNewEventsTask().run();
+
+        // then
+        final EventData eventData = RunningState.getGameState().getEventData();
+        assertNull(eventData.getElderBuffEnd());
+        assertEquals(1, eventData.getTotalEldersKilled());
+        assertFalse(GameStateHelper.hasElderBuff());
+    }
+
+    @Test
+    void testElderBuffInactiveIfPlayerDead() {
+        // given
+        leagueHttpClientMock.mockEventsResponse("json/scenarios/elderBuffActive.json");
+        leagueHttpClientMock.mockGameStatsGameTime(400);
+        when(gameStateMocks.player().isDead()).thenReturn(true);
+        when(gameStateMocks.playerList().isAlly(any())).thenReturn(true);
+
+        // when
+        new FetchNewEventsTask().run();
+
+        // then
+        final EventData eventData = RunningState.getGameState().getEventData();
+        assertNull(eventData.getElderBuffEnd());
+        assertEquals(1, eventData.getTotalEldersKilled());
+        assertFalse(GameStateHelper.hasElderBuff());
+    }
+
+    @Test
+    void testElderBuffInactiveIfPlayerDied() {
+        // given
+        leagueHttpClientMock.mockEventsResponse("json/scenarios/elderBuffInactivePlayerDied.json");
+        leagueHttpClientMock.mockGameStatsGameTime(450);
+        when(gameStateMocks.player().isDead()).thenReturn(false);
+        when(gameStateMocks.playerList().isAlly(any())).thenReturn(true);
+
+        // when
+        new FetchNewEventsTask().run();
+
+        // then
+        final EventData eventData = RunningState.getGameState().getEventData();
+        assertNull(eventData.getElderBuffEnd());
+        assertEquals(1, eventData.getTotalEldersKilled());
+        assertFalse(GameStateHelper.hasElderBuff());
     }
 
     private static void assertSecondsEqualsWithMargin(long expectedSeconds, long actualSeconds) {

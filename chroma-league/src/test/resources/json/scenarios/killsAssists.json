@@ -1,0 +1,78 @@
+{
+  "Events": [
+    {
+      "EventID": 0,
+      "EventName": "GameStart",
+      "EventTime": 0.0563616007566452
+    },
+    {
+      "EventID": 1,
+      "EventName": "MinionsSpawning",
+      "EventTime": 65.06690979003906
+    },
+    {
+      "Assisters": [],
+      "EventID": 2,
+      "EventName": "ChampionKill",
+      "EventTime": 100.8250732421876,
+      "KillerName": "BooonE",
+      "VictimName": "Enemy"
+    },
+    {
+      "Assisters": [
+        "BooonE"
+      ],
+      "EventID": 3,
+      "EventName": "ChampionKill",
+      "EventTime": 120.8250732421876,
+      "KillerName": "Ally",
+      "VictimName": "Enemy"
+    },
+    {
+      "Assisters": [
+        "BooonE"
+      ],
+      "EventID": 4,
+      "EventName": "ChampionKill",
+      "EventTime": 150.8250732421876,
+      "KillerName": "Ally",
+      "VictimName": "Enemy"
+    },
+    {
+      "Assisters": [],
+      "EventID": 5,
+      "EventName": "ChampionKill",
+      "EventTime": 200.8250732421876,
+      "KillerName": "Enemy",
+      "VictimName": "BooonE"
+    },
+    {
+      "Assisters": [],
+      "EventID": 6,
+      "EventName": "ChampionKill",
+      "EventTime": 220.8250732421876,
+      "KillerName": "BooonE",
+      "VictimName": "Enemy"
+    },
+    {
+      "Assisters": [
+        "BooonE"
+      ],
+      "EventID": 7,
+      "EventName": "ChampionKill",
+      "EventTime": 250.8250732421876,
+      "KillerName": "Ally",
+      "VictimName": "Enemy"
+    },
+    {
+      "Assisters": [
+        "BooonE"
+      ],
+      "EventID": 8,
+      "EventName": "ChampionKill",
+      "EventTime": 300.8250732421876,
+      "KillerName": "Ally",
+      "VictimName": "Enemy"
+    }
+  ]
+}

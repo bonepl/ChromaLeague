@@ -14,17 +14,19 @@
       "Assisters": [],
       "EventID": 2,
       "EventName": "ChampionKill",
-      "EventTime": 247.1595916748047,
-      "KillerName": "Enemy Player",
-      "VictimName": "BooonE"
+      "EventTime": 100.8250732421876,
+      "KillerName": "Enemy",
+      "VictimName": "Ally"
     },
     {
-      "Assisters": [],
+      "Assisters": [
+        "Enemy"
+      ],
       "EventID": 3,
-      "EventName": "BaronKill",
-      "EventTime": 250.689453125,
-      "KillerName": "Ally",
-      "Stolen": "False"
+      "EventName": "ChampionKill",
+      "EventTime": 120.8250732421876,
+      "KillerName": "Enemy",
+      "VictimName": "Ally"
     }
   ]
 }

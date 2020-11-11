@@ -6,6 +6,7 @@ import com.bonepl.chromaleague.rest.playerlist.Player;
 import com.bonepl.chromaleague.rest.playerlist.PlayerList;
 import com.bonepl.chromaleague.state.RunningState;
 
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -55,5 +56,11 @@ public final class GameStateMocks {
     public Player player() {
         RunningState.getGameState().setPlayerList(mockPlayerList);
         return mockPlayerList.getActivePlayer();
+    }
+
+    public void mockTestPlayerList() {
+        when(playerList().isAlly(eq(PLAYER_NAME))).thenReturn(true);
+        when(playerList().isAlly(eq("Ally"))).thenReturn(true);
+        when(playerList().isAlly(eq("Enemy"))).thenReturn(false);
     }
 }

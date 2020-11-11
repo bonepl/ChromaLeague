@@ -12,7 +12,6 @@ import java.time.LocalTime;
 
 import static java.time.temporal.ChronoUnit.SECONDS;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 class EventDataProcessorElderBuffTest {
@@ -25,6 +24,7 @@ class EventDataProcessorElderBuffTest {
         gameStateMocks = new GameStateMocks();
         gameStateMocks.activePlayer();
         gameStateMocks.playerList();
+        gameStateMocks.mockTestPlayerList();
     }
 
     @Test
@@ -33,7 +33,6 @@ class EventDataProcessorElderBuffTest {
         leagueHttpClientMock.mockEventsResponse("json/scenarios/elderBuffActive.json");
         leagueHttpClientMock.mockGameStatsGameTime(400);
         when(gameStateMocks.player().isDead()).thenReturn(false);
-        when(gameStateMocks.playerList().isAlly(any())).thenReturn(true);
 
         // when
         new FetchNewEventsTask().run();
@@ -53,7 +52,6 @@ class EventDataProcessorElderBuffTest {
         leagueHttpClientMock.mockEventsResponse("json/scenarios/secondElderBuffActive.json");
         leagueHttpClientMock.mockGameStatsGameTime(750);
         when(gameStateMocks.player().isDead()).thenReturn(false);
-        when(gameStateMocks.playerList().isAlly(any())).thenReturn(true);
 
         // when
         new FetchNewEventsTask().run();
@@ -73,7 +71,6 @@ class EventDataProcessorElderBuffTest {
         leagueHttpClientMock.mockEventsResponse("json/scenarios/elderBuffActive.json");
         leagueHttpClientMock.mockGameStatsGameTime(600);
         when(gameStateMocks.player().isDead()).thenReturn(false);
-        when(gameStateMocks.playerList().isAlly(any())).thenReturn(true);
 
         // when
         new FetchNewEventsTask().run();
@@ -92,7 +89,6 @@ class EventDataProcessorElderBuffTest {
         leagueHttpClientMock.mockEventsResponse("json/scenarios/elderBuffActive.json");
         leagueHttpClientMock.mockGameStatsGameTime(400);
         when(gameStateMocks.player().isDead()).thenReturn(true);
-        when(gameStateMocks.playerList().isAlly(any())).thenReturn(true);
 
         // when
         new FetchNewEventsTask().run();
@@ -111,7 +107,7 @@ class EventDataProcessorElderBuffTest {
         leagueHttpClientMock.mockEventsResponse("json/scenarios/elderBuffInactivePlayerWasDead.json");
         leagueHttpClientMock.mockGameStatsGameTime(400);
         when(gameStateMocks.player().isDead()).thenReturn(false);
-        when(gameStateMocks.playerList().isAlly(any())).thenReturn(true);
+        when(gameStateMocks.activePlayer().getLevel()).thenReturn(6);
 
         // when
         new FetchNewEventsTask().run();
@@ -130,7 +126,7 @@ class EventDataProcessorElderBuffTest {
         leagueHttpClientMock.mockEventsResponse("json/scenarios/elderBuffInactivePlayerDied.json");
         leagueHttpClientMock.mockGameStatsGameTime(450);
         when(gameStateMocks.player().isDead()).thenReturn(false);
-        when(gameStateMocks.playerList().isAlly(any())).thenReturn(true);
+        when(gameStateMocks.activePlayer().getLevel()).thenReturn(6);
 
         // when
         new FetchNewEventsTask().run();
@@ -149,7 +145,6 @@ class EventDataProcessorElderBuffTest {
         leagueHttpClientMock.mockEventsResponse("json/scenarios/enemyElderBuff.json");
         leagueHttpClientMock.mockGameStatsGameTime(400);
         when(gameStateMocks.player().isDead()).thenReturn(false);
-        when(gameStateMocks.playerList().isAlly(any())).thenReturn(false);
 
         // when
         new FetchNewEventsTask().run();

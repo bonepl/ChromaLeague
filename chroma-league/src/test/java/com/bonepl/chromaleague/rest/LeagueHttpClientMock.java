@@ -43,7 +43,7 @@ public final class LeagueHttpClientMock {
     private final DecimalFormat gameTimeFormat =
             new DecimalFormat("0.0###############", DecimalFormatSymbols.getInstance(Locale.US));
 
-    public void mockGameStatsGameTime(double gameTime){
+    public void mockGameStatsGameTime(double gameTime) {
         mockReturnedResponse(FetchGameStats.URL, String.format("{\"gameMode\": \"CLASSIC\", \"gameTime\": %s}", gameTimeFormat.format(gameTime))
                 .getBytes(StandardCharsets.UTF_8));
     }

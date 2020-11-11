@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.when;
 
 class FetchNewEventsTaskTest {
     private LeagueHttpClientMock leagueHttpClientMock;
@@ -21,6 +22,7 @@ class FetchNewEventsTaskTest {
         final GameStateMocks gameStateMocks = new GameStateMocks();
         gameStateMocks.activePlayer();
         gameStateMocks.playerList();
+        when(gameStateMocks.activePlayer().getLevel()).thenReturn(6);
         leagueHttpClientMock = new LeagueHttpClientMock();
         leagueHttpClientMock.mockGameStatsGameTime(1400);
     }

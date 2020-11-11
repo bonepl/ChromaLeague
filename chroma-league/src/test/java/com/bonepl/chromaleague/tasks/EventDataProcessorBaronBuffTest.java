@@ -12,7 +12,6 @@ import java.time.LocalTime;
 
 import static java.time.temporal.ChronoUnit.SECONDS;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 class EventDataProcessorBaronBuffTest {
@@ -25,6 +24,7 @@ class EventDataProcessorBaronBuffTest {
         gameStateMocks = new GameStateMocks();
         gameStateMocks.activePlayer();
         gameStateMocks.playerList();
+        gameStateMocks.mockTestPlayerList();
     }
 
     @Test
@@ -33,7 +33,6 @@ class EventDataProcessorBaronBuffTest {
         leagueHttpClientMock.mockEventsResponse("json/scenarios/baronBuffActive.json");
         leagueHttpClientMock.mockGameStatsGameTime(250);
         when(gameStateMocks.player().isDead()).thenReturn(false);
-        when(gameStateMocks.playerList().isAlly(any())).thenReturn(true);
 
         // when
         new FetchNewEventsTask().run();
@@ -51,7 +50,6 @@ class EventDataProcessorBaronBuffTest {
         leagueHttpClientMock.mockEventsResponse("json/scenarios/baronBuffActive.json");
         leagueHttpClientMock.mockGameStatsGameTime(400);
         when(gameStateMocks.player().isDead()).thenReturn(false);
-        when(gameStateMocks.playerList().isAlly(any())).thenReturn(true);
 
         // when
         new FetchNewEventsTask().run();
@@ -68,7 +66,6 @@ class EventDataProcessorBaronBuffTest {
         leagueHttpClientMock.mockEventsResponse("json/scenarios/baronBuffActive.json");
         leagueHttpClientMock.mockGameStatsGameTime(250);
         when(gameStateMocks.player().isDead()).thenReturn(true);
-        when(gameStateMocks.playerList().isAlly(any())).thenReturn(true);
 
         // when
         new FetchNewEventsTask().run();
@@ -85,7 +82,7 @@ class EventDataProcessorBaronBuffTest {
         leagueHttpClientMock.mockEventsResponse("json/scenarios/baronBuffInactivePlayerWasDead.json");
         leagueHttpClientMock.mockGameStatsGameTime(300);
         when(gameStateMocks.player().isDead()).thenReturn(false);
-        when(gameStateMocks.playerList().isAlly(any())).thenReturn(true);
+        when(gameStateMocks.activePlayer().getLevel()).thenReturn(6);
 
         // when
         new FetchNewEventsTask().run();
@@ -102,7 +99,7 @@ class EventDataProcessorBaronBuffTest {
         leagueHttpClientMock.mockEventsResponse("json/scenarios/baronBuffInactivePlayerDied.json");
         leagueHttpClientMock.mockGameStatsGameTime(300);
         when(gameStateMocks.player().isDead()).thenReturn(false);
-        when(gameStateMocks.playerList().isAlly(any())).thenReturn(true);
+        when(gameStateMocks.activePlayer().getLevel()).thenReturn(6);
 
         // when
         new FetchNewEventsTask().run();
@@ -119,7 +116,6 @@ class EventDataProcessorBaronBuffTest {
         leagueHttpClientMock.mockEventsResponse("json/scenarios/enemyBaronBuff.json");
         leagueHttpClientMock.mockGameStatsGameTime(250);
         when(gameStateMocks.player().isDead()).thenReturn(false);
-        when(gameStateMocks.playerList().isAlly(any())).thenReturn(false);
 
         // when
         new FetchNewEventsTask().run();

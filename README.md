@@ -22,6 +22,8 @@ the integrations
 **Chroma League** is using League's [Live Client Data Api](https://developer.riotgames.com/docs/lol#game-client-api_live-client-data-api)
 exposed during game to fetch current game's state and react to the in-game events.
 
+If you have any comments, suggestions, ideas, found a bug or just want to say hello please visit official thread at Razer Insider: [Chroma League - League of Legends integration for Razer Chroma](https://insider.razer.com/index.php?threads/chroma-league-league-of-legends-integration-for-razer-chroma.65412/).
+
 ## Overview
 ![Chroma League HUD](https://github.com/bonepl/ChromaLeague/blob/master/doc/images/ChromaLeague.png "Chroma League HUD")
 

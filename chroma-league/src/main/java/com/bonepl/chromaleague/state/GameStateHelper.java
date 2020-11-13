@@ -141,4 +141,25 @@ public final class GameStateHelper {
         RunningState.getGameState().getEventData().setActivePlayerAssistSpree(
                 RunningState.getGameState().getEventData().getActivePlayerAssistSpree() + 1);
     }
+
+    public static boolean shouldPlayRespawnAnimation() {
+        final RespawnIndicator respawnIndicator = RunningState.getGameState().getEventData().getRespawnIndicator();
+        final double respawnTimer = RunningState.getGameState().getPlayerList().getActivePlayer().getRespawnTimer();
+        if (respawnIndicator == RespawnIndicator.IDLE) {
+            if (isActivePlayerAlive() && respawnTimer > 2.0) {
+                RunningState.getGameState().getEventData().setRespawnIndicator(RespawnIndicator.IDLE);
+            }
+            return false;
+        }
+        if (respawnIndicator == RespawnIndicator.READY) {
+            RunningState.getGameState().getEventData().setRespawnIndicator(RespawnIndicator.IDLE);
+            return true;
+        }
+        if (respawnIndicator == RespawnIndicator.CHARGING) {
+            if (respawnTimer <= 2.0) {
+                RunningState.getGameState().getEventData().setRespawnIndicator(RespawnIndicator.READY);
+            }
+        }
+        return false;
+    }
 }

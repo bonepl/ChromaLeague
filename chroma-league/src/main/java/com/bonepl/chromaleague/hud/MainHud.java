@@ -38,7 +38,9 @@ public class MainHud extends AnimatedFrame {
             mainHudFrame.addFrame(dragonBar);
             mainHudFrame.addFrame(goldBar);
             mainHudFrame.addFrame(levelUpBar);
-            handleRespawnEvent();
+            if(GameStateHelper.shouldPlayRespawnAnimation()){
+                eventAnimation.addAnimation(new RespawnAnimation());
+            }
             if (eventAnimation.hasFrame()) {
                 mainHudFrame.addFrame(eventAnimation);
             }
@@ -54,7 +56,6 @@ public class MainHud extends AnimatedFrame {
         if (playerDead) {
             if (activePlayerAlive) {
                 playerDead = false;
-                eventAnimation.addAnimation(new RespawnAnimation());
             }
         } else {
             if (!activePlayerAlive) {

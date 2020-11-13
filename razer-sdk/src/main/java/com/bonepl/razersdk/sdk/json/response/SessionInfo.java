@@ -21,9 +21,4 @@ public class SessionInfo {
     public String getUri() {
         return uri;
     }
-
-    @Override
-    public String toString() {
-        return String.format("{ session id: %d, session uri: %s }", sessionId, uri);
-    }
 }

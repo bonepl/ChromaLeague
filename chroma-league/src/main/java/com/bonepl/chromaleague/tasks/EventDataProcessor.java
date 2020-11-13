@@ -6,6 +6,7 @@ import com.bonepl.chromaleague.rest.eventdata.Event;
 import com.bonepl.chromaleague.rest.eventdata.EventType;
 import com.bonepl.chromaleague.state.EventData;
 import com.bonepl.chromaleague.state.GameStateHelper;
+import com.bonepl.chromaleague.state.RespawnIndicator;
 import com.bonepl.chromaleague.state.RunningState;
 
 import java.util.List;
@@ -59,7 +60,9 @@ public class EventDataProcessor {
         eventData.setLastDeathTime(event.getEventTime());
         final int level = RunningState.getGameState().getActivePlayer().getLevel();
         if (currentTimeForReconnection == 0.0) {
+            RunningState.getGameState().getPlayerList().getActivePlayer().overwriteRespawnTimer(3.0);
             eventData.setApproxLastDeathTimer(ExperienceUtil.getApproxDeathTimeForLevel(level));
+            eventData.setRespawnIndicator(RespawnIndicator.CHARGING);
         } else {
             eventData.setApproxLastDeathTimer(ExperienceUtil.getApproxDeathTimeForEventTime(event.getEventTime(), currentTimeForReconnection));
         }

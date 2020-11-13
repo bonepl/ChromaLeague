@@ -7,14 +7,16 @@ public class Player {
     private final Team team;
     private final boolean isDead;
     private final String championName;
+    private double respawnTimer;
 
     @SuppressWarnings("BooleanParameter")
     @JsonCreator
-    public Player(String summonerName, Team team, boolean isDead, String championName) {
+    public Player(String summonerName, Team team, boolean isDead, String championName, double respawnTimer) {
         this.summonerName = summonerName;
         this.team = team;
         this.isDead = isDead;
         this.championName = championName;
+        this.respawnTimer = respawnTimer;
     }
 
     public String getSummonerName() {
@@ -31,5 +33,13 @@ public class Player {
 
     public String getChampionName() {
         return championName;
+    }
+
+    public double getRespawnTimer() {
+        return respawnTimer;
+    }
+
+    public void overwriteRespawnTimer(double timer) {
+        respawnTimer = timer;
     }
 }

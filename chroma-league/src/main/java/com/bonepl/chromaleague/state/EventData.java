@@ -20,6 +20,7 @@ public class EventData {
     private int activePlayerAssistSpree;
     private double lastDeathTime;
     private double approxLastDeathTimer;
+    private RespawnIndicator respawnIndicator = RespawnIndicator.IDLE;
 
     public void setLastDeathTime(double lastDeathTime) {
         this.lastDeathTime = lastDeathTime;
@@ -93,6 +94,14 @@ public class EventData {
         return fetchedEvents.stream()
                 .filter(fetchedEvent -> !processedEvents.contains(fetchedEvent))
                 .collect(Collectors.toUnmodifiableList());
+    }
+
+    public RespawnIndicator getRespawnIndicator() {
+        return respawnIndicator;
+    }
+
+    public void setRespawnIndicator(RespawnIndicator respawnIndicator) {
+        this.respawnIndicator = respawnIndicator;
     }
 
     //TEST ONLY

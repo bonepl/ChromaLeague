@@ -102,7 +102,7 @@ public final class ChromaRestSDK implements AutoCloseable {
         try {
             return new StringEntity(keyboardEffectJson);
         } catch (UnsupportedEncodingException e) {
-            LOGGER.log(Level.SEVERE, e, () -> "Error while creating Keyboard Effect");
+            LOGGER.log(Level.SEVERE, e, () -> "Error while creating KeyboardEffect");
             throw new IllegalStateException(e);
         }
     }
@@ -113,7 +113,7 @@ public final class ChromaRestSDK implements AutoCloseable {
         initRequest.setHeader("Content-type", "application/json");
         final String sessionInfoJson = executeRequest(initRequest);
         final SessionInfo sessionInfo = JsonIterator.deserialize(sessionInfoJson, SessionInfo.class);
-        LOGGER.info(() -> "Initialized ChromaRestSDK connection " + sessionInfo);
+        LOGGER.info(() -> "Initialized ChromaRestSDK connection { sessionId: " + sessionInfo.getSessionId() + " }");
         try {
             Thread.sleep(INIT_SLEEP_TIME);
         } catch (InterruptedException e) {

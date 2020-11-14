@@ -10,8 +10,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class MainTask implements Runnable {
-    public static final int PLAYER_LIST_FETCH_DELAY = 1000;
-    public static final int ACTIVE_PLAYER_FETCH_DELAY = 200;
+    public static final int ACTIVE_PLAYER_FETCH_DELAY = 100;
+    public static final int EVENTS_FETCH_DELAY = 1000;
     public static final int MAIN_HUD_REFRESH_DELAY = 50;
 
     private static final Logger LOGGER = Logger.getLogger(MainTask.class.getName());
@@ -81,7 +81,7 @@ public class MainTask implements Runnable {
         if (mainExecutor == null) {
             LOGGER.info("Game is loading");
             mainExecutor = Executors.newScheduledThreadPool(10);
-            mainExecutor.scheduleWithFixedDelay(new FetchNewEventsTask(), 0, 1000, TimeUnit.MILLISECONDS);
+            mainExecutor.scheduleWithFixedDelay(new FetchNewEventsTask(), 0, EVENTS_FETCH_DELAY, TimeUnit.MILLISECONDS);
         }
     }
 }

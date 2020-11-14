@@ -5,7 +5,7 @@ import com.bonepl.chromaleague.rest.LeagueHttpClientMock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class FetchRespawnTimeTest {
     @BeforeEach

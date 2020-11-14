@@ -15,7 +15,7 @@ public class FetchPlayerList {
 
     public PlayerList fetchPlayerList() {
         try {
-            if (RunningState.getGameState().isActivePlayerAvailable()) {
+            if (RunningState.getGameState().getActivePlayer() != null) {
                 return LeagueHttpClient.getResponse(URL)
                         .map(playerList -> JsonIterator.deserialize(playerList, Player[].class))
                         .map(PlayerList::new)

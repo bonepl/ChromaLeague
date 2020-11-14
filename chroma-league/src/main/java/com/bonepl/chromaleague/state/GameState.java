@@ -19,10 +19,6 @@ public final class GameState {
         return activePlayer;
     }
 
-    public boolean isActivePlayerAvailable() {
-        return activePlayer != null;
-    }
-
     public void setPlayerList(PlayerList playerList) {
         this.playerList = playerList;
     }
@@ -32,10 +28,6 @@ public final class GameState {
             playerList = new FetchPlayerList().fetchPlayerList();
         }
         return playerList;
-    }
-
-    public boolean isPlayerListAvailable() {
-        return playerList != null;
     }
 
     public EventData getEventData() {

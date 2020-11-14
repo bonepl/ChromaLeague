@@ -18,7 +18,7 @@ public final class GameStateHelper {
     }
 
     public static boolean isActivePlayerAlive() {
-        return !RunningState.getGameState().getPlayerList().getActivePlayer().isDead();
+        return !RunningState.getGameState().getActivePlayer().getChampionStats().isDead();
     }
 
     public static int getHpPercentage() {

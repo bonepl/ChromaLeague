@@ -274,7 +274,7 @@
     "position": "TOP",
     "rawChampionName": "game_character_displayname_Chogath",
     "rawSkinName": "game_character_skin_displayname_Chogath_2",
-    "respawnTimer": 0.0,
+    "respawnTimer": 4.5,
     "runes": {
       "keystone": {
         "displayName": "Grasp of the Undying",

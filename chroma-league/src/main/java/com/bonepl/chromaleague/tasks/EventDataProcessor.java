@@ -64,11 +64,8 @@ public class EventDataProcessor {
         final int level = RunningState.getGameState().getActivePlayer().getLevel();
         if (currentTimeForReconnection == 0.0) {
             eventData.setDeathTime(LocalTime.now());
-            new FetchPlayerListTask().run();
-            final double respawnTimer = RunningState.getGameState().getPlayerList().getActivePlayer().getRespawnTimer();
+            final double respawnTimer = new FetchRespawnTime().fetchPlayerRespawnTime();
             eventData.setRespawnTime(LocalTime.now().plus(millisDuration(respawnTimer)));
-//            RunningState.getGameState().getPlayerList().getActivePlayer().overwriteRespawnTimer(3.0);
-//            eventData.setApproxLastDeathTimer(ExperienceUtil.getApproxDeathTimeForLevel(level));
             eventData.setRespawnIndicator(RespawnIndicator.CHARGING);
         } else {
             final Duration millisToDeath = millisDuration(currentTimeForReconnection - event.getEventTime());
@@ -76,7 +73,6 @@ public class EventDataProcessor {
             final double approxDeathTimeForEventTime = ExperienceUtil.getApproxDeathTimeForEventTime(event.getEventTime(), currentTimeForReconnection);
             final LocalTime pastRespawnTime = eventData.getDeathTime().plus(millisDuration(approxDeathTimeForEventTime));
             eventData.setRespawnTime(pastRespawnTime);
-//            eventData.setApproxLastDeathTimer(approxDeathTimeForEventTime);
         }
 
         eventData.setElderBuffEnd(null);

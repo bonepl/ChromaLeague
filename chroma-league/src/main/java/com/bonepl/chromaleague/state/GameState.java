@@ -3,6 +3,7 @@ package com.bonepl.chromaleague.state;
 import com.bonepl.chromaleague.hud.MainHud;
 import com.bonepl.chromaleague.rest.activeplayer.ActivePlayer;
 import com.bonepl.chromaleague.rest.playerlist.PlayerList;
+import com.bonepl.chromaleague.tasks.FetchPlayerList;
 
 public final class GameState {
     private ActivePlayer activePlayer;
@@ -27,6 +28,9 @@ public final class GameState {
     }
 
     public PlayerList getPlayerList() {
+        if (playerList == null) {
+            playerList = new FetchPlayerList().fetchPlayerList();
+        }
         return playerList;
     }
 

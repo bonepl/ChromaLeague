@@ -73,7 +73,6 @@ public class MainTask implements Runnable {
     private static void initializeGameThreads() {
         LOGGER.info("Player joined the game");
         chromaRestSDK = new ChromaRestSDK();
-        mainExecutor.scheduleWithFixedDelay(new FetchPlayerListTask(), 0, PLAYER_LIST_FETCH_DELAY, TimeUnit.MILLISECONDS);
         mainExecutor.scheduleWithFixedDelay(new FetchActivePlayerTask(), 50, ACTIVE_PLAYER_FETCH_DELAY, TimeUnit.MILLISECONDS);
         mainExecutor.scheduleWithFixedDelay(new RefreshMainHudTask(chromaRestSDK), 150, MAIN_HUD_REFRESH_DELAY, TimeUnit.MILLISECONDS);
     }

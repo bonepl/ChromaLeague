@@ -5,7 +5,9 @@ import com.bonepl.chromaleague.rest.activeplayer.ChampionStats;
 import com.bonepl.chromaleague.rest.eventdata.DragonType;
 import com.bonepl.chromaleague.tasks.FetchGameStats;
 
+import java.time.Duration;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 public final class GameStateHelper {
@@ -56,7 +58,7 @@ public final class GameStateHelper {
     }
 
     public static void startBaronBuff(double eventTime, double currentTimeForReconnection) {
-        if (wasPlayerAlive(eventTime) && isActivePlayerAlive()) {
+        if (playerAliveAtEventTime(eventTime, currentTimeForReconnection)) {
             double buffDiffToCover = getCurrentTimeOrReconnectionTime(currentTimeForReconnection) - eventTime;
             long secondsToRemoveFromTimer = Math.round(buffDiffToCover);
             if (secondsToRemoveFromTimer < BARON_TIME) {
@@ -83,10 +85,10 @@ public final class GameStateHelper {
 
     public static void startElderBuff(double eventTime, double currentTimeForReconnection) {
         addKilledElder();
-        if (wasPlayerAlive(eventTime) && isActivePlayerAlive()) {
+        final double currentTimeOrReconnectionTime = getCurrentTimeOrReconnectionTime(currentTimeForReconnection);
+        if (playerAliveAtEventTime(eventTime, currentTimeOrReconnectionTime)) {
             final int totalEldersKilled = getTotalEldersKilled();
-            double buffDiffToCover = getCurrentTimeOrReconnectionTime(currentTimeForReconnection) - eventTime;
-            long secondsToRemoveFromTimer = Math.round(buffDiffToCover);
+            long secondsToRemoveFromTimer = Math.round(currentTimeOrReconnectionTime - eventTime);
             if (totalEldersKilled == 1 && secondsToRemoveFromTimer < FIRST_ELDER_TIME) {
                 RunningState.getGameState().getEventData()
                         .setElderBuffEnd(LocalTime.now().minusSeconds(secondsToRemoveFromTimer).plusSeconds(FIRST_ELDER_TIME));
@@ -97,9 +99,17 @@ public final class GameStateHelper {
         }
     }
 
-    private static boolean wasPlayerAlive(double eventTime) {
+    private static boolean playerAliveAtEventTime(double eventTime, double currentTimeOrReconnectionTime) {
         final EventData eventData = RunningState.getGameState().getEventData();
-        return eventTime > eventData.getLastDeathTime() + eventData.getApproxLastDeathTimer();
+        if (eventData.getDeathTime() == null) {
+            return true;
+        }
+        final LocalTime eventLocalTime = LocalTime.now().minus(millisDuration(currentTimeOrReconnectionTime - eventTime));
+        return !(eventLocalTime.isAfter(eventData.getDeathTime()) && eventLocalTime.isBefore(eventData.getRespawnTime()));
+    }
+
+    public static Duration millisDuration(double gameTime) {
+        return Duration.ofMillis(Double.valueOf(gameTime * 1000).longValue());
     }
 
     public static boolean hasElderBuff() {
@@ -143,21 +153,29 @@ public final class GameStateHelper {
     }
 
     public static boolean shouldPlayRespawnAnimation() {
-        final RespawnIndicator respawnIndicator = RunningState.getGameState().getEventData().getRespawnIndicator();
-        final double respawnTimer = RunningState.getGameState().getPlayerList().getActivePlayer().getRespawnTimer();
-        if (respawnIndicator == RespawnIndicator.IDLE) {
-            if (isActivePlayerAlive() && respawnTimer > 2.0) {
-                RunningState.getGameState().getEventData().setRespawnIndicator(RespawnIndicator.IDLE);
+        final boolean dead = RunningState.getGameState().getActivePlayer().getChampionStats().isDead();
+        final EventData eventData = RunningState.getGameState().getEventData();
+        if (!dead && eventData.getDeathTime() != null) {
+            eventData.setDeathTime(null);
+            eventData.setRespawnTime(null);
+        }
+        if (eventData.getDeathTime() == null) {
+            return false;
+        }
+        final LocalTime now = LocalTime.now();
+        if (eventData.getRespawnIndicator() == RespawnIndicator.IDLE) {
+            if (now.isBefore(eventData.getRespawnTime())) {
+                RunningState.getGameState().getEventData().setRespawnIndicator(RespawnIndicator.CHARGING);
             }
             return false;
         }
-        if (respawnIndicator == RespawnIndicator.READY) {
-            RunningState.getGameState().getEventData().setRespawnIndicator(RespawnIndicator.IDLE);
+        if (eventData.getRespawnIndicator() == RespawnIndicator.READY) {
+            eventData.setRespawnIndicator(RespawnIndicator.IDLE);
             return true;
         }
-        if (respawnIndicator == RespawnIndicator.CHARGING) {
-            if (respawnTimer <= 2.0) {
-                RunningState.getGameState().getEventData().setRespawnIndicator(RespawnIndicator.READY);
+        if (eventData.getRespawnIndicator() == RespawnIndicator.CHARGING) {
+            if (ChronoUnit.SECONDS.between(now, eventData.getRespawnTime()) <= 2) {
+                eventData.setRespawnIndicator(RespawnIndicator.READY);
             }
         }
         return false;

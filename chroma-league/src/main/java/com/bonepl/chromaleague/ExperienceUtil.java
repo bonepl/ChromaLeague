@@ -66,6 +66,6 @@ public final class ExperienceUtil {
     }
 
     private static int getLevelFromExp(final double experience) {
-        return LEVEL_EXPERIENCE_MAP.entrySet().stream().filter(entry -> entry.getValue() >= experience).findFirst().map(Map.Entry::getValue).orElseThrow();
+        return LEVEL_EXPERIENCE_MAP.entrySet().stream().filter(entry -> entry.getValue() >= experience).findFirst().map(Map.Entry::getKey).orElseThrow();
     }
 }

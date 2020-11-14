@@ -9,7 +9,11 @@ import com.bonepl.chromaleague.state.GameStateHelper;
 import com.bonepl.chromaleague.state.RespawnIndicator;
 import com.bonepl.chromaleague.state.RunningState;
 
+import java.time.Duration;
+import java.time.LocalTime;
 import java.util.List;
+
+import static com.bonepl.chromaleague.state.GameStateHelper.millisDuration;
 
 public class EventDataProcessor {
     private final double currentTimeForReconnection;
@@ -57,14 +61,22 @@ public class EventDataProcessor {
 
     private void resetAlivePlayerCounters(Event event) {
         final EventData eventData = RunningState.getGameState().getEventData();
-        eventData.setLastDeathTime(event.getEventTime());
         final int level = RunningState.getGameState().getActivePlayer().getLevel();
         if (currentTimeForReconnection == 0.0) {
-            RunningState.getGameState().getPlayerList().getActivePlayer().overwriteRespawnTimer(3.0);
-            eventData.setApproxLastDeathTimer(ExperienceUtil.getApproxDeathTimeForLevel(level));
+            eventData.setDeathTime(LocalTime.now());
+            new FetchPlayerListTask().run();
+            final double respawnTimer = RunningState.getGameState().getPlayerList().getActivePlayer().getRespawnTimer();
+            eventData.setRespawnTime(LocalTime.now().plus(millisDuration(respawnTimer)));
+//            RunningState.getGameState().getPlayerList().getActivePlayer().overwriteRespawnTimer(3.0);
+//            eventData.setApproxLastDeathTimer(ExperienceUtil.getApproxDeathTimeForLevel(level));
             eventData.setRespawnIndicator(RespawnIndicator.CHARGING);
         } else {
-            eventData.setApproxLastDeathTimer(ExperienceUtil.getApproxDeathTimeForEventTime(event.getEventTime(), currentTimeForReconnection));
+            final Duration millisToDeath = millisDuration(currentTimeForReconnection - event.getEventTime());
+            eventData.setDeathTime(LocalTime.now().minus(millisToDeath));
+            final double approxDeathTimeForEventTime = ExperienceUtil.getApproxDeathTimeForEventTime(event.getEventTime(), currentTimeForReconnection);
+            final LocalTime pastRespawnTime = eventData.getDeathTime().plus(millisDuration(approxDeathTimeForEventTime));
+            eventData.setRespawnTime(pastRespawnTime);
+//            eventData.setApproxLastDeathTimer(approxDeathTimeForEventTime);
         }
 
         eventData.setElderBuffEnd(null);

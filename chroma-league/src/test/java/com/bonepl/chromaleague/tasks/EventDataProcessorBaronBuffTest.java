@@ -61,22 +61,6 @@ class EventDataProcessorBaronBuffTest {
     }
 
     @Test
-    void testBaronBuffInactiveIfPlayerDead() {
-        // given
-        leagueHttpClientMock.mockEventsResponse("json/scenarios/baronBuffActive.json");
-        leagueHttpClientMock.mockGameStatsGameTime(250);
-        when(gameStateMocks.championStats().isDead()).thenReturn(true);
-
-        // when
-        new FetchNewEventsTask().run();
-
-        // then
-        final EventData eventData = RunningState.getGameState().getEventData();
-        assertNull(eventData.getBaronBuffEnd());
-        assertFalse(GameStateHelper.hasBaronBuff());
-    }
-
-    @Test
     void testBaronBuffInactiveIfPlayerWasDead() {
         // given
         leagueHttpClientMock.mockEventsResponse("json/scenarios/baronBuffInactivePlayerWasDead.json");

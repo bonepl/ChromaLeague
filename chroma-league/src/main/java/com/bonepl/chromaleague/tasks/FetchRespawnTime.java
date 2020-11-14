@@ -19,7 +19,7 @@ public class FetchRespawnTime {
                         .orElseThrow(() -> new IllegalStateException("Couldn't fetch respawn time"));
             }
         } catch (Exception ex) {
-            LOGGER.log(Level.SEVERE, ex, () -> "Error while fetching respawn time from PlayerList");
+            LOGGER.log(Level.WARNING, ex, () -> "Error while fetching respawn time from PlayerList");
         }
         return 0.0;
     }

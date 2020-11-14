@@ -153,29 +153,18 @@ public final class GameStateHelper {
     }
 
     public static boolean shouldPlayRespawnAnimation() {
-        final boolean dead = RunningState.getGameState().getActivePlayer().getChampionStats().isDead();
         final EventData eventData = RunningState.getGameState().getEventData();
-        if (!dead && eventData.getDeathTime() != null) {
-            eventData.setDeathTime(null);
-            eventData.setRespawnTime(null);
-        }
-        if (eventData.getDeathTime() == null) {
-            return false;
-        }
-        final LocalTime now = LocalTime.now();
-        if (eventData.getRespawnIndicator() == RespawnIndicator.IDLE) {
-            if (now.isBefore(eventData.getRespawnTime())) {
-                RunningState.getGameState().getEventData().setRespawnIndicator(RespawnIndicator.CHARGING);
+        if (eventData.getDeathTime() != null) {
+            final LocalTime now = LocalTime.now();
+            if (now.isAfter(eventData.getRespawnTime())
+                    || eventData.getRespawnIndicator() == RespawnIndicator.IDLE) {
+                return false;
             }
-            return false;
-        }
-        if (eventData.getRespawnIndicator() == RespawnIndicator.READY) {
-            eventData.setRespawnIndicator(RespawnIndicator.IDLE);
-            return true;
-        }
-        if (eventData.getRespawnIndicator() == RespawnIndicator.CHARGING) {
-            if (ChronoUnit.SECONDS.between(now, eventData.getRespawnTime()) <= 2) {
-                eventData.setRespawnIndicator(RespawnIndicator.READY);
+            if (eventData.getRespawnIndicator() == RespawnIndicator.CHARGING) {
+                if (ChronoUnit.SECONDS.between(now, eventData.getRespawnTime()) <= 1) {
+                    eventData.setRespawnIndicator(RespawnIndicator.IDLE);
+                    return true;
+                }
             }
         }
         return false;

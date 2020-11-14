@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class FetchPlayerListTaskTest {
+class FetchPlayerListTest {
 
     @BeforeEach
     void setUp() {
@@ -30,11 +30,9 @@ class FetchPlayerListTaskTest {
         new GameStateMocks();
 
         //when
-        new FetchPlayerListTask().run();
+        final PlayerList playerList = new FetchPlayerList().fetchPlayerList();
 
         //then
-        assertTrue(RunningState.getGameState().isPlayerListAvailable());
-        final PlayerList playerList = RunningState.getGameState().getPlayerList();
         assertNotNull(playerList);
         assertEquals(5, playerList.getAllies().size());
         assertEquals(5, playerList.getEnemies().size());
@@ -54,9 +52,9 @@ class FetchPlayerListTaskTest {
     void testDependencyOnActivePlayer() {
         //when
         RunningState.setRunningGame(true);
-        new FetchPlayerListTask().run();
+        final PlayerList playerList = new FetchPlayerList().fetchPlayerList();
 
         //then
-        assertFalse(RunningState.getGameState().isPlayerListAvailable());
+        assertNull(playerList);
     }
 }

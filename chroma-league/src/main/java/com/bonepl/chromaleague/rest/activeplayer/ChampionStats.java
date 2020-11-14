@@ -44,4 +44,8 @@ public class ChampionStats {
     public String getResourceType() {
         return resourceType;
     }
+
+    public boolean isDead() {
+        return currentHealth == 0.0;
+    }
 }

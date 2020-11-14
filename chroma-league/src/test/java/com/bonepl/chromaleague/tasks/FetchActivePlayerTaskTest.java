@@ -9,7 +9,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class FetchActivePlayerTaskTest {
 
@@ -27,7 +27,7 @@ class FetchActivePlayerTaskTest {
         new FetchActivePlayerTask().run();
 
         //then
-        assertTrue(RunningState.getGameState().isActivePlayerAvailable());
+        assertNotNull(RunningState.getGameState().getActivePlayer());
 
         final ActivePlayer activePlayer = RunningState.getGameState().getActivePlayer();
         assertEquals(123.45, activePlayer.getCurrentGold());

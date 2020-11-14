@@ -18,25 +18,9 @@ public class EventData {
     private int totalEldersKilled;
     private int activePlayerKillingSpree;
     private int activePlayerAssistSpree;
-    private double lastDeathTime;
-    private double approxLastDeathTimer;
     private RespawnIndicator respawnIndicator = RespawnIndicator.IDLE;
-
-    public void setLastDeathTime(double lastDeathTime) {
-        this.lastDeathTime = lastDeathTime;
-    }
-
-    public double getLastDeathTime() {
-        return lastDeathTime;
-    }
-
-    public double getApproxLastDeathTimer() {
-        return approxLastDeathTimer;
-    }
-
-    public void setApproxLastDeathTimer(double approxLastDeathTimer) {
-        this.approxLastDeathTimer = approxLastDeathTimer;
-    }
+    private LocalTime deathTime;
+    private LocalTime respawnTime;
 
     public void setBaronBuffEnd(LocalTime baronBuffEnd) {
         this.baronBuffEnd = baronBuffEnd;
@@ -86,11 +70,11 @@ public class EventData {
         this.activePlayerAssistSpree = activePlayerAssistSpree;
     }
 
-    public void addProcessedEvents(List<Event> events){
+    public void addProcessedEvents(List<Event> events) {
         processedEvents.addAll(events);
     }
 
-    public List<Event> getUnprocessedEvents(List<Event> fetchedEvents){
+    public List<Event> getUnprocessedEvents(List<Event> fetchedEvents) {
         return fetchedEvents.stream()
                 .filter(fetchedEvent -> !processedEvents.contains(fetchedEvent))
                 .collect(Collectors.toUnmodifiableList());
@@ -102,6 +86,22 @@ public class EventData {
 
     public void setRespawnIndicator(RespawnIndicator respawnIndicator) {
         this.respawnIndicator = respawnIndicator;
+    }
+
+    public LocalTime getDeathTime() {
+        return deathTime;
+    }
+
+    public void setDeathTime(LocalTime deathTime) {
+        this.deathTime = deathTime;
+    }
+
+    public LocalTime getRespawnTime() {
+        return respawnTime;
+    }
+
+    public void setRespawnTime(LocalTime respawnTime) {
+        this.respawnTime = respawnTime;
     }
 
     //TEST ONLY

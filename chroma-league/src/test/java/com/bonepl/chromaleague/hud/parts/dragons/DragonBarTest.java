@@ -21,10 +21,11 @@ class DragonBarTest {
     void setUp() {
         GameStateMocks gameStateMocks = new GameStateMocks();
         when(gameStateMocks.playerList().isAlly(any())).thenReturn(true);
-        when(gameStateMocks.player().isDead()).thenReturn(false);
+        when(gameStateMocks.championStats().isDead()).thenReturn(false);
         new LeagueHttpClientMock().mockGameStatsResponse("json/gamestats.json");
     }
 
+    @SuppressWarnings("JUnitTestMethodWithNoAssertions")
     @Test
     void testFullDragonBar() {
         Queue<DragonType> testDrakesOrder = new LinkedList<>(List.of(DragonType.INFERNAL,

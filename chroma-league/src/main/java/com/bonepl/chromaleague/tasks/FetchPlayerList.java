@@ -9,21 +9,21 @@ import com.jsoniter.JsonIterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class FetchPlayerListTask implements Runnable {
+public class FetchPlayerList {
     public static final String URL = "https://127.0.0.1:2999/liveclientdata/playerlist";
-    private static final Logger LOGGER = Logger.getLogger(FetchPlayerListTask.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(FetchPlayerList.class.getName());
 
-    @Override
-    public void run() {
+    public PlayerList fetchPlayerList() {
         try {
-            if (RunningState.getGameState().isActivePlayerAvailable()) {
-                LeagueHttpClient.getResponse(URL)
+            if (RunningState.getGameState().getActivePlayer() != null) {
+                return LeagueHttpClient.getResponse(URL)
                         .map(playerList -> JsonIterator.deserialize(playerList, Player[].class))
                         .map(PlayerList::new)
-                        .ifPresent(playerList1 -> RunningState.getGameState().setPlayerList(playerList1));
+                        .orElseThrow(() -> new IllegalStateException("Couldn't fetch PlayerList"));
             }
         } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, ex, () -> "Error while fetching PlayerList");
         }
+        return null;
     }
 }

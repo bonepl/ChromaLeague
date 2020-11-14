@@ -32,7 +32,7 @@ class EventDataProcessorElderBuffTest {
         // given
         leagueHttpClientMock.mockEventsResponse("json/scenarios/elderBuffActive.json");
         leagueHttpClientMock.mockGameStatsGameTime(400);
-        when(gameStateMocks.player().isDead()).thenReturn(false);
+        when(gameStateMocks.championStats().isDead()).thenReturn(false);
 
         // when
         new FetchNewEventsTask().run();
@@ -51,7 +51,7 @@ class EventDataProcessorElderBuffTest {
         // given
         leagueHttpClientMock.mockEventsResponse("json/scenarios/secondElderBuffActive.json");
         leagueHttpClientMock.mockGameStatsGameTime(750);
-        when(gameStateMocks.player().isDead()).thenReturn(false);
+        when(gameStateMocks.championStats().isDead()).thenReturn(false);
 
         // when
         new FetchNewEventsTask().run();
@@ -70,25 +70,7 @@ class EventDataProcessorElderBuffTest {
         // given
         leagueHttpClientMock.mockEventsResponse("json/scenarios/elderBuffActive.json");
         leagueHttpClientMock.mockGameStatsGameTime(600);
-        when(gameStateMocks.player().isDead()).thenReturn(false);
-
-        // when
-        new FetchNewEventsTask().run();
-
-        // then
-        final EventData eventData = RunningState.getGameState().getEventData();
-        assertNull(eventData.getElderBuffEnd());
-        assertEquals(1, eventData.getTotalEldersKilled());
-        assertFalse(GameStateHelper.hasElderBuff());
-        assertEquals(4, eventData.getKilledDragons().size());
-    }
-
-    @Test
-    void testElderBuffInactiveIfPlayerDead() {
-        // given
-        leagueHttpClientMock.mockEventsResponse("json/scenarios/elderBuffActive.json");
-        leagueHttpClientMock.mockGameStatsGameTime(400);
-        when(gameStateMocks.player().isDead()).thenReturn(true);
+        when(gameStateMocks.championStats().isDead()).thenReturn(false);
 
         // when
         new FetchNewEventsTask().run();
@@ -106,7 +88,7 @@ class EventDataProcessorElderBuffTest {
         // given
         leagueHttpClientMock.mockEventsResponse("json/scenarios/elderBuffInactivePlayerWasDead.json");
         leagueHttpClientMock.mockGameStatsGameTime(400);
-        when(gameStateMocks.player().isDead()).thenReturn(false);
+        when(gameStateMocks.championStats().isDead()).thenReturn(false);
         when(gameStateMocks.activePlayer().getLevel()).thenReturn(6);
 
         // when
@@ -125,7 +107,7 @@ class EventDataProcessorElderBuffTest {
         // given
         leagueHttpClientMock.mockEventsResponse("json/scenarios/elderBuffInactivePlayerDied.json");
         leagueHttpClientMock.mockGameStatsGameTime(450);
-        when(gameStateMocks.player().isDead()).thenReturn(false);
+        when(gameStateMocks.championStats().isDead()).thenReturn(false);
         when(gameStateMocks.activePlayer().getLevel()).thenReturn(6);
 
         // when
@@ -144,7 +126,7 @@ class EventDataProcessorElderBuffTest {
         // given
         leagueHttpClientMock.mockEventsResponse("json/scenarios/enemyElderBuff.json");
         leagueHttpClientMock.mockGameStatsGameTime(400);
-        when(gameStateMocks.player().isDead()).thenReturn(false);
+        when(gameStateMocks.championStats().isDead()).thenReturn(false);
 
         // when
         new FetchNewEventsTask().run();

@@ -20,6 +20,15 @@
         <module>chroma-league</module>
     </modules>
 
+    <profiles>
+        <profile>
+            <id>create-launcher</id>
+            <modules>
+                <module>chroma-league-launcher</module>
+            </modules>
+        </profile>
+    </profiles>
+
     <dependencies>
         <!-- test -->
         <dependency>

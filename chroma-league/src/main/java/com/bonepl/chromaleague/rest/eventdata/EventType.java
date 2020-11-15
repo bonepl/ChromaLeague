@@ -33,12 +33,12 @@ public enum EventType {
                 return GAME_START;
             }
             if ("ChampionKill".equals(event.getEventName())) {
-                final String activePlayerName = RunningState.getGameState().getActivePlayer().getSummonerName();
-                if (activePlayerName.equals(event.getVictimName())) {
+                final String playerName = RunningState.getGameState().getPlayerName();
+                if (playerName.equals(event.getVictimName())) {
                     return ACTIVE_PLAYER_DIED;
-                } else if (activePlayerName.equals(event.getKillerName())) {
+                } else if (playerName.equals(event.getKillerName())) {
                     return ACTIVE_PLAYER_KILL;
-                } else if (event.getAssisters() != null && event.getAssisters().contains(activePlayerName)) {
+                } else if (event.getAssisters() != null && event.getAssisters().contains(playerName)) {
                     return ACTIVE_PLAYER_ASSIST;
                 }
             }

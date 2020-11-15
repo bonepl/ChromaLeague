@@ -31,17 +31,19 @@ public class MainThreads implements Closeable {
     public void initializeGameThreads() {
         LOGGER.info("Player joined the game");
         chromaRestSDK = new ChromaRestSDK();
+        RunningState.getGameState().setPlayerName(new FetchPlayerName().fetchPlayerName());
+        RunningState.getGameState().setPlayerList(new FetchPlayerList().fetchPlayerList());
         mainExecutor.scheduleWithFixedDelay(new FetchActivePlayerTask(), 50, ACTIVE_PLAYER_FETCH_DELAY, TimeUnit.MILLISECONDS);
         mainExecutor.scheduleWithFixedDelay(new RefreshMainHudTask(chromaRestSDK), 150, MAIN_HUD_REFRESH_DELAY, TimeUnit.MILLISECONDS);
     }
 
     @Override
     public void close() {
-        LOGGER.info("Player left the game, waiting for another...");
         alive = false;
         RunningState.setRunningGame(false);
         shutdownMainExecutor();
         shutdownChromaSDK();
+        LOGGER.info("Player left the game, waiting for another...");
     }
 
     private void shutdownMainExecutor() {

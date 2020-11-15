@@ -1,43 +1,39 @@
 package com.bonepl.chromaleague.state;
 
+import com.bonepl.chromaleague.tasks.ChangeAwareBoolean;
+
+import java.util.logging.Logger;
+
 public final class RunningState {
-    private static boolean runningGameChanged = false;
-    private static boolean riotApiUp = false;
-    private static boolean runningGame = false;
-    private static GameState gameState;
+    private static final Logger LOGGER = Logger.getLogger(RunningState.class.getName());
+    private static final ChangeAwareBoolean RIOT_API = new ChangeAwareBoolean();
+    private static final ChangeAwareBoolean RUNNING_GAME = new ChangeAwareBoolean();
+    private static GameState gameState = null;
 
     private RunningState() {
     }
 
-    public static boolean isRunningGameChanged() {
-        return runningGameChanged;
+    public static ChangeAwareBoolean getRiotApi() {
+        return RIOT_API;
     }
 
-    public static boolean isRunningGame() {
-        runningGameChanged = false;
-        return runningGame;
+    public static ChangeAwareBoolean getRunningGame() {
+        return RUNNING_GAME;
     }
 
-    public static void setRunningGame(boolean runningGame) {
-        if (RunningState.runningGame != runningGame) {
-            if (runningGame) {
+    public static void setRunningGame(boolean newValue) {
+        final boolean changed = RUNNING_GAME.setValue(newValue);
+        if (changed) {
+            if (newValue) {
                 gameState = new GameState();
             } else {
                 gameState = null;
             }
-            runningGameChanged = true;
-            RunningState.runningGame = runningGame;
         }
     }
 
-    public static boolean isRiotApiUp() {
-        return riotApiUp;
-    }
-
-    public static void setRiotApiUp(boolean riotApiUp) {
-        if (RunningState.riotApiUp != riotApiUp) {
-            RunningState.riotApiUp = riotApiUp;
-        }
+    public static void setRiotApi(boolean newValue) {
+        RIOT_API.setValue(newValue);
     }
 
     public static GameState getGameState() {

@@ -42,19 +42,9 @@ class FetchPlayerListTest {
         assertFalse(playerList.isAlly("Test summoner 9"));
         assertTrue(playerList.getEnemies().stream().anyMatch("Łążćkiewicz"::equals));
 
-        final Player activePlayer = RunningState.getGameState().getPlayerList().getActivePlayer();
+        final Player activePlayer = playerList.getActivePlayer();
         assertEquals("Cho'Gath", activePlayer.getChampionName());
         assertEquals("BooonE", activePlayer.getSummonerName());
         assertEquals(Team.CHAOS, activePlayer.getTeam());
-    }
-
-    @Test
-    void testDependencyOnActivePlayer() {
-        //when
-        RunningState.setRunningGame(true);
-        final PlayerList playerList = new FetchPlayerList().fetchPlayerList();
-
-        //then
-        assertNull(playerList);
     }
 }

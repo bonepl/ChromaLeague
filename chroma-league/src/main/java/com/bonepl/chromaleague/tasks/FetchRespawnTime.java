@@ -13,11 +13,9 @@ public class FetchRespawnTime {
 
     public double fetchPlayerRespawnTime() {
         try {
-            if (RunningState.getGameState().getActivePlayer() != null) {
-                return LeagueHttpClient.getResponse(URL)
-                        .map(FetchRespawnTime::getRespawnTimeFromJson)
-                        .orElseThrow(() -> new IllegalStateException("Couldn't fetch respawn time"));
-            }
+            return LeagueHttpClient.getResponse(URL)
+                    .map(FetchRespawnTime::getRespawnTimeFromJson)
+                    .orElseThrow(() -> new IllegalStateException("Couldn't fetch respawn time"));
         } catch (Exception ex) {
             LOGGER.log(Level.WARNING, ex, () -> "Error while fetching respawn time from PlayerList");
         }
@@ -25,7 +23,7 @@ public class FetchRespawnTime {
     }
 
     private static double getRespawnTimeFromJson(byte... json) {
-        final String summonerName = RunningState.getGameState().getActivePlayer().getSummonerName();
+        final String summonerName = RunningState.getGameState().getPlayerName();
         return JsonIterator.deserialize(json).asList().stream()
                 .filter(champion -> summonerName.equals(champion.toString("summonerName")))
                 .map(player -> player.toDouble("respawnTimer")).findAny()

@@ -21,7 +21,7 @@ public final class GameStateMocks {
         RunningState.setRunningGame(true);
         mockActivePlayer = prepareActivePlayerMock();
         mockPlayerList = preparePlayerListMock();
-        when(activePlayer().getSummonerName()).thenReturn(PLAYER_NAME);
+        RunningState.getGameState().setPlayerName(PLAYER_NAME);
     }
 
     private static PlayerList preparePlayerListMock() {

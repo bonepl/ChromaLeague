@@ -17,17 +17,20 @@ public class MainTask implements Runnable {
     @Override
     public void run() {
         try {
-            if (RunningState.isRiotApiUp()) {
+            final boolean riotApiUp = RunningState.getRiotApi().waitForChange();
+            if (riotApiUp) {
                 if (mainThreads == null || !mainThreads.isAlive()) {
                     mainThreads = new MainThreads();
                 }
-                if (RunningState.isRunningGameChanged() && RunningState.isRunningGame()) {
+                final boolean runningGame = RunningState.getRunningGame().waitForChange();
+                if (runningGame) {
                     mainThreads.initializeGameThreads();
                 }
             } else {
                 if (mainThreads != null && mainThreads.isAlive()) {
                     mainThreads.close();
                 }
+                RunningState.getRunningGame().reset();
             }
         } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, ex, () -> "Exception in MainTask");

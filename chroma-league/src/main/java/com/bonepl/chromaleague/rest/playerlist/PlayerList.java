@@ -17,7 +17,7 @@ public class PlayerList {
     }
 
     public Player getActivePlayer() {
-        return players.get(RunningState.getGameState().getActivePlayer().getSummonerName());
+        return players.get(RunningState.getGameState().getPlayerName());
     }
 
     public List<String> getAllies() {

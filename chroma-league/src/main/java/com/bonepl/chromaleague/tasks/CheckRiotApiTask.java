@@ -10,7 +10,7 @@ public class CheckRiotApiTask implements Runnable {
 
     @Override
     public void run() {
-        RunningState.setRiotApiUp(checkRiotApiUp());
+        RunningState.setRiotApi(checkRiotApiUp());
     }
 
     public static boolean checkRiotApiUp() {

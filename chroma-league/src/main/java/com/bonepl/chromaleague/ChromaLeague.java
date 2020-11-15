@@ -16,7 +16,7 @@ public class ChromaLeague implements AutoCloseable {
     private final ScheduledExecutorService mainExecutorService = Executors.newScheduledThreadPool(5);
 
     public void runChromaLeague() {
-        LOGGER.info("Started Chroma League - press ENTER to exit");
+        LOGGER.info("Started Chroma League, waiting for a game - press ENTER to exit");
         mainExecutorService.scheduleWithFixedDelay(new CheckRiotApiTask(), 0, 1000, TimeUnit.MILLISECONDS);
         mainExecutorService.scheduleWithFixedDelay(new MainTask(), 100, 500, TimeUnit.MILLISECONDS);
         try (Scanner scanner = new Scanner(System.in, StandardCharsets.UTF_8)) {

@@ -154,14 +154,15 @@ public final class GameStateHelper {
 
     public static boolean shouldPlayRespawnAnimation() {
         final EventData eventData = RunningState.getGameState().getEventData();
-        if (eventData.getDeathTime() != null) {
+        final LocalTime respawnTime = eventData.getRespawnTime();
+        if (respawnTime != null) {
             final LocalTime now = LocalTime.now();
-            if (now.isAfter(eventData.getRespawnTime())
+            if (now.isAfter(respawnTime)
                     || eventData.getRespawnIndicator() == RespawnIndicator.IDLE) {
                 return false;
             }
             if (eventData.getRespawnIndicator() == RespawnIndicator.CHARGING) {
-                if (ChronoUnit.SECONDS.between(now, eventData.getRespawnTime()) <= 1) {
+                if (ChronoUnit.SECONDS.between(now, respawnTime) <= 1) {
                     eventData.setRespawnIndicator(RespawnIndicator.IDLE);
                     return true;
                 }

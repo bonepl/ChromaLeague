@@ -22,8 +22,7 @@ public final class RunningState {
     }
 
     public static void setRunningGame(boolean newValue) {
-        final boolean changed = RUNNING_GAME.setValue(newValue);
-        if (changed) {
+        if (RUNNING_GAME.setValue(newValue)) {
             if (newValue) {
                 gameState = new GameState();
             } else {

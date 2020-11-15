@@ -1,6 +1,7 @@
 package com.bonepl.chromaleague;
 
 import com.bonepl.chromaleague.rest.LeagueHttpClient;
+import com.bonepl.chromaleague.state.RunningState;
 import com.bonepl.chromaleague.tasks.CheckRiotApiTask;
 import com.bonepl.chromaleague.tasks.MainTask;
 
@@ -28,5 +29,7 @@ public class ChromaLeague implements AutoCloseable {
     public void close() {
         mainExecutorService.shutdown();
         LeagueHttpClient.shutdown();
+        RunningState.getRiotApi().reset();
+        RunningState.getRunningGame().reset();
     }
 }

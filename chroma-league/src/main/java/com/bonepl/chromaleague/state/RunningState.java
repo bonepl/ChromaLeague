@@ -22,13 +22,14 @@ public final class RunningState {
     }
 
     public static void setRunningGame(boolean newValue) {
-        if (RUNNING_GAME.setValue(newValue)) {
+        if (!RUNNING_GAME.same(newValue)) {
             if (newValue) {
                 gameState = new GameState();
             } else {
                 gameState = null;
             }
         }
+        RUNNING_GAME.setValue(newValue);
     }
 
     public static void setRiotApi(boolean newValue) {

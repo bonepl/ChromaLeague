@@ -18,7 +18,8 @@ public class MainThreads implements Closeable {
     private static final Logger LOGGER = Logger.getLogger(MainThreads.class.getName());
 
     private final ScheduledExecutorService mainExecutor;
-    private ChromaRestSDK chromaRestSDK;
+    private final GameLoader gameLoader;
+    private final ChromaRestSDK chromaRestSDK;
     private boolean alive;
 
     public MainThreads() {
@@ -32,7 +33,7 @@ public class MainThreads implements Closeable {
 
     public void initializeGameThreads() {
         LOGGER.info("Player joined the game");
-        chromaRestSDK = new ChromaRestSDK();
+        gameLoader.close();
         RunningState.getGameState().setPlayerName(new FetchPlayerName().fetchPlayerName());
         RunningState.getGameState().setPlayerList(new FetchPlayerList().fetchPlayerList());
         mainExecutor.scheduleWithFixedDelay(new FetchActivePlayerTask(), 50, ACTIVE_PLAYER_FETCH_DELAY, TimeUnit.MILLISECONDS);

@@ -1,5 +1,7 @@
 package com.bonepl.razersdk.sdk;
 
+import com.bonepl.razersdk.sdk.json.request.KeyboardEffect;
+
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -28,11 +30,35 @@ public final class RzKeySelector {
     }
 
     public RzKeySelector withColumnOf(RzKey rzKey) {
-        return withColumn(column -> column == rzKey.getColumn());
+        return withColumn(rzKey.getColumn());
     }
 
     public RzKeySelector withRowOf(RzKey rzKey) {
-        return withRow(row -> row == rzKey.getRow());
+        return withRow(rzKey.getRow());
+    }
+
+    public RzKeySelector withColumn(final int column) {
+        if (column < 0 || column > KeyboardEffect.KEYBOARD_COLUMNS) {
+            throw new IllegalArgumentException(String.format("Column number should be between 0 and %d, but was %d",
+                    KeyboardEffect.KEYBOARD_COLUMNS, column));
+        }
+        return withColumn(col -> col == column);
+    }
+
+    public RzKeySelector withRow(final int row) {
+        if (row < 0 || row > KeyboardEffect.KEYBOARD_ROWS) {
+            throw new IllegalArgumentException(String.format("Row number should be between 0 and %d, but was %d",
+                    KeyboardEffect.KEYBOARD_ROWS, row));
+        }
+        return withRow(ro -> ro == row);
+    }
+
+    public RzKeySelector withAnyColumn() {
+        return withColumn(column -> true);
+    }
+
+    public RzKeySelector withAnyRow() {
+        return withRow(row -> true);
     }
 
     public RzKeySelector withColumnBetween(RzKey from, RzKey to) {

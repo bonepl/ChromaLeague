@@ -36,4 +36,8 @@ public class ChangeAwareBoolean {
         }
         return false;
     }
+
+    public boolean getValue() {
+        return value;
+    }
 }

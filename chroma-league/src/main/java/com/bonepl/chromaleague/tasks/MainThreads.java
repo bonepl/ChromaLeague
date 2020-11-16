@@ -26,6 +26,8 @@ public class MainThreads implements Closeable {
         LOGGER.info("Game is loading");
         mainExecutor = Executors.newScheduledThreadPool(10);
         mainExecutor.scheduleWithFixedDelay(new FetchNewEventsTask(), 0, EVENTS_FETCH_DELAY, TimeUnit.MILLISECONDS);
+        chromaRestSDK = new ChromaRestSDK();
+        gameLoader = new GameLoader(chromaRestSDK);
     }
 
     public void initializeGameThreads() {

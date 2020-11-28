@@ -1,9 +1,7 @@
 package com.bonepl.chromaleague.hud.animations;
 
-import com.bonepl.razersdk.animation.AnimatedFrame;
-import com.bonepl.razersdk.animation.Color;
-import com.bonepl.razersdk.animation.Frame;
-import com.bonepl.razersdk.animation.SimpleFrame;
+import com.bonepl.chromaleague.hud.parts.Background;
+import com.bonepl.razersdk.animation.*;
 import com.bonepl.razersdk.sdk.RzKey;
 import com.bonepl.razersdk.sdk.RzKeySelector;
 import com.bonepl.razersdk.sdk.json.request.KeyboardEffect;
@@ -22,7 +20,7 @@ public class LoadingAnimation extends AnimatedFrame {
 
     @Override
     public Frame getFrame() {
-        final SimpleFrame nextFrame = getNextFrame(currentColumn);
+        final LayeredFrame nextFrame = getNextFrame(currentColumn);
         if (currentColumn + direction < 0 ||
                 currentColumn + direction > KeyboardEffect.KEYBOARD_COLUMNS) {
             direction = Math.negateExact(direction);
@@ -32,10 +30,13 @@ public class LoadingAnimation extends AnimatedFrame {
         return super.getFrame();
     }
 
-    private static SimpleFrame getNextFrame(int column) {
+    private static LayeredFrame getNextFrame(int column) {
+        final LayeredFrame layeredFrame = new LayeredFrame();
+        layeredFrame.addFrame(new SimpleFrame(Background.BACKGROUND_COLOR));
         final List<RzKey> rzKeys = new RzKeySelector()
                 .withColumn(column)
                 .withAnyRow().asList();
-        return new SimpleFrame(rzKeys, LOADING_COLOR);
+        layeredFrame.addFrame(new SimpleFrame(rzKeys, LOADING_COLOR));
+        return layeredFrame;
     }
 }

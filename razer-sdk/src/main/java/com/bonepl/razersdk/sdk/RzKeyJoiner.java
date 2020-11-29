@@ -18,11 +18,11 @@ public final class RzKeyJoiner {
     }
 
     public RzKeyJoiner with(RzKeySelector rzKeySelector) {
-        rzKeys.addAll(rzKeySelector.asList());
+        rzKeys.addAll(rzKeySelector.asSet());
         return this;
     }
 
-    public List<RzKey> join() {
-        return new ArrayList<>(rzKeys);
+    public Set<RzKey> join() {
+        return Collections.unmodifiableSet(rzKeys);
     }
 }

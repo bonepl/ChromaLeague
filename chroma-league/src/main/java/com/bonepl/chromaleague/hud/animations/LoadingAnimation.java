@@ -6,7 +6,7 @@ import com.bonepl.razersdk.sdk.RzKey;
 import com.bonepl.razersdk.sdk.RzKeySelector;
 import com.bonepl.razersdk.sdk.json.request.KeyboardEffect;
 
-import java.util.List;
+import java.util.Set;
 
 public class LoadingAnimation extends AnimatedFrame {
     private static final Color LOADING_COLOR = Color.GREEN;
@@ -33,9 +33,9 @@ public class LoadingAnimation extends AnimatedFrame {
     private static LayeredFrame getNextFrame(int column) {
         final LayeredFrame layeredFrame = new LayeredFrame();
         layeredFrame.addFrame(new SimpleFrame(Background.BACKGROUND_COLOR));
-        final List<RzKey> rzKeys = new RzKeySelector()
+        final Set<RzKey> rzKeys = new RzKeySelector()
                 .withColumn(column)
-                .withAnyRow().asList();
+                .withAnyRow().asSet();
         layeredFrame.addFrame(new SimpleFrame(rzKeys, LOADING_COLOR));
         return layeredFrame;
     }

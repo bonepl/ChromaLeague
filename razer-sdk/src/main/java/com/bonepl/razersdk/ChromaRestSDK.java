@@ -32,7 +32,7 @@ import java.util.logging.Logger;
  * and close only when you want to disconnect from your Razer device.
  * <br><br>
  * This class implements {@link AutoCloseable} interface so it is recommended
- * to use with try-with-resources.
+ * to use it with try-with-resources.
  * <br><br>
  * Recommended usage:
  * <pre>

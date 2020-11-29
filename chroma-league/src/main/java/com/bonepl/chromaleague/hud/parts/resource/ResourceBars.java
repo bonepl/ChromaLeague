@@ -7,6 +7,7 @@ import com.bonepl.razersdk.sdk.RzKeySelector;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import static com.bonepl.razersdk.sdk.RzKey.RZKEY_BACKSPACE;
 import static com.bonepl.razersdk.sdk.RzKey.RZKEY_TILDE;
@@ -18,10 +19,10 @@ public final class ResourceBars {
             .sortedByColumn()
             .asList();
 
-    private static final List<String> NO_MANA_BAR_CHAMPIONS
-            = List.of("Aatrox", "Dr. Mundo", "Garen", "Katarina", "Riven", "Yone", "Zac");
-    private static final List<String> ENERGY_BAR_CHAMPIONS
-            = List.of("Akali", "Kennen", "Lee Sin", "Shen", "Zed");
+    private static final Set<String> NO_MANA_BAR_CHAMPIONS
+            = Set.of("Aatrox", "Dr. Mundo", "Garen", "Katarina", "Riven", "Yone", "Zac");
+    private static final Set<String> ENERGY_BAR_CHAMPIONS
+            = Set.of("Akali", "Kennen", "Lee Sin", "Shen", "Zed");
 
     private ResourceBars() {
     }
@@ -55,7 +56,7 @@ public final class ResourceBars {
         return Collections.unmodifiableList(RESOURCE_BAR_KEYS);
     }
 
-    public static List<String> getEnergyBarChampions() {
+    public static Set<String> getEnergyBarChampions() {
         return ENERGY_BAR_CHAMPIONS;
     }
 }

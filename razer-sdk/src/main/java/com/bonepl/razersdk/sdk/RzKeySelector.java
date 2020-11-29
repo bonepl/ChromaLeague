@@ -5,10 +5,14 @@ import com.bonepl.razersdk.sdk.json.request.KeyboardEffect;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Helper class for selecting desired key sets
+ */
 public final class RzKeySelector {
     private Predicate<Integer> columnPredicate = column -> false;
     private Predicate<Integer> rowPredicate = row -> false;
@@ -81,14 +85,17 @@ public final class RzKeySelector {
         return withSort(Comparator.comparingInt(RzKey::getRow));
     }
 
-    public List<RzKey> asList() {
-        return asStream().collect(Collectors.toUnmodifiableList());
+    public Set<RzKey> asSet() {
+        return asStream().collect(Collectors.toUnmodifiableSet());
     }
 
-    public Stream<RzKey> asStream() {
+    public List<RzKey> asList() {
+        return asStream().sorted(sort).collect(Collectors.toUnmodifiableList());
+    }
+
+    private Stream<RzKey> asStream() {
         return Arrays.stream(RzKey.values())
                 .filter(rzKey -> columnPredicate.test(rzKey.getColumn()))
-                .filter(rzKey -> rowPredicate.test(rzKey.getRow()))
-                .sorted(sort);
+                .filter(rzKey -> rowPredicate.test(rzKey.getRow()));
     }
 }

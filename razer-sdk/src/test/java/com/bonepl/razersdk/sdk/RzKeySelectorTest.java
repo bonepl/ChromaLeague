@@ -3,6 +3,7 @@ package com.bonepl.razersdk.sdk;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,10 +12,12 @@ class RzKeySelectorTest {
     @Test
     void testEmptySelection() {
         //when
-        final List<RzKey> rzKeys = new RzKeySelector().asList();
+        final List<RzKey> rzKeysList = new RzKeySelector().asList();
+        final Set<RzKey> rzKeysSet = new RzKeySelector().asSet();
 
         //then
-        assertTrue(rzKeys.isEmpty());
+        assertTrue(rzKeysList.isEmpty());
+        assertTrue(rzKeysSet.isEmpty());
     }
 
     @Test
@@ -34,14 +37,14 @@ class RzKeySelectorTest {
     @Test
     void testRangeSelection() {
         //given
-        final List<RzKey> expected = List.of(RzKey.RZKEY_INSERT, RzKey.RZKEY_HOME,
+        final Set<RzKey> expected = Set.of(RzKey.RZKEY_INSERT, RzKey.RZKEY_HOME,
                 RzKey.RZKEY_PAGEUP, RzKey.RZKEY_DELETE, RzKey.RZKEY_END, RzKey.RZKEY_PAGEDOWN);
 
         //when
-        final List<RzKey> rzKeys = new RzKeySelector()
+        final Set<RzKey> rzKeys = new RzKeySelector()
                 .withColumnBetween(RzKey.RZKEY_INSERT, RzKey.RZKEY_PAGEUP)
                 .withRowBetween(RzKey.RZKEY_INSERT, RzKey.RZKEY_DELETE)
-                .asList();
+                .asSet();
 
         //then
         assertFalse(rzKeys.isEmpty());
@@ -51,13 +54,13 @@ class RzKeySelectorTest {
 
     @Test
     void testRectangleSelection() {
-        final List<RzKey> expected = List.of(RzKey.RZKEY_NUMPAD7, RzKey.RZKEY_NUMPAD8,
+        final Set<RzKey> expected = Set.of(RzKey.RZKEY_NUMPAD7, RzKey.RZKEY_NUMPAD8,
                 RzKey.RZKEY_NUMPAD4, RzKey.RZKEY_NUMPAD5,
                 RzKey.RZKEY_NUMPAD1, RzKey.RZKEY_NUMPAD2);
 
         //when
-        final List<RzKey> rzKeys = new RzKeySelector()
-                .withRectangleBetween(RzKey.RZKEY_NUMPAD7, RzKey.RZKEY_NUMPAD2).asList();
+        final Set<RzKey> rzKeys = new RzKeySelector()
+                .withRectangleBetween(RzKey.RZKEY_NUMPAD7, RzKey.RZKEY_NUMPAD2).asSet();
 
         //then
         //then

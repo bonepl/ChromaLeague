@@ -10,12 +10,13 @@ import com.bonepl.razersdk.sdk.RzKeyJoiner;
 import com.bonepl.razersdk.sdk.RzKeySelector;
 
 import java.util.List;
+import java.util.Set;
 
 import static com.bonepl.razersdk.sdk.RzKey.*;
 
 public class BaronBuffBackgroundAnimation extends AnimatedFrame {
     private final BreathingColor baronBuffColor = new BreathingColor(new Color(200, 0, 200));
-    private static final List<RzKey> BARON_AREA = buildBaronArea();
+    private static final Set<RzKey> BARON_AREA = buildBaronArea();
 
     @Override
     public Frame getFrame() {
@@ -31,7 +32,7 @@ public class BaronBuffBackgroundAnimation extends AnimatedFrame {
         }
     }
 
-    public static List<RzKey> buildBaronArea() {
+    public static Set<RzKey> buildBaronArea() {
         return new RzKeyJoiner()
                 .with(new RzKeySelector().withRowOf(RZKEY_Q).withColumnBetween(RZKEY_Q, RZKEY_U))
                 .with(new RzKeySelector().withRowOf(RZKEY_A).withColumnBetween(RZKEY_A, RZKEY_H))

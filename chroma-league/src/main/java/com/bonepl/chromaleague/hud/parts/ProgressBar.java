@@ -5,6 +5,7 @@ import com.bonepl.razersdk.animation.SimpleFrame;
 import com.bonepl.razersdk.sdk.RzKey;
 
 import java.util.List;
+import java.util.Set;
 
 public class ProgressBar extends SimpleFrame {
 

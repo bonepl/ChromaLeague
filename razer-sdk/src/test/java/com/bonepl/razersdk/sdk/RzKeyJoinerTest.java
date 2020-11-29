@@ -12,31 +12,31 @@ class RzKeyJoinerTest {
     @Test
     void testSimpleJoin() {
         //when
-        final List<RzKey> rzKeys = new RzKeyJoiner()
+        final Set<RzKey> rzKeys = new RzKeyJoiner()
                 .with(RzKey.RZKEY_A).with(RzKey.RZKEY_B).with(RzKey.RZKEY_A).join();
 
         //then
         assertFalse(rzKeys.isEmpty());
         assertEquals(2, rzKeys.size());
-        assertTrue(rzKeys.containsAll(List.of(RzKey.RZKEY_A, RzKey.RZKEY_B)));
+        assertTrue(rzKeys.containsAll(Set.of(RzKey.RZKEY_A, RzKey.RZKEY_B)));
     }
 
     @Test
     void testArrayJoin() {
         //when
-        final List<RzKey> rzKeys = new RzKeyJoiner()
+        final Set<RzKey> rzKeys = new RzKeyJoiner()
                 .with(RzKey.RZKEY_A, RzKey.RZKEY_B).with(RzKey.RZKEY_A, RzKey.RZKEY_C).join();
 
         //then
         assertFalse(rzKeys.isEmpty());
         assertEquals(3, rzKeys.size());
-        assertTrue(rzKeys.containsAll(List.of(RzKey.RZKEY_A, RzKey.RZKEY_B, RzKey.RZKEY_C)));
+        assertTrue(rzKeys.containsAll(Set.of(RzKey.RZKEY_A, RzKey.RZKEY_B, RzKey.RZKEY_C)));
     }
 
     @Test
     void testEmptyJoins() {
         //when
-        final List<RzKey> rzKeys = new RzKeyJoiner().with()
+        final Set<RzKey> rzKeys = new RzKeyJoiner().with()
                 .with(Collections.emptyList())
                 .with(new RzKeySelector()).join();
 
@@ -52,7 +52,7 @@ class RzKeyJoinerTest {
         final List<RzKey> rzKeys3 = Collections.singletonList(RzKey.RZKEY_B);
 
         //when
-        final List<RzKey> rzKeys = new RzKeyJoiner()
+        final Set<RzKey> rzKeys = new RzKeyJoiner()
                 .with(rzkeys1).with(rzKeys2).with(rzKeys3).join();
 
         //then
@@ -70,13 +70,13 @@ class RzKeyJoinerTest {
                 .withRowBetween(RzKey.RZKEY_1, RzKey.RZKEY_Q).withColumnOf(RzKey.RZKEY_1);
 
         //then
-        final List<RzKey> rzKeys = new RzKeyJoiner()
+        final Set<RzKey> rzKeys = new RzKeyJoiner()
                 .with(rzKeySelector).with(rzKeySelector2).join();
 
         //then
         //then
         assertFalse(rzKeys.isEmpty());
         assertEquals(3, rzKeys.size());
-        assertTrue(rzKeys.containsAll(List.of(RzKey.RZKEY_1, RzKey.RZKEY_2, RzKey.RZKEY_Q)));
+        assertTrue(rzKeys.containsAll(Set.of(RzKey.RZKEY_1, RzKey.RZKEY_2, RzKey.RZKEY_Q)));
     }
 }

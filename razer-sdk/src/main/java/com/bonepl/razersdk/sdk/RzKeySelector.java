@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * Helper class for selecting {@link RzKey} key sets. <br><br>
+ * Helper class for selecting {@link RzKey} sets. <br><br>
  * Usage example:<br>
  * <pre>
  * List<RzKey> selectedKeys = new RzKeySelector()

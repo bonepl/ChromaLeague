@@ -17,7 +17,7 @@ public class FetchNewEventsTask implements Runnable {
     @Override
     public void run() {
         try {
-            LeagueHttpClient.getResponse(URL)
+            LeagueHttpClient.getSingleResponse(URL)
                     .map(events -> JsonIterator.deserialize(events, Events.class))
                     .map(Events::getEvents)
                     .filter(events -> !events.isEmpty())

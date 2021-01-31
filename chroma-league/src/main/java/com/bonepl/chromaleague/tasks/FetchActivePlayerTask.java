@@ -16,7 +16,7 @@ public class FetchActivePlayerTask implements Runnable {
     public void run() {
         if (RunningState.getGameState() != null) {
             try {
-                LeagueHttpClient.getResponse(URL)
+                LeagueHttpClient.getSingleResponse(URL)
                         .map(activePlayer -> JsonIterator.deserialize(activePlayer, ActivePlayer.class))
                         .ifPresent(activePlayer -> RunningState.getGameState().setActivePlayer(activePlayer));
             } catch (Exception ex) {

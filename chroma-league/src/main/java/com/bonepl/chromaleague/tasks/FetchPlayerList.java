@@ -14,7 +14,7 @@ public class FetchPlayerList {
 
     public PlayerList fetchPlayerList() {
         try {
-            return LeagueHttpClient.getResponse(URL)
+            return LeagueHttpClient.getRetriableResponse(URL)
                     .map(playerList -> JsonIterator.deserialize(playerList, Player[].class))
                     .map(PlayerList::new)
                     .orElseThrow(() -> new IllegalStateException("Couldn't fetch PlayerList"));

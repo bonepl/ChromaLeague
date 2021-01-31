@@ -13,7 +13,7 @@ public class FetchRespawnTime {
 
     public double fetchPlayerRespawnTime() {
         try {
-            return LeagueHttpClient.getResponse(URL)
+            return LeagueHttpClient.getSingleResponse(URL)
                     .map(FetchRespawnTime::getRespawnTimeFromJson)
                     .orElseThrow(() -> new IllegalStateException("Couldn't fetch respawn time"));
         } catch (Exception ex) {

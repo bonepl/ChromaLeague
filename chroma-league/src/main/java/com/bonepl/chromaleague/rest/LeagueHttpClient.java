@@ -7,6 +7,8 @@ import org.apache.http.config.RegistryBuilder;
 import org.apache.http.conn.socket.ConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.DefaultHttpRequestRetryHandler;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.util.EntityUtils;
@@ -28,15 +30,25 @@ public final class LeagueHttpClient {
     private static final Logger LOGGER = Logger.getLogger(LeagueHttpClient.class.getName());
 
     public static final int DEFAULT_TIMEOUT = 150;
-    private static CloseableHttpClient leagueHttpClient = createLeagueHttpClient();
+    private static CloseableHttpClient singleFetchLeagueHttpClient = createSingleFetchLeagueHttpClient();
+    private static CloseableHttpClient retriableLeagueHttpClient = createRetriableHttpClient();
+
 
     private LeagueHttpClient() {
     }
 
-    public static Optional<byte[]> getResponse(String url) {
+    public static Optional<byte[]> getSingleResponse(String url) {
+        return getResponse(singleFetchLeagueHttpClient, url);
+    }
+
+    public static Optional<byte[]> getRetriableResponse(String url) {
+        return getResponse(retriableLeagueHttpClient, url);
+    }
+
+    private static Optional<byte[]> getResponse(final CloseableHttpClient httpClient, final String url) {
         final HttpGet request = new HttpGet(url);
         request.addHeader("Content-type", "application/json; charset=UTF-8");
-        try (CloseableHttpResponse response = leagueHttpClient.execute(request)) {
+        try (CloseableHttpResponse response = httpClient.execute(request)) {
             byte[] responseBytes = EntityUtils.toByteArray(response.getEntity());
             if (isResponseValid(responseBytes)) {
                 return Optional.of(responseBytes);
@@ -52,15 +64,25 @@ public final class LeagueHttpClient {
         return !new String(responseBytes, StandardCharsets.UTF_8).contains("RESOURCE_NOT_FOUND");
     }
 
-    private static CloseableHttpClient createLeagueHttpClient() {
+    private static CloseableHttpClient createSingleFetchLeagueHttpClient() {
+        return createCustomLeagueHttpClient()
+                .disableAutomaticRetries()
+                .build();
+    }
+
+    private static CloseableHttpClient createRetriableHttpClient() {
+        return createCustomLeagueHttpClient()
+                .setRetryHandler(new DefaultHttpRequestRetryHandler(10, false))
+                .build();
+    }
+
+    private static HttpClientBuilder createCustomLeagueHttpClient() {
         try {
             return HttpClients.custom()
                     .setConnectionManager(createUnsecureConnManager())
-                    .setDefaultRequestConfig(createRequestConfig())
-                    .disableAutomaticRetries()
-                    .build();
+                    .setDefaultRequestConfig(createRequestConfig());
         } catch (Exception ex) {
-            LOGGER.log(Level.SEVERE, ex, () -> "Error while fetching HTTP response");
+            LOGGER.log(Level.SEVERE, ex, () -> "Error while creating League HTTP Client");
             return null;
         }
     }
@@ -104,19 +126,23 @@ public final class LeagueHttpClient {
     }
 
     public static void shutdown() {
-        if (leagueHttpClient != null) {
+        shutdownHttpClient(singleFetchLeagueHttpClient);
+        shutdownHttpClient(retriableLeagueHttpClient);
+    }
+
+    private static void shutdownHttpClient(CloseableHttpClient httpClient) {
+        if (httpClient != null) {
             try {
-                leagueHttpClient.close();
+                httpClient.close();
             } catch (IOException e) {
                 LOGGER.log(Level.WARNING, e, () -> "Couldn't close League HTTP Client, this can lead to memory leak");
-            } finally {
-                leagueHttpClient = null;
             }
         }
     }
 
     //TEST ONLY
     static void setLeagueHttpClient(CloseableHttpClient leagueHttpClient) {
-        LeagueHttpClient.leagueHttpClient = leagueHttpClient;
+        singleFetchLeagueHttpClient = leagueHttpClient;
+        retriableLeagueHttpClient = leagueHttpClient;
     }
 }

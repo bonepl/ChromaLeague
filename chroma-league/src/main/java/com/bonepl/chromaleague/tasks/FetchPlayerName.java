@@ -13,7 +13,7 @@ public class FetchPlayerName {
     public String fetchPlayerName() {
         if (RunningState.getGameState() != null) {
             try {
-                return LeagueHttpClient.getResponse(URL)
+                return LeagueHttpClient.getRetriableResponse(URL)
                         .map(String::new)
                         .map(playerName -> playerName.substring(1, playerName.length() - 1))
                         .orElseThrow(() -> new IllegalStateException("Couldn't fetch player name"));

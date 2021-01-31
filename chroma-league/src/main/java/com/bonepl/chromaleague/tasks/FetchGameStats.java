@@ -11,7 +11,7 @@ public class FetchGameStats {
     private static final Logger LOGGER = Logger.getLogger(FetchGameStats.class.getName());
 
     public GameStats fetchGameStats() {
-        return LeagueHttpClient.getResponse(URL)
+        return LeagueHttpClient.getSingleResponse(URL)
                 .map(gameStats -> JsonIterator.deserialize(gameStats, GameStats.class)).orElseThrow();
     }
 }

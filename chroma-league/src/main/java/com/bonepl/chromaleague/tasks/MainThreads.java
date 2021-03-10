@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class MainThreads implements Closeable {
+    public static final int PLAYER_LIST_FETCH_DELAY = 500;
     public static final int ACTIVE_PLAYER_FETCH_DELAY = 100;
     public static final int EVENTS_FETCH_DELAY = 300;
     public static final int MAIN_HUD_REFRESH_DELAY = 50;
@@ -35,7 +36,7 @@ public class MainThreads implements Closeable {
         LOGGER.info("Player joined the game");
         gameLoader.close();
         RunningState.getGameState().setPlayerName(new FetchPlayerName().fetchPlayerName());
-        RunningState.getGameState().setPlayerList(new FetchPlayerList().fetchPlayerList());
+        mainExecutor.scheduleWithFixedDelay(new FetchPlayerListTask(), 50, PLAYER_LIST_FETCH_DELAY, TimeUnit.MILLISECONDS);
         mainExecutor.scheduleWithFixedDelay(new FetchActivePlayerTask(), 50, ACTIVE_PLAYER_FETCH_DELAY, TimeUnit.MILLISECONDS);
         mainExecutor.scheduleWithFixedDelay(new RefreshMainHudTask(chromaRestSDK), 150, MAIN_HUD_REFRESH_DELAY, TimeUnit.MILLISECONDS);
     }

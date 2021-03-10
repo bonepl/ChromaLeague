@@ -32,7 +32,7 @@ class EventDataProcessorBaronBuffTest {
         // given
         leagueHttpClientMock.mockEventsResponse("json/scenarios/baronBuffActive.json");
         leagueHttpClientMock.mockGameStatsGameTime(250);
-        when(gameStateMocks.championStats().isDead()).thenReturn(false);
+        when(gameStateMocks.playerList().getActivePlayer().isDead()).thenReturn(false);
 
         // when
         new FetchNewEventsTask().run();
@@ -49,7 +49,7 @@ class EventDataProcessorBaronBuffTest {
         // given
         leagueHttpClientMock.mockEventsResponse("json/scenarios/baronBuffActive.json");
         leagueHttpClientMock.mockGameStatsGameTime(400);
-        when(gameStateMocks.championStats().isDead()).thenReturn(false);
+        when(gameStateMocks.playerList().getActivePlayer().isDead()).thenReturn(false);
 
         // when
         new FetchNewEventsTask().run();
@@ -65,7 +65,7 @@ class EventDataProcessorBaronBuffTest {
         // given
         leagueHttpClientMock.mockEventsResponse("json/scenarios/baronBuffInactivePlayerWasDead.json");
         leagueHttpClientMock.mockGameStatsGameTime(300);
-        when(gameStateMocks.championStats().isDead()).thenReturn(false);
+        when(gameStateMocks.playerList().getActivePlayer().isDead()).thenReturn(false);
         when(gameStateMocks.activePlayer().getLevel()).thenReturn(6);
 
         // when
@@ -82,7 +82,7 @@ class EventDataProcessorBaronBuffTest {
         // given
         leagueHttpClientMock.mockEventsResponse("json/scenarios/baronBuffInactivePlayerDied.json");
         leagueHttpClientMock.mockGameStatsGameTime(300);
-        when(gameStateMocks.championStats().isDead()).thenReturn(false);
+        when(gameStateMocks.playerList().getActivePlayer().isDead()).thenReturn(false);
         when(gameStateMocks.activePlayer().getLevel()).thenReturn(6);
 
         // when
@@ -99,7 +99,7 @@ class EventDataProcessorBaronBuffTest {
         // given
         leagueHttpClientMock.mockEventsResponse("json/scenarios/enemyBaronBuff.json");
         leagueHttpClientMock.mockGameStatsGameTime(250);
-        when(gameStateMocks.championStats().isDead()).thenReturn(false);
+        when(gameStateMocks.playerList().getActivePlayer().isDead()).thenReturn(false);
 
         // when
         new FetchNewEventsTask().run();

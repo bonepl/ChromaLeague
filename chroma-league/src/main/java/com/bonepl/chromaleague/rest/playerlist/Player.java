@@ -6,12 +6,14 @@ public class Player {
     private final String summonerName;
     private final Team team;
     private final String championName;
+    private final boolean isDead;
 
     @JsonCreator
-    public Player(String summonerName, Team team, String championName) {
+    public Player(String summonerName, Team team, String championName, boolean isDead) {
         this.summonerName = summonerName;
         this.team = team;
         this.championName = championName;
+        this.isDead = isDead;
     }
 
     public String getSummonerName() {
@@ -24,5 +26,9 @@ public class Player {
 
     public String getChampionName() {
         return championName;
+    }
+
+    public boolean isDead() {
+        return isDead;
     }
 }

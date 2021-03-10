@@ -3,7 +3,7 @@ package com.bonepl.chromaleague.rest;
 import com.bonepl.chromaleague.tasks.FetchActivePlayerTask;
 import com.bonepl.chromaleague.tasks.FetchGameStats;
 import com.bonepl.chromaleague.tasks.FetchNewEventsTask;
-import com.bonepl.chromaleague.tasks.FetchPlayerList;
+import com.bonepl.chromaleague.tasks.FetchPlayerListTask;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -29,7 +29,7 @@ public final class LeagueHttpClientMock {
     }
 
     public void mockPlayerListResponse(String jsonResourcePath) {
-        mockReturnedResponseWithResource(FetchPlayerList.URL, jsonResourcePath);
+        mockReturnedResponseWithResource(FetchPlayerListTask.URL, jsonResourcePath);
     }
 
     public void mockEventsResponse(String jsonResourcePath) {

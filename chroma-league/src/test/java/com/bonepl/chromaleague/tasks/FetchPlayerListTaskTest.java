@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class FetchPlayerListTest {
+class FetchPlayerListTaskTest {
 
     @BeforeEach
     void setUp() {
@@ -30,7 +30,8 @@ class FetchPlayerListTest {
         new GameStateMocks();
 
         //when
-        final PlayerList playerList = new FetchPlayerList().fetchPlayerList();
+        new FetchPlayerListTask().run();
+        final PlayerList playerList = RunningState.getGameState().getPlayerList();
 
         //then
         assertNotNull(playerList);
@@ -45,6 +46,7 @@ class FetchPlayerListTest {
         final Player activePlayer = playerList.getActivePlayer();
         assertEquals("Cho'Gath", activePlayer.getChampionName());
         assertEquals("BooonE", activePlayer.getSummonerName());
+        assertTrue(activePlayer.isDead());
         assertEquals(Team.CHAOS, activePlayer.getTeam());
     }
 }

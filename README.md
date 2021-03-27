@@ -37,7 +37,7 @@ Certain in-game events will spawn additional animations.
 * Chroma enabled keyboard
 
 ## Running
-Simply download the latest **Chroma League** release, unpack and run it
+Simply download [the latest Chroma League release](https://github.com/bonepl/ChromaLeague/releases/latest), unpack and run it
 by executing `chroma-league.bat`.
 
 **Chroma League** will automatically detect when you join the game and start running integrations.

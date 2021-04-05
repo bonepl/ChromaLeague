@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class VersionCheckTask implements Runnable {
@@ -43,15 +44,16 @@ public class VersionCheckTask implements Runnable {
 
     public List<String> getOnlineVersion() throws IOException {
         try (final CloseableHttpClient defaultHttpClient = HttpClients.createDefault()) {
-            return Arrays.asList(EntityUtils.toString(
+            return Arrays.stream(EntityUtils.toString(
                     defaultHttpClient.execute(new HttpGet(ONLINE_VERSION_URL)).getEntity())
-                    .split(System.lineSeparator()));
+                    .split(System.lineSeparator())).map(String::strip).collect(Collectors.toList());
         }
     }
 
     public List<String> getLocalVersion() throws IOException {
         try (final InputStream resourceAsStream = getClass().getResourceAsStream(LOCAL_VERSION_PATH)) {
-            return Arrays.asList(new String(resourceAsStream.readAllBytes(), StandardCharsets.UTF_8).split(System.lineSeparator()));
+            return Arrays.stream(new String(resourceAsStream.readAllBytes(), StandardCharsets.UTF_8)
+                    .split(System.lineSeparator())).map(String::strip).collect(Collectors.toList());
         }
     }
 

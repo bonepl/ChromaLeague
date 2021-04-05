@@ -8,7 +8,7 @@ import com.bonepl.razersdk.animation.Color;
 import com.bonepl.razersdk.animation.Frame;
 
 public class ShyvanaDragonFuryBar extends AnimatedFrame {
-    public static final Color DRAGON_FURY_COLOR = Color.RED;
+    public static final Color DRAGON_FURY_COLOR = Color.ORANGE;
     private static final BreathingColor ULTI_READY_COLOR = new BreathingColor(Color.RED);
 
     @Override

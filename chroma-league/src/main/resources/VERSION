@@ -1,4 +1,5 @@
-1.1.0
-Fixed bug when end game animation wasn't stopping
-Karthus Bar color adjusted
-Shyvana's bar color adjusted
+1.1.1
+- Fixed bug when end game animation wasn't stopping
+- Karthus Bar color adjusted
+- Shyvana's bar color adjusted
+- Added version checker

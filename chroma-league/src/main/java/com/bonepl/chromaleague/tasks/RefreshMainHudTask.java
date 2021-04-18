@@ -1,5 +1,6 @@
 package com.bonepl.chromaleague.tasks;
 
+import com.bonepl.chromaleague.state.GameState;
 import com.bonepl.chromaleague.state.RunningState;
 import com.bonepl.razersdk.ChromaRestSDK;
 
@@ -17,8 +18,9 @@ public class RefreshMainHudTask implements Runnable {
     @Override
     public void run() {
         try {
-            if (RunningState.getGameState().getActivePlayer() != null && RunningState.getGameState().getPlayerList() != null) {
-                chromaRestSDK.createKeyboardEffect(RunningState.getGameState().getMainHud());
+            final GameState gameState = RunningState.getGameState();
+            if (gameState!= null && gameState.getActivePlayer() != null && gameState.getPlayerList() != null) {
+                chromaRestSDK.createKeyboardEffect(gameState.getMainHud());
             }
         } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, ex, () -> "Error while refreshing main HUD");

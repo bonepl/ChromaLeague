@@ -12,10 +12,14 @@ import com.bonepl.chromaleague.state.RunningState;
 import java.time.Duration;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import static com.bonepl.chromaleague.state.GameStateHelper.millisDuration;
 
 public class EventDataProcessor {
+    private static final ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
     private final double currentTimeForReconnection;
 
     public EventDataProcessor() {
@@ -44,11 +48,16 @@ public class EventDataProcessor {
             case ACTIVE_PLAYER_DIED -> resetAlivePlayerCounters(event);
             case ACTIVE_PLAYER_KILL -> GameStateHelper.addPlayerKill();
             case ACTIVE_PLAYER_ASSIST -> GameStateHelper.addPlayerAssist();
-            case GAME_END_DEFEAT, GAME_END_VICTORY, ENEMY_OCEAN_DRAGON_KILL, ENEMY_MOUNTAIN_DRAGON_KILL,
+            case GAME_END_DEFEAT, GAME_END_VICTORY -> finishGameInSeconds(8);
+            case ENEMY_OCEAN_DRAGON_KILL, ENEMY_MOUNTAIN_DRAGON_KILL,
                     ENEMY_INFERNAL_DRAGON_KILL, ENEMY_CLOUD_DRAGON_KILL, ENEMY_HERALD_KILL,
                     ENEMY_BARON_KILL, ALLY_HERALD_KILL, UNSUPPORTED -> {
             }
         }
+    }
+
+    private static void finishGameInSeconds(int seconds) {
+        scheduledExecutorService.schedule(() -> RunningState.setRunningGame(false), seconds, TimeUnit.SECONDS);
     }
 
     private static void addKilledDragon(DragonType dragonType) {

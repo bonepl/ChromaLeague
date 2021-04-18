@@ -19,7 +19,7 @@ public class RefreshMainHudTask implements Runnable {
     public void run() {
         try {
             final GameState gameState = RunningState.getGameState();
-            if (gameState!= null && gameState.getActivePlayer() != null && gameState.getPlayerList() != null) {
+            if (gameState != null && gameState.getActivePlayer() != null && gameState.getPlayerList() != null) {
                 chromaRestSDK.createKeyboardEffect(gameState.getMainHud());
             }
         } catch (Exception ex) {

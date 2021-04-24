@@ -30,9 +30,7 @@ class RumbleHeatBarTest extends AbstractResourceTest {
 
         final RumbleHeatBar rumbleHeatBar = new RumbleHeatBar();
         new AnimationTester()
-                .withBeforeIterationAction(i -> {
-                    mockResource(heatSteps.nextInt(), 100);
-                })
+                .withBeforeIterationAction(i -> mockResource(heatSteps.nextInt(), 100))
                 .withSleepTime(300)
                 .testAnimation(rumbleHeatBar, 40);
     }

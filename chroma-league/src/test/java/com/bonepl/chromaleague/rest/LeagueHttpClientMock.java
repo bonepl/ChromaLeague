@@ -16,9 +16,9 @@ import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
+import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.fail;
-import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.*;
 
 public final class LeagueHttpClientMock {
@@ -51,8 +51,8 @@ public final class LeagueHttpClientMock {
     public void mockReturnedResponseWithResource(String uri, String jsonResourcePath) {
         try {
             mockReturnedResponse(uri, Files.readAllBytes(
-                    Paths.get(LeagueHttpClientMock.class.getClassLoader()
-                            .getResource(jsonResourcePath).toURI())));
+                    Paths.get(Objects.requireNonNull(LeagueHttpClientMock.class.getClassLoader()
+                            .getResource(jsonResourcePath)).toURI())));
         } catch (IOException | URISyntaxException e) {
             fail(e);
         }

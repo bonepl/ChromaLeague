@@ -2,10 +2,7 @@ package com.bonepl.chromaleague.state;
 
 import com.bonepl.chromaleague.tasks.ChangeAwareBoolean;
 
-import java.util.logging.Logger;
-
 public final class RunningState {
-    private static final Logger LOGGER = Logger.getLogger(RunningState.class.getName());
     private static final ChangeAwareBoolean RIOT_API = new ChangeAwareBoolean();
     private static final ChangeAwareBoolean RUNNING_GAME = new ChangeAwareBoolean();
     private static GameState gameState = null;
@@ -22,7 +19,7 @@ public final class RunningState {
     }
 
     public static void setRunningGame(boolean newValue) {
-        if (!RUNNING_GAME.same(newValue)) {
+        if (RUNNING_GAME.different(newValue)) {
             if (newValue) {
                 gameState = new GameState();
             } else {

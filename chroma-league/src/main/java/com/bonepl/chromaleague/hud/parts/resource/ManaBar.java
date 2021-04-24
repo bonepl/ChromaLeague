@@ -4,7 +4,6 @@ import com.bonepl.chromaleague.hud.colors.CLColor;
 import com.bonepl.chromaleague.hud.parts.ProgressBar;
 import com.bonepl.chromaleague.state.GameStateHelper;
 import com.bonepl.razersdk.animation.AnimatedFrame;
-import com.bonepl.razersdk.animation.Color;
 import com.bonepl.razersdk.animation.Frame;
 
 /**

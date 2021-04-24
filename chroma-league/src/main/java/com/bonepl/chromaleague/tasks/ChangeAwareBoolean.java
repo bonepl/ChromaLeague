@@ -28,12 +28,12 @@ public class ChangeAwareBoolean {
         countDownLatch = new CountDownLatch(1);
     }
 
-    public boolean same(boolean other) {
-        return value == other;
+    public boolean different(boolean other) {
+        return value != other;
     }
 
     public void setValue(boolean newValue) {
-        if (!same(newValue)) {
+        if (different(newValue)) {
             value = newValue;
             countDownLatch.countDown();
         }

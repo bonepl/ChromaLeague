@@ -1,6 +1,4 @@
-package com.bonepl.chromaleague;
-
-import com.bonepl.chromaleague.state.RunningState;
+package com.bonepl.chromaleague.state;
 
 import java.util.HashMap;
 import java.util.Map;

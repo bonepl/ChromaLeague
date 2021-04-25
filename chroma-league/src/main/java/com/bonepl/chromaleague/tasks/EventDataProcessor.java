@@ -1,6 +1,6 @@
 package com.bonepl.chromaleague.tasks;
 
-import com.bonepl.chromaleague.ExperienceUtil;
+import com.bonepl.chromaleague.state.ExperienceUtil;
 import com.bonepl.chromaleague.rest.eventdata.DragonType;
 import com.bonepl.chromaleague.rest.eventdata.Event;
 import com.bonepl.chromaleague.rest.eventdata.EventType;

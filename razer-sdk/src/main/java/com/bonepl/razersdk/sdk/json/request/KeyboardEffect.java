@@ -6,7 +6,6 @@ import com.jsoniter.annotation.JsonUnwrapper;
 import com.jsoniter.output.JsonStream;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Map;
 
 public class KeyboardEffect {

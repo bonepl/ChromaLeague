@@ -7,13 +7,8 @@ import com.bonepl.razersdk.ChromaRestSDK;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class RefreshMainHudTask implements Runnable {
+public record RefreshMainHudTask(ChromaRestSDK chromaRestSDK) implements Runnable {
     private static final Logger LOGGER = Logger.getLogger(RefreshMainHudTask.class.getName());
-    private final ChromaRestSDK chromaRestSDK;
-
-    public RefreshMainHudTask(ChromaRestSDK chromaRestSDK) {
-        this.chromaRestSDK = chromaRestSDK;
-    }
 
     @Override
     public void run() {

@@ -20,9 +20,9 @@ public class TransitionColor {
     }
 
     public Color getNextColor() {
-        final Color color = new Color(from.getRed() - getRedStep() * currentStep,
-                from.getGreen() - getGreenStep() * currentStep,
-                from.getBlue() - getBlueStep() * currentStep);
+        final Color color = new Color(from.red() - getRedStep() * currentStep,
+                from.green() - getGreenStep() * currentStep,
+                from.blue() - getBlueStep() * currentStep);
         if (transitionFinished()) {
             return to;
         }
@@ -31,21 +31,21 @@ public class TransitionColor {
     }
 
     public Color getColorAtPercent(int percent) {
-        return new Color((int) (from.getRed() - ((from.getRed() - to.getRed()) * percent * 0.01)),
-                (int) (from.getGreen() - ((from.getGreen() - to.getGreen()) * percent * 0.01)),
-                (int) (from.getBlue() - ((from.getBlue() - to.getBlue()) * percent * 0.01)));
+        return new Color((int) (from.red() - (from.red() - to.red()) * percent * 0.01),
+                (int) (from.green() - (from.green() - to.green()) * percent * 0.01),
+                (int) (from.blue() - (from.blue() - to.blue()) * percent * 0.01));
     }
 
     private int getRedStep() {
-        return (from.getRed() - to.getRed()) / steps;
+        return (from.red() - to.red()) / steps;
     }
 
     private int getGreenStep() {
-        return (from.getGreen() - to.getGreen()) / steps;
+        return (from.green() - to.green()) / steps;
     }
 
     private int getBlueStep() {
-        return (from.getBlue() - to.getBlue()) / steps;
+        return (from.blue() - to.blue()) / steps;
     }
 
     public boolean transitionFinished() {

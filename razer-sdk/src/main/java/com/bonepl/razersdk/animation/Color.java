@@ -4,7 +4,7 @@ package com.bonepl.razersdk.animation;
  * Class describing color in RGB format.
  * Note that Razer Chroma SDK is using BGR format encoded with {@link #getSDKColorRef()}
  */
-public class Color {
+public record Color(int red, int green, int blue) {
     public static final Color NONE = new Color(0, 0, 0);
 
     public static final Color WHITE = new Color(255, 255, 255);
@@ -24,10 +24,6 @@ public class Color {
 
     private static final int GREEN_BIT_POS = 8;
     private static final int BLUE_BIT_POS = 16;
-
-    private final int red;
-    private final int green;
-    private final int blue;
 
     /**
      * Create color definition in RGB
@@ -57,26 +53,5 @@ public class Color {
      */
     public int getSDKColorRef() {
         return blue << BLUE_BIT_POS | green << GREEN_BIT_POS | red;
-    }
-
-    public int getRed() {
-        return red;
-    }
-
-    public int getGreen() {
-        return green;
-    }
-
-    public int getBlue() {
-        return blue;
-    }
-
-    @Override
-    public String toString() {
-        return "Color{" +
-                "red=" + red +
-                ", green=" + green +
-                ", blue=" + blue +
-                '}';
     }
 }

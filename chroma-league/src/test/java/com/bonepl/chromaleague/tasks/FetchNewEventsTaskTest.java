@@ -22,7 +22,7 @@ class FetchNewEventsTaskTest {
         final GameStateMocks gameStateMocks = new GameStateMocks();
         gameStateMocks.activePlayer();
         gameStateMocks.playerList();
-        when(gameStateMocks.activePlayer().getLevel()).thenReturn(6);
+        when(gameStateMocks.activePlayer().level()).thenReturn(6);
         leagueHttpClientMock = new LeagueHttpClientMock();
         leagueHttpClientMock.mockGameStatsGameTime(1400);
     }

@@ -102,7 +102,7 @@ public class RespawnAnimation extends AnimatedFrame {
     }
 
     private static Color getPlayerResourceToTransitionColor() {
-        String activePlayerChampionName = RunningState.getGameState().getPlayerList().getActivePlayer().getChampionName();
+        String activePlayerChampionName = RunningState.getGameState().getPlayerList().getActivePlayer().championName();
         if (ResourceBars.getEnergyBarChampions().contains(activePlayerChampionName)) {
             return Color.YELLOW;
         }

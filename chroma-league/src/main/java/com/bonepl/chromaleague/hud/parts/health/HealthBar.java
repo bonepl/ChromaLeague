@@ -26,7 +26,7 @@ public class HealthBar extends Animation {
 
     @Override
     public Frame getFrame() {
-        final double currentHp = RunningState.getGameState().getActivePlayer().getChampionStats().getCurrentHealth();
+        final double currentHp = RunningState.getGameState().getActivePlayer().championStats().currentHealth();
         addToBack(getHpBar());
         if (currentHp < previousHp) {
             addToFront(new LostHealthAnimation(previousHp, currentHp));
@@ -47,7 +47,7 @@ public class HealthBar extends Animation {
     }
 
     public static List<RzKey> getHpBarPart(double previousHp, double currentHp) {
-        final double maxHealth = RunningState.getGameState().getActivePlayer().getChampionStats().getMaxHealth();
+        final double maxHealth = RunningState.getGameState().getActivePlayer().championStats().maxHealth();
         final int from = ProgressBar.indexToFill(getHealthBarKeys(), Double.valueOf(previousHp * 100 / maxHealth).intValue());
         final int to = ProgressBar.indexToFill(getHealthBarKeys(), Double.valueOf(currentHp * 100 / maxHealth).intValue());
         return getHealthBarKeys().subList(from, to);

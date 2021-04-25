@@ -1,5 +1,6 @@
 package com.bonepl.chromaleague.tasks;
 
+import com.bonepl.chromaleague.hud.animations.LoadingAnimation;
 import com.bonepl.razersdk.ChromaRestSDK;
 
 import java.io.Closeable;
@@ -17,7 +18,7 @@ public class GameLoader implements Closeable {
 
     public GameLoader(final ChromaRestSDK chromaRestSDK) {
         gameLoaderExecutor = Executors.newSingleThreadScheduledExecutor();
-        gameLoaderExecutor.scheduleWithFixedDelay(new GameLoadingTask(chromaRestSDK), 0, GAME_LOADING_REFRESH_DELAY, TimeUnit.MILLISECONDS);
+        gameLoaderExecutor.scheduleWithFixedDelay(new GameLoadingTask(chromaRestSDK, new LoadingAnimation()), 0, GAME_LOADING_REFRESH_DELAY, TimeUnit.MILLISECONDS);
     }
 
     @Override

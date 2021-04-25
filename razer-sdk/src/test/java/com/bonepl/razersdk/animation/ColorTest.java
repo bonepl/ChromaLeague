@@ -12,10 +12,10 @@ class ColorTest {
         final Color color = new Color(0, 123, 255);
 
         //then
-        assertEquals(0, color.getRed());
-        assertEquals(123, color.getGreen());
-        assertEquals(255, color.getBlue());
-        assertEquals("Color{red=0, green=123, blue=255}", color.toString());
+        assertEquals(0, color.red());
+        assertEquals(123, color.green());
+        assertEquals(255, color.blue());
+        assertEquals("Color[red=0, green=123, blue=255]", color.toString());
     }
 
     @Test

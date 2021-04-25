@@ -87,11 +87,11 @@ public final class ChromaRestSDK implements AutoCloseable {
      * @param frame {@link IFrame} with available {@link Frame}
      */
     public void createKeyboardEffect(IFrame frame) {
-        final HttpPut keyboardEffectRequest = new HttpPut(currentSession.getUri() + "/keyboard");
+        final HttpPut keyboardEffectRequest = new HttpPut(currentSession.uri() + "/keyboard");
         keyboardEffectRequest.setEntity(createKeyboardEffectParameter(frame));
         final String result = executeRequest(keyboardEffectRequest);
         final Result effectResponse = JsonIterator.deserialize(result, Result.class);
-        if (effectResponse.getResult() != 0) {
+        if (effectResponse.result() != 0) {
             LOGGER.severe(() -> "Error from Razer SDK Effect response: " + result);
         }
     }
@@ -113,7 +113,7 @@ public final class ChromaRestSDK implements AutoCloseable {
         initRequest.setHeader("Content-type", "application/json");
         final String sessionInfoJson = executeRequest(initRequest);
         final SessionInfo sessionInfo = JsonIterator.deserialize(sessionInfoJson, SessionInfo.class);
-        LOGGER.info(() -> "Initialized ChromaRestSDK connection { sessionId: " + sessionInfo.getSessionId() + " }");
+        LOGGER.info(() -> "Initialized ChromaRestSDK connection { sessionId: " + sessionInfo.sessionId() + " }");
         try {
             Thread.sleep(INIT_SLEEP_TIME);
         } catch (InterruptedException e) {
@@ -146,11 +146,11 @@ public final class ChromaRestSDK implements AutoCloseable {
     @Override
     public void close() {
         heartbeatExecutor.shutdown();
-        final HttpDelete unInitRequest = new HttpDelete(currentSession.getUri());
+        final HttpDelete unInitRequest = new HttpDelete(currentSession.uri());
         final String unInitResponseJson = executeRequest(unInitRequest);
         final Result result = JsonIterator.deserialize(unInitResponseJson, Result.class);
         LOGGER.info(String.format("Razer Chroma SDK session %d ended with code %d",
-                currentSession.getSessionId(), result.getResult()));
+                currentSession.sessionId(), result.result()));
         try {
             httpClient.close();
         } catch (IOException e) {

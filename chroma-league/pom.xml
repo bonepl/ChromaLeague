@@ -51,9 +51,9 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <source>15</source>
-                    <target>15</target>
-                    <release>15</release>
+                    <source>16</source>
+                    <target>16</target>
+                    <release>16</release>
                     <forceJavacCompilerUse>true</forceJavacCompilerUse>
                     <parameters>true</parameters>
                 </configuration>

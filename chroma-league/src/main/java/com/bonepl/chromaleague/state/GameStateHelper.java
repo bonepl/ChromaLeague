@@ -24,33 +24,33 @@ public final class GameStateHelper {
     }
 
     public static int getHpPercentage() {
-        final ChampionStats championStats = RunningState.getGameState().getActivePlayer().getChampionStats();
-        return getPercentage(championStats.getCurrentHealth(), championStats.getMaxHealth());
+        final ChampionStats championStats = RunningState.getGameState().getActivePlayer().championStats();
+        return getPercentage(championStats.currentHealth(), championStats.maxHealth());
     }
 
     public static int getResourcePercentage() {
-        final ChampionStats championStats = RunningState.getGameState().getActivePlayer().getChampionStats();
-        return getPercentage(championStats.getResourceValue(), championStats.getResourceMax());
+        final ChampionStats championStats = RunningState.getGameState().getActivePlayer().championStats();
+        return getPercentage(championStats.resourceValue(), championStats.resourceMax());
     }
 
     public static double getGold() {
-        return RunningState.getGameState().getActivePlayer().getCurrentGold();
+        return RunningState.getGameState().getActivePlayer().currentGold();
     }
 
     public static int getLevel() {
-        return RunningState.getGameState().getActivePlayer().getLevel();
+        return RunningState.getGameState().getActivePlayer().level();
     }
 
     /**
      * Future's market rune can make percentage negative
      */
     public static int getGoldPercentage() {
-        final int percentage = getPercentage(RunningState.getGameState().getActivePlayer().getCurrentGold(), GoldBar.GOLD_FULL);
+        final int percentage = getPercentage(RunningState.getGameState().getActivePlayer().currentGold(), GoldBar.GOLD_FULL);
         return Math.max(percentage, 0);
     }
 
     public static double getActivePlayerRange() {
-        return RunningState.getGameState().getActivePlayer().getChampionStats().getAttackRange();
+        return RunningState.getGameState().getActivePlayer().championStats().attackRange();
     }
 
     private static int getPercentage(double firstDouble, double secondDouble) {
@@ -69,7 +69,7 @@ public final class GameStateHelper {
 
     private static double getCurrentTimeOrReconnectionTime(double currentTimeForReconnection) {
         if (currentTimeForReconnection == 0.0) {
-            return new FetchGameStats().fetchGameStats().getGameTime();
+            return new FetchGameStats().fetchGameStats().gameTime();
         }
         return currentTimeForReconnection;
     }

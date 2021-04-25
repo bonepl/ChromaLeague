@@ -34,13 +34,13 @@ public final class GameStateMocks {
     private static ActivePlayer prepareActivePlayerMock() {
         ChampionStats championStats = mock(ChampionStats.class);
         ActivePlayer activePlayer = mock(ActivePlayer.class);
-        when(activePlayer.getChampionStats()).thenReturn(championStats);
+        when(activePlayer.championStats()).thenReturn(championStats);
         return activePlayer;
     }
 
     public ChampionStats championStats() {
         RunningState.getGameState().setActivePlayer(mockActivePlayer);
-        return mockActivePlayer.getChampionStats();
+        return mockActivePlayer.championStats();
     }
 
     public ActivePlayer activePlayer() {

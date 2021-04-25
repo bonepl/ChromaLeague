@@ -174,8 +174,7 @@ public final class RzKeySelector {
      * @return selected keys as {@link Set}
      */
     public Set<RzKey> asSet() {
-        return asStream()
-                .collect(Collectors.toUnmodifiableSet());
+        return asStream().collect(Collectors.toUnmodifiableSet());
     }
 
     /**
@@ -183,9 +182,7 @@ public final class RzKeySelector {
      * @return selected keys as {@link List}
      */
     public List<RzKey> asList() {
-        return asStream()
-                .sorted(sort)
-                .collect(Collectors.toUnmodifiableList());
+        return asStream().sorted(sort).toList();
     }
 
     private Stream<RzKey> asStream() {

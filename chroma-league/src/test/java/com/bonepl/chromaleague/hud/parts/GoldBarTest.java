@@ -29,6 +29,6 @@ class GoldBarTest {
     }
 
     private void mockActivePlayerGold(double gold) {
-        when(gameStateMocks.activePlayer().getCurrentGold()).thenReturn(gold);
+        when(gameStateMocks.activePlayer().currentGold()).thenReturn(gold);
     }
 }

@@ -13,7 +13,7 @@ public class PlayerList {
 
     public PlayerList(Player... players) {
         this.players = Arrays.stream(players)
-                .collect(Collectors.toMap(Player::getSummonerName, Function.identity()));
+                .collect(Collectors.toMap(Player::summonerName, Function.identity()));
     }
 
     public Player getActivePlayer() {
@@ -22,19 +22,19 @@ public class PlayerList {
 
     public List<String> getAllies() {
         return players.values().stream()
-                .filter(p -> getActivePlayer().getTeam() == p.getTeam())
-                .map(Player::getSummonerName)
+                .filter(p -> getActivePlayer().team() == p.team())
+                .map(Player::summonerName)
                 .collect(Collectors.toList());
     }
 
     public List<String> getEnemies() {
         return players.values().stream()
-                .filter(p -> getActivePlayer().getTeam() != p.getTeam())
-                .map(Player::getSummonerName)
+                .filter(p -> getActivePlayer().team() != p.team())
+                .map(Player::summonerName)
                 .collect(Collectors.toList());
     }
 
     public boolean isAlly(String summonersName) {
-        return players.get(summonersName).getTeam() == getActivePlayer().getTeam();
+        return players.get(summonersName).team() == getActivePlayer().team();
     }
 }

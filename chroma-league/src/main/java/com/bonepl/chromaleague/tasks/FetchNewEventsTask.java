@@ -19,7 +19,7 @@ public class FetchNewEventsTask implements Runnable {
         try {
             LeagueHttpClient.getSingleResponse(URL)
                     .map(events -> JsonIterator.deserialize(events, Events.class))
-                    .map(Events::getEvents)
+                    .map(Events::events)
                     .filter(events -> !events.isEmpty())
                     .ifPresent(this::collectUnprocessedEvents);
         } catch (Exception ex) {
@@ -34,7 +34,7 @@ public class FetchNewEventsTask implements Runnable {
             final List<Event> unprocessedEvents = RunningState.getGameState().getEventData().getUnprocessedEvents(events);
             if (!unprocessedEvents.isEmpty()) {
                 if (hasPlayerReconnected(unprocessedEvents)) {
-                    final double gameTimeForReconnection = new FetchGameStats().fetchGameStats().getGameTime();
+                    final double gameTimeForReconnection = new FetchGameStats().fetchGameStats().gameTime();
                     new EventDataProcessor(gameTimeForReconnection).processNewEvents(unprocessedEvents);
                 } else {
                     new EventDataProcessor().processNewEvents(unprocessedEvents);

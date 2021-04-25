@@ -69,7 +69,7 @@ public final class GameStateHelper {
 
     private static double getCurrentTimeOrReconnectionTime(double currentTimeForReconnection) {
         if (currentTimeForReconnection == 0.0) {
-            return new FetchGameStats().fetchGameStats().getGameTime();
+            return new FetchGameStats().fetchGameStats().gameTime();
         }
         return currentTimeForReconnection;
     }

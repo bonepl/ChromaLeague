@@ -2,21 +2,8 @@ package com.bonepl.chromaleague.rest.gamestats;
 
 import com.jsoniter.annotation.JsonCreator;
 
-public class GameStats {
-    private final String gameMode;
-    private final double gameTime;
-
+public record GameStats(String gameMode, double gameTime) {
     @JsonCreator
-    public GameStats(String gameMode, double gameTime) {
-        this.gameMode = gameMode;
-        this.gameTime = gameTime;
-    }
-
-    public String getGameMode() {
-        return gameMode;
-    }
-
-    public double getGameTime() {
-        return gameTime;
+    public GameStats {
     }
 }

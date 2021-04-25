@@ -28,7 +28,7 @@ public final class ResourceBars {
     }
 
     public static IFrame getResourceBarForActivePlayerChampion() {
-        String activePlayerChampionName = RunningState.getGameState().getPlayerList().getActivePlayer().getChampionName();
+        String activePlayerChampionName = RunningState.getGameState().getPlayerList().getActivePlayer().championName();
         if (NO_MANA_BAR_CHAMPIONS.contains(activePlayerChampionName)) {
             return new NoResourceBar();
         }

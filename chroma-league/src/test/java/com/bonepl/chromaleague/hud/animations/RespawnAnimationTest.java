@@ -21,7 +21,7 @@ class RespawnAnimationTest {
         when(championStats.currentHealth()).thenReturn(100.0);
         when(championStats.maxHealth()).thenReturn(100.0);
 
-        when(gameStateMocks.player().getChampionName()).thenReturn("Morgana");
+        when(gameStateMocks.player().championName()).thenReturn("Morgana");
 
         // then
         new AnimationTester().testAnimation(new RespawnAnimation());

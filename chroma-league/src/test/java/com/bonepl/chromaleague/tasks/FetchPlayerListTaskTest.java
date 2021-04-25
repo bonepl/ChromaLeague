@@ -37,16 +37,16 @@ class FetchPlayerListTaskTest {
         assertNotNull(playerList);
         assertEquals(5, playerList.getAllies().size());
         assertEquals(5, playerList.getEnemies().size());
-        assertEquals("BooonE", playerList.getActivePlayer().getSummonerName());
-        assertEquals(Team.CHAOS, playerList.getActivePlayer().getTeam());
+        assertEquals("BooonE", playerList.getActivePlayer().summonerName());
+        assertEquals(Team.CHAOS, playerList.getActivePlayer().team());
         assertTrue(playerList.isAlly("Test summoner 5"));
         assertFalse(playerList.isAlly("Test summoner 9"));
         assertTrue(playerList.getEnemies().stream().anyMatch("Łążćkiewicz"::equals));
 
         final Player activePlayer = playerList.getActivePlayer();
-        assertEquals("Cho'Gath", activePlayer.getChampionName());
-        assertEquals("BooonE", activePlayer.getSummonerName());
+        assertEquals("Cho'Gath", activePlayer.championName());
+        assertEquals("BooonE", activePlayer.summonerName());
         assertTrue(activePlayer.isDead());
-        assertEquals(Team.CHAOS, activePlayer.getTeam());
+        assertEquals(Team.CHAOS, activePlayer.team());
     }
 }

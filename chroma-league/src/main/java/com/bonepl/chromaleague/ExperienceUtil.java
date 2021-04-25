@@ -52,7 +52,7 @@ public final class ExperienceUtil {
     }
 
     private static int getApproxLevelOnDeath(final double eventTime, final double currentGameTime) {
-        final int currentLevel = RunningState.getGameState().getActivePlayer().getLevel();
+        final int currentLevel = RunningState.getGameState().getActivePlayer().level();
         final int approxCurrentExp = getApproxCurrentExp(currentLevel);
         final double timePercent = eventTime / currentGameTime;
         return getLevelFromExp(approxCurrentExp * timePercent);

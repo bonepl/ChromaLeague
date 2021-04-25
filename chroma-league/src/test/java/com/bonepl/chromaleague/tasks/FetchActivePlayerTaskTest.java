@@ -30,10 +30,10 @@ class FetchActivePlayerTaskTest {
         assertNotNull(RunningState.getGameState().getActivePlayer());
 
         final ActivePlayer activePlayer = RunningState.getGameState().getActivePlayer();
-        assertEquals(123.45, activePlayer.getCurrentGold());
-        assertEquals(1, activePlayer.getLevel());
+        assertEquals(123.45, activePlayer.currentGold());
+        assertEquals(1, activePlayer.level());
 
-        final ChampionStats championStats = activePlayer.getChampionStats();
+        final ChampionStats championStats = activePlayer.championStats();
         assertEquals(255.59997, championStats.getCurrentHealth());
         assertEquals(655.5999755859375, championStats.getMaxHealth());
         assertEquals(111.11111111111111, championStats.getResourceValue());

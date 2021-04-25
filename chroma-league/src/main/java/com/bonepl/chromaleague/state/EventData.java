@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class EventData {
     private final List<DragonType> killedDragons = new ArrayList<>();
@@ -76,8 +75,7 @@ public class EventData {
 
     public List<Event> getUnprocessedEvents(List<Event> fetchedEvents) {
         return fetchedEvents.stream()
-                .filter(fetchedEvent -> !processedEvents.contains(fetchedEvent))
-                .collect(Collectors.toUnmodifiableList());
+                .filter(fetchedEvent -> !processedEvents.contains(fetchedEvent)).toList();
     }
 
     public RespawnIndicator getRespawnIndicator() {

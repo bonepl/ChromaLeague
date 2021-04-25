@@ -66,7 +66,7 @@ class EventDataProcessorBaronBuffTest {
         leagueHttpClientMock.mockEventsResponse("json/scenarios/baronBuffInactivePlayerWasDead.json");
         leagueHttpClientMock.mockGameStatsGameTime(300);
         when(gameStateMocks.playerList().getActivePlayer().isDead()).thenReturn(false);
-        when(gameStateMocks.activePlayer().getLevel()).thenReturn(6);
+        when(gameStateMocks.activePlayer().level()).thenReturn(6);
 
         // when
         new FetchNewEventsTask().run();
@@ -83,7 +83,7 @@ class EventDataProcessorBaronBuffTest {
         leagueHttpClientMock.mockEventsResponse("json/scenarios/baronBuffInactivePlayerDied.json");
         leagueHttpClientMock.mockGameStatsGameTime(300);
         when(gameStateMocks.playerList().getActivePlayer().isDead()).thenReturn(false);
-        when(gameStateMocks.activePlayer().getLevel()).thenReturn(6);
+        when(gameStateMocks.activePlayer().level()).thenReturn(6);
 
         // when
         new FetchNewEventsTask().run();

@@ -55,7 +55,7 @@ class HealthBarTest {
 
     private void mockActivePlayerHealth(double currentHealth, double maxHealth) {
         final ChampionStats mockedChampionStats = gameStateMocks.championStats();
-        when(mockedChampionStats.getCurrentHealth()).thenReturn(currentHealth);
-        when(mockedChampionStats.getMaxHealth()).thenReturn(maxHealth);
+        when(mockedChampionStats.currentHealth()).thenReturn(currentHealth);
+        when(mockedChampionStats.maxHealth()).thenReturn(maxHealth);
     }
 }

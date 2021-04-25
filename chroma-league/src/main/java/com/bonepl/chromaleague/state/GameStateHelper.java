@@ -25,12 +25,12 @@ public final class GameStateHelper {
 
     public static int getHpPercentage() {
         final ChampionStats championStats = RunningState.getGameState().getActivePlayer().championStats();
-        return getPercentage(championStats.getCurrentHealth(), championStats.getMaxHealth());
+        return getPercentage(championStats.currentHealth(), championStats.maxHealth());
     }
 
     public static int getResourcePercentage() {
         final ChampionStats championStats = RunningState.getGameState().getActivePlayer().championStats();
-        return getPercentage(championStats.getResourceValue(), championStats.getResourceMax());
+        return getPercentage(championStats.resourceValue(), championStats.resourceMax());
     }
 
     public static double getGold() {
@@ -50,7 +50,7 @@ public final class GameStateHelper {
     }
 
     public static double getActivePlayerRange() {
-        return RunningState.getGameState().getActivePlayer().championStats().getAttackRange();
+        return RunningState.getGameState().getActivePlayer().championStats().attackRange();
     }
 
     private static int getPercentage(double firstDouble, double secondDouble) {

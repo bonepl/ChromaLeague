@@ -16,12 +16,12 @@ public abstract class AbstractResourceTest {
 
     protected void mockResource(double resource, double maxResource) {
         final ChampionStats mockedChampionStats = gameStateMocks.championStats();
-        when(mockedChampionStats.getResourceValue()).thenReturn(resource);
-        when(mockedChampionStats.getResourceMax()).thenReturn(maxResource);
+        when(mockedChampionStats.resourceValue()).thenReturn(resource);
+        when(mockedChampionStats.resourceMax()).thenReturn(maxResource);
     }
 
     protected void mockRange(double range) {
         final ChampionStats mockedChampionStats = gameStateMocks.championStats();
-        when(mockedChampionStats.getAttackRange()).thenReturn(range);
+        when(mockedChampionStats.attackRange()).thenReturn(range);
     }
 }

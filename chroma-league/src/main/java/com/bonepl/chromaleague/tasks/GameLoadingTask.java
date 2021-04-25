@@ -7,16 +7,9 @@ import com.bonepl.razersdk.ChromaRestSDK;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class GameLoadingTask implements Runnable {
+public record GameLoadingTask(ChromaRestSDK chromaRestSDK,
+                              LoadingAnimation loadingAnimation) implements Runnable {
     private static final Logger LOGGER = Logger.getLogger(GameLoadingTask.class.getName());
-
-    private final ChromaRestSDK chromaRestSDK;
-    private final LoadingAnimation loadingAnimation;
-
-    public GameLoadingTask(final ChromaRestSDK chromaRestSDK) {
-        this.chromaRestSDK = chromaRestSDK;
-        loadingAnimation = new LoadingAnimation();
-    }
 
     @Override
     public void run() {

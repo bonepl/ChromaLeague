@@ -38,12 +38,12 @@ public class EventDataProcessor {
         final EventType eventType = EventType.fromEvent(event);
         switch (eventType) {
             case GAME_START -> RunningState.setRunningGame(true);
-            case ALLY_BARON_KILL -> GameStateHelper.startBaronBuff(event.getEventTime(), currentTimeForReconnection);
+            case ALLY_BARON_KILL -> GameStateHelper.startBaronBuff(event.EventTime(), currentTimeForReconnection);
             case ALLY_CLOUD_DRAGON_KILL -> addKilledDragon(DragonType.CLOUD);
             case ALLY_INFERNAL_DRAGON_KILL -> addKilledDragon(DragonType.INFERNAL);
             case ALLY_MOUNTAIN_DRAGON_KILL -> addKilledDragon(DragonType.MOUNTAIN);
             case ALLY_OCEAN_DRAGON_KILL -> addKilledDragon(DragonType.OCEAN);
-            case ALLY_ELDER_DRAGON_KILL -> processAllyElderKill(event.getEventTime());
+            case ALLY_ELDER_DRAGON_KILL -> processAllyElderKill(event.EventTime());
             case ENEMY_ELDER_DRAGON_KILL -> GameStateHelper.addKilledElder();
             case ACTIVE_PLAYER_DIED -> resetAlivePlayerCounters(event);
             case ACTIVE_PLAYER_KILL -> GameStateHelper.addPlayerKill();
@@ -77,9 +77,9 @@ public class EventDataProcessor {
             eventData.setRespawnTime(LocalTime.now().plus(millisDuration(respawnTimer)));
             eventData.setRespawnIndicator(RespawnIndicator.CHARGING);
         } else {
-            final Duration millisToDeath = millisDuration(currentTimeForReconnection - event.getEventTime());
+            final Duration millisToDeath = millisDuration(currentTimeForReconnection - event.EventTime());
             eventData.setDeathTime(LocalTime.now().minus(millisToDeath));
-            final double approxDeathTimeForEventTime = ExperienceUtil.getApproxDeathTimeForEventTime(event.getEventTime(), currentTimeForReconnection);
+            final double approxDeathTimeForEventTime = ExperienceUtil.getApproxDeathTimeForEventTime(event.EventTime(), currentTimeForReconnection);
             final LocalTime pastRespawnTime = eventData.getDeathTime().plus(millisDuration(approxDeathTimeForEventTime));
             eventData.setRespawnTime(pastRespawnTime);
         }

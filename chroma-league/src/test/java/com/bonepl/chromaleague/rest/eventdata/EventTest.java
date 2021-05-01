@@ -24,14 +24,14 @@ class EventTest {
         final Event baseEvent = JsonIterator.deserialize(json, Event.class);
 
         //then
-        assertEquals(7, baseEvent.getEventID());
-        assertEquals("DragonKill", baseEvent.getEventName());
-        assertEquals(933.6826782226563, baseEvent.getEventTime());
-        assertEquals("Fire", baseEvent.getDragonType());
-        assertEquals("BooonE", baseEvent.getKillerName());
-        assertEquals("Noob", baseEvent.getVictimName());
-        assertEquals("Win", baseEvent.getResult());
-        assertTrue(baseEvent.getAssisters().containsAll(List.of("Teammate 1", "Teammate 2")));
+        assertEquals(7, baseEvent.EventID());
+        assertEquals("DragonKill", baseEvent.EventName());
+        assertEquals(933.6826782226563, baseEvent.EventTime());
+        assertEquals("Fire", baseEvent.DragonType());
+        assertEquals("BooonE", baseEvent.KillerName());
+        assertEquals("Noob", baseEvent.VictimName());
+        assertEquals("Win", baseEvent.Result());
+        assertTrue(baseEvent.Assisters().containsAll(List.of("Teammate 1", "Teammate 2")));
     }
 
     private static String readJsonResource(String resourceName) {

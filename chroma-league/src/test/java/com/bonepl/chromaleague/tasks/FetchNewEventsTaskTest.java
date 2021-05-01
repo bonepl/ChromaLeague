@@ -45,9 +45,9 @@ class FetchNewEventsTaskTest {
         events.addAll(RunningState.getGameState().getEventData().getProcessedEvents());
         assertEquals(3, events.size());
         final Event event = events.get(2);
-        assertEquals(2, event.getEventID());
-        assertEquals("ChampionKill", event.getEventName());
-        assertEquals(7.1595916748047, event.getEventTime());
+        assertEquals(2, event.EventID());
+        assertEquals("ChampionKill", event.EventName());
+        assertEquals(7.1595916748047, event.EventTime());
     }
 
     @Test
@@ -64,9 +64,9 @@ class FetchNewEventsTaskTest {
         events.addAll(RunningState.getGameState().getEventData().getProcessedEvents());
         assertEquals(27, events.size());
         final Event event = events.get(0);
-        assertEquals(0, event.getEventID());
-        assertEquals("GameStart", event.getEventName());
-        assertEquals(0.0563616007566452, event.getEventTime());
+        assertEquals(0, event.EventID());
+        assertEquals("GameStart", event.EventName());
+        assertEquals(0.0563616007566452, event.EventTime());
     }
 
     @Test
@@ -82,8 +82,8 @@ class FetchNewEventsTaskTest {
         events.addAll(RunningState.getGameState().getEventData().getProcessedEvents());
         assertEquals(1, events.size());
         final Event event = events.get(0);
-        assertEquals(0, event.getEventID());
-        assertEquals("GameStart", event.getEventName());
-        assertEquals(0.0563616007566452, event.getEventTime());
+        assertEquals(0, event.EventID());
+        assertEquals("GameStart", event.EventName());
+        assertEquals(0.0563616007566452, event.EventTime());
     }
 }

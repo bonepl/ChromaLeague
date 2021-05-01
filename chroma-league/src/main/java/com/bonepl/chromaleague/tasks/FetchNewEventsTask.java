@@ -46,7 +46,7 @@ public class FetchNewEventsTask implements Runnable {
     }
 
     private static boolean hasPlayerReconnected(List<Event> events) {
-        return events.get(events.size() - 1).getEventTime() - events.get(0).getEventTime() > 10;
+        return events.get(events.size() - 1).EventTime() - events.get(0).EventTime() > 10;
     }
 
     private static void waitForGameStart(List<Event> events) {

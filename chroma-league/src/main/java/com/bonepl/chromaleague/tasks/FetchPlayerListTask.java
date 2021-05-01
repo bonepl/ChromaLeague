@@ -6,6 +6,7 @@ import com.bonepl.chromaleague.rest.playerlist.PlayerList;
 import com.bonepl.chromaleague.state.RunningState;
 import com.jsoniter.JsonIterator;
 
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,6 +20,7 @@ public class FetchPlayerListTask implements Runnable {
             try {
                 LeagueHttpClient.getSingleResponse(URL)
                         .map(playerList -> JsonIterator.deserialize(playerList, Player[].class))
+                        .map(Arrays::asList)
                         .map(PlayerList::new)
                         .ifPresent(playerList -> RunningState.getGameState().setPlayerList(playerList));
             } catch (Exception ex) {

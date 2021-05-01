@@ -1,10 +1,12 @@
 package com.bonepl.razersdk.animation;
 
+import java.io.Serializable;
+
 /**
  * Class describing color in RGB format.
  * Note that Razer Chroma SDK is using BGR format encoded with {@link #getSDKColorRef()}
  */
-public record Color(int red, int green, int blue) {
+public record Color(int red, int green, int blue) implements Serializable {
     public static final Color NONE = new Color(0, 0, 0);
 
     public static final Color WHITE = new Color(255, 255, 255);

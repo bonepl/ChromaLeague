@@ -13,7 +13,6 @@ public enum DragonType {
     OCEAN("Water", CLColor.OCEAN);
 
     private final String apiType;
-    @SuppressWarnings("NonSerializableFieldInSerializableClass")
     private final Color color;
 
     DragonType(String apiType, Color color) {

@@ -26,7 +26,7 @@ public final class ChromaSDKHttpClient {
     private ChromaSDKHttpClient() {
     }
 
-    public static CloseableHttpClient getInstance() {
+    public static CloseableHttpClient create() {
         return HttpClients.custom()
                 .setConnectionManager(createSelfTrustedConnectionManager())
                 .setDefaultRequestConfig(createRequestConfig())

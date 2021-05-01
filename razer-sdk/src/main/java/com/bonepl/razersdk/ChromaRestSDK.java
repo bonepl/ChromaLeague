@@ -3,18 +3,18 @@ package com.bonepl.razersdk;
 import com.bonepl.razersdk.animation.Frame;
 import com.bonepl.razersdk.animation.IFrame;
 import com.bonepl.razersdk.sdk.HeartbeatTask;
+import com.bonepl.razersdk.sdk.SdkRequestExecutor;
 import com.bonepl.razersdk.sdk.json.ChromaSDKHttpClient;
 import com.bonepl.razersdk.sdk.json.request.Init;
 import com.bonepl.razersdk.sdk.json.request.KeyboardEffect;
 import com.bonepl.razersdk.sdk.json.response.Result;
 import com.bonepl.razersdk.sdk.json.response.SessionInfo;
-import com.bonepl.razersdk.sdk.json.response.Version;
 import com.jsoniter.JsonIterator;
 import com.jsoniter.output.JsonStream;
-import org.apache.http.client.methods.*;
+import org.apache.http.client.methods.HttpDelete;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -46,10 +46,9 @@ import java.util.logging.Logger;
  * # automatic disconnection
  * </pre>
  */
-public final class ChromaRestSDK implements AutoCloseable {
+public final class ChromaRestSDK extends SdkRequestExecutor {
     private static final Logger LOGGER = Logger.getLogger(ChromaRestSDK.class.getName());
     private static final int INIT_SLEEP_TIME = 2000;
-    private final CloseableHttpClient httpClient;
     private final SessionInfo currentSession;
     private final ScheduledExecutorService heartbeatExecutor;
 
@@ -66,11 +65,10 @@ public final class ChromaRestSDK implements AutoCloseable {
      * Create and initialize connection to Chroma-enabled Razer device
      */
     public ChromaRestSDK() {
-        httpClient = ChromaSDKHttpClient.getInstance();
-        printVersionInfo();
+        super(ChromaSDKHttpClient.create());
         currentSession = init();
         heartbeatExecutor = Executors.newSingleThreadScheduledExecutor();
-        heartbeatExecutor.scheduleAtFixedRate(new HeartbeatTask(httpClient, currentSession), 0, 5, TimeUnit.SECONDS);
+        heartbeatExecutor.scheduleAtFixedRate(new HeartbeatTask(getHttpClient(), currentSession), 0, 5, TimeUnit.SECONDS);
     }
 
     /**
@@ -133,13 +131,6 @@ public final class ChromaRestSDK implements AutoCloseable {
         }
     }
 
-    private void printVersionInfo() {
-        final HttpGet versionInfoRequest = new HttpGet("https://chromasdk.io:54236/razer/chromasdk");
-        final String versionInfoJson = executeRequest(versionInfoRequest);
-        final Version version = JsonIterator.deserialize(versionInfoJson, Version.class);
-        LOGGER.info(() -> "Detected Razer Chroma REST Api " + version);
-    }
-
     /**
      * Close and disconnect Chroma-enabled Razer device
      */
@@ -151,26 +142,6 @@ public final class ChromaRestSDK implements AutoCloseable {
         final Result result = JsonIterator.deserialize(unInitResponseJson, Result.class);
         LOGGER.info(String.format("Razer Chroma SDK session %d ended with code %d",
                 currentSession.sessionId(), result.result()));
-        try {
-            httpClient.close();
-        } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, e, () -> "Exception while closing ChromaSDKHttpClient");
-            throw new IllegalStateException(e);
-        }
-    }
-
-    private String executeRequest(HttpUriRequest request) {
-        try {
-            return execute(request);
-        } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, e, () -> "Error while executing SDK Http request");
-            throw new IllegalStateException(e);
-        }
-    }
-
-    private String execute(HttpUriRequest request) throws IOException {
-        try (final CloseableHttpResponse execute = httpClient.execute(request)) {
-            return EntityUtils.toString(execute.getEntity());
-        }
+        super.close();
     }
 }

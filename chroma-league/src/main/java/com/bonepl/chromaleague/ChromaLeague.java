@@ -4,6 +4,7 @@ import com.bonepl.chromaleague.rest.LeagueHttpClient;
 import com.bonepl.chromaleague.state.RunningState;
 import com.bonepl.chromaleague.tasks.CheckRiotApiTask;
 import com.bonepl.chromaleague.tasks.MainTask;
+import com.bonepl.chromaleague.tasks.SdkConnectivityCheckTask;
 import com.bonepl.chromaleague.tasks.VersionCheckTask;
 
 import java.nio.charset.StandardCharsets;
@@ -19,6 +20,7 @@ public class ChromaLeague implements AutoCloseable {
 
     public void runChromaLeague() {
         mainExecutorService.execute(new VersionCheckTask());
+        mainExecutorService.execute(new SdkConnectivityCheckTask());
         LOGGER.info("Started Chroma League, waiting for a game - press ENTER to exit");
         mainExecutorService.scheduleWithFixedDelay(new CheckRiotApiTask(), 0, 1000, TimeUnit.MILLISECONDS);
         mainExecutorService.scheduleWithFixedDelay(new MainTask(), 100, 500, TimeUnit.MILLISECONDS);

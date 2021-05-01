@@ -28,7 +28,7 @@ public class FetchNewEventsTask implements Runnable {
     }
 
     void collectUnprocessedEvents(List<Event> events) {
-        if (RunningState.getGameState() == null) {
+        if (!RunningState.getRunningGame().getValue()) {
             waitForGameStart(events);
         } else if (RunningState.getGameState().getActivePlayer() != null && RunningState.getGameState().getPlayerList() != null) {
             final List<Event> unprocessedEvents = RunningState.getGameState().getEventData().getUnprocessedEvents(events);

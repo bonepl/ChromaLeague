@@ -14,14 +14,12 @@ public class FetchActivePlayerTask implements Runnable {
 
     @Override
     public void run() {
-        if (RunningState.getGameState() != null) {
-            try {
-                LeagueHttpClient.getSingleResponse(URL)
-                        .map(activePlayer -> JsonIterator.deserialize(activePlayer, ActivePlayer.class))
-                        .ifPresent(activePlayer -> RunningState.getGameState().setActivePlayer(activePlayer));
-            } catch (Exception ex) {
-                LOGGER.log(Level.SEVERE, ex, () -> "Error while fetching ActivePlayer");
-            }
+        try {
+            LeagueHttpClient.getSingleResponse(URL)
+                    .map(activePlayer -> JsonIterator.deserialize(activePlayer, ActivePlayer.class))
+                    .ifPresent(activePlayer -> RunningState.getGameState().setActivePlayer(activePlayer));
+        } catch (Exception ex) {
+            LOGGER.log(Level.SEVERE, ex, () -> "Error while fetching ActivePlayer");
         }
     }
 }

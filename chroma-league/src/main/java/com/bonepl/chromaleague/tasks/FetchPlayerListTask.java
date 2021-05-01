@@ -16,16 +16,14 @@ public class FetchPlayerListTask implements Runnable {
 
     @Override
     public void run() {
-        if (RunningState.getGameState() != null) {
-            try {
-                LeagueHttpClient.getSingleResponse(URL)
-                        .map(playerList -> JsonIterator.deserialize(playerList, Player[].class))
-                        .map(Arrays::asList)
-                        .map(PlayerList::new)
-                        .ifPresent(playerList -> RunningState.getGameState().setPlayerList(playerList));
-            } catch (Exception ex) {
-                LOGGER.log(Level.SEVERE, ex, () -> "Error while fetching PlayerList");
-            }
+        try {
+            LeagueHttpClient.getSingleResponse(URL)
+                    .map(playerList -> JsonIterator.deserialize(playerList, Player[].class))
+                    .map(Arrays::asList)
+                    .map(PlayerList::new)
+                    .ifPresent(playerList -> RunningState.getGameState().setPlayerList(playerList));
+        } catch (Exception ex) {
+            LOGGER.log(Level.SEVERE, ex, () -> "Error while fetching PlayerList");
         }
     }
 }

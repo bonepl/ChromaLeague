@@ -33,7 +33,6 @@ public final class LeagueHttpClient {
     private static CloseableHttpClient singleFetchLeagueHttpClient = createSingleFetchLeagueHttpClient();
     private static CloseableHttpClient retriableLeagueHttpClient = createRetriableHttpClient();
 
-
     private LeagueHttpClient() {
     }
 

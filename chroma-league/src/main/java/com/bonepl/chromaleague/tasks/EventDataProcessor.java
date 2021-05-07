@@ -70,7 +70,6 @@ public class EventDataProcessor {
 
     private void resetAlivePlayerCounters(Event event) {
         final EventData eventData = RunningState.getGameState().getEventData();
-        final int level = RunningState.getGameState().getActivePlayer().level();
         if (currentTimeForReconnection == 0.0) {
             eventData.setDeathTime(LocalTime.now());
             final double respawnTimer = new FetchRespawnTime().fetchPlayerRespawnTime();

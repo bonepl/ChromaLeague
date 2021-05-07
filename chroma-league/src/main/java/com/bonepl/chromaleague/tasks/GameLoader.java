@@ -25,7 +25,9 @@ public class GameLoader implements Closeable {
     public void close() {
         try {
             gameLoaderExecutor.shutdown();
-            gameLoaderExecutor.awaitTermination(5000, TimeUnit.MILLISECONDS);
+            if (!gameLoaderExecutor.awaitTermination(5000, TimeUnit.MILLISECONDS)) {
+                LOGGER.log(Level.WARNING, () -> "Couldn't terminate GameLoader executor - timed out");
+            }
         } catch (InterruptedException e) {
             LOGGER.log(Level.WARNING, e, () -> "GameLoader interrupted while shutting down scheduler");
             Thread.currentThread().interrupt();

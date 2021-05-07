@@ -25,10 +25,10 @@ public class GnarFuryBar extends AnimatedFrame {
         } else {
             if (gnarFuryPercent < COLOR_TRANSITION_PERCENT_START) {
                 addAnimationFrame(new ProgressBar(ResourceBars.getResourceBarKeys(), gnarFuryPercent, Color.YELLOW));
-            } else if (gnarFuryPercent >= COLOR_TRANSITION_PERCENT_START && gnarFuryPercent < 85) {
+            } else if (gnarFuryPercent < 85) {
                 addAnimationFrame(new ProgressBar(ResourceBars.getResourceBarKeys(), gnarFuryPercent,
                         fromYellowToRed.getColorAtPercent(COLOR_TRANSITION_PERCENT_STEP * (gnarFuryPercent - COLOR_TRANSITION_PERCENT_START))));
-            } else if (gnarFuryPercent >= 85 && gnarFuryPercent < 100) {
+            } else if (gnarFuryPercent < 100) {
                 aboutToTransform.setUpColor(fromYellowToRed.getColorAtPercent(COLOR_TRANSITION_PERCENT_STEP * (gnarFuryPercent - COLOR_TRANSITION_PERCENT_START)));
                 addAnimationFrame(new ProgressBar(ResourceBars.getResourceBarKeys(), gnarFuryPercent,
                         aboutToTransform.getNextColor()));

@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -52,7 +53,7 @@ public class VersionCheckTask implements Runnable {
 
     public List<String> getLocalVersion() throws IOException {
         try (final InputStream resourceAsStream = getClass().getResourceAsStream(LOCAL_VERSION_PATH)) {
-            return Arrays.stream(new String(resourceAsStream.readAllBytes(), StandardCharsets.UTF_8)
+            return Arrays.stream(new String(Objects.requireNonNull(resourceAsStream).readAllBytes(), StandardCharsets.UTF_8)
                     .split(System.lineSeparator())).map(String::strip).collect(Collectors.toList());
         }
     }

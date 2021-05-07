@@ -71,12 +71,4 @@ public class TransitionColor {
             steps = newSteps;
         }
     }
-
-    public Color getFrom() {
-        return from;
-    }
-
-    public Color getTo() {
-        return to;
-    }
 }

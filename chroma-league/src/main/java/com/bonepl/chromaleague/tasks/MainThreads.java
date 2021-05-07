@@ -53,7 +53,9 @@ public class MainThreads implements Closeable {
     private void shutdownMainExecutor() {
         try {
             mainExecutor.shutdown();
-            mainExecutor.awaitTermination(5000, TimeUnit.MILLISECONDS);
+            if (!mainExecutor.awaitTermination(5000, TimeUnit.MILLISECONDS)) {
+                LOGGER.log(Level.WARNING, () -> "Couldn't terminate GameLoader executor - timed out");
+            }
         } catch (InterruptedException e) {
             LOGGER.log(Level.WARNING, e, () -> "MainThreads interrupted while shutting down scheduler");
             Thread.currentThread().interrupt();

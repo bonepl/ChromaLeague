@@ -76,14 +76,9 @@ public final class LeagueHttpClient {
     }
 
     private static HttpClientBuilder createCustomLeagueHttpClient() {
-        try {
-            return HttpClients.custom()
-                    .setConnectionManager(createUnsecureConnManager())
-                    .setDefaultRequestConfig(createRequestConfig());
-        } catch (Exception ex) {
-            LOGGER.log(Level.SEVERE, ex, () -> "Error while creating League HTTP Client");
-            return null;
-        }
+        return HttpClients.custom()
+                .setConnectionManager(createUnsecureConnManager())
+                .setDefaultRequestConfig(createRequestConfig());
     }
 
     private static PoolingHttpClientConnectionManager createUnsecureConnManager() {

@@ -23,7 +23,6 @@ public class MainHud extends AnimatedFrame {
     private final DragonBar dragonBar = new DragonBar();
     private final HealthBar healthBar = new HealthBar();
     private IFrame resourceBar;
-    private boolean playerDead;
 
     @Override
     public Frame getFrame() {
@@ -49,19 +48,6 @@ public class MainHud extends AnimatedFrame {
         }
         addAnimationFrame(mainHudFrame);
         return super.getFrame();
-    }
-
-    private void handleRespawnEvent() {
-        final boolean activePlayerAlive = GameStateHelper.isActivePlayerAlive();
-        if (playerDead) {
-            if (activePlayerAlive) {
-                playerDead = false;
-            }
-        } else {
-            if (!activePlayerAlive) {
-                playerDead = true;
-            }
-        }
     }
 
     private IFrame getResourceBar() {

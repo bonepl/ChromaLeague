@@ -7,13 +7,10 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Objects;
 
 public final class ResourceLoader {
     private ResourceLoader() {
-    }
-
-    public static String readJson(String fileName) {
-        return readResource("json/" + fileName);
     }
 
     public static Event eventFromJson(String fileName) {
@@ -26,7 +23,7 @@ public final class ResourceLoader {
 
     private static String readResource(String resourceName) {
         try {
-            return Files.readString(Paths.get(ResourceLoader.class.getClassLoader().getResource(resourceName).toURI()));
+            return Files.readString(Paths.get(Objects.requireNonNull(ResourceLoader.class.getClassLoader().getResource(resourceName)).toURI()));
         } catch (IOException | URISyntaxException ex) {
             throw new AssertionError("Couldn't read test resource ", ex);
         }

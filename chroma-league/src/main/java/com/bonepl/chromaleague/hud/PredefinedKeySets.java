@@ -37,8 +37,6 @@ public final class PredefinedKeySets {
             = List.of(RZKEY_NUMPAD_MULTIPLY, RZKEY_NUMPAD9, RZKEY_NUMPAD6, RZKEY_NUMPAD3, RZKEY_NUMPAD_DECIMAL);
     public static final List<RzKey> FOURTH_NUMPAD_COLUMN
             = List.of(RZKEY_NUMPAD_SUBTRACT, RZKEY_NUMPAD_ADD, RZKEY_NUMPAD_ENTER);
-    public static final List<RzKey> MACROS = List.of(RZKEY_MACRO1, RZKEY_MACRO2, RZKEY_MACRO3, RZKEY_MACRO4, RZKEY_MACRO5);
-    public static final List<RzKey> ARROWS = List.of(RZKEY_LEFT, RZKEY_DOWN, RZKEY_RIGHT, RZKEY_UP);
 
     private PredefinedKeySets() {
     }

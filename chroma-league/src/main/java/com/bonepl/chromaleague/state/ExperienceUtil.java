@@ -30,10 +30,6 @@ public final class ExperienceUtil {
     private ExperienceUtil() {
     }
 
-    public static double getApproxDeathTimeForLevel(final int level) {
-        return getApproxDeathTimerForLevel(level);
-    }
-
     public static double getApproxDeathTimeForEventTime(final double eventTime, final double currentGameTime) {
         final int approxLevelOnDeath = getApproxLevelOnDeath(eventTime, currentGameTime);
         return getApproxDeathTimerForLevel(approxLevelOnDeath);

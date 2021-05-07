@@ -20,10 +20,6 @@ public enum DragonType {
         this.color = color;
     }
 
-    public String getApiType() {
-        return apiType;
-    }
-
     public Color getColor() {
         return color;
     }

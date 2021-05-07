@@ -19,12 +19,10 @@ import com.bonepl.razersdk.sdk.RzKeySelector;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
 
 import static com.bonepl.razersdk.sdk.RzKey.*;
 
 public class RespawnAnimation extends AnimatedFrame {
-    private static final Set<RzKey> GLOW_AREA = BaronBuffBackgroundAnimation.buildBaronArea();
     private static final List<RzKey> FOURTH_ROW = new RzKeySelector().withRowOf(RZKEY_Q).withColumnBetween(RZKEY_Q, RZKEY_U).asList();
     private static final List<RzKey> THIRD_ROW = new RzKeySelector().withRowOf(RZKEY_A).withColumnBetween(RZKEY_A, RZKEY_H).asList();
     private static final List<RzKey> SECOND_ROW = new RzKeySelector().withRowOf(RZKEY_Z).withColumnBetween(RZKEY_Z, RZKEY_B).asList();
@@ -32,8 +30,6 @@ public class RespawnAnimation extends AnimatedFrame {
     private static final int STEPS = 20;
 
     public RespawnAnimation() {
-        BreathingColor glowAreaColor = new BreathingColor(Color.YELLOW, STEPS, true);
-        BreathingColor buttonsColor = new BreathingColor(Color.YELLOW, STEPS, true);
         int delayBetweenRows = 5;
         final List<AnimatedFrame> animatedFrames = Arrays.asList(
                 createYellowAnimatedFrame(0, FIRST_ROW),

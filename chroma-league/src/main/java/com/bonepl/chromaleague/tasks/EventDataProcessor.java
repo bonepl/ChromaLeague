@@ -1,13 +1,9 @@
 package com.bonepl.chromaleague.tasks;
 
-import com.bonepl.chromaleague.state.ExperienceUtil;
 import com.bonepl.chromaleague.rest.eventdata.DragonType;
 import com.bonepl.chromaleague.rest.eventdata.Event;
 import com.bonepl.chromaleague.rest.eventdata.EventType;
-import com.bonepl.chromaleague.state.EventData;
-import com.bonepl.chromaleague.state.GameStateHelper;
-import com.bonepl.chromaleague.state.RespawnIndicator;
-import com.bonepl.chromaleague.state.RunningState;
+import com.bonepl.chromaleague.state.*;
 
 import java.time.Duration;
 import java.time.LocalTime;
@@ -48,7 +44,7 @@ public class EventDataProcessor {
             case ACTIVE_PLAYER_DIED -> resetAlivePlayerCounters(event);
             case ACTIVE_PLAYER_KILL -> GameStateHelper.addPlayerKill();
             case ACTIVE_PLAYER_ASSIST -> GameStateHelper.addPlayerAssist();
-            case GAME_END_DEFEAT, GAME_END_VICTORY -> finishGameInSeconds(8);
+            case GAME_END_DEFEAT, GAME_END_VICTORY -> finishGameInSeconds(8L);
             case ENEMY_OCEAN_DRAGON_KILL, ENEMY_MOUNTAIN_DRAGON_KILL,
                     ENEMY_INFERNAL_DRAGON_KILL, ENEMY_CLOUD_DRAGON_KILL, ENEMY_HERALD_KILL,
                     ENEMY_BARON_KILL, ALLY_HERALD_KILL, UNSUPPORTED -> {
@@ -56,7 +52,7 @@ public class EventDataProcessor {
         }
     }
 
-    private static void finishGameInSeconds(int seconds) {
+    private static void finishGameInSeconds(long seconds) {
         scheduledExecutorService.schedule(() -> RunningState.setRunningGame(false), seconds, TimeUnit.SECONDS);
     }
 
@@ -72,7 +68,7 @@ public class EventDataProcessor {
         final EventData eventData = RunningState.getGameState().getEventData();
         if (currentTimeForReconnection == 0.0) {
             eventData.setDeathTime(LocalTime.now());
-            final double respawnTimer = new FetchRespawnTime().fetchPlayerRespawnTime();
+            final double respawnTimer = FetchRespawnTime.fetchPlayerRespawnTime();
             eventData.setRespawnTime(LocalTime.now().plus(millisDuration(respawnTimer)));
             eventData.setRespawnIndicator(RespawnIndicator.CHARGING);
         } else {

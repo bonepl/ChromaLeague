@@ -12,9 +12,9 @@ import java.util.List;
 
 public final class GameStateHelper {
 
-    public static final int FIRST_ELDER_TIME = 150;
-    public static final int NEXT_ELDER_TIME = 300;
-    public static final int BARON_TIME = 180;
+    public static final long FIRST_ELDER_TIME = 150L;
+    public static final long NEXT_ELDER_TIME = 300L;
+    public static final long BARON_TIME = 180L;
 
     private GameStateHelper() {
     }
@@ -69,7 +69,7 @@ public final class GameStateHelper {
 
     private static double getCurrentTimeOrReconnectionTime(double currentTimeForReconnection) {
         if (currentTimeForReconnection == 0.0) {
-            return new FetchGameStats().fetchGameStats().gameTime();
+            return FetchGameStats.fetchGameStats().gameTime();
         }
         return currentTimeForReconnection;
     }
@@ -162,7 +162,7 @@ public final class GameStateHelper {
                 return false;
             }
             if (eventData.getRespawnIndicator() == RespawnIndicator.CHARGING) {
-                if (ChronoUnit.SECONDS.between(now, respawnTime) <= 1) {
+                if (ChronoUnit.SECONDS.between(now, respawnTime) <= 1L) {
                     eventData.setRespawnIndicator(RespawnIndicator.IDLE);
                     return true;
                 }

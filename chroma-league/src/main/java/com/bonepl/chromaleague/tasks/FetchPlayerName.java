@@ -9,7 +9,10 @@ public class FetchPlayerName {
     public static final String URL = "https://127.0.0.1:2999/liveclientdata/activeplayername";
     private static final Logger LOGGER = Logger.getLogger(FetchPlayerName.class.getName());
 
-    public String fetchPlayerName() {
+    private FetchPlayerName() {
+    }
+
+    public static String fetchPlayerName() {
         try {
             return LeagueHttpClient.getRetriableResponse(URL)
                     .map(String::new)

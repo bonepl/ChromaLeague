@@ -19,7 +19,7 @@ class FetchRespawnTimeTest {
         new GameStateMocks();
 
         //when
-        final double respawnTime = new FetchRespawnTime().fetchPlayerRespawnTime();
+        final double respawnTime = FetchRespawnTime.fetchPlayerRespawnTime();
 
         //then
         assertEquals(4.5, respawnTime);

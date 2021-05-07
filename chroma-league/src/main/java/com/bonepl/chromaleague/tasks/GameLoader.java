@@ -12,13 +12,13 @@ import java.util.logging.Logger;
 
 public class GameLoader implements Closeable {
     private static final Logger LOGGER = Logger.getLogger(GameLoader.class.getName());
-    private static final int GAME_LOADING_REFRESH_DELAY = 50;
+    private static final long GAME_LOADING_REFRESH_DELAY = 50L;
 
     private final ScheduledExecutorService gameLoaderExecutor;
 
     public GameLoader(final ChromaRestSDK chromaRestSDK) {
         gameLoaderExecutor = Executors.newSingleThreadScheduledExecutor();
-        gameLoaderExecutor.scheduleWithFixedDelay(new GameLoadingTask(chromaRestSDK, new LoadingAnimation()), 0, GAME_LOADING_REFRESH_DELAY, TimeUnit.MILLISECONDS);
+        gameLoaderExecutor.scheduleWithFixedDelay(new GameLoadingTask(chromaRestSDK, new LoadingAnimation()), 0L, GAME_LOADING_REFRESH_DELAY, TimeUnit.MILLISECONDS);
     }
 
     @Override

@@ -48,7 +48,7 @@ import java.util.logging.Logger;
  */
 public final class ChromaRestSDK extends SdkRequestExecutor {
     private static final Logger LOGGER = Logger.getLogger(ChromaRestSDK.class.getName());
-    private static final int INIT_SLEEP_TIME = 2000;
+    private static final long INIT_SLEEP_TIME = 2000L;
     private final SessionInfo currentSession;
     private final ScheduledExecutorService heartbeatExecutor;
 
@@ -68,7 +68,7 @@ public final class ChromaRestSDK extends SdkRequestExecutor {
         super(ChromaSDKHttpClient.create());
         currentSession = init();
         heartbeatExecutor = Executors.newSingleThreadScheduledExecutor();
-        heartbeatExecutor.scheduleAtFixedRate(new HeartbeatTask(getHttpClient(), currentSession), 0, 5, TimeUnit.SECONDS);
+        heartbeatExecutor.scheduleAtFixedRate(new HeartbeatTask(getHttpClient(), currentSession), 0L, 5L, TimeUnit.SECONDS);
     }
 
     /**

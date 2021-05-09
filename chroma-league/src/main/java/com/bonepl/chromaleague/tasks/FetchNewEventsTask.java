@@ -21,24 +21,24 @@ public class FetchNewEventsTask implements Runnable {
                     .map(events -> JsonIterator.deserialize(events, Events.class))
                     .map(Events::events)
                     .filter(events -> !events.isEmpty())
-                    .ifPresent(this::collectUnprocessedEvents);
+                    .ifPresent(FetchNewEventsTask::collectUnprocessedEvents);
         } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, ex, () -> "Error while fetching Events");
         }
     }
 
-    void collectUnprocessedEvents(List<Event> events) {
+    static void collectUnprocessedEvents(List<Event> events) {
         if (!RunningState.getRunningGame().getValue()) {
             waitForGameStart(events);
         } else if (RunningState.getGameState().getActivePlayer() != null && RunningState.getGameState().getPlayerList() != null) {
             final List<Event> unprocessedEvents = RunningState.getGameState().getEventData().getUnprocessedEvents(events);
             if (!unprocessedEvents.isEmpty()) {
                 if (hasPlayerReconnected(unprocessedEvents)) {
-                    final double gameTimeForReconnection = new FetchGameStats().fetchGameStats().gameTime();
+                    final double gameTimeForReconnection = FetchGameStats.fetchGameStats().gameTime();
                     new EventDataProcessor(gameTimeForReconnection).processNewEvents(unprocessedEvents);
                 } else {
                     new EventDataProcessor().processNewEvents(unprocessedEvents);
-                    new EventAnimationProcessor().processNewEvents(unprocessedEvents);
+                    EventAnimationProcessor.processNewEvents(unprocessedEvents);
                 }
                 RunningState.getGameState().getEventData().addProcessedEvents(unprocessedEvents);
             }

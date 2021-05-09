@@ -10,8 +10,10 @@ import com.bonepl.razersdk.animation.SimpleFrame;
 import java.util.List;
 
 public class EventAnimationProcessor {
+    private EventAnimationProcessor() {
+    }
 
-    public void processNewEvents(List<Event> events) {
+    public static void processNewEvents(List<Event> events) {
         events.stream().map(EventType::fromEvent)
                 .forEach(EventAnimationProcessor::processEventAnimation);
     }

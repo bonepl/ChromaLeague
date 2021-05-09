@@ -21,7 +21,7 @@ class FetchGameStatsTest {
         new LeagueHttpClientMock().mockGameStatsResponse("json/gamestats.json");
 
         //when
-        final GameStats gameStats = new FetchGameStats().fetchGameStats();
+        final GameStats gameStats = FetchGameStats.fetchGameStats();
 
         //then
         assertNotNull(gameStats);

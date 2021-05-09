@@ -22,7 +22,7 @@ public class GoldBar extends Animation {
     private static final Random RANDOM = new SecureRandom();
 
     private final double goldDiffToSpawnCoin;
-    private final int millisecondsForGoldCount;
+    private final long millisecondsForGoldCount;
 
     private Double lastGold;
     private LocalTime lastGoldCheck;

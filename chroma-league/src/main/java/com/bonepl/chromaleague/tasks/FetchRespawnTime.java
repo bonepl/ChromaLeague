@@ -11,7 +11,10 @@ public class FetchRespawnTime {
     public static final String URL = "https://127.0.0.1:2999/liveclientdata/playerlist";
     private static final Logger LOGGER = Logger.getLogger(FetchRespawnTime.class.getName());
 
-    public double fetchPlayerRespawnTime() {
+    private FetchRespawnTime() {
+    }
+
+    public static double fetchPlayerRespawnTime() {
         try {
             return LeagueHttpClient.getSingleResponse(URL)
                     .map(FetchRespawnTime::getRespawnTimeFromJson)

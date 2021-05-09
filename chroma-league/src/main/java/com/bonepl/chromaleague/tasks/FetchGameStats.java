@@ -7,7 +7,10 @@ import com.jsoniter.JsonIterator;
 public class FetchGameStats {
     public static final String URL = "https://127.0.0.1:2999/liveclientdata/gamestats";
 
-    public GameStats fetchGameStats() {
+    private FetchGameStats() {
+    }
+
+    public static GameStats fetchGameStats() {
         return LeagueHttpClient.getSingleResponse(URL)
                 .map(gameStats -> JsonIterator.deserialize(gameStats, GameStats.class)).orElseThrow();
     }

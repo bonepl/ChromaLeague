@@ -11,10 +11,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class MainThreads implements Closeable {
-    public static final int PLAYER_LIST_FETCH_DELAY = 500;
-    public static final int ACTIVE_PLAYER_FETCH_DELAY = 100;
-    public static final int EVENTS_FETCH_DELAY = 300;
-    public static final int MAIN_HUD_REFRESH_DELAY = 50;
+    public static final long PLAYER_LIST_FETCH_DELAY = 500L;
+    public static final long ACTIVE_PLAYER_FETCH_DELAY = 100L;
+    public static final long EVENTS_FETCH_DELAY = 300L;
+    public static final long MAIN_HUD_REFRESH_DELAY = 50L;
 
     private static final Logger LOGGER = Logger.getLogger(MainThreads.class.getName());
 
@@ -29,16 +29,16 @@ public class MainThreads implements Closeable {
         chromaRestSDK = new ChromaRestSDK();
         gameLoader = new GameLoader(chromaRestSDK);
         mainExecutor = Executors.newScheduledThreadPool(10);
-        mainExecutor.scheduleWithFixedDelay(new FetchNewEventsTask(), 0, EVENTS_FETCH_DELAY, TimeUnit.MILLISECONDS);
+        mainExecutor.scheduleWithFixedDelay(new FetchNewEventsTask(), 0L, EVENTS_FETCH_DELAY, TimeUnit.MILLISECONDS);
     }
 
     public void initializeGameThreads() {
         LOGGER.info("Player joined the game");
         gameLoader.close();
-        RunningState.getGameState().setPlayerName(new FetchPlayerName().fetchPlayerName());
-        mainExecutor.scheduleWithFixedDelay(new FetchPlayerListTask(), 50, PLAYER_LIST_FETCH_DELAY, TimeUnit.MILLISECONDS);
-        mainExecutor.scheduleWithFixedDelay(new FetchActivePlayerTask(), 50, ACTIVE_PLAYER_FETCH_DELAY, TimeUnit.MILLISECONDS);
-        mainExecutor.scheduleWithFixedDelay(new RefreshMainHudTask(chromaRestSDK), 150, MAIN_HUD_REFRESH_DELAY, TimeUnit.MILLISECONDS);
+        RunningState.getGameState().setPlayerName(FetchPlayerName.fetchPlayerName());
+        mainExecutor.scheduleWithFixedDelay(new FetchPlayerListTask(), 50L, PLAYER_LIST_FETCH_DELAY, TimeUnit.MILLISECONDS);
+        mainExecutor.scheduleWithFixedDelay(new FetchActivePlayerTask(), 50L, ACTIVE_PLAYER_FETCH_DELAY, TimeUnit.MILLISECONDS);
+        mainExecutor.scheduleWithFixedDelay(new RefreshMainHudTask(chromaRestSDK), 150L, MAIN_HUD_REFRESH_DELAY, TimeUnit.MILLISECONDS);
     }
 
     @Override
@@ -53,7 +53,7 @@ public class MainThreads implements Closeable {
     private void shutdownMainExecutor() {
         try {
             mainExecutor.shutdown();
-            if (!mainExecutor.awaitTermination(5000, TimeUnit.MILLISECONDS)) {
+            if (!mainExecutor.awaitTermination(5000L, TimeUnit.MILLISECONDS)) {
                 LOGGER.log(Level.WARNING, () -> "Couldn't terminate GameLoader executor - timed out");
             }
         } catch (InterruptedException e) {

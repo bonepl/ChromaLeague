@@ -105,11 +105,11 @@ public final class LeagueHttpClient {
                         }
 
                         @Override
-                        public void checkClientTrusted(X509Certificate[] certs, String authType) {
+                        public void checkClientTrusted(X509Certificate[] chain, String authType) {
                         }
 
                         @Override
-                        public void checkServerTrusted(X509Certificate[] certs, String authType) {
+                        public void checkServerTrusted(X509Certificate[] chain, String authType) {
                         }
                     }
             }, new SecureRandom());

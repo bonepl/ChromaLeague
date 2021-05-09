@@ -22,8 +22,8 @@ public class ChromaLeague implements AutoCloseable {
         mainExecutorService.execute(new VersionCheckTask());
         mainExecutorService.execute(new SdkConnectivityCheckTask());
         LOGGER.info("Started Chroma League, waiting for a game - press ENTER to exit");
-        mainExecutorService.scheduleWithFixedDelay(new CheckRiotApiTask(), 0, 1000, TimeUnit.MILLISECONDS);
-        mainExecutorService.scheduleWithFixedDelay(new MainTask(), 100, 500, TimeUnit.MILLISECONDS);
+        mainExecutorService.scheduleWithFixedDelay(new CheckRiotApiTask(), 0L, 1000L, TimeUnit.MILLISECONDS);
+        mainExecutorService.scheduleWithFixedDelay(new MainTask(), 100L, 500L, TimeUnit.MILLISECONDS);
         try (Scanner scanner = new Scanner(System.in, StandardCharsets.UTF_8)) {
             scanner.nextLine();
         }

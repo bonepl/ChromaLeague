@@ -7,7 +7,7 @@ If you like this project, consider giving me a tip for all the hard work :)
 
 ## Introduction
 Razer Chroma is a wonderful framework provided by [Razer](https://www.razer.com/)
-for implementing custom led animations for their pheripherals.
+for implementing custom LED animations for their peripherals.
 
 Many applications/games have its official support but [League of Legends](https://leagueoflegends.com)
 is not one of them.
@@ -33,7 +33,7 @@ Certain in-game events will spawn additional animations.
 ## Requirements
 * Windows
 * League of Legends
-* Razer Synapse 3
+* Razer Synapse 3 (with Chroma Connect module enabled)
 * Chroma enabled keyboard
 
 ## Running

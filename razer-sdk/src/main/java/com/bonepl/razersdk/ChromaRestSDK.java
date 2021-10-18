@@ -4,7 +4,7 @@ import com.bonepl.razersdk.animation.Frame;
 import com.bonepl.razersdk.animation.IFrame;
 import com.bonepl.razersdk.sdk.HeartbeatTask;
 import com.bonepl.razersdk.sdk.SdkRequestExecutor;
-import com.bonepl.razersdk.sdk.json.ChromaSDKHttpClient;
+import com.bonepl.razersdk.sdk.json.ChromaSDKHttpsClient;
 import com.bonepl.razersdk.sdk.json.request.Init;
 import com.bonepl.razersdk.sdk.json.request.KeyboardEffect;
 import com.bonepl.razersdk.sdk.json.response.Result;
@@ -65,7 +65,7 @@ public final class ChromaRestSDK extends SdkRequestExecutor {
      * Create and initialize connection to Chroma-enabled Razer device
      */
     public ChromaRestSDK() {
-        super(ChromaSDKHttpClient.create());
+        super(ChromaSDKHttpsClient.create());
         currentSession = init();
         heartbeatExecutor = Executors.newSingleThreadScheduledExecutor();
         heartbeatExecutor.scheduleAtFixedRate(new HeartbeatTask(getHttpClient(), currentSession), 0L, 5L, TimeUnit.SECONDS);

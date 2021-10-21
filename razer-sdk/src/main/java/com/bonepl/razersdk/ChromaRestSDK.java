@@ -4,7 +4,7 @@ import com.bonepl.razersdk.animation.Frame;
 import com.bonepl.razersdk.animation.IFrame;
 import com.bonepl.razersdk.sdk.HeartbeatTask;
 import com.bonepl.razersdk.sdk.SdkRequestExecutor;
-import com.bonepl.razersdk.sdk.json.ChromaSDKHttpsClient;
+import com.bonepl.razersdk.sdk.json.ChromaSDKHttpClient;
 import com.bonepl.razersdk.sdk.json.request.Init;
 import com.bonepl.razersdk.sdk.json.request.KeyboardEffect;
 import com.bonepl.razersdk.sdk.json.response.Result;
@@ -27,11 +27,9 @@ import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
 /**
- * Main class for communication with Razer Chroma SDK C++ libraries.
- * Note that it is heavy to initialize this class, so try to initialize it once
- * and close only when you want to disconnect from your Razer device.
+ * Main class for communication with Razer Chroma REST SDK.
  * <br><br>
- * This class implements {@link AutoCloseable} interface so it is recommended
+ * This class implements {@link AutoCloseable} interface, so it is recommended
  * to use it with try-with-resources.
  * <br><br>
  * Recommended usage:
@@ -65,7 +63,7 @@ public final class ChromaRestSDK extends SdkRequestExecutor {
      * Create and initialize connection to Chroma-enabled Razer device
      */
     public ChromaRestSDK() {
-        super(ChromaSDKHttpsClient.create());
+        super(ChromaSDKHttpClient.create());
         currentSession = init();
         heartbeatExecutor = Executors.newSingleThreadScheduledExecutor();
         heartbeatExecutor.scheduleAtFixedRate(new HeartbeatTask(getHttpClient(), currentSession), 0L, 5L, TimeUnit.SECONDS);
@@ -106,7 +104,7 @@ public final class ChromaRestSDK extends SdkRequestExecutor {
     }
 
     private SessionInfo init() {
-        final HttpPost initRequest = new HttpPost("https://chromasdk.io:54236/razer/chromasdk/");
+        final HttpPost initRequest = new HttpPost("http://localhost:54235/razer/chromasdk/");
         initRequest.setEntity(createJsonInitParameter());
         initRequest.setHeader("Content-type", "application/json");
         final String sessionInfoJson = executeRequest(initRequest);

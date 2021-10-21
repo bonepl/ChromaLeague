@@ -1,7 +1,7 @@
 package com.bonepl.razersdk;
 
 import com.bonepl.razersdk.sdk.SdkRequestExecutor;
-import com.bonepl.razersdk.sdk.json.ChromaSDKHttpsClient;
+import com.bonepl.razersdk.sdk.json.ChromaSDKHttpClient;
 import com.bonepl.razersdk.sdk.json.response.Version;
 import com.jsoniter.JsonIterator;
 import org.apache.http.client.methods.HttpGet;
@@ -12,7 +12,7 @@ public class SdkConnectivityChecker extends SdkRequestExecutor {
     private static final Logger LOGGER = Logger.getLogger(SdkConnectivityChecker.class.getName());
 
     public SdkConnectivityChecker() {
-        super(ChromaSDKHttpsClient.create());
+        super(ChromaSDKHttpClient.create());
     }
 
     public void checkSdkConnectivity() {
@@ -21,7 +21,7 @@ public class SdkConnectivityChecker extends SdkRequestExecutor {
     }
 
     public Version versionInfo() {
-        final HttpGet versionInfoRequest = new HttpGet("https://chromasdk.io:54236/razer/chromasdk");
+        final HttpGet versionInfoRequest = new HttpGet("http://localhost:54235/razer/chromasdk");
         final String versionInfoJson = executeRequest(versionInfoRequest);
         return JsonIterator.deserialize(versionInfoJson, Version.class);
     }

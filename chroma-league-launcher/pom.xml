@@ -6,7 +6,7 @@
 
     <groupId>com.bonepl</groupId>
     <artifactId>chroma-league-launcher</artifactId>
-    <version>1.1.4</version>
+    <version>1.1.5-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Chroma League Launcher</name>
@@ -19,7 +19,7 @@
         <dependency>
             <groupId>com.bonepl</groupId>
             <artifactId>chroma-league</artifactId>
-            <version>1.1.4</version>
+            <version>1.1.5-SNAPSHOT</version>
         </dependency>
     </dependencies>
 

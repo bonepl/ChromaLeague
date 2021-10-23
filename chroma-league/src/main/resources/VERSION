@@ -1,2 +1,3 @@
-1.1.3
-- Fixed encoding issues for summoner names with custom characters
+1.1.4
+- Updated core libraries
+- Fixed SSL connectivity errors

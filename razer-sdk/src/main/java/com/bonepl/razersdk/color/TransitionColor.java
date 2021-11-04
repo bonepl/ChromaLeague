@@ -19,6 +19,9 @@ public class TransitionColor implements Color {
     public TransitionColor(StaticColor from, StaticColor to, int steps) {
         this.from = from;
         this.to = to;
+        if (steps < 2) {
+            throw new IllegalArgumentException("TransitionColor needs at least 2 steps for transition, provided steps: " + steps);
+        }
         this.steps = steps;
     }
 
@@ -29,19 +32,19 @@ public class TransitionColor implements Color {
     }
 
     private int getRedStep() {
-        return (from.red() - to.red()) / steps;
+        return (from.red() - to.red()) / (steps - 1);
     }
 
     private int getGreenStep() {
-        return (from.green() - to.green()) / steps;
+        return (from.green() - to.green()) / (steps - 1);
     }
 
     private int getBlueStep() {
-        return (from.blue() - to.blue()) / steps;
+        return (from.blue() - to.blue()) / (steps - 1);
     }
 
     public boolean transitionFinished() {
-        return currentStep + 1 == steps;
+        return currentStep == steps;
     }
 
     public void resetTransition() {
@@ -66,12 +69,18 @@ public class TransitionColor implements Color {
 
     @Override
     public StaticColor getColor() {
-        final StaticColor color = new StaticColor(from.red() - getRedStep() * currentStep,
-                from.green() - getGreenStep() * currentStep,
-                from.blue() - getBlueStep() * currentStep);
         if (transitionFinished()) {
             return to;
         }
+
+        if(currentStep + 1 == steps){
+            currentStep += 1;
+            return to;
+        }
+
+        final StaticColor color = new StaticColor(from.red() - getRedStep() * currentStep,
+                from.green() - getGreenStep() * currentStep,
+                from.blue() - getBlueStep() * currentStep);
         currentStep += 1;
         return color;
     }

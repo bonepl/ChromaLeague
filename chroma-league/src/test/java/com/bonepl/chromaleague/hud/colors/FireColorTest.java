@@ -24,6 +24,6 @@ class FireColorTest {
             animatedFrame.addAnimationFrame(new SimpleFrame(fireColorMap));
         }
 
-        new AnimationTester().testAnimation(animatedFrame, 200);
+        new AnimationTester().testAnimation(animatedFrame);
     }
 }

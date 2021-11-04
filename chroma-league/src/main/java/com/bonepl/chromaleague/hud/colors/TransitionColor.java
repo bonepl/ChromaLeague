@@ -1,9 +1,9 @@
 package com.bonepl.chromaleague.hud.colors;
 
 import com.bonepl.razersdk.color.Color;
-import com.bonepl.razersdk.color.ColorSupplier;
+import com.bonepl.razersdk.color.StaticColor;
 
-public class TransitionColor implements ColorSupplier {
+public class TransitionColor implements Color {
     private static final int DEFAULT_STEPS = 20;
     private Color from;
     private Color to;
@@ -21,9 +21,9 @@ public class TransitionColor implements ColorSupplier {
     }
 
     public Color getNextColor() {
-        final Color color = new Color(from.red() - getRedStep() * currentStep,
-                from.green() - getGreenStep() * currentStep,
-                from.blue() - getBlueStep() * currentStep);
+        final Color color = new StaticColor(from.getColor().red() - getRedStep() * currentStep,
+                from.getColor().green() - getGreenStep() * currentStep,
+                from.getColor().blue() - getBlueStep() * currentStep);
         if (transitionFinished()) {
             return to;
         }
@@ -32,21 +32,21 @@ public class TransitionColor implements ColorSupplier {
     }
 
     public Color getColorAtPercent(int percent) {
-        return new Color((int) (from.red() - (from.red() - to.red()) * percent * 0.01),
-                (int) (from.green() - (from.green() - to.green()) * percent * 0.01),
-                (int) (from.blue() - (from.blue() - to.blue()) * percent * 0.01));
+        return new StaticColor((int) (from.getColor().red() - (from.getColor().red() - to.getColor().red()) * percent * 0.01),
+                (int) (from.getColor().green() - (from.getColor().green() - to.getColor().green()) * percent * 0.01),
+                (int) (from.getColor().blue() - (from.getColor().blue() - to.getColor().blue()) * percent * 0.01));
     }
 
     private int getRedStep() {
-        return (from.red() - to.red()) / steps;
+        return (from.getColor().red() - to.getColor().red()) / steps;
     }
 
     private int getGreenStep() {
-        return (from.green() - to.green()) / steps;
+        return (from.getColor().green() - to.getColor().green()) / steps;
     }
 
     private int getBlueStep() {
-        return (from.blue() - to.blue()) / steps;
+        return (from.getColor().blue() - to.getColor().blue()) / steps;
     }
 
     public boolean transitionFinished() {
@@ -74,7 +74,7 @@ public class TransitionColor implements ColorSupplier {
     }
 
     @Override
-    public Color getColor() {
-        return getNextColor();
+    public StaticColor getColor() {
+        return getNextColor().getColor();
     }
 }

@@ -1,6 +1,7 @@
 package com.bonepl.razersdk.animation;
 
 import com.bonepl.razersdk.color.Color;
+import com.bonepl.razersdk.color.StaticColor;
 import org.junit.jupiter.api.Test;
 
 import java.util.NoSuchElementException;
@@ -32,8 +33,8 @@ class AnimatedFrameTest {
         final AnimatedFrame animatedFrame = new AnimatedFrame();
 
         //when
-        animatedFrame.addAnimationFrame(0, new SimpleFrame(Color.RED));
-        animatedFrame.addAnimationFrame(-2, new SimpleFrame(Color.RED));
+        animatedFrame.addAnimationFrame(0, new SimpleFrame(StaticColor.RED));
+        animatedFrame.addAnimationFrame(-2, new SimpleFrame(StaticColor.RED));
 
         //then
         assertFalse(animatedFrame.hasFrame());
@@ -46,13 +47,13 @@ class AnimatedFrameTest {
         final AnimatedFrame animatedFrame = new AnimatedFrame();
 
         //when
-        animatedFrame.addAnimationFrame(new SimpleFrame(Color.RED));
-        animatedFrame.addAnimationFrame(2, new SimpleFrame(Color.BLUE));
+        animatedFrame.addAnimationFrame(new SimpleFrame(StaticColor.RED));
+        animatedFrame.addAnimationFrame(2, new SimpleFrame(StaticColor.BLUE));
 
         //then
-        assertHasFrameAndMatches(animatedFrame, Color.RED);
-        assertHasFrameAndMatches(animatedFrame, Color.BLUE);
-        assertHasFrameAndMatches(animatedFrame, Color.BLUE);
+        assertHasFrameAndMatches(animatedFrame, StaticColor.RED);
+        assertHasFrameAndMatches(animatedFrame, StaticColor.BLUE);
+        assertHasFrameAndMatches(animatedFrame, StaticColor.BLUE);
         assertFalse(animatedFrame.hasFrame());
         assertThrows(NoSuchElementException.class, animatedFrame::getFrame);
     }
@@ -63,10 +64,10 @@ class AnimatedFrameTest {
         final AnimatedFrame animatedFrame = new AnimatedFrame();
 
         //when
-        animatedFrame.addAnimationFrame(new SimpleFrame(Color.BROWN));
+        animatedFrame.addAnimationFrame(new SimpleFrame(StaticColor.BROWN));
 
         //then
-        assertHasFrameAndMatches(animatedFrame, Color.BROWN);
+        assertHasFrameAndMatches(animatedFrame, StaticColor.BROWN);
         assertFalse(animatedFrame.hasFrame());
         assertThrows(NoSuchElementException.class, animatedFrame::getFrame);
     }
@@ -77,11 +78,11 @@ class AnimatedFrameTest {
         final AnimatedFrame animatedFrame = new AnimatedFrame();
 
         //when
-        animatedFrame.addAnimationFrame(2, new SimpleFrame(Color.ORANGE));
+        animatedFrame.addAnimationFrame(2, new SimpleFrame(StaticColor.ORANGE));
 
         //then
-        assertHasFrameAndMatches(animatedFrame, Color.ORANGE);
-        assertHasFrameAndMatches(animatedFrame, Color.ORANGE);
+        assertHasFrameAndMatches(animatedFrame, StaticColor.ORANGE);
+        assertHasFrameAndMatches(animatedFrame, StaticColor.ORANGE);
         assertFalse(animatedFrame.hasFrame());
         assertThrows(NoSuchElementException.class, animatedFrame::getFrame);
     }
@@ -90,9 +91,9 @@ class AnimatedFrameTest {
     void testAnimationStop() {
         //given
         final AnimatedFrame animatedFrame = new AnimatedFrame();
-        animatedFrame.addAnimationFrame(5, new SimpleFrame(Color.PURPLE));
-        assertHasFrameAndMatches(animatedFrame, Color.PURPLE);
-        assertHasFrameAndMatches(animatedFrame, Color.PURPLE);
+        animatedFrame.addAnimationFrame(5, new SimpleFrame(StaticColor.PURPLE));
+        assertHasFrameAndMatches(animatedFrame, StaticColor.PURPLE);
+        assertHasFrameAndMatches(animatedFrame, StaticColor.PURPLE);
 
         //when
         animatedFrame.clearFrames();

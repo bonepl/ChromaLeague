@@ -2,7 +2,7 @@ package com.bonepl.chromaleague.hud.animations;
 
 import com.bonepl.chromaleague.hud.colors.BreathingColor;
 import com.bonepl.razersdk.animation.AnimatedFrame;
-import com.bonepl.razersdk.color.Color;
+import com.bonepl.razersdk.color.StaticColor;
 import com.bonepl.razersdk.animation.Frame;
 import com.bonepl.razersdk.animation.SimpleFrame;
 import com.bonepl.razersdk.sdk.RzKey;
@@ -14,7 +14,7 @@ import java.util.Set;
 import static com.bonepl.razersdk.sdk.RzKey.*;
 
 public class BaronBuffBackgroundAnimation extends AnimatedFrame {
-    private final BreathingColor baronBuffColor = new BreathingColor(new Color(200, 0, 200));
+    private final BreathingColor baronBuffColor = new BreathingColor(new StaticColor(200, 0, 200));
     private static final Set<RzKey> BARON_AREA = buildBaronArea();
 
     @Override

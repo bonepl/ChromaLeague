@@ -1,6 +1,7 @@
 package com.bonepl.razersdk.animation;
 
 import com.bonepl.razersdk.color.Color;
+import com.bonepl.razersdk.color.StaticColor;
 import com.bonepl.razersdk.sdk.RzKey;
 
 import java.util.EnumMap;
@@ -9,7 +10,7 @@ import java.util.NoSuchElementException;
 
 /**
  * Class used to simulate layering of multiple {@link Frame} classes to create one {@link SimpleFrame} to return.
- * Newest frame always overwrites previous ones. Keys with color {@link Color#NONE}
+ * Newest frame always overwrites previous ones. Keys with color {@link StaticColor#NONE}
  * are treated as transparent.
  * <br><br>
  * New object without any added frames is similar to {@link SimpleFrame} - there is an empty frame by default.
@@ -26,7 +27,7 @@ public class LayeredFrame implements IFrame {
      */
     public final void addFrame(final IFrame frame) {
         frame.getFrame().getKeysToColors().entrySet().stream()
-                .filter(ktc -> ktc.getValue() != Color.NONE)
+                .filter(ktc -> ktc.getValue() != StaticColor.NONE)
                 .forEach(ktc -> keysToColors.put(ktc.getKey(), ktc.getValue()));
     }
 

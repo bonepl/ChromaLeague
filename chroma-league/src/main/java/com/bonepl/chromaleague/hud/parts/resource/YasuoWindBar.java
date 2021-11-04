@@ -6,10 +6,11 @@ import com.bonepl.chromaleague.state.GameStateHelper;
 import com.bonepl.razersdk.animation.AnimatedFrame;
 import com.bonepl.razersdk.color.Color;
 import com.bonepl.razersdk.animation.Frame;
+import com.bonepl.razersdk.color.StaticColor;
 
 public class YasuoWindBar extends AnimatedFrame {
-    public static final BreathingColor WIND_SHIELD_READY_COLOR = new BreathingColor(Color.WHITE);
-    public static final Color WIND_SHIELD_COLOR = Color.GRAY;
+    public static final BreathingColor WIND_SHIELD_READY_COLOR = new BreathingColor(StaticColor.WHITE);
+    public static final Color WIND_SHIELD_COLOR = StaticColor.GRAY;
 
     @Override
     public Frame getFrame() {

@@ -6,13 +6,14 @@ import com.bonepl.chromaleague.state.GameStateHelper;
 import com.bonepl.razersdk.animation.AnimatedFrame;
 import com.bonepl.razersdk.color.Color;
 import com.bonepl.razersdk.animation.Frame;
+import com.bonepl.razersdk.color.StaticColor;
 
 import java.time.Duration;
 import java.time.LocalTime;
 
 public class RumbleHeatBar extends AnimatedFrame {
     private static final double HEAT_THRESHOLD = 8.0;
-    private static final TransitionColor HEAT_COLOR = new TransitionColor(Color.YELLOW, Color.RED);
+    private static final TransitionColor HEAT_COLOR = new TransitionColor(StaticColor.YELLOW, StaticColor.RED);
 
     private LocalTime lastHeatingTime = LocalTime.now();
     private int previousResourcePercentage;
@@ -46,12 +47,12 @@ public class RumbleHeatBar extends AnimatedFrame {
 
         Color color;
         if (overheating) {
-            color = Color.RED;
+            color = StaticColor.RED;
         } else {
             if (resourcePercentage >= 50) {
                 color = HEAT_COLOR.getColorAtPercent(resourcePercentage - 50 << 1);
             } else {
-                color = Color.WHITE;
+                color = StaticColor.WHITE;
             }
         }
 

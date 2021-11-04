@@ -3,6 +3,7 @@ package com.bonepl.chromaleague.hud.animations;
 import com.bonepl.chromaleague.hud.PredefinedKeySets;
 import com.bonepl.razersdk.animation.*;
 import com.bonepl.razersdk.color.Color;
+import com.bonepl.razersdk.color.StaticColor;
 import com.bonepl.razersdk.sdk.RzKeyJoiner;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -11,13 +12,13 @@ public class WinAnimation extends Animation {
     public WinAnimation() {
         AtomicInteger integer = new AtomicInteger(0);
         while (integer.get() < 500) {
-            addToFront(createUpMovingFrame(integer.getAndIncrement(), Color.GREEN));
-            addToFront(createUpMovingFrame(integer.getAndIncrement(), Color.WHITE));
-            addToFront(createUpMovingFrame(integer.getAndIncrement(), Color.BLUE));
-            addToFront(createUpMovingFrame(integer.getAndIncrement(), Color.YELLOW));
-            addToFront(createUpMovingFrame(integer.getAndIncrement(), Color.CYAN));
-            addToFront(createUpMovingFrame(integer.getAndIncrement(), Color.ORANGE));
-            addToFront(createUpMovingFrame(integer.getAndIncrement(), Color.RED));
+            addToFront(createUpMovingFrame(integer.getAndIncrement(), StaticColor.GREEN));
+            addToFront(createUpMovingFrame(integer.getAndIncrement(), StaticColor.WHITE));
+            addToFront(createUpMovingFrame(integer.getAndIncrement(), StaticColor.BLUE));
+            addToFront(createUpMovingFrame(integer.getAndIncrement(), StaticColor.YELLOW));
+            addToFront(createUpMovingFrame(integer.getAndIncrement(), StaticColor.CYAN));
+            addToFront(createUpMovingFrame(integer.getAndIncrement(), StaticColor.ORANGE));
+            addToFront(createUpMovingFrame(integer.getAndIncrement(), StaticColor.RED));
         }
     }
 
@@ -38,7 +39,7 @@ public class WinAnimation extends Animation {
 
     @Override
     public Frame getFrame() {
-        addToBack(new SimpleFrame(Color.BLACK));
+        addToBack(new SimpleFrame(StaticColor.BLACK));
         return super.getFrame();
     }
 }

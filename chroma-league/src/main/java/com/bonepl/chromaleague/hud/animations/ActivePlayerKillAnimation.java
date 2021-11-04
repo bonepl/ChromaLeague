@@ -3,7 +3,7 @@ package com.bonepl.chromaleague.hud.animations;
 import com.bonepl.chromaleague.hud.parts.AssistKillingSpreeBar;
 import com.bonepl.chromaleague.hud.parts.Background;
 import com.bonepl.razersdk.animation.AnimatedFrame;
-import com.bonepl.razersdk.color.Color;
+import com.bonepl.razersdk.color.StaticColor;
 import com.bonepl.razersdk.animation.LayeredFrame;
 import com.bonepl.razersdk.animation.SimpleFrame;
 import com.bonepl.razersdk.sdk.RzKey;
@@ -25,7 +25,7 @@ public class ActivePlayerKillAnimation extends AnimatedFrame {
     private static LayeredFrame withBackground(List<RzKey> rzKeys) {
         final LayeredFrame layeredFrame = new LayeredFrame();
         layeredFrame.addFrame(new SimpleFrame(AssistKillingSpreeBar.getKillingSpreeBar(), Background.BACKGROUND_COLOR));
-        layeredFrame.addFrame(new SimpleFrame(rzKeys, Color.RED));
+        layeredFrame.addFrame(new SimpleFrame(rzKeys, StaticColor.RED));
         return layeredFrame;
     }
 }

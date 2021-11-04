@@ -1,6 +1,7 @@
 package com.bonepl.razersdk.animation;
 
 import com.bonepl.razersdk.color.Color;
+import com.bonepl.razersdk.color.StaticColor;
 import com.bonepl.razersdk.sdk.RzKey;
 import org.junit.jupiter.api.Test;
 
@@ -14,8 +15,8 @@ class FrameTest {
     void testCustomEffectCreation() {
         //given
         final EnumMap<RzKey, Color> inputMap = new EnumMap<>(RzKey.class);
-        inputMap.put(RzKey.RZKEY_ESC, Color.BLUE);
-        inputMap.put(RzKey.RZKEY_ENTER, Color.WHITE);
+        inputMap.put(RzKey.RZKEY_ESC, StaticColor.BLUE);
+        inputMap.put(RzKey.RZKEY_ENTER, StaticColor.WHITE);
 
         //when
         final Frame frame = new Frame(inputMap);

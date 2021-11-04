@@ -2,9 +2,9 @@ package com.bonepl.chromaleague.hud.colors;
 
 import com.bonepl.chromaleague.hud.parts.Background;
 import com.bonepl.razersdk.color.Color;
-import com.bonepl.razersdk.color.ColorSupplier;
+import com.bonepl.razersdk.color.StaticColor;
 
-public class BreathingColor implements ColorSupplier {
+public class BreathingColor implements Color {
     private final TransitionColor upColor;
     private final TransitionColor downColor;
     private boolean upDirection;
@@ -27,16 +27,16 @@ public class BreathingColor implements ColorSupplier {
         this.downColor = new TransitionColor(upColor, downColor, steps);
     }
 
-    public Color getNextColor() {
+    public StaticColor getNextColor() {
         if (upDirection) {
-            Color color = upColor.getNextColor();
+            StaticColor color = upColor.getColor();
             if (upColor.transitionFinished()) {
                 upDirection = false;
                 upColor.resetTransition();
             }
             return color;
         }
-        Color color = downColor.getNextColor();
+        StaticColor color = downColor.getColor();
         if (downColor.transitionFinished()) {
             upDirection = true;
             downColor.resetTransition();
@@ -60,7 +60,7 @@ public class BreathingColor implements ColorSupplier {
     }
 
     @Override
-    public Color getColor() {
+    public StaticColor getColor() {
         return getNextColor();
     }
 }

@@ -6,9 +6,10 @@ import com.bonepl.chromaleague.state.GameStateHelper;
 import com.bonepl.razersdk.animation.AnimatedFrame;
 import com.bonepl.razersdk.color.Color;
 import com.bonepl.razersdk.animation.Frame;
+import com.bonepl.razersdk.color.StaticColor;
 
 public class KledCourageBar extends AnimatedFrame {
-    private static final BreathingColor COURAGE_BAR = new BreathingColor(Color.YELLOW, 10);
+    private static final BreathingColor COURAGE_BAR = new BreathingColor(StaticColor.YELLOW, 10);
 
     @Override
     public Frame getFrame() {
@@ -21,9 +22,9 @@ public class KledCourageBar extends AnimatedFrame {
             COURAGE_BAR.setSteps(5);
             color = COURAGE_BAR.getNextColor();
         } else if (resourcePercentage == 100) {
-            color = Color.RED;
+            color = StaticColor.RED;
         } else {
-            color = Color.WHITE;
+            color = StaticColor.WHITE;
         }
 
         addAnimationFrame(new ProgressBar(ResourceBars.getResourceBarKeys(), resourcePercentage, color));

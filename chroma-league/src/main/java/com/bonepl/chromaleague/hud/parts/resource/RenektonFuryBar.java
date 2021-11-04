@@ -5,6 +5,7 @@ import com.bonepl.chromaleague.state.GameStateHelper;
 import com.bonepl.razersdk.animation.AnimatedFrame;
 import com.bonepl.razersdk.color.Color;
 import com.bonepl.razersdk.animation.Frame;
+import com.bonepl.razersdk.color.StaticColor;
 
 public class RenektonFuryBar extends AnimatedFrame {
     @Override
@@ -12,10 +13,10 @@ public class RenektonFuryBar extends AnimatedFrame {
         final int resourcePercentage = GameStateHelper.getResourcePercentage();
         if (resourcePercentage < 50) {
             addAnimationFrame(new ProgressBar(ResourceBars.getResourceBarKeys(),
-                    resourcePercentage, Color.WHITE));
+                    resourcePercentage, StaticColor.WHITE));
         } else {
             addAnimationFrame(new ProgressBar(ResourceBars.getResourceBarKeys(),
-                    resourcePercentage, Color.RED));
+                    resourcePercentage, StaticColor.RED));
         }
         return super.getFrame();
     }

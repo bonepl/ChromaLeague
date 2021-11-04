@@ -3,6 +3,7 @@ package com.bonepl.chromaleague.hud.parts;
 import com.bonepl.chromaleague.state.GameStateHelper;
 import com.bonepl.razersdk.animation.*;
 import com.bonepl.razersdk.color.Color;
+import com.bonepl.razersdk.color.StaticColor;
 import com.bonepl.razersdk.sdk.RzKey;
 
 import java.security.SecureRandom;
@@ -46,7 +47,7 @@ public class GoldBar extends Animation {
     }
 
     private static ProgressBar createGoldBar() {
-        return new ProgressBar(GOLD_BAR_KEYS, GameStateHelper.getGoldPercentage(), Color.YELLOW);
+        return new ProgressBar(GOLD_BAR_KEYS, GameStateHelper.getGoldPercentage(), StaticColor.YELLOW);
     }
 
     private void spawnCoinIfNeeded() {
@@ -72,7 +73,7 @@ public class GoldBar extends Animation {
 
     private static AnimatedFrame fallingCoin(List<RzKey> rzKeys) {
         final AnimatedFrame animatedFrames = new AnimatedFrame();
-        rzKeys.forEach(rzKey -> animatedFrames.addAnimationFrame(new SimpleFrame(rzKey, Color.YELLOW)));
+        rzKeys.forEach(rzKey -> animatedFrames.addAnimationFrame(new SimpleFrame(rzKey, StaticColor.YELLOW)));
         return animatedFrames;
     }
 

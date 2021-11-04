@@ -5,6 +5,7 @@ import com.bonepl.chromaleague.hud.parts.Background;
 import com.bonepl.razersdk.animation.AnimatedFrame;
 import com.bonepl.razersdk.color.Color;
 import com.bonepl.razersdk.animation.SimpleFrame;
+import com.bonepl.razersdk.color.StaticColor;
 import com.bonepl.razersdk.sdk.RzKey;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class LostHealthAnimation extends AnimatedFrame {
     private void createLostHealthAnimation(double previousHp, double currentHp) {
         final List<RzKey> rzKeys = computeLostHealth(previousHp, currentHp);
         if (!rzKeys.isEmpty()) {
-            final TransitionColor transitionColor = new TransitionColor(Color.RED, Background.BACKGROUND_COLOR, LOST_HEALTH_CHANGE_STEPS);
+            final TransitionColor transitionColor = new TransitionColor(StaticColor.RED, Background.BACKGROUND_COLOR, LOST_HEALTH_CHANGE_STEPS);
             IntStream.range(0, LOST_HEALTH_CHANGE_STEPS).forEach(i -> addAnimationFrame(new SimpleFrame(rzKeys, transitionColor.getNextColor())));
         }
     }

@@ -5,6 +5,7 @@ import com.bonepl.chromaleague.state.GameStateHelper;
 import com.bonepl.razersdk.animation.AnimatedFrame;
 import com.bonepl.razersdk.color.Color;
 import com.bonepl.razersdk.animation.Frame;
+import com.bonepl.razersdk.color.StaticColor;
 
 /**
  * vladimir uses resource type: GNARFURY
@@ -15,7 +16,7 @@ public class EnergyBar extends AnimatedFrame {
     @Override
     public Frame getFrame() {
         addAnimationFrame(new ProgressBar(ResourceBars.getResourceBarKeys(),
-                GameStateHelper.getResourcePercentage(), Color.YELLOW));
+                GameStateHelper.getResourcePercentage(), StaticColor.YELLOW));
         return super.getFrame();
     }
 }

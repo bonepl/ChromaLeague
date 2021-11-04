@@ -6,10 +6,11 @@ import com.bonepl.chromaleague.state.GameStateHelper;
 import com.bonepl.razersdk.animation.AnimatedFrame;
 import com.bonepl.razersdk.color.Color;
 import com.bonepl.razersdk.animation.Frame;
+import com.bonepl.razersdk.color.StaticColor;
 
 public class ShyvanaDragonFuryBar extends AnimatedFrame {
-    public static final Color DRAGON_FURY_COLOR = Color.ORANGE;
-    private static final BreathingColor ULTI_READY_COLOR = new BreathingColor(Color.RED);
+    public static final Color DRAGON_FURY_COLOR = StaticColor.ORANGE;
+    private static final BreathingColor ULTI_READY_COLOR = new BreathingColor(StaticColor.RED);
 
     @Override
     public Frame getFrame() {

@@ -1,8 +1,9 @@
 package com.bonepl.chromaleague.hud.animations;
 
-import com.bonepl.chromaleague.hud.colors.BreathingColor;
+import com.bonepl.chromaleague.hud.colors.BackgroundBreathingColor;
+import com.bonepl.razersdk.color.BreathingColor;
 import com.bonepl.chromaleague.hud.colors.CLColor;
-import com.bonepl.chromaleague.hud.colors.TransitionColor;
+import com.bonepl.razersdk.color.TransitionColor;
 import com.bonepl.chromaleague.hud.parts.Background;
 import com.bonepl.chromaleague.hud.parts.health.HealthBar;
 import com.bonepl.chromaleague.hud.parts.resource.ResourceBars;
@@ -15,7 +16,6 @@ import com.bonepl.razersdk.color.Color;
 import com.bonepl.razersdk.color.StaticColor;
 import com.bonepl.razersdk.animation.LayeredFrame;
 import com.bonepl.razersdk.animation.SimpleFrame;
-import com.bonepl.razersdk.color.StaticColor;
 import com.bonepl.razersdk.sdk.RzKey;
 import com.bonepl.razersdk.sdk.RzKeySelector;
 
@@ -63,7 +63,7 @@ public class RespawnAnimation extends AnimatedFrame {
     private static AnimatedFrame createYellowAnimatedFrame(int delay, List<RzKey> keys) {
         final AnimatedFrame animatedFrame = new AnimatedFrame();
         animatedFrame.addAnimationFrame(delay, new SimpleFrame());
-        BreathingColor yellowBreathingColor = new BreathingColor(StaticColor.YELLOW, STEPS, true);
+        BreathingColor yellowBreathingColor = new BackgroundBreathingColor(StaticColor.YELLOW, STEPS, true);
         for (int i = 0; i < STEPS << 1; i++) {
             final LayeredFrame layeredFrame = new LayeredFrame();
             layeredFrame.addFrame(new SimpleFrame(keys, yellowBreathingColor.getNextColor()));
@@ -79,7 +79,7 @@ public class RespawnAnimation extends AnimatedFrame {
     private static AnimatedFrame createButtonsGlowAnimatedFrame(int delay, List<RzKey> keys, int waitTill) {
         final AnimatedFrame animatedFrame = new AnimatedFrame();
         animatedFrame.addAnimationFrame(delay, new SimpleFrame());
-        BreathingColor yellowBreathingColor = new BreathingColor(StaticColor.YELLOW, STEPS, true);
+        BreathingColor yellowBreathingColor = new BackgroundBreathingColor(StaticColor.YELLOW, STEPS, true);
         for (int i = 0; i < STEPS; i++) {
             animatedFrame.addAnimationFrame(new SimpleFrame(keys, yellowBreathingColor.getNextColor()));
         }

@@ -1,6 +1,6 @@
 package com.bonepl.chromaleague.hud.parts.dragons;
 
-import com.bonepl.chromaleague.hud.colors.BreathingColor;
+import com.bonepl.chromaleague.hud.colors.BackgroundBreathingColor;
 import com.bonepl.chromaleague.rest.eventdata.DragonType;
 import com.bonepl.chromaleague.state.GameStateHelper;
 import com.bonepl.razersdk.color.Color;
@@ -21,7 +21,7 @@ public class KilledDragonsBar extends SimpleFrame {
     public static final List<RzKey> FOURTH_DRAGON_ROW = List.of(RZKEY_FN, RZKEY_RMENU, RZKEY_RCTRL);
     public static final List<RzKey> SOUL_BAR = List.of(RZKEY_UP, RZKEY_LEFT, RZKEY_DOWN, RZKEY_RIGHT);
 
-    private static BreathingColor dragonSoulColor;
+    private static BackgroundBreathingColor dragonSoulColor;
 
     public KilledDragonsBar() {
         super(getKilledDragonsBar());
@@ -34,7 +34,7 @@ public class KilledDragonsBar extends SimpleFrame {
         if (dragonSoul.isPresent()) {
             final DragonType soulType = dragonSoul.get();
             if (dragonSoulColor == null) {
-                dragonSoulColor = new BreathingColor(soulType.getColor());
+                dragonSoulColor = new BackgroundBreathingColor(soulType.getColor());
             }
             final Color nextSoulColor = dragonSoulColor.getNextColor();
             getDragonType(0).map(dragonType -> swapColorIfSoul(dragonType, soulType, nextSoulColor))

@@ -1,7 +1,4 @@
-package com.bonepl.chromaleague.hud.colors;
-
-import com.bonepl.razersdk.color.Color;
-import com.bonepl.razersdk.color.StaticColor;
+package com.bonepl.razersdk.color;
 
 public class TransitionColor implements Color {
     private static final int DEFAULT_STEPS = 20;

@@ -1,18 +1,17 @@
 package com.bonepl.chromaleague.hud.parts.resource;
 
-import com.bonepl.chromaleague.hud.colors.BreathingColor;
-import com.bonepl.chromaleague.hud.colors.TransitionColor;
-import com.bonepl.chromaleague.hud.parts.Background;
+import com.bonepl.chromaleague.hud.colors.BackgroundBreathingColor;
+import com.bonepl.razersdk.color.BreathingColor;
+import com.bonepl.razersdk.color.TransitionColor;
 import com.bonepl.chromaleague.hud.parts.ProgressBar;
 import com.bonepl.chromaleague.state.GameStateHelper;
 import com.bonepl.razersdk.animation.AnimatedFrame;
-import com.bonepl.razersdk.color.Color;
 import com.bonepl.razersdk.animation.Frame;
 import com.bonepl.razersdk.color.StaticColor;
 
 public class GnarFuryBar extends AnimatedFrame {
     private final TransitionColor fromYellowToRed = new TransitionColor(StaticColor.YELLOW, StaticColor.RED);
-    private final BreathingColor aboutToTransform = new BreathingColor(StaticColor.YELLOW, Background.BACKGROUND_COLOR, 20, false);
+    private final BreathingColor aboutToTransform = new BackgroundBreathingColor(StaticColor.YELLOW, 20, false);
 
     private static final int COLOR_TRANSITION_PERCENT_START = 50;
     private static final int COLOR_TRANSITION_PERCENT_STEP = 100 / COLOR_TRANSITION_PERCENT_START;

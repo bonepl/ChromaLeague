@@ -1,24 +1,16 @@
-package com.bonepl.chromaleague.hud.colors;
-
-import com.bonepl.chromaleague.hud.parts.Background;
-import com.bonepl.razersdk.color.Color;
-import com.bonepl.razersdk.color.StaticColor;
+package com.bonepl.razersdk.color;
 
 public class BreathingColor implements Color {
     private final TransitionColor upColor;
     private final TransitionColor downColor;
     private boolean upDirection;
 
-    public BreathingColor(Color color) {
-        this(color, 20);
+    public BreathingColor(Color upColor, Color downColor) {
+        this(upColor, downColor, 20);
     }
 
-    public BreathingColor(Color color, int steps) {
-        this(color, steps, false);
-    }
-
-    public BreathingColor(Color color, int steps, boolean startUpDirection) {
-        this(color, Background.BACKGROUND_COLOR, steps, startUpDirection);
+    public BreathingColor(Color upColor, Color downColor, int steps) {
+        this(upColor, downColor, steps, false);
     }
 
     public BreathingColor(Color upColor, Color downColor, int steps, boolean startUpDirection) {

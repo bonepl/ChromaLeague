@@ -1,6 +1,6 @@
 package com.bonepl.chromaleague.hud.parts.resource;
 
-import com.bonepl.chromaleague.hud.colors.TransitionColor;
+import com.bonepl.razersdk.color.TransitionColor;
 import com.bonepl.chromaleague.hud.parts.ProgressBar;
 import com.bonepl.chromaleague.state.GameStateHelper;
 import com.bonepl.razersdk.animation.AnimatedFrame;

@@ -18,7 +18,7 @@ public class ShyvanaDragonFuryBar extends AnimatedFrame {
         final int resourcePercentage = GameStateHelper.getResourcePercentage();
         Color color;
         if (resourcePercentage == 100) {
-            color = ULTI_READY_COLOR.getNextColor();
+            color = ULTI_READY_COLOR.getColor();
         } else {
             color = DRAGON_FURY_COLOR;
         }

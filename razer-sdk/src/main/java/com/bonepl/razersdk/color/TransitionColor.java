@@ -1,5 +1,10 @@
 package com.bonepl.razersdk.color;
 
+/**
+ * Dynamic Color that continuously provides
+ * Color being the result of transition between provided fromColor and toColor.
+ * Once the transition finishes - toColor is returned
+ */
 public class TransitionColor implements Color {
     private static final int DEFAULT_STEPS = 20;
     private Color from;
@@ -17,21 +22,12 @@ public class TransitionColor implements Color {
         this.steps = steps;
     }
 
-    public Color getNextColor() {
-        final Color color = new StaticColor(from.getColor().red() - getRedStep() * currentStep,
-                from.getColor().green() - getGreenStep() * currentStep,
-                from.getColor().blue() - getBlueStep() * currentStep);
-        if (transitionFinished()) {
-            return to;
-        }
-        currentStep += 1;
-        return color;
-    }
-
     public Color getColorAtPercent(int percent) {
-        return new StaticColor((int) (from.getColor().red() - (from.getColor().red() - to.getColor().red()) * percent * 0.01),
-                (int) (from.getColor().green() - (from.getColor().green() - to.getColor().green()) * percent * 0.01),
-                (int) (from.getColor().blue() - (from.getColor().blue() - to.getColor().blue()) * percent * 0.01));
+        StaticColor nextFromColor = from.getColor();
+        StaticColor nextToColor = to.getColor();
+        return new StaticColor((int) (nextFromColor.red() - (nextFromColor.red() - nextToColor.red()) * percent * 0.01),
+                (int) (nextFromColor.green() - (nextFromColor.green() - nextToColor.green()) * percent * 0.01),
+                (int) (nextFromColor.blue() - (nextFromColor.blue() - nextToColor.blue()) * percent * 0.01));
     }
 
     private int getRedStep() {
@@ -72,6 +68,14 @@ public class TransitionColor implements Color {
 
     @Override
     public StaticColor getColor() {
-        return getNextColor().getColor();
+        StaticColor nextFromColor = from.getColor();
+        final Color color = new StaticColor(nextFromColor.red() - getRedStep() * currentStep,
+                nextFromColor.green() - getGreenStep() * currentStep,
+                nextFromColor.blue() - getBlueStep() * currentStep);
+        if (transitionFinished()) {
+            return to.getColor();
+        }
+        currentStep += 1;
+        return color.getColor();
     }
 }

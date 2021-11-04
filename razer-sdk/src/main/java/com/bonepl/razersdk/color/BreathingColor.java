@@ -1,5 +1,9 @@
 package com.bonepl.razersdk.color;
 
+/**
+ * Dynamic Color that continuously provides
+ * Color being the result of transition between provided upColor and downColor
+ */
 public class BreathingColor implements Color {
     private final TransitionColor upColor;
     private final TransitionColor downColor;
@@ -19,23 +23,6 @@ public class BreathingColor implements Color {
         this.downColor = new TransitionColor(upColor, downColor, steps);
     }
 
-    public StaticColor getNextColor() {
-        if (upDirection) {
-            StaticColor color = upColor.getColor();
-            if (upColor.transitionFinished()) {
-                upDirection = false;
-                upColor.resetTransition();
-            }
-            return color;
-        }
-        StaticColor color = downColor.getColor();
-        if (downColor.transitionFinished()) {
-            upDirection = true;
-            downColor.resetTransition();
-        }
-        return color;
-    }
-
     public void setSteps(int steps) {
         upColor.setSteps(steps);
         downColor.setSteps(steps);
@@ -53,6 +40,19 @@ public class BreathingColor implements Color {
 
     @Override
     public StaticColor getColor() {
-        return getNextColor();
+        if (upDirection) {
+            StaticColor color = upColor.getColor();
+            if (upColor.transitionFinished()) {
+                upDirection = false;
+                upColor.resetTransition();
+            }
+            return color;
+        }
+        StaticColor color = downColor.getColor();
+        if (downColor.transitionFinished()) {
+            upDirection = true;
+            downColor.resetTransition();
+        }
+        return color;
     }
 }

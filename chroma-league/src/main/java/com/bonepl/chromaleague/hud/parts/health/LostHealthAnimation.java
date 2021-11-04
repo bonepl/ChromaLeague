@@ -23,7 +23,7 @@ public class LostHealthAnimation extends AnimatedFrame {
         final List<RzKey> rzKeys = computeLostHealth(previousHp, currentHp);
         if (!rzKeys.isEmpty()) {
             final TransitionColor transitionColor = new TransitionColor(StaticColor.RED, Background.BACKGROUND_COLOR, LOST_HEALTH_CHANGE_STEPS);
-            IntStream.range(0, LOST_HEALTH_CHANGE_STEPS).forEach(i -> addAnimationFrame(new SimpleFrame(rzKeys, transitionColor.getNextColor())));
+            IntStream.range(0, LOST_HEALTH_CHANGE_STEPS).forEach(i -> addAnimationFrame(new SimpleFrame(rzKeys, transitionColor.getColor())));
         }
     }
 

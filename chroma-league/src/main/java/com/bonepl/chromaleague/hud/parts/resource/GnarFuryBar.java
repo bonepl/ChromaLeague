@@ -31,11 +31,11 @@ public class GnarFuryBar extends AnimatedFrame {
             } else if (gnarFuryPercent < 100) {
                 aboutToTransform.setUpColor(fromYellowToRed.getColorAtPercent(COLOR_TRANSITION_PERCENT_STEP * (gnarFuryPercent - COLOR_TRANSITION_PERCENT_START)));
                 addAnimationFrame(new ProgressBar(ResourceBars.getResourceBarKeys(), gnarFuryPercent,
-                        aboutToTransform.getNextColor()));
+                        aboutToTransform.getColor()));
             } else {
                 aboutToTransform.setUpColor(StaticColor.RED);
                 aboutToTransform.setSteps(5);
-                addAnimationFrame(new ProgressBar(ResourceBars.getResourceBarKeys(), gnarFuryPercent, aboutToTransform.getNextColor()));
+                addAnimationFrame(new ProgressBar(ResourceBars.getResourceBarKeys(), gnarFuryPercent, aboutToTransform.getColor()));
             }
         }
         return super.getFrame();

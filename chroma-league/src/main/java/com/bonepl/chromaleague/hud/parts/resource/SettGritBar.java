@@ -23,10 +23,10 @@ public class SettGritBar extends AnimatedFrame {
         Color color;
         if (resourcePercentage >= 40 && resourcePercentage < 80) {
             GRIT_BAR.setSteps(10);
-            color = GRIT_BAR.getNextColor();
+            color = GRIT_BAR.getColor();
         } else if (resourcePercentage >= 80) {
             GRIT_BAR.setSteps(5);
-            color = GRIT_BAR.getNextColor();
+            color = GRIT_BAR.getColor();
         } else {
             color = StaticColor.WHITE;
         }

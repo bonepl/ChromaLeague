@@ -66,7 +66,7 @@ public class RespawnAnimation extends AnimatedFrame {
         BreathingColor yellowBreathingColor = new BackgroundBreathingColor(StaticColor.YELLOW, STEPS, true);
         for (int i = 0; i < STEPS << 1; i++) {
             final LayeredFrame layeredFrame = new LayeredFrame();
-            layeredFrame.addFrame(new SimpleFrame(keys, yellowBreathingColor.getNextColor()));
+            layeredFrame.addFrame(new SimpleFrame(keys, yellowBreathingColor.getColor()));
             if (i < STEPS) {
                 layeredFrame.addFrame(new SimpleFrame(HealthBar.getHealthBarKeys(), Background.BACKGROUND_COLOR));
                 layeredFrame.addFrame(new SimpleFrame(ResourceBars.getResourceBarKeys(), Background.BACKGROUND_COLOR));
@@ -81,7 +81,7 @@ public class RespawnAnimation extends AnimatedFrame {
         animatedFrame.addAnimationFrame(delay, new SimpleFrame());
         BreathingColor yellowBreathingColor = new BackgroundBreathingColor(StaticColor.YELLOW, STEPS, true);
         for (int i = 0; i < STEPS; i++) {
-            animatedFrame.addAnimationFrame(new SimpleFrame(keys, yellowBreathingColor.getNextColor()));
+            animatedFrame.addAnimationFrame(new SimpleFrame(keys, yellowBreathingColor.getColor()));
         }
         for (int i = delay + (STEPS << 1); i < waitTill - delay; i++) {
             animatedFrame.addAnimationFrame(new SimpleFrame(keys, StaticColor.YELLOW));
@@ -94,7 +94,7 @@ public class RespawnAnimation extends AnimatedFrame {
         animatedFrame.addAnimationFrame(delay, new SimpleFrame());
         TransitionColor buttonTransitionColor = new TransitionColor(StaticColor.YELLOW, toColor, STEPS);
         for (int i = 0; i < STEPS; i++) {
-            animatedFrame.addAnimationFrame(new SimpleFrame(keys, buttonTransitionColor.getNextColor()));
+            animatedFrame.addAnimationFrame(new SimpleFrame(keys, buttonTransitionColor.getColor()));
         }
         return animatedFrame;
     }

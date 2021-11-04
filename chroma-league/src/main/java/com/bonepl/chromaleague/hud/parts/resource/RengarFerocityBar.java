@@ -17,7 +17,7 @@ public class RengarFerocityBar extends AnimatedFrame {
         final int resourcePercentage = GameStateHelper.getResourcePercentage();
         Color color;
         if (resourcePercentage == 100) {
-            color = FEROCITY_FULL_COLOR.getNextColor();
+            color = FEROCITY_FULL_COLOR.getColor();
         } else {
             color = StaticColor.WHITE;
         }

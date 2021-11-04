@@ -23,7 +23,7 @@ public class GainedHealthAnimation extends AnimatedFrame {
         final List<RzKey> rzKeys = computeGainedHealth(previousHp, currentHp);
         if (!rzKeys.isEmpty()) {
             final TransitionColor transitionColor = new TransitionColor(StaticColor.WHITE, CLColor.HEALTH, GAINED_HEALTH_CHANGE_STEPS);
-            IntStream.range(0, GAINED_HEALTH_CHANGE_STEPS).forEach(i -> addAnimationFrame(new SimpleFrame(rzKeys, transitionColor.getNextColor())));
+            IntStream.range(0, GAINED_HEALTH_CHANGE_STEPS).forEach(i -> addAnimationFrame(new SimpleFrame(rzKeys, transitionColor.getColor())));
         }
     }
 

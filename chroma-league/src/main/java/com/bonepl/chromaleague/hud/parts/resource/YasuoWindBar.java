@@ -18,7 +18,7 @@ public class YasuoWindBar extends AnimatedFrame {
         final int resourcePercentage = GameStateHelper.getResourcePercentage();
         Color color;
         if (resourcePercentage == 100) {
-            color = WIND_SHIELD_READY_COLOR.getNextColor();
+            color = WIND_SHIELD_READY_COLOR.getColor();
         } else {
             color = WIND_SHIELD_COLOR;
         }

@@ -18,10 +18,10 @@ public class KledCourageBar extends AnimatedFrame {
         Color color;
         if (resourcePercentage >= 50 && resourcePercentage < 80) {
             COURAGE_BAR.setSteps(10);
-            color = COURAGE_BAR.getNextColor();
+            color = COURAGE_BAR.getColor();
         } else if (resourcePercentage >= 80 && resourcePercentage < 100) {
             COURAGE_BAR.setSteps(5);
-            color = COURAGE_BAR.getNextColor();
+            color = COURAGE_BAR.getColor();
         } else if (resourcePercentage == 100) {
             color = StaticColor.RED;
         } else {

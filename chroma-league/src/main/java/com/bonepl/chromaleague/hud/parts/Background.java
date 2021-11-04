@@ -19,7 +19,7 @@ public class Background extends LayeredFrame {
         if (GameStateHelper.isActivePlayerAlive()) {
             addFrame(new SimpleFrame(BACKGROUND_COLOR));
         } else {
-            addFrame(new SimpleFrame(DEAD_BACKGROUND.getNextColor()));
+            addFrame(new SimpleFrame(DEAD_BACKGROUND.getColor()));
         }
         if (GameStateHelper.hasBaronBuff()) {
             addFrame(BARON_BUFF_BACKGROUND_ANIMATION);

@@ -1,8 +1,9 @@
 package com.bonepl.chromaleague.hud.colors;
 
-import com.bonepl.razersdk.animation.Color;
+import com.bonepl.razersdk.color.Color;
+import com.bonepl.razersdk.color.ColorSupplier;
 
-public class TransitionColor {
+public class TransitionColor implements ColorSupplier {
     private static final int DEFAULT_STEPS = 20;
     private Color from;
     private Color to;
@@ -70,5 +71,10 @@ public class TransitionColor {
             currentStep = (int) (stepsRatio * newSteps);
             steps = newSteps;
         }
+    }
+
+    @Override
+    public Color getColor() {
+        return getNextColor();
     }
 }

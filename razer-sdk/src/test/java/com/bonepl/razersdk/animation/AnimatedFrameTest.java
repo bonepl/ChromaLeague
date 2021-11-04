@@ -1,5 +1,6 @@
 package com.bonepl.razersdk.animation;
 
+import com.bonepl.razersdk.color.Color;
 import org.junit.jupiter.api.Test;
 
 import java.util.NoSuchElementException;

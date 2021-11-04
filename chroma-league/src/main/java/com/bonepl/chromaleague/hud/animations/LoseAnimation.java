@@ -2,6 +2,7 @@ package com.bonepl.chromaleague.hud.animations;
 
 import com.bonepl.chromaleague.hud.PredefinedKeySets;
 import com.bonepl.razersdk.animation.*;
+import com.bonepl.razersdk.color.Color;
 import com.bonepl.razersdk.sdk.RzKeyJoiner;
 
 import java.util.concurrent.atomic.AtomicInteger;

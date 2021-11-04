@@ -1,5 +1,6 @@
 package com.bonepl.razersdk.animation;
 
+import com.bonepl.razersdk.color.Color;
 import com.bonepl.razersdk.sdk.RzKey;
 import org.junit.jupiter.api.Test;
 

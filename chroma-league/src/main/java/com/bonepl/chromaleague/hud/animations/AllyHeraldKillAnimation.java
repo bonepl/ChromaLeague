@@ -1,6 +1,6 @@
 package com.bonepl.chromaleague.hud.animations;
 
-import com.bonepl.razersdk.animation.Color;
+import com.bonepl.razersdk.color.Color;
 
 public class AllyHeraldKillAnimation extends StaticBlinkingAnimation {
     public AllyHeraldKillAnimation() {

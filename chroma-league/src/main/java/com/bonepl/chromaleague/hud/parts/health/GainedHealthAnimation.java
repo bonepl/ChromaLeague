@@ -3,7 +3,7 @@ package com.bonepl.chromaleague.hud.parts.health;
 import com.bonepl.chromaleague.hud.colors.CLColor;
 import com.bonepl.chromaleague.hud.colors.TransitionColor;
 import com.bonepl.razersdk.animation.AnimatedFrame;
-import com.bonepl.razersdk.animation.Color;
+import com.bonepl.razersdk.color.Color;
 import com.bonepl.razersdk.animation.SimpleFrame;
 import com.bonepl.razersdk.sdk.RzKey;
 

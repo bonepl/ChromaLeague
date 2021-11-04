@@ -1,6 +1,6 @@
 package com.bonepl.razersdk.sdk.json.request;
 
-import com.bonepl.razersdk.animation.Color;
+import com.bonepl.razersdk.color.Color;
 import com.bonepl.razersdk.sdk.RzKey;
 import com.jsoniter.annotation.JsonUnwrapper;
 import com.jsoniter.output.JsonStream;

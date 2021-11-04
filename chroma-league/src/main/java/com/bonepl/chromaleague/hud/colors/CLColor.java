@@ -1,6 +1,6 @@
 package com.bonepl.chromaleague.hud.colors;
 
-import com.bonepl.razersdk.animation.Color;
+import com.bonepl.razersdk.color.Color;
 
 public final class CLColor {
     public static final Color AIR = new Color(120, 150, 150);

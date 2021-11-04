@@ -1,4 +1,4 @@
-package com.bonepl.razersdk.animation;
+package com.bonepl.razersdk.color;
 
 import org.junit.jupiter.api.Test;
 

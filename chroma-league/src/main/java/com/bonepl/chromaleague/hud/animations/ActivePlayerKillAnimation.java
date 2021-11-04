@@ -3,7 +3,7 @@ package com.bonepl.chromaleague.hud.animations;
 import com.bonepl.chromaleague.hud.parts.AssistKillingSpreeBar;
 import com.bonepl.chromaleague.hud.parts.Background;
 import com.bonepl.razersdk.animation.AnimatedFrame;
-import com.bonepl.razersdk.animation.Color;
+import com.bonepl.razersdk.color.Color;
 import com.bonepl.razersdk.animation.LayeredFrame;
 import com.bonepl.razersdk.animation.SimpleFrame;
 import com.bonepl.razersdk.sdk.RzKey;

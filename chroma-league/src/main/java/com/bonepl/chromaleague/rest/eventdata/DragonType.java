@@ -1,7 +1,7 @@
 package com.bonepl.chromaleague.rest.eventdata;
 
 import com.bonepl.chromaleague.hud.colors.CLColor;
-import com.bonepl.razersdk.animation.Color;
+import com.bonepl.razersdk.color.Color;
 
 import java.util.Objects;
 

@@ -2,6 +2,7 @@ package com.bonepl.chromaleague.hud.animations;
 
 import com.bonepl.chromaleague.hud.parts.Background;
 import com.bonepl.razersdk.animation.*;
+import com.bonepl.razersdk.color.Color;
 import com.bonepl.razersdk.sdk.RzKey;
 import com.bonepl.razersdk.sdk.RzKeySelector;
 import com.bonepl.razersdk.sdk.json.request.KeyboardEffect;

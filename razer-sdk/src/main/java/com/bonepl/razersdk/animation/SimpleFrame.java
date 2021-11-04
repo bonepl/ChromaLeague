@@ -52,7 +52,7 @@ public class SimpleFrame implements IFrame {
      *
      * @param keysToColors {@link Map} of keys and corresponding fill color
      */
-    public SimpleFrame(Map<RzKey, Color> keysToColors) {
+    public SimpleFrame(Map<RzKey, ? extends Color> keysToColors) {
         this.keysToColors.putAll(keysToColors);
     }
 

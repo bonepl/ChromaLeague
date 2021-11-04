@@ -7,39 +7,37 @@ package com.bonepl.razersdk.color;
  */
 public class TransitionColor implements Color {
     private static final int DEFAULT_STEPS = 20;
-    private Color from;
-    private Color to;
+    private StaticColor from;
+    private StaticColor to;
     private int steps;
     private int currentStep;
 
-    public TransitionColor(Color from, Color to) {
+    public TransitionColor(StaticColor from, StaticColor to) {
         this(from, to, DEFAULT_STEPS);
     }
 
-    public TransitionColor(Color from, Color to, int steps) {
+    public TransitionColor(StaticColor from, StaticColor to, int steps) {
         this.from = from;
         this.to = to;
         this.steps = steps;
     }
 
-    public Color getColorAtPercent(int percent) {
-        StaticColor nextFromColor = from.getColor();
-        StaticColor nextToColor = to.getColor();
-        return new StaticColor((int) (nextFromColor.red() - (nextFromColor.red() - nextToColor.red()) * percent * 0.01),
-                (int) (nextFromColor.green() - (nextFromColor.green() - nextToColor.green()) * percent * 0.01),
-                (int) (nextFromColor.blue() - (nextFromColor.blue() - nextToColor.blue()) * percent * 0.01));
+    public StaticColor getColorAtPercent(int percent) {
+        return new StaticColor((int) (from.red() - (from.red() - to.red()) * percent * 0.01),
+                (int) (from.green() - (from.green() - to.green()) * percent * 0.01),
+                (int) (from.blue() - (from.blue() - to.blue()) * percent * 0.01));
     }
 
     private int getRedStep() {
-        return (from.getColor().red() - to.getColor().red()) / steps;
+        return (from.red() - to.red()) / steps;
     }
 
     private int getGreenStep() {
-        return (from.getColor().green() - to.getColor().green()) / steps;
+        return (from.green() - to.green()) / steps;
     }
 
     private int getBlueStep() {
-        return (from.getColor().blue() - to.getColor().blue()) / steps;
+        return (from.blue() - to.blue()) / steps;
     }
 
     public boolean transitionFinished() {
@@ -50,11 +48,11 @@ public class TransitionColor implements Color {
         currentStep = 0;
     }
 
-    public void setFrom(Color from) {
+    public void setFrom(StaticColor from) {
         this.from = from;
     }
 
-    public void setTo(Color to) {
+    public void setTo(StaticColor to) {
         this.to = to;
     }
 
@@ -68,14 +66,13 @@ public class TransitionColor implements Color {
 
     @Override
     public StaticColor getColor() {
-        StaticColor nextFromColor = from.getColor();
-        final Color color = new StaticColor(nextFromColor.red() - getRedStep() * currentStep,
-                nextFromColor.green() - getGreenStep() * currentStep,
-                nextFromColor.blue() - getBlueStep() * currentStep);
+        final StaticColor color = new StaticColor(from.red() - getRedStep() * currentStep,
+                from.green() - getGreenStep() * currentStep,
+                from.blue() - getBlueStep() * currentStep);
         if (transitionFinished()) {
-            return to.getColor();
+            return to;
         }
         currentStep += 1;
-        return color.getColor();
+        return color;
     }
 }

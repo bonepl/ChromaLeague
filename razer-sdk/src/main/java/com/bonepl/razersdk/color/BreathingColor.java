@@ -9,18 +9,26 @@ public class BreathingColor implements Color {
     private final TransitionColor downColor;
     private boolean upDirection;
 
-    public BreathingColor(Color upColor, Color downColor) {
+    public BreathingColor(StaticColor upColor, StaticColor downColor) {
         this(upColor, downColor, 20);
     }
 
-    public BreathingColor(Color upColor, Color downColor, int steps) {
+    public BreathingColor(StaticColor upColor, StaticColor downColor, int steps) {
         this(upColor, downColor, steps, false);
     }
 
-    public BreathingColor(Color upColor, Color downColor, int steps, boolean startUpDirection) {
+    public BreathingColor(StaticColor upColor, StaticColor downColor, int steps, boolean startUpDirection) {
+        this(new TransitionColor(downColor, upColor, steps), new TransitionColor(upColor, downColor, steps), startUpDirection);
+    }
+
+    public BreathingColor(TransitionColor upColor, TransitionColor downColor) {
+        this(upColor, downColor, false);
+    }
+
+    public BreathingColor(TransitionColor upColor, TransitionColor downColor, boolean startUpDirection) {
         upDirection = startUpDirection;
-        this.upColor = new TransitionColor(downColor, upColor, steps);
-        this.downColor = new TransitionColor(upColor, downColor, steps);
+        this.upColor = upColor;
+        this.downColor = downColor;
     }
 
     public void setSteps(int steps) {
@@ -28,12 +36,12 @@ public class BreathingColor implements Color {
         downColor.setSteps(steps);
     }
 
-    public void setUpColor(Color color) {
+    public void setUpColor(StaticColor color) {
         upColor.setTo(color);
         downColor.setFrom(color);
     }
 
-    public void setDownColor(Color color) {
+    public void setDownColor(StaticColor color) {
         upColor.setFrom(color);
         downColor.setTo(color);
     }

@@ -50,8 +50,8 @@ public class RespawnAnimation extends AnimatedFrame {
         }
     }
 
-    private static Color getResourceColor() {
-        Color toResourceColor;
+    private static StaticColor getResourceColor() {
+        StaticColor toResourceColor;
         if (GameStateHelper.getResourcePercentage() == 0) {
             toResourceColor = Background.BACKGROUND_COLOR;
         } else {
@@ -89,7 +89,7 @@ public class RespawnAnimation extends AnimatedFrame {
         return animatedFrame;
     }
 
-    private static AnimatedFrame createButtonsTransitionAnimatedFrame(int delay, List<RzKey> keys, Color toColor) {
+    private static AnimatedFrame createButtonsTransitionAnimatedFrame(int delay, List<RzKey> keys, StaticColor toColor) {
         final AnimatedFrame animatedFrame = new AnimatedFrame();
         animatedFrame.addAnimationFrame(delay, new SimpleFrame());
         TransitionColor buttonTransitionColor = new TransitionColor(StaticColor.YELLOW, toColor, STEPS);
@@ -99,7 +99,7 @@ public class RespawnAnimation extends AnimatedFrame {
         return animatedFrame;
     }
 
-    private static Color getPlayerResourceToTransitionColor() {
+    private static StaticColor getPlayerResourceToTransitionColor() {
         String activePlayerChampionName = RunningState.getGameState().getPlayerList().getActivePlayer().championName();
         if (ResourceBars.getEnergyBarChampions().contains(activePlayerChampionName)) {
             return StaticColor.YELLOW;

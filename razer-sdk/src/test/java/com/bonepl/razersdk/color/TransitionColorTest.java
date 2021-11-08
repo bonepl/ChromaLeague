@@ -32,4 +32,15 @@ class TransitionColorTest {
         assertEquals(StaticColor.GREEN, transitionColor.getColor());
         assertTrue(transitionColor.transitionFinished());
     }
+
+    @Test
+    void testSameColorTransition() {
+        TransitionColor transitionColor = new TransitionColor(StaticColor.YELLOW, StaticColor.YELLOW, 3);
+        assertEquals(StaticColor.YELLOW, transitionColor.getColor());
+        assertFalse(transitionColor.transitionFinished());
+        assertEquals(StaticColor.YELLOW, transitionColor.getColor());
+        assertFalse(transitionColor.transitionFinished());
+        assertEquals(StaticColor.YELLOW, transitionColor.getColor());
+        assertTrue(transitionColor.transitionFinished());
+    }
 }

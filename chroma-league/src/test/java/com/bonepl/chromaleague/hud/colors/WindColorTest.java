@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 class WindColorTest {
     @SuppressWarnings("JUnitTestMethodWithNoAssertions")
     @Test
-    void playFireColor() {
+    void playWindColor() {
         Map<RzKey, WindColor> windColorMap = Arrays.stream(RzKey.values())
                 .collect(Collectors.toMap(Function.identity(), key -> new WindColor()));
 

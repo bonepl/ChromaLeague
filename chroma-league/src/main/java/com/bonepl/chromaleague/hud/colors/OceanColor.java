@@ -7,8 +7,6 @@ import com.bonepl.razersdk.color.StaticColor;
 import java.security.SecureRandom;
 
 public class OceanColor implements Color {
-    int steps = 20;
-
     MultiTransitionColor oceanColor = new MultiTransitionColor.Builder(new StaticColor(0, 0, 80))
             .addTransition(StaticColor.BLUE, 10)
             .addTransition(new StaticColor(0, 0, 80), 10)
@@ -18,8 +16,8 @@ public class OceanColor implements Color {
             .build();
 
     public OceanColor() {
-        SecureRandom secureRandom = new SecureRandom();
-        for (int i = 0; i < secureRandom.nextInt(steps * 2); i++) {
+        int random = new SecureRandom().nextInt(40);
+        for (int i = 0; i < random; i++) {
             oceanColor.getColor();
         }
     }

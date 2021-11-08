@@ -7,8 +7,6 @@ import com.bonepl.razersdk.color.StaticColor;
 import java.security.SecureRandom;
 
 public class FireColor implements Color {
-    int steps = 30;
-
     MultiTransitionColor fireColor = new MultiTransitionColor.Builder(StaticColor.YELLOW)
             .addTransition(StaticColor.ORANGE, 5)
             .addTransition(StaticColor.RED, 10)
@@ -17,8 +15,8 @@ public class FireColor implements Color {
             .build();
 
     public FireColor() {
-        SecureRandom secureRandom = new SecureRandom();
-        for (int i = 0; i < secureRandom.nextInt(steps * 2); i++) {
+        int random = new SecureRandom().nextInt(30);
+        for (int i = 0; i < random; i++) {
             fireColor.getColor();
         }
     }

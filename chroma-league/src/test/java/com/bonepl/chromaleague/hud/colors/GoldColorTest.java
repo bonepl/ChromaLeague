@@ -17,12 +17,12 @@ class GoldColorTest {
     @Test
     void playGoldColor() {
         AtomicInteger in = new AtomicInteger(1);
-        Map<RzKey, GoldColor> mountainColorMap = Arrays.stream(RzKey.values())
+        Map<RzKey, GoldColor> goldColorMap = Arrays.stream(RzKey.values())
                 .collect(Collectors.toMap(Function.identity(), key -> new GoldColor(in.getAndIncrement())));
 
         AnimatedFrame animatedFrame = new AnimatedFrame();
         for (int i = 0; i < 400; i++) {
-            animatedFrame.addAnimationFrame(new SimpleFrame(mountainColorMap));
+            animatedFrame.addAnimationFrame(new SimpleFrame(goldColorMap));
         }
 
         new AnimationTester().testAnimation(animatedFrame);

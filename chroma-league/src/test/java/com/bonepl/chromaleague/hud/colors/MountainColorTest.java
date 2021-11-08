@@ -11,17 +11,16 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-class FireColorTest {
-
+class MountainColorTest {
     @SuppressWarnings("JUnitTestMethodWithNoAssertions")
     @Test
-    void playFireColor() {
-        Map<RzKey, FireColor> fireColorMap = Arrays.stream(RzKey.values())
-                .collect(Collectors.toMap(Function.identity(), key -> new FireColor()));
+    void playMountainColor() {
+        Map<RzKey, MountainColor> mountainColorMap = Arrays.stream(RzKey.values())
+                .collect(Collectors.toMap(Function.identity(), key -> new MountainColor()));
 
         AnimatedFrame animatedFrame = new AnimatedFrame();
         for (int i = 0; i < 200; i++) {
-            animatedFrame.addAnimationFrame(new SimpleFrame(fireColorMap));
+            animatedFrame.addAnimationFrame(new SimpleFrame(mountainColorMap));
         }
 
         new AnimationTester().testAnimation(animatedFrame);

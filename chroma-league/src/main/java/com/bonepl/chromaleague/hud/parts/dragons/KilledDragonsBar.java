@@ -2,6 +2,7 @@ package com.bonepl.chromaleague.hud.parts.dragons;
 
 import com.bonepl.chromaleague.rest.eventdata.DragonType;
 import com.bonepl.chromaleague.state.GameStateHelper;
+import com.bonepl.razersdk.animation.Frame;
 import com.bonepl.razersdk.animation.SimpleFrame;
 import com.bonepl.razersdk.color.Color;
 import com.bonepl.razersdk.sdk.RzKey;
@@ -19,13 +20,14 @@ public class KilledDragonsBar extends SimpleFrame {
     public static final List<RzKey> SOUL_BAR = List.of(RZKEY_LCTRL, RZKEY_LWIN, RZKEY_LALT, RZKEY_SPACE, RZKEY_RALT,
             RZKEY_UP, RZKEY_LEFT, RZKEY_DOWN, RZKEY_RIGHT);
 
-    private static final Map<RzKey, Color> dragonColorsMap = new HashMap<>();
+    private final Map<RzKey, Color> dragonColorsMap = new HashMap<>();
 
-    public KilledDragonsBar() {
-        super(getKilledDragonsBar());
+    @Override
+    public Frame getFrame() {
+        return new SimpleFrame(getKilledDragonsBar()).getFrame();
     }
 
-    private static Map<RzKey, Color> getKilledDragonsBar() {
+    private Map<RzKey, Color> getKilledDragonsBar() {
         Map<RzKey, Color> killedDragonsBar = new EnumMap<>(RzKey.class);
         killedDragonsBar.putAll(getDragonType(0).map(dragonType -> computeDragonColor(dragonType, FIRST_DRAGON_ROW)).orElse(emptyMap()));
         killedDragonsBar.putAll(getDragonType(1).map(dragonType -> computeDragonColor(dragonType, SECOND_DRAGON_ROW)).orElse(emptyMap()));
@@ -35,7 +37,7 @@ public class KilledDragonsBar extends SimpleFrame {
         return killedDragonsBar;
     }
 
-    private static Map<RzKey, Color> computeDragonColor(DragonType dragonType, List<RzKey> keys) {
+    private Map<RzKey, Color> computeDragonColor(DragonType dragonType, List<RzKey> keys) {
         Map<RzKey, Color> currentDragonColorMap = new HashMap<>();
         keys.forEach(rzKey -> dragonColorsMap.computeIfAbsent(rzKey, rk -> dragonType.getColor()));
         keys.forEach(rzKey -> currentDragonColorMap.put(rzKey, dragonColorsMap.get(rzKey)));

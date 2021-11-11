@@ -7,11 +7,12 @@ import com.bonepl.razersdk.animation.LayeredFrame;
 
 public class DragonBar extends AnimatedFrame {
     private final ElderBuffAnimation elderBuffAnimation = new ElderBuffAnimation();
+    private final KilledDragonsBar killedDragonsBar = new KilledDragonsBar();
 
     @Override
     public Frame getFrame() {
         final LayeredFrame layeredFrame = new LayeredFrame();
-        layeredFrame.addFrame(new KilledDragonsBar());
+        layeredFrame.addFrame(killedDragonsBar);
         if (GameStateHelper.hasElderBuff()) {
             layeredFrame.addFrame(elderBuffAnimation);
         }

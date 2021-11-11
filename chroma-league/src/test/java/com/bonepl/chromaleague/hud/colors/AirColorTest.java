@@ -11,12 +11,12 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-class WindColorTest {
+class AirColorTest {
     @SuppressWarnings("JUnitTestMethodWithNoAssertions")
     @Test
     void playWindColor() {
-        Map<RzKey, WindColor> windColorMap = Arrays.stream(RzKey.values())
-                .collect(Collectors.toMap(Function.identity(), key -> new WindColor()));
+        Map<RzKey, AirColor> windColorMap = Arrays.stream(RzKey.values())
+                .collect(Collectors.toMap(Function.identity(), key -> new AirColor()));
 
         AnimatedFrame animatedFrame = new AnimatedFrame();
         for (int i = 0; i < 200; i++) {

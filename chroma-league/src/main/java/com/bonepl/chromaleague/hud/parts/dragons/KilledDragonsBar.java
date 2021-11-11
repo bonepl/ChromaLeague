@@ -1,70 +1,45 @@
 package com.bonepl.chromaleague.hud.parts.dragons;
 
-import com.bonepl.chromaleague.hud.colors.BackgroundBreathingColor;
 import com.bonepl.chromaleague.rest.eventdata.DragonType;
 import com.bonepl.chromaleague.state.GameStateHelper;
-import com.bonepl.razersdk.color.Color;
 import com.bonepl.razersdk.animation.SimpleFrame;
+import com.bonepl.razersdk.color.Color;
 import com.bonepl.razersdk.sdk.RzKey;
 
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 import static com.bonepl.razersdk.sdk.RzKey.*;
+import static java.util.Collections.emptyMap;
 
 public class KilledDragonsBar extends SimpleFrame {
-    public static final RzKey FIRST_DRAGON_ROW = RZKEY_BACKSLASH;
-    public static final RzKey SECOND_DRAGON_ROW = RZKEY_ENTER;
-    public static final RzKey THIRD_DRAGON_ROW = RZKEY_RSHIFT;
+    public static final List<RzKey> FIRST_DRAGON_ROW = List.of(RZKEY_BACKSLASH);
+    public static final List<RzKey> SECOND_DRAGON_ROW = List.of(RZKEY_ENTER);
+    public static final List<RzKey> THIRD_DRAGON_ROW = List.of(RZKEY_RSHIFT);
     public static final List<RzKey> FOURTH_DRAGON_ROW = List.of(RZKEY_FN, RZKEY_RMENU, RZKEY_RCTRL);
-    public static final List<RzKey> SOUL_BAR = List.of(RZKEY_UP, RZKEY_LEFT, RZKEY_DOWN, RZKEY_RIGHT);
+    public static final List<RzKey> SOUL_BAR = List.of(RZKEY_LCTRL, RZKEY_LWIN, RZKEY_LALT, RZKEY_SPACE, RZKEY_RALT,
+            RZKEY_UP, RZKEY_LEFT, RZKEY_DOWN, RZKEY_RIGHT);
 
-    private static BackgroundBreathingColor dragonSoulColor;
+    private static final Map<RzKey, Color> dragonColorsMap = new HashMap<>();
 
     public KilledDragonsBar() {
         super(getKilledDragonsBar());
     }
 
     private static Map<RzKey, Color> getKilledDragonsBar() {
-        final List<DragonType> killedDragons = GameStateHelper.getKilledDragons();
         Map<RzKey, Color> killedDragonsBar = new EnumMap<>(RzKey.class);
-        final Optional<DragonType> dragonSoul = getDragonSoul(killedDragons);
-        if (dragonSoul.isPresent()) {
-            final DragonType soulType = dragonSoul.get();
-            if (dragonSoulColor == null) {
-                dragonSoulColor = new BackgroundBreathingColor(soulType.getColor());
-            }
-            final Color nextSoulColor = dragonSoulColor.getColor();
-            getDragonType(0).map(dragonType -> swapColorIfSoul(dragonType, soulType, nextSoulColor))
-                    .ifPresent(dragonColor -> killedDragonsBar.put(FIRST_DRAGON_ROW, dragonColor));
-            getDragonType(1).map(dragonType -> swapColorIfSoul(dragonType, soulType, nextSoulColor))
-                    .ifPresent(dragonColor -> killedDragonsBar.put(SECOND_DRAGON_ROW, dragonColor));
-            getDragonType(2).map(dragonType -> swapColorIfSoul(dragonType, soulType, nextSoulColor))
-                    .ifPresent(dragonColor -> killedDragonsBar.put(THIRD_DRAGON_ROW, dragonColor));
-            getDragonType(3).map(dragonType -> swapColorIfSoul(dragonType, soulType, nextSoulColor))
-                    .ifPresent(dragonColor -> FOURTH_DRAGON_ROW.forEach(rzKey -> killedDragonsBar.put(rzKey, dragonColor)));
-            SOUL_BAR.forEach(rzKey -> killedDragonsBar.put(rzKey, nextSoulColor));
-        } else {
-            dragonSoulColor = null;
-            getDragonType(0).map(DragonType::getColor)
-                    .ifPresent(dragonColor -> killedDragonsBar.put(FIRST_DRAGON_ROW, dragonColor));
-            getDragonType(1).map(DragonType::getColor)
-                    .ifPresent(dragonColor -> killedDragonsBar.put(SECOND_DRAGON_ROW, dragonColor));
-            getDragonType(2).map(DragonType::getColor)
-                    .ifPresent(dragonColor -> killedDragonsBar.put(THIRD_DRAGON_ROW, dragonColor));
-            getDragonType(3).map(DragonType::getColor)
-                    .ifPresent(dragonColor -> FOURTH_DRAGON_ROW.forEach(rzKey -> killedDragonsBar.put(rzKey, dragonColor)));
-        }
+        killedDragonsBar.putAll(getDragonType(0).map(dragonType -> computeDragonColor(dragonType, FIRST_DRAGON_ROW)).orElse(emptyMap()));
+        killedDragonsBar.putAll(getDragonType(1).map(dragonType -> computeDragonColor(dragonType, SECOND_DRAGON_ROW)).orElse(emptyMap()));
+        killedDragonsBar.putAll(getDragonType(2).map(dragonType -> computeDragonColor(dragonType, THIRD_DRAGON_ROW)).orElse(emptyMap()));
+        killedDragonsBar.putAll(getDragonType(3).map(dragonType -> computeDragonColor(dragonType, FOURTH_DRAGON_ROW)).orElse(emptyMap()));
+        killedDragonsBar.putAll(getDragonSoul(GameStateHelper.getKilledDragons()).map(dragonType -> computeDragonColor(dragonType, SOUL_BAR)).orElse(emptyMap()));
         return killedDragonsBar;
     }
 
-    private static Color swapColorIfSoul(DragonType dragonType, DragonType soulType, Color soulColor) {
-        if (soulType != null && dragonType == soulType) {
-            return soulColor;
-        }
-        return dragonType.getColor();
+    private static Map<RzKey, Color> computeDragonColor(DragonType dragonType, List<RzKey> keys) {
+        Map<RzKey, Color> currentDragonColorMap = new HashMap<>();
+        keys.forEach(rzKey -> dragonColorsMap.computeIfAbsent(rzKey, rk -> dragonType.getColor()));
+        keys.forEach(rzKey -> currentDragonColorMap.put(rzKey, dragonColorsMap.get(rzKey)));
+        return currentDragonColorMap;
     }
 
     private static Optional<DragonType> getDragonType(int index) {

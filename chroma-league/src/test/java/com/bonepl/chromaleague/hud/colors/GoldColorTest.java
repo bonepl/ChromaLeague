@@ -16,9 +16,8 @@ class GoldColorTest {
     @SuppressWarnings("JUnitTestMethodWithNoAssertions")
     @Test
     void playGoldColor() {
-        AtomicInteger in = new AtomicInteger(1);
         Map<RzKey, GoldColor> goldColorMap = Arrays.stream(RzKey.values())
-                .collect(Collectors.toMap(Function.identity(), key -> new GoldColor(in.getAndIncrement())));
+                .collect(Collectors.toMap(Function.identity(), key -> new GoldColor()));
 
         AnimatedFrame animatedFrame = new AnimatedFrame();
         for (int i = 0; i < 400; i++) {

@@ -7,26 +7,29 @@ import com.bonepl.razersdk.color.StaticColor;
 import java.security.SecureRandom;
 
 public class GoldColor implements Color {
-    MultiTransitionColor fireColor = new MultiTransitionColor.Builder(StaticColor.YELLOW)
-            .addTransition(new StaticColor(60, 60, 0), 20)
-            .addTransition(StaticColor.YELLOW, 20)
-            .addTransition(new StaticColor(60, 60, 0), 20)
-            .addTransition(StaticColor.YELLOW, 20)
-            .addTransition(new StaticColor(60, 60, 0), 20)
-            .addTransition(StaticColor.YELLOW, 20)
-            .addTransition(new StaticColor(60, 60, 0), 20)
+    private static final StaticColor DARKER_YELLOW = new StaticColor(60, 60, 0);
+    private static final SecureRandom SECURE_RANDOM = new SecureRandom();
+    private static final float BLINK_CHANCE = 0.02f;
+    private int blinkingCountdown;
+    MultiTransitionColor blinkColor = new MultiTransitionColor.Builder(StaticColor.YELLOW)
             .addTransition(StaticColor.WHITE, 3)
-            .looped(5)
+            .looped(3)
             .build();
-
-    public GoldColor(int steps) {
-        for (int i = 0; i < steps; i++) {
-            fireColor.getColor();
-        }
-    }
+    MultiTransitionColor goldColor = new MultiTransitionColor.Builder(StaticColor.YELLOW)
+            .addTransition(DARKER_YELLOW, 20)
+            .looped(20)
+            .build();
 
     @Override
     public StaticColor getColor() {
-        return fireColor.getColor();
+        if (blinkingCountdown == 0) {
+            if (SECURE_RANDOM.nextFloat() <= BLINK_CHANCE) {
+                blinkingCountdown = 4;
+            }
+            return goldColor.getColor();
+        } else {
+            blinkingCountdown--;
+            return blinkColor.getColor();
+        }
     }
 }

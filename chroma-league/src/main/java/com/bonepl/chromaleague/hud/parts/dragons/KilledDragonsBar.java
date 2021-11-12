@@ -2,6 +2,7 @@ package com.bonepl.chromaleague.hud.parts.dragons;
 
 import com.bonepl.chromaleague.rest.eventdata.DragonType;
 import com.bonepl.chromaleague.state.GameStateHelper;
+import com.bonepl.razersdk.animation.AnimatedFrame;
 import com.bonepl.razersdk.animation.Frame;
 import com.bonepl.razersdk.animation.SimpleFrame;
 import com.bonepl.razersdk.color.Color;
@@ -12,7 +13,7 @@ import java.util.*;
 import static com.bonepl.razersdk.sdk.RzKey.*;
 import static java.util.Collections.emptyMap;
 
-public class KilledDragonsBar extends SimpleFrame {
+public class KilledDragonsBar extends AnimatedFrame {
     public static final List<RzKey> FIRST_DRAGON_ROW = List.of(RZKEY_BACKSLASH);
     public static final List<RzKey> SECOND_DRAGON_ROW = List.of(RZKEY_ENTER);
     public static final List<RzKey> THIRD_DRAGON_ROW = List.of(RZKEY_RSHIFT);
@@ -25,7 +26,8 @@ public class KilledDragonsBar extends SimpleFrame {
 
     @Override
     public Frame getFrame() {
-        return new SimpleFrame(getKilledDragonsBar()).getFrame();
+        addAnimationFrame(new SimpleFrame(getKilledDragonsBar()));
+        return super.getFrame();
     }
 
     private Map<RzKey, Color> getKilledDragonsBar() {

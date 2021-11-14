@@ -1,8 +1,9 @@
 package com.bonepl.chromaleague.hud.animations;
 
-import com.bonepl.chromaleague.hud.colors.BreathingColor;
+import com.bonepl.chromaleague.hud.colors.BackgroundBreathingColor;
+import com.bonepl.razersdk.color.BreathingColor;
 import com.bonepl.chromaleague.hud.colors.CLColor;
-import com.bonepl.chromaleague.hud.colors.TransitionColor;
+import com.bonepl.razersdk.color.TransitionColor;
 import com.bonepl.chromaleague.hud.parts.Background;
 import com.bonepl.chromaleague.hud.parts.health.HealthBar;
 import com.bonepl.chromaleague.hud.parts.resource.ResourceBars;
@@ -11,7 +12,8 @@ import com.bonepl.chromaleague.hud.parts.resource.YasuoWindBar;
 import com.bonepl.chromaleague.state.GameStateHelper;
 import com.bonepl.chromaleague.state.RunningState;
 import com.bonepl.razersdk.animation.AnimatedFrame;
-import com.bonepl.razersdk.animation.Color;
+import com.bonepl.razersdk.color.Color;
+import com.bonepl.razersdk.color.StaticColor;
 import com.bonepl.razersdk.animation.LayeredFrame;
 import com.bonepl.razersdk.animation.SimpleFrame;
 import com.bonepl.razersdk.sdk.RzKey;
@@ -39,7 +41,7 @@ public class RespawnAnimation extends AnimatedFrame {
                 createButtonsGlowAnimatedFrame(delayBetweenRows * 5, ResourceBars.getResourceBarKeys(), delayBetweenRows * 7),
                 createButtonsGlowAnimatedFrame(delayBetweenRows * 6, HealthBar.getHealthBarKeys(), delayBetweenRows * 7),
                 createButtonsTransitionAnimatedFrame(delayBetweenRows * 7, ResourceBars.getResourceBarKeys(), getResourceColor()),
-                createButtonsTransitionAnimatedFrame(delayBetweenRows * 7, HealthBar.getHealthBarKeys(), Color.GREEN)
+                createButtonsTransitionAnimatedFrame(delayBetweenRows * 7, HealthBar.getHealthBarKeys(), StaticColor.GREEN)
         );
         for (int i = 0; i < delayBetweenRows * 7 + (STEPS << 1); i++) {
             final LayeredFrame layeredFrame = new LayeredFrame();
@@ -48,8 +50,8 @@ public class RespawnAnimation extends AnimatedFrame {
         }
     }
 
-    private static Color getResourceColor() {
-        Color toResourceColor;
+    private static StaticColor getResourceColor() {
+        StaticColor toResourceColor;
         if (GameStateHelper.getResourcePercentage() == 0) {
             toResourceColor = Background.BACKGROUND_COLOR;
         } else {
@@ -61,10 +63,10 @@ public class RespawnAnimation extends AnimatedFrame {
     private static AnimatedFrame createYellowAnimatedFrame(int delay, List<RzKey> keys) {
         final AnimatedFrame animatedFrame = new AnimatedFrame();
         animatedFrame.addAnimationFrame(delay, new SimpleFrame());
-        BreathingColor yellowBreathingColor = new BreathingColor(Color.YELLOW, STEPS, true);
+        BreathingColor yellowBreathingColor = new BackgroundBreathingColor(StaticColor.YELLOW, STEPS, true);
         for (int i = 0; i < STEPS << 1; i++) {
             final LayeredFrame layeredFrame = new LayeredFrame();
-            layeredFrame.addFrame(new SimpleFrame(keys, yellowBreathingColor.getNextColor()));
+            layeredFrame.addFrame(new SimpleFrame(keys, yellowBreathingColor.getColor()));
             if (i < STEPS) {
                 layeredFrame.addFrame(new SimpleFrame(HealthBar.getHealthBarKeys(), Background.BACKGROUND_COLOR));
                 layeredFrame.addFrame(new SimpleFrame(ResourceBars.getResourceBarKeys(), Background.BACKGROUND_COLOR));
@@ -77,30 +79,30 @@ public class RespawnAnimation extends AnimatedFrame {
     private static AnimatedFrame createButtonsGlowAnimatedFrame(int delay, List<RzKey> keys, int waitTill) {
         final AnimatedFrame animatedFrame = new AnimatedFrame();
         animatedFrame.addAnimationFrame(delay, new SimpleFrame());
-        BreathingColor yellowBreathingColor = new BreathingColor(Color.YELLOW, STEPS, true);
+        BreathingColor yellowBreathingColor = new BackgroundBreathingColor(StaticColor.YELLOW, STEPS, true);
         for (int i = 0; i < STEPS; i++) {
-            animatedFrame.addAnimationFrame(new SimpleFrame(keys, yellowBreathingColor.getNextColor()));
+            animatedFrame.addAnimationFrame(new SimpleFrame(keys, yellowBreathingColor.getColor()));
         }
         for (int i = delay + (STEPS << 1); i < waitTill - delay; i++) {
-            animatedFrame.addAnimationFrame(new SimpleFrame(keys, Color.YELLOW));
+            animatedFrame.addAnimationFrame(new SimpleFrame(keys, StaticColor.YELLOW));
         }
         return animatedFrame;
     }
 
-    private static AnimatedFrame createButtonsTransitionAnimatedFrame(int delay, List<RzKey> keys, Color toColor) {
+    private static AnimatedFrame createButtonsTransitionAnimatedFrame(int delay, List<RzKey> keys, StaticColor toColor) {
         final AnimatedFrame animatedFrame = new AnimatedFrame();
         animatedFrame.addAnimationFrame(delay, new SimpleFrame());
-        TransitionColor buttonTransitionColor = new TransitionColor(Color.YELLOW, toColor, STEPS);
+        TransitionColor buttonTransitionColor = new TransitionColor(StaticColor.YELLOW, toColor, STEPS);
         for (int i = 0; i < STEPS; i++) {
-            animatedFrame.addAnimationFrame(new SimpleFrame(keys, buttonTransitionColor.getNextColor()));
+            animatedFrame.addAnimationFrame(new SimpleFrame(keys, buttonTransitionColor.getColor()));
         }
         return animatedFrame;
     }
 
-    private static Color getPlayerResourceToTransitionColor() {
+    private static StaticColor getPlayerResourceToTransitionColor() {
         String activePlayerChampionName = RunningState.getGameState().getPlayerList().getActivePlayer().championName();
         if (ResourceBars.getEnergyBarChampions().contains(activePlayerChampionName)) {
-            return Color.YELLOW;
+            return StaticColor.YELLOW;
         }
         if ("Shyvana".equals(activePlayerChampionName)) {
             return ShyvanaDragonFuryBar.DRAGON_FURY_COLOR;

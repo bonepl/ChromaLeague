@@ -48,8 +48,8 @@ public class HealthBar extends Animation {
 
     public static List<RzKey> getHpBarPart(double previousHp, double currentHp) {
         final double maxHealth = RunningState.getGameState().getActivePlayer().championStats().maxHealth();
-        final int from = ProgressBar.indexToFill(getHealthBarKeys(), Double.valueOf(previousHp * 100 / maxHealth).intValue());
-        final int to = ProgressBar.indexToFill(getHealthBarKeys(), Double.valueOf(currentHp * 100 / maxHealth).intValue());
+        final int from = ProgressBar.indexToFill(getHealthBarKeys().size(), Double.valueOf(previousHp * 100 / maxHealth).intValue());
+        final int to = ProgressBar.indexToFill(getHealthBarKeys().size(), Double.valueOf(currentHp * 100 / maxHealth).intValue());
         return getHealthBarKeys().subList(from, to);
     }
 }

@@ -2,6 +2,8 @@ package com.bonepl.chromaleague.hud.animations;
 
 import com.bonepl.chromaleague.hud.parts.Background;
 import com.bonepl.razersdk.animation.*;
+import com.bonepl.razersdk.color.Color;
+import com.bonepl.razersdk.color.StaticColor;
 import com.bonepl.razersdk.sdk.RzKey;
 import com.bonepl.razersdk.sdk.RzKeySelector;
 import com.bonepl.razersdk.sdk.json.request.KeyboardEffect;
@@ -9,7 +11,7 @@ import com.bonepl.razersdk.sdk.json.request.KeyboardEffect;
 import java.util.Set;
 
 public class LoadingAnimation extends AnimatedFrame {
-    private static final Color LOADING_COLOR = Color.GREEN;
+    private static final Color LOADING_COLOR = StaticColor.GREEN;
     private int currentColumn;
     private int direction;
 

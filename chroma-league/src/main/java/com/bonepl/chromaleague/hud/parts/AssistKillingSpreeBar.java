@@ -1,9 +1,10 @@
 package com.bonepl.chromaleague.hud.parts;
 
 import com.bonepl.chromaleague.state.GameStateHelper;
-import com.bonepl.razersdk.animation.Color;
+import com.bonepl.razersdk.color.Color;
 import com.bonepl.razersdk.animation.LayeredFrame;
 import com.bonepl.razersdk.animation.SimpleFrame;
+import com.bonepl.razersdk.color.StaticColor;
 import com.bonepl.razersdk.sdk.RzKey;
 
 import java.util.List;
@@ -17,8 +18,8 @@ public class AssistKillingSpreeBar extends LayeredFrame {
                     RZKEY_O, RZKEY_P, RZKEY_SQUARE_BRACKET_LEFT);
 
     public AssistKillingSpreeBar() {
-        addFrame(new SimpleFrame(KILLING_SPREE_BAR.subList(0, computeAssistsIndex()), Color.YELLOW));
-        addFrame(new SimpleFrame(KILLING_SPREE_BAR.subList(0, computeKillsIndex()), Color.RED));
+        addFrame(new SimpleFrame(KILLING_SPREE_BAR.subList(0, computeAssistsIndex()), StaticColor.YELLOW));
+        addFrame(new SimpleFrame(KILLING_SPREE_BAR.subList(0, computeKillsIndex()), StaticColor.RED));
     }
 
     private static int computeAssistsIndex() {

@@ -3,8 +3,9 @@ package com.bonepl.razersdk.effects;
 import com.bonepl.razersdk.ChromaRestSDK;
 import com.bonepl.razersdk.animation.AnimatedFrame;
 import com.bonepl.razersdk.animation.Animation;
-import com.bonepl.razersdk.animation.Color;
+import com.bonepl.razersdk.color.Color;
 import com.bonepl.razersdk.animation.SimpleFrame;
+import com.bonepl.razersdk.color.StaticColor;
 import com.bonepl.razersdk.sdk.RzKey;
 import org.junit.jupiter.api.Test;
 
@@ -21,9 +22,9 @@ public class BlackToNoneEffectTest {
     void testNonTransparentBlack() throws InterruptedException {
         try (ChromaRestSDK razerSDKClient = new ChromaRestSDK()) {
             Animation animation = new Animation();
-            animation.addToFront(createMovingBlackPixel(Color.BLACK));
+            animation.addToFront(createMovingBlackPixel(StaticColor.BLACK));
             while (animation.hasFrame()) {
-                animation.addToBack(new SimpleFrame(FIRST_LETTERS, Color.CYAN));
+                animation.addToBack(new SimpleFrame(FIRST_LETTERS, StaticColor.CYAN));
                 razerSDKClient.createKeyboardEffect(animation);
                 Thread.sleep(100);
             }
@@ -35,9 +36,9 @@ public class BlackToNoneEffectTest {
     void testTransparentBlack() throws InterruptedException {
         try (ChromaRestSDK razerSDKClient = new ChromaRestSDK()) {
             Animation animation = new Animation();
-            animation.addToFront(createMovingBlackPixel(Color.NONE));
+            animation.addToFront(createMovingBlackPixel(StaticColor.NONE));
             while (animation.hasFrame()) {
-                animation.addToBack(new SimpleFrame(FIRST_LETTERS, Color.CYAN));
+                animation.addToBack(new SimpleFrame(FIRST_LETTERS, StaticColor.CYAN));
                 razerSDKClient.createKeyboardEffect(animation);
                 Thread.sleep(100);
             }

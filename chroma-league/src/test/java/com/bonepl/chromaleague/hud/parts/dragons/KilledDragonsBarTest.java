@@ -57,13 +57,14 @@ public class KilledDragonsBarTest {
 
     private static void testDragonsWithSoul(Queue<DragonType> testDrakesOrder) {
         final EventDataProcessor eventDataProcessor = new EventDataProcessor();
+        KilledDragonsBar killedDragonsBar = new KilledDragonsBar();
         new AnimationTester()
                 .withAfterIterationAction(i -> {
                     if (i % 5 == 0 && !testDrakesOrder.isEmpty()) {
                         eventDataProcessor.processEventForEventData(getEventForDragonKill(testDrakesOrder.remove()));
                     }
                 })
-                .testAnimation(KilledDragonsBar::new, 80);
+                .testAnimation(killedDragonsBar, 80);
     }
 
     public static Event getEventForDragonKill(DragonType dragonType) {

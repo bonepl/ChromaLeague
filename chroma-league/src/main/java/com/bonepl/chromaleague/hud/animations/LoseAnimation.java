@@ -2,6 +2,8 @@ package com.bonepl.chromaleague.hud.animations;
 
 import com.bonepl.chromaleague.hud.PredefinedKeySets;
 import com.bonepl.razersdk.animation.*;
+import com.bonepl.razersdk.color.Color;
+import com.bonepl.razersdk.color.StaticColor;
 import com.bonepl.razersdk.sdk.RzKeyJoiner;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -13,7 +15,7 @@ public class LoseAnimation extends Animation {
     public LoseAnimation() {
         AtomicInteger integer = new AtomicInteger(0);
         while (integer.get() < 500) {
-            addToFront(createDownMovingFrame(integer.getAndIncrement(), new Color(getNewRedValue(), 0, 0)));
+            addToFront(createDownMovingFrame(integer.getAndIncrement(), new StaticColor(getNewRedValue(), 0, 0)));
         }
     }
 
@@ -49,7 +51,7 @@ public class LoseAnimation extends Animation {
 
     @Override
     public Frame getFrame() {
-        addToBack(new SimpleFrame(Color.BLACK));
+        addToBack(new SimpleFrame(StaticColor.BLACK));
         return super.getFrame();
     }
 }

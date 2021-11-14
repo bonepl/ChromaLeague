@@ -110,6 +110,10 @@ public final class RzKeySelector {
         return withRow(row -> true);
     }
 
+    public RzKeySelector all() {
+        return withAnyColumn().withAnyRow();
+    }
+
     /**
      * Select keys with the column between provided {@link RzKey}s
      *
@@ -143,11 +147,11 @@ public final class RzKeySelector {
     /**
      * Select keys as the rectangle between provided {@link RzKey}s
      *
-     * @param topLeft top left rectangle corner represented by RzKey
+     * @param topLeft     top left rectangle corner represented by RzKey
      * @param bottomRight bottom right rectangle corner represented by RzKey
      * @return this
      * @throws IllegalArgumentException if topLeft column is higher than bottomRight column
-     * or if topLeft row is higher than bottomRight row
+     *                                  or if topLeft row is higher than bottomRight row
      */
     public RzKeySelector withRectangleBetween(final RzKey topLeft, final RzKey bottomRight) {
         return withRowBetween(topLeft, bottomRight).withColumnBetween(topLeft, bottomRight);
@@ -155,6 +159,7 @@ public final class RzKeySelector {
 
     /**
      * Sort selected keys by column number (applies only when selecting {@link #asList()})
+     *
      * @return this
      */
     public RzKeySelector sortedByColumn() {
@@ -163,6 +168,7 @@ public final class RzKeySelector {
 
     /**
      * Sort selected keys by row number (applies only when selecting {@link #asList()})
+     *
      * @return this
      */
     public RzKeySelector sortedByRow() {
@@ -171,6 +177,7 @@ public final class RzKeySelector {
 
     /**
      * Collect selected {@link RzKey}s to {@link Set}
+     *
      * @return selected keys as {@link Set}
      */
     public Set<RzKey> asSet() {
@@ -179,6 +186,7 @@ public final class RzKeySelector {
 
     /**
      * Collect selected {@link RzKey}s to sorted {@link List}
+     *
      * @return selected keys as {@link List}
      */
     public List<RzKey> asList() {

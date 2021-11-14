@@ -1,5 +1,7 @@
 package com.bonepl.razersdk.animation;
 
+import com.bonepl.razersdk.color.Color;
+import com.bonepl.razersdk.color.StaticColor;
 import com.bonepl.razersdk.sdk.RzKey;
 import org.junit.jupiter.api.Test;
 
@@ -24,15 +26,15 @@ class AnimationTest {
     void testAddingFrameToFront() {
         //given
         final Animation animation = new Animation();
-        animation.addToBack(new SimpleFrame(Color.YELLOW));
+        animation.addToBack(new SimpleFrame(StaticColor.YELLOW));
 
         //when
-        animation.addToFront(new SimpleFrame(Color.RED));
+        animation.addToFront(new SimpleFrame(StaticColor.RED));
 
         //then
         assertTrue(animation.hasFrame());
         final Map<RzKey, Color> actualKeysToColors = animation.getFrame().getKeysToColors();
-        assertTrue(actualKeysToColors.values().stream().allMatch(color -> color == Color.RED));
+        assertTrue(actualKeysToColors.values().stream().allMatch(color -> color == StaticColor.RED));
         assertThrows(NoSuchElementException.class, animation::getFrame);
     }
 
@@ -40,15 +42,15 @@ class AnimationTest {
     void testAddingFrameToBack() {
         //given
         final Animation animation = new Animation();
-        animation.addToFront(new SimpleFrame(Color.RED));
+        animation.addToFront(new SimpleFrame(StaticColor.RED));
 
         //when
-        animation.addToBack(new SimpleFrame(Color.YELLOW));
+        animation.addToBack(new SimpleFrame(StaticColor.YELLOW));
 
         //then
         assertTrue(animation.hasFrame());
         final Map<RzKey, Color> actualKeysToColors = animation.getFrame().getKeysToColors();
-        assertTrue(actualKeysToColors.values().stream().allMatch(color -> color == Color.RED));
+        assertTrue(actualKeysToColors.values().stream().allMatch(color -> color == StaticColor.RED));
         assertThrows(NoSuchElementException.class, animation::getFrame);
     }
 
@@ -58,12 +60,12 @@ class AnimationTest {
         final Animation animation = new Animation();
 
         final LayeredFrame layeredFrame = new LayeredFrame();
-        layeredFrame.addFrame(new SimpleFrame(Color.GREEN));
+        layeredFrame.addFrame(new SimpleFrame(StaticColor.GREEN));
         animation.addToBack(layeredFrame);
 
         final AnimatedFrame animatedFrame = new AnimatedFrame();
-        animatedFrame.addAnimationFrame(new SimpleFrame(RZKEY_ENTER, Color.RED));
-        animatedFrame.addAnimationFrame(new SimpleFrame(RZKEY_ENTER, Color.BLUE));
+        animatedFrame.addAnimationFrame(new SimpleFrame(RZKEY_ENTER, StaticColor.RED));
+        animatedFrame.addAnimationFrame(new SimpleFrame(RZKEY_ENTER, StaticColor.BLUE));
         animation.addToFront(animatedFrame);
 
         //when 1st frame
@@ -71,10 +73,10 @@ class AnimationTest {
 
         //then
         assertTrue(animation.hasFrame());
-        assertEquals(actualKeysToColors.get(RZKEY_ENTER), Color.RED);
+        assertEquals(actualKeysToColors.get(RZKEY_ENTER), StaticColor.RED);
         assertTrue(actualKeysToColors.entrySet().stream()
                 .filter(entry -> entry.getKey() != RZKEY_ENTER)
-                .map(Map.Entry::getValue).allMatch(color -> color == Color.GREEN));
+                .map(Map.Entry::getValue).allMatch(color -> color == StaticColor.GREEN));
         assertEquals(RzKey.values().length, actualKeysToColors.size());
 
         //when 2nd frame
@@ -82,7 +84,7 @@ class AnimationTest {
 
         //then
         assertFalse(animation.hasFrame());
-        assertEquals(actualKeysToColors2.get(RZKEY_ENTER), Color.BLUE);
+        assertEquals(actualKeysToColors2.get(RZKEY_ENTER), StaticColor.BLUE);
         assertEquals(1, actualKeysToColors2.size());
         assertThrows(NoSuchElementException.class, animation::getFrame);
     }

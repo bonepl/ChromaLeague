@@ -36,9 +36,9 @@ import java.util.logging.Logger;
  * <pre>
  * try (ChromaRestSDK chromaRestSDK = new ChromaRestSDK()) {
  *     # animation start
- *     chromaRestSDK.createKeyboardEffect(new SimpleFrame(Color.RED));
- *     chromaRestSDK.createKeyboardEffect(new SimpleFrame(Color.BLUE));
- *     chromaRestSDK.createKeyboardEffect(new SimpleFrame(Color.GREEN));
+ *     chromaRestSDK.createKeyboardEffect(new SimpleFrame(StaticColor.RED));
+ *     chromaRestSDK.createKeyboardEffect(new SimpleFrame(StaticColor.BLUE));
+ *     chromaRestSDK.createKeyboardEffect(new SimpleFrame(StaticColor.GREEN));
  *     # animation end
  * }
  * # automatic disconnection

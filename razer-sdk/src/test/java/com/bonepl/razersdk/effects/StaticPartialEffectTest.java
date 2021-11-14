@@ -1,8 +1,8 @@
 package com.bonepl.razersdk.effects;
 
 import com.bonepl.razersdk.ChromaRestSDK;
-import com.bonepl.razersdk.animation.Color;
 import com.bonepl.razersdk.animation.SimpleFrame;
+import com.bonepl.razersdk.color.StaticColor;
 import com.bonepl.razersdk.sdk.RzKey;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +19,7 @@ class StaticPartialEffectTest {
     @SuppressWarnings("JUnitTestMethodWithNoAssertions")
     void testPartialStaticEffect() throws InterruptedException {
         try (ChromaRestSDK razerSDKClient = new ChromaRestSDK()) {
-            razerSDKClient.createKeyboardEffect(new SimpleFrame(smiley, Color.YELLOW));
+            razerSDKClient.createKeyboardEffect(new SimpleFrame(smiley, StaticColor.YELLOW));
             Thread.sleep(100);
         }
     }

@@ -1,27 +1,35 @@
 package com.bonepl.chromaleague.rest.eventdata;
 
-import com.bonepl.chromaleague.hud.colors.CLColor;
-import com.bonepl.razersdk.animation.Color;
+import com.bonepl.chromaleague.hud.colors.*;
+import com.bonepl.razersdk.color.Color;
+import com.bonepl.razersdk.color.StaticColor;
 
 import java.util.Objects;
+import java.util.function.Supplier;
 
 public enum DragonType {
-    CLOUD("Air", CLColor.AIR),
-    ELDER("Elder", Color.WHITE),
-    INFERNAL("Fire", Color.RED),
-    MOUNTAIN("Earth", Color.BROWN),
-    OCEAN("Water", CLColor.OCEAN);
+    CLOUD("Air", CLColor.AIR, AirColor::new),
+    ELDER("Elder", StaticColor.WHITE, () -> StaticColor.WHITE),
+    INFERNAL("Fire", StaticColor.RED, FireColor::new),
+    MOUNTAIN("Earth", StaticColor.BROWN, MountainColor::new),
+    OCEAN("Water", CLColor.OCEAN, OceanColor::new);
 
     private final String apiType;
-    private final Color color;
+    private final StaticColor color;
+    private final Supplier<Color> soulColor;
 
-    DragonType(String apiType, Color color) {
+    DragonType(String apiType, StaticColor color, Supplier<Color> soulColor) {
         this.apiType = apiType;
         this.color = color;
+        this.soulColor = soulColor;
     }
 
-    public Color getColor() {
+    public StaticColor getColor() {
         return color;
+    }
+
+    public Color getSoulColor() {
+        return soulColor.get();
     }
 
     public static DragonType fromApiType(String apiType) {

@@ -25,7 +25,7 @@ class GoldBarTest {
         final GoldBar goldBar = new GoldBar(10, 150);
         new AnimationTester()
                 .withAfterIterationAction(i -> mockActivePlayerGold(GameStateHelper.getGold() + 30))
-                .testAnimation(goldBar, 100);
+                .testAnimation(goldBar, 500);
     }
 
     private void mockActivePlayerGold(double gold) {

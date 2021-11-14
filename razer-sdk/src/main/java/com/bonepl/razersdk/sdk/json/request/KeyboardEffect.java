@@ -1,6 +1,6 @@
 package com.bonepl.razersdk.sdk.json.request;
 
-import com.bonepl.razersdk.animation.Color;
+import com.bonepl.razersdk.color.Color;
 import com.bonepl.razersdk.sdk.RzKey;
 import com.jsoniter.annotation.JsonUnwrapper;
 import com.jsoniter.output.JsonStream;
@@ -16,7 +16,7 @@ public class KeyboardEffect {
     private final int[][] param = new int[KEYBOARD_ROWS][KEYBOARD_COLUMNS];
 
     public KeyboardEffect(Map<RzKey, Color> keysToColors) {
-        keysToColors.forEach((key, value) -> param[key.getRow()][key.getColumn()] = value.getSDKColorRef());
+        keysToColors.forEach((key, value) -> param[key.getRow()][key.getColumn()] = value.getColor().getSDKColorRef());
     }
 
     @JsonUnwrapper

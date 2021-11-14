@@ -1,24 +1,35 @@
 package com.bonepl.chromaleague.hud.parts;
 
+import com.bonepl.chromaleague.hud.colors.GoldColor;
 import com.bonepl.chromaleague.state.GameStateHelper;
-import com.bonepl.razersdk.animation.*;
+import com.bonepl.razersdk.animation.AnimatedFrame;
+import com.bonepl.razersdk.animation.Animation;
+import com.bonepl.razersdk.animation.Frame;
+import com.bonepl.razersdk.animation.SimpleFrame;
+import com.bonepl.razersdk.color.Color;
+import com.bonepl.razersdk.color.StaticColor;
 import com.bonepl.razersdk.sdk.RzKey;
 
 import java.security.SecureRandom;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Random;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.bonepl.chromaleague.hud.PredefinedKeySets.*;
 import static com.bonepl.razersdk.sdk.RzKey.*;
 
 public class GoldBar extends Animation {
     public static final int GOLD_FULL = 3000;
-    public static final List<RzKey> GOLD_BAR_KEYS = List.of(RZKEY_NUMPAD_DECIMAL, RZKEY_NUMPAD0,
-            RZKEY_NUMPAD2, RZKEY_NUMPAD_ENTER, RZKEY_NUMPAD3, RZKEY_NUMPAD5, RZKEY_NUMPAD1,
-            RZKEY_NUMPAD6, RZKEY_NUMPAD8, RZKEY_NUMPAD4, RZKEY_NUMPAD_ADD, RZKEY_NUMPAD9,
-            RZKEY_NUMPAD_DIVIDE, RZKEY_NUMPAD7, RZKEY_NUMPAD_MULTIPLY, RZKEY_NUMLOCK, RZKEY_NUMPAD_SUBTRACT);
+    public static final LinkedHashMap<RzKey, Color> GOLD_BAR_KEYS = Stream.of(RZKEY_NUMPAD_DECIMAL, RZKEY_NUMPAD0,
+                    RZKEY_NUMPAD2, RZKEY_NUMPAD_ENTER, RZKEY_NUMPAD3, RZKEY_NUMPAD5, RZKEY_NUMPAD1,
+                    RZKEY_NUMPAD6, RZKEY_NUMPAD8, RZKEY_NUMPAD4, RZKEY_NUMPAD_ADD, RZKEY_NUMPAD9,
+                    RZKEY_NUMPAD_DIVIDE, RZKEY_NUMPAD7, RZKEY_NUMPAD_MULTIPLY, RZKEY_NUMLOCK, RZKEY_NUMPAD_SUBTRACT)
+            .collect(Collectors.toMap(Function.identity(), r -> new GoldColor(), (a, b) -> a, LinkedHashMap::new));
     private static final Random RANDOM = new SecureRandom();
 
     private final double goldDiffToSpawnCoin;
@@ -45,7 +56,7 @@ public class GoldBar extends Animation {
     }
 
     private static ProgressBar createGoldBar() {
-        return new ProgressBar(GOLD_BAR_KEYS, GameStateHelper.getGoldPercentage(), Color.YELLOW);
+        return new ProgressBar(GOLD_BAR_KEYS, GameStateHelper.getGoldPercentage());
     }
 
     private void spawnCoinIfNeeded() {
@@ -71,7 +82,7 @@ public class GoldBar extends Animation {
 
     private static AnimatedFrame fallingCoin(List<RzKey> rzKeys) {
         final AnimatedFrame animatedFrames = new AnimatedFrame();
-        rzKeys.forEach(rzKey -> animatedFrames.addAnimationFrame(new SimpleFrame(rzKey, Color.YELLOW)));
+        rzKeys.forEach(rzKey -> animatedFrames.addAnimationFrame(new SimpleFrame(rzKey, StaticColor.YELLOW)));
         return animatedFrames;
     }
 

@@ -1,25 +1,24 @@
-package com.bonepl.razersdk.animation;
 
-import java.io.Serializable;
+package com.bonepl.razersdk.color;
 
 /**
  * Class describing color in RGB format.
  * Note that Razer Chroma SDK is using BGR format encoded with {@link #getSDKColorRef()}
  */
-public record Color(int red, int green, int blue) implements Serializable {
-    public static final Color NONE = new Color(0, 0, 0);
+public record StaticColor(int red, int green, int blue) implements Color {
+    public static final StaticColor NONE = new StaticColor(0, 0, 0);
 
-    public static final Color WHITE = new Color(255, 255, 255);
-    public static final Color RED = new Color(255, 0, 0);
-    public static final Color GREEN = new Color(0, 255, 0);
-    public static final Color BLUE = new Color(0, 0, 255);
-    public static final Color BLACK = new Color(0, 0, 0);
-    public static final Color YELLOW = new Color(255, 255, 0);
-    public static final Color CYAN = new Color(0, 255, 255);
-    public static final Color BROWN = new Color(130, 50, 0);
-    public static final Color PURPLE = new Color(200, 0, 200);
-    public static final Color ORANGE = new Color(255, 165, 0);
-    public static final Color GRAY = new Color(100, 100, 100);
+    public static final StaticColor WHITE = new StaticColor(255, 255, 255);
+    public static final StaticColor RED = new StaticColor(255, 0, 0);
+    public static final StaticColor GREEN = new StaticColor(0, 255, 0);
+    public static final StaticColor BLUE = new StaticColor(0, 0, 255);
+    public static final StaticColor BLACK = new StaticColor(0, 0, 0);
+    public static final StaticColor YELLOW = new StaticColor(255, 255, 0);
+    public static final StaticColor CYAN = new StaticColor(0, 255, 255);
+    public static final StaticColor BROWN = new StaticColor(130, 50, 0);
+    public static final StaticColor PURPLE = new StaticColor(200, 0, 200);
+    public static final StaticColor ORANGE = new StaticColor(255, 165, 0);
+    public static final StaticColor GRAY = new StaticColor(100, 100, 100);
 
     public static final int MIN_COLOR_VALUE = 0;
     public static final int MAX_COLOR_VALUE = 255;
@@ -35,7 +34,7 @@ public record Color(int red, int green, int blue) implements Serializable {
      * @param blue  blue color (0-255)
      * @throws IllegalArgumentException if color value is out of accepted range
      */
-    public Color(int red, int green, int blue) {
+    public StaticColor(int red, int green, int blue) {
         this.red = validatedColorRange("red", red);
         this.green = validatedColorRange("green", green);
         this.blue = validatedColorRange("blue", blue);
@@ -55,5 +54,10 @@ public record Color(int red, int green, int blue) implements Serializable {
      */
     public int getSDKColorRef() {
         return blue << BLUE_BIT_POS | green << GREEN_BIT_POS | red;
+    }
+
+    @Override
+    public StaticColor getColor() {
+        return this;
     }
 }

@@ -2,9 +2,10 @@ package com.bonepl.razersdk.effects;
 
 import com.bonepl.razersdk.ChromaRestSDK;
 import com.bonepl.razersdk.animation.AnimatedFrame;
-import com.bonepl.razersdk.animation.Color;
+import com.bonepl.razersdk.color.Color;
 import com.bonepl.razersdk.animation.LayeredFrame;
 import com.bonepl.razersdk.animation.SimpleFrame;
+import com.bonepl.razersdk.color.StaticColor;
 import com.bonepl.razersdk.sdk.RzKey;
 import org.junit.jupiter.api.Test;
 
@@ -18,15 +19,15 @@ class LayeredCustomKeyboardEffectTest {
     @SuppressWarnings("JUnitTestMethodWithNoAssertions")
     void testLayeredKeyboardEffect() throws InterruptedException {
         try (ChromaRestSDK razerSDKClient = new ChromaRestSDK()) {
-            final AnimatedFrame firstAnimatedFrame = createFramesFromEnum(7, 18, Color.GREEN);
-            final AnimatedFrame secondAnimatedFrame = createFramesFromEnum(0, 11, Color.BLUE);
+            final AnimatedFrame firstAnimatedFrame = createFramesFromEnum(7, 18, StaticColor.GREEN);
+            final AnimatedFrame secondAnimatedFrame = createFramesFromEnum(0, 11, StaticColor.BLUE);
             for (int i = 0; i <= 100; i += 5) {
                 LayeredFrame layeredFrame = new LayeredFrame();
-                layeredFrame.addFrame(new SimpleFrame(new Color(30, 30, 0)));
+                layeredFrame.addFrame(new SimpleFrame(new StaticColor(30, 30, 0)));
                 layeredFrame.addFrame(firstAnimatedFrame);
                 layeredFrame.addFrame(secondAnimatedFrame);
                 if (i % 10 == 0) {
-                    layeredFrame.addFrame(new SimpleFrame(RzKey.RZKEY_SPACE, Color.RED));
+                    layeredFrame.addFrame(new SimpleFrame(RzKey.RZKEY_SPACE, StaticColor.RED));
                 }
                 razerSDKClient.createKeyboardEffect(layeredFrame);
                 Thread.sleep(100);

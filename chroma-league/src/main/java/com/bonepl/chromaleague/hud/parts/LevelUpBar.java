@@ -2,6 +2,8 @@ package com.bonepl.chromaleague.hud.parts;
 
 import com.bonepl.chromaleague.state.GameStateHelper;
 import com.bonepl.razersdk.animation.*;
+import com.bonepl.razersdk.color.Color;
+import com.bonepl.razersdk.color.StaticColor;
 import com.bonepl.razersdk.sdk.RzKey;
 
 import java.util.List;
@@ -35,13 +37,13 @@ public class LevelUpBar extends Animation {
 
     void levelUp() {
         final AnimatedFrame frame = new AnimatedFrame();
-        frame.addAnimationFrame(2, new SimpleFrame(LEVEL_UP_KEYS.subList(0, 3), Color.YELLOW));
-        frame.addAnimationFrame(2, new SimpleFrame(LEVEL_UP_KEYS.subList(0, 5), Color.YELLOW));
-        frame.addAnimationFrame(2, new SimpleFrame(LEVEL_UP_KEYS.subList(0, 7), Color.YELLOW));
-        frame.addAnimationFrame(2, new SimpleFrame(LEVEL_UP_KEYS.subList(3, 9), Color.YELLOW));
-        frame.addAnimationFrame(2, new SimpleFrame(LEVEL_UP_KEYS.subList(5, 11), Color.YELLOW));
-        frame.addAnimationFrame(2, new SimpleFrame(LEVEL_UP_KEYS.subList(7, 11), Color.YELLOW));
-        frame.addAnimationFrame(2, new SimpleFrame(LEVEL_UP_KEYS.subList(9, 11), Color.YELLOW));
+        frame.addAnimationFrame(2, new SimpleFrame(LEVEL_UP_KEYS.subList(0, 3), StaticColor.YELLOW));
+        frame.addAnimationFrame(2, new SimpleFrame(LEVEL_UP_KEYS.subList(0, 5), StaticColor.YELLOW));
+        frame.addAnimationFrame(2, new SimpleFrame(LEVEL_UP_KEYS.subList(0, 7), StaticColor.YELLOW));
+        frame.addAnimationFrame(2, new SimpleFrame(LEVEL_UP_KEYS.subList(3, 9), StaticColor.YELLOW));
+        frame.addAnimationFrame(2, new SimpleFrame(LEVEL_UP_KEYS.subList(5, 11), StaticColor.YELLOW));
+        frame.addAnimationFrame(2, new SimpleFrame(LEVEL_UP_KEYS.subList(7, 11), StaticColor.YELLOW));
+        frame.addAnimationFrame(2, new SimpleFrame(LEVEL_UP_KEYS.subList(9, 11), StaticColor.YELLOW));
         addToFront(frame);
     }
 }

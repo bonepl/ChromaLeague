@@ -20,7 +20,7 @@ import java.util.NoSuchElementException;
  * <pre>
  * {@code @Override}
  *  public Frame getFrame() {
- *      addToBack(new SimpleFrame(Color.BLUE));
+ *      addToBack(new SimpleFrame(StaticColor.BLUE));
  *      return super.getFrame();
  *  }
  * </pre>

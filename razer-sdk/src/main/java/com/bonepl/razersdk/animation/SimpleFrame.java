@@ -1,5 +1,6 @@
 package com.bonepl.razersdk.animation;
 
+import com.bonepl.razersdk.color.Color;
 import com.bonepl.razersdk.sdk.RzKey;
 
 import java.util.*;
@@ -51,7 +52,7 @@ public class SimpleFrame implements IFrame {
      *
      * @param keysToColors {@link Map} of keys and corresponding fill color
      */
-    public SimpleFrame(Map<RzKey, Color> keysToColors) {
+    public SimpleFrame(Map<RzKey, ? extends Color> keysToColors) {
         this.keysToColors.putAll(keysToColors);
     }
 

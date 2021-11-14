@@ -8,7 +8,9 @@ import java.security.SecureRandom;
 
 public class MountainColor implements Color {
     MultiTransitionColor mountainColor = new MultiTransitionColor.Builder(new StaticColor(8,3,0))
-            .addTransition(new StaticColor(32,12,0),4)
+            .addTransition(StaticColor.BROWN, 10)
+            .addTransition(new StaticColor(8,3,0), 10)
+            .addTransition(new StaticColor(64,24,0),4)
             .looped(4)
             .build();
 

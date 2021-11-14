@@ -19,7 +19,7 @@ public abstract class DragonKillBlinkingAnimation extends AnimatedFrame {
     private static final int COLOR_LENGTH = 80;
 
     public DragonKillBlinkingAnimation(DragonType dragonType) {
-        this(new RzKeySelector().withAnyColumn().withAnyRow().asList(), dragonType);
+        this(new RzKeySelector().all().asList(), dragonType);
     }
 
     protected DragonKillBlinkingAnimation(List<RzKey> rzKeys, DragonType dragonType) {

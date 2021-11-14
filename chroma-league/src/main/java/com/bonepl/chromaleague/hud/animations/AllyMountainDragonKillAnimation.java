@@ -2,8 +2,8 @@ package com.bonepl.chromaleague.hud.animations;
 
 import com.bonepl.chromaleague.rest.eventdata.DragonType;
 
-public class AllyMountainDragonKillAnimation extends StaticBlinkingAnimation {
+public class AllyMountainDragonKillAnimation extends DragonKillBlinkingAnimation {
     public AllyMountainDragonKillAnimation() {
-        super(8, DragonType.MOUNTAIN.getColor());
+        super(DragonType.MOUNTAIN);
     }
 }

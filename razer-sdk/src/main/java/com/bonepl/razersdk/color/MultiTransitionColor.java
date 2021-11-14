@@ -28,6 +28,9 @@ public class MultiTransitionColor implements Color {
         }
 
         public Builder addTransition(StaticColor toColor, int steps) {
+            if (steps < 2) {
+                throw new IllegalArgumentException("Minimum amount of steps in transition color is 2, requested: " + steps);
+            }
             TransitionColor transitionColor = new TransitionColor(builderList.getLast(), toColor, steps);
             //skip first color as it is already on list
             transitionColor.getColor();

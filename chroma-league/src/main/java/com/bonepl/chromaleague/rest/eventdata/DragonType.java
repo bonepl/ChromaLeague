@@ -24,7 +24,7 @@ public enum DragonType {
         this.soulColor = soulColor;
     }
 
-    public Color getColor() {
+    public StaticColor getColor() {
         return color;
     }
 

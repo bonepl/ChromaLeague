@@ -8,15 +8,19 @@ public enum EventType {
     UNSUPPORTED,
     ALLY_BARON_KILL,
     ALLY_HERALD_KILL,
+    ALLY_CHEMTECH_DRAGON_KILL,
     ALLY_CLOUD_DRAGON_KILL,
     ALLY_ELDER_DRAGON_KILL,
+    ALLY_HEXTECH_DRAGON_KILL,
     ALLY_INFERNAL_DRAGON_KILL,
     ALLY_MOUNTAIN_DRAGON_KILL,
     ALLY_OCEAN_DRAGON_KILL,
     ENEMY_BARON_KILL,
     ENEMY_HERALD_KILL,
+    ENEMY_CHEMTECH_DRAGON_KILL,
     ENEMY_CLOUD_DRAGON_KILL,
     ENEMY_ELDER_DRAGON_KILL,
+    ENEMY_HEXTECH_DRAGON_KILL,
     ENEMY_INFERNAL_DRAGON_KILL,
     ENEMY_MOUNTAIN_DRAGON_KILL,
     ENEMY_OCEAN_DRAGON_KILL,
@@ -45,11 +49,29 @@ public enum EventType {
 
             if ("DragonKill".equals(event.EventName())) {
                 return switch (Objects.requireNonNull(DragonType.fromApiType(event.DragonType()))) {
+                    case CHEMTECH -> {
+                        if (RunningState.getGameState().getPlayerList().isAlly(event.KillerName())) {
+                            yield ALLY_CHEMTECH_DRAGON_KILL;
+                        }
+                        yield ENEMY_CHEMTECH_DRAGON_KILL;
+                    }
                     case CLOUD -> {
                         if (RunningState.getGameState().getPlayerList().isAlly(event.KillerName())) {
                             yield ALLY_CLOUD_DRAGON_KILL;
                         }
                         yield ENEMY_CLOUD_DRAGON_KILL;
+                    }
+                    case ELDER -> {
+                        if (RunningState.getGameState().getPlayerList().isAlly(event.KillerName())) {
+                            yield ALLY_ELDER_DRAGON_KILL;
+                        }
+                        yield ENEMY_ELDER_DRAGON_KILL;
+                    }
+                    case HEXTECH -> {
+                        if (RunningState.getGameState().getPlayerList().isAlly(event.KillerName())) {
+                            yield ALLY_HEXTECH_DRAGON_KILL;
+                        }
+                        yield ENEMY_HEXTECH_DRAGON_KILL;
                     }
                     case INFERNAL -> {
                         if (RunningState.getGameState().getPlayerList().isAlly(event.KillerName())) {
@@ -68,12 +90,6 @@ public enum EventType {
                             yield ALLY_MOUNTAIN_DRAGON_KILL;
                         }
                         yield ENEMY_MOUNTAIN_DRAGON_KILL;
-                    }
-                    case ELDER -> {
-                        if (RunningState.getGameState().getPlayerList().isAlly(event.KillerName())) {
-                            yield ALLY_ELDER_DRAGON_KILL;
-                        }
-                        yield ENEMY_ELDER_DRAGON_KILL;
                     }
                 };
             }

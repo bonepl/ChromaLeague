@@ -15,7 +15,7 @@ public class AirColor implements Color {
             .build();
 
     public AirColor() {
-        int random = new SecureRandom().nextInt(20);
+        int random = new SecureRandom().nextInt(windColor.getTotalTransitions());
         for (int i = 0; i < random; i++) {
             windColor.getColor();
         }

@@ -19,6 +19,10 @@ public class MultiTransitionColor implements Color {
         return colorsList.get(i++);
     }
 
+    public int getTotalTransitions() {
+        return colorsList.size();
+    }
+
     public static class Builder {
         private final LinkedList<StaticColor> builderList = new LinkedList<>();
         private int loopedSteps;

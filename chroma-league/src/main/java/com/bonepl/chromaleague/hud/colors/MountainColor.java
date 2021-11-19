@@ -15,7 +15,7 @@ public class MountainColor implements Color {
             .build();
 
     public MountainColor() {
-        int random = new SecureRandom().nextInt(20);
+        int random = new SecureRandom().nextInt(mountainColor.getTotalTransitions());
         for (int i = 0; i < random; i++) {
             mountainColor.getColor();
         }

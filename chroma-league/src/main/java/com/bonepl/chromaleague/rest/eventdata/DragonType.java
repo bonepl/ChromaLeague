@@ -8,8 +8,10 @@ import java.util.Objects;
 import java.util.function.Supplier;
 
 public enum DragonType {
+    CHEMTECH("Chemtech", CLColor.CHEMTECH, ChemtechColor::new),
     CLOUD("Air", CLColor.AIR, AirColor::new),
     ELDER("Elder", StaticColor.WHITE, () -> StaticColor.WHITE),
+    HEXTECH("Hextech", StaticColor.BLUE, HextechColor::new),
     INFERNAL("Fire", StaticColor.RED, FireColor::new),
     MOUNTAIN("Earth", StaticColor.BROWN, MountainColor::new),
     OCEAN("Water", CLColor.OCEAN, OceanColor::new);

@@ -36,6 +36,8 @@ public class EventDataProcessor {
             case GAME_START -> RunningState.setRunningGame(true);
             case ALLY_BARON_KILL -> GameStateHelper.startBaronBuff(event.EventTime(), currentTimeForReconnection);
             case ALLY_CLOUD_DRAGON_KILL -> addKilledDragon(DragonType.CLOUD);
+            case ALLY_CHEMTECH_DRAGON_KILL -> addKilledDragon(DragonType.CHEMTECH);
+            case ALLY_HEXTECH_DRAGON_KILL -> addKilledDragon(DragonType.HEXTECH);
             case ALLY_INFERNAL_DRAGON_KILL -> addKilledDragon(DragonType.INFERNAL);
             case ALLY_MOUNTAIN_DRAGON_KILL -> addKilledDragon(DragonType.MOUNTAIN);
             case ALLY_OCEAN_DRAGON_KILL -> addKilledDragon(DragonType.OCEAN);
@@ -45,7 +47,7 @@ public class EventDataProcessor {
             case ACTIVE_PLAYER_KILL -> GameStateHelper.addPlayerKill();
             case ACTIVE_PLAYER_ASSIST -> GameStateHelper.addPlayerAssist();
             case GAME_END_DEFEAT, GAME_END_VICTORY -> finishGameInSeconds(8L);
-            case ENEMY_OCEAN_DRAGON_KILL, ENEMY_MOUNTAIN_DRAGON_KILL,
+            case ENEMY_OCEAN_DRAGON_KILL, ENEMY_CHEMTECH_DRAGON_KILL, ENEMY_HEXTECH_DRAGON_KILL, ENEMY_MOUNTAIN_DRAGON_KILL,
                     ENEMY_INFERNAL_DRAGON_KILL, ENEMY_CLOUD_DRAGON_KILL, ENEMY_HERALD_KILL,
                     ENEMY_BARON_KILL, ALLY_HERALD_KILL, UNSUPPORTED -> {
             }

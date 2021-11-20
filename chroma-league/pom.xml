@@ -7,12 +7,12 @@
     <parent>
         <groupId>com.bonepl</groupId>
         <artifactId>chroma-league-parent</artifactId>
-        <version>1.1.5-SNAPSHOT</version>
+        <version>1.2.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>chroma-league</artifactId>
-    <version>1.1.5-SNAPSHOT</version>
+    <version>1.2.0</version>
     <name>Chroma League</name>
 
     <dependencies>
@@ -20,7 +20,7 @@
         <dependency>
             <groupId>com.bonepl</groupId>
             <artifactId>razer-sdk</artifactId>
-            <version>1.1.5-SNAPSHOT</version>
+            <version>1.2.0</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>

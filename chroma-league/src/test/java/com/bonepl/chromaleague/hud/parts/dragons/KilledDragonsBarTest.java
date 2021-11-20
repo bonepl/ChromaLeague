@@ -69,11 +69,13 @@ public class KilledDragonsBarTest {
 
     public static Event getEventForDragonKill(DragonType dragonType) {
         return ResourceLoader.eventFromJson(switch (dragonType) {
+            case CHEMTECH -> "allyChemtechDragonKill.json";
             case CLOUD -> "allyCloudDragonKill.json";
-            case OCEAN -> "allyOceanDragonKill.json";
-            case INFERNAL -> "allyInfernalDragonKill.json";
-            case MOUNTAIN -> "allyMountainDragonKill.json";
             case ELDER -> "allyElderDragonKill.json";
+            case HEXTECH -> "allyHextechDragonKill.json";
+            case INFERNAL -> "allyInfernalDragonKill.json";
+            case OCEAN -> "allyOceanDragonKill.json";
+            case MOUNTAIN -> "allyMountainDragonKill.json";
         });
     }
 }

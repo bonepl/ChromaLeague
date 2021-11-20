@@ -17,7 +17,7 @@ public class OceanColor implements Color {
             .build();
 
     public OceanColor() {
-        int random = new SecureRandom().nextInt(40);
+        int random = new SecureRandom().nextInt(oceanColor.getTotalTransitions());
         for (int i = 0; i < random; i++) {
             oceanColor.getColor();
         }

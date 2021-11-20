@@ -15,7 +15,7 @@ public class FireColor implements Color {
             .build();
 
     public FireColor() {
-        int random = new SecureRandom().nextInt(30);
+        int random = new SecureRandom().nextInt(fireColor.getTotalTransitions());
         for (int i = 0; i < random; i++) {
             fireColor.getColor();
         }

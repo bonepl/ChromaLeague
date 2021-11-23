@@ -10,7 +10,7 @@ public class ChemtechColor implements Color {
     MultiTransitionColor chemtechColor = new MultiTransitionColor.Builder(CLColor.CHEMTECH)
             .addTransition(StaticColor.YELLOW, 10)
             .addTransition(CLColor.CHEMTECH, 10)
-            .addTransition(new StaticColor(0, 60, 0), 5)
+            .addTransition(new StaticColor(25, 60, 0), 5)
             .looped(5)
             .build();
 

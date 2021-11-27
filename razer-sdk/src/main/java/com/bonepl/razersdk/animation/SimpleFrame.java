@@ -1,6 +1,7 @@
 package com.bonepl.razersdk.animation;
 
 import com.bonepl.razersdk.color.Color;
+import com.bonepl.razersdk.color.StaticColor;
 import com.bonepl.razersdk.sdk.RzKey;
 
 import java.util.*;
@@ -44,7 +45,8 @@ public class SimpleFrame implements IFrame {
      * @param color  {@link Color} of the fill
      */
     public SimpleFrame(Collection<RzKey> rzKeys, Color color) {
-        rzKeys.forEach(rzKey -> keysToColors.put(rzKey, color));
+        StaticColor nextColor = color.getColor();
+        rzKeys.forEach(rzKey -> keysToColors.put(rzKey, nextColor));
     }
 
     /**

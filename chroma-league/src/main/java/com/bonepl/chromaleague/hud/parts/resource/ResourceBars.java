@@ -20,7 +20,7 @@ public final class ResourceBars {
             .asList();
 
     private static final Set<String> NO_MANA_BAR_CHAMPIONS
-            = Set.of("Aatrox", "Dr. Mundo", "Garen", "Katarina", "Riven", "Yone", "Zac");
+            = Set.of("Aatrox", "Dr. Mundo", "Garen", "Katarina", "Riven", "Viego", "Yone", "Zac");
     private static final Set<String> ENERGY_BAR_CHAMPIONS
             = Set.of("Akali", "Kennen", "Lee Sin", "Shen", "Zed");
 

@@ -1,6 +1,7 @@
 package com.bonepl.chromaleague.hud;
 
 import com.bonepl.chromaleague.hud.animations.RespawnAnimation;
+import com.bonepl.chromaleague.hud.animations.RiftAnimation;
 import com.bonepl.chromaleague.hud.parts.*;
 import com.bonepl.chromaleague.hud.parts.dragons.DragonBar;
 import com.bonepl.chromaleague.hud.parts.health.HealthBar;
@@ -29,6 +30,10 @@ public class MainHud extends AnimatedFrame {
         final LayeredFrame mainHudFrame = new LayeredFrame();
         try {
             mainHudFrame.addFrame(new Background());
+            if (GameStateHelper.shouldPlayRiftAnimation()) {
+                LOGGER.info("Playing rift animation");
+                eventAnimation.addAnimation(new RiftAnimation());
+            }
             if (GameStateHelper.isActivePlayerAlive()) {
                 mainHudFrame.addFrame(healthBar);
                 mainHudFrame.addFrame(getResourceBar());
@@ -37,7 +42,7 @@ public class MainHud extends AnimatedFrame {
             mainHudFrame.addFrame(dragonBar);
             mainHudFrame.addFrame(goldBar);
             mainHudFrame.addFrame(levelUpBar);
-            if(GameStateHelper.shouldPlayRespawnAnimation()){
+            if (GameStateHelper.shouldPlayRespawnAnimation()) {
                 eventAnimation.addAnimation(new RespawnAnimation());
             }
             if (eventAnimation.hasFrame()) {

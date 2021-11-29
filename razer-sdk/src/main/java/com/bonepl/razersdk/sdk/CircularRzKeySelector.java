@@ -27,7 +27,9 @@ public final class CircularRzKeySelector {
             Set<RzKey> previousLayer = list.get(i);
             Set<RzKey> newLayer = previousLayer.stream().flatMap(rzKey -> Stream.of(
                     keyAt(rzKey.getRow() - 1, rzKey.getColumn()),
+                    keyAt(rzKey.getRow() - 1, rzKey.getColumn() + 1),
                     keyAt(rzKey.getRow() + 1, rzKey.getColumn()),
+                    keyAt(rzKey.getRow() + 1, rzKey.getColumn() + 1),
                     keyAt(rzKey.getRow(), rzKey.getColumn() - 1),
                     keyAt(rzKey.getRow(), rzKey.getColumn() + 1)
             ).filter(Optional::isPresent).map(Optional::get)).collect(Collectors.toSet());
@@ -49,7 +51,7 @@ public final class CircularRzKeySelector {
     }
 
     private int countSkippedLayers(int currentStep, int thickness) {
-        if (currentStep >= thickness) {
+        if (currentStep > thickness) {
             return currentStep - thickness;
         }
         return 0;

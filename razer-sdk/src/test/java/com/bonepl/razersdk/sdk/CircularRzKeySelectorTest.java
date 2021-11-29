@@ -12,7 +12,7 @@ class CircularRzKeySelectorTest {
     @Disabled
     void name() throws InterruptedException {
         try (ChromaRestSDK chromaRestSDK = new ChromaRestSDK()) {
-            CircularRzKeySelector circularRzKeySelector = new CircularRzKeySelector(RzKey.RZKEY_H, 3);
+            CircularRzKeySelector circularRzKeySelector = new CircularRzKeySelector(RzKey.RZKEY_H, 1);
             TransitionColor transitionColor = new TransitionColor(StaticColor.RED, StaticColor.BLACK, 20);
             for (int i = 0; i < 30; i++) {
                 chromaRestSDK.createKeyboardEffect(new SimpleFrame(circularRzKeySelector.getNextLayer(), transitionColor));

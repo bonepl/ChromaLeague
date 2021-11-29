@@ -44,7 +44,7 @@ public class MainThreads implements Closeable {
     @Override
     public void close() {
         alive = false;
-        RunningState.setRunningGame(false);
+        RunningState.setRunningGame(Boolean.TRUE);
         shutdownMainExecutor();
         shutdownChromaSDK();
         LOGGER.info("Player left the game, waiting for another...");

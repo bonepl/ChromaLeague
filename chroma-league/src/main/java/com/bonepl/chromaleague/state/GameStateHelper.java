@@ -4,11 +4,13 @@ import com.bonepl.chromaleague.hud.parts.GoldBar;
 import com.bonepl.chromaleague.rest.activeplayer.ChampionStats;
 import com.bonepl.chromaleague.rest.eventdata.DragonType;
 import com.bonepl.chromaleague.tasks.FetchGameStats;
+import com.bonepl.chromaleague.tasks.FetchMapTerrain;
 
 import java.time.Duration;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Objects;
 
 public final class GameStateHelper {
 
@@ -169,5 +171,14 @@ public final class GameStateHelper {
             }
         }
         return false;
+    }
+
+    public static boolean shouldPlayRiftAnimation() {
+        EventData eventData = RunningState.getGameState().getEventData();
+        if (Objects.equals(FetchMapTerrain.DEFAULT_MAP_TERRAIN, eventData.getMapTerrain()) || eventData.didRiftAnimationPlay()) {
+            return false;
+        }
+        eventData.setRiftAnimationPlayed(true);
+        return true;
     }
 }

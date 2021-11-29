@@ -13,12 +13,12 @@ public class CheckRiotApiTask implements Runnable {
         RunningState.setRiotApi(checkRiotApiUp());
     }
 
-    public static boolean checkRiotApiUp() {
+    public static Boolean checkRiotApiUp() {
         try (Socket socket = new Socket()) {
             socket.connect(new InetSocketAddress("localhost", RIOT_API_PORT), 100);
-            return true;
+            return Boolean.TRUE;
         } catch (Exception e) {
-            return false;
+            return Boolean.FALSE;
         }
     }
 }

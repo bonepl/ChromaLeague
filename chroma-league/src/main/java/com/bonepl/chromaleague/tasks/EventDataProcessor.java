@@ -11,10 +11,12 @@ import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 import static com.bonepl.chromaleague.state.GameStateHelper.millisDuration;
 
 public class EventDataProcessor {
+    private static final Logger LOGGER = Logger.getLogger(EventDataProcessor.class.getName());
     private static final ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
     private final double currentTimeForReconnection;
 
@@ -33,7 +35,7 @@ public class EventDataProcessor {
     public void processEventForEventData(Event event) {
         final EventType eventType = EventType.fromEvent(event);
         switch (eventType) {
-            case GAME_START -> RunningState.setRunningGame(true);
+            case GAME_START -> RunningState.setRunningGame(Boolean.TRUE);
             case ALLY_BARON_KILL -> GameStateHelper.startBaronBuff(event.EventTime(), currentTimeForReconnection);
             case ALLY_CLOUD_DRAGON_KILL -> addKilledDragon(DragonType.CLOUD);
             case ALLY_CHEMTECH_DRAGON_KILL -> addKilledDragon(DragonType.CHEMTECH);
@@ -55,11 +57,19 @@ public class EventDataProcessor {
     }
 
     private static void finishGameInSeconds(long seconds) {
-        scheduledExecutorService.schedule(() -> RunningState.setRunningGame(false), seconds, TimeUnit.SECONDS);
+        scheduledExecutorService.schedule(() -> RunningState.setRunningGame(Boolean.TRUE), seconds, TimeUnit.SECONDS);
     }
 
     private static void addKilledDragon(DragonType dragonType) {
+        //reconnection prevention?
         RunningState.getGameState().getEventData().addKilledDragon(dragonType);
+        LOGGER.info("Killed dragon: " + dragonType.name());
+        int dragonCount = RunningState.getGameState().getEventData().getKilledDragons().size();
+        LOGGER.info("Dragon count: " + dragonCount);
+
+        if (dragonCount == 2) {
+            new FetchMapTerrain().start();
+        }
     }
 
     private void processAllyElderKill(double eventTime) {

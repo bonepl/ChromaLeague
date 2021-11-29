@@ -9,6 +9,8 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import static com.bonepl.chromaleague.tasks.FetchMapTerrain.DEFAULT_MAP_TERRAIN;
+
 public class EventData {
     private final List<DragonType> killedDragons = new ArrayList<>();
     private final List<Event> processedEvents = new LinkedList<>();
@@ -17,6 +19,8 @@ public class EventData {
     private int totalEldersKilled;
     private int activePlayerKillingSpree;
     private int activePlayerAssistSpree;
+    private String mapTerrain = DEFAULT_MAP_TERRAIN;
+    private boolean riftAnimationPlayed = false;
     private RespawnIndicator respawnIndicator = RespawnIndicator.IDLE;
     private LocalTime deathTime;
     private LocalTime respawnTime;
@@ -67,6 +71,22 @@ public class EventData {
 
     public void setActivePlayerAssistSpree(int activePlayerAssistSpree) {
         this.activePlayerAssistSpree = activePlayerAssistSpree;
+    }
+
+    public String getMapTerrain() {
+        return mapTerrain;
+    }
+
+    public void setMapTerrain(String mapTerrain) {
+        this.mapTerrain = mapTerrain;
+    }
+
+    public boolean didRiftAnimationPlay() {
+        return riftAnimationPlayed;
+    }
+
+    public void setRiftAnimationPlayed(boolean riftAnimationPlayed) {
+        this.riftAnimationPlayed = riftAnimationPlayed;
     }
 
     public void addProcessedEvents(List<Event> events) {

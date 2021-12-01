@@ -11,7 +11,7 @@ public enum MapTerrain {
     CHEMTECH("Chemtech", DragonType.CHEMTECH),
     CLOUD("Air", DragonType.CLOUD),
     HEXTECH("Hextech", DragonType.HEXTECH),
-    INFERNAL("Fire", DragonType.INFERNAL),
+    INFERNAL("Infernal", DragonType.INFERNAL),
     MOUNTAIN("Earth", DragonType.MOUNTAIN),
     OCEAN("Water", DragonType.OCEAN);
 

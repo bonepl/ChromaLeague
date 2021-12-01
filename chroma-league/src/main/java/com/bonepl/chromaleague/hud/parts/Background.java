@@ -2,12 +2,14 @@ package com.bonepl.chromaleague.hud.parts;
 
 import com.bonepl.chromaleague.hud.animations.BaronBuffBackgroundAnimation;
 import com.bonepl.chromaleague.hud.colors.BackgroundBreathingColor;
-import com.bonepl.razersdk.color.BreathingColor;
+import com.bonepl.chromaleague.rest.gamestats.MapTerrain;
+import com.bonepl.chromaleague.state.EventData;
 import com.bonepl.chromaleague.state.GameStateHelper;
+import com.bonepl.chromaleague.state.RunningState;
 import com.bonepl.razersdk.animation.AnimatedFrame;
-import com.bonepl.razersdk.color.Color;
 import com.bonepl.razersdk.animation.LayeredFrame;
 import com.bonepl.razersdk.animation.SimpleFrame;
+import com.bonepl.razersdk.color.BreathingColor;
 import com.bonepl.razersdk.color.StaticColor;
 
 public class Background extends LayeredFrame {
@@ -17,7 +19,12 @@ public class Background extends LayeredFrame {
 
     public Background() {
         if (GameStateHelper.isActivePlayerAlive()) {
-            addFrame(new SimpleFrame(BACKGROUND_COLOR));
+            EventData eventData = RunningState.getGameState().getEventData();
+            if (eventData.didRiftAnimationPlay()) {
+                addFrame(new SimpleFrame(MapTerrain.fromApiType(eventData.getMapTerrain()).getBackgroundColor()));
+            } else {
+                addFrame(new SimpleFrame(BACKGROUND_COLOR));
+            }
         } else {
             addFrame(new SimpleFrame(DEAD_BACKGROUND.getColor()));
         }

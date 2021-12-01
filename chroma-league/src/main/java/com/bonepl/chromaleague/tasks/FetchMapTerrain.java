@@ -15,8 +15,8 @@ public class FetchMapTerrain extends Thread {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        String mapTerrain = "Default";
-        while ("Default".equals(mapTerrain)) {
+        String mapTerrain = FetchGameStats.fetchGameStats().mapTerrain();
+        while (DEFAULT_MAP_TERRAIN.equals(mapTerrain)) {
             mapTerrain = FetchGameStats.fetchGameStats().mapTerrain();
             LOGGER.info("Fetched mapTerrain " + mapTerrain);
             try {

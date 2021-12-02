@@ -2,6 +2,7 @@ package com.bonepl.chromaleague;
 
 import com.bonepl.chromaleague.rest.activeplayer.ActivePlayer;
 import com.bonepl.chromaleague.rest.activeplayer.ChampionStats;
+import com.bonepl.chromaleague.rest.gamestats.GameStats;
 import com.bonepl.chromaleague.rest.playerlist.Player;
 import com.bonepl.chromaleague.rest.playerlist.PlayerList;
 import com.bonepl.chromaleague.state.RunningState;
@@ -15,12 +16,14 @@ public final class GameStateMocks {
 
     private final ActivePlayer mockActivePlayer;
     private final PlayerList mockPlayerList;
+    private final GameStats mockGameStats;
 
     public GameStateMocks() {
         RunningState.setRunningGame(false);
         RunningState.setRunningGame(true);
         mockActivePlayer = prepareActivePlayerMock();
         mockPlayerList = preparePlayerListMock();
+        mockGameStats = mock(GameStats.class);
         RunningState.getGameState().setPlayerName(PLAYER_NAME);
     }
 
@@ -51,6 +54,11 @@ public final class GameStateMocks {
     public PlayerList playerList() {
         RunningState.getGameState().setPlayerList(mockPlayerList);
         return mockPlayerList;
+    }
+
+    public GameStats gameStats() {
+        RunningState.getGameState().setGameStats(mockGameStats);
+        return mockGameStats;
     }
 
     public Player player() {

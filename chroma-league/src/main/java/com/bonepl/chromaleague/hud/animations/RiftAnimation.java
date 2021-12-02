@@ -24,7 +24,7 @@ public class RiftAnimation extends AnimatedFrame {
     }
 
     private static Color getColorForMapTerrain() {
-        String mapTerrain = RunningState.getGameState().getEventData().getMapTerrain();
+        String mapTerrain = RunningState.getGameState().getGameStats().mapTerrain();
         return switch (mapTerrain) {
             case "Mountain" -> DragonType.MOUNTAIN.getColor();
             case "Ocean" -> DragonType.OCEAN.getColor();

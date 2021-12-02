@@ -1,7 +1,7 @@
 package com.bonepl.chromaleague.rest;
 
 import com.bonepl.chromaleague.tasks.FetchActivePlayerTask;
-import com.bonepl.chromaleague.tasks.FetchGameStats;
+import com.bonepl.chromaleague.tasks.FetchGameStatsTask;
 import com.bonepl.chromaleague.tasks.FetchNewEventsTask;
 import com.bonepl.chromaleague.tasks.FetchPlayerListTask;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -37,14 +37,14 @@ public final class LeagueHttpClientMock {
     }
 
     public void mockGameStatsResponse(String jsonResourcePath) {
-        mockReturnedResponseWithResource(FetchGameStats.URL, jsonResourcePath);
+        mockReturnedResponseWithResource(FetchGameStatsTask.URL, jsonResourcePath);
     }
 
     private final DecimalFormat gameTimeFormat =
             new DecimalFormat("0.0###############", DecimalFormatSymbols.getInstance(Locale.US));
 
     public void mockGameStatsGameTime(double gameTime) {
-        mockReturnedResponse(FetchGameStats.URL, String.format("{\"gameMode\": \"CLASSIC\", \"gameTime\": %s}", gameTimeFormat.format(gameTime))
+        mockReturnedResponse(FetchGameStatsTask.URL, String.format("{\"gameMode\": \"CLASSIC\", \"gameTime\": %s}", gameTimeFormat.format(gameTime))
                 .getBytes(StandardCharsets.UTF_8));
     }
 

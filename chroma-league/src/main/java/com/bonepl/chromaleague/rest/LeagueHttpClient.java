@@ -29,7 +29,6 @@ import java.util.logging.Logger;
 public final class LeagueHttpClient {
     private static final Logger LOGGER = Logger.getLogger(LeagueHttpClient.class.getName());
 
-    private static final int RETRIES = 5;
     public static final int DEFAULT_TIMEOUT = 150;
     private static CloseableHttpClient singleFetchLeagueHttpClient = createSingleFetchLeagueHttpClient();
     private static CloseableHttpClient retriableLeagueHttpClient = createRetriableHttpClient();
@@ -48,18 +47,14 @@ public final class LeagueHttpClient {
     private static Optional<byte[]> getResponse(final CloseableHttpClient httpClient, final String url) {
         final HttpGet request = new HttpGet(url);
         request.addHeader("Content-type", "application/json; charset=UTF-8");
-        for (int i = 0; i < RETRIES; i++) {
-            try (CloseableHttpResponse response = httpClient.execute(request)) {
-                byte[] responseBytes = EntityUtils.toByteArray(response.getEntity());
-                if (isResponseValid(responseBytes)) {
-                    return Optional.of(responseBytes);
-                }
-                Thread.sleep(100);
-            } catch (Exception ex) {
-                // it is possible to fail on HTTP connection during API shutdown
-                int finalI = i;
-                LOGGER.log(Level.FINER, ex, () -> "Error while fetching HTTP response, Retrying " + finalI + "/" + RETRIES);
+        try (CloseableHttpResponse response = httpClient.execute(request)) {
+            byte[] responseBytes = EntityUtils.toByteArray(response.getEntity());
+            if (isResponseValid(responseBytes)) {
+                return Optional.of(responseBytes);
             }
+        } catch (Exception ex) {
+            // it is possible to fail on HTTP connection during API shutdown
+            LOGGER.log(Level.FINER, ex, () -> "Error while fetching HTTP response");
         }
         return Optional.empty();
     }

@@ -12,11 +12,11 @@ public enum MapTerrain {
     CLOUD("Air", DragonType.CLOUD),
     HEXTECH("Hextech", DragonType.HEXTECH),
     INFERNAL("Infernal", DragonType.INFERNAL),
-    MOUNTAIN("Earth", DragonType.MOUNTAIN),
+    MOUNTAIN("Mountain", DragonType.MOUNTAIN),
     OCEAN("Water", DragonType.OCEAN);
 
-    private String apiType;
-    private DragonType dragonType;
+    private final String apiType;
+    private final DragonType dragonType;
 
     MapTerrain(String apiType, DragonType dragonType) {
         this.apiType = apiType;

@@ -63,13 +63,6 @@ public class EventDataProcessor {
     private static void addKilledDragon(DragonType dragonType) {
         //reconnection prevention?
         RunningState.getGameState().getEventData().addKilledDragon(dragonType);
-        LOGGER.info("Killed dragon: " + dragonType.name());
-        int dragonCount = RunningState.getGameState().getEventData().getKilledDragons().size();
-        LOGGER.info("Dragon count: " + dragonCount);
-
-        if (dragonCount == 2) {
-            new FetchMapTerrain().start();
-        }
     }
 
     private void processAllyElderKill(double eventTime) {

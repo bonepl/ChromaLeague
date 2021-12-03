@@ -31,7 +31,6 @@ public final class LeagueHttpClient {
 
     public static final int DEFAULT_TIMEOUT = 150;
     private static CloseableHttpClient singleFetchLeagueHttpClient = createSingleFetchLeagueHttpClient();
-    private static CloseableHttpClient retriableLeagueHttpClient = createRetriableHttpClient();
 
     private LeagueHttpClient() {
     }
@@ -40,8 +39,16 @@ public final class LeagueHttpClient {
         return getResponse(singleFetchLeagueHttpClient, url);
     }
 
-    public static Optional<byte[]> getRetriableResponse(String url) {
-        return getResponse(retriableLeagueHttpClient, url);
+    public static String getBlockingResponse(String url) {
+        String response;
+        do {
+            response = getResponse(singleFetchLeagueHttpClient, url)
+                    .map(r -> new String(r, StandardCharsets.UTF_8))
+                    .map(r -> r.replaceAll("\"", "").trim())
+                    .filter(r -> !r.isEmpty())
+                    .orElse(null);
+        } while (response == null);
+        return response;
     }
 
     private static Optional<byte[]> getResponse(final CloseableHttpClient httpClient, final String url) {
@@ -121,7 +128,6 @@ public final class LeagueHttpClient {
 
     public static void shutdown() {
         shutdownHttpClient(singleFetchLeagueHttpClient);
-        shutdownHttpClient(retriableLeagueHttpClient);
     }
 
     private static void shutdownHttpClient(CloseableHttpClient httpClient) {
@@ -137,6 +143,5 @@ public final class LeagueHttpClient {
     //TEST ONLY
     static void setLeagueHttpClient(CloseableHttpClient leagueHttpClient) {
         singleFetchLeagueHttpClient = leagueHttpClient;
-        retriableLeagueHttpClient = leagueHttpClient;
     }
 }

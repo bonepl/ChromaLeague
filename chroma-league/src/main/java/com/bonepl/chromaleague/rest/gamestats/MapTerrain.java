@@ -9,11 +9,11 @@ import java.util.NoSuchElementException;
 
 public enum MapTerrain {
     CHEMTECH("Chemtech", DragonType.CHEMTECH),
-    CLOUD("Air", DragonType.CLOUD),
+    CLOUD("Cloud", DragonType.CLOUD),
     HEXTECH("Hextech", DragonType.HEXTECH),
     INFERNAL("Infernal", DragonType.INFERNAL),
     MOUNTAIN("Mountain", DragonType.MOUNTAIN),
-    OCEAN("Water", DragonType.OCEAN);
+    OCEAN("Ocean", DragonType.OCEAN);
 
     private final String apiType;
     private final DragonType dragonType;

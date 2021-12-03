@@ -31,7 +31,6 @@ public class MainHud extends AnimatedFrame {
         try {
             mainHudFrame.addFrame(new Background());
             if (GameStateHelper.shouldPlayRiftAnimation()) {
-                LOGGER.info("Playing rift animation");
                 eventAnimation.addAnimation(new RiftAnimation());
             }
             if (GameStateHelper.isActivePlayerAlive()) {

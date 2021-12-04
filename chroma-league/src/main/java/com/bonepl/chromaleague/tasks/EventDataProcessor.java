@@ -61,7 +61,6 @@ public class EventDataProcessor {
     }
 
     private static void addKilledDragon(DragonType dragonType) {
-        //reconnection prevention?
         RunningState.getGameState().getEventData().addKilledDragon(dragonType);
     }
 

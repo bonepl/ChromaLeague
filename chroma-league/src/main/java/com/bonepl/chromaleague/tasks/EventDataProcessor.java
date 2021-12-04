@@ -57,7 +57,7 @@ public class EventDataProcessor {
     }
 
     private static void finishGameInSeconds(long seconds) {
-        scheduledExecutorService.schedule(() -> RunningState.setRunningGame(Boolean.TRUE), seconds, TimeUnit.SECONDS);
+        scheduledExecutorService.schedule(() -> RunningState.setRunningGame(false), seconds, TimeUnit.SECONDS);
     }
 
     private static void addKilledDragon(DragonType dragonType) {

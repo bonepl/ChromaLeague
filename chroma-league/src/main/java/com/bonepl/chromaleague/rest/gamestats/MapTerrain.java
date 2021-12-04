@@ -36,6 +36,6 @@ public enum MapTerrain {
     }
 
     public int reduceColor(int color) {
-        return (int) (0.07 * color);
+        return (int) (0.08 * color);
     }
 }

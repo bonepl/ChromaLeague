@@ -39,13 +39,16 @@ public final class ResourceBars {
 
         return switch (activePlayerChampionName) {
             case "Gnar" -> new GnarFuryBar();
+            case "Kled" -> new KledCourageBar();
             case "Mordekaiser" -> new MordekaiserShieldBar();
             case "Renekton" -> new RenektonFuryBar();
             case "Rengar" -> new RengarFerocityBar();
             case "Rek'Sai", "Tryndamere" -> new RedFuryBar();
             case "Rumble" -> new RumbleHeatBar();
+            case "Sett" -> new SettGritBar();
             case "Shyvana" -> new ShyvanaDragonFuryBar();
             case "Vladimir" -> new VladimirBloodPoolBar();
+            case "Yasuo" -> new YasuoWindBar();
             case "Yone" -> new YoneCloneBar();
             default -> new ManaBar();
         };

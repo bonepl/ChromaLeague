@@ -40,15 +40,14 @@ public final class LeagueHttpClient {
     }
 
     public static String getBlockingResponse(String url) {
-        String response;
+        Optional<String> response;
         do {
             response = getResponse(url)
                     .map(r -> new String(r, StandardCharsets.UTF_8))
                     .map(r -> r.replaceAll("\"", "").trim())
-                    .filter(r -> !r.isEmpty())
-                    .orElse(null);
-        } while (response == null);
-        return response;
+                    .filter(r -> !r.isEmpty());
+        } while (response.isEmpty());
+        return response.get();
     }
 
     private static Optional<byte[]> getResponse(final String url) {

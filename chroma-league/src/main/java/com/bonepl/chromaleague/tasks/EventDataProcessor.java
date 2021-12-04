@@ -48,7 +48,7 @@ public class EventDataProcessor {
             case ACTIVE_PLAYER_DIED -> resetAlivePlayerCounters(event);
             case ACTIVE_PLAYER_KILL -> GameStateHelper.addPlayerKill();
             case ACTIVE_PLAYER_ASSIST -> GameStateHelper.addPlayerAssist();
-            case GAME_END_DEFEAT, GAME_END_VICTORY -> finishGameInSeconds(8L);
+            case GAME_END_DEFEAT, GAME_END_VICTORY -> finishGame();
             case ENEMY_OCEAN_DRAGON_KILL, ENEMY_CHEMTECH_DRAGON_KILL, ENEMY_HEXTECH_DRAGON_KILL, ENEMY_MOUNTAIN_DRAGON_KILL,
                     ENEMY_INFERNAL_DRAGON_KILL, ENEMY_CLOUD_DRAGON_KILL, ENEMY_HERALD_KILL,
                     ENEMY_BARON_KILL, ALLY_HERALD_KILL, UNSUPPORTED -> {
@@ -56,8 +56,8 @@ public class EventDataProcessor {
         }
     }
 
-    private static void finishGameInSeconds(long seconds) {
-        scheduledExecutorService.schedule(() -> RunningState.setRunningGame(false), seconds, TimeUnit.SECONDS);
+    private static void finishGame() {
+        scheduledExecutorService.schedule(() -> RunningState.setRunningGame(false), 8, TimeUnit.SECONDS);
     }
 
     private static void addKilledDragon(DragonType dragonType) {

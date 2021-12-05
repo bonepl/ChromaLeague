@@ -10,7 +10,6 @@ import org.apache.http.impl.client.CloseableHttpClient;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.DecimalFormat;
@@ -42,11 +41,6 @@ public final class LeagueHttpClientMock {
 
     private final DecimalFormat gameTimeFormat =
             new DecimalFormat("0.0###############", DecimalFormatSymbols.getInstance(Locale.US));
-
-    public void mockGameStatsGameTime(double gameTime) {
-        mockReturnedResponse(FetchGameStatsTask.URL, String.format("{\"gameMode\": \"CLASSIC\", \"gameTime\": %s}", gameTimeFormat.format(gameTime))
-                .getBytes(StandardCharsets.UTF_8));
-    }
 
     public void mockReturnedResponseWithResource(String uri, String jsonResourcePath) {
         try {

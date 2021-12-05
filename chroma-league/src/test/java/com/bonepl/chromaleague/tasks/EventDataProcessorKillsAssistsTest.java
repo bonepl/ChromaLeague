@@ -25,7 +25,7 @@ public class EventDataProcessorKillsAssistsTest {
     @Test
     void testKillsAndAssists() {
         leagueHttpClientMock.mockEventsResponse("json/scenarios/killsAssists.json");
-        leagueHttpClientMock.mockGameStatsGameTime(320);
+        when(gameStateMocks.gameStats().gameTime()).thenReturn(320.0);
         when(gameStateMocks.activePlayer().level()).thenReturn(5);
 
         new FetchNewEventsTask().run();
@@ -38,7 +38,7 @@ public class EventDataProcessorKillsAssistsTest {
     @Test
     void testEnemyKillsAndAssists() {
         leagueHttpClientMock.mockEventsResponse("json/scenarios/enemyKillsAssists.json");
-        leagueHttpClientMock.mockGameStatsGameTime(320);
+        when(gameStateMocks.gameStats().gameTime()).thenReturn(320.0);
         when(gameStateMocks.activePlayer().level()).thenReturn(5);
 
         new FetchNewEventsTask().run();

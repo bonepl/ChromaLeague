@@ -30,6 +30,10 @@ public enum MapTerrain {
                 .orElseThrow(() -> new NoSuchElementException("MapTerrain for apiType " + apiType + " does not exist"));
     }
 
+    public String getApiType() {
+        return apiType;
+    }
+
     public Color getBackgroundColor() {
         StaticColor color = dragonType.getColor();
         return new StaticColor(reduceColor(color.red()), reduceColor(color.green()), reduceColor(color.blue()));

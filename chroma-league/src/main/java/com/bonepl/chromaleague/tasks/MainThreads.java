@@ -15,6 +15,7 @@ public class MainThreads implements Closeable {
     public static final long ACTIVE_PLAYER_FETCH_DELAY = 100L;
     public static final long EVENTS_FETCH_DELAY = 300L;
     public static final long MAIN_HUD_REFRESH_DELAY = 50L;
+    public static final long GAME_STATS_FETCH_DELAY = 500L;
 
     private static final Logger LOGGER = Logger.getLogger(MainThreads.class.getName());
 
@@ -33,9 +34,10 @@ public class MainThreads implements Closeable {
     }
 
     public void initializeGameThreads() {
-        LOGGER.info("Player joined the game");
         gameLoader.close();
         RunningState.getGameState().setPlayerName(FetchPlayerName.fetchPlayerName());
+        LOGGER.info(RunningState.getGameState().getPlayerName() + " joined the game");
+        mainExecutor.scheduleWithFixedDelay(new FetchGameStatsTask(), 20L, GAME_STATS_FETCH_DELAY, TimeUnit.MILLISECONDS);
         mainExecutor.scheduleWithFixedDelay(new FetchPlayerListTask(), 50L, PLAYER_LIST_FETCH_DELAY, TimeUnit.MILLISECONDS);
         mainExecutor.scheduleWithFixedDelay(new FetchActivePlayerTask(), 50L, ACTIVE_PLAYER_FETCH_DELAY, TimeUnit.MILLISECONDS);
         mainExecutor.scheduleWithFixedDelay(new RefreshMainHudTask(chromaRestSDK), 150L, MAIN_HUD_REFRESH_DELAY, TimeUnit.MILLISECONDS);
@@ -44,7 +46,7 @@ public class MainThreads implements Closeable {
     @Override
     public void close() {
         alive = false;
-        RunningState.setRunningGame(false);
+        RunningState.setRunningGame(Boolean.TRUE);
         shutdownMainExecutor();
         shutdownChromaSDK();
         LOGGER.info("Player left the game, waiting for another...");

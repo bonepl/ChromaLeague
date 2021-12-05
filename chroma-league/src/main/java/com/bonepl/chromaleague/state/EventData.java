@@ -17,6 +17,7 @@ public class EventData {
     private int totalEldersKilled;
     private int activePlayerKillingSpree;
     private int activePlayerAssistSpree;
+    private boolean riftAnimationPlayed = false;
     private RespawnIndicator respawnIndicator = RespawnIndicator.IDLE;
     private LocalTime deathTime;
     private LocalTime respawnTime;
@@ -67,6 +68,14 @@ public class EventData {
 
     public void setActivePlayerAssistSpree(int activePlayerAssistSpree) {
         this.activePlayerAssistSpree = activePlayerAssistSpree;
+    }
+
+    public boolean didRiftAnimationPlay() {
+        return riftAnimationPlayed;
+    }
+
+    public void setRiftAnimationPlayed(boolean riftAnimationPlayed) {
+        this.riftAnimationPlayed = riftAnimationPlayed;
     }
 
     public void addProcessedEvents(List<Event> events) {

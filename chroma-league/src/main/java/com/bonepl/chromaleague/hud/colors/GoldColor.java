@@ -12,7 +12,7 @@ public class GoldColor implements Color {
     private static final float BLINK_CHANCE = 0.01f;
     private int blinkingCountdown;
     MultiTransitionColor blinkColor;
-    MultiTransitionColor goldColor = new MultiTransitionColor.Builder(StaticColor.YELLOW)
+    final MultiTransitionColor goldColor = new MultiTransitionColor.Builder(StaticColor.YELLOW)
             .addTransition(DARKER_YELLOW, 20)
             .looped(20)
             .build();

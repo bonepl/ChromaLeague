@@ -7,7 +7,7 @@ import com.bonepl.razersdk.color.StaticColor;
 import java.security.SecureRandom;
 
 public class ChemtechColor implements Color {
-    MultiTransitionColor chemtechColor = new MultiTransitionColor.Builder(CLColor.CHEMTECH)
+    final MultiTransitionColor chemtechColor = new MultiTransitionColor.Builder(CLColor.CHEMTECH)
             .addTransition(StaticColor.YELLOW, 10)
             .addTransition(CLColor.CHEMTECH, 10)
             .addTransition(new StaticColor(25, 60, 0), 5)

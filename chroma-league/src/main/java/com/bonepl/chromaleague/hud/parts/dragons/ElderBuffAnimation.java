@@ -1,7 +1,6 @@
 package com.bonepl.chromaleague.hud.parts.dragons;
 
 import com.bonepl.razersdk.animation.AnimatedFrame;
-import com.bonepl.razersdk.color.Color;
 import com.bonepl.razersdk.animation.Frame;
 import com.bonepl.razersdk.animation.SimpleFrame;
 import com.bonepl.razersdk.color.StaticColor;

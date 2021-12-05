@@ -7,7 +7,7 @@ import com.bonepl.razersdk.color.StaticColor;
 import java.security.SecureRandom;
 
 public class AirColor implements Color {
-    MultiTransitionColor windColor = new MultiTransitionColor.Builder(new StaticColor(15, 18, 18))
+    final MultiTransitionColor windColor = new MultiTransitionColor.Builder(new StaticColor(15, 18, 18))
             .addTransition(CLColor.AIR, 10)
             .addTransition(new StaticColor(15, 18, 18), 10)
             .addTransition(new StaticColor(60, 75, 75), 5)

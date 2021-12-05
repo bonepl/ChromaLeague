@@ -1,7 +1,6 @@
 package com.bonepl.chromaleague.hud.parts;
 
 import com.bonepl.chromaleague.state.GameStateHelper;
-import com.bonepl.razersdk.color.Color;
 import com.bonepl.razersdk.animation.LayeredFrame;
 import com.bonepl.razersdk.animation.SimpleFrame;
 import com.bonepl.razersdk.color.StaticColor;

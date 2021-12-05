@@ -3,12 +3,13 @@ package com.bonepl.chromaleague.state;
 import com.bonepl.chromaleague.hud.parts.GoldBar;
 import com.bonepl.chromaleague.rest.activeplayer.ChampionStats;
 import com.bonepl.chromaleague.rest.eventdata.DragonType;
-import com.bonepl.chromaleague.tasks.FetchGameStats;
+import com.bonepl.chromaleague.tasks.FetchGameStatsTask;
 
 import java.time.Duration;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Objects;
 
 public final class GameStateHelper {
 
@@ -59,7 +60,7 @@ public final class GameStateHelper {
 
     public static void startBaronBuff(double eventTime, double currentTimeForReconnection) {
         if (playerAliveAtEventTime(eventTime, currentTimeForReconnection)) {
-            double buffDiffToCover = getCurrentTimeOrReconnectionTime(currentTimeForReconnection) - eventTime;
+            double buffDiffToCover = (currentTimeForReconnection) - eventTime;
             long secondsToRemoveFromTimer = Math.round(buffDiffToCover);
             if (secondsToRemoveFromTimer < BARON_TIME) {
                 RunningState.getGameState().getEventData().setBaronBuffEnd(LocalTime.now().minusSeconds(secondsToRemoveFromTimer).plusSeconds(BARON_TIME));
@@ -69,7 +70,7 @@ public final class GameStateHelper {
 
     private static double getCurrentTimeOrReconnectionTime(double currentTimeForReconnection) {
         if (currentTimeForReconnection == 0.0) {
-            return FetchGameStats.fetchGameStats().gameTime();
+            return RunningState.getGameState().getGameStats().gameTime();
         }
         return currentTimeForReconnection;
     }
@@ -169,5 +170,15 @@ public final class GameStateHelper {
             }
         }
         return false;
+    }
+
+    public static boolean shouldPlayRiftAnimation() {
+        EventData eventData = RunningState.getGameState().getEventData();
+        if (Objects.equals(FetchGameStatsTask.DEFAULT_MAP_TERRAIN, RunningState.getGameState().getGameStats().mapTerrain())
+                || eventData.didRiftAnimationPlay()) {
+            return false;
+        }
+        eventData.setRiftAnimationPlayed(true);
+        return true;
     }
 }

@@ -20,7 +20,7 @@ public final class ResourceBars {
             .asList();
 
     private static final Set<String> NO_MANA_BAR_CHAMPIONS
-            = Set.of("Aatrox", "Dr. Mundo", "Garen", "Katarina", "Riven", "Yone", "Zac");
+            = Set.of("Aatrox", "Dr. Mundo", "Garen", "Katarina", "Riven", "Viego", "Zac");
     private static final Set<String> ENERGY_BAR_CHAMPIONS
             = Set.of("Akali", "Kennen", "Lee Sin", "Shen", "Zed");
 
@@ -39,13 +39,16 @@ public final class ResourceBars {
 
         return switch (activePlayerChampionName) {
             case "Gnar" -> new GnarFuryBar();
+            case "Kled" -> new KledCourageBar();
             case "Mordekaiser" -> new MordekaiserShieldBar();
             case "Renekton" -> new RenektonFuryBar();
             case "Rengar" -> new RengarFerocityBar();
             case "Rek'Sai", "Tryndamere" -> new RedFuryBar();
             case "Rumble" -> new RumbleHeatBar();
+            case "Sett" -> new SettGritBar();
             case "Shyvana" -> new ShyvanaDragonFuryBar();
             case "Vladimir" -> new VladimirBloodPoolBar();
+            case "Yasuo" -> new YasuoWindBar();
             case "Yone" -> new YoneCloneBar();
             default -> new ManaBar();
         };

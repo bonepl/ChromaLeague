@@ -11,10 +11,12 @@ import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
 
 import static com.bonepl.chromaleague.state.GameStateHelper.millisDuration;
 
 public class EventDataProcessor {
+    private static final Logger LOGGER = Logger.getLogger(EventDataProcessor.class.getName());
     private static final ScheduledExecutorService scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
     private final double currentTimeForReconnection;
 
@@ -33,7 +35,7 @@ public class EventDataProcessor {
     public void processEventForEventData(Event event) {
         final EventType eventType = EventType.fromEvent(event);
         switch (eventType) {
-            case GAME_START -> RunningState.setRunningGame(true);
+            case GAME_START -> RunningState.setRunningGame(Boolean.TRUE);
             case ALLY_BARON_KILL -> GameStateHelper.startBaronBuff(event.EventTime(), currentTimeForReconnection);
             case ALLY_CLOUD_DRAGON_KILL -> addKilledDragon(DragonType.CLOUD);
             case ALLY_CHEMTECH_DRAGON_KILL -> addKilledDragon(DragonType.CHEMTECH);
@@ -46,7 +48,7 @@ public class EventDataProcessor {
             case ACTIVE_PLAYER_DIED -> resetAlivePlayerCounters(event);
             case ACTIVE_PLAYER_KILL -> GameStateHelper.addPlayerKill();
             case ACTIVE_PLAYER_ASSIST -> GameStateHelper.addPlayerAssist();
-            case GAME_END_DEFEAT, GAME_END_VICTORY -> finishGameInSeconds(8L);
+            case GAME_END_DEFEAT, GAME_END_VICTORY -> finishGame();
             case ENEMY_OCEAN_DRAGON_KILL, ENEMY_CHEMTECH_DRAGON_KILL, ENEMY_HEXTECH_DRAGON_KILL, ENEMY_MOUNTAIN_DRAGON_KILL,
                     ENEMY_INFERNAL_DRAGON_KILL, ENEMY_CLOUD_DRAGON_KILL, ENEMY_HERALD_KILL,
                     ENEMY_BARON_KILL, ALLY_HERALD_KILL, UNSUPPORTED -> {
@@ -54,8 +56,8 @@ public class EventDataProcessor {
         }
     }
 
-    private static void finishGameInSeconds(long seconds) {
-        scheduledExecutorService.schedule(() -> RunningState.setRunningGame(false), seconds, TimeUnit.SECONDS);
+    private static void finishGame() {
+        scheduledExecutorService.schedule(() -> RunningState.setRunningGame(false), 8, TimeUnit.SECONDS);
     }
 
     private static void addKilledDragon(DragonType dragonType) {

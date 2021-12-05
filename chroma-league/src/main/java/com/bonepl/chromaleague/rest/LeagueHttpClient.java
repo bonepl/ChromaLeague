@@ -30,21 +30,27 @@ public final class LeagueHttpClient {
     private static final Logger LOGGER = Logger.getLogger(LeagueHttpClient.class.getName());
 
     public static final int DEFAULT_TIMEOUT = 150;
-    private static CloseableHttpClient singleFetchLeagueHttpClient = createSingleFetchLeagueHttpClient();
-    private static CloseableHttpClient retriableLeagueHttpClient = createRetriableHttpClient();
+    private static CloseableHttpClient httpClient = createChromaLeagueHttpClient();
 
     private LeagueHttpClient() {
     }
 
     public static Optional<byte[]> getSingleResponse(String url) {
-        return getResponse(singleFetchLeagueHttpClient, url);
+        return getResponse(url);
     }
 
-    public static Optional<byte[]> getRetriableResponse(String url) {
-        return getResponse(retriableLeagueHttpClient, url);
+    public static String getBlockingResponse(String url) {
+        Optional<String> response;
+        do {
+            response = getResponse(url)
+                    .map(r -> new String(r, StandardCharsets.UTF_8))
+                    .map(r -> r.replaceAll("\"", "").trim())
+                    .filter(r -> !r.isEmpty());
+        } while (response.isEmpty());
+        return response.get();
     }
 
-    private static Optional<byte[]> getResponse(final CloseableHttpClient httpClient, final String url) {
+    private static Optional<byte[]> getResponse(final String url) {
         final HttpGet request = new HttpGet(url);
         request.addHeader("Content-type", "application/json; charset=UTF-8");
         try (CloseableHttpResponse response = httpClient.execute(request)) {
@@ -63,15 +69,9 @@ public final class LeagueHttpClient {
         return !new String(responseBytes, StandardCharsets.UTF_8).contains("RESOURCE_NOT_FOUND");
     }
 
-    private static CloseableHttpClient createSingleFetchLeagueHttpClient() {
+    private static CloseableHttpClient createChromaLeagueHttpClient() {
         return createCustomLeagueHttpClient()
-                .disableAutomaticRetries()
-                .build();
-    }
-
-    private static CloseableHttpClient createRetriableHttpClient() {
-        return createCustomLeagueHttpClient()
-                .setRetryHandler(new DefaultHttpRequestRetryHandler(10, false))
+                .setRetryHandler(new DefaultHttpRequestRetryHandler(3, false))
                 .build();
     }
 
@@ -120,8 +120,7 @@ public final class LeagueHttpClient {
     }
 
     public static void shutdown() {
-        shutdownHttpClient(singleFetchLeagueHttpClient);
-        shutdownHttpClient(retriableLeagueHttpClient);
+        shutdownHttpClient(httpClient);
     }
 
     private static void shutdownHttpClient(CloseableHttpClient httpClient) {
@@ -136,7 +135,6 @@ public final class LeagueHttpClient {
 
     //TEST ONLY
     static void setLeagueHttpClient(CloseableHttpClient leagueHttpClient) {
-        singleFetchLeagueHttpClient = leagueHttpClient;
-        retriableLeagueHttpClient = leagueHttpClient;
+        httpClient = leagueHttpClient;
     }
 }

@@ -8,7 +8,7 @@ import java.security.SecureRandom;
 
 public class OceanColor implements Color {
     private static final StaticColor DARKER_OCEAN = new StaticColor(0, 60, 60);
-    MultiTransitionColor oceanColor = new MultiTransitionColor.Builder(DARKER_OCEAN)
+    final MultiTransitionColor oceanColor = new MultiTransitionColor.Builder(DARKER_OCEAN)
             .addTransition(CLColor.OCEAN, 10)
             .addTransition(DARKER_OCEAN, 10)
             .addTransition(CLColor.OCEAN, 10)

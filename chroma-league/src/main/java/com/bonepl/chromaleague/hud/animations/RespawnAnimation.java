@@ -1,9 +1,7 @@
 package com.bonepl.chromaleague.hud.animations;
 
 import com.bonepl.chromaleague.hud.colors.BackgroundBreathingColor;
-import com.bonepl.razersdk.color.BreathingColor;
 import com.bonepl.chromaleague.hud.colors.CLColor;
-import com.bonepl.razersdk.color.TransitionColor;
 import com.bonepl.chromaleague.hud.parts.Background;
 import com.bonepl.chromaleague.hud.parts.health.HealthBar;
 import com.bonepl.chromaleague.hud.parts.resource.ResourceBars;
@@ -12,10 +10,11 @@ import com.bonepl.chromaleague.hud.parts.resource.YasuoWindBar;
 import com.bonepl.chromaleague.state.GameStateHelper;
 import com.bonepl.chromaleague.state.RunningState;
 import com.bonepl.razersdk.animation.AnimatedFrame;
-import com.bonepl.razersdk.color.Color;
-import com.bonepl.razersdk.color.StaticColor;
 import com.bonepl.razersdk.animation.LayeredFrame;
 import com.bonepl.razersdk.animation.SimpleFrame;
+import com.bonepl.razersdk.color.BreathingColor;
+import com.bonepl.razersdk.color.StaticColor;
+import com.bonepl.razersdk.color.TransitionColor;
 import com.bonepl.razersdk.sdk.RzKey;
 import com.bonepl.razersdk.sdk.RzKeySelector;
 

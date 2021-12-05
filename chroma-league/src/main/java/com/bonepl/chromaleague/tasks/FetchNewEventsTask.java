@@ -34,7 +34,7 @@ public class FetchNewEventsTask implements Runnable {
             final List<Event> unprocessedEvents = RunningState.getGameState().getEventData().getUnprocessedEvents(events);
             if (!unprocessedEvents.isEmpty()) {
                 if (hasPlayerReconnected(unprocessedEvents)) {
-                    final double gameTimeForReconnection = FetchGameStats.fetchGameStats().gameTime();
+                    final double gameTimeForReconnection = RunningState.getGameState().getGameStats().gameTime();
                     new EventDataProcessor(gameTimeForReconnection).processNewEvents(unprocessedEvents);
                 } else {
                     new EventDataProcessor().processNewEvents(unprocessedEvents);

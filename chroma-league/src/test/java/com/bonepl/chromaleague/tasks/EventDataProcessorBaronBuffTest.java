@@ -22,8 +22,8 @@ class EventDataProcessorBaronBuffTest {
     void setUp() {
         leagueHttpClientMock = new LeagueHttpClientMock();
         gameStateMocks = new GameStateMocks();
-        gameStateMocks.activePlayer();
         gameStateMocks.playerList();
+        gameStateMocks.activePlayer();
         gameStateMocks.mockTestPlayerList();
     }
 
@@ -31,7 +31,7 @@ class EventDataProcessorBaronBuffTest {
     void testBaronBuffActive() {
         // given
         leagueHttpClientMock.mockEventsResponse("json/scenarios/baronBuffActive.json");
-        leagueHttpClientMock.mockGameStatsGameTime(250);
+        when(gameStateMocks.gameStats().gameTime()).thenReturn(250.0);
         when(gameStateMocks.playerList().getActivePlayer().isDead()).thenReturn(false);
 
         // when
@@ -48,7 +48,7 @@ class EventDataProcessorBaronBuffTest {
     void testBaronBuffInactiveCauseExpired() {
         // given
         leagueHttpClientMock.mockEventsResponse("json/scenarios/baronBuffActive.json");
-        leagueHttpClientMock.mockGameStatsGameTime(400);
+        when(gameStateMocks.gameStats().gameTime()).thenReturn(400.0);
         when(gameStateMocks.playerList().getActivePlayer().isDead()).thenReturn(false);
 
         // when
@@ -64,7 +64,7 @@ class EventDataProcessorBaronBuffTest {
     void testBaronBuffInactiveIfPlayerWasDead() {
         // given
         leagueHttpClientMock.mockEventsResponse("json/scenarios/baronBuffInactivePlayerWasDead.json");
-        leagueHttpClientMock.mockGameStatsGameTime(300);
+        when(gameStateMocks.gameStats().gameTime()).thenReturn(300.0);
         when(gameStateMocks.playerList().getActivePlayer().isDead()).thenReturn(false);
         when(gameStateMocks.activePlayer().level()).thenReturn(6);
 
@@ -81,7 +81,7 @@ class EventDataProcessorBaronBuffTest {
     void testBaronBuffInactiveIfPlayerDied() {
         // given
         leagueHttpClientMock.mockEventsResponse("json/scenarios/baronBuffInactivePlayerDied.json");
-        leagueHttpClientMock.mockGameStatsGameTime(300);
+        when(gameStateMocks.gameStats().gameTime()).thenReturn(300.0);
         when(gameStateMocks.playerList().getActivePlayer().isDead()).thenReturn(false);
         when(gameStateMocks.activePlayer().level()).thenReturn(6);
 
@@ -98,7 +98,7 @@ class EventDataProcessorBaronBuffTest {
     void testBaronBuffInactiveCauseEnemyKilled() {
         // given
         leagueHttpClientMock.mockEventsResponse("json/scenarios/enemyBaronBuff.json");
-        leagueHttpClientMock.mockGameStatsGameTime(250);
+        when(gameStateMocks.gameStats().gameTime()).thenReturn(250.0);
         when(gameStateMocks.playerList().getActivePlayer().isDead()).thenReturn(false);
 
         // when

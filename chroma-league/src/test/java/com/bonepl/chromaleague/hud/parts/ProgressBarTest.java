@@ -2,7 +2,6 @@ package com.bonepl.chromaleague.hud.parts;
 
 import com.bonepl.chromaleague.IntSteps;
 import com.bonepl.chromaleague.hud.AnimationTester;
-import com.bonepl.razersdk.color.Color;
 import com.bonepl.razersdk.color.StaticColor;
 import org.junit.jupiter.api.Test;
 

@@ -7,7 +7,7 @@ import com.bonepl.razersdk.color.StaticColor;
 import java.security.SecureRandom;
 
 public class HextechColor implements Color {
-    MultiTransitionColor hextechColor = new MultiTransitionColor.Builder(StaticColor.BLUE)
+    final MultiTransitionColor hextechColor = new MultiTransitionColor.Builder(StaticColor.BLUE)
             .addTransition(StaticColor.BLUE, 20)
             .addTransition(StaticColor.WHITE, 3)
             .looped(3)

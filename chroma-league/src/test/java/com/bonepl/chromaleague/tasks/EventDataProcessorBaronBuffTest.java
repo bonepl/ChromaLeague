@@ -23,6 +23,7 @@ class EventDataProcessorBaronBuffTest {
         leagueHttpClientMock = new LeagueHttpClientMock();
         gameStateMocks = new GameStateMocks();
         gameStateMocks.playerList();
+        gameStateMocks.activePlayer();
         gameStateMocks.mockTestPlayerList();
     }
 

@@ -7,7 +7,7 @@ import com.bonepl.razersdk.color.StaticColor;
 import java.security.SecureRandom;
 
 public class FireColor implements Color {
-    MultiTransitionColor fireColor = new MultiTransitionColor.Builder(StaticColor.YELLOW)
+    final MultiTransitionColor fireColor = new MultiTransitionColor.Builder(StaticColor.YELLOW)
             .addTransition(StaticColor.ORANGE, 5)
             .addTransition(StaticColor.RED, 10)
             .addTransition(StaticColor.ORANGE, 10)

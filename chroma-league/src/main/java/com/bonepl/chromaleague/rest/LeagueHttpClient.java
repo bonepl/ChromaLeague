@@ -7,8 +7,6 @@ import org.apache.http.config.RegistryBuilder;
 import org.apache.http.conn.socket.ConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.DefaultHttpRequestRetryHandler;
-import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.util.EntityUtils;
@@ -70,15 +68,11 @@ public final class LeagueHttpClient {
     }
 
     private static CloseableHttpClient createChromaLeagueHttpClient() {
-        return createCustomLeagueHttpClient()
-                .setRetryHandler(new DefaultHttpRequestRetryHandler(3, false))
-                .build();
-    }
-
-    private static HttpClientBuilder createCustomLeagueHttpClient() {
         return HttpClients.custom()
+                .disableAutomaticRetries()
                 .setConnectionManager(createUnsecureConnManager())
-                .setDefaultRequestConfig(createRequestConfig());
+                .setDefaultRequestConfig(createRequestConfig())
+                .build();
     }
 
     private static PoolingHttpClientConnectionManager createUnsecureConnManager() {

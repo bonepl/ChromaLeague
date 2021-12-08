@@ -8,7 +8,9 @@ import org.apache.http.client.ResponseHandler;
 import java.io.IOException;
 import java.util.Optional;
 
-public class GameStatsResponseHandler extends LiveClientResponseVerifier implements ResponseHandler<Optional<GameStats>> {
+import static com.bonepl.chromaleague.rest.LiveClientResponseVerifier.fetchBytesResponse;
+
+public class GameStatsResponseHandler implements ResponseHandler<Optional<GameStats>> {
 
     @Override
     public Optional<GameStats> handleResponse(HttpResponse response) throws IOException {

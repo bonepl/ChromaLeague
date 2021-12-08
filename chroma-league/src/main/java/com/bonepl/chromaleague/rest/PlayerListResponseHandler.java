@@ -10,7 +10,9 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Optional;
 
-public class PlayerListResponseHandler extends LiveClientResponseVerifier implements ResponseHandler<Optional<PlayerList>> {
+import static com.bonepl.chromaleague.rest.LiveClientResponseVerifier.fetchBytesResponse;
+
+public class PlayerListResponseHandler implements ResponseHandler<Optional<PlayerList>> {
 
     @Override
     public Optional<PlayerList> handleResponse(HttpResponse response) throws IOException {

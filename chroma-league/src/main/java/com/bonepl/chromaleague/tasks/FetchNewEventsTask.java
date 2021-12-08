@@ -1,29 +1,27 @@
 package com.bonepl.chromaleague.tasks;
 
-import com.bonepl.chromaleague.rest.LeagueHttpClient;
+import com.bonepl.chromaleague.rest.EventsResponseHandler;
+import com.bonepl.chromaleague.rest.NewLeagueHttpClient;
 import com.bonepl.chromaleague.rest.eventdata.Event;
-import com.bonepl.chromaleague.rest.eventdata.Events;
 import com.bonepl.chromaleague.state.RunningState;
-import com.jsoniter.JsonIterator;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class FetchNewEventsTask implements Runnable {
     public static final String URL = "https://127.0.0.1:2999/liveclientdata/eventdata";
     private static final Logger LOGGER = Logger.getLogger(FetchNewEventsTask.class.getName());
+    private final EventsResponseHandler eventsResponseHandler = new EventsResponseHandler();
 
     @Override
     public void run() {
         try {
-            LeagueHttpClient.getSingleResponse(URL)
-                    .map(events -> JsonIterator.deserialize(events, Events.class))
-                    .map(Events::events)
-                    .filter(events -> !events.isEmpty())
-                    .ifPresent(FetchNewEventsTask::collectUnprocessedEvents);
+            Optional<List<Event>> response = NewLeagueHttpClient.getResponse(URL, eventsResponseHandler);
+            response.ifPresent(FetchNewEventsTask::collectUnprocessedEvents);
         } catch (Exception ex) {
-            LOGGER.log(Level.SEVERE, ex, () -> "Error while fetching Events");
+            LOGGER.log(Level.SEVERE, "ERROR", ex);
         }
     }
 

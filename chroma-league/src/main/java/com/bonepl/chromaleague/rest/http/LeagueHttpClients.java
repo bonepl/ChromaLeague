@@ -6,7 +6,7 @@ import org.apache.http.client.ResponseHandler;
 
 import java.util.Optional;
 
-public class LeagueHttpClients {
+public final class LeagueHttpClients {
     private static NonBlockingLeagueHttpClient nonBlockingLeagueHttpClient = new NonBlockingLeagueHttpClient();
     private static BlockingLeagueHttpClient blockingLeagueHttpClient = new BlockingLeagueHttpClient();
 

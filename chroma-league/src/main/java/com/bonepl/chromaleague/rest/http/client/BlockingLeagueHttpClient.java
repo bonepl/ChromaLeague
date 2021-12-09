@@ -22,6 +22,7 @@ public final class BlockingLeagueHttpClient extends AbstractLeagueHttpClient {
 
     private CloseableHttpClient createBlockingLeagueHttpClient() {
         return commonHttpClientBuilder()
+                .setRetryHandler(new IndefiniteRetryHandler())
                 .addInterceptorLast(new BlockingResponseInterceptor())
                 .build();
     }

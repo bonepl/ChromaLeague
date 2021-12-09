@@ -6,10 +6,6 @@ import com.bonepl.razersdk.animation.AnimatedFrame;
 import com.bonepl.razersdk.animation.Frame;
 import com.bonepl.razersdk.color.StaticColor;
 
-/**
- * vladimir uses resource type: GNARFURY
- * shyvana uses resource type: DRAGONFURY
- */
 public class EnergyBar extends AnimatedFrame {
 
     @Override

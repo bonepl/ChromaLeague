@@ -5,7 +5,6 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.config.RegistryBuilder;
 import org.apache.http.conn.socket.ConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
@@ -13,16 +12,12 @@ import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
-import java.io.IOException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public abstract class AbstractLeagueHttpClient {
-    private static final Logger LOGGER = Logger.getLogger(AbstractLeagueHttpClient.class.getName());
     public static final int DEFAULT_TIMEOUT = 150;
 
     protected HttpGet jsonHttpGet(final String url) {
@@ -73,15 +68,5 @@ public abstract class AbstractLeagueHttpClient {
         return HttpClients.custom()
                 .setConnectionManager(createUnsecureConnManager())
                 .setDefaultRequestConfig(createRequestConfig());
-    }
-
-    protected void shutdownHttpClient(CloseableHttpClient httpClient) {
-        if (httpClient != null) {
-            try {
-                httpClient.close();
-            } catch (IOException e) {
-                LOGGER.log(Level.WARNING, e, () -> "Couldn't close League HTTP Client, this can lead to memory leak");
-            }
-        }
     }
 }

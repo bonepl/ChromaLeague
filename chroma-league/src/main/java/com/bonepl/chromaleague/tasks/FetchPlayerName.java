@@ -1,7 +1,7 @@
 package com.bonepl.chromaleague.tasks;
 
 import com.bonepl.chromaleague.rest.http.LeagueHttpClients;
-import com.bonepl.chromaleague.rest.http.PlayerNameResponseHandler;
+import com.bonepl.chromaleague.rest.http.handlers.PlayerNameResponseHandler;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

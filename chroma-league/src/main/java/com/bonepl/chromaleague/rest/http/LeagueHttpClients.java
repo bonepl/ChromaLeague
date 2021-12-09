@@ -1,5 +1,7 @@
 package com.bonepl.chromaleague.rest.http;
 
+import com.bonepl.chromaleague.rest.http.client.BlockingLeagueHttpClient;
+import com.bonepl.chromaleague.rest.http.client.NonBlockingLeagueHttpClient;
 import org.apache.http.client.ResponseHandler;
 
 import java.util.Optional;

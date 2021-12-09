@@ -1,4 +1,4 @@
-package com.bonepl.chromaleague.rest.http;
+package com.bonepl.chromaleague.rest.http.handlers;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ResponseHandler;

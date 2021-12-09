@@ -1,8 +1,8 @@
 package com.bonepl.chromaleague.tasks;
 
 import com.bonepl.chromaleague.rest.eventdata.Event;
-import com.bonepl.chromaleague.rest.http.EventsResponseHandler;
 import com.bonepl.chromaleague.rest.http.LeagueHttpClients;
+import com.bonepl.chromaleague.rest.http.handlers.EventsResponseHandler;
 import com.bonepl.chromaleague.state.RunningState;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.bonepl.chromaleague.rest.http;
+package com.bonepl.chromaleague.rest.http.handlers;
 
 import com.bonepl.chromaleague.rest.playerlist.Player;
 import com.bonepl.chromaleague.rest.playerlist.PlayerList;

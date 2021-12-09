@@ -1,4 +1,4 @@
-package com.bonepl.chromaleague.rest.http;
+package com.bonepl.chromaleague.rest.http.client;
 
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpGet;

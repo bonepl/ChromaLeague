@@ -1,5 +1,7 @@
 package com.bonepl.chromaleague.rest.http;
 
+import com.bonepl.chromaleague.rest.http.client.BlockingLeagueHttpClient;
+import com.bonepl.chromaleague.rest.http.client.NonBlockingLeagueHttpClient;
 import com.bonepl.chromaleague.tasks.FetchActivePlayerTask;
 import com.bonepl.chromaleague.tasks.FetchGameStatsTask;
 import com.bonepl.chromaleague.tasks.FetchNewEventsTask;

@@ -6,7 +6,7 @@ import org.apache.http.client.ResponseHandler;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-public class PlayerNameResponseHandler extends AbstractHttpOkBytesHandler
+public class PlayerNameResponseHandler extends HttpOkBytesHandler
         implements ResponseHandler<String> {
 
     @Override

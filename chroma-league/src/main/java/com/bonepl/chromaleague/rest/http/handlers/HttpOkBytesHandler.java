@@ -7,7 +7,7 @@ import org.apache.http.util.EntityUtils;
 import java.io.IOException;
 import java.util.Optional;
 
-public class AbstractHttpOkBytesHandler {
+public class HttpOkBytesHandler {
     public Optional<byte[]> fetchBytesResponse(HttpResponse response) throws IOException {
         if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
             return Optional.of(EntityUtils.toByteArray(response.getEntity()));

@@ -8,7 +8,7 @@ import org.apache.http.client.ResponseHandler;
 import java.io.IOException;
 import java.util.Optional;
 
-public class ActivePlayerResponseHandler extends AbstractHttpOkBytesHandler
+public class ActivePlayerResponseHandler extends HttpOkBytesHandler
         implements ResponseHandler<Optional<ActivePlayer>> {
 
     @Override

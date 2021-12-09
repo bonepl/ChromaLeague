@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-public class EventsResponseHandler extends AbstractHttpOkBytesHandler
+public class EventsResponseHandler extends HttpOkBytesHandler
         implements ResponseHandler<Optional<List<Event>>> {
 
     @Override

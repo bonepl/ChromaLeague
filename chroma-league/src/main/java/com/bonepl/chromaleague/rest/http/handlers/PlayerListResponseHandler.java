@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Optional;
 
-public class PlayerListResponseHandler extends AbstractHttpOkBytesHandler
+public class PlayerListResponseHandler extends HttpOkBytesHandler
         implements ResponseHandler<Optional<PlayerList>> {
 
     @Override

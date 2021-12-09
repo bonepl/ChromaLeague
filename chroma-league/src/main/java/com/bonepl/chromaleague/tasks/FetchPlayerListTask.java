@@ -1,7 +1,7 @@
 package com.bonepl.chromaleague.tasks;
 
-import com.bonepl.chromaleague.rest.NewLeagueHttpClient;
-import com.bonepl.chromaleague.rest.PlayerListResponseHandler;
+import com.bonepl.chromaleague.rest.http.LeagueHttpClients;
+import com.bonepl.chromaleague.rest.http.PlayerListResponseHandler;
 import com.bonepl.chromaleague.state.RunningState;
 
 import java.util.logging.Logger;
@@ -13,7 +13,7 @@ public class FetchPlayerListTask implements Runnable {
 
     @Override
     public void run() {
-        NewLeagueHttpClient.getResponse(URL, playerListResponseHandler)
+        LeagueHttpClients.getNonBlockingResponse(URL, playerListResponseHandler)
                 .ifPresent(playerList -> RunningState.getGameState().setPlayerList(playerList));
     }
 }

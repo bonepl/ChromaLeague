@@ -1,4 +1,4 @@
-package com.bonepl.chromaleague.rest;
+package com.bonepl.chromaleague.rest.http;
 
 import com.bonepl.chromaleague.rest.playerlist.Player;
 import com.bonepl.chromaleague.rest.playerlist.PlayerList;
@@ -10,9 +10,8 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Optional;
 
-import static com.bonepl.chromaleague.rest.LiveClientResponseVerifier.fetchBytesResponse;
-
-public class PlayerListResponseHandler implements ResponseHandler<Optional<PlayerList>> {
+public class PlayerListResponseHandler extends AbstractHttpOkBytesHandler
+        implements ResponseHandler<Optional<PlayerList>> {
 
     @Override
     public Optional<PlayerList> handleResponse(HttpResponse response) throws IOException {

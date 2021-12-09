@@ -181,4 +181,8 @@ public final class GameStateHelper {
         eventData.setRiftAnimationPlayed(true);
         return true;
     }
+
+    public static double getPlayerRespawnTime() {
+        return RunningState.getGameState().getPlayerList().getActivePlayer().respawnTimer();
+    }
 }

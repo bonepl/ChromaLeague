@@ -1,12 +1,11 @@
 package com.bonepl.chromaleague.tasks;
 
-import com.bonepl.chromaleague.rest.EventsResponseHandler;
-import com.bonepl.chromaleague.rest.NewLeagueHttpClient;
 import com.bonepl.chromaleague.rest.eventdata.Event;
+import com.bonepl.chromaleague.rest.http.EventsResponseHandler;
+import com.bonepl.chromaleague.rest.http.LeagueHttpClients;
 import com.bonepl.chromaleague.state.RunningState;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,8 +17,8 @@ public class FetchNewEventsTask implements Runnable {
     @Override
     public void run() {
         try {
-            Optional<List<Event>> response = NewLeagueHttpClient.getResponse(URL, eventsResponseHandler);
-            response.ifPresent(FetchNewEventsTask::collectUnprocessedEvents);
+            LeagueHttpClients.getNonBlockingResponse(URL, eventsResponseHandler)
+                    .ifPresent(FetchNewEventsTask::collectUnprocessedEvents);
         } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, "ERROR", ex);
         }

@@ -72,7 +72,7 @@ public class EventDataProcessor {
         final EventData eventData = RunningState.getGameState().getEventData();
         if (currentTimeForReconnection == 0.0) {
             eventData.setDeathTime(LocalTime.now());
-            final double respawnTimer = FetchRespawnTime.fetchPlayerRespawnTime();
+            final double respawnTimer = GameStateHelper.getPlayerRespawnTime();
             eventData.setRespawnTime(LocalTime.now().plus(millisDuration(respawnTimer)));
             eventData.setRespawnIndicator(RespawnIndicator.CHARGING);
         } else {

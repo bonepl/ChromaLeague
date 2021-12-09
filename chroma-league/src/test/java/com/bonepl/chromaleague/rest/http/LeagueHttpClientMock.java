@@ -1,4 +1,4 @@
-package com.bonepl.chromaleague.rest;
+package com.bonepl.chromaleague.rest.http;
 
 import com.bonepl.chromaleague.tasks.FetchActivePlayerTask;
 import com.bonepl.chromaleague.tasks.FetchGameStatsTask;
@@ -21,6 +21,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.*;
 
 public final class LeagueHttpClientMock {
+    private final BlockingLeagueHttpClient blockingLeagueHttpClientMock = mock(BlockingLeagueHttpClient.class);
+    private final NonBlockingLeagueHttpClient nonBlockingLeagueHttpClientMock = mock(NonBlockingLeagueHttpClient.class);
     private final CloseableHttpClient mock = mock(CloseableHttpClient.class);
 
     public void mockActivePlayerResponse(String jsonResourcePath) {
@@ -57,7 +59,10 @@ public final class LeagueHttpClientMock {
             final CloseableHttpResponse mockedResponse = mock(CloseableHttpResponse.class);
             when(mockedResponse.getEntity()).thenReturn(new ByteArrayEntity(toReturn));
             doReturn(mockedResponse).when(mock).execute(argThat(uriRequest -> uriRequest.getURI().toString().equals(uri)));
-            LeagueHttpClient.setLeagueHttpClient(mock);
+            doReturn(mock).when(blockingLeagueHttpClientMock).getHttpClient();
+            doReturn(mock).when(nonBlockingLeagueHttpClientMock).getHttpClient();
+            LeagueHttpClients.setBlockingLeagueHttpClient(blockingLeagueHttpClientMock);
+            LeagueHttpClients.setNonBlockingLeagueHttpClient(nonBlockingLeagueHttpClientMock);
         } catch (IOException e) {
             fail(e);
         }

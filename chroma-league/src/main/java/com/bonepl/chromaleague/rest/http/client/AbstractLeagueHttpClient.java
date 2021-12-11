@@ -1,10 +1,12 @@
 package com.bonepl.chromaleague.rest.http.client;
 
+import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.config.RegistryBuilder;
 import org.apache.http.conn.socket.ConnectionSocketFactory;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
+import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
@@ -12,13 +14,30 @@ import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
+import java.io.IOException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public abstract class AbstractLeagueHttpClient {
+    private static final Logger LOGGER = Logger.getLogger(AbstractLeagueHttpClient.class.getName());
+
     public static final int DEFAULT_TIMEOUT = 150;
+    private final CloseableHttpClient httpClient = createLeagueHttpClient();
+
+    protected abstract CloseableHttpClient createLeagueHttpClient();
+
+    public <T> T getResponse(final String url, ResponseHandler<T> responseHandler) {
+        try {
+            return httpClient.execute(jsonHttpGet(url), responseHandler);
+        } catch (IOException e) {
+            LOGGER.log(Level.SEVERE, e, () -> "Error while fetching HTTP response - this shouldn't happen in BlockingLeagueHttpClient");
+            throw new IllegalStateException(e);
+        }
+    }
 
     protected HttpGet jsonHttpGet(final String url) {
         final HttpGet request = new HttpGet(url);
@@ -68,5 +87,9 @@ public abstract class AbstractLeagueHttpClient {
         return HttpClients.custom()
                 .setConnectionManager(createUnsecureConnManager())
                 .setDefaultRequestConfig(createRequestConfig());
+    }
+
+    public CloseableHttpClient getHttpClient() {
+        return httpClient;
     }
 }

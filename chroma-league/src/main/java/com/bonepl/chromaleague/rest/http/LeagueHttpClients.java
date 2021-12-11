@@ -18,14 +18,14 @@ public final class LeagueHttpClients {
     }
 
     public static <T> T getBlockingResponse(final String url, ResponseHandler<T> responseHandler) {
-        return getBlockingLeagueHttpClient().getResponse(url, responseHandler);
+        return getRetryingLeagueHttpClient().getResponse(url, responseHandler);
     }
 
     static NonBlockingLeagueHttpClient getNonBlockingLeagueHttpClient() {
         return nonBlockingLeagueHttpClient;
     }
 
-    static RetryingLeagueHttpClient getBlockingLeagueHttpClient() {
+    static RetryingLeagueHttpClient getRetryingLeagueHttpClient() {
         return retryingLeagueHttpClient;
     }
 
@@ -35,7 +35,7 @@ public final class LeagueHttpClients {
     }
 
     //TEST ONLY
-    static void setBlockingLeagueHttpClient(RetryingLeagueHttpClient retryingLeagueHttpClient) {
+    static void setRetryingLeagueHttpClient(RetryingLeagueHttpClient retryingLeagueHttpClient) {
         LeagueHttpClients.retryingLeagueHttpClient = retryingLeagueHttpClient;
     }
 }

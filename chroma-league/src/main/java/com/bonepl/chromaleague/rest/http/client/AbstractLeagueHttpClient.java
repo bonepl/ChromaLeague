@@ -19,24 +19,15 @@ import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public abstract class AbstractLeagueHttpClient {
-    private static final Logger LOGGER = Logger.getLogger(AbstractLeagueHttpClient.class.getName());
-
     public static final int DEFAULT_TIMEOUT = 150;
     private final CloseableHttpClient httpClient = createLeagueHttpClient();
 
     protected abstract CloseableHttpClient createLeagueHttpClient();
 
-    public <T> T getResponse(final String url, ResponseHandler<T> responseHandler) {
-        try {
-            return httpClient.execute(jsonHttpGet(url), responseHandler);
-        } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, e, () -> "Error while fetching HTTP response - this shouldn't happen in BlockingLeagueHttpClient");
-            throw new IllegalStateException(e);
-        }
+    protected <T> T execute(final String url, ResponseHandler<T> responseHandler) throws IOException {
+        return getHttpClient().execute(jsonHttpGet(url), responseHandler);
     }
 
     protected HttpGet jsonHttpGet(final String url) {

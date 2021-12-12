@@ -8,9 +8,6 @@ import com.bonepl.chromaleague.state.RunningState;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalTime;
-
-import static java.time.temporal.ChronoUnit.SECONDS;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
@@ -39,8 +36,9 @@ class EventDataProcessorBaronBuffTest {
 
         // then
         final EventData eventData = RunningState.getGameState().getEventData();
+        double gameTime = RunningState.getGameState().getGameStats().gameTime();
         assertSecondsEqualsWithMargin(GameStateHelper.BARON_TIME,
-                50 + SECONDS.between(LocalTime.now(), eventData.getBaronBuffEnd()));
+                (long) (50 + eventData.getBaronBuffEnd() - gameTime));
         assertTrue(GameStateHelper.hasBaronBuff());
     }
 

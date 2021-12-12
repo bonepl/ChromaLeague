@@ -16,7 +16,7 @@ public class FetchPlayerName {
 
     public static String fetchPlayerName() {
         try {
-            return LeagueHttpClients.getBlockingResponse(URL, playerNameResponseHandler);
+            return LeagueHttpClients.getRetryingResponse(URL, playerNameResponseHandler);
         } catch (Exception ex) {
             LOGGER.log(Level.SEVERE, ex, () -> "Error while fetching player name");
             throw new IllegalStateException(ex);

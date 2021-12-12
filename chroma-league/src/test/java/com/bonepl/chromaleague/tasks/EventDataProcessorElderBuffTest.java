@@ -8,9 +8,6 @@ import com.bonepl.chromaleague.state.RunningState;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalTime;
-
-import static java.time.temporal.ChronoUnit.SECONDS;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
@@ -39,8 +36,9 @@ class EventDataProcessorElderBuffTest {
 
         // then
         final EventData eventData = RunningState.getGameState().getEventData();
+        double gameTime = RunningState.getGameState().getGameStats().gameTime();
         assertSecondsEqualsWithMargin(GameStateHelper.FIRST_ELDER_TIME,
-                50 + SECONDS.between(LocalTime.now(), eventData.getElderBuffEnd()));
+                (long) (50 + eventData.getElderBuffEnd() - gameTime));
         assertEquals(1, eventData.getTotalEldersKilled());
         assertTrue(GameStateHelper.hasElderBuff());
         assertEquals(4, eventData.getKilledDragons().size());
@@ -58,8 +56,9 @@ class EventDataProcessorElderBuffTest {
 
         // then
         final EventData eventData = RunningState.getGameState().getEventData();
+        double gameTime = RunningState.getGameState().getGameStats().gameTime();
         assertSecondsEqualsWithMargin(GameStateHelper.NEXT_ELDER_TIME,
-                50 + SECONDS.between(LocalTime.now(), eventData.getElderBuffEnd()));
+                (long) (50 + eventData.getElderBuffEnd() - gameTime));
         assertEquals(2, eventData.getTotalEldersKilled());
         assertTrue(GameStateHelper.hasElderBuff());
         assertEquals(4, eventData.getKilledDragons().size());

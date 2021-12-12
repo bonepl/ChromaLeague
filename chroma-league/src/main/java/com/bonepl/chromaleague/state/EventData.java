@@ -3,7 +3,6 @@ package com.bonepl.chromaleague.state;
 import com.bonepl.chromaleague.rest.eventdata.DragonType;
 import com.bonepl.chromaleague.rest.eventdata.Event;
 
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -12,22 +11,22 @@ import java.util.List;
 public class EventData {
     private final List<DragonType> killedDragons = new ArrayList<>();
     private final List<Event> processedEvents = new LinkedList<>();
-    private LocalTime baronBuffEnd;
-    private LocalTime elderBuffEnd;
+    private Double baronBuffEnd;
+    private Double elderBuffEnd;
     private int totalEldersKilled;
     private int activePlayerKillingSpree;
     private int activePlayerAssistSpree;
     private boolean riftAnimationPlayed = false;
     private RespawnIndicator respawnIndicator = RespawnIndicator.IDLE;
-    private LocalTime deathTime;
-    private LocalTime respawnTime;
+    private Double deathTime;
+    private Double respawnTime;
 
-    public void setBaronBuffEnd(LocalTime baronBuffEnd) {
-        this.baronBuffEnd = baronBuffEnd;
+    public Double getBaronBuffEnd() {
+        return baronBuffEnd;
     }
 
-    public LocalTime getBaronBuffEnd() {
-        return baronBuffEnd;
+    public void setBaronBuffEnd(Double baronBuffEnd) {
+        this.baronBuffEnd = baronBuffEnd;
     }
 
     public List<DragonType> getKilledDragons() {
@@ -38,12 +37,12 @@ public class EventData {
         killedDragons.add(dragonType);
     }
 
-    public void setElderBuffEnd(LocalTime elderBuffEnd) {
-        this.elderBuffEnd = elderBuffEnd;
+    public Double getElderBuffEnd() {
+        return elderBuffEnd;
     }
 
-    public LocalTime getElderBuffEnd() {
-        return elderBuffEnd;
+    public void setElderBuffEnd(Double elderBuffEnd) {
+        this.elderBuffEnd = elderBuffEnd;
     }
 
     public int getTotalEldersKilled() {
@@ -95,19 +94,19 @@ public class EventData {
         this.respawnIndicator = respawnIndicator;
     }
 
-    public LocalTime getDeathTime() {
+    public Double getDeathTime() {
         return deathTime;
     }
 
-    public void setDeathTime(LocalTime deathTime) {
+    public void setDeathTime(Double deathTime) {
         this.deathTime = deathTime;
     }
 
-    public LocalTime getRespawnTime() {
+    public Double getRespawnTime() {
         return respawnTime;
     }
 
-    public void setRespawnTime(LocalTime respawnTime) {
+    public void setRespawnTime(Double respawnTime) {
         this.respawnTime = respawnTime;
     }
 

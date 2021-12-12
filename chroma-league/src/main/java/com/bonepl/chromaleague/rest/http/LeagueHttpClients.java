@@ -17,7 +17,7 @@ public final class LeagueHttpClients {
         return getNonBlockingLeagueHttpClient().getResponse(url, responseHandler);
     }
 
-    public static <T> T getBlockingResponse(final String url, ResponseHandler<T> responseHandler) {
+    public static <T> T getRetryingResponse(final String url, ResponseHandler<T> responseHandler) {
         return getRetryingLeagueHttpClient().getResponse(url, responseHandler);
     }
 

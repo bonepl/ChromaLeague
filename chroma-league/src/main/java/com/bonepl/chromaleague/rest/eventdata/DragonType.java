@@ -4,6 +4,8 @@ import com.bonepl.chromaleague.hud.colors.*;
 import com.bonepl.razersdk.color.Color;
 import com.bonepl.razersdk.color.StaticColor;
 
+import java.util.Arrays;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.function.Supplier;
 
@@ -35,11 +37,9 @@ public enum DragonType {
     }
 
     public static DragonType fromApiType(String apiType) {
-        for (DragonType value : values()) {
-            if (Objects.equals(value.apiType, apiType)) {
-                return value;
-            }
-        }
-        return null;
+        return Arrays.stream(values())
+                .filter(v -> Objects.equals(v.apiType, apiType))
+                .findAny()
+                .orElseThrow(() -> new NoSuchElementException("Couldn't find dragon type for apiType " + apiType));
     }
 }

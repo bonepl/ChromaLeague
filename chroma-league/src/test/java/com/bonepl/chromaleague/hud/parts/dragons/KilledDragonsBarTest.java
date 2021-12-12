@@ -55,6 +55,22 @@ public class KilledDragonsBarTest {
         testDragonsWithSoul(testDrakesOrder);
     }
 
+    @Test
+    void testChemtechDragons() {
+        Queue<DragonType> testDrakesOrder = new LinkedList<>(List.of(DragonType.HEXTECH,
+                DragonType.INFERNAL, DragonType.CHEMTECH, DragonType.CHEMTECH));
+
+        testDragonsWithSoul(testDrakesOrder);
+    }
+
+    @Test
+    void testHextechDragons() {
+        Queue<DragonType> testDrakesOrder = new LinkedList<>(List.of(DragonType.CHEMTECH,
+                DragonType.INFERNAL, DragonType.HEXTECH, DragonType.HEXTECH));
+
+        testDragonsWithSoul(testDrakesOrder);
+    }
+
     private static void testDragonsWithSoul(Queue<DragonType> testDrakesOrder) {
         final EventDataProcessor eventDataProcessor = new EventDataProcessor();
         KilledDragonsBar killedDragonsBar = new KilledDragonsBar();

@@ -97,6 +97,32 @@ class EventTypeTest {
     }
 
     @Test
+    void testAllyChemtechDragonAnimation() {
+        //given
+        when(gameStateMocks.playerList().isAlly(any())).thenReturn(true);
+        final Event event = KilledDragonsBarTest.getEventForDragonKill(DragonType.CHEMTECH);
+
+        //when
+        final EventType eventType = EventType.fromEvent(event);
+
+        //then
+        assertEquals(EventType.ALLY_CHEMTECH_DRAGON_KILL, eventType);
+    }
+
+    @Test
+    void testAllyHextechDragonAnimation() {
+        //given
+        when(gameStateMocks.playerList().isAlly(any())).thenReturn(true);
+        final Event event = KilledDragonsBarTest.getEventForDragonKill(DragonType.HEXTECH);
+
+        //when
+        final EventType eventType = EventType.fromEvent(event);
+
+        //then
+        assertEquals(EventType.ALLY_HEXTECH_DRAGON_KILL, eventType);
+    }
+
+    @Test
     void testAllyElderDragonAnimation() {
         //given
         when(gameStateMocks.playerList().isAlly(any())).thenReturn(true);
@@ -162,6 +188,32 @@ class EventTypeTest {
     }
 
     @Test
+    void testEnemyChemtechDragonAnimation() {
+        //given
+        when(gameStateMocks.playerList().isAlly(any())).thenReturn(false);
+        final Event event = KilledDragonsBarTest.getEventForDragonKill(DragonType.CHEMTECH);
+
+        //when
+        final EventType eventType = EventType.fromEvent(event);
+
+        //then
+        assertEquals(EventType.ENEMY_CHEMTECH_DRAGON_KILL, eventType);
+    }
+
+    @Test
+    void testEnemyHextechDragonAnimation() {
+        //given
+        when(gameStateMocks.playerList().isAlly(any())).thenReturn(false);
+        final Event event = KilledDragonsBarTest.getEventForDragonKill(DragonType.HEXTECH);
+
+        //when
+        final EventType eventType = EventType.fromEvent(event);
+
+        //then
+        assertEquals(EventType.ENEMY_HEXTECH_DRAGON_KILL, eventType);
+    }
+
+    @Test
     void testEnemyElderDragonAnimation() {
         //given
         when(gameStateMocks.playerList().isAlly(any())).thenReturn(false);
@@ -224,5 +276,29 @@ class EventTypeTest {
 
         //then
         assertEquals(EventType.ENEMY_BARON_KILL, eventType);
+    }
+
+    @Test
+    void testGameEndWin() {
+        //given
+        final Event event = ResourceLoader.eventFromJson("gameEndWin.json");
+
+        //when
+        final EventType eventType = EventType.fromEvent(event);
+
+        //then
+        assertEquals(EventType.GAME_END_VICTORY, eventType);
+    }
+
+    @Test
+    void testGameEndLose() {
+        //given
+        final Event event = ResourceLoader.eventFromJson("gameEndLose.json");
+
+        //when
+        final EventType eventType = EventType.fromEvent(event);
+
+        //then
+        assertEquals(EventType.GAME_END_DEFEAT, eventType);
     }
 }

@@ -179,7 +179,4 @@ public final class GameStateHelper {
         return true;
     }
 
-    public static double getPlayerRespawnTime() {
-        return RunningState.getGameState().getPlayerList().getActivePlayer().respawnTimer();
-    }
 }

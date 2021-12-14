@@ -1,8 +1,8 @@
 package com.bonepl.chromaleague.tasks;
 
 import com.bonepl.chromaleague.GameStateMocks;
-import com.bonepl.chromaleague.rest.LeagueHttpClientMock;
 import com.bonepl.chromaleague.rest.eventdata.Event;
+import com.bonepl.chromaleague.rest.http.LeagueHttpClientMock;
 import com.bonepl.chromaleague.state.RunningState;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

@@ -11,11 +11,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class MainThreads implements Closeable {
-    public static final long PLAYER_LIST_FETCH_DELAY = 500L;
+    public static final long PLAYER_LIST_FETCH_DELAY = 300L;
     public static final long ACTIVE_PLAYER_FETCH_DELAY = 100L;
     public static final long EVENTS_FETCH_DELAY = 300L;
     public static final long MAIN_HUD_REFRESH_DELAY = 50L;
-    public static final long GAME_STATS_FETCH_DELAY = 500L;
+    public static final long GAME_STATS_FETCH_DELAY = 300L;
 
     private static final Logger LOGGER = Logger.getLogger(MainThreads.class.getName());
 

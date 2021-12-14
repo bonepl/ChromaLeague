@@ -1,6 +1,6 @@
 package com.bonepl.chromaleague.rest.eventdata;
 
-import com.bonepl.chromaleague.rest.LeagueHttpClientMock;
+import com.bonepl.chromaleague.rest.http.LeagueHttpClientMock;
 import com.jsoniter.JsonIterator;
 import org.junit.jupiter.api.Test;
 

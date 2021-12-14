@@ -4,6 +4,6 @@ import com.bonepl.razersdk.color.StaticColor;
 
 public class AllyHeraldKillAnimation extends StaticBlinkingAnimation {
     public AllyHeraldKillAnimation() {
-        super(8, StaticColor.PURPLE);
+        super(StaticColor.PURPLE);
     }
 }

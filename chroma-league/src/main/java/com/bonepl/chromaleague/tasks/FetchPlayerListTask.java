@@ -1,29 +1,16 @@
 package com.bonepl.chromaleague.tasks;
 
-import com.bonepl.chromaleague.rest.LeagueHttpClient;
-import com.bonepl.chromaleague.rest.playerlist.Player;
-import com.bonepl.chromaleague.rest.playerlist.PlayerList;
+import com.bonepl.chromaleague.rest.http.LeagueHttpClients;
+import com.bonepl.chromaleague.rest.http.handlers.PlayerListResponseHandler;
 import com.bonepl.chromaleague.state.RunningState;
-import com.jsoniter.JsonIterator;
-
-import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class FetchPlayerListTask implements Runnable {
     public static final String URL = "https://127.0.0.1:2999/liveclientdata/playerlist";
-    private static final Logger LOGGER = Logger.getLogger(FetchPlayerListTask.class.getName());
+    private final PlayerListResponseHandler playerListResponseHandler = new PlayerListResponseHandler();
 
     @Override
     public void run() {
-        try {
-            LeagueHttpClient.getSingleResponse(URL)
-                    .map(playerList -> JsonIterator.deserialize(playerList, Player[].class))
-                    .map(Arrays::asList)
-                    .map(PlayerList::new)
-                    .ifPresent(playerList -> RunningState.getGameState().setPlayerList(playerList));
-        } catch (Exception ex) {
-            LOGGER.log(Level.SEVERE, ex, () -> "Error while fetching PlayerList");
-        }
+        LeagueHttpClients.getNonBlockingResponse(URL, playerListResponseHandler)
+                .ifPresent(playerList -> RunningState.getGameState().setPlayerList(playerList));
     }
 }

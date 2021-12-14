@@ -3,11 +3,9 @@ package com.bonepl.chromaleague.state;
 import com.bonepl.chromaleague.hud.parts.GoldBar;
 import com.bonepl.chromaleague.rest.activeplayer.ChampionStats;
 import com.bonepl.chromaleague.rest.eventdata.DragonType;
+import com.bonepl.chromaleague.rest.gamestats.GameStats;
 import com.bonepl.chromaleague.tasks.FetchGameStatsTask;
 
-import java.time.Duration;
-import java.time.LocalTime;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Objects;
 
@@ -60,25 +58,27 @@ public final class GameStateHelper {
 
     public static void startBaronBuff(double eventTime, double currentTimeForReconnection) {
         if (playerAliveAtEventTime(eventTime, currentTimeForReconnection)) {
-            double buffDiffToCover = (currentTimeForReconnection) - eventTime;
-            long secondsToRemoveFromTimer = Math.round(buffDiffToCover);
-            if (secondsToRemoveFromTimer < BARON_TIME) {
-                RunningState.getGameState().getEventData().setBaronBuffEnd(LocalTime.now().minusSeconds(secondsToRemoveFromTimer).plusSeconds(BARON_TIME));
+            if (hasExpired(eventTime, currentTimeForReconnection, BARON_TIME)) {
+                RunningState.getGameState().getEventData().setBaronBuffEnd(null);
+            } else {
+                RunningState.getGameState().getEventData().setBaronBuffEnd(eventTime + BARON_TIME);
             }
         }
     }
 
-    private static double getCurrentTimeOrReconnectionTime(double currentTimeForReconnection) {
-        if (currentTimeForReconnection == 0.0) {
-            return RunningState.getGameState().getGameStats().gameTime();
+    private static boolean hasExpired(double eventTime, double currentTimeForReconnection, long expirationTime) {
+        if (currentTimeForReconnection == 0d) {
+            double gameTime = RunningState.getGameState().getGameStats().gameTime();
+            return gameTime - eventTime > expirationTime;
         }
-        return currentTimeForReconnection;
+        return currentTimeForReconnection - eventTime > expirationTime;
     }
 
     public static boolean hasBaronBuff() {
         final EventData eventData = RunningState.getGameState().getEventData();
-        if (eventData.getBaronBuffEnd() != null && isActivePlayerAlive()) {
-            return LocalTime.now().isBefore(eventData.getBaronBuffEnd());
+        GameStats gameStats = RunningState.getGameState().getGameStats();
+        if (gameStats != null && eventData.getBaronBuffEnd() != null && isActivePlayerAlive()) {
+            return gameStats.gameTime() < eventData.getBaronBuffEnd();
         }
         eventData.setBaronBuffEnd(null);
         return false;
@@ -86,37 +86,39 @@ public final class GameStateHelper {
 
     public static void startElderBuff(double eventTime, double currentTimeForReconnection) {
         addKilledElder();
-        final double currentTimeOrReconnectionTime = getCurrentTimeOrReconnectionTime(currentTimeForReconnection);
-        if (playerAliveAtEventTime(eventTime, currentTimeOrReconnectionTime)) {
+        if (playerAliveAtEventTime(eventTime, currentTimeForReconnection)) {
             final int totalEldersKilled = getTotalEldersKilled();
-            long secondsToRemoveFromTimer = Math.round(currentTimeOrReconnectionTime - eventTime);
-            if (totalEldersKilled == 1 && secondsToRemoveFromTimer < FIRST_ELDER_TIME) {
-                RunningState.getGameState().getEventData()
-                        .setElderBuffEnd(LocalTime.now().minusSeconds(secondsToRemoveFromTimer).plusSeconds(FIRST_ELDER_TIME));
-            } else if (totalEldersKilled > 1 && secondsToRemoveFromTimer < NEXT_ELDER_TIME) {
-                RunningState.getGameState().getEventData()
-                        .setElderBuffEnd(LocalTime.now().minusSeconds(secondsToRemoveFromTimer).plusSeconds(NEXT_ELDER_TIME));
+            if (totalEldersKilled == 1) {
+                computeElderBuffTimes(eventTime, currentTimeForReconnection, FIRST_ELDER_TIME);
+            } else if (totalEldersKilled > 1) {
+                computeElderBuffTimes(eventTime, currentTimeForReconnection, NEXT_ELDER_TIME);
             }
+        }
+    }
+
+    private static void computeElderBuffTimes(double eventTime, double currentTimeForReconnection, long elderBuffTime) {
+        if (hasExpired(eventTime, currentTimeForReconnection, elderBuffTime)) {
+            RunningState.getGameState().getEventData().setElderBuffEnd(null);
+        } else {
+            RunningState.getGameState().getEventData().setElderBuffEnd(eventTime + elderBuffTime);
         }
     }
 
     private static boolean playerAliveAtEventTime(double eventTime, double currentTimeOrReconnectionTime) {
         final EventData eventData = RunningState.getGameState().getEventData();
+        double gameTime = RunningState.getGameState().getGameStats().gameTime();
         if (eventData.getDeathTime() == null) {
             return true;
         }
-        final LocalTime eventLocalTime = LocalTime.now().minus(millisDuration(currentTimeOrReconnectionTime - eventTime));
-        return !(eventLocalTime.isAfter(eventData.getDeathTime()) && eventLocalTime.isBefore(eventData.getRespawnTime()));
-    }
-
-    public static Duration millisDuration(double gameTime) {
-        return Duration.ofMillis(Double.valueOf(gameTime * 1000).longValue());
+        double eventLocalTime = gameTime - (currentTimeOrReconnectionTime - eventTime);
+        return !(eventLocalTime > eventData.getDeathTime() && eventLocalTime < eventData.getRespawnTime());
     }
 
     public static boolean hasElderBuff() {
         final EventData eventData = RunningState.getGameState().getEventData();
-        if (eventData.getElderBuffEnd() != null && isActivePlayerAlive()) {
-            return LocalTime.now().isBefore(eventData.getElderBuffEnd());
+        GameStats gameStats = RunningState.getGameState().getGameStats();
+        if (gameStats != null && eventData.getElderBuffEnd() != null && isActivePlayerAlive()) {
+            return gameStats.gameTime() < eventData.getElderBuffEnd();
         }
         eventData.setElderBuffEnd(null);
         return false;
@@ -155,19 +157,14 @@ public final class GameStateHelper {
 
     public static boolean shouldPlayRespawnAnimation() {
         final EventData eventData = RunningState.getGameState().getEventData();
-        final LocalTime respawnTime = eventData.getRespawnTime();
-        if (respawnTime != null) {
-            final LocalTime now = LocalTime.now();
-            if (now.isAfter(respawnTime)
-                    || eventData.getRespawnIndicator() == RespawnIndicator.IDLE) {
-                return false;
+        double respawnTimer = RunningState.getGameState().getPlayerList().getActivePlayer().respawnTimer();
+        if (respawnTimer > 0.0 && respawnTimer < 3.0) {
+            if (eventData.getRespawnIndicator() == RespawnIndicator.IDLE) {
+                eventData.setRespawnIndicator(RespawnIndicator.CHARGING);
+                return true;
             }
-            if (eventData.getRespawnIndicator() == RespawnIndicator.CHARGING) {
-                if (ChronoUnit.SECONDS.between(now, respawnTime) <= 1L) {
-                    eventData.setRespawnIndicator(RespawnIndicator.IDLE);
-                    return true;
-                }
-            }
+        } else if (eventData.getRespawnIndicator() == RespawnIndicator.CHARGING) {
+            eventData.setRespawnIndicator(RespawnIndicator.IDLE);
         }
         return false;
     }
@@ -181,4 +178,5 @@ public final class GameStateHelper {
         eventData.setRiftAnimationPlayed(true);
         return true;
     }
+
 }

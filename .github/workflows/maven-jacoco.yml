@@ -20,7 +20,7 @@ jobs:
           java-version: 17
 
       - name: Build with Maven
-        run: mvn -B test
+        run: mvn -B package
 
       - name: Generate JaCoCo Badge for Chroma League
         id: jacoco-chromaleague

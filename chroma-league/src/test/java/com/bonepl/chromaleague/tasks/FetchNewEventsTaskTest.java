@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.bonepl.chromaleague.rest.http.handlers.EventsResponseHandlerTest.verifyStandardEvent;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
@@ -41,16 +42,11 @@ class FetchNewEventsTaskTest {
         new FetchNewEventsTask().run();
 
         //then
-        List<Event> events = new ArrayList<>(3);
-        events.addAll(RunningState.getGameState().getEventData().getProcessedEvents());
-        assertEquals(3, events.size());
-        final Event event = events.get(2);
-        assertEquals(2, event.EventID());
-        assertEquals("ChampionKill", event.EventName());
-        assertEquals(7.1595916748047, event.EventTime());
+        verifyStandardEvent(RunningState.getGameState().getEventData().getProcessedEvents());
     }
 
     @Test
+        //TODO REMOVE?
     void testEventParsingAfterReconnect() {
         //given
         leagueHttpClientMock.mockEventsResponse("json/eventdata.json");
@@ -70,6 +66,7 @@ class FetchNewEventsTaskTest {
     }
 
     @Test
+        //TODO REMOVE?
     void testFirstEventParsing() {
         //given
         leagueHttpClientMock.mockEventsResponse("json/gamestartevent.json");

@@ -49,11 +49,7 @@ public final class LeagueHttpClientMock {
 
     public void mockReturnedResponseWithResource(String uri, String jsonResourcePath, ResponseHandler responseHandler) {
         try {
-            BasicHttpResponse basicHttpResponse = new BasicHttpResponse(new BasicStatusLine(HttpVersion.HTTP_1_1, HttpStatus.SC_OK, ""));
-            basicHttpResponse.setEntity(new ByteArrayEntity(Files.readAllBytes(
-                    Paths.get(Objects.requireNonNull(LeagueHttpClientMock.class.getClassLoader()
-                            .getResource(jsonResourcePath)).toURI()))));
-            mockReturnedResponse(uri, responseHandler.handleResponse(basicHttpResponse));
+            mockReturnedResponse(uri, responseHandler.handleResponse(createTestResponseFromJSON(jsonResourcePath)));
         } catch (IOException | URISyntaxException e) {
             fail(e);
         }
@@ -74,6 +70,14 @@ public final class LeagueHttpClientMock {
     public static HttpResponse createTestResponse(int statusCode, String testString) {
         BasicHttpResponse basicHttpResponse = new BasicHttpResponse(new BasicStatusLine(HttpVersion.HTTP_1_1, statusCode, ""));
         basicHttpResponse.setEntity(new ByteArrayEntity(testString.getBytes()));
+        return basicHttpResponse;
+    }
+
+    public static HttpResponse createTestResponseFromJSON(String jsonResourcePath) throws IOException, URISyntaxException {
+        BasicHttpResponse basicHttpResponse = new BasicHttpResponse(new BasicStatusLine(HttpVersion.HTTP_1_1, HttpStatus.SC_OK, ""));
+        basicHttpResponse.setEntity(new ByteArrayEntity(Files.readAllBytes(
+                Paths.get(Objects.requireNonNull(LeagueHttpClientMock.class.getClassLoader()
+                        .getResource(jsonResourcePath)).toURI()))));
         return basicHttpResponse;
     }
 }

@@ -2,14 +2,9 @@ package com.bonepl.chromaleague.rest.http;
 
 import com.bonepl.chromaleague.rest.http.client.NonBlockingLeagueHttpClient;
 import com.bonepl.chromaleague.rest.http.client.RetryingLeagueHttpClient;
-import com.bonepl.chromaleague.rest.http.handlers.ActivePlayerResponseHandler;
-import com.bonepl.chromaleague.rest.http.handlers.EventsResponseHandler;
-import com.bonepl.chromaleague.rest.http.handlers.GameStatsResponseHandler;
-import com.bonepl.chromaleague.rest.http.handlers.PlayerListResponseHandler;
-import com.bonepl.chromaleague.tasks.FetchActivePlayerTask;
-import com.bonepl.chromaleague.tasks.FetchGameStatsTask;
-import com.bonepl.chromaleague.tasks.FetchNewEventsTask;
-import com.bonepl.chromaleague.tasks.FetchPlayerListTask;
+import com.bonepl.chromaleague.rest.http.handlers.*;
+import com.bonepl.chromaleague.tasks.*;
+import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.HttpVersion;
 import org.apache.http.client.ResponseHandler;
@@ -48,6 +43,10 @@ public final class LeagueHttpClientMock {
         mockReturnedResponseWithResource(FetchGameStatsTask.URL, jsonResourcePath, new GameStatsResponseHandler());
     }
 
+    public void mockPlayerNameResponse(String jsonResourcePath) {
+        mockReturnedResponseWithResource(FetchPlayerNameTask.URL, jsonResourcePath, new PlayerNameResponseHandler());
+    }
+
     public void mockReturnedResponseWithResource(String uri, String jsonResourcePath, ResponseHandler responseHandler) {
         try {
             BasicHttpResponse basicHttpResponse = new BasicHttpResponse(new BasicStatusLine(HttpVersion.HTTP_1_1, HttpStatus.SC_OK, ""));
@@ -70,5 +69,11 @@ public final class LeagueHttpClientMock {
         } catch (IOException e) {
             fail(e);
         }
+    }
+
+    public static HttpResponse createTestResponse(int statusCode, String testString) {
+        BasicHttpResponse basicHttpResponse = new BasicHttpResponse(new BasicStatusLine(HttpVersion.HTTP_1_1, statusCode, ""));
+        basicHttpResponse.setEntity(new ByteArrayEntity(testString.getBytes()));
+        return basicHttpResponse;
     }
 }

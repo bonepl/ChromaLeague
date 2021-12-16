@@ -10,5 +10,5 @@ import org.junit.platform.suite.api.SuiteDisplayName;
         "com.bonepl.chromaleague.rest",
         "com.bonepl.chromaleague.tasks"
 })
-public class NonIntegrationTests {
+public class CLNonIntegrationTests {
 }

@@ -35,7 +35,7 @@ public class MainThreads implements Closeable {
 
     public void initializeGameThreads() {
         gameLoader.close();
-        RunningState.getGameState().setPlayerName(FetchPlayerName.fetchPlayerName());
+        new FetchPlayerNameTask().run();
         LOGGER.info(RunningState.getGameState().getPlayerName() + " joined the game");
         mainExecutor.scheduleWithFixedDelay(new FetchGameStatsTask(), 20L, GAME_STATS_FETCH_DELAY, TimeUnit.MILLISECONDS);
         mainExecutor.scheduleWithFixedDelay(new FetchPlayerListTask(), 50L, PLAYER_LIST_FETCH_DELAY, TimeUnit.MILLISECONDS);

@@ -1,7 +1,7 @@
 package com.bonepl.razersdk.sdk;
 
+import com.bonepl.razersdk.SessionHolder;
 import com.bonepl.razersdk.sdk.json.response.Heartbeat;
-import com.bonepl.razersdk.sdk.json.response.SessionInfo;
 import com.jsoniter.JsonIterator;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPut;
@@ -13,17 +13,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public record HeartbeatTask(CloseableHttpClient httpClient,
-                            SessionInfo sessionInfo) implements Runnable {
+                            SessionHolder sessionHolder) implements Runnable {
     private static final Logger LOGGER = Logger.getLogger(HeartbeatTask.class.getName());
 
     @Override
     public void run() {
         try {
-            final HttpPut heartbeatRequest = new HttpPut(sessionInfo.uri() + "/heartbeat");
+            final HttpPut heartbeatRequest = new HttpPut(sessionHolder.getCurrentSession().uri() + "/heartbeat");
             executeHttpRequest(heartbeatRequest);
         } catch (IOException e) {
-            LOGGER.log(Level.SEVERE, e, () -> "Error while executing heartbeat");
-            throw new IllegalStateException(e);
+            LOGGER.log(Level.WARNING, e, () -> "Error while executing heartbeat");
+            sessionHolder.refreshSession();
         }
     }
 

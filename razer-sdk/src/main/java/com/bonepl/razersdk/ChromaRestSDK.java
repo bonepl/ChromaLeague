@@ -42,7 +42,7 @@ import java.util.logging.Logger;
  */
 public final class ChromaRestSDK extends SdkRequestExecutor {
     private static final Logger LOGGER = Logger.getLogger(ChromaRestSDK.class.getName());
-    private final SessionHolder sessionHolder;
+    private final ChromaRestSDKSession chromaRestSDKSession;
     private final ScheduledExecutorService heartbeatExecutor;
 
     static {
@@ -59,9 +59,9 @@ public final class ChromaRestSDK extends SdkRequestExecutor {
      */
     public ChromaRestSDK() {
         super(HttpClients.createMinimal());
-        sessionHolder = new SessionHolder(HttpClients.createMinimal());
+        chromaRestSDKSession = new ChromaRestSDKSession(HttpClients.createMinimal());
         heartbeatExecutor = Executors.newSingleThreadScheduledExecutor();
-        heartbeatExecutor.scheduleWithFixedDelay(new HeartbeatTask(HttpClients.createMinimal(), sessionHolder), 0L, 5L, TimeUnit.SECONDS);
+        heartbeatExecutor.scheduleWithFixedDelay(new HeartbeatTask(HttpClients.createMinimal(), chromaRestSDKSession), 0L, 5L, TimeUnit.SECONDS);
     }
 
     /**
@@ -78,7 +78,7 @@ public final class ChromaRestSDK extends SdkRequestExecutor {
      * @param frame {@link IFrame} with available {@link Frame}
      */
     public void createKeyboardEffect(IFrame frame) {
-        final HttpPut keyboardEffectRequest = new HttpPut(sessionHolder.getCurrentSession().uri() + "/keyboard");
+        final HttpPut keyboardEffectRequest = new HttpPut(chromaRestSDKSession.getCurrentSession().uri() + "/keyboard");
         keyboardEffectRequest.setEntity(createKeyboardEffectParameter(frame));
         final String result = executeRequest(keyboardEffectRequest);
         final Result effectResponse = JsonIterator.deserialize(result, Result.class);
@@ -98,15 +98,13 @@ public final class ChromaRestSDK extends SdkRequestExecutor {
         }
     }
 
-
-
     /**
      * Close and disconnect Chroma-enabled Razer device
      */
     @Override
     public void close() {
         heartbeatExecutor.shutdown();
-        sessionHolder.unInit();
+        chromaRestSDKSession.unInit();
         super.close();
     }
 }

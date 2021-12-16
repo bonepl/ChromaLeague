@@ -15,13 +15,13 @@ import java.io.UnsupportedEncodingException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class SessionHolder extends SdkRequestExecutor {
+public class ChromaRestSDKSession extends SdkRequestExecutor {
     private static final long INIT_SLEEP_TIME = 2000L;
     private static final Logger LOGGER = Logger.getLogger(ChromaRestSDK.class.getName());
 
     private SessionInfo currentSession;
 
-    public SessionHolder(CloseableHttpClient instance) {
+    public ChromaRestSDKSession(CloseableHttpClient instance) {
         super(instance);
         currentSession = init();
     }

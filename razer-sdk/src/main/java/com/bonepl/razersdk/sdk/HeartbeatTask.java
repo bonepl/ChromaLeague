@@ -1,6 +1,6 @@
 package com.bonepl.razersdk.sdk;
 
-import com.bonepl.razersdk.SessionHolder;
+import com.bonepl.razersdk.ChromaRestSDKSession;
 import com.bonepl.razersdk.sdk.json.response.Heartbeat;
 import com.jsoniter.JsonIterator;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -13,17 +13,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public record HeartbeatTask(CloseableHttpClient httpClient,
-                            SessionHolder sessionHolder) implements Runnable {
+                            ChromaRestSDKSession chromaRestSDKSession) implements Runnable {
     private static final Logger LOGGER = Logger.getLogger(HeartbeatTask.class.getName());
 
     @Override
     public void run() {
         try {
-            final HttpPut heartbeatRequest = new HttpPut(sessionHolder.getCurrentSession().uri() + "/heartbeat");
+            final HttpPut heartbeatRequest = new HttpPut(chromaRestSDKSession.getCurrentSession().uri() + "/heartbeat");
             executeHttpRequest(heartbeatRequest);
         } catch (IOException e) {
             LOGGER.log(Level.WARNING, e, () -> "Error while executing heartbeat");
-            sessionHolder.refreshSession();
+            chromaRestSDKSession.refreshSession();
         }
     }
 

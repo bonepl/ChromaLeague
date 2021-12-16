@@ -32,7 +32,6 @@ public class ChromaRestSDKSession extends SdkRequestExecutor {
 
     public synchronized void refreshSession() {
         LOGGER.info(() -> "Refreshing ChromaRestSDK session");
-        unInit();
         currentSession = init();
     }
 

@@ -17,7 +17,7 @@
 
     <files>
         <file>
-            <source>${project.basedir}/src/scripts/chroma-league.bat</source>
+            <source>${project.basedir}/src/scripts/run-chroma-league.bat</source>
             <outputDirectory>/</outputDirectory>
         </file>
         <file>

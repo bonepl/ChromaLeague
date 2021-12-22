@@ -4,14 +4,10 @@ import com.bonepl.razersdk.animation.Frame;
 import com.bonepl.razersdk.animation.IFrame;
 import com.bonepl.razersdk.sdk.HeartbeatTask;
 import com.bonepl.razersdk.sdk.SdkRequestExecutor;
-import com.bonepl.razersdk.sdk.json.request.Init;
 import com.bonepl.razersdk.sdk.json.request.KeyboardEffect;
 import com.bonepl.razersdk.sdk.json.response.Result;
-import com.bonepl.razersdk.sdk.json.response.SessionInfo;
 import com.jsoniter.JsonIterator;
 import com.jsoniter.output.JsonStream;
-import org.apache.http.client.methods.HttpDelete;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
@@ -46,8 +42,7 @@ import java.util.logging.Logger;
  */
 public final class ChromaRestSDK extends SdkRequestExecutor {
     private static final Logger LOGGER = Logger.getLogger(ChromaRestSDK.class.getName());
-    private static final long INIT_SLEEP_TIME = 2000L;
-    private final SessionInfo currentSession;
+    private final ChromaRestSDKSession chromaRestSDKSession;
     private final ScheduledExecutorService heartbeatExecutor;
 
     static {
@@ -64,9 +59,9 @@ public final class ChromaRestSDK extends SdkRequestExecutor {
      */
     public ChromaRestSDK() {
         super(HttpClients.createMinimal());
-        currentSession = init();
+        chromaRestSDKSession = new ChromaRestSDKSession(HttpClients.createMinimal());
         heartbeatExecutor = Executors.newSingleThreadScheduledExecutor();
-        heartbeatExecutor.scheduleAtFixedRate(new HeartbeatTask(getHttpClient(), currentSession), 0L, 5L, TimeUnit.SECONDS);
+        heartbeatExecutor.scheduleWithFixedDelay(new HeartbeatTask(HttpClients.createMinimal(), chromaRestSDKSession), 0L, 5L, TimeUnit.SECONDS);
     }
 
     /**
@@ -83,7 +78,7 @@ public final class ChromaRestSDK extends SdkRequestExecutor {
      * @param frame {@link IFrame} with available {@link Frame}
      */
     public void createKeyboardEffect(IFrame frame) {
-        final HttpPut keyboardEffectRequest = new HttpPut(currentSession.uri() + "/keyboard");
+        final HttpPut keyboardEffectRequest = new HttpPut(chromaRestSDKSession.getCurrentSession().uri() + "/keyboard");
         keyboardEffectRequest.setEntity(createKeyboardEffectParameter(frame));
         final String result = executeRequest(keyboardEffectRequest);
         final Result effectResponse = JsonIterator.deserialize(result, Result.class);
@@ -103,43 +98,13 @@ public final class ChromaRestSDK extends SdkRequestExecutor {
         }
     }
 
-    private SessionInfo init() {
-        final HttpPost initRequest = new HttpPost("http://localhost:54235/razer/chromasdk/");
-        initRequest.setEntity(createJsonInitParameter());
-        initRequest.setHeader("Content-type", "application/json");
-        final String sessionInfoJson = executeRequest(initRequest);
-        final SessionInfo sessionInfo = JsonIterator.deserialize(sessionInfoJson, SessionInfo.class);
-        LOGGER.info(() -> "Initialized ChromaRestSDK connection { sessionId: " + sessionInfo.sessionId() + " }");
-        try {
-            Thread.sleep(INIT_SLEEP_TIME);
-        } catch (InterruptedException e) {
-            LOGGER.log(Level.WARNING, e, () -> "ChromaRestSDK initialization interrupted");
-            Thread.currentThread().interrupt();
-        }
-        return sessionInfo;
-    }
-
-    private static StringEntity createJsonInitParameter() {
-        try {
-            final String serialize = JsonStream.serialize(new Init());
-            return new StringEntity(serialize);
-        } catch (UnsupportedEncodingException e) {
-            LOGGER.log(Level.SEVERE, e, () -> "Error while creating Json Init parameter");
-            throw new IllegalStateException(e);
-        }
-    }
-
     /**
      * Close and disconnect Chroma-enabled Razer device
      */
     @Override
     public void close() {
         heartbeatExecutor.shutdown();
-        final HttpDelete unInitRequest = new HttpDelete(currentSession.uri());
-        final String unInitResponseJson = executeRequest(unInitRequest);
-        final Result result = JsonIterator.deserialize(unInitResponseJson, Result.class);
-        LOGGER.info(String.format("Razer Chroma SDK session %d ended with code %d",
-                currentSession.sessionId(), result.result()));
+        chromaRestSDKSession.unInit();
         super.close();
     }
 }

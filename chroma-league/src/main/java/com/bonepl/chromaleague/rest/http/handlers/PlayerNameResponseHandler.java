@@ -13,7 +13,7 @@ public class PlayerNameResponseHandler extends HttpOkBytesHandler
     public String handleResponse(HttpResponse response) throws IOException {
         return fetchBytesResponse(response)
                 .map(bytes -> new String(bytes, StandardCharsets.UTF_8))
-                .map(str -> str.replaceAll("\"", "").trim())
+                .map(str -> str.replaceAll("^\"(.+)\"$", "$1"))
                 .orElseThrow(() -> new IllegalStateException("Couldn't fetch PlayerName"));
     }
 }

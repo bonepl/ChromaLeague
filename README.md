@@ -44,7 +44,18 @@ Certain in-game events will spawn additional animations.
 Simply download [the latest Chroma League release](https://github.com/bonepl/ChromaLeague/releases/latest), unpack and
 run it by executing `run-chroma-league.bat`.
 
-**Chroma League** will automatically detect when you join the game and start running integrations.
+> **WARNING:** You need to fully unpack the archive to separate directory before running it. 
+> Running **Chroma League** directly from the archive will end up with following error:
+> 
+> `windows cannot find './cl-jre/bin/java.exe'. Make sure you type the name correctly and try again`
+
+After running `run-chroma-league.bat` you will see terminal window with application logs.
+**Chroma League** will verify connectivity to local Razer SDK and log REST Api versions like:
+
+`18:20:08 [INFO] Detected Razer Chroma REST Api Version[core=3.23.03, device=3.23.04, version=3.23.05]`
+
+This means that **Chroma League** has successfully passed startup checks,
+will automatically detect when you join the game and start running integrations.
 
 ## Compatibility
 * runs on Windows only

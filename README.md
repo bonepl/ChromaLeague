@@ -1,12 +1,16 @@
 # Chroma League
 
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/bonepl/chromaleague)](https://github.com/bonepl/ChromaLeague/releases/latest) ![GitHub release (by tag)](https://img.shields.io/github/downloads/bonepl/chromaleague/v1.2.0/total) ![GitHub all releases](https://img.shields.io/github/downloads/bonepl/chromaleague/total) ![License](https://img.shields.io/badge/license-GPL%203.0-informational) ![Coverage](.github/badges/jacoco-chromaleague.svg)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/bonepl/chromaleague)](https://github.com/bonepl/ChromaLeague/releases/latest)
+![GitHub release (by tag)](https://img.shields.io/github/downloads/bonepl/chromaleague/v1.2.0/total)
+![GitHub all releases](https://img.shields.io/github/downloads/bonepl/chromaleague/total)
+![License](https://img.shields.io/badge/license-GPL%203.0-informational)
+![Coverage](.github/badges/jacoco-chromaleague.svg)
 
 Java open-source Razer Chroma keyboard integration for League of Legends.
 
 If you like this project, consider giving me a tip for all the hard work :)
 
-[![paypal](https://www.paypalobjects.com/en_US/PL/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=5JFBXY66RT8Z6&item_name=Chroma+League&currency_code=PLN)
+[![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=5JFBXY66RT8Z6&item_name=Chroma+League&currency_code=PLN)
 
 ## Introduction
 

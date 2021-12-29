@@ -70,7 +70,7 @@ will automatically detect when you join the game and start running integrations.
 
 ## Implemented integrations
 - animated health bar (with health loss and gain animations)
-- animated resource bar (and customized for all champions)
+- animated resource bar (customized for all champions)
 - level up animation
 - gold pouch with animated coins (3000 gold means pouch is full)
 - enemy/ally dragon/herald/baron kill indicators
@@ -82,9 +82,10 @@ will automatically detect when you join the game and start running integrations.
 - kill/assist animation
 - respawn animation
 - dead animation
+- rift change animation
+- dim background light for the keyboard for playing in the dark
 - game victory animation
 - game defeat animation
-- dim background light for the keyboard for playing in the dark
 
 ## Troubleshooting
 Double check if Razer Chroma SDK Server service in Windows (`services.msc`) is up and running.

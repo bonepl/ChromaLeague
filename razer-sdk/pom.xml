@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.bonepl</groupId>
+        <groupId>net.booone</groupId>
         <artifactId>chroma-league-parent</artifactId>
         <version>1.2.2-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
@@ -46,7 +46,7 @@
                 <version>3.0.0-M5</version>
                 <configuration>
                     <excludes>
-                        <exclude>com/bonepl/razersdk/effects/*.java</exclude>
+                        <exclude>net/booone/razersdk/effects/*.java</exclude>
                     </excludes>
                 </configuration>
             </plugin>
@@ -57,7 +57,7 @@
                 <version>3.0.0-M5</version>
                 <configuration>
                     <includes>
-                        <include>com/bonepl/razersdk/effects/*.java</include>
+                        <include>net/booone/razersdk/effects/*.java</include>
                     </includes>
                 </configuration>
                 <executions>
@@ -76,7 +76,7 @@
                 <version>0.8.7</version>
                 <configuration>
                     <excludes>
-                        <exclude>com/bonepl/razersdk/effects/*</exclude>
+                        <exclude>net/booone/razersdk/effects/*</exclude>
                     </excludes>
                 </configuration>
                 <executions>

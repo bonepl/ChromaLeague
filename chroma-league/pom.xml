@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.bonepl</groupId>
+        <groupId>net.booone</groupId>
         <artifactId>chroma-league-parent</artifactId>
         <version>1.2.2-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
@@ -18,7 +18,7 @@
     <dependencies>
         <!-- core -->
         <dependency>
-            <groupId>com.bonepl</groupId>
+            <groupId>net.booone</groupId>
             <artifactId>razer-sdk</artifactId>
             <version>1.2.2-SNAPSHOT</version>
         </dependency>
@@ -81,7 +81,7 @@
                         <configuration>
                             <archive>
                                 <manifest>
-                                    <mainClass>com.bonepl.chromaleague.ChromaLeagueApp</mainClass>
+                                    <mainClass>net.booone.chromaleague.ChromaLeagueApp</mainClass>
                                 </manifest>
                             </archive>
                             <descriptorRefs>
@@ -98,7 +98,7 @@
                 <version>3.0.0-M5</version>
                 <configuration>
                     <excludes>
-                        <exclude>com/bonepl/chromaleague/hud/**/*.java</exclude>
+                        <exclude>net/booone/chromaleague/hud/**/*.java</exclude>
                     </excludes>
                 </configuration>
             </plugin>
@@ -109,7 +109,7 @@
                 <version>3.0.0-M5</version>
                 <configuration>
                     <includes>
-                        <include>com/bonepl/chromaleague/hud/**/*.java</include>
+                        <include>net/booone/chromaleague/hud/**/*.java</include>
                     </includes>
                 </configuration>
                 <executions>
@@ -128,7 +128,7 @@
                 <version>0.8.7</version>
                 <configuration>
                     <excludes>
-                        <exclude>com/bonepl/chromaleague/hud/**/*</exclude>
+                        <exclude>net/booone/chromaleague/hud/**/*</exclude>
                     </excludes>
                 </configuration>
                 <executions>

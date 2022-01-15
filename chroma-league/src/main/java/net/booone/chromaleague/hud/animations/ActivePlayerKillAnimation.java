@@ -24,7 +24,7 @@ public class ActivePlayerKillAnimation extends AnimatedFrame {
 
     private static LayeredFrame withBackground(List<RzKey> rzKeys) {
         final LayeredFrame layeredFrame = new LayeredFrame();
-        layeredFrame.addFrame(new SimpleFrame(AssistKillingSpreeBar.getKillingSpreeBar(), Background.BACKGROUND_COLOR));
+        layeredFrame.addFrame(new SimpleFrame(AssistKillingSpreeBar.getKillingSpreeBar(), Background.getCurrentBackgroundColor()));
         layeredFrame.addFrame(new SimpleFrame(rzKeys, StaticColor.RED));
         return layeredFrame;
     }

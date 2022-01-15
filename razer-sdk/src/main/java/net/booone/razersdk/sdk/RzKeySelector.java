@@ -23,8 +23,8 @@ import java.util.stream.Stream;
  * </pre>
  */
 public final class RzKeySelector {
-    private Predicate<Integer> columnSelector = column -> false;
-    private Predicate<Integer> rowSelector = row -> false;
+    private Predicate<Integer> columnSelector = column -> true;
+    private Predicate<Integer> rowSelector = row -> true;
     private Comparator<RzKey> sort = Comparator.naturalOrder();
 
     private RzKeySelector withColumn(Predicate<Integer> predicate) {
@@ -70,7 +70,7 @@ public final class RzKeySelector {
      * @throws IllegalArgumentException if provided number is not between 0 and 22 inclusive
      */
     public RzKeySelector withColumn(final int column) {
-        if (column < 0 || column > KeyboardEffect.KEYBOARD_COLUMNS) {
+        if (column < 0 || column >= KeyboardEffect.KEYBOARD_COLUMNS) {
             throw new IllegalArgumentException(String.format("Column number should be between 0 and %d, but was %d",
                     KeyboardEffect.KEYBOARD_COLUMNS, column));
         }
@@ -85,33 +85,11 @@ public final class RzKeySelector {
      * @throws IllegalArgumentException if provided number is not between 0 and 6 inclusive
      */
     public RzKeySelector withRow(final int row) {
-        if (row < 0 || row > KeyboardEffect.KEYBOARD_ROWS) {
+        if (row < 0 || row >= KeyboardEffect.KEYBOARD_ROWS) {
             throw new IllegalArgumentException(String.format("Row number should be between 0 and %d, but was %d",
                     KeyboardEffect.KEYBOARD_ROWS, row));
         }
         return withRow(r -> r == row);
-    }
-
-    /**
-     * Select keys with any column
-     *
-     * @return this
-     */
-    public RzKeySelector withAnyColumn() {
-        return withColumn(column -> true);
-    }
-
-    /**
-     * Select keys with any row
-     *
-     * @return this
-     */
-    public RzKeySelector withAnyRow() {
-        return withRow(row -> true);
-    }
-
-    public RzKeySelector all() {
-        return withAnyColumn().withAnyRow();
     }
 
     /**

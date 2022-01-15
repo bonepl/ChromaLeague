@@ -7,7 +7,7 @@ import net.booone.razersdk.animation.Frame;
 import net.booone.razersdk.animation.SimpleFrame;
 import net.booone.razersdk.color.Color;
 import net.booone.razersdk.color.StaticColor;
-import net.booone.razersdk.sdk.RzKeyJoiner;
+import net.booone.razersdk.sdk.ProgressiveRzKeySelector;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -30,14 +30,24 @@ public class WinAnimation extends Animation {
         if (delay > 0) {
             animatedFrame.addAnimationFrame(delay << 2, new SimpleFrame());
         }
-        animatedFrame.addAnimationFrame(new SimpleFrame(PredefinedKeySets.BLACKWIDOW_SIXTH_ROW, color));
-        animatedFrame.addAnimationFrame(new SimpleFrame(new RzKeyJoiner().with(PredefinedKeySets.BLACKWIDOW_SIXTH_ROW).with(PredefinedKeySets.BLACKWIDOW_FIFTH_ROW).join(), color));
-        animatedFrame.addAnimationFrame(new SimpleFrame(new RzKeyJoiner().with(PredefinedKeySets.BLACKWIDOW_FIFTH_ROW).with(PredefinedKeySets.BLACKWIDOW_FOURTH_ROW).join(), color));
-        animatedFrame.addAnimationFrame(new SimpleFrame(new RzKeyJoiner().with(PredefinedKeySets.BLACKWIDOW_FOURTH_ROW).with(PredefinedKeySets.BLACKWIDOW_THIRD_ROW).join(), color));
-        animatedFrame.addAnimationFrame(new SimpleFrame(new RzKeyJoiner().with(PredefinedKeySets.BLACKWIDOW_THIRD_ROW).with(PredefinedKeySets.BLACKWIDOW_SECOND_ROW).join(), color));
-        animatedFrame.addAnimationFrame(new SimpleFrame(new RzKeyJoiner().with(PredefinedKeySets.BLACKWIDOW_SECOND_ROW).with(PredefinedKeySets.BLACKWIDOW_FIRST_ROW).join(), color));
-        animatedFrame.addAnimationFrame(new SimpleFrame(PredefinedKeySets.BLACKWIDOW_FIRST_ROW, color));
+        ProgressiveRzKeySelector progressiveRzKeySelector = buildMovingFrame();
+        for (int i = 0; i < progressiveRzKeySelector.getTotalSteps(); i++) {
+            animatedFrame.addAnimationFrame(new SimpleFrame(progressiveRzKeySelector.getNextPart(), color));
+
+        }
         return animatedFrame;
+    }
+
+    private static ProgressiveRzKeySelector buildMovingFrame() {
+        return new ProgressiveRzKeySelector.Builder()
+                .addPart(PredefinedKeySets.BLACKWIDOW_SIXTH_ROW)
+                .addPart(PredefinedKeySets.BLACKWIDOW_FIFTH_ROW)
+                .addPart(PredefinedKeySets.BLACKWIDOW_FOURTH_ROW)
+                .addPart(PredefinedKeySets.BLACKWIDOW_THIRD_ROW)
+                .addPart(PredefinedKeySets.BLACKWIDOW_SECOND_ROW)
+                .addPart(PredefinedKeySets.BLACKWIDOW_FIRST_ROW)
+                .withLength(2)
+                .build();
     }
 
     @Override

@@ -1,4 +1,4 @@
-package net.booone.chromaleague.hud.parts;
+package net.booone.chromaleague.hud.animations;
 
 import net.booone.chromaleague.GameStateMocks;
 import net.booone.chromaleague.hud.AnimationTester;
@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.when;
 
-class LevelUpBarTest {
+class LevelUpAnimationTest {
 
     @Test
     void playLevelUpAnimation() {
@@ -14,10 +14,10 @@ class LevelUpBarTest {
         when(new GameStateMocks().activePlayer().level()).thenReturn(1);
 
         // when
-        final LevelUpBar levelUpBar = new LevelUpBar();
-        levelUpBar.levelUp();
+        final LevelUpAnimation levelUpAnimation = new LevelUpAnimation();
+        levelUpAnimation.levelUp();
 
         // then
-        new AnimationTester().testAnimation(levelUpBar);
+        new AnimationTester().testAnimation(levelUpAnimation);
     }
 }

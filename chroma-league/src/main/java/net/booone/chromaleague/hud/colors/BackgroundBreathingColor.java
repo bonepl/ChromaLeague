@@ -7,14 +7,14 @@ import net.booone.razersdk.color.StaticColor;
 public class BackgroundBreathingColor extends BreathingColor {
 
     public BackgroundBreathingColor(StaticColor upColor) {
-        super(upColor, Background.BACKGROUND_COLOR);
+        super(upColor, Background.DEFAULT_BACKGROUND_COLOR);
     }
 
     public BackgroundBreathingColor(StaticColor upColor, int steps) {
-        super(upColor, Background.BACKGROUND_COLOR, steps);
+        super(upColor, Background.DEFAULT_BACKGROUND_COLOR, steps);
     }
 
     public BackgroundBreathingColor(StaticColor upColor, int steps, boolean startUpDirection) {
-        super(upColor, Background.BACKGROUND_COLOR, steps, startUpDirection);
+        super(upColor, Background.DEFAULT_BACKGROUND_COLOR, steps, startUpDirection);
     }
 }

@@ -1,16 +1,16 @@
-package net.booone.razersdk.sdk;
+package net.booone.razersdk.effects;
 
 import net.booone.razersdk.ChromaRestSDK;
 import net.booone.razersdk.animation.SimpleFrame;
 import net.booone.razersdk.color.StaticColor;
 import net.booone.razersdk.color.TransitionColor;
-import org.junit.jupiter.api.Disabled;
+import net.booone.razersdk.sdk.CircularRzKeySelector;
+import net.booone.razersdk.sdk.RzKey;
 import org.junit.jupiter.api.Test;
 
-class CircularRzKeySelectorTest {
+class CircularRzKeySelectorEffectTest {
     @Test
-    @Disabled
-    void name() throws InterruptedException {
+    void testCircularRzKeySelectorAnimation() throws InterruptedException {
         try (ChromaRestSDK chromaRestSDK = new ChromaRestSDK()) {
             CircularRzKeySelector circularRzKeySelector = new CircularRzKeySelector(RzKey.RZKEY_H, 1);
             TransitionColor transitionColor = new TransitionColor(StaticColor.RED, StaticColor.BLACK, 20);

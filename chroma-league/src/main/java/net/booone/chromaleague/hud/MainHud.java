@@ -1,8 +1,12 @@
 package net.booone.chromaleague.hud;
 
+import net.booone.chromaleague.hud.animations.LevelUpAnimation;
 import net.booone.chromaleague.hud.animations.RespawnAnimation;
 import net.booone.chromaleague.hud.animations.RiftAnimation;
-import net.booone.chromaleague.hud.parts.*;
+import net.booone.chromaleague.hud.parts.AssistKillingSpreeBar;
+import net.booone.chromaleague.hud.parts.Background;
+import net.booone.chromaleague.hud.parts.EventAnimation;
+import net.booone.chromaleague.hud.parts.GoldBar;
 import net.booone.chromaleague.hud.parts.dragons.DragonBar;
 import net.booone.chromaleague.hud.parts.health.HealthBar;
 import net.booone.chromaleague.hud.parts.resource.ResourceBars;
@@ -19,7 +23,7 @@ public class MainHud extends AnimatedFrame {
     private static final Logger LOGGER = Logger.getLogger(MainHud.class.getName());
 
     private final GoldBar goldBar = new GoldBar();
-    private final LevelUpBar levelUpBar = new LevelUpBar();
+    private final LevelUpAnimation levelUpAnimation = new LevelUpAnimation();
     private final EventAnimation eventAnimation = new EventAnimation();
     private final DragonBar dragonBar = new DragonBar();
     private final HealthBar healthBar = new HealthBar();
@@ -40,7 +44,7 @@ public class MainHud extends AnimatedFrame {
             mainHudFrame.addFrame(new AssistKillingSpreeBar());
             mainHudFrame.addFrame(dragonBar);
             mainHudFrame.addFrame(goldBar);
-            mainHudFrame.addFrame(levelUpBar);
+            mainHudFrame.addFrame(levelUpAnimation);
             if (GameStateHelper.shouldPlayRespawnAnimation()) {
                 eventAnimation.addAnimation(new RespawnAnimation());
             }

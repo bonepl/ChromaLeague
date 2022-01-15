@@ -2,8 +2,10 @@ package net.booone.razersdk.sdk;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,8 +18,8 @@ class RzKeySelectorTest {
         final Set<RzKey> rzKeysSet = new RzKeySelector().asSet();
 
         //then
-        assertTrue(rzKeysList.isEmpty());
-        assertTrue(rzKeysSet.isEmpty());
+        assertTrue(Arrays.stream(RzKey.values()).toList().containsAll(rzKeysList));
+        assertEquals(Arrays.stream(RzKey.values()).collect(Collectors.toSet()), rzKeysSet);
     }
 
     @Test

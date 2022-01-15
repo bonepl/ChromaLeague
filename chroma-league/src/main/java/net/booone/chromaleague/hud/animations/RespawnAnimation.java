@@ -52,7 +52,7 @@ public class RespawnAnimation extends AnimatedFrame {
     private static StaticColor getResourceColor() {
         StaticColor toResourceColor;
         if (GameStateHelper.getResourcePercentage() == 0) {
-            toResourceColor = Background.BACKGROUND_COLOR;
+            toResourceColor = Background.DEFAULT_BACKGROUND_COLOR;
         } else {
             toResourceColor = getPlayerResourceToTransitionColor();
         }
@@ -67,8 +67,8 @@ public class RespawnAnimation extends AnimatedFrame {
             final LayeredFrame layeredFrame = new LayeredFrame();
             layeredFrame.addFrame(new SimpleFrame(keys, yellowBreathingColor.getColor()));
             if (i < STEPS) {
-                layeredFrame.addFrame(new SimpleFrame(HealthBar.getHealthBarKeys(), Background.BACKGROUND_COLOR));
-                layeredFrame.addFrame(new SimpleFrame(ResourceBars.getResourceBarKeys(), Background.BACKGROUND_COLOR));
+                layeredFrame.addFrame(new SimpleFrame(HealthBar.getHealthBarKeys(), Background.getCurrentBackgroundColor()));
+                layeredFrame.addFrame(new SimpleFrame(ResourceBars.getResourceBarKeys(), Background.getCurrentBackgroundColor()));
             }
             animatedFrame.addAnimationFrame(layeredFrame);
         }

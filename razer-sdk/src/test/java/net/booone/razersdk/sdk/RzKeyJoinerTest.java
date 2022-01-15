@@ -38,7 +38,7 @@ class RzKeyJoinerTest {
         //when
         final Set<RzKey> rzKeys = new RzKeyJoiner().with()
                 .with(Collections.emptyList())
-                .with(new RzKeySelector()).join();
+                .with(Collections.emptySet()).join();
 
         //then
         assertTrue(rzKeys.isEmpty());

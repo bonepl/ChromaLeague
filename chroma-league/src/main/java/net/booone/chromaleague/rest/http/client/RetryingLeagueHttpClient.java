@@ -1,8 +1,9 @@
 package net.booone.chromaleague.rest.http.client;
 
-import org.apache.http.client.ResponseHandler;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.StandardHttpRequestRetryHandler;
+import org.apache.hc.client5.http.impl.DefaultHttpRequestRetryStrategy;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.core5.http.io.HttpClientResponseHandler;
+import org.apache.hc.core5.util.TimeValue;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -11,7 +12,7 @@ import java.util.logging.Logger;
 public final class RetryingLeagueHttpClient extends AbstractLeagueHttpClient {
     private static final Logger LOGGER = Logger.getLogger(RetryingLeagueHttpClient.class.getName());
 
-    public <T> T getResponse(final String url, ResponseHandler<T> responseHandler) {
+    public <T> T getResponse(final String url, HttpClientResponseHandler<T> responseHandler) {
         try {
             return super.execute(url, responseHandler);
         } catch (IOException e) {
@@ -22,9 +23,9 @@ public final class RetryingLeagueHttpClient extends AbstractLeagueHttpClient {
 
     public CloseableHttpClient createLeagueHttpClient() {
         return commonHttpClientBuilder()
-                .addInterceptorFirst(new RetryOnNon200StatusInterceptor())
-                .addInterceptorLast(new RetryOnContentTooSmallInterceptor())
-                .setRetryHandler(new StandardHttpRequestRetryHandler(10, true))
+                .addResponseInterceptorFirst(new RetryOnNon200StatusInterceptor())
+                .addResponseInterceptorLast(new RetryOnContentTooSmallInterceptor())
+                .setRetryStrategy(new DefaultHttpRequestRetryStrategy(10, TimeValue.ofSeconds(1)))
                 .build();
     }
 }

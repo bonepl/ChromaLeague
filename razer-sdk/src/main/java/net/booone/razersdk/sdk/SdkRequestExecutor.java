@@ -1,9 +1,10 @@
 package net.booone.razersdk.sdk;
 
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpUriRequest;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.util.EntityUtils;
+import org.apache.hc.client5.http.classic.methods.HttpUriRequest;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
+import org.apache.hc.core5.http.ParseException;
+import org.apache.hc.core5.http.io.entity.EntityUtils;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -30,6 +31,8 @@ public class SdkRequestExecutor implements Closeable {
     private String execute(HttpUriRequest request) throws IOException {
         try (final CloseableHttpResponse execute = httpClient.execute(request)) {
             return EntityUtils.toString(execute.getEntity());
+        } catch (ParseException e) {
+            throw new IOException(e);
         }
     }
 

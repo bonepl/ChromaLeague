@@ -1,8 +1,8 @@
 package net.booone.chromaleague.rest.http.client;
 
 import net.booone.chromaleague.rest.http.LeagueHttpClientMock;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
+import org.apache.hc.core5.http.HttpStatus;
+import org.apache.hc.core5.http.message.BasicClassicHttpResponse;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
@@ -15,9 +15,9 @@ class RetryOnContentTooSmallInterceptorTest {
     @Test
     void shouldThrowIOExceptionToForceRetry() {
         //given
-        HttpResponse testResponse = LeagueHttpClientMock.createTestResponse(HttpStatus.SC_OK, "\"\"");
+        BasicClassicHttpResponse testResponse = LeagueHttpClientMock.createTestResponse(HttpStatus.SC_OK, "\"\"");
         //when
-        Executable executable = () -> new RetryOnContentTooSmallInterceptor().process(testResponse, null);
+        Executable executable = () -> new RetryOnContentTooSmallInterceptor().process(testResponse, testResponse.getEntity(), null);
         //then
         assertThrows(IOException.class, executable);
     }
@@ -25,9 +25,9 @@ class RetryOnContentTooSmallInterceptorTest {
     @Test
     void shouldNotThrowIOExceptionIfContentLargeEnough() {
         //given
-        HttpResponse testResponse = LeagueHttpClientMock.createTestResponse(HttpStatus.SC_OK, "\"B\"");
+        BasicClassicHttpResponse testResponse = LeagueHttpClientMock.createTestResponse(HttpStatus.SC_OK, "\"B\"");
         //when
-        Executable executable = () -> new RetryOnContentTooSmallInterceptor().process(testResponse, null);
+        Executable executable = () -> new RetryOnContentTooSmallInterceptor().process(testResponse, testResponse.getEntity(), null);
         //then
         assertDoesNotThrow(executable);
     }

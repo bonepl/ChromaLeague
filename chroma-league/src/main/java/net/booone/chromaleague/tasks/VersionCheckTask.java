@@ -1,9 +1,10 @@
 package net.booone.chromaleague.tasks;
 
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
+import org.apache.hc.client5.http.classic.methods.HttpGet;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.HttpClients;
+import org.apache.hc.core5.http.ParseException;
+import org.apache.hc.core5.http.io.entity.EntityUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -48,6 +49,8 @@ public class VersionCheckTask implements Runnable {
             return Arrays.stream(EntityUtils.toString(
                             defaultHttpClient.execute(new HttpGet(ONLINE_VERSION_URL)).getEntity())
                     .split(System.lineSeparator())).map(String::strip).collect(Collectors.toList());
+        } catch (ParseException e) {
+            throw new IOException(e);
         }
     }
 

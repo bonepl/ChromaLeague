@@ -1,8 +1,8 @@
 package net.booone.chromaleague.rest.http.client;
 
 import net.booone.chromaleague.rest.http.LeagueHttpClientMock;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
+import org.apache.hc.core5.http.HttpStatus;
+import org.apache.hc.core5.http.message.BasicClassicHttpResponse;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
@@ -15,9 +15,9 @@ class RetryOnNon200StatusInterceptorTest {
     @Test
     void shouldThrowIOExceptionToForceRetry() {
         //given
-        HttpResponse testResponse = LeagueHttpClientMock.createTestResponse(HttpStatus.SC_SERVICE_UNAVAILABLE, "test");
+        BasicClassicHttpResponse testResponse = LeagueHttpClientMock.createTestResponse(HttpStatus.SC_SERVICE_UNAVAILABLE, "test");
         //when
-        Executable executable = () -> new RetryOnNon200StatusInterceptor().process(testResponse, null);
+        Executable executable = () -> new RetryOnNon200StatusInterceptor().process(testResponse, testResponse.getEntity(), null);
         //then
         assertThrows(IOException.class, executable);
     }
@@ -25,9 +25,9 @@ class RetryOnNon200StatusInterceptorTest {
     @Test
     void shouldNotThrowIOExceptionIfStatus200() {
         //given
-        HttpResponse testResponse = LeagueHttpClientMock.createTestResponse(HttpStatus.SC_OK, "\test");
+        BasicClassicHttpResponse testResponse = LeagueHttpClientMock.createTestResponse(HttpStatus.SC_OK, "\test");
         //when
-        Executable executable = () -> new RetryOnNon200StatusInterceptor().process(testResponse, null);
+        Executable executable = () -> new RetryOnNon200StatusInterceptor().process(testResponse, testResponse.getEntity(), null);
         //then
         assertDoesNotThrow(executable);
     }

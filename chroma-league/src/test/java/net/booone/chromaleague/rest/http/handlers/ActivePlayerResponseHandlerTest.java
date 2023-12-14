@@ -3,7 +3,8 @@ package net.booone.chromaleague.rest.http.handlers;
 import net.booone.chromaleague.rest.activeplayer.ActivePlayer;
 import net.booone.chromaleague.rest.activeplayer.ChampionStats;
 import net.booone.chromaleague.rest.http.LeagueHttpClientMock;
-import org.apache.http.HttpResponse;
+import org.apache.hc.core5.http.ClassicHttpResponse;
+import org.apache.hc.core5.http.HttpException;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -14,9 +15,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ActivePlayerResponseHandlerTest {
     @Test
-    void testActivePlayerParsing() throws IOException, URISyntaxException {
+    void testActivePlayerParsing() throws IOException, URISyntaxException, HttpException {
         //given
-        HttpResponse testResponseFromJSON = LeagueHttpClientMock.createTestResponseFromJSON("json/activeplayer.json");
+        ClassicHttpResponse testResponseFromJSON = LeagueHttpClientMock.createTestResponseFromJSON("json/activeplayer.json");
 
         //when
         Optional<ActivePlayer> activePlayer = new ActivePlayerResponseHandler().handleResponse(testResponseFromJSON);

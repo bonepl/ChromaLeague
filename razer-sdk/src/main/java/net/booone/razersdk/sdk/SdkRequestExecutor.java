@@ -29,15 +29,7 @@ public class SdkRequestExecutor implements Closeable {
     }
 
     private String execute(HttpUriRequest request) throws IOException {
-        try (final CloseableHttpResponse execute = httpClient.execute(request)) {
-            return EntityUtils.toString(execute.getEntity());
-        } catch (ParseException e) {
-            throw new IOException(e);
-        }
-    }
-
-    public CloseableHttpClient getHttpClient() {
-        return httpClient;
+        return httpClient.execute(request, response -> EntityUtils.toString(response.getEntity()));
     }
 
     @Override

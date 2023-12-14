@@ -13,21 +13,27 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class RetryOnNon200StatusInterceptorTest {
     @Test
-    void shouldThrowIOExceptionToForceRetry() {
+    void shouldThrowIOExceptionToForceRetry() throws IOException {
         //given
-        BasicClassicHttpResponse testResponse = LeagueHttpClientMock.createTestResponse(HttpStatus.SC_SERVICE_UNAVAILABLE, "test");
-        //when
-        Executable executable = () -> new RetryOnNon200StatusInterceptor().process(testResponse, testResponse.getEntity(), null);
+        Executable executable;
+        try (BasicClassicHttpResponse testResponse = LeagueHttpClientMock.createTestResponse(HttpStatus.SC_SERVICE_UNAVAILABLE, "test")) {
+            //when
+            executable = () -> new RetryOnNon200StatusInterceptor().process(testResponse, testResponse.getEntity(), null);
+        }
+
         //then
         assertThrows(IOException.class, executable);
     }
 
     @Test
-    void shouldNotThrowIOExceptionIfStatus200() {
+    void shouldNotThrowIOExceptionIfStatus200() throws IOException {
         //given
-        BasicClassicHttpResponse testResponse = LeagueHttpClientMock.createTestResponse(HttpStatus.SC_OK, "\test");
-        //when
-        Executable executable = () -> new RetryOnNon200StatusInterceptor().process(testResponse, testResponse.getEntity(), null);
+        Executable executable;
+        try (BasicClassicHttpResponse testResponse = LeagueHttpClientMock.createTestResponse(HttpStatus.SC_OK, "\test")) {
+            //when
+            executable = () -> new RetryOnNon200StatusInterceptor().process(testResponse, testResponse.getEntity(), null);
+        }
+
         //then
         assertDoesNotThrow(executable);
     }

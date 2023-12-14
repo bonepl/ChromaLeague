@@ -32,7 +32,7 @@ public class EventsResponseHandlerTest {
     public static void verifyStandardEvent(List<Event> events) {
         assertEquals(3, events.size());
 
-        final Event event0 = events.get(0);
+        final Event event0 = events.getFirst();
         assertEquals(0, event0.EventID());
         assertEquals("GameStart", event0.EventName());
         assertEquals(0.0563616007566452, event0.EventTime());

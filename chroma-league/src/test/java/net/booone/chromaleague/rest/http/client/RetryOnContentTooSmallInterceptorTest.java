@@ -13,21 +13,27 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class RetryOnContentTooSmallInterceptorTest {
     @Test
-    void shouldThrowIOExceptionToForceRetry() {
+    void shouldThrowIOExceptionToForceRetry() throws IOException {
         //given
-        BasicClassicHttpResponse testResponse = LeagueHttpClientMock.createTestResponse(HttpStatus.SC_OK, "\"\"");
-        //when
-        Executable executable = () -> new RetryOnContentTooSmallInterceptor().process(testResponse, testResponse.getEntity(), null);
+        Executable executable;
+        try (BasicClassicHttpResponse testResponse = LeagueHttpClientMock.createTestResponse(HttpStatus.SC_OK, "\"\"")) {
+            //when
+            executable = () -> new RetryOnContentTooSmallInterceptor().process(testResponse, testResponse.getEntity(), null);
+        }
+
         //then
         assertThrows(IOException.class, executable);
     }
 
     @Test
-    void shouldNotThrowIOExceptionIfContentLargeEnough() {
+    void shouldNotThrowIOExceptionIfContentLargeEnough() throws IOException {
         //given
-        BasicClassicHttpResponse testResponse = LeagueHttpClientMock.createTestResponse(HttpStatus.SC_OK, "\"B\"");
-        //when
-        Executable executable = () -> new RetryOnContentTooSmallInterceptor().process(testResponse, testResponse.getEntity(), null);
+        Executable executable;
+        try (BasicClassicHttpResponse testResponse = LeagueHttpClientMock.createTestResponse(HttpStatus.SC_OK, "\"B\"")) {
+            //when
+            executable = () -> new RetryOnContentTooSmallInterceptor().process(testResponse, testResponse.getEntity(), null);
+        }
+
         //then
         assertDoesNotThrow(executable);
     }

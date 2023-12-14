@@ -4,7 +4,6 @@ import net.booone.chromaleague.rest.activeplayer.ActivePlayer;
 import net.booone.chromaleague.rest.activeplayer.ChampionStats;
 import net.booone.chromaleague.rest.http.LeagueHttpClientMock;
 import org.apache.hc.core5.http.ClassicHttpResponse;
-import org.apache.hc.core5.http.HttpException;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -15,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class ActivePlayerResponseHandlerTest {
     @Test
-    void testActivePlayerParsing() throws IOException, URISyntaxException, HttpException {
+    void testActivePlayerParsing() throws IOException, URISyntaxException {
         //given
         ClassicHttpResponse testResponseFromJSON = LeagueHttpClientMock.createTestResponseFromJSON("json/activeplayer.json");
 

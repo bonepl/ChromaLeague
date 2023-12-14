@@ -3,7 +3,6 @@ package net.booone.chromaleague.rest.http.handlers;
 import net.booone.chromaleague.rest.gamestats.GameStats;
 import net.booone.chromaleague.rest.http.LeagueHttpClientMock;
 import org.apache.hc.core5.http.ClassicHttpResponse;
-import org.apache.hc.core5.http.HttpException;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -15,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class GameStatsResponseHandlerTest {
 
     @Test
-    void testGameStatsParsing() throws IOException, URISyntaxException, HttpException {
+    void testGameStatsParsing() throws IOException, URISyntaxException {
         //given
         ClassicHttpResponse testResponseFromJSON = LeagueHttpClientMock.createTestResponseFromJSON("json/gamestats.json");
 

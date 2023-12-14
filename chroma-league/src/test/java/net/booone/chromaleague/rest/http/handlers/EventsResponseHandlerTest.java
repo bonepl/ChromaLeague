@@ -3,7 +3,6 @@ package net.booone.chromaleague.rest.http.handlers;
 import net.booone.chromaleague.rest.eventdata.Event;
 import net.booone.chromaleague.rest.http.LeagueHttpClientMock;
 import org.apache.hc.core5.http.ClassicHttpResponse;
-import org.apache.hc.core5.http.HttpException;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -17,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class EventsResponseHandlerTest {
 
     @Test
-    void testEventParsing() throws IOException, URISyntaxException, HttpException {
+    void testEventParsing() throws IOException, URISyntaxException {
         //given
         ClassicHttpResponse testResponseFromJSON = LeagueHttpClientMock.createTestResponseFromJSON("json/standardevent.json");
 

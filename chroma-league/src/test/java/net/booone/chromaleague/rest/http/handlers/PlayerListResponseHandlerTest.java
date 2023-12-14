@@ -6,7 +6,6 @@ import net.booone.chromaleague.rest.playerlist.PlayerList;
 import net.booone.chromaleague.rest.playerlist.Team;
 import net.booone.chromaleague.state.RunningState;
 import org.apache.hc.core5.http.ClassicHttpResponse;
-import org.apache.hc.core5.http.HttpException;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -19,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PlayerListResponseHandlerTest {
 
     @Test
-    void testPlayerListParsing() throws IOException, URISyntaxException, HttpException {
+    void testPlayerListParsing() throws IOException, URISyntaxException {
         //given
         RunningState.getGameState().setPlayerName(PLAYER_NAME);
         ClassicHttpResponse testResponseFromJSON = LeagueHttpClientMock.createTestResponseFromJSON("json/playerlist.json");

@@ -1,6 +1,5 @@
 package net.booone.chromaleague.rest.http.handlers;
 
-import org.apache.hc.core5.http.HttpException;
 import org.apache.hc.core5.http.HttpStatus;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class PlayerNameResponseHandlerTest {
 
     @Test
-    void testPlayerNameCleanup() throws IOException, HttpException {
+    void testPlayerNameCleanup() throws IOException {
         //given
         final String testPlayerName = "\"BąnE \" \"";
 

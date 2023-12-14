@@ -59,7 +59,7 @@ class FetchNewEventsTaskTest {
         List<Event> events = new ArrayList<>(30);
         events.addAll(RunningState.getGameState().getEventData().getProcessedEvents());
         assertEquals(27, events.size());
-        final Event event = events.get(0);
+        final Event event = events.getFirst();
         assertEquals(0, event.EventID());
         assertEquals("GameStart", event.EventName());
         assertEquals(0.0563616007566452, event.EventTime());
@@ -78,7 +78,7 @@ class FetchNewEventsTaskTest {
         List<Event> events = new ArrayList<>(1);
         events.addAll(RunningState.getGameState().getEventData().getProcessedEvents());
         assertEquals(1, events.size());
-        final Event event = events.get(0);
+        final Event event = events.getFirst();
         assertEquals(0, event.EventID());
         assertEquals("GameStart", event.EventName());
         assertEquals(0.0563616007566452, event.EventTime());

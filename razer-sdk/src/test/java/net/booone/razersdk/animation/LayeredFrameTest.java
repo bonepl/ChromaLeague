@@ -39,15 +39,7 @@ class LayeredFrameTest {
     @Test
     void testLayerCreation() {
         //given
-        final SimpleFrame layerOne = new SimpleFrame(List.of(RzKey.RZKEY_1, RzKey.RZKEY_2, RzKey.RZKEY_3), StaticColor.BLUE);
-        final SimpleFrame layerTwo = new SimpleFrame(RzKey.RZKEY_2, StaticColor.RED);
-        final SimpleFrame transparentLayer = new SimpleFrame(List.of(RzKey.RZKEY_1, RzKey.RZKEY_2, RzKey.RZKEY_3, RzKey.RZKEY_4), StaticColor.NONE);
-
-        //when
-        final LayeredFrame layeredFrame = new LayeredFrame();
-        layeredFrame.addFrame(layerOne);
-        layeredFrame.addFrame(layerTwo);
-        layeredFrame.addFrame(transparentLayer);
+        final LayeredFrame layeredFrame = createTestLayer();
         final Map<RzKey, Color> actualColorMap = layeredFrame.getFrame().getKeysToColors();
 
         //then
@@ -57,5 +49,18 @@ class LayeredFrameTest {
         assertEquals(3, actualColorMap.size());
         assertFalse(layeredFrame.hasFrame());
         assertThrows(NoSuchElementException.class, layeredFrame::getFrame);
+    }
+
+    private static LayeredFrame createTestLayer() {
+        final SimpleFrame layerOne = new SimpleFrame(List.of(RzKey.RZKEY_1, RzKey.RZKEY_2, RzKey.RZKEY_3), StaticColor.BLUE);
+        final SimpleFrame layerTwo = new SimpleFrame(RzKey.RZKEY_2, StaticColor.RED);
+        final SimpleFrame transparentLayer = new SimpleFrame(List.of(RzKey.RZKEY_1, RzKey.RZKEY_2, RzKey.RZKEY_3, RzKey.RZKEY_4), StaticColor.NONE);
+
+        //when
+        final LayeredFrame layeredFrame = new LayeredFrame();
+        layeredFrame.addFrame(layerOne);
+        layeredFrame.addFrame(layerTwo);
+        layeredFrame.addFrame(transparentLayer);
+        return layeredFrame;
     }
 }

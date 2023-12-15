@@ -33,7 +33,7 @@ public record PlayerList(List<Player> players) {
         return players.stream()
                 .filter(player -> player.summonerName().equals(summonersName)
                         //RIOT ID migration bug mitigation
-                        || player.summonerName().equals(summonersName.substring(0, summonersName.indexOf('#'))))
+                        || (summonersName.contains("#") && player.summonerName().equals(summonersName.substring(0, summonersName.indexOf('#')))))
                 .findAny().orElseThrow(() -> new IllegalStateException("Couldn't find player with name " + summonersName));
     }
 }

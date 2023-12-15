@@ -33,7 +33,7 @@ class RzKeySelectorTest {
 
         //then
         assertFalse(rzKeys.isEmpty());
-        assertEquals(expected, rzKeys.get(0));
+        assertEquals(expected, rzKeys.getFirst());
     }
 
     @Test

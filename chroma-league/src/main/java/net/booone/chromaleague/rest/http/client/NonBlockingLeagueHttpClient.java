@@ -1,14 +1,15 @@
 package net.booone.chromaleague.rest.http.client;
 
-import org.apache.http.client.ResponseHandler;
-import org.apache.http.impl.client.CloseableHttpClient;
+
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.core5.http.io.HttpClientResponseHandler;
 
 import java.io.IOException;
 import java.util.Optional;
 
 public final class NonBlockingLeagueHttpClient extends AbstractLeagueHttpClient {
 
-    public <T> Optional<T> getResponse(final String url, ResponseHandler<Optional<T>> responseHandler) {
+    public <T> Optional<T> getResponse(final String url, HttpClientResponseHandler<Optional<T>> responseHandler) {
         try {
             return super.execute(url, responseHandler);
         } catch (IOException e) {

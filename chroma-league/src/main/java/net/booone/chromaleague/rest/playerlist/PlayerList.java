@@ -31,7 +31,9 @@ public record PlayerList(List<Player> players) {
 
     private Player getBySummonersName(String summonersName) {
         return players.stream()
-                .filter(player -> player.summonerName().equals(summonersName))
+                .filter(player -> player.summonerName().equals(summonersName)
+                        //RIOT ID migration bug mitigation
+                        || (summonersName.contains("#") && player.summonerName().equals(summonersName.substring(0, summonersName.indexOf('#')))))
                 .findAny().orElseThrow(() -> new IllegalStateException("Couldn't find player with name " + summonersName));
     }
 }

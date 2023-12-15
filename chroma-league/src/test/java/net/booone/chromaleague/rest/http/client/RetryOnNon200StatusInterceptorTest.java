@@ -1,8 +1,8 @@
 package net.booone.chromaleague.rest.http.client;
 
 import net.booone.chromaleague.rest.http.LeagueHttpClientMock;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
+import org.apache.hc.core5.http.HttpStatus;
+import org.apache.hc.core5.http.message.BasicClassicHttpResponse;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
@@ -13,21 +13,27 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class RetryOnNon200StatusInterceptorTest {
     @Test
-    void shouldThrowIOExceptionToForceRetry() {
+    void shouldThrowIOExceptionToForceRetry() throws IOException {
         //given
-        HttpResponse testResponse = LeagueHttpClientMock.createTestResponse(HttpStatus.SC_SERVICE_UNAVAILABLE, "test");
-        //when
-        Executable executable = () -> new RetryOnNon200StatusInterceptor().process(testResponse, null);
+        Executable executable;
+        try (BasicClassicHttpResponse testResponse = LeagueHttpClientMock.createTestResponse(HttpStatus.SC_SERVICE_UNAVAILABLE, "test")) {
+            //when
+            executable = () -> new RetryOnNon200StatusInterceptor().process(testResponse, testResponse.getEntity(), null);
+        }
+
         //then
         assertThrows(IOException.class, executable);
     }
 
     @Test
-    void shouldNotThrowIOExceptionIfStatus200() {
+    void shouldNotThrowIOExceptionIfStatus200() throws IOException {
         //given
-        HttpResponse testResponse = LeagueHttpClientMock.createTestResponse(HttpStatus.SC_OK, "\test");
-        //when
-        Executable executable = () -> new RetryOnNon200StatusInterceptor().process(testResponse, null);
+        Executable executable;
+        try (BasicClassicHttpResponse testResponse = LeagueHttpClientMock.createTestResponse(HttpStatus.SC_OK, "\test")) {
+            //when
+            executable = () -> new RetryOnNon200StatusInterceptor().process(testResponse, testResponse.getEntity(), null);
+        }
+
         //then
         assertDoesNotThrow(executable);
     }

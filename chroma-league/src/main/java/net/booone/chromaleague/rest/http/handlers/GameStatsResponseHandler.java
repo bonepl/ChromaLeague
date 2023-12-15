@@ -2,17 +2,17 @@ package net.booone.chromaleague.rest.http.handlers;
 
 import com.jsoniter.JsonIterator;
 import net.booone.chromaleague.rest.gamestats.GameStats;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ResponseHandler;
+import org.apache.hc.core5.http.ClassicHttpResponse;
+import org.apache.hc.core5.http.io.HttpClientResponseHandler;
 
 import java.io.IOException;
 import java.util.Optional;
 
 public class GameStatsResponseHandler extends HttpOkBytesHandler
-        implements ResponseHandler<Optional<GameStats>> {
+        implements HttpClientResponseHandler<Optional<GameStats>> {
 
     @Override
-    public Optional<GameStats> handleResponse(HttpResponse response) throws IOException {
+    public Optional<GameStats> handleResponse(ClassicHttpResponse response) throws IOException {
         return fetchBytesResponse(response)
                 .map(gameStats -> JsonIterator.deserialize(gameStats, GameStats.class));
     }

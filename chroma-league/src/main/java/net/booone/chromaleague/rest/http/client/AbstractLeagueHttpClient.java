@@ -1,15 +1,16 @@
 package net.booone.chromaleague.rest.http.client;
 
-import org.apache.http.client.ResponseHandler;
-import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.config.RegistryBuilder;
-import org.apache.http.conn.socket.ConnectionSocketFactory;
-import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClientBuilder;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
+import org.apache.hc.client5.http.classic.methods.HttpGet;
+import org.apache.hc.client5.http.config.RequestConfig;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
+import org.apache.hc.client5.http.impl.classic.HttpClients;
+import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManager;
+import org.apache.hc.client5.http.socket.ConnectionSocketFactory;
+import org.apache.hc.client5.http.ssl.SSLConnectionSocketFactory;
+import org.apache.hc.core5.http.config.RegistryBuilder;
+import org.apache.hc.core5.http.io.HttpClientResponseHandler;
+import org.apache.hc.core5.util.Timeout;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
@@ -21,12 +22,12 @@ import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
 
 public abstract class AbstractLeagueHttpClient {
-    public static final int DEFAULT_TIMEOUT = 150;
+    public static final Timeout DEFAULT_TIMEOUT = Timeout.ofSeconds(150);
     private final CloseableHttpClient httpClient = createLeagueHttpClient();
 
     protected abstract CloseableHttpClient createLeagueHttpClient();
 
-    protected <T> T execute(final String url, ResponseHandler<T> responseHandler) throws IOException {
+    protected <T> T execute(final String url, HttpClientResponseHandler<T> responseHandler) throws IOException {
         return getHttpClient().execute(jsonHttpGet(url), responseHandler);
     }
 
@@ -45,8 +46,8 @@ public abstract class AbstractLeagueHttpClient {
 
     protected RequestConfig createRequestConfig() {
         return RequestConfig.custom()
-                .setConnectTimeout(DEFAULT_TIMEOUT)
-                .setSocketTimeout(DEFAULT_TIMEOUT).build();
+                .setConnectionRequestTimeout(DEFAULT_TIMEOUT)
+                .setResponseTimeout(DEFAULT_TIMEOUT).build();
     }
 
     protected SSLContext createUnsecuredSSL() {

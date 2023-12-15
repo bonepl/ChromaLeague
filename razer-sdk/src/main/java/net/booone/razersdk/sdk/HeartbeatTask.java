@@ -3,10 +3,9 @@ package net.booone.razersdk.sdk;
 import com.jsoniter.JsonIterator;
 import net.booone.razersdk.ChromaRestSDKSession;
 import net.booone.razersdk.sdk.json.response.Heartbeat;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPut;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.util.EntityUtils;
+import org.apache.hc.client5.http.classic.methods.HttpPut;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.core5.http.io.entity.EntityUtils;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -28,10 +27,11 @@ public record HeartbeatTask(CloseableHttpClient httpClient,
     }
 
     private void executeHttpRequest(HttpPut heartbeatRequest) throws IOException {
-        try (final CloseableHttpResponse execute = httpClient.execute(heartbeatRequest)) {
-            final String heartbeatJson = EntityUtils.toString(execute.getEntity());
+        httpClient.execute(heartbeatRequest, response -> {
+            final String heartbeatJson = EntityUtils.toString(response.getEntity());
             final Heartbeat heartbeat = JsonIterator.deserialize(heartbeatJson, Heartbeat.class);
             LOGGER.finer(heartbeat::toString);
-        }
+            return null;
+        });
     }
 }

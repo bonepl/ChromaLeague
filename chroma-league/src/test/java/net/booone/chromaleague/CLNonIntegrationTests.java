@@ -7,8 +7,8 @@ import org.junit.platform.suite.api.SuiteDisplayName;
 @Suite
 @SuiteDisplayName("Non integration tests")
 @SelectPackages({
-        "com.bonepl.chromaleague.rest",
-        "com.bonepl.chromaleague.tasks"
+        "net.booone.chromaleague.rest",
+        "net.booone.chromaleague.tasks"
 })
 public class CLNonIntegrationTests {
 }

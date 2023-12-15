@@ -3,8 +3,8 @@ package net.booone.razersdk;
 import com.jsoniter.JsonIterator;
 import net.booone.razersdk.sdk.SdkRequestExecutor;
 import net.booone.razersdk.sdk.json.response.Version;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.HttpClients;
+import org.apache.hc.client5.http.classic.methods.HttpGet;
+import org.apache.hc.client5.http.impl.classic.HttpClients;
 
 import java.util.logging.Logger;
 

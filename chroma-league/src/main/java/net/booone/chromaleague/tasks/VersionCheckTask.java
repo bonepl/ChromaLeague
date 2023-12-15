@@ -1,9 +1,9 @@
 package net.booone.chromaleague.tasks;
 
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
+import org.apache.hc.client5.http.classic.methods.HttpGet;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.HttpClients;
+import org.apache.hc.core5.http.io.entity.EntityUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -27,9 +27,9 @@ public class VersionCheckTask implements Runnable {
         try {
             final List<String> onlineVersion = getOnlineVersion();
             final List<String> localVersion = getLocalVersion();
-            LOGGER.info(() -> "Running ChromaLeague version " + localVersion.get(0));
-            if (newerVersionAvailable(localVersion.get(0), onlineVersion.get(0))) {
-                LOGGER.info(() -> "There is a newer ChromaLeague version " + onlineVersion.get(0) + " available!");
+            LOGGER.info(() -> "Running ChromaLeague version " + localVersion.getFirst());
+            if (newerVersionAvailable(localVersion.getFirst(), onlineVersion.getFirst())) {
+                LOGGER.info(() -> "There is a newer ChromaLeague version " + onlineVersion.getFirst() + " available!");
                 LOGGER.info("New changes:");
                 IntStream.range(1, onlineVersion.size())
                         .mapToObj(onlineVersion::get)
@@ -45,9 +45,10 @@ public class VersionCheckTask implements Runnable {
 
     public List<String> getOnlineVersion() throws IOException {
         try (final CloseableHttpClient defaultHttpClient = HttpClients.createDefault()) {
-            return Arrays.stream(EntityUtils.toString(
-                            defaultHttpClient.execute(new HttpGet(ONLINE_VERSION_URL)).getEntity())
-                    .split(System.lineSeparator())).map(String::strip).collect(Collectors.toList());
+            return defaultHttpClient.execute(new HttpGet(ONLINE_VERSION_URL),
+                    response -> Arrays.stream(EntityUtils.toString(response.getEntity())
+                                    .split(System.lineSeparator())).map(String::strip)
+                            .collect(Collectors.toList()));
         }
     }
 

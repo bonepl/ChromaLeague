@@ -1,6 +1,6 @@
 package net.booone.chromaleague.rest.http.handlers;
 
-import org.apache.http.HttpStatus;
+import org.apache.hc.core5.http.HttpStatus;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;

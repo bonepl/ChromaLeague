@@ -8,13 +8,12 @@ import net.booone.razersdk.sdk.HeartbeatTask;
 import net.booone.razersdk.sdk.SdkRequestExecutor;
 import net.booone.razersdk.sdk.json.request.KeyboardEffect;
 import net.booone.razersdk.sdk.json.response.Result;
-import org.apache.http.client.methods.HttpPut;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.HttpClients;
+import org.apache.hc.client5.http.classic.methods.HttpPut;
+import org.apache.hc.client5.http.impl.classic.HttpClients;
+import org.apache.hc.core5.http.io.entity.StringEntity;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -90,12 +89,7 @@ public final class ChromaRestSDK extends SdkRequestExecutor {
     private static StringEntity createKeyboardEffectParameter(IFrame frame) {
         final KeyboardEffect keyboardEffect = new KeyboardEffect(frame.getFrame().getKeysToColors());
         final String keyboardEffectJson = JsonStream.serialize(keyboardEffect);
-        try {
-            return new StringEntity(keyboardEffectJson);
-        } catch (UnsupportedEncodingException e) {
-            LOGGER.log(Level.SEVERE, e, () -> "Error while creating KeyboardEffect");
-            throw new IllegalStateException(e);
-        }
+        return new StringEntity(keyboardEffectJson);
     }
 
     /**

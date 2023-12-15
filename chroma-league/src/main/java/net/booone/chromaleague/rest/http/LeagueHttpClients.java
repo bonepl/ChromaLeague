@@ -2,7 +2,7 @@ package net.booone.chromaleague.rest.http;
 
 import net.booone.chromaleague.rest.http.client.NonBlockingLeagueHttpClient;
 import net.booone.chromaleague.rest.http.client.RetryingLeagueHttpClient;
-import org.apache.http.client.ResponseHandler;
+import org.apache.hc.core5.http.io.HttpClientResponseHandler;
 
 import java.util.Optional;
 
@@ -13,11 +13,11 @@ public final class LeagueHttpClients {
     private LeagueHttpClients() {
     }
 
-    public static <T> Optional<T> getNonBlockingResponse(final String url, ResponseHandler<Optional<T>> responseHandler) {
+    public static <T> Optional<T> getNonBlockingResponse(final String url, HttpClientResponseHandler<Optional<T>> responseHandler) {
         return getNonBlockingLeagueHttpClient().getResponse(url, responseHandler);
     }
 
-    public static <T> T getRetryingResponse(final String url, ResponseHandler<T> responseHandler) {
+    public static <T> T getRetryingResponse(final String url, HttpClientResponseHandler<T> responseHandler) {
         return getRetryingLeagueHttpClient().getResponse(url, responseHandler);
     }
 

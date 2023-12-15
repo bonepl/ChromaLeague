@@ -6,12 +6,11 @@ import net.booone.razersdk.sdk.SdkRequestExecutor;
 import net.booone.razersdk.sdk.json.request.Init;
 import net.booone.razersdk.sdk.json.response.Result;
 import net.booone.razersdk.sdk.json.response.SessionInfo;
-import org.apache.http.client.methods.HttpDelete;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.hc.client5.http.classic.methods.HttpDelete;
+import org.apache.hc.client5.http.classic.methods.HttpPost;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.core5.http.io.entity.StringEntity;
 
-import java.io.UnsupportedEncodingException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -60,12 +59,7 @@ public class ChromaRestSDKSession extends SdkRequestExecutor {
     }
 
     private static StringEntity createJsonInitParameter() {
-        try {
-            final String serialize = JsonStream.serialize(new Init());
-            return new StringEntity(serialize);
-        } catch (UnsupportedEncodingException e) {
-            LOGGER.log(Level.SEVERE, e, () -> "Error while creating Json Init parameter");
-            throw new IllegalStateException(e);
-        }
+        final String serialize = JsonStream.serialize(new Init());
+        return new StringEntity(serialize);
     }
 }

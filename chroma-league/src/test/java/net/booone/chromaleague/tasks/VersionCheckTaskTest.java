@@ -51,7 +51,7 @@ class VersionCheckTaskTest {
 
         //then
         assertFalse(onlineVersion.isEmpty());
-        assertTrue(onlineVersion.get(0).matches("\\d+\\.\\d+\\.\\d+"));
+        assertTrue(onlineVersion.getFirst().matches("\\d+\\.\\d+\\.\\d+"));
     }
 
     @Test
@@ -61,7 +61,7 @@ class VersionCheckTaskTest {
 
         //then
         assertFalse(onlineVersion.isEmpty());
-        assertTrue(onlineVersion.get(0).matches("\\d+\\.\\d+\\.\\d+"));
+        assertTrue(onlineVersion.getFirst().matches("\\d+\\.\\d+\\.\\d+"));
     }
 
     @ParameterizedTest

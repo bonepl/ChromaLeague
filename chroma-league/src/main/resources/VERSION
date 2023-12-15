@@ -1,4 +1,4 @@
-1.2.1
-- New rift change animation
-- New background colors for rift
-- Stability improvements
+1.3.0
+- Now running on Temurin JDK 21
+- Updated libraries
+- SummonerName to Riot ID migration problem mitigation (not guaranteed to work - waiting for proper fix from Riot)

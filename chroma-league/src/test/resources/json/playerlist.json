@@ -9,6 +9,9 @@
     "rawChampionName": "game_character_displayname_Ryze",
     "rawSkinName": "game_character_skin_displayname_Ryze_10",
     "respawnTimer": 0.0,
+    "riotId": "Łążćkiewicz#TAG1",
+    "riotIdGameName": "Łążćkiewicz",
+    "riotIdTagLine": "TAG1",
     "runes": {
       "keystone": {
         "displayName": "Phase Rush",
@@ -38,7 +41,7 @@
     },
     "skinID": 10,
     "skinName": "SKT T1 Ryze",
-    "summonerName": "Łążćkiewicz",
+    "summonerName": "Łążćkiewicz#TAG1",
     "summonerSpells": {
       "summonerSpellOne": {
         "displayName": "Flash",
@@ -63,6 +66,9 @@
     "rawChampionName": "game_character_displayname_Hecarim",
     "rawSkinName": "game_character_skin_displayname_Hecarim_5",
     "respawnTimer": 0.0,
+    "riotId": "Test summoner 2#TEST",
+    "riotIdGameName": "Test summoner 2",
+    "riotIdTagLine": "TEST",
     "runes": {
       "keystone": {
         "displayName": "Conqueror",
@@ -92,7 +98,7 @@
     },
     "skinID": 5,
     "skinName": "Elderwood Hecarim",
-    "summonerName": "Test summoner 2",
+    "summonerName": "Test summoner 2#TEST",
     "summonerSpells": {
       "summonerSpellOne": {
         "displayName": "Ghost",
@@ -116,6 +122,9 @@
     "position": "MIDDLE",
     "rawChampionName": "game_character_displayname_Yasuo",
     "respawnTimer": 0.0,
+    "riotId": "Test summoner 7#TEST",
+    "riotIdGameName": "Test summoner 7",
+    "riotIdTagLine": "TEST",
     "runes": {
       "keystone": {
         "displayName": "Conqueror",
@@ -144,7 +153,7 @@
       "wardScore": 0.0
     },
     "skinID": 0,
-    "summonerName": "Test summoner 7",
+    "summonerName": "Test summoner 7#TEST",
     "summonerSpells": {
       "summonerSpellOne": {
         "displayName": "Ignite",
@@ -169,6 +178,9 @@
     "rawChampionName": "game_character_displayname_Lucian",
     "rawSkinName": "game_character_skin_displayname_Lucian_9",
     "respawnTimer": 0.0,
+    "riotId": "Test summoner 8#TEST",
+    "riotIdGameName": "Test summoner 8",
+    "riotIdTagLine": "TEST",
     "runes": {
       "keystone": {
         "displayName": "Press the Attack",
@@ -198,7 +210,7 @@
     },
     "skinID": 9,
     "skinName": "Demacia Vice Lucian",
-    "summonerName": "Test summoner 8",
+    "summonerName": "Test summoner 8#TEST",
     "summonerSpells": {
       "summonerSpellOne": {
         "displayName": "Flash",
@@ -222,6 +234,9 @@
     "position": "UTILITY",
     "rawChampionName": "game_character_displayname_Malphite",
     "respawnTimer": 0.0,
+    "riotId": "Test summoner 9#TEST",
+    "riotIdGameName": "Test summoner 9",
+    "riotIdTagLine": "TEST",
     "runes": {
       "keystone": {
         "displayName": "Arcane Comet",
@@ -250,7 +265,7 @@
       "wardScore": 0.0
     },
     "skinID": 0,
-    "summonerName": "Test summoner 9",
+    "summonerName": "Test summoner 9#TEST",
     "summonerSpells": {
       "summonerSpellOne": {
         "displayName": "Ignite",
@@ -275,6 +290,9 @@
     "rawChampionName": "game_character_displayname_Chogath",
     "rawSkinName": "game_character_skin_displayname_Chogath_2",
     "respawnTimer": 4.5,
+    "riotId": "BonE#EUPL",
+    "riotIdGameName": "BonE",
+    "riotIdTagLine": "EUPL",
     "runes": {
       "keystone": {
         "displayName": "Grasp of the Undying",
@@ -304,7 +322,7 @@
     },
     "skinID": 2,
     "skinName": "Gentleman Cho'Gath",
-    "summonerName": "BooonE",
+    "summonerName": "BonE#EUPL",
     "summonerSpells": {
       "summonerSpellOne": {
         "displayName": "Flash",
@@ -329,6 +347,9 @@
     "rawChampionName": "game_character_displayname_Amumu",
     "rawSkinName": "game_character_skin_displayname_Amumu_23",
     "respawnTimer": 0.0,
+    "riotId": "Test summoner 3#TEST",
+    "riotIdGameName": "Test summoner 3",
+    "riotIdTagLine": "TEST",
     "runes": {
       "keystone": {
         "displayName": "Aftershock",
@@ -358,7 +379,7 @@
     },
     "skinID": 23,
     "skinName": "Hextech Amumu",
-    "summonerName": "Test summoner 3",
+    "summonerName": "Test summoner 3#TEST",
     "summonerSpells": {
       "summonerSpellOne": {
         "displayName": "Flash",
@@ -417,6 +438,9 @@
     "rawChampionName": "game_character_displayname_Zed",
     "rawSkinName": "game_character_skin_displayname_Zed_10",
     "respawnTimer": 0.0,
+    "riotId": "Test summoner 4#TEST",
+    "riotIdGameName": "Test summoner 4",
+    "riotIdTagLine": "TEST",
     "runes": {
       "keystone": {
         "displayName": "Electrocute",
@@ -446,7 +470,7 @@
     },
     "skinID": 10,
     "skinName": "Championship Zed",
-    "summonerName": "Test summoner 4",
+    "summonerName": "Test summoner 4#TEST",
     "summonerSpells": {
       "summonerSpellOne": {
         "displayName": "Flash",
@@ -505,6 +529,9 @@
     "rawChampionName": "game_character_displayname_Jhin",
     "rawSkinName": "game_character_skin_displayname_Jhin_2",
     "respawnTimer": 0.0,
+    "riotId": "Test summoner 5#TEST",
+    "riotIdGameName": "Test summoner 5",
+    "riotIdTagLine": "TEST",
     "runes": {
       "keystone": {
         "displayName": "Fleet Footwork",
@@ -534,7 +561,7 @@
     },
     "skinID": 2,
     "skinName": "Blood Moon Jhin",
-    "summonerName": "Test summoner 5",
+    "summonerName": "Test summoner 5#TEST",
     "summonerSpells": {
       "summonerSpellOne": {
         "displayName": "Flash",
@@ -559,6 +586,9 @@
     "rawChampionName": "game_character_displayname_Thresh",
     "rawSkinName": "game_character_skin_displayname_Thresh_3",
     "respawnTimer": 0.0,
+    "riotId": "Test summoner 6#TEST",
+    "riotIdGameName": "Test summoner 6",
+    "riotIdTagLine": "TEST",
     "runes": {
       "keystone": {
         "displayName": "Aftershock",
@@ -588,7 +618,7 @@
     },
     "skinID": 3,
     "skinName": "Blood Moon Thresh",
-    "summonerName": "Test summoner 6",
+    "summonerName": "Test summoner 6#TEST",
     "summonerSpells": {
       "summonerSpellOne": {
         "displayName": "Flash",

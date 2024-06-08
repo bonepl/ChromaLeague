@@ -23,6 +23,6 @@ class FetchPlayerNameTaskTest {
         new FetchPlayerNameTask().run();
 
         //then
-        assertEquals("BooonE", RunningState.getGameState().getPlayerName());
+        assertEquals("BooonE", RunningState.getGameState().getPlayerRiotId());
     }
 }

@@ -16,7 +16,7 @@
       "EventID": 2,
       "EventName": "DragonKill",
       "EventTime": 100.6826782226563,
-      "KillerName": "BooonE",
+      "KillerName": "BonE",
       "Stolen": "False"
     },
     {
@@ -25,7 +25,7 @@
       "EventID": 3,
       "EventName": "DragonKill",
       "EventTime": 200.6826782226563,
-      "KillerName": "BooonE",
+      "KillerName": "BonE",
       "Stolen": "False"
     },
     {
@@ -34,7 +34,7 @@
       "EventID": 4,
       "EventName": "DragonKill",
       "EventTime": 250.6826782226563,
-      "KillerName": "BooonE",
+      "KillerName": "BonE",
       "Stolen": "False"
     },
     {
@@ -43,7 +43,7 @@
       "EventID": 5,
       "EventName": "DragonKill",
       "EventTime": 300.6826782226563,
-      "KillerName": "BooonE",
+      "KillerName": "BonE",
       "Stolen": "False"
     },
     {
@@ -52,7 +52,7 @@
       "EventName": "ChampionKill",
       "EventTime": 347.1595916748047,
       "KillerName": "Enemy Player",
-      "VictimName": "BooonE"
+      "VictimName": "BonE"
     },
     {
       "Assisters": [],

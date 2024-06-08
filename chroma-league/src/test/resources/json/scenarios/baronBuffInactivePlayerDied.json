@@ -15,7 +15,7 @@
       "EventID": 2,
       "EventName": "BaronKill",
       "EventTime": 200.689453125,
-      "KillerName": "BooonE",
+      "KillerName": "BonE",
       "Stolen": "False"
     },
     {
@@ -24,7 +24,7 @@
       "EventName": "ChampionKill",
       "EventTime": 250.1595916748047,
       "KillerName": "Enemy Player",
-      "VictimName": "BooonE"
+      "VictimName": "BonE"
     }
   ]
 }

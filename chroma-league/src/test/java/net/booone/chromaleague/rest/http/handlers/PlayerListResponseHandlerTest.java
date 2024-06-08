@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Optional;
 
-import static net.booone.chromaleague.GameStateMocks.PLAYER_NAME;
+import static net.booone.chromaleague.GameStateMocks.PLAYER_RIOT_ID;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PlayerListResponseHandlerTest {
@@ -20,7 +20,7 @@ public class PlayerListResponseHandlerTest {
     @Test
     void testPlayerListParsing() throws IOException, URISyntaxException {
         //given
-        RunningState.getGameState().setPlayerName(PLAYER_NAME);
+        RunningState.getGameState().setPlayerRiotId(PLAYER_RIOT_ID);
         ClassicHttpResponse testResponseFromJSON = LeagueHttpClientMock.createTestResponseFromJSON("json/playerlist.json");
 
         //when
@@ -35,7 +35,8 @@ public class PlayerListResponseHandlerTest {
         assertNotNull(playerList);
         assertEquals(5, playerList.getAllies().size());
         assertEquals(5, playerList.getEnemies().size());
-        assertEquals("BooonE", playerList.getActivePlayer().summonerName());
+        assertEquals("BonE#EUPL", playerList.getActivePlayer().riotId());
+        assertEquals("BonE", playerList.getActivePlayer().riotIdGameName());
         assertEquals(Team.CHAOS, playerList.getActivePlayer().team());
         assertEquals(4.5, playerList.getActivePlayer().respawnTimer());
         assertTrue(playerList.isAlly("Test summoner 5"));
@@ -44,7 +45,8 @@ public class PlayerListResponseHandlerTest {
 
         final Player activePlayer = playerList.getActivePlayer();
         assertEquals("Cho'Gath", activePlayer.championName());
-        assertEquals("BooonE", activePlayer.summonerName());
+        assertEquals("BonE#EUPL", activePlayer.riotId());
+        assertEquals("BonE", activePlayer.riotIdGameName());
         assertTrue(activePlayer.isDead());
         assertEquals(Team.CHAOS, activePlayer.team());
     }

@@ -45,11 +45,11 @@ public final class GameState {
         return eventData;
     }
 
-    public String getPlayerName() {
+    public String getPlayerRiotId() {
         return playerName;
     }
 
-    public void setPlayerName(String playerName) {
-        this.playerName = playerName;
+    public void setPlayerRiotId(String playerRiotId) {
+        this.playerName = playerRiotId;
     }
 }

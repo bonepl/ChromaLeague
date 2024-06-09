@@ -8,32 +8,36 @@ import java.util.stream.Collectors;
 public record PlayerList(List<Player> players) {
 
     public Player getActivePlayer() {
-        return getBySummonersName(RunningState.getGameState().getPlayerName());
+        return getByRiotId(RunningState.getGameState().getPlayerRiotId());
     }
 
     public List<String> getAllies() {
         return players.stream()
                 .filter(p -> getActivePlayer().team() == p.team())
-                .map(Player::summonerName)
+                .map(Player::riotIdGameName)
                 .collect(Collectors.toList());
     }
 
     public List<String> getEnemies() {
         return players.stream()
                 .filter(p -> getActivePlayer().team() != p.team())
-                .map(Player::summonerName)
+                .map(Player::riotIdGameName)
                 .collect(Collectors.toList());
     }
 
-    public boolean isAlly(String summonersName) {
-        return getBySummonersName(summonersName).team() == getActivePlayer().team();
+    public boolean isAlly(String riotIdGameName) {
+        return getByRiotIdGameName(riotIdGameName).team() == getActivePlayer().team();
     }
 
-    private Player getBySummonersName(String summonersName) {
+    private Player getByRiotId(String riotId) {
         return players.stream()
-                .filter(player -> player.summonerName().equals(summonersName)
-                        //RIOT ID migration bug mitigation
-                        || (summonersName.contains("#") && player.summonerName().equals(summonersName.substring(0, summonersName.indexOf('#')))))
-                .findAny().orElseThrow(() -> new IllegalStateException("Couldn't find player with name " + summonersName));
+                .filter(player -> player.riotId().equals(riotId))
+                .findAny().orElseThrow(() -> new IllegalStateException("Couldn't find player with riotId " + riotId));
+    }
+
+    private Player getByRiotIdGameName(String riotIdGameName) {
+        return players.stream()
+                .filter(player -> player.riotIdGameName().equals(riotIdGameName))
+                .findAny().orElseThrow(() -> new IllegalStateException("Couldn't find player with riotIdGameName " + riotIdGameName));
     }
 }

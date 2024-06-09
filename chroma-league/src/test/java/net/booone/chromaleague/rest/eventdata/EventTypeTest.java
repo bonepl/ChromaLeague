@@ -21,6 +21,7 @@ class EventTypeTest {
     @BeforeEach
     void setUp() {
         gameStateMocks = new GameStateMocks();
+        gameStateMocks.activePlayer();
     }
 
     @ParameterizedTest(name = "{0} -> {1}")

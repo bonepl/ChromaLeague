@@ -12,7 +12,8 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public final class GameStateMocks {
-    public static final String PLAYER_NAME = "BooonE";
+    public static final String PLAYER_RIOT_ID_GAME_NAME = "BonE";
+    public static final String PLAYER_RIOT_ID = "BonE#EUPL";
 
     private final ActivePlayer mockActivePlayer;
     private final PlayerList mockPlayerList;
@@ -24,7 +25,7 @@ public final class GameStateMocks {
         mockActivePlayer = prepareActivePlayerMock();
         mockPlayerList = preparePlayerListMock();
         mockGameStats = mock(GameStats.class);
-        RunningState.getGameState().setPlayerName(PLAYER_NAME);
+        RunningState.getGameState().setPlayerRiotId(PLAYER_RIOT_ID);
     }
 
     private static PlayerList preparePlayerListMock() {
@@ -38,6 +39,8 @@ public final class GameStateMocks {
         ChampionStats championStats = mock(ChampionStats.class);
         ActivePlayer activePlayer = mock(ActivePlayer.class);
         when(activePlayer.championStats()).thenReturn(championStats);
+        when(activePlayer.riotId()).thenReturn(PLAYER_RIOT_ID);
+        when(activePlayer.riotIdGameName()).thenReturn(PLAYER_RIOT_ID_GAME_NAME);
         return activePlayer;
     }
 
@@ -67,7 +70,7 @@ public final class GameStateMocks {
     }
 
     public void mockTestPlayerList() {
-        when(playerList().isAlly(eq(PLAYER_NAME))).thenReturn(true);
+        when(playerList().isAlly(eq(PLAYER_RIOT_ID_GAME_NAME))).thenReturn(true);
         when(playerList().isAlly(eq("Ally"))).thenReturn(true);
         when(playerList().isAlly(eq("Enemy"))).thenReturn(false);
     }

@@ -1,7 +1,7 @@
 # Chroma League
 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/bonepl/chromaleague)](https://github.com/bonepl/ChromaLeague/releases/latest)
-![GitHub release (by tag)](https://img.shields.io/github/downloads/bonepl/chromaleague/v1.3.0/total)
+![GitHub release (by tag)](https://img.shields.io/github/downloads/bonepl/chromaleague/v1.3.1/total)
 ![GitHub all releases](https://img.shields.io/github/downloads/bonepl/chromaleague/total)
 ![License](https://img.shields.io/badge/license-GPL%203.0-informational)
 ![Coverage](.github/badges/jacoco-chromaleague.svg)

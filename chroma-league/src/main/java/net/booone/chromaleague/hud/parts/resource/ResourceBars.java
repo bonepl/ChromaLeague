@@ -20,9 +20,9 @@ public final class ResourceBars {
             .asList();
 
     private static final Set<String> NO_MANA_BAR_CHAMPIONS
-            = Set.of("Aatrox", "Dr. Mundo", "Garen", "Katarina", "Riven", "Viego", "Zac");
+            = Set.of("Aatrox", "Briar", "Dr. Mundo", "Garen", "Katarina", "Riven", "Viego", "Zac");
     private static final Set<String> ENERGY_BAR_CHAMPIONS
-            = Set.of("Akali", "Kennen", "Lee Sin", "Shen", "Zed");
+            = Set.of("Akali", "Ambessa", "Kennen", "Lee Sin", "Shen", "Zed");
 
     private ResourceBars() {
     }
@@ -38,6 +38,7 @@ public final class ResourceBars {
         }
 
         return switch (activePlayerChampionName) {
+            case "Bel'Veth" -> new BelVethLavenderBar();
             case "Gnar" -> new GnarFuryBar();
             case "Kled" -> new KledCourageBar();
             case "Mordekaiser" -> new MordekaiserShieldBar();

@@ -12,8 +12,8 @@ public class Init {
     public Init() {
         title = "Chroma League";
         description = "Razer Chroma SDK support for League of Legends";
-        author = new InitAuthor("Jakub \"BonE\" Andrzejewski", "bone.pl@gmail.com");
-        deviceSupported = new String[]{"keyboard"};
+        author = new InitAuthor("Max \"Ncorrex\" Schlüß", "max.schluess@gmail.com");
+        deviceSupported = new String[]{"keyboard", "mouse", "chromalink"};
         category = "game";
     }
 

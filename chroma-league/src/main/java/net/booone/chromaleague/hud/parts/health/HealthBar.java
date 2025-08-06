@@ -13,13 +13,13 @@ import net.booone.razersdk.sdk.RzKeySelector;
 import java.util.Collections;
 import java.util.List;
 
-import static net.booone.razersdk.sdk.RzKey.RZKEY_ESC;
 import static net.booone.razersdk.sdk.RzKey.RZKEY_F12;
+import static net.booone.razersdk.sdk.RzKey.RZKEY_MACRO6;
 
 public class HealthBar extends Animation {
     private static final List<RzKey> HP_BAR_KEYS = new RzKeySelector()
-            .withRowOf(RZKEY_ESC)
-            .withColumnBetween(RZKEY_ESC, RZKEY_F12)
+            .withRowOf(RZKEY_MACRO6)
+            .withColumnBetween(RZKEY_MACRO6, RZKEY_F12)
             .sortedByColumn()
             .asList();
     private double previousHp;

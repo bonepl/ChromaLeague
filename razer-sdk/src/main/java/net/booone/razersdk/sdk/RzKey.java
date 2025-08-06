@@ -103,6 +103,7 @@ public enum RzKey {
     RZKEY_MACRO3(3, 0),
     RZKEY_MACRO4(4, 0),
     RZKEY_MACRO5(5, 0),
+    RZKEY_MACRO6(0, 0),
     RZKEY_TILDE(1, 1), // ~ `
     RZKEY_HYPHEN(1, 12), // - _
     RZKEY_EQUALS(1, 13), // = +
@@ -127,7 +128,11 @@ public enum RzKey {
     RZKEY_KOR_4(4, 13),
     RZKEY_KOR_5(5, 4),
     RZKEY_KOR_6(5, 9),
-    RZKEY_KOR_7(5, 10);
+    RZKEY_KOR_7(5, 10),
+    RZKEY_PREV(0, 18),
+    RZKEY_PLAYPAUSE(0, 19),
+    RZKEY_NEXT(0, 20),
+    RZKEY_MUTE(0, 21);
 
     private final int row;
     private final int column;

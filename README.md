@@ -6,6 +6,17 @@
 ![License](https://img.shields.io/badge/license-GPL%203.0-informational)
 ![Coverage](.github/badges/jacoco-chromaleague.svg)
 
+> **NOTICE**
+> 
+> Due to a bug that Razer is "actively working on" this project in its current state
+> is not working. I am working on a port of Chroma League (which works) that
+> will be deployed on the Overwolf platform. 
+>
+> Due to extended validation of Riot/Overwolf I cannot come up with any ETA. 
+> 
+> If you have any questions, feel free to drop the issue in GitHub.
+ 
+
 Java open-source Razer Chroma keyboard integration for League of Legends.
 
 If you like this project, consider giving me a tip for all the hard work :)

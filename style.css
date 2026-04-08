@@ -1,0 +1,92 @@
+body {
+    font-family: 'Consolas', 'Courier New', monospace;
+    background-color: #000000;
+    color: #00ff00; /* Classic terminal green */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+#cl_ad_160x600_desktop {
+    flex-shrink: 0;
+    width: 160px;
+    height: 600px;
+    align-self: center;
+    background: #000;
+}
+
+#cl_ad_400x600_desktop {
+    flex-shrink: 0;
+    width: 400px;
+    height: 600px;
+    align-self: center;
+    background: #000;
+}
+
+.content-area {
+    flex: 1;
+    min-width: 0;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+#header {
+    flex-shrink: 0;
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+
+h1 {
+    font-size: 18px;
+    margin: 0;
+    color: #ffffff;
+}
+
+#sdk-status {
+    font-size: 13px;
+    color: #aaa;
+    margin-top: 4px;
+}
+
+#log-container {
+    flex-grow: 1;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    font-size: 13px;
+    line-height: 1.4;
+    scrollbar-width: thin;
+    scrollbar-color: #333 #000;
+}
+
+#log-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+#log-container::-webkit-scrollbar-track {
+    background: #000;
+}
+
+#log-container::-webkit-scrollbar-thumb {
+    background-color: #333;
+    border-radius: 4px;
+}
+
+.log-entry {
+    margin-bottom: 2px;
+}
+
+#footer {
+    flex-shrink: 0;
+    font-size: 10px;
+    color: #444;
+    padding-top: 6px;
+    border-top: 1px solid #1a1a1a;
+    line-height: 1.4;
+}

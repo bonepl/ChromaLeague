@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Chroma League Background</title>
+</head>
+<body>
+    <script>
+        setTimeout(function() {
+            overwolf.windows.obtainDeclaredWindow('main', function(result) {
+                if (result.success && result.window) {
+                    overwolf.windows.restore(result.window.id, function() {});
+                }
+            });
+        }, 500);
+    </script>
+    <script src="./dist/background.js"></script>
+</body>
+</html>

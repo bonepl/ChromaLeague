@@ -1,0 +1,50 @@
+{
+  "manifest_version": 1,
+  "type": "WebApp",
+  "meta": {
+    "name": "Chroma League",
+    "version": "2.0.0",
+    "minimum-overwolf-version": "0.220.0.0",
+    "author": "Jakub \"BonE\" Andrzejewski",
+    "icon": "icon.png",
+    "icon_gray": "icon_gray.png",
+    "description": "Razer Chroma keyboard lighting for League of Legends",
+    "uid": "ckmfapngeolbdnhbpjcegkiahldfnjpmbeonbnca"
+  },
+  "permissions": ["Extensions", "GameInfo", "FileSystem"],
+  "data": {
+    "game_targeting": {
+      "type": "dedicated",
+      "game_ids": [5426]
+    },
+    "launch_events": [
+      {
+        "event": "GameLaunch",
+        "start_minimized": true
+      }
+    ],
+    "windows": {
+      "background": {
+        "file": "background.html",
+        "is_background_page": true
+      },
+      "main": {
+        "file": "index.html",
+        "size": { "width": 980, "height": 640 },
+        "min_size": { "width": 980, "height": 640 },
+        "use_os_windowing": true,
+        "resizable": true,
+        "block_top_window_navigation": true,
+        "popup_blocker": true,
+        "mute": true
+      }
+    },
+    "start_window": "background",
+    "extra-objects": {
+      "process-manager-plugin": {
+        "file": "plugins/process_manager.dll",
+        "class": "com.overwolf.overwolf_process_manager.ProcessManager"
+      }
+    }
+  }
+}

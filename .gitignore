@@ -1,3 +1,11 @@
-.idea
-target
-*.iml
+/.claude/
+/.gemini/
+/.idea/
+/coverage/
+/dist/
+/dist-electron/
+/dist-opk/
+/node/
+/node_modules/
+/plugins/
+CLAUDE.md

@@ -1,0 +1,41 @@
+{
+  "name": "chroma-league",
+  "version": "2.0.0",
+  "author": "Jakub 'BonE' Andrzejewski",
+  "description": "League of Legends Razer Chroma keyboard lighting effects",
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "pack": "node pack.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --exclude 'test/hud/**' --exclude 'test/razer-sdk/effects/**'",
+    "test:coverage": "vitest run --coverage --exclude 'test/hud/**' --exclude 'test/razer-sdk/effects/**'",
+    "test:watch": "vitest",
+    "test:integration": "vitest run test/razer-sdk/effects test/hud",
+    "test:integration:effects": "vitest run test/razer-sdk/effects",
+    "test:integration:animations": "vitest run test/hud/animations",
+    "test:integration:resources": "vitest run test/hud/parts/resource",
+    "test:integration:colors": "vitest run test/hud/colors",
+    "test:integration:parts": "vitest run test/hud/parts",
+    "dev": "tsx src/index.ts",
+    "start": "node dist/index.js",
+    "dev:server": "tsx src/server.ts",
+    "start:server": "node dist/server.js",
+    "validate:manifest": "node validate-manifest.mjs"
+  },
+  "devDependencies": {
+    "@overwolf/types": "^3.50.1",
+    "@types/node": "^22.0.0",
+    "@types/ws": "^8.5.0",
+    "@vitest/coverage-v8": "^3.2.4",
+    "ajv": "^8.0.0",
+    "esbuild": "0.25.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0"
+  },
+  "dependencies": {
+    "koffi": "^2.15.2",
+    "ws": "^8.18.0"
+  }
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Chroma League</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div id="header">
+        <div id="sdk-status"><span id="sdk-indicator" style="font-size:16px">⏳</span> Chroma SDK ready</div>
+    </div>
+    <div id="log-container"></div>
+    <div id="footer">
+        Chroma League isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games and all associated properties are trademarks or registered trademarks of Riot Games, Inc.
+    </div>
+
+    <script>
+        const container = document.getElementById('log-container');
+
+        // Use the API exposed by preload.cjs
+        if (window.electronAPI) {
+            window.electronAPI.onChromaSdkStatus((available) => {
+                document.getElementById('sdk-indicator').textContent = available ? '✅' : '❌';
+            });
+
+            window.electronAPI.onLogMessage((message) => {
+                const entry = document.createElement('div');
+                entry.className = 'log-entry';
+                entry.textContent = message;
+                container.appendChild(entry);
+
+                // Auto-scroll to bottom
+                container.scrollTop = container.scrollHeight;
+            });
+        } else {
+            const errorEntry = document.createElement('div');
+            errorEntry.style.color = '#ff0000';
+            errorEntry.textContent = '[ERROR] electronAPI not found. Make sure preload script is working.';
+            container.appendChild(errorEntry);
+        }
+    </script>
+</body>
+</html>

@@ -1,23 +1,23 @@
-# Chroma League
-
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/bonepl/chromaleague)](https://github.com/bonepl/ChromaLeague/releases/latest)
-![GitHub release (by tag)](https://img.shields.io/github/downloads/bonepl/chromaleague/v1.3.2/total)
-![GitHub all releases](https://img.shields.io/github/downloads/bonepl/chromaleague/total)
-![License](https://img.shields.io/badge/license-GPL%203.0-informational)
-![Coverage](.github/badges/jacoco-chromaleague.svg)
+# Chroma League pre-2.0
 
 > **NOTICE**
 > 
-> Due to a bug that Razer is "actively working on" this project in its current state
-> is not working. I am working on a port of Chroma League (which works) that
-> will be deployed on the Overwolf platform. 
+> Due to a bug that Razer is "actively working on", 
+> previous Java-based version of this project is not working.
+> 
+> This is a complete working port of old Chroma League 1.x
+> 
+> I am targeting to release it on the popular Overwolf platform 
+> which will provide easy installation, updates and League of Legends integration. 
 >
-> Due to extended validation of Riot/Overwolf I cannot come up with any ETA. 
+> Currently, if you want to run it, see the [Running](#running) section below.
+>
+> Due to extended validation of Riot/Overwolf I cannot come up with any ETA when it will be released on Overwolf. 
 > 
 > If you have any questions, feel free to drop the issue in GitHub.
  
 
-Java open-source Razer Chroma keyboard integration for League of Legends.
+Open-source Razer Chroma keyboard integration for League of Legends.
 
 If you like this project, consider giving me a tip for all the hard work :)
 
@@ -48,7 +48,7 @@ Insider: [Chroma League - League of Legends integration for Razer Chroma](https:
 
 ## Overview
 
-![Chroma League HUD](https://github.com/bonepl/ChromaLeague/blob/master/doc/images/ChromaLeague.png "Chroma League HUD")
+![Chroma League HUD](doc/images/ChromaLeague.png "Chroma League HUD")
 
 This is what basic in game HUD looks like on Chroma Keyboard. Certain in-game events will spawn additional animations.
 
@@ -61,21 +61,19 @@ This is what basic in game HUD looks like on Chroma Keyboard. Certain in-game ev
 
 ## Running
 
-Simply download [the latest Chroma League release](https://github.com/bonepl/ChromaLeague/releases/latest), unpack and
-run it by executing `run-chroma-league.bat`.
+**Prerequisites:** [Node.js](https://nodejs.org/) must be installed.
 
-> **WARNING:** You need to fully unpack the archive to separate directory before running it.
-> Running **Chroma League** directly from the archive will end up with following error:
->
-> `windows cannot find './cl-jre/bin/java.exe'. Make sure you type the name correctly and try again`
+1. Clone or download this repository
+2. Install dependencies:
+   ```
+   npm install
+   ```
+3. Start the application:
+   ```
+   npm run dev:server
+   ```
 
-After running `run-chroma-league.bat` you will see terminal window with application logs.
-**Chroma League** will verify connectivity to local Razer SDK and log REST Api versions like:
-
-`18:20:08 [INFO] Detected Razer Chroma REST Api Version[core=3.23.03, device=3.23.04, version=3.23.05]`
-
-This means that **Chroma League** has successfully passed startup checks, will automatically detect when you join the
-game and start running integrations.
+**Chroma League** will start and automatically detect when you join a League of Legends game.
 
 ## Compatibility
 
@@ -91,7 +89,7 @@ game and start running integrations.
 - animated resource bar (customized for all champions)
 - level up animation
 - gold pouch with animated coins (3000 gold means pouch is full)
-- enemy/ally dragon/herald/baron kill indicators
+- enemy/ally dragon/voidgrubs/herald/baron kill indicators
 - dragons killed by allies counter
 - dragon soul indicator
 - baron/elder buff indicator
@@ -107,21 +105,13 @@ game and start running integrations.
 
 ## Troubleshooting
 
-Double check if Razer Chroma SDK Server service in Windows (`services.msc`) is up and running. Few times I experienced a
-bug where it was stuck in Paused state and not responding.
-
-You can
-use [this PowerShell script](https://github.com/bonepl/ChromaLeague/blob/master/chroma-league-launcher/src/scripts/restartRazerSdk.ps1)
-to restart the service.
-
-If you encounter a bug, please attach logs (`cl.log`) with the exceptions to help me track the error.
+If you encounter a bug, please attach logs with the exceptions to help me track the error.
 
 Before reporting a bug, please check Chroma League's issues page if it isn't already worked on.
 
 ## Plans
 
-Next plans include resolving any bugs/issues, crafting better, advanced animations for events (like dragon kills)
-and then maybe extending support to other peripherals like mice or headphones.
+Next plans include resolving any bugs/issues and extending support to other peripherals like mice or headphones.
 
 ## Disclaimer
 

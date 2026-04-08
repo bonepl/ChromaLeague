@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chroma League</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://content.overwolf.com/libs/ads/latest/owads.min.js"
+            async onerror="onAdsSDKNotLoaded()" onload="onAdsSDKReady()"></script>
+</head>
+<body>
+    <div id="cl_ad_160x600_desktop"></div>
+
+    <div class="content-area">
+        <div id="header">
+            <div id="sdk-status"><span id="sdk-indicator" style="font-size:16px">⏳</span> Chroma SDK ready</div>
+            <div id="cl-status" style="font-size:13px; color:#aaa; margin-top:4px;">Chroma League status: <span id="cl-indicator" style="font-size:16px">⏳</span><span id="cl-text"> Waiting for the game</span></div>
+        </div>
+        <div id="log-container"></div>
+        <div id="footer">
+            Chroma League isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games and all associated properties are trademarks or registered trademarks of Riot Games, Inc.
+        </div>
+    </div>
+
+    <div id="cl_ad_400x600_desktop"></div>
+
+    <script>
+        const container = document.getElementById('log-container');
+
+        function addLogEntry(message) {
+            const entry = document.createElement('div');
+            entry.className = 'log-entry';
+            entry.textContent = message;
+            container.appendChild(entry);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function updateSdkStatus(available) {
+            document.getElementById('sdk-indicator').textContent = available ? '✅' : '❌';
+        }
+
+        function updateClStatus(inGame) {
+            document.getElementById('cl-indicator').textContent = inGame ? '✅' : '⏳';
+            document.getElementById('cl-text').textContent = inGame ? ' Active' : ' Waiting for the game';
+        }
+
+        // Listen for messages from background window
+        overwolf.windows.onMessageReceived.addListener((message) => {
+            if (message.id === 'log') {
+                addLogEntry(message.content);
+            } else if (message.id === 'chroma-sdk-status') {
+                updateSdkStatus(message.content);
+            } else if (message.id === 'chroma-league-status') {
+                updateClStatus(message.content);
+            }
+        });
+
+        // Notify background window that we're ready
+        overwolf.windows.obtainDeclaredWindow('background', (result) => {
+            if (result.success && result.window) {
+                overwolf.windows.sendMessage(result.window.id, 'ready', null, () => {});
+            }
+        });
+
+        // Ads SDK
+        let owAdLeft, owAdRight;
+
+        function onAdsSDKReady() {
+            if (typeof OwAd === 'undefined') return;
+            owAdLeft  = new OwAd(document.getElementById('cl_ad_160x600_desktop'), { size: { width: 160, height: 600 } });
+            owAdRight = new OwAd(document.getElementById('cl_ad_400x600_desktop'), { size: { width: 400, height: 600 } });
+        }
+
+        function onAdsSDKNotLoaded() {
+            console.warn('Overwolf Ads SDK failed to load');
+        }
+
+        // Remove ads on minimize, refresh on restore
+        overwolf.windows.getCurrentWindow((result) => {
+            if (!result.success) return;
+            const windowId = result.window.id;
+            overwolf.windows.onStateChanged.addListener((state) => {
+                if (state.window_id !== windowId) return;
+                if (state.window_state_ex === 'minimized') {
+                    owAdLeft?.removeAd();
+                    owAdRight?.removeAd();
+                } else if (state.window_state_ex === 'normal' || state.window_state_ex === 'maximized') {
+                    owAdLeft?.refreshAd({});
+                    owAdRight?.refreshAd({});
+                }
+            });
+        });
+    </script>
+</body>
+</html>

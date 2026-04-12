@@ -56,7 +56,7 @@ This is what basic in game HUD looks like on Chroma Keyboard. Certain in-game ev
 
 * Windows
 * League of Legends
-* Razer Synapse 3 (with Chroma Connect module enabled)
+* Razer Synapse 3/4 (with Chroma Connect module enabled)
 * Chroma enabled keyboard
 
 ## Running

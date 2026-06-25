@@ -2,10 +2,10 @@
 
 > **NOTICE**
 > 
-> Due to a bug that Razer is "actively working on", 
-> previous Java-based version of this project is not working.
+> Razer has finally fixed a bug. 
+> Version 1.3.2 is viable and working.
 > 
-> This is a complete working port of old Chroma League 1.x
+> In this repository you will find complete working port of old Chroma League 1.x
 > 
 > I am targeting to release it on the popular Overwolf platform 
 > which will provide easy installation, updates and League of Legends integration. 

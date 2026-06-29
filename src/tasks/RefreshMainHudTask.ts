@@ -9,6 +9,10 @@ export function createRefreshMainHudTask(chromaNativeSDK: ChromaNativeSDK): () =
     return async () => {
         try {
             const gameState = RunningState.getGameState();
+            if (!RunningState.getRunningGame().getValue()) {
+                console.warn('RefreshMainHudTask running while game is not active!');
+                return;
+            }
             if (gameState.activePlayer !== null && gameState.playerList !== null) {
                 await chromaNativeSDK.createKeyboardEffect(gameState.mainHud);
                 clearErrorSuppression(TASK_KEY);

@@ -13,9 +13,13 @@
     <div class="content-area">
         <div id="header">
             <div id="sdk-status"><span id="sdk-indicator" style="font-size:16px">⏳</span> Chroma SDK ready</div>
-            <div id="cl-status" style="font-size:13px; color:#aaa; margin-top:4px;">Chroma League status: <span id="cl-indicator" style="font-size:16px">⏳</span><span id="cl-text"> Waiting for the game</span></div>
+            <div id="cl-status">Chroma League status: <span id="cl-indicator" style="font-size:16px">⏳</span><span id="cl-text"> Waiting for the game</span></div>
         </div>
         <div id="log-container"></div>
+        <div id="log-actions">
+            To report a bug <a href="#" onclick="overwolf.utils.openUrlInDefaultBrowser('https://github.com/bonepl/ChromaLeague/issues'); return false;">click here</a>
+            and attach <a href="#" onclick="downloadLogs(); return false;">logs</a>
+        </div>
         <div id="footer">
             Chroma League isn't endorsed by Riot Games and doesn't reflect the views or opinions of Riot Games or anyone officially involved in producing or managing Riot Games properties. Riot Games and all associated properties are trademarks or registered trademarks of Riot Games, Inc.
         </div>
@@ -26,6 +30,30 @@
     <script>
         const container = document.getElementById('log-container');
 
+        function downloadLogs() {
+            const now = new Date();
+            const dd = String(now.getDate()).padStart(2, '0');
+            const MM = String(now.getMonth() + 1).padStart(2, '0');
+            const yyyy = now.getFullYear();
+            const hh = String(now.getHours()).padStart(2, '0');
+            const mm = String(now.getMinutes()).padStart(2, '0');
+            const ss = String(now.getSeconds()).padStart(2, '0');
+            const timestamp = `${dd}${MM}${yyyy}-${hh}${mm}${ss}`;
+
+            const entries = container.querySelectorAll('.log-entry');
+            const body = Array.from(entries).map(e => e.textContent).join('');
+            const text = 'Chroma League 2.0.0 logs\n' + body;
+            const fileName = `chroma-league-${timestamp}.log`;
+            const filePath = overwolf.io.paths.documents + '\\ChromaLeagueLogs\\' + fileName;
+            overwolf.io.writeFileContents(filePath, text, 'UTF8', false, (result) => {
+                if (result.success) {
+                    addLogEntry('Logs saved to: ' + filePath);
+                } else {
+                    addLogEntry('Failed to save logs: ' + JSON.stringify(result));
+                }
+            });
+        }
+
         function addLogEntry(message) {
             const entry = document.createElement('div');
             entry.className = 'log-entry';
@@ -34,8 +62,20 @@
             container.scrollTop = container.scrollHeight;
         }
 
+        let sdkCheckDone = false;
+        let allGoodLogged = false;
+
+        function tryLogAllGood() {
+            if (allGoodLogged || !sdkCheckDone) return;
+            if (document.getElementById('sdk-indicator').textContent !== '✅') return;
+            allGoodLogged = true;
+            addLogEntry(`[${new Date().toISOString()}] All good! Join League of Legends match to run animations!\n`);
+        }
+
         function updateSdkStatus(available) {
             document.getElementById('sdk-indicator').textContent = available ? '✅' : '❌';
+            sdkCheckDone = true;
+            tryLogAllGood();
         }
 
         function updateClStatus(inGame) {

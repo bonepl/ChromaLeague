@@ -12,6 +12,7 @@ export class RunningState {
     static setRiotApi(value: boolean): void {
         this.riotApi.setValue(value);
         if (!value) {
+            this.setRunningGame(false);
             this.runningGame.reset();
         }
     }

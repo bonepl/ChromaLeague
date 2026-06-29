@@ -66,8 +66,11 @@ export class EventDataProcessor {
             case EventType.ACTIVE_PLAYER_ASSIST:
                 GameStateHelper.addPlayerAssist();
                 break;
-            case EventType.GAME_END_DEFEAT:
             case EventType.GAME_END_VICTORY:
+                console.log('Game ended. Congratulations! GG WP!');
+                break;
+            case EventType.GAME_END_DEFEAT:
+                console.log('Game ended. Better luck next time!');
                 break;
             default:
                 // No-op for enemy dragons, heralds, barons, unsupported

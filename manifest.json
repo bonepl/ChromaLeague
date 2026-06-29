@@ -30,8 +30,8 @@
       },
       "main": {
         "file": "index.html",
-        "size": { "width": 980, "height": 640 },
-        "min_size": { "width": 980, "height": 640 },
+        "size": { "width": 1180, "height": 640 },
+        "min_size": { "width": 1180, "height": 640 },
         "use_os_windowing": true,
         "resizable": true,
         "block_top_window_navigation": true,

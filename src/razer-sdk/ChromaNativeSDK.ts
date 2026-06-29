@@ -36,6 +36,7 @@ export class ChromaNativeSDK {
     private UnInit: KoffiFunc | null = null;
     private CreateKeyboardEffect: KoffiFunc | null = null;
     private initialized = false;
+    private closed = false;
     private droppedFrames = 0;
 
     /**
@@ -86,6 +87,11 @@ export class ChromaNativeSDK {
     async createKeyboardEffect(frame: IFrame): Promise<void> {
         const frameData = frame.pollFrame();
 
+        if (this.closed) {
+            console.warn('createKeyboardEffect called after close!');
+            return;
+        }
+
         if (!this.initialized) {
             this.droppedFrames++;
             if (this.droppedFrames % 100 === 1) {
@@ -108,7 +114,12 @@ export class ChromaNativeSDK {
             }
         });
 
+        const start = Date.now();
         const result = this.CreateKeyboardEffect!(CHROMA_CUSTOM, this.buffer, null);
+        const elapsed = Date.now() - start;
+        if (elapsed > 100) {
+            console.warn(`CreateKeyboardEffect took ${elapsed}ms`);
+        }
         if (result !== 0) {
             console.error(`Error from Razer SDK: ${result}`);
         }
@@ -137,6 +148,7 @@ export class ChromaNativeSDK {
      */
     async close(): Promise<void> {
         if (this.initialized && this.UnInit) {
+            this.closed = true;
             await this.clearKeyboard();
             await new Promise(r => setTimeout(r, 100));
             this.UnInit!();
